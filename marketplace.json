@@ -1,4 +1,5 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "tyrion",
   "owner": {
     "name": "Salohiddin",
@@ -14,6 +15,13 @@
       "source": "./",
       "description": "Tyrion v5.0 — Single-Root ECC-Grade Paid Media & Targetology OS (36 agents, 62 skills, 100 wiki notes, 9 playbooks, 6 context modes, 18 slash commands, 29 tools).",
       "version": "5.0.0",
+      "author": {
+        "name": "Salohiddin",
+        "url": "https://github.com/salohiddinayydigital-sudo"
+      },
+      "homepage": "https://github.com/salohiddinayydigital-sudo/ai-ads",
+      "repository": "https://github.com/salohiddinayydigital-sudo/ai-ads",
+      "license": "MIT",
       "category": "marketing",
       "keywords": [
         "marketing",
