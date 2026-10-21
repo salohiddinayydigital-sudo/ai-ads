@@ -63,6 +63,18 @@ SKILL_ROOT = VAULT / "skills"
 AGENT_ROOT = VAULT / "agents"
 VALID_RISK_LEVELS = {"low", "medium", "high"}
 DEFAULT_MAX_CONTEXT_BYTES = 180_000
+
+PROGRESSIVE_SINGLE_STEP_BUDGET = 15_000  # <= 15 KB budget for simple queries (Progressive Disclosure)
+
+
+def _progressive_slice(text: str, max_bytes: int = 3600) -> str:
+    """Progressive disclosure: returns YAML frontmatter + core instructions body within max_bytes."""
+    encoded = text.encode("utf-8")
+    if len(encoded) <= max_bytes:
+        return text
+    clipped = encoded[: max_bytes - 120].decode("utf-8", errors="ignore")
+    return clipped.rstrip() + "\n\n<!-- [Progressive Disclosure: full reference/extended sections available via --context-mode full] -->"
+
 DEFAULT_SESSION_CACHE_PATH = VAULT / "output" / ".cache" / "router_session_cache.json"
 
 FRONTMATTER_RE = re.compile(r"\A---\r?\n(.*?)\r?\n---", re.DOTALL)
@@ -837,7 +849,7 @@ def route_task(
     query: str,
     agent_hint: str = "",
     load: bool = True,
-    context_mode: str = "full",
+    context_mode: str = "progressive",
     max_context_bytes: int = DEFAULT_MAX_CONTEXT_BYTES,
     extra_references: list[str] | None = None,
     mutation_approved: bool = False,
@@ -852,8 +864,13 @@ def route_task(
     agents = load_agents()
     skills_by_name = {s["name"]: s for s in skills}
 
-    effective_mode = "manifest" if (not load or context_mode == "manifest") else "full"
-    should_load_files = effective_mode == "full"
+    if not load or context_mode == "manifest":
+        effective_mode = "manifest"
+    elif context_mode == "full":
+        effective_mode = "full"
+    else:
+        effective_mode = "progressive"
+    should_load_files = effective_mode in ("full", "progressive")
 
     clean_query = str(query or "").strip()
     lang = (language or "").strip() or detect_language(clean_query)
@@ -1136,8 +1153,14 @@ def route_task(
     refs_loaded_by_path: dict[str, dict[str, Any]] = {}
     rules_loaded_by_path: dict[str, dict[str, Any]] = {}
 
+    effective_budget = (
+        min(max_context_bytes, PROGRESSIVE_SINGLE_STEP_BUDGET)
+        if (effective_mode == "progressive" and complexity == "single_step" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES)
+        else (min(max_context_bytes, 28_000) if (effective_mode == "progressive" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES) else max_context_bytes)
+    )
+
     if should_load_files:
-        # Priority 1: Agent Charters (Full Text)
+        # Priority 1: Agent Charters (Progressive frontmatter+core body in progressive mode, Full Text in full mode)
         for ag_name in all_assigned_agents:
             ag_info = agents.get(ag_name)
             if not ag_info:
@@ -1152,23 +1175,26 @@ def route_task(
                 load_errors.append(err)
                 continue
             if rec:
-                used_context_bytes += rec["bytes"]
+                c_text = _progressive_slice(rec["content"], 3400) if effective_mode == "progressive" else rec["content"]
+                c_bytes = len(c_text.encode("utf-8"))
+                used_context_bytes += c_bytes
                 entry = {
                     "name": ag_name,
                     "path": rec["path"],
                     "sha256": rec["sha256"],
-                    "bytes": rec["bytes"],
+                    "bytes": c_bytes,
                     "from_session_cache": rec["from_session_cache"],
                     "cache_invalidated": rec.get("cache_invalidated", False),
                     "full_instructions_loaded": True,
-                    "content": rec["content"],
-                    "body_markdown": rec["body_markdown"],
+                    "disclosure_mode": effective_mode,
+                    "content": c_text,
+                    "body_markdown": _progressive_slice(rec["body_markdown"], 3000) if effective_mode == "progressive" else rec["body_markdown"],
                     "excerpt": rec["excerpt"],
                 }
                 loaded_charters.append(entry)
                 charters_by_name[ag_name] = entry
 
-        # Priority 2 & 3: Required & Supporting Skills (Full Text)
+        # Priority 2 & 3: Required & Supporting Skills
         for sk_name in (required_skills + supporting_skills):
             sk_role = "required" if sk_name in required_skills else "supporting"
             sk_obj = skills_by_name.get(sk_name)
@@ -1184,52 +1210,67 @@ def route_task(
                 load_errors.append(err)
                 continue
             if rec:
-                used_context_bytes += rec["bytes"]
+                s_text = _progressive_slice(rec["content"], 3600) if effective_mode == "progressive" else rec["content"]
+                s_bytes = len(s_text.encode("utf-8"))
+                used_context_bytes += s_bytes
                 entry = {
                     "name": sk_name,
                     "role": sk_role,
                     "path": rec["path"],
                     "sha256": rec["sha256"],
-                    "bytes": rec["bytes"],
+                    "bytes": s_bytes,
                     "from_session_cache": rec["from_session_cache"],
                     "cache_invalidated": rec.get("cache_invalidated", False),
                     "full_instructions_loaded": True,
+                    "disclosure_mode": effective_mode,
                     "output_contract": sk_obj.get("output_contract", ""),
-                    "content": rec["content"],
-                    "body_markdown": rec["body_markdown"],
+                    "content": s_text,
+                    "body_markdown": _progressive_slice(rec["body_markdown"], 3200) if effective_mode == "progressive" else rec["body_markdown"],
                     "instructions_excerpt": rec["excerpt"],
                 }
                 loaded_skill_files.append(entry)
                 skills_loaded_by_name[sk_name] = entry
 
-        # Priority 4: Rules (Full Text)
+        # Priority 4: Rules
         for rule_rel in rules_to_load:
             rec, err = cache.read_verified_with_error(rule_rel)
             if err:
                 load_errors.append(err)
                 continue
             if rec:
-                used_context_bytes += rec["bytes"]
-                entry = {
-                    "path": rec["path"],
-                    "sha256": rec["sha256"],
-                    "bytes": rec["bytes"],
-                    "from_session_cache": rec["from_session_cache"],
-                    "full_instructions_loaded": True,
-                    "content": rec["content"],
-                    "body_markdown": rec["body_markdown"],
-                }
-                loaded_rule_files.append(entry)
-                rules_loaded_by_path[rule_rel] = entry
+                r_text = _progressive_slice(rec["content"], 900) if effective_mode == "progressive" else rec["content"]
+                r_bytes = len(r_text.encode("utf-8"))
+                if used_context_bytes + r_bytes <= effective_budget:
+                    used_context_bytes += r_bytes
+                    entry = {
+                        "path": rec["path"],
+                        "sha256": rec["sha256"],
+                        "bytes": r_bytes,
+                        "from_session_cache": rec["from_session_cache"],
+                        "full_instructions_loaded": True,
+                        "disclosure_mode": effective_mode,
+                        "content": r_text,
+                        "body_markdown": _progressive_slice(rec["body_markdown"], 800) if effective_mode == "progressive" else rec["body_markdown"],
+                    }
+                    loaded_rule_files.append(entry)
+                    rules_loaded_by_path[rule_rel] = entry
 
-        # Priority 5: Selected References (Controlled by max_context_bytes budget!)
+        # Priority 5: Selected References (Deferred on-demand in progressive mode unless explicitly requested; loaded in full mode within budget)
         for ref_rel in references_to_load:
             rec, err = cache.read_verified_with_error(ref_rel)
             if err:
                 load_errors.append(err)
                 continue
             if rec:
-                if used_context_bytes + rec["bytes"] <= max_context_bytes:
+                is_explicit_ref = bool(extra_references and ref_rel in extra_references)
+                if effective_mode == "progressive" and not is_explicit_ref:
+                    deferred_references.append({
+                        "path": rec["path"],
+                        "bytes": rec["bytes"],
+                        "full_instructions_loaded": False,
+                        "reason": "Progressive disclosure: reference deferred until needed (use --context-mode full to pre-load).",
+                    })
+                elif used_context_bytes + rec["bytes"] <= effective_budget:
                     used_context_bytes += rec["bytes"]
                     entry = {
                         "path": rec["path"],
@@ -1249,7 +1290,7 @@ def route_task(
                         "path": rec["path"],
                         "bytes": rec["bytes"],
                         "full_instructions_loaded": False,
-                        "reason": f"Kontekst byudjeti ({max_context_bytes} bayt) to'lgani sababli ikkinchi bosqichga qoldirildi (hozircha yuklanmadi).",
+                        "reason": f"Kontekst byudjeti ({effective_budget} bayt) to'lgani sababli ikkinchi bosqichga qoldirildi (hozircha yuklanmadi).",
                     })
 
     # Build Worker Packets WITH Full Loaded Instructions attached when `should_load_files=True`
@@ -1413,8 +1454,8 @@ def route_task(
             "load_errors": load_errors,
             "context_budget": {
                 "used_bytes": used_context_bytes,
-                "max_bytes": max_context_bytes,
-                "within_budget": used_context_bytes <= max_context_bytes,
+                "max_bytes": effective_budget,
+                "within_budget": used_context_bytes <= effective_budget,
             },
             "compiled_context_package": {
                 "total_bytes": len(compiled_bundle_text.encode("utf-8")),
@@ -1489,7 +1530,7 @@ def reroute_task(
         f"{len(updated['workflow']) + 1}. Dynamic Re-Route ('{emergent_requirement}'): `{new_ag}` va `{', '.join(new_sub['required_skills'])}` to'liq ko'rsatmalari bilan qo'shildi."
     )
 
-    if load and updated.get("context_mode", "full") == "full":
+    if load and updated.get("context_mode", "full") in ("full", "progressive"):
         existing_charters = {c["name"] for c in updated["loaded_context"]["loaded_agent_charters"]}
         for ch in new_sub["loaded_context"]["loaded_agent_charters"]:
             if ch["name"] not in existing_charters:
@@ -1903,7 +1944,7 @@ def cmd_route(args: argparse.Namespace) -> int:
         print("=" * 76)
         return 0
 
-    mode = "manifest" if (args.no_load or getattr(args, "context_mode", "full") == "manifest") else "full"
+    mode = "manifest" if (args.no_load or getattr(args, "context_mode", "progressive") == "manifest") else getattr(args, "context_mode", "progressive")
     plan = route_task(
         query=args.query,
         agent_hint=args.agent,
@@ -2093,7 +2134,7 @@ def main(argv: list[str] | None = None) -> int:
         p_r.add_argument("--agent", default="", help="Ixtiyoriy boshlang'ich agent ishorasi")
         p_r.add_argument("--load", action="store_true", default=True, help="Tanlangan charter, SKILL.md va reference to'liq matnini yuklash (default: True)")
         p_r.add_argument("--no-load", "--manifest-only", dest="no_load", action="store_true", help="Fayllarni o'qimasdan faqat manifest rejasini chiqarish")
-        p_r.add_argument("--context-mode", choices=["full", "manifest"], default="full", help="Kontekst yuklash rejimi: full (to'liq matn) yoki manifest")
+        p_r.add_argument("--context-mode", choices=["progressive", "full", "manifest"], default="progressive", help="Context loading mode: progressive (<=15KB frontmatter+core body), full (all references), or manifest")
         p_r.add_argument("--max-context-bytes", type=int, default=DEFAULT_MAX_CONTEXT_BYTES, help="Kontekst paketi maksimal hajmi (bayt)")
         p_r.add_argument("--reroute-with", default="", help="Ish davomida paydo bo'lgan qo'shimcha ehtiyojni dinamik qo'shish")
         p_r.add_argument("--approved", action="store_true", help="Reklama hisobiga o'zgartirish (mutation) tasdiqlanganligi")

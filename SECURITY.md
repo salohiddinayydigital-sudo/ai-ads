@@ -8,7 +8,7 @@ updated: 2026-10-20
 
 # 🔒 Security Policy (TyrionShield v5.0 & Spend-Guard)
 
-Tyrion v5.0 enforces deterministic security, secret hygiene, and financial safety across all **36 agents**, **62 skills**, **26 slash commands**, and **30 CLI tools**.
+Tyrion v5.0 enforces deterministic security, secret hygiene, and financial safety across all **36 agents**, **62 skills**, **26 slash commands**, and **29 CLI tools**.
 
 ## 1. Read-Only Default & 6 Spend-Guard Gates (`rules/40-xavfsizlik-va-hisob.md`)
 

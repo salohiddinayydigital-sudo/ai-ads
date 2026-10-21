@@ -273,7 +273,7 @@ def scan() -> dict:
         "schema": SCHEMA,
         "generated": datetime.now().astimezone().isoformat(timespec="seconds"),
         "generator": "tools/catalog.py",
-        "vault": str(VAULT),
+        "vault": ".",
         "counts": counts,
         "items": items,
         "mirrors": mirror_status(items),
