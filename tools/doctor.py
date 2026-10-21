@@ -7,9 +7,9 @@ ustiga o'zi ham tekshiradi (raqamlar eskirganmi, graf yangimi, sir oshkor bo'lga
 botlar joyidami, testlar o'tadimi).
 
 Ishlatish:
-  py -3 tools\\doctor.py            # to'liq hisobot
-  py -3 tools\\doctor.py --quick    # testlarsiz (tezkor rejim)
-  py -3 tools\\doctor.py --json     # mashina o'qiydigan chiqish
+  python3 tools\\doctor.py            # to'liq hisobot
+  python3 tools\\doctor.py --quick    # testlarsiz (tezkor rejim)
+  python3 tools\\doctor.py --json     # mashina o'qiydigan chiqish
 
 Chiqish kodi: 0 — hammasi joyida, 1 — ❌ bor, 2 — ishga tushirish xatosi.
 """
@@ -156,7 +156,7 @@ def check_catalog(report: Report, data: dict) -> None:
         total = sum(data["counts"].values())
         report.add("Katalog", OK, f"haqiqatga mos ({total} element)")
     else:
-        report.add("Katalog", FAIL, "eskirgan — `py -3 tools\\catalog.py build`")
+        report.add("Katalog", FAIL, "eskirgan — `python3 tools\\catalog.py build`")
 
 
 def check_drift(report: Report, data: dict) -> None:

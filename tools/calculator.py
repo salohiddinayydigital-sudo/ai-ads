@@ -9,11 +9,11 @@ Meta Ads, Google Ads va Telegram Ads uchun aniq, deterministik hisob-kitoblar:
   5. ladder          : 3 bosqichli sinov pillapoyasi (Sandbox -> Validation -> Scale)
 
 Buyruqlar:
-  py -3 tools\\calculator.py breakeven --price 350000 --cogs 120000 --shipping 25000
-  py -3 tools\\calculator.py meta-155 --daily-budget 150 --target-cpa 15
-  py -3 tools\\calculator.py google-sculpt --monthly-budget 3000 --target-cpa 25 --avg-cpc 1.8
-  py -3 tools\\calculator.py telegram-funnel --budget 500 --cpm 3.5 --ctr 1.2 --aov 45
-  py -3 tools\\calculator.py ladder --total-budget 2000 --breakeven-cpa 20
+  python3 tools\\calculator.py breakeven --price 350000 --cogs 120000 --shipping 25000
+  python3 tools\\calculator.py meta-155 --daily-budget 150 --target-cpa 15
+  python3 tools\\calculator.py google-sculpt --monthly-budget 3000 --target-cpa 25 --avg-cpc 1.8
+  python3 tools\\calculator.py telegram-funnel --budget 500 --cpm 3.5 --ctr 1.2 --aov 45
+  python3 tools\\calculator.py ladder --total-budget 2000 --breakeven-cpa 20
 """
 
 from __future__ import annotations

@@ -11,9 +11,9 @@ deterministik qurish mumkin: lahzalali, bepul, har doim yangi, %100 ishonchli.
 `graphify query|path|explain|god-nodes` shu graf bilan ham ishlaydi (sxema bir xil).
 
 Buyruqlar:
-  py -3 tools\\brain-graph.py build      # graphify-out/graph.json ni qayta quradi
-  py -3 tools\\brain-graph.py build --report
-  py -3 tools\\brain-graph.py stats
+  python3 tools\\brain-graph.py build      # graphify-out/graph.json ni qayta quradi
+  python3 tools\\brain-graph.py build --report
+  python3 tools\\brain-graph.py stats
 
 Chiqish kodi: 0 — tayyor, 2 — xato.
 """
@@ -218,7 +218,7 @@ def cmd_build(args: argparse.Namespace) -> int:
 
 def cmd_stats(_args: argparse.Namespace) -> int:
     if not OUT.is_file():
-        print("✗ graf yo'q — `py -3 tools\\brain-graph.py build`")
+        print("✗ graf yo'q — `python3 tools\\brain-graph.py build`")
         return 2
     data = json.loads(OUT.read_text(encoding="utf-8"))
     s = data.get("stats", {})

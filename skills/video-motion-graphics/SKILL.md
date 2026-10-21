@@ -62,7 +62,7 @@ Ishni boshlashdan **oldin**:
 
 1. E'lon qil (bir qator): `Skill so'rovi: "<vazifa kalit so'zlari>" · agent: video-editor`
 2. Qidiruv (0 token, LLM'siz):
-   `py -3 tools\skill-search.py brief "<vazifa>" --agent video-editor` (repo ildizidan)
+   `python3 tools/skill-search.py brief "<vazifa>" --agent video-editor` (repo ildizidan)
 3. Chiqqan **`fayl:`** yo'lini `Read` bilan o'qi va **faqat shu skill tartibi** bo'yicha ishla.
    `references/` ko'rsatilsa — kerak bo'lgan faylni ham o'qi (kod retseptlari/QA).
 4. Mos skill topilmasa (exit 1) — **ish boshlamaydi**: conductor'ga `needs_input` qaytariladi.
@@ -189,7 +189,7 @@ Tartib (buzilmaydi): **ekspozitsiya → white balance → kontrast (`curves`) �
 | 7 | Topshirish | Render + MANIFEST + QA natijasi | Hash, litsenziya, spec manbasi yozilgan |
 
 Ish maydoni: **standart buyruq bilan ochiladi** —
-`py -3 tools\video-run.py new --client <mijoz> --topic "<mavzu>" --format 9x16`
+`python3 tools/video-run.py new --client <mijoz> --topic "<mavzu>" --format 9x16`
 (`assets/`, `renders/`, `build.py`, `props.json`, `MANIFEST.md`, `qa.md`; mavjud fayl ustiga yozilmaydi).
 Uni `.claude-ads/runs/<run_id>/workers/video-editor/` ichida to'ldiriladi; animatsion sahnani
 Remotion loyihasi sifatida qursa — loyiha ham shu papkada turadi. Kanonik papkalarga yozilmaydi;

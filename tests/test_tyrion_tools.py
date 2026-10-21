@@ -945,9 +945,13 @@ class TyrionV4EnginesTests(unittest.TestCase):
 
     def test_mcp_json_has_tyrion_core_server(self) -> None:
         mcp_cfg = json.loads((VAULT / ".mcp.json").read_text(encoding="utf-8"))
-        self.assertIn("tyrion-core", mcp_cfg.get("mcpServers", {}))
-        self.assertIn("meta-ads", mcp_cfg.get("mcpServers", {}))
-        self.assertIn("google-ads", mcp_cfg.get("mcpServers", {}))
+        servers = mcp_cfg.get("mcpServers", {})
+        self.assertIn("tyrion-core", servers)
+        self.assertNotIn("meta-ads", servers, "optional meta-ads server must not be in default .mcp.json")
+        self.assertNotIn("google-ads", servers, "optional google-ads server must not be in default .mcp.json")
+        integ = (VAULT / "docs" / "integrations.md").read_text(encoding="utf-8")
+        self.assertIn("meta-ads-mcp", integ)
+        self.assertIn("google-ads-mcp", integ)
 
     def test_windsurf_export_creates_windsurfrules(self) -> None:
         import importlib

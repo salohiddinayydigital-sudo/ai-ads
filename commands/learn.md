@@ -15,13 +15,13 @@ Kampaniya auditi, A/B sinov, kreativ sprint yoki texnik nosozlikdan olingan tasd
 
 ```powershell
 # Mavjud instinktlarni ko'rish
-py -3 tools/instincts.py list
+python3 tools/instincts.py list
 
 # Yangi instinkt qo'shish (confidence 1..5)
-py -3 tools/instincts.py add --id <slug> --domain <meta|google|telegram|kreativ|tracking|tizim> --trigger "<qachon>" --action "<nima qilinadi>" --evidence "<manba>" --confidence 4
+python3 tools/instincts.py add --id <slug> --domain <meta|google|telegram|kreativ|tracking|tizim> --trigger "<qachon>" --action "<nima qilinadi>" --evidence "<manba>" --confidence 4
 
 # Yuqori ishonchli (>=4) instinktni memory.md §6 ga ko'tarish
-py -3 tools/instincts.py promote <id>
+python3 tools/instincts.py promote <id>
 ```
 
 ## Qoidalar

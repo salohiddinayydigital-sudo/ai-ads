@@ -31,3 +31,6 @@ claude-ads-main/journal/*.md
 !claude-ads-main/journal/README.md
 !claude-ads-main/journal/_SHABLON.md
 claude-ads-main/.claude-ads/runs/
+
+.claude/settings.json
+.claude/settings.json.bak

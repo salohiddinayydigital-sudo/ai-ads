@@ -36,7 +36,7 @@
   "skills": "./skills/",
   "agents": "./agents/",
   "commands": "./commands/",
-  "hooks": "./hooks.json",
+  "hooks": "./hooks/hooks.json",
   "userConfig": {
     "hooks_enabled": {
       "type": "boolean",

@@ -1,5 +1,5 @@
 {
-  "$comment": "Tyrion kanonik hook'lari. {{VAULT}} ni tools/install-hooks.py almashtiradi va .claude/settings.json ga qo'shadi. Bu fayl qo'lda o'zgartirilmaydi.",
+  "$comment": "Canonical Tyrion lifecycle hooks for Claude Code / Codex. Uses ${CLAUDE_PLUGIN_ROOT} and cross-platform Node launcher.",
   "hooks": {
     "SessionStart": [
       {
@@ -7,8 +7,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "py -3 \"{{VAULT}}/hooks/tyrion-hook.py\" brief",
-            "timeout": 30
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs\" brief",
+            "timeout": 10
           }
         ]
       }
@@ -19,8 +19,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "py -3 \"{{VAULT}}/hooks/tyrion-hook.py\" guard --warn-only --quiet",
-            "timeout": 30
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs\" guard --warn-only --quiet",
+            "timeout": 10
           }
         ]
       }
@@ -31,8 +31,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "py -3 \"{{VAULT}}/hooks/tyrion-hook.py\" ingest --warn-only --quiet",
-            "timeout": 60
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs\" ingest --warn-only --quiet",
+            "timeout": 15
           }
         ]
       }
@@ -43,8 +43,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "py -3 \"{{VAULT}}/hooks/tyrion-hook.py\" dod --warn-only",
-            "timeout": 180
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs\" dod --warn-only",
+            "timeout": 5
           }
         ]
       }

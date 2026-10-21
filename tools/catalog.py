@@ -9,13 +9,13 @@ Yechim: katalog HAR DOIM fayl tizimidan generatsiya qilinadi. Qo'lda tahrirlanma
 `check` buyrug'i katalog bilan haqiqatni solishtiradi va farq bo'lsa xato qaytaradi.
 
 Buyruqlar:
-  py -3 tools\\catalog.py build            # manifests/catalog.json ni qayta yozadi
-  py -3 tools\\catalog.py check            # katalog haqiqatga mos keladimi (CI/doctor uchun)
-  py -3 tools\\catalog.py drift            # nusxalar (mirror) farqini ko'rsatadi
-  py -3 tools\\catalog.py sync-mirrors     # nusxalarni kanonikdan qayta quradi (eskisi arxivga)
-  py -3 tools\\catalog.py sync-claims      # hujjatlardagi (marker + oddiy matn) raqamlarni moslashtiradi
-  py -3 tools\\catalog.py list --layer agents
-  py -3 tools\\catalog.py summary
+  python3 tools\\catalog.py build            # manifests/catalog.json ni qayta yozadi
+  python3 tools\\catalog.py check            # katalog haqiqatga mos keladimi (CI/doctor uchun)
+  python3 tools\\catalog.py drift            # nusxalar (mirror) farqini ko'rsatadi
+  python3 tools\\catalog.py sync-mirrors     # nusxalarni kanonikdan qayta quradi (eskisi arxivga)
+  python3 tools\\catalog.py sync-claims      # hujjatlardagi (marker + oddiy matn) raqamlarni moslashtiradi
+  python3 tools\\catalog.py list --layer agents
+  python3 tools\\catalog.py summary
 
 Chiqish kodi: 0 — mos, 1 — farq bor, 2 — xato.
 """
@@ -367,7 +367,7 @@ def _comparable(data: dict) -> dict:
 
 def cmd_check(_args: argparse.Namespace) -> int:
     if not MANIFEST.is_file():
-        print("✗ katalog yo'q — avval: py -3 tools\\catalog.py build")
+        print("✗ katalog yo'q — avval: python3 tools\\catalog.py build")
         return 2
     stored = json.loads(MANIFEST.read_text(encoding="utf-8"))
     current = scan()
@@ -393,7 +393,7 @@ def cmd_check(_args: argparse.Namespace) -> int:
         if old["counts"].get(key) != new["counts"].get(key):
             print(f"  ~ soni: {key}: {old['counts'].get(key)} → {new['counts'].get(key)}")
             problems += 1
-    print(f"\n✗ katalog eskirgan — {problems} farq. Tuzatish: py -3 tools\\catalog.py build")
+    print(f"\n✗ katalog eskirgan — {problems} farq. Tuzatish: python3 tools\\catalog.py build")
     return 1
 
 
@@ -536,7 +536,7 @@ def cmd_sync_mirrors(args: argparse.Namespace) -> int:
         for line in orphans:
             print(f"  ? {line}")
     print("\n" + ("· --dry-run: hech narsa yozilmadi" if args.dry_run else
-                  "✓ tayyor. Tekshirish: py -3 tools\\catalog.py drift"))
+                  "✓ tayyor. Tekshirish: python3 tools\\catalog.py drift"))
     return 0
 
 

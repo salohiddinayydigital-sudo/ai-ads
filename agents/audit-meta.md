@@ -66,7 +66,7 @@ mutation gate passes.
 - Creative (M25-M32, M-CR1-M-CR4): format diversity, concept coverage, video aspect ratios, fatigue detection, hook rate, social proof, UGC/native content, Advantage+ Creative, freshness and frequency context - bad signal is observed evidence of fatigue or weak hooks, not universal CTR/frequency tables.
 - Account structure (M11-M18): campaign fragmentation, campaign- vs ad-set-level budget control, learning-phase status and resets, Advantage+ Sales, ad-set consolidation, budget distribution, objective alignment.
 - Placements, attribution and bidding (M33-M40): Advantage+ Placements, placement performance review, attribution setting, bid-strategy fit, frequency-cap monitoring, breakdown reporting, UTM parameters, A/B testing.
-- Audiences (M19-M24 — powered by `skills/ads-meta-audience` & `py -3 tools/meta-audience.py`):
+- Audiences (M19-M24 — powered by `skills/ads-meta-audience` & `python3 tools/meta-audience.py`):
   * **M19 (Auction Overlap):** Run `meta-audience.py overlap`; flag collision if overlap of smaller ad set > 20-25%.
   * **M20 (Custom Audience Freshness & 1P Pools):** Verify segmented windows (`IG_Engaged_30d`, `Video_50pct_14d`, `LeadForm_Opened_30d`, `Web_30d`, `AddToCart_14d`).
   * **M21 (Lookalike Seed Quality):** Ensure 1% / 1-2% LALs are built from qualified/paying CRM/CAPI cohorts (≥100-500 events), never raw unqualified leads.

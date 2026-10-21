@@ -37,7 +37,7 @@ davom etadi va buni hech kim sezmaydi.
 
 1. E'lon: `Skill so'rovi: "<vazifa>" · agent: <nom>`
 2. Qidiruv (0 token, LLM'siz, ish papkasi `D:/tyrion`):
-   `py -3 tools\skill-search.py brief "<vazifa>" --agent <nom>`
+   `python3 tools/skill-search.py brief "<vazifa>" --agent <nom>`
 3. Chiqqan `fayl:` yo'lidagi `SKILL.md` o'qiladi va **faqat shu tartib** bo'yicha ishlanadi
    (`qo'shimcha:` ko'rsatgan `references/*.md` — kerak bo'lganda).
 4. Mos skill topilmasa (chiqish kodi 1) — **ish boshlanmaydi**: conductor'ga `needs_input`
@@ -74,7 +74,7 @@ faqat bittasiga xos so'z ("animatsion", "kinetik") ko'proq vazn beradi. Sabab: r
   `research-worker` (2) · `seo-auditor` (2) va boshqalar.
 - **33 platforma skill** (`skills/ads-*`) ulanish talab qilmaydi — ularni
   `ads/SKILL.md` orchestration routeri boshqaradi.
-- Nazorat: `py -3 tools\doctor.py` → "Skill reyestri" qatori (ulanishlar soni va uzilishlar).
+- Nazorat: `python3 tools/doctor.py` → "Skill reyestri" qatori (ulanishlar soni va uzilishlar).
 
 ## Qoidalar
 
@@ -82,7 +82,7 @@ faqat bittasiga xos so'z ("animatsion", "kinetik") ko'proq vazn beradi. Sabab: r
 - Yangi skill qo'shilsa: papka `SKILL.md` bilan + `attached_agents` + agentda `skills:` + `check` o'tishi.
 - Skill tavsifi (`description`) va `triggers` — qidiruv sifati shu yerga bog'liq; erkin tarzda
   "after effects", "montaj qil" kabi **foydalanuvchi aytadigan so'zlar** yoziladi.
-- Har ish oxirida: `py -3 tools\skill-search.py check` va `py -3 tools\doctor.py` — skill qatlami
+- Har ish oxirida: `python3 tools/skill-search.py check` va `python3 tools/doctor.py` — skill qatlami
   sog'ligi boshqa qatlamlar kabi nazoratda ([[50-topshirish-dod]]).
 
 ## Bog'liq

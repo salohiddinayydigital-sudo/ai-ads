@@ -25,9 +25,9 @@ Har bir instinkt 5 ta majburiy maydondan iborat ([[agent-os-qatlami]]):
 
 ## Hayot Sikli (`/learn` → Instinkt → Wiki)
 
-1. **Ajratib olish (`/learn`):** Sessiya yoki haftalik hisobot ([[haftalik-audit]]) yakunida `py -3 tools/instincts.py add` orqali yangi saboq kiritiladi.
+1. **Ajratib olish (`/learn`):** Sessiya yoki haftalik hisobot ([[haftalik-audit]]) yakunida `python3 tools/instincts.py add` orqali yangi saboq kiritiladi.
 2. **Tekshirish (`confidence 1 → 3`):** Gipoteza ikkinchi mijoz yoki kampaniyada ham tasdiqlansa, ishonch balli oshiriladi ([[dalil-tasnifi]]).
-3. **Ko'tarish (`promote`, `confidence >= 4`):** Ishonch balli 4–5 ga yetgan instinkt `py -3 tools/instincts.py promote <id>` buyrug'i bilan `MEMORY.md` §6 (Saboqlar) bo'limiga yoki `wiki/` da alohida atomik qaydga aylantiriladi.
+3. **Ko'tarish (`promote`, `confidence >= 4`):** Ishonch balli 4–5 ga yetgan instinkt `python3 tools/instincts.py promote <id>` buyrug'i bilan `MEMORY.md` §6 (Saboqlar) bo'limiga yoki `wiki/` da alohida atomik qaydga aylantiriladi.
 
 ## Anti-Patterns (WRONG vs CORRECT)
 

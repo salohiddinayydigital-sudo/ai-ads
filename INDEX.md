@@ -213,7 +213,7 @@ updated: 2026-09-16
 4. Yangi xom manba → `raw/` ga (verbatim), tahlil → `wiki/` ga
 5. Tugagach: `LOG.md` tepasiga 1 qator sana+harakat
 
-**Nazorat:** `py -3 tools\vault-audit.py` (0 muammo) · `py -3 tools\doctor.py` (0 xato) · `py -3 hooks\tyrion-hook.py ingest`
+**Nazorat:** `python3 tools/vault-audit.py` (0 muammo) · `python3 tools/doctor.py` (0 xato) · `python3 hooks\tyrion-hook.py ingest`
 | [[uzluksiz-organish-instinktlar]] | ECC continuous-learning naqshi asosida Tyrion instinktlar tizimi — kampaniya saboqlarini yig'ish, ishonch balli (1-5) bilan baholash va wiki/memory qatlamiga ko'tarish | raw/2026-09-16-ecc-naqshlar-tahlili.md + affaan-m/ECC continuous-learning-v2 (2026-10-17) |
 | [[verification-loop-6-bosqich]] | Marketing auditi, kreativ va kampaniya o'zgarishlarini topshirishdan oldin 6 bosqichli deterministik tekshiruv zanjiri (ECC verification-loop adaptatsiyasi) | raw/2026-09-16-ecc-naqshlar-tahlili.md §6 + rules/50-topshirish-dod.md (2026-10-17) |
 | [[meta-auditoriya-arxitekturasi]] | Meta Ads Andromeda 2 auditoriya arxitekturasi — 4 qatlamli voronka (Broad, Interest Stack, 1P Custom Audience, Value LAL), Exclusion matritsasi, Overlap va Saturation matematikasi | tools/meta-audience.py + wiki/meta-kampaniya-tuzilmalari.md + wiki/andromeda-scalability-signal.md (2026-10-18) |

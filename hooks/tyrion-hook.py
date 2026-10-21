@@ -6,10 +6,10 @@ Qo'llab-quvvatlanadigan muhit o'zgaruvchilari (ECC 2.2 mos):
   TYRION_DISABLED_HOOKS : vergul bilan ajratilgan hook ID ro'yxati (session:brief,pre:guard,post:ingest,stop:dod)
 
 Buyruqlar:
-  py -3 hooks/tyrion-hook.py brief     # sessiya boshi: holat + instinktlar (SessionStart, ID: session:brief)
-  py -3 hooks/tyrion-hook.py guard     # muhim konfiguratsiya himoyasi (PreToolUse, ID: pre:guard)
-  py -3 hooks/tyrion-hook.py ingest    # ingest protokoli: INDEX/LOG/graf (PostToolUse, ID: post:ingest)
-  py -3 hooks/tyrion-hook.py dod       # topshirish darvozasi: doctor + ingest + gate (Stop, ID: stop:dod)
+  python3 hooks/tyrion-hook.py brief     # sessiya boshi: holat + instinktlar (SessionStart, ID: session:brief)
+  python3 hooks/tyrion-hook.py guard     # muhim konfiguratsiya himoyasi (PreToolUse, ID: pre:guard)
+  python3 hooks/tyrion-hook.py ingest    # ingest protokoli: INDEX/LOG/graf (PostToolUse, ID: post:ingest)
+  python3 hooks/tyrion-hook.py dod       # topshirish darvozasi: doctor + ingest + gate (Stop, ID: stop:dod)
 
 Chiqish kodi: 0 — joyida, 1 — qoida buzilgan (hook bloklaydi), 2 — xato.
 """
@@ -38,6 +38,16 @@ for _stream in (sys.stdout, sys.stderr):
             _stream.reconfigure(encoding="utf-8", errors="replace")
         except Exception:  # pragma: no cover
             pass
+
+
+
+def is_maintainer_mode() -> bool:
+    if os.environ.get("TYRION_DEV", "").strip().lower() in ("1", "true", "yes"):
+        return True
+    try:
+        return Path.cwd().resolve() == VAULT.resolve()
+    except Exception:
+        return False
 
 
 def get_profile() -> str:
@@ -92,7 +102,7 @@ def cmd_brief(_args: argparse.Namespace) -> int:
         newest = max((p.stat().st_mtime for p in notes if p.is_file()), default=0)
         if newest > graph.stat().st_mtime:
             days = (newest - graph.stat().st_mtime) / 86400
-            bits.append(f"graf {days:.0f} kun eski → `py -3 tools/brain-graph.py build`")
+            bits.append(f"graf {days:.0f} kun eski → `python3 tools/brain-graph.py build`")
 
     drift = [m for m in data["mirrors"] if m["status"] != "identical"]
     if drift:
@@ -112,7 +122,25 @@ PROTECTED_GENERATED = {"manifests/catalog.json", "graphify-out/graph.json"}
 def cmd_guard(args: argparse.Namespace) -> int:
     if is_disabled("pre:guard"):
         return 0
-    target = (args.target or "").replace("\\", "/").strip()
+    raw_target = (args.target or "").strip()
+    if not raw_target and not sys.stdin.isatty():
+        try:
+            stdin_data = sys.stdin.read().strip()
+            if stdin_data.startswith("{"):
+                payload = json.loads(stdin_data)
+                t_in = payload.get("tool_input") or payload.get("input") or {}
+                raw_target = str(t_in.get("file_path") or t_in.get("path") or t_in.get("target_file") or "")
+        except Exception:
+            raw_target = ""
+    target = raw_target.replace("\\", "/").strip()
+    # If target is an absolute path outside VAULT, never block user files in another project
+    if target and Path(raw_target).is_absolute():
+        try:
+            resolved_target = Path(raw_target).resolve()
+            if VAULT.resolve() not in resolved_target.parents and resolved_target != VAULT.resolve():
+                return 0
+        except Exception:
+            return 0
     if any(target.endswith(p) for p in PROTECTED_GENERATED):
         msg = f"⚠ HIMOYA (pre:guard): '{target}' generatsiya fayli — qo'lda tahrirlamang (`catalog.py build` / `brain-graph.py build` ishlating)."
         print(msg)
@@ -133,7 +161,7 @@ def _today() -> str:
 
 
 def cmd_ingest(args: argparse.Namespace) -> int:
-    if is_disabled("post:ingest"):
+    if is_disabled("post:ingest") or not is_maintainer_mode():
         return 0
     problems: list[str] = []
     data = cat.scan()
@@ -177,7 +205,7 @@ def cmd_ingest(args: argparse.Namespace) -> int:
         print(f"  - {line}")
     if len(problems) > 8:
         print(f"  ... yana {len(problems) - 8} ta")
-    print("  Tuzatish: `py -3 tools/vault-audit.py --write` va LOG.md tepasiga sana muhrlang.")
+    print("  Tuzatish: `python3 tools/vault-audit.py --write` va LOG.md tepasiga sana muhrlang.")
     strict = (get_profile() == "strict") and not args.warn_only
     return 1 if (not args.warn_only or strict) else 0
 
@@ -187,7 +215,7 @@ def cmd_ingest(args: argparse.Namespace) -> int:
 # --------------------------------------------------------------------------- #
 
 def cmd_dod(args: argparse.Namespace) -> int:
-    if is_disabled("stop:dod"):
+    if is_disabled("stop:dod") or not is_maintainer_mode():
         return 0
     failures: list[str] = []
 
@@ -253,8 +281,18 @@ def main(argv: list[str] | None = None) -> int:
     dod.set_defaults(func=cmd_dod)
 
     args = parser.parse_args(argv)
-    return args.func(args)
+    try:
+        return args.func(args)
+    except Exception as exc:
+        print(f"⚠ tyrion-hook warning: {exc} (non-blocking)", file=sys.stderr)
+        return 2 if get_profile() == "strict" else 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except SystemExit:
+        raise
+    except Exception as _exc:
+        print(f"⚠ tyrion-hook warning: {_exc} (non-blocking)", file=sys.stderr)
+        raise SystemExit(2 if get_profile() == "strict" else 0)

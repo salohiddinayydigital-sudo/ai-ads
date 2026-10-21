@@ -28,8 +28,8 @@ updated: 2026-10-18
 
 ## 3. Auction Overlap va Saturation Matematikasi (`tools/meta-audience.py`)
 
-- **Auction Overlap Chegarasi:** Ikki ad setning o'zaro ustma-ust tushishi kichik ad set hajmining **$\le 20\%$** qismidan oshmasligi shart (`py -3 tools/meta-audience.py overlap`). Agar $>25\%$ bo'lsa — ad setlarni birlashtiring (konsolidatsiya) yoki o'zaro Exclude qiling.
-- **Saturation va Charchash (Fatigue):** 14 kunlik oynada Prospecting Frequency **$\le 2.5	ext{x}$** (FTIR $\ge 60\%$) bo'lishi kerak (`py -3 tools/meta-audience.py saturation`). Frequency $>2.8	ext{x}$ ga chiqsa, CPA keskin qimmatlashadi ([[kreativ-hit-rate]]).
+- **Auction Overlap Chegarasi:** Ikki ad setning o'zaro ustma-ust tushishi kichik ad set hajmining **$\le 20\%$** qismidan oshmasligi shart (`python3 tools/meta-audience.py overlap`). Agar $>25\%$ bo'lsa — ad setlarni birlashtiring (konsolidatsiya) yoki o'zaro Exclude qiling.
+- **Saturation va Charchash (Fatigue):** 14 kunlik oynada Prospecting Frequency **$\le 2.5	ext{x}$** (FTIR $\ge 60\%$) bo'lishi kerak (`python3 tools/meta-audience.py saturation`). Frequency $>2.8	ext{x}$ ga chiqsa, CPA keskin qimmatlashadi ([[kreativ-hit-rate]]).
 
 ## Anti-Patterns (WRONG vs CORRECT)
 

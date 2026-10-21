@@ -57,7 +57,7 @@ video + yetkazish manifesti. Manba material **o'zgartirilmaydi** — faqat nusxa
 ## 0. Kirish sharti — SKILL TALASH SO'ROVI (majburiy, birinchi qadam)
 
 1. E'lon: `Skill so'rovi: "<vazifa kalit so'zlari>" · agent: video-editor`
-2. Qidiruv (0 token): `py -3 tools\skill-search.py brief "<vazifa>" --agent video-editor` (repo ildizi)
+2. Qidiruv (0 token): `python3 tools/skill-search.py brief "<vazifa>" --agent video-editor` (repo ildizi)
 3. Chiqqan `fayl:` yo'lini `Read` qilib, **faqat shu skill tartibi** bo'yicha ishla.
 4. Skill topilmasa (exit 1) — ish boshlanmaydi, `needs_input` qaytariladi.
 
@@ -181,13 +181,13 @@ Zanjir tartibi: `highpass → afftdn (shovqin) → deesser → acompressor → l
 **Ish maydoni standart buyruq bilan ochiladi** (papka tuzilishi qo'lda o'ylab topilmaydi):
 
 ```powershell
-py -3 tools\video-run.py new --client <mijoz> --topic "<mavzu>" --format 9x16
+python3 tools/video-run.py new --client <mijoz> --topic "<mavzu>" --format 9x16
 # → assets/ renders/ build.py props.json MANIFEST.md qa.md  (mavjud fayl ustiga yozilmaydi)
-py -3 tools\video-run.py status <run_id>     # nima bor, nima yetishmayapti
+python3 tools/video-run.py status <run_id>     # nima bor, nima yetishmayapti
 ```
 `props.json` — cut_list (sababi bilan), matn, rang, spec, subtitr fayli; `build.py` — normalizatsiya →
 kesim → rang → subtitr → miks → eksport → **QA** zanjiri (qayta ishga tushiriladi, natijani
-`qa-report.md` ga yozadi). Draft: `py -3 build.py --draft`, final: `py -3 build.py`.
+`qa-report.md` ga yozadi). Draft: `python3 build.py --draft`, final: `python3 build.py`.
 
 | # | Faza | Chiqish | Darvoza |
 |---|---|---|---|

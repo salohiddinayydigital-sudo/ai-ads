@@ -8,11 +8,11 @@ Yechim: bitta buyruq ikki tomonni ham yozadi; frontmatter satr-satr tahrirlanadi
 bayt-aniq qoladi); `--dry-run` rejasi ko'rsatiladi; `skill-search.py check` natijani tekshiradi.
 
 Buyruqlar:
-  py -3 tools\\skill-attach.py set copywriting --agents copy-writer
-  py -3 tools\\skill-attach.py set social --agents social-content-writer --dry-run
-  py -3 tools\\skill-attach.py set tyrion --standalone
-  py -3 tools\\skill-attach.py remove social --agent social-content-writer
-  py -3 tools\\skill-attach.py list
+  python3 tools\\skill-attach.py set copywriting --agents copy-writer
+  python3 tools\\skill-attach.py set social --agents social-content-writer --dry-run
+  python3 tools\\skill-attach.py set tyrion --standalone
+  python3 tools\\skill-attach.py remove social --agent social-content-writer
+  python3 tools\\skill-attach.py list
 
 Chiqish: `+` qo'shildi, `~` yangilandi, `=` o'zgarmadi. Kod: 0 — bajarildi,
 1 — topilmadi/mumkin emas, 2 — argument xatosi.
@@ -205,7 +205,7 @@ def cmd_set(args: argparse.Namespace) -> int:
     print(f"{head}: {args.skill} → {', '.join(targets) or 'standalone'}")
     print("\n".join(changes))
     if not args.dry_run:
-        print("Tekshiruv: py -3 tools\\skill-search.py check")
+        print("Tekshiruv: python3 tools\\skill-search.py check")
     return 0
 
 

@@ -43,10 +43,10 @@ tekshiradi, raqamlari qo'lda yozilmaydi va nusxalar bir-biridan uzoqlashmaydi.
 ## Tekshirish
 
 ```powershell
-py -3 tools\doctor.py            # 11 tekshiruv, bitta hisobot (0 xato bo'lishi kerak)
-py -3 tools\catalog.py drift     # nusxalar kanonikdan farq qiladimi
-py -3 -m unittest discover tests # 21 test
-py -3 hooks\tyrion-hook.py dod   # topshirish darvozasi
+python3 tools/doctor.py            # 11 tekshiruv, bitta hisobot (0 xato bo'lishi kerak)
+python3 tools/catalog.py drift     # nusxalar kanonikdan farq qiladimi
+python3 -m unittest discover tests # 21 test
+python3 hooks\tyrion-hook.py dod   # topshirish darvozasi
 ```
 
 ## Saboqlar (qurish paytida topilgan xatolar)

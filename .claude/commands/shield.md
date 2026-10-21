@@ -10,7 +10,7 @@ Vazifa: **$ARGUMENTS**
 ## Ishga tushirish
 
 ```powershell
-py -3 tools/tyrion-shield.py scan
+python3 tools/tyrion-shield.py scan
 ```
 
 ## Tekshiriladigan 5 qatlam

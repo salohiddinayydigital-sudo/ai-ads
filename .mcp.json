@@ -1,27 +1,12 @@
 {
   "mcpServers": {
     "tyrion-core": {
-      "command": "python3",
+      "command": "node",
       "args": [
-        "tools/tyrion-mcp-server.py"
+        "${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs",
+        "--mcp"
       ],
-      "description": "Tyrion v5.0 built-in 0-token MCP server (10 tools: Universal Auto-Router, Detailed Targeting Accuracy Engine, Meta Audience, Live Meta Insights, Breakdown Effect, Creative Matrix, CAPI/UTM, Spend-Guard, Calculator, Brain Search)"
-    },
-    "meta-ads": {
-      "command": "uvx",
-      "args": [
-        "meta-ads-mcp"
-      ],
-      "disabled": true,
-      "description": "Optional live Meta Ads MCP server (github.com/pipeboard-co/meta-ads-mcp). Set META_ACCESS_TOKEN in environment and disabled=false to activate."
-    },
-    "google-ads": {
-      "command": "uvx",
-      "args": [
-        "google-ads-mcp"
-      ],
-      "disabled": true,
-      "description": "Optional official Google Ads read-only MCP server (github.com/googleads/google-ads-mcp). Set disabled=false after configuring OAuth."
+      "description": "Tyrion built-in 0-token STDIO MCP server (10 deterministic paid-media & routing tools: Universal Auto-Router, Detailed Targeting Accuracy Engine, Meta Audience, Live Meta Insights, Breakdown Effect, Creative Matrix, CAPI/UTM, Spend-Guard, Calculator, Brain Search)"
     }
   }
 }
