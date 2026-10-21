@@ -34,6 +34,11 @@ import os
 import re
 import sys
 from pathlib import Path
+
+_TOOLS_DIR = Path(__file__).resolve().parent
+if str(_TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(_TOOLS_DIR))
+import market_locale as mloc  # noqa: E402
 from typing import Any, Callable
 
 VAULT = Path(__file__).resolve().parent.parent
@@ -837,6 +842,9 @@ def route_task(
     extra_references: list[str] | None = None,
     mutation_approved: bool = False,
     session_cache: SessionContextCache | None = None,
+    market: str | None = None,
+    currency: str | None = None,
+    language: str | None = None,
 ) -> dict[str, Any]:
     """Har qanday foydalanuvchi topshirig'i uchun Universal Auto-Router rejasini tuzadi va to'liq kontekstni yuklaydi."""
     cache = session_cache if session_cache is not None else SESSION_CACHE
@@ -848,10 +856,17 @@ def route_task(
     should_load_files = effective_mode == "full"
 
     clean_query = str(query or "").strip()
-    lang = detect_language(clean_query)
+    lang = (language or "").strip() or detect_language(clean_query)
     norm_q = normalize_multilingual_text(clean_query)
     q_tokens = tokens(clean_query)
     niche = _detect_niche(norm_q)
+    market_info = mloc.detect_market(
+        text=clean_query,
+        explicit_market=market,
+        currency=currency,
+        detected_lang=lang,
+    )
+    active_market = market_info["market_id"]
 
     is_mutation = bool(MUTATION_PATTERNS.search(norm_q))
     mutation_blocked = is_mutation and not mutation_approved
@@ -904,7 +919,7 @@ def route_task(
         primary_agent = agent_hint if (agent_hint and agent_hint in agents) else "positioning-strategist"
         supporting_agents: list[str] = []
         required_skills = ["ads"]
-        supporting_skills = ["uzbekistan-market-intel"] if lang in ("uz_latin", "uz_cyrillic") else []
+        supporting_skills = ["uzbekistan-market-intel"] if active_market == "uz" else []
         references_to_load = ["skills/ads/references/thinking-framework.md"]
         tools_to_use = ["tools/brain-search.py", "tools/tyrion.py"]
         confidence_score = 0.35
@@ -952,6 +967,10 @@ def route_task(
                     sup_list.append(sk["name"])
             required_skills = req_list or [top_skill["name"]]
             supporting_skills = [s for s in sup_list if s not in required_skills]
+
+        if active_market != "uz" and "uzbekistan" not in norm_q and "toshkent" not in norm_q and "tashkent" not in norm_q:
+            required_skills = [s for s in required_skills if s != "uzbekistan-market-intel"] or [top_skill["name"]]
+            supporting_skills = [s for s in supporting_skills if s != "uzbekistan-market-intel"]
 
         agent_scores: dict[str, float] = {a: 0.0 for a in agents}
         for cmeta in matched_concepts:
@@ -1080,11 +1099,18 @@ def route_task(
     else:
         risk_level = "low"
 
-    rules_to_load = ["rules/00-manba.md", "rules/70-charter-baseline.md"]
+    rules_to_load = ["rules/00-manba.md", "rules/10-til-va-uslub.md", "rules/70-charter-baseline.md"]
     if risk_level in ("medium", "high") or is_mutation or primary_agent in ("audit-budget", "tracking-specialist", "audit-tracking", "launch-planner"):
         rules_to_load.append("rules/40-xavfsizlik-va-hisob.md")
-    if lang in ("uz_latin", "uz_cyrillic", "ru") or niche != "general" or "uzbekistan-market-intel" in (required_skills + supporting_skills):
+    if active_market == "uz" or "uzbekistan-market-intel" in (required_skills + supporting_skills):
         rules_to_load.append("rules/30-ozbekiston-konteksti.md")
+        if (VAULT / "markets/uz/README.md").is_file():
+            rules_to_load.append("markets/uz/README.md")
+    else:
+        if (VAULT / market_info["readme_path"]).is_file():
+            rules_to_load.append(market_info["readme_path"])
+        if (VAULT / market_info["benchmarks_path"]).is_file():
+            rules_to_load.append(market_info["benchmarks_path"])
     if complexity == "multi_step" or primary_agent == "release-verifier":
         rules_to_load.append("rules/50-topshirish-dod.md")
 
@@ -1329,6 +1355,9 @@ def route_task(
         "asks_user_for_skill_or_agent": False,
         "intent_analysis": {
             "detected_language": lang,
+            "response_language": market_info["language"],
+            "detected_market": active_market,
+            "detected_currency": market_info["currency"],
             "domains": detected_domains,
             "platforms": detected_platforms,
             "niche": niche,
@@ -1337,6 +1366,7 @@ def route_task(
             "is_mutation_request": is_mutation,
             "mutation_approved": mutation_approved,
         },
+        "market_context": market_info,
         "primary_agent": primary_agent,
         "supporting_agents": supporting_agents,
         "required_skills": required_skills,
@@ -1882,6 +1912,9 @@ def cmd_route(args: argparse.Namespace) -> int:
         max_context_bytes=getattr(args, "max_context_bytes", DEFAULT_MAX_CONTEXT_BYTES),
         mutation_approved=args.approved,
         session_cache=cache,
+        market=getattr(args, "market", None),
+        currency=getattr(args, "currency", None),
+        language=getattr(args, "language", None),
     )
     if args.reroute_with:
         plan = reroute_task(
@@ -1896,11 +1929,18 @@ def cmd_route(args: argparse.Namespace) -> int:
         print(json.dumps(plan, ensure_ascii=False, indent=2))
         return 0
 
+    is_uz_out = plan["intent_analysis"]["detected_language"] in ("uz_latin", "uz_cyrillic", "uz", "uz-Latn", "uz-Cyrl")
+    m_ctx = plan.get("market_context", {})
     print("=" * 72)
     print("  🧭 TYRION UNIVERSAL AUTO-ROUTER & ORCHESTRATION PLAN")
     print("=" * 72)
-    print(f"  So'rov            : {plan['query']}")
-    print(f"  Holat (Status)    : {plan['status']} (til={plan['intent_analysis']['detected_language']}, murakkablik={plan['intent_analysis']['complexity']}, xavf={plan['intent_analysis']['risk_level']})")
+    if is_uz_out:
+        print(f"  So'rov            : {plan['query']}")
+        print(f"  Holat (Status)    : {plan['status']} (til={plan['intent_analysis']['detected_language']}, bozor={m_ctx.get('market_id', 'global')}, valyuta={m_ctx.get('currency', 'USD')}, murakkablik={plan['intent_analysis']['complexity']}, xavf={plan['intent_analysis']['risk_level']})")
+    else:
+        print(f"  Query             : {plan['query']}")
+        print(f"  Status            : {plan['status']} (lang={plan['intent_analysis']['detected_language']}, market={m_ctx.get('market_id', 'global')}, currency={m_ctx.get('currency', 'USD')}, complexity={plan['intent_analysis']['complexity']}, risk={plan['intent_analysis']['risk_level']})")
+        print(f"  Regulations       : {', '.join(m_ctx.get('regulations', {}).get('frameworks', [])) or 'Standard'}")
     print(f"  Kontekst Rejimi   : {plan['context_mode']} (full_instructions_loaded={plan['loaded_context']['full_instructions_loaded']}, bytes={plan['loaded_context']['context_budget']['used_bytes']:,})")
     print(f"  Asosiy Agent      : {plan['primary_agent']}")
     print(f"  Yordamchi Agentlar: {', '.join(plan['supporting_agents']) or '— (oddiy vazifa, ortiqcha agent chaqirilmadi)'}")
@@ -2059,6 +2099,9 @@ def main(argv: list[str] | None = None) -> int:
         p_r.add_argument("--approved", action="store_true", help="Reklama hisobiga o'zgartirish (mutation) tasdiqlanganligi")
         p_r.add_argument("--execute", action="store_true", default=(sub_name == "execute"), help="Rejadan tashqari deterministik vositalar va conductor sintezini amalda bajarish")
         p_r.add_argument("--harness", default="", help="Harness imkoniyatini tekshirish (claude_code, codex, cursor, windsurf)")
+        p_r.add_argument("--market", default="", help="Market pack override (global, uz, us, eu, uk, mena, latam, sea, in)")
+        p_r.add_argument("--currency", default="", help="ISO 4217 currency override (USD, EUR, GBP, JPY, UZS, etc.)")
+        p_r.add_argument("--language", default="", help="BCP 47 language override (en, de, fr, ar, uz-Latn, ru, etc.)")
         p_r.add_argument("--persist-session-cache", action="store_true", help="Sessiya keshini diskda (`output/.cache/router_session_cache.json`) saqlash")
         p_r.add_argument("--session-cache-file", default="", help="Maxsus sessiya kesh fayli yo'li")
         p_r.add_argument("--json", action="store_true", help="To'liq JSON chiqarish")

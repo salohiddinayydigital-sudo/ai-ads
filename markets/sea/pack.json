@@ -1,0 +1,233 @@
+{
+  "market_id": "sea",
+  "display_name": "Southeast Asia (SG, ID, TH, VN, MY, PH)",
+  "default_currency": "SGD",
+  "supported_currencies": [
+    "SGD",
+    "IDR",
+    "THB",
+    "VND",
+    "MYR",
+    "PHP",
+    "USD"
+  ],
+  "payment_methods": [
+    "GrabPay",
+    "GoPay / OVO / QRIS (ID)",
+    "PromptPay / TrueMoney (TH)",
+    "GCash (PH)",
+    "PayNow (SG)",
+    "COD"
+  ],
+  "bnpl_providers": [
+    "Atome",
+    "Shopee SPayLater",
+    "Grab PayLater",
+    "Kredivo"
+  ],
+  "price_anchor_template": "3x 0% installments of {installment} with {bnpl}",
+  "primary_funnels": [
+    "Collaborative Ads (CPAS) / TikTok Shop -> Shopee / Lazada / TikTok Shop In-App Checkout",
+    "Ad -> LINE Official Account (TH) / WhatsApp (SG/MY/ID) / Messenger (PH/VN) -> Order"
+  ],
+  "messaging_channels": [
+    "WhatsApp (SG/MY/ID)",
+    "LINE Official Account (TH)",
+    "Zalo / Messenger (VN)",
+    "Messenger (PH)"
+  ],
+  "platform_share": {
+    "Meta Ads": "40%",
+    "TikTok Ads & TikTok Shop": "30%",
+    "Google/YouTube/LINE Ads": "30%"
+  },
+  "seasonality_calendar": [
+    {
+      "period": "Monthly Double-Digit Days",
+      "events": [
+        "9.9 Super Shopping Day",
+        "10.10",
+        "11.11 Singles' Day",
+        "12.12 Birthday Sale"
+      ],
+      "cpm_pressure": "Extreme on Mega-Sale Days"
+    },
+    {
+      "period": "Q1-Q2",
+      "events": [
+        "Lunar New Year / Tet",
+        "Ramadan / Hari Raya / Lebaran (ID/MY)",
+        "Songkran (TH)"
+      ],
+      "cpm_pressure": "High"
+    }
+  ],
+  "regulations": {
+    "frameworks": [
+      "Singapore PDPA",
+      "Thailand PDPA",
+      "Indonesia PDP Law (UU No. 27 Tahun 2022)"
+    ],
+    "consent_required_for_pii": true,
+    "special_ad_categories": [
+      "FINANCIAL_MAS_OJK_LICENSE",
+      "HEALTHCARE_HSA_BPOM_PERMIT"
+    ]
+  },
+  "languages": [
+    "en-SG",
+    "id",
+    "th",
+    "vi",
+    "ms",
+    "tl"
+  ],
+  "rtl_languages": [],
+  "niche_taxonomy": {
+    "ecom": {
+      "name": "E-Commerce & DTC Retail",
+      "core_interests": [
+        "Online shopping",
+        "Engaged Shoppers",
+        "Boutique",
+        "Consumer electronics",
+        "Skin care"
+      ],
+      "behaviors": [
+        "Engaged Shoppers"
+      ],
+      "exclusions": [
+        "30d Purchasers (Custom Audience)",
+        "Payment page drop-offs (Retargeting pool)"
+      ]
+    },
+    "saas": {
+      "name": "B2B SaaS & Software",
+      "core_interests": [
+        "Software as a service",
+        "Cloud computing",
+        "Project management software",
+        "Business intelligence",
+        "CRM"
+      ],
+      "behaviors": [
+        "Business page admins",
+        "Small business owners"
+      ],
+      "exclusions": [
+        "Existing active subscribers",
+        "Job seekers"
+      ]
+    },
+    "real-estate": {
+      "name": "Real Estate & Property",
+      "core_interests": [
+        "Real estate",
+        "Property investment",
+        "Mortgage loans",
+        "Interior design",
+        "Architecture"
+      ],
+      "behaviors": [
+        "Likely to move (where available)"
+      ],
+      "exclusions": [
+        "Existing closed buyers",
+        "Real estate agents (B2C exclusion)"
+      ]
+    },
+    "education": {
+      "name": "EdTech, Courses & Higher Education",
+      "core_interests": [
+        "Online learning",
+        "Professional certification",
+        "Higher education",
+        "Career development",
+        "Language learning"
+      ],
+      "behaviors": [
+        "Continuous learners"
+      ],
+      "exclusions": [
+        "Current enrolled students (30d)"
+      ]
+    },
+    "b2b": {
+      "name": "B2B Services & Enterprise",
+      "core_interests": [
+        "Business-to-business",
+        "Enterprise resource planning",
+        "Supply chain management",
+        "Corporate finance"
+      ],
+      "behaviors": [
+        "B2B decision makers",
+        "Business page admins"
+      ],
+      "exclusions": [
+        "Current clients",
+        "Students / Interns"
+      ]
+    },
+    "fintech": {
+      "name": "Fintech, Banking & Insurance",
+      "core_interests": [
+        "Personal finance",
+        "Financial technology",
+        "Digital banking",
+        "Investment management",
+        "Insurance"
+      ],
+      "behaviors": [
+        "Early technology adopters"
+      ],
+      "exclusions": [
+        "Existing account holders"
+      ]
+    },
+    "med": {
+      "name": "Healthcare, Clinics & Wellness",
+      "core_interests": [
+        "Preventive healthcare",
+        "Dental care",
+        "Dermatology",
+        "Physical fitness",
+        "Wellness"
+      ],
+      "behaviors": [
+        "Health & wellness buyers"
+      ],
+      "exclusions": [
+        "Recent 30d booked patients"
+      ]
+    },
+    "horeca": {
+      "name": "Hospitality, Travel & Dining",
+      "core_interests": [
+        "Fine dining",
+        "Food delivery",
+        "Boutique hotels",
+        "Travel & tourism",
+        "Coffeehouse"
+      ],
+      "behaviors": [
+        "Frequent travelers",
+        "Commuters"
+      ],
+      "exclusions": [
+        "Staff / Employees"
+      ]
+    }
+  },
+  "verified_date": "2026-10-21",
+  "sources": [
+    {
+      "title": "PDPC Singapore — Personal Data Protection Act (PDPA) Overview",
+      "url": "https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act"
+    },
+    {
+      "title": "Google / Temasek / Bain e-Conomy SEA Report",
+      "url": "https://economysea.withgoogle.com/"
+    }
+  ]
+}

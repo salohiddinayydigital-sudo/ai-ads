@@ -1,0 +1,10 @@
+{
+  "locale": "ru",
+  "language_name": "Русский",
+  "cli_status_header": "TYRION ГЛОБАЛЬНАЯ СИСТЕМА PAID MEDIA И ТАРГЕТОЛОГИИ",
+  "router_header": "TYRION UNIVERSAL AUTO-ROUTER — ПЛАН ОРКЕСТРАЦИИ",
+  "market_detected": "Определенный рыночный пакет",
+  "currency_detected": "Активная валюта",
+  "consent_blocked_warning": "Хеширование PII заблокировано: требуется согласие пользователя (--consent-granted).",
+  "ColdStartBenchmarkNote": "История аккаунта первична; используются эталонные диапазоны рынка для холодного старта."
+}

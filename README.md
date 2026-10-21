@@ -9,11 +9,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Security: TyrionShield](https://img.shields.io/badge/TyrionShield-6%2F6%20Passing-brightgreen.svg)](./SECURITY.md)
 
-<!-- tyrion:catalog agents=36 skills=62 wiki=100 playbooks=9 contexts=6 commands=18 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=36 skills=62 wiki=100 playbooks=9 contexts=6 commands=26 rules=9 tools=30 -->
 
 **Tyrion v5.0 (Calibrated & Live-Telemetry Edition)** — `affaan-m/ECC` (*Everything Claude Code*) arxitekturasi asosida qurilgan **yagona ildizli (Single-Root)** raqamli reklama, targetologiya va growth-marketing operatsion tizimi.
 
-Barcha **36 ta ixtisoslashgan agent**, **62 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **18 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **29 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
+Barcha **36 ta ixtisoslashgan agent**, **62 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **26 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **30 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
 
 ## ✨ Tyrion v5.0 Arxitekturasi (Nima o'zgardi?)
 
@@ -30,7 +30,7 @@ tyrion/
 ├── playbooks/                # 9 ta Tayyor Nisha va Platforma Playbooki (Meta $1k-$10k, E-com, Ta'lim, Ko'chmas mulk...)
 ├── rules/                    # 9 ta Buzilmas Qoida (00-manba .. 70-charter-baseline + README)
 ├── wiki/                     # 100 ta Atomik Bilim Qaydi (Andromeda 2, Meta Audience, Google Coliseum, 16 SOP)
-├── tools/                    # 29 ta 0-Token Deterministik CLI Asbob (boshqaruv markazi: tools/tyrion.py)
+├── tools/                    # 30 ta 0-Token Deterministik CLI Asbob (boshqaruv markazi: tools/tyrion.py)
 ├── hooks/                    # Deterministik Lifecycle Hooklar (SessionStart, PreToolUse, PostToolUse, Stop)
 ├── templates/                # 6 ta Tayyor Hisobot, Brief va Launch Shablonlari
 ├── examples/                 # Demo Mijoz Ish Maydoni va Real Graph API v26.0 JSON namunasi

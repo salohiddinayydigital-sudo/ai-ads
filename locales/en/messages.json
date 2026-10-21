@@ -1,0 +1,10 @@
+{
+  "locale": "en",
+  "language_name": "English",
+  "cli_status_header": "TYRION GLOBAL PAID-MEDIA OS",
+  "router_header": "TYRION UNIVERSAL AUTO-ROUTER — EXECUTION PLAN",
+  "market_detected": "Detected Market Pack",
+  "currency_detected": "Active Currency",
+  "consent_blocked_warning": "PII hashing blocked: user consent (--consent-granted) is required in regulated markets (GDPR/LGPD/DPDP).",
+  "ColdStartBenchmarkNote": "Account history takes precedence; using market cold-start reference ranges."
+}

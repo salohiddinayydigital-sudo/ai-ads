@@ -1,0 +1,240 @@
+{
+  "market_id": "us",
+  "display_name": "United States (US)",
+  "default_currency": "USD",
+  "supported_currencies": [
+    "USD"
+  ],
+  "payment_methods": [
+    "Visa/Mastercard/Amex/Discover",
+    "Apple Pay",
+    "Shop Pay",
+    "PayPal",
+    "Venmo"
+  ],
+  "bnpl_providers": [
+    "Affirm",
+    "Afterpay",
+    "Klarna",
+    "PayPal Pay in 4"
+  ],
+  "price_anchor_template": "Or 4 interest-free payments of {installment} with {bnpl}",
+  "primary_funnels": [
+    "Ad -> Shopify / Custom DTC Landing Page -> One-Click Checkout (Shop Pay / Apple Pay)",
+    "Ad -> VSL / Demo Funnel -> HubSpot / Salesforce -> AE Discovery Call",
+    "Ad -> SMS / Email Capture (Klaviyo / Attentive) -> Welcome Flow -> Purchase"
+  ],
+  "messaging_channels": [
+    "SMS / iMessage (Attentive, Postscript)",
+    "Email (Klaviyo)",
+    "Instagram DM",
+    "Messenger"
+  ],
+  "platform_share": {
+    "Meta Ads": "35%",
+    "Google/YouTube Ads": "40%",
+    "TikTok Ads": "10%",
+    "Amazon/LinkedIn/Reddit/X": "15%"
+  },
+  "seasonality_calendar": [
+    {
+      "period": "May-Jul",
+      "events": [
+        "Memorial Day",
+        "4th of July",
+        "Amazon Prime Day"
+      ],
+      "cpm_pressure": "Moderate-High"
+    },
+    {
+      "period": "Aug-Sep",
+      "events": [
+        "Back to School",
+        "Labor Day"
+      ],
+      "cpm_pressure": "High"
+    },
+    {
+      "period": "Nov-Dec",
+      "events": [
+        "Black Friday / Cyber Monday (BFCM)",
+        "Christmas / Q4 Holiday"
+      ],
+      "cpm_pressure": "Extreme ($18-$40+ CPM)"
+    }
+  ],
+  "regulations": {
+    "frameworks": [
+      "CCPA / CPRA (California)",
+      "State Privacy Laws (VA, CO, CT, TX)",
+      "Meta Limited Data Use (LDU: data_processing_options=['LDU'])",
+      "FTC Endorsement Guides (UGC/Influencer Disclosure)",
+      "TCPA (SMS Opt-in Compliance)"
+    ],
+    "consent_required_for_pii": false,
+    "ldu_required": true,
+    "special_ad_categories": [
+      "HOUSING",
+      "EMPLOYMENT",
+      "CREDIT",
+      "FINANCIAL_PRODUCTS_SERVICES",
+      "ISSUES_ELECTIONS_POLITICS"
+    ]
+  },
+  "languages": [
+    "en-US",
+    "es-US"
+  ],
+  "rtl_languages": [],
+  "niche_taxonomy": {
+    "ecom": {
+      "name": "E-Commerce & DTC Retail",
+      "core_interests": [
+        "Online shopping",
+        "Engaged Shoppers",
+        "Boutique",
+        "Consumer electronics",
+        "Skin care"
+      ],
+      "behaviors": [
+        "Engaged Shoppers"
+      ],
+      "exclusions": [
+        "30d Purchasers (Custom Audience)",
+        "Payment page drop-offs (Retargeting pool)"
+      ]
+    },
+    "saas": {
+      "name": "B2B SaaS & Software",
+      "core_interests": [
+        "Software as a service",
+        "Cloud computing",
+        "Project management software",
+        "Business intelligence",
+        "CRM"
+      ],
+      "behaviors": [
+        "Business page admins",
+        "Small business owners"
+      ],
+      "exclusions": [
+        "Existing active subscribers",
+        "Job seekers"
+      ]
+    },
+    "real-estate": {
+      "name": "Real Estate & Property",
+      "core_interests": [
+        "Real estate",
+        "Property investment",
+        "Mortgage loans",
+        "Interior design",
+        "Architecture"
+      ],
+      "behaviors": [
+        "Likely to move (where available)"
+      ],
+      "exclusions": [
+        "Existing closed buyers",
+        "Real estate agents (B2C exclusion)"
+      ]
+    },
+    "education": {
+      "name": "EdTech, Courses & Higher Education",
+      "core_interests": [
+        "Online learning",
+        "Professional certification",
+        "Higher education",
+        "Career development",
+        "Language learning"
+      ],
+      "behaviors": [
+        "Continuous learners"
+      ],
+      "exclusions": [
+        "Current enrolled students (30d)"
+      ]
+    },
+    "b2b": {
+      "name": "B2B Services & Enterprise",
+      "core_interests": [
+        "Business-to-business",
+        "Enterprise resource planning",
+        "Supply chain management",
+        "Corporate finance"
+      ],
+      "behaviors": [
+        "B2B decision makers",
+        "Business page admins"
+      ],
+      "exclusions": [
+        "Current clients",
+        "Students / Interns"
+      ]
+    },
+    "fintech": {
+      "name": "Fintech, Banking & Insurance",
+      "core_interests": [
+        "Personal finance",
+        "Financial technology",
+        "Digital banking",
+        "Investment management",
+        "Insurance"
+      ],
+      "behaviors": [
+        "Early technology adopters"
+      ],
+      "exclusions": [
+        "Existing account holders"
+      ]
+    },
+    "med": {
+      "name": "Healthcare, Clinics & Wellness",
+      "core_interests": [
+        "Preventive healthcare",
+        "Dental care",
+        "Dermatology",
+        "Physical fitness",
+        "Wellness"
+      ],
+      "behaviors": [
+        "Health & wellness buyers"
+      ],
+      "exclusions": [
+        "Recent 30d booked patients"
+      ]
+    },
+    "horeca": {
+      "name": "Hospitality, Travel & Dining",
+      "core_interests": [
+        "Fine dining",
+        "Food delivery",
+        "Boutique hotels",
+        "Travel & tourism",
+        "Coffeehouse"
+      ],
+      "behaviors": [
+        "Frequent travelers",
+        "Commuters"
+      ],
+      "exclusions": [
+        "Staff / Employees"
+      ]
+    }
+  },
+  "verified_date": "2026-10-21",
+  "sources": [
+    {
+      "title": "Meta Developers — Limited Data Use (LDU) for US States",
+      "url": "https://developers.facebook.com/docs/marketing-apis/data-processing-options"
+    },
+    {
+      "title": "California Privacy Protection Agency — CCPA/CPRA",
+      "url": "https://cppa.ca.gov/regulations/"
+    },
+    {
+      "title": "FTC Endorsement Guides (16 CFR Part 255)",
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+    }
+  ]
+}

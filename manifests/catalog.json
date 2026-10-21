@@ -1,6 +1,6 @@
 {
   "schema": "tyrion-catalog/v1",
-  "generated": "2026-10-21T14:27:54+00:00",
+  "generated": "2026-10-21T14:37:34+00:00",
   "generator": "tools/catalog.py",
   "vault": "/tmp/tyrion_work/tyrion",
   "counts": {
@@ -9,11 +9,11 @@
     "contexts": 6,
     "agents": 36,
     "skills": 62,
-    "commands": 18,
-    "commands.mirror": 18,
+    "commands": 26,
+    "commands.mirror": 26,
     "rules": 9,
     "hooks": 4,
-    "tools": 29,
+    "tools": 30,
     "tests": 1,
     "templates": 6,
     "evals": 1
@@ -2587,6 +2587,30 @@
     ],
     "commands": [
       {
+        "name": "ask",
+        "layer": "commands",
+        "path": "commands/ask.md",
+        "sha256": "3124204ca1a70809",
+        "bytes": 645,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": "ask",
+        "description": "Universal natural-language paid media & targetology routing query across 36 agents, 62 skills & 100 wiki notes (Alias: /savol)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "audience",
+        "layer": "commands",
+        "path": "commands/audience.md",
+        "sha256": "862cdac48ef1ce40",
+        "bytes": 686,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": "audience",
+        "description": "Meta Ads & multi-platform audience architecture, 6-status live interest verification, overlap & saturation analysis (Alias: /auditoriya)",
+        "source": null,
+        "fm_error": null
+      },
+      {
         "name": "audit",
         "layer": "commands",
         "path": "commands/audit.md",
@@ -2623,6 +2647,42 @@
         "fm_error": null
       },
       {
+        "name": "client",
+        "layer": "commands",
+        "path": "commands/client.md",
+        "sha256": "46e34ea05c753de8",
+        "bytes": 657,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": "client",
+        "description": "Client workspace onboarding & 5-file campaign scaffolding (brief, unit economics, audience, creative, tracking) (Alias: /mijoz)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "competitors",
+        "layer": "commands",
+        "path": "commands/competitors.md",
+        "sha256": "fcc50ba5669d5de6",
+        "bytes": 628,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": "competitors",
+        "description": "Competitor Ad Library teardown, offer positioning matrix & counter-hook generation (Alias: /raqobatchi)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "creative",
+        "layer": "commands",
+        "path": "commands/creative.md",
+        "sha256": "f9c2494f843d982c",
+        "bytes": 686,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": "creative",
+        "description": "3x3 Creative Testing Matrix, multilingual 3-second hooks (any BCP 47 language), BNPL price anchors & fatigue diagnostics (Alias: /kreativ)",
+        "source": null,
+        "fm_error": null
+      },
+      {
         "name": "doctor",
         "layer": "commands",
         "path": "commands/doctor.md",
@@ -2643,6 +2703,30 @@
         "updated": "2026-10-20T12:19:42+00:00",
         "title": "eksport",
         "description": "Meta Ads, Google Ads yoki Telegram Ads CSV/JSON eksport fayllarini 0 tokenda tahlil qilish, Kill/Keep/Scale va Meta 'Breakdown Effect' tuzog'ini aniqlash",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "export",
+        "layer": "commands",
+        "path": "commands/export.md",
+        "sha256": "de177700fc480180",
+        "bytes": 661,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": "export",
+        "description": "CSV/JSON ad account export analyzer — wasted spend detection, marginal CPA breakdown & scale/kill verdicts (Alias: /eksport)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "funnel",
+        "layer": "commands",
+        "path": "commands/funnel.md",
+        "sha256": "49218d5582e35881",
+        "bytes": 673,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": "funnel",
+        "description": "End-to-end conversion funnel architecture & leak diagnostics across E-Commerce, B2B SaaS, WhatsApp/Telegram/LINE & CRM (Alias: /voronka)",
         "source": null,
         "fm_error": null
       },
@@ -2703,6 +2787,18 @@
         "updated": "2026-10-20T12:19:42+00:00",
         "title": "raqobatchi",
         "description": "Raqobatchilarning Meta Ads Library, Telegram va Google reklamalari, offerlari va voronkasini chuqur tahlil qilish (Teardown)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "report",
+        "layer": "commands",
+        "path": "commands/report.md",
+        "sha256": "489dada6ebaaf4c2",
+        "bytes": 647,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": "report",
+        "description": "Executive client & operator performance report generator with MER, ROAS, CPA & next-sprint action plan (Alias: /hisobot)",
         "source": null,
         "fm_error": null
       },
@@ -2805,6 +2901,30 @@
     ],
     "commands.mirror": [
       {
+        "name": "ask",
+        "layer": "commands.mirror",
+        "path": ".claude/commands/ask.md",
+        "sha256": "3124204ca1a70809",
+        "bytes": 645,
+        "updated": "2026-10-21T14:35:14+00:00",
+        "title": "ask",
+        "description": "Universal natural-language paid media & targetology routing query across 36 agents, 62 skills & 100 wiki notes (Alias: /savol)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "audience",
+        "layer": "commands.mirror",
+        "path": ".claude/commands/audience.md",
+        "sha256": "862cdac48ef1ce40",
+        "bytes": 686,
+        "updated": "2026-10-21T14:35:14+00:00",
+        "title": "audience",
+        "description": "Meta Ads & multi-platform audience architecture, 6-status live interest verification, overlap & saturation analysis (Alias: /auditoriya)",
+        "source": null,
+        "fm_error": null
+      },
+      {
         "name": "audit",
         "layer": "commands.mirror",
         "path": ".claude/commands/audit.md",
@@ -2841,6 +2961,42 @@
         "fm_error": null
       },
       {
+        "name": "client",
+        "layer": "commands.mirror",
+        "path": ".claude/commands/client.md",
+        "sha256": "46e34ea05c753de8",
+        "bytes": 657,
+        "updated": "2026-10-21T14:35:14+00:00",
+        "title": "client",
+        "description": "Client workspace onboarding & 5-file campaign scaffolding (brief, unit economics, audience, creative, tracking) (Alias: /mijoz)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "competitors",
+        "layer": "commands.mirror",
+        "path": ".claude/commands/competitors.md",
+        "sha256": "fcc50ba5669d5de6",
+        "bytes": 628,
+        "updated": "2026-10-21T14:35:14+00:00",
+        "title": "competitors",
+        "description": "Competitor Ad Library teardown, offer positioning matrix & counter-hook generation (Alias: /raqobatchi)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "creative",
+        "layer": "commands.mirror",
+        "path": ".claude/commands/creative.md",
+        "sha256": "f9c2494f843d982c",
+        "bytes": 686,
+        "updated": "2026-10-21T14:35:14+00:00",
+        "title": "creative",
+        "description": "3x3 Creative Testing Matrix, multilingual 3-second hooks (any BCP 47 language), BNPL price anchors & fatigue diagnostics (Alias: /kreativ)",
+        "source": null,
+        "fm_error": null
+      },
+      {
         "name": "doctor",
         "layer": "commands.mirror",
         "path": ".claude/commands/doctor.md",
@@ -2861,6 +3017,30 @@
         "updated": "2026-10-20T12:19:42+00:00",
         "title": "eksport",
         "description": "Meta Ads, Google Ads yoki Telegram Ads CSV/JSON eksport fayllarini 0 tokenda tahlil qilish, Kill/Keep/Scale va Meta 'Breakdown Effect' tuzog'ini aniqlash",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "export",
+        "layer": "commands.mirror",
+        "path": ".claude/commands/export.md",
+        "sha256": "de177700fc480180",
+        "bytes": 661,
+        "updated": "2026-10-21T14:35:14+00:00",
+        "title": "export",
+        "description": "CSV/JSON ad account export analyzer — wasted spend detection, marginal CPA breakdown & scale/kill verdicts (Alias: /eksport)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "funnel",
+        "layer": "commands.mirror",
+        "path": ".claude/commands/funnel.md",
+        "sha256": "49218d5582e35881",
+        "bytes": 673,
+        "updated": "2026-10-21T14:35:14+00:00",
+        "title": "funnel",
+        "description": "End-to-end conversion funnel architecture & leak diagnostics across E-Commerce, B2B SaaS, WhatsApp/Telegram/LINE & CRM (Alias: /voronka)",
         "source": null,
         "fm_error": null
       },
@@ -2921,6 +3101,18 @@
         "updated": "2026-10-20T12:19:42+00:00",
         "title": "raqobatchi",
         "description": "Raqobatchilarning Meta Ads Library, Telegram va Google reklamalari, offerlari va voronkasini chuqur tahlil qilish (Teardown)",
+        "source": null,
+        "fm_error": null
+      },
+      {
+        "name": "report",
+        "layer": "commands.mirror",
+        "path": ".claude/commands/report.md",
+        "sha256": "489dada6ebaaf4c2",
+        "bytes": 647,
+        "updated": "2026-10-21T14:35:14+00:00",
+        "title": "report",
+        "description": "Executive client & operator performance report generator with MER, ROAS, CPA & next-sprint action plan (Alias: /hisobot)",
         "source": null,
         "fm_error": null
       },
@@ -3038,13 +3230,13 @@
         "name": "10-til-va-uslub",
         "layer": "rules",
         "path": "rules/10-til-va-uslub.md",
-        "sha256": "009ccfb5258daf07",
-        "bytes": 1568,
-        "updated": "2026-10-20T12:19:42+00:00",
-        "title": "10-til-va-uslub",
-        "description": "Javob tili va uslubi — o'zbekcha lotin, texnik atamalar inglizcha, kirishsiz, jadval, wikilink bog'lash",
-        "source": "MEMORY.md §1 + vault router qoidalari (2026-09-16)",
-        "fm_error": null
+        "sha256": "4d23c77350a5a5ce",
+        "bytes": 1814,
+        "updated": "2026-10-21T14:34:06+00:00",
+        "title": null,
+        "description": null,
+        "source": null,
+        "fm_error": "frontmatter yo'q"
       },
       {
         "name": "20-token-gigiyena",
@@ -3270,9 +3462,9 @@
         "name": "catalog",
         "layer": "tools",
         "path": "tools/catalog.py",
-        "sha256": "ec8d98782aeeb804",
-        "bytes": 22976,
-        "updated": "2026-10-21T14:27:19+00:00",
+        "sha256": "eb0b6050dac932c0",
+        "bytes": 22981,
+        "updated": "2026-10-21T14:35:13+00:00",
         "title": null,
         "description": null,
         "source": null,
@@ -3363,6 +3555,18 @@
         "fm_error": "frontmatter yo'q"
       },
       {
+        "name": "market_locale",
+        "layer": "tools",
+        "path": "tools/market_locale.py",
+        "sha256": "655bf4836ada76c1",
+        "bytes": 12285,
+        "updated": "2026-10-21T14:37:34+00:00",
+        "title": null,
+        "description": null,
+        "source": null,
+        "fm_error": "frontmatter yo'q"
+      },
+      {
         "name": "meta-audience",
         "layer": "tools",
         "path": "tools/meta-audience.py",
@@ -3426,9 +3630,9 @@
         "name": "skill-search",
         "layer": "tools",
         "path": "tools/skill-search.py",
-        "sha256": "452bb9eb6901f363",
-        "bytes": 100445,
-        "updated": "2026-10-21T12:17:57+00:00",
+        "sha256": "0c6fa7d3c897cdad",
+        "bytes": 103074,
+        "updated": "2026-10-21T14:36:24+00:00",
         "title": null,
         "description": null,
         "source": null,
@@ -3536,9 +3740,9 @@
         "name": "test_tyrion_tools",
         "layer": "tests",
         "path": "tests/test_tyrion_tools.py",
-        "sha256": "11e25417ea5bf405",
+        "sha256": "712d0c9e286a0cd7",
         "bytes": 133314,
-        "updated": "2026-10-21T14:27:19+00:00",
+        "updated": "2026-10-21T14:35:13+00:00",
         "title": null,
         "description": null,
         "source": null,
@@ -3636,6 +3840,18 @@
   },
   "mirrors": [
     {
+      "name": "ask",
+      "canonical": "commands/ask.md",
+      "mirror": ".claude/commands/ask.md",
+      "status": "identical"
+    },
+    {
+      "name": "audience",
+      "canonical": "commands/audience.md",
+      "mirror": ".claude/commands/audience.md",
+      "status": "identical"
+    },
+    {
       "name": "audit",
       "canonical": "commands/audit.md",
       "mirror": ".claude/commands/audit.md",
@@ -3654,6 +3870,24 @@
       "status": "identical"
     },
     {
+      "name": "client",
+      "canonical": "commands/client.md",
+      "mirror": ".claude/commands/client.md",
+      "status": "identical"
+    },
+    {
+      "name": "competitors",
+      "canonical": "commands/competitors.md",
+      "mirror": ".claude/commands/competitors.md",
+      "status": "identical"
+    },
+    {
+      "name": "creative",
+      "canonical": "commands/creative.md",
+      "mirror": ".claude/commands/creative.md",
+      "status": "identical"
+    },
+    {
       "name": "doctor",
       "canonical": "commands/doctor.md",
       "mirror": ".claude/commands/doctor.md",
@@ -3663,6 +3897,18 @@
       "name": "eksport",
       "canonical": "commands/eksport.md",
       "mirror": ".claude/commands/eksport.md",
+      "status": "identical"
+    },
+    {
+      "name": "export",
+      "canonical": "commands/export.md",
+      "mirror": ".claude/commands/export.md",
+      "status": "identical"
+    },
+    {
+      "name": "funnel",
+      "canonical": "commands/funnel.md",
+      "mirror": ".claude/commands/funnel.md",
       "status": "identical"
     },
     {
@@ -3693,6 +3939,12 @@
       "name": "raqobatchi",
       "canonical": "commands/raqobatchi.md",
       "mirror": ".claude/commands/raqobatchi.md",
+      "status": "identical"
+    },
+    {
+      "name": "report",
+      "canonical": "commands/report.md",
+      "mirror": ".claude/commands/report.md",
       "status": "identical"
     },
     {

@@ -1,0 +1,244 @@
+{
+  "market_id": "uz",
+  "display_name": "Uzbekistan & Central Asia (O'zbekiston)",
+  "default_currency": "UZS",
+  "supported_currencies": [
+    "UZS",
+    "USD"
+  ],
+  "payment_methods": [
+    "Payme",
+    "Click",
+    "Uzcard",
+    "Humo",
+    "Visa/Mastercard"
+  ],
+  "bnpl_providers": [
+    "Uzum Nasiya",
+    "Alif Nasiya",
+    "Anorbank Nasiya",
+    "Intend"
+  ],
+  "price_anchor_template": "Oyiga atigi {installment} dan ({bnpl} orqali 12 oyga bo'lib to'lash)",
+  "primary_funnels": [
+    "Ad -> Telegram Bot / Mini App -> AmoCRM / Bitrix24 -> Call Center (15-min SLA)",
+    "Ad -> Instagram Direct / Lead Form -> AmoCRM -> Sales Call",
+    "Ad -> Marketplace (Uzum Market) / Web Checkout (Payme/Click)"
+  ],
+  "messaging_channels": [
+    "Telegram (90%+ penetration)",
+    "Instagram DM",
+    "SMS",
+    "WhatsApp"
+  ],
+  "platform_share": {
+    "Meta (Instagram/Facebook)": "55-65%",
+    "Telegram Ads & Seeding": "20-25%",
+    "Google/YouTube Ads": "10-15%",
+    "Yandex Direct / TikTok": "5-10%"
+  },
+  "seasonality_calendar": [
+    {
+      "period": "Mar-Apr",
+      "events": [
+        "Ramazon (Ramadan)",
+        "Ramazon Hayit",
+        "Navro'z (21-mart)"
+      ],
+      "cpm_pressure": "High in Food/Fashion/Charity"
+    },
+    {
+      "period": "Jun-Jul",
+      "events": [
+        "Qurbon Hayit",
+        "DTM / OTM Qabul mavsumi (EdTech peak)"
+      ],
+      "cpm_pressure": "High in EdTech & Travel"
+    },
+    {
+      "period": "Sep-Oct",
+      "events": [
+        "O'quv yili va biznes mavsumi boshlanishi"
+      ],
+      "cpm_pressure": "High across B2B/EdTech/Real Estate"
+    },
+    {
+      "period": "Nov-Dec",
+      "events": [
+        "11.11 / Black Friday",
+        "Yangi yil sovg'a mavsumi (10-30 dekabr)"
+      ],
+      "cpm_pressure": "Peak CPM (+30% to +50%)"
+    }
+  ],
+  "regulations": {
+    "frameworks": [
+      "O'zbekiston Respublikasining 'Shaxsga doir ma'lumotlar to'g'risida'gi Qonuni (O'RQ-547)",
+      "O'zbekiston Respublikasining 'Reklama to'g'risida'gi Qonuni (O'RQ-776)"
+    ],
+    "consent_required_for_pii": true,
+    "special_ad_categories": [
+      "MEDICINE_PHARMA_DISCLAIMER_REQUIRED",
+      "FINANCIAL_LICENSE_REQUIRED",
+      "NO_GUARANTEED_INCOME_CLAIMS"
+    ]
+  },
+  "languages": [
+    "uz-Latn",
+    "uz-Cyrl",
+    "ru",
+    "en"
+  ],
+  "rtl_languages": [],
+  "niche_taxonomy": {
+    "ecom": {
+      "name": "E-Commerce & DTC Retail",
+      "core_interests": [
+        "Online shopping",
+        "Engaged Shoppers",
+        "Boutique",
+        "Consumer electronics",
+        "Skin care"
+      ],
+      "behaviors": [
+        "Engaged Shoppers"
+      ],
+      "exclusions": [
+        "30d Purchasers (Custom Audience)",
+        "Payment page drop-offs (Retargeting pool)"
+      ]
+    },
+    "saas": {
+      "name": "B2B SaaS & Software",
+      "core_interests": [
+        "Software as a service",
+        "Cloud computing",
+        "Project management software",
+        "Business intelligence",
+        "CRM"
+      ],
+      "behaviors": [
+        "Business page admins",
+        "Small business owners"
+      ],
+      "exclusions": [
+        "Existing active subscribers",
+        "Job seekers"
+      ]
+    },
+    "real-estate": {
+      "name": "Real Estate & Property",
+      "core_interests": [
+        "Real estate",
+        "Property investment",
+        "Mortgage loans",
+        "Interior design",
+        "Architecture"
+      ],
+      "behaviors": [
+        "Likely to move (where available)"
+      ],
+      "exclusions": [
+        "Existing closed buyers",
+        "Real estate agents (B2C exclusion)"
+      ]
+    },
+    "education": {
+      "name": "EdTech, Courses & Higher Education",
+      "core_interests": [
+        "Online learning",
+        "Professional certification",
+        "Higher education",
+        "Career development",
+        "Language learning"
+      ],
+      "behaviors": [
+        "Continuous learners"
+      ],
+      "exclusions": [
+        "Current enrolled students (30d)"
+      ]
+    },
+    "b2b": {
+      "name": "B2B Services & Enterprise",
+      "core_interests": [
+        "Business-to-business",
+        "Enterprise resource planning",
+        "Supply chain management",
+        "Corporate finance"
+      ],
+      "behaviors": [
+        "B2B decision makers",
+        "Business page admins"
+      ],
+      "exclusions": [
+        "Current clients",
+        "Students / Interns"
+      ]
+    },
+    "fintech": {
+      "name": "Fintech, Banking & Insurance",
+      "core_interests": [
+        "Personal finance",
+        "Financial technology",
+        "Digital banking",
+        "Investment management",
+        "Insurance"
+      ],
+      "behaviors": [
+        "Early technology adopters"
+      ],
+      "exclusions": [
+        "Existing account holders"
+      ]
+    },
+    "med": {
+      "name": "Healthcare, Clinics & Wellness",
+      "core_interests": [
+        "Preventive healthcare",
+        "Dental care",
+        "Dermatology",
+        "Physical fitness",
+        "Wellness"
+      ],
+      "behaviors": [
+        "Health & wellness buyers"
+      ],
+      "exclusions": [
+        "Recent 30d booked patients"
+      ]
+    },
+    "horeca": {
+      "name": "Hospitality, Travel & Dining",
+      "core_interests": [
+        "Fine dining",
+        "Food delivery",
+        "Boutique hotels",
+        "Travel & tourism",
+        "Coffeehouse"
+      ],
+      "behaviors": [
+        "Frequent travelers",
+        "Commuters"
+      ],
+      "exclusions": [
+        "Staff / Employees"
+      ]
+    }
+  },
+  "verified_date": "2026-10-21",
+  "sources": [
+    {
+      "title": "Lex.uz — O'RQ-776 Reklama to'g'risidagi Qonun",
+      "url": "https://lex.uz/docs/-6052631"
+    },
+    {
+      "title": "Lex.uz — O'RQ-547 Shaxsga doir ma'lumotlar to'g'risidagi Qonun",
+      "url": "https://lex.uz/docs/-4396419"
+    },
+    {
+      "title": "DataReportal — Digital Uzbekistan Report",
+      "url": "https://datareportal.com/reports/digital-2024-uzbekistan"
+    }
+  ]
+}

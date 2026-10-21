@@ -1175,7 +1175,7 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
         counts = catalog.scan()["counts"]
         self.assertEqual(counts["agents"], 36)
         self.assertEqual(counts["skills"], 62)
-        self.assertEqual(counts["commands"], 18)
+        self.assertEqual(counts["commands"], 26)
         self.assertEqual(counts["wiki"], 100)
 
         for jpath in ("plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "package.json"):

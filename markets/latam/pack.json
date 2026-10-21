@@ -1,0 +1,226 @@
+{
+  "market_id": "latam",
+  "display_name": "Latin America (Brazil, Mexico, Colombia, Chile)",
+  "default_currency": "BRL",
+  "supported_currencies": [
+    "BRL",
+    "MXN",
+    "COP",
+    "CLP",
+    "ARS",
+    "USD"
+  ],
+  "payment_methods": [
+    "Pix (Brazil — Instant)",
+    "Cartao de Credito Parcelado (Installments)",
+    "OXXO / SPEI (Mexico)",
+    "Mercado Pago"
+  ],
+  "bnpl_providers": [
+    "Mercado Credito",
+    "Parcelado sem juros (Up to 12x)",
+    "Kueski Pay (MX)",
+    "Addi (CO)"
+  ],
+  "price_anchor_template": "Em ate 12x de {installment} sem juros ou 5% OFF no Pix",
+  "primary_funnels": [
+    "Ad -> Click-to-WhatsApp (CTWA) -> Automated WhatsApp Flow / Sales Rep -> Pix / Payment Link",
+    "Ad -> E-Commerce / Mercado Libre -> Pix / Installment Checkout"
+  ],
+  "messaging_channels": [
+    "WhatsApp Business (95%+ reach)",
+    "Instagram DM"
+  ],
+  "platform_share": {
+    "Meta (Instagram/WhatsApp/Facebook)": "55%",
+    "Google/YouTube Ads": "30%",
+    "TikTok Ads": "15%"
+  },
+  "seasonality_calendar": [
+    {
+      "period": "May",
+      "events": [
+        "Hot Sale (Mexico/Colombia)",
+        "Mother's Day"
+      ],
+      "cpm_pressure": "High"
+    },
+    {
+      "period": "Nov-Dec",
+      "events": [
+        "El Buen Fin (Mexico)",
+        "Black Friday Brasil",
+        "Christmas"
+      ],
+      "cpm_pressure": "Extreme"
+    }
+  ],
+  "regulations": {
+    "frameworks": [
+      "Brazil LGPD (Lei Geral de Protecao de Dados, Law No. 13.709/2018)",
+      "CONAR (Brazil Advertising Self-Regulation)",
+      "Mexico LFPDPPP"
+    ],
+    "consent_required_for_pii": true,
+    "special_ad_categories": [
+      "HOUSING",
+      "EMPLOYMENT",
+      "CREDIT",
+      "POLITICAL_ADS"
+    ]
+  },
+  "languages": [
+    "pt-BR",
+    "es-MX",
+    "es-419",
+    "en"
+  ],
+  "rtl_languages": [],
+  "niche_taxonomy": {
+    "ecom": {
+      "name": "E-Commerce & DTC Retail",
+      "core_interests": [
+        "Online shopping",
+        "Engaged Shoppers",
+        "Boutique",
+        "Consumer electronics",
+        "Skin care"
+      ],
+      "behaviors": [
+        "Engaged Shoppers"
+      ],
+      "exclusions": [
+        "30d Purchasers (Custom Audience)",
+        "Payment page drop-offs (Retargeting pool)"
+      ]
+    },
+    "saas": {
+      "name": "B2B SaaS & Software",
+      "core_interests": [
+        "Software as a service",
+        "Cloud computing",
+        "Project management software",
+        "Business intelligence",
+        "CRM"
+      ],
+      "behaviors": [
+        "Business page admins",
+        "Small business owners"
+      ],
+      "exclusions": [
+        "Existing active subscribers",
+        "Job seekers"
+      ]
+    },
+    "real-estate": {
+      "name": "Real Estate & Property",
+      "core_interests": [
+        "Real estate",
+        "Property investment",
+        "Mortgage loans",
+        "Interior design",
+        "Architecture"
+      ],
+      "behaviors": [
+        "Likely to move (where available)"
+      ],
+      "exclusions": [
+        "Existing closed buyers",
+        "Real estate agents (B2C exclusion)"
+      ]
+    },
+    "education": {
+      "name": "EdTech, Courses & Higher Education",
+      "core_interests": [
+        "Online learning",
+        "Professional certification",
+        "Higher education",
+        "Career development",
+        "Language learning"
+      ],
+      "behaviors": [
+        "Continuous learners"
+      ],
+      "exclusions": [
+        "Current enrolled students (30d)"
+      ]
+    },
+    "b2b": {
+      "name": "B2B Services & Enterprise",
+      "core_interests": [
+        "Business-to-business",
+        "Enterprise resource planning",
+        "Supply chain management",
+        "Corporate finance"
+      ],
+      "behaviors": [
+        "B2B decision makers",
+        "Business page admins"
+      ],
+      "exclusions": [
+        "Current clients",
+        "Students / Interns"
+      ]
+    },
+    "fintech": {
+      "name": "Fintech, Banking & Insurance",
+      "core_interests": [
+        "Personal finance",
+        "Financial technology",
+        "Digital banking",
+        "Investment management",
+        "Insurance"
+      ],
+      "behaviors": [
+        "Early technology adopters"
+      ],
+      "exclusions": [
+        "Existing account holders"
+      ]
+    },
+    "med": {
+      "name": "Healthcare, Clinics & Wellness",
+      "core_interests": [
+        "Preventive healthcare",
+        "Dental care",
+        "Dermatology",
+        "Physical fitness",
+        "Wellness"
+      ],
+      "behaviors": [
+        "Health & wellness buyers"
+      ],
+      "exclusions": [
+        "Recent 30d booked patients"
+      ]
+    },
+    "horeca": {
+      "name": "Hospitality, Travel & Dining",
+      "core_interests": [
+        "Fine dining",
+        "Food delivery",
+        "Boutique hotels",
+        "Travel & tourism",
+        "Coffeehouse"
+      ],
+      "behaviors": [
+        "Frequent travelers",
+        "Commuters"
+      ],
+      "exclusions": [
+        "Staff / Employees"
+      ]
+    }
+  },
+  "verified_date": "2026-10-21",
+  "sources": [
+    {
+      "title": "Planalto.gov.br — Brazil LGPD (Lei n 13.709/2018)",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm"
+    },
+    {
+      "title": "Banco Central do Brasil — Pix Instant Payments",
+      "url": "https://www.bcb.gov.br/en/financialstability/pix_en"
+    }
+  ]
+}
