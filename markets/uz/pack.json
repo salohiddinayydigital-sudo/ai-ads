@@ -240,5 +240,9 @@
       "title": "DataReportal — Digital Uzbekistan Report",
       "url": "https://datareportal.com/reports/digital-2024-uzbekistan"
     }
+  ],
+  "regional_platform_skills": [
+    "markets/uz/skills/ads-yandex-direct/SKILL.md",
+    "markets/uz/skills/ads-vk/SKILL.md"
   ]
 }

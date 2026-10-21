@@ -271,5 +271,13 @@
       "title": "WordStream / LocaliQ 2025-2026 Facebook & Google Ads Benchmarks",
       "url": "https://www.wordstream.com/blog/facebook-ads-benchmarks-2024"
     }
+  ],
+  "regional_platform_skills": [
+    "markets/global/skills/ads-naver-kakao/SKILL.md",
+    "markets/global/skills/ads-china-ecosystem/SKILL.md",
+    "markets/global/skills/ads-native-taboola-outbrain/SKILL.md",
+    "markets/uz/skills/ads-yandex-direct/SKILL.md",
+    "markets/uz/skills/ads-vk/SKILL.md",
+    "markets/sea/skills/ads-line/SKILL.md"
   ]
 }
