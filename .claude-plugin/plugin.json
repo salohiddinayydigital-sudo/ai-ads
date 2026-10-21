@@ -33,60 +33,31 @@
     "instincts",
     "tyrion-shield"
   ],
-  "skills": "./skills/",
-  "agents": "./agents/",
-  "commands": "./commands/",
+  "skills": [
+    "./skills/"
+  ],
+  "commands": [
+    "./commands/"
+  ],
   "hooks": "./hooks.json",
   "userConfig": {
     "hooks_enabled": {
       "type": "boolean",
+      "title": "Enable Tyrion hooks",
       "default": true,
       "description": "Enable Tyrion deterministic lifecycle hooks (SessionStart, PreToolUse, PostToolUse, Stop)"
     },
     "hook_profile": {
       "type": "string",
-      "enum": [
-        "minimal",
-        "standard",
-        "strict"
-      ],
+      "title": "Tyrion hook profile",
       "default": "standard",
       "description": "Hook enforcement profile (minimal=SessionStart/Stop only, standard=warn on ingest/guard, strict=block on gate violations)"
     },
     "default_market": {
       "type": "string",
-      "enum": [
-        "uz",
-        "global"
-      ],
+      "title": "Default market context",
       "default": "uz",
-      "description": "Default market context (uz loads 30-ozbekiston-konteksti.md automatically)"
+      "description": "Default market context (uz loads 30-ozbekiston-konteksti.md automatically, or global)"
     }
-  },
-  "suggestedPrompts": [
-    "Run an evidence-backed audit across my Meta and Google ad accounts (/audit)",
-    "Verify Meta Ads Detailed Targeting interests & account validation without hallucinations (/auditoriya)",
-    "Develop an Andromeda 2 creative strategy and 3-second hook variations (/kreativ)",
-    "Draft a 3-stage campaign launch plan (Sandbox -> Validation -> Scale) with Spend-Guard (/budget)",
-    "Audit conversion tracking, CAPI v26.0 match quality, and event deduplication (/tracking)",
-    "Extract reusable campaign lessons into Tyrion instincts (/learn)",
-    "Run a TyrionShield v5.0 static security & AST audit across the workspace (/shield)"
-  ],
-  "interface": {
-    "displayName": "Tyrion",
-    "shortDescription": "36 marketing agents, 62 skills, 100 wiki notes, 9 playbooks, 18 commands, 29 CLI tools & Meta Graph API v26.0 Studio.",
-    "longDescription": "Tyrion v5.0 — The Calibrated Single-Root ECC Paid Media & Targetology Operating System. 36 specialist agents, 62 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 18 slash commands, 29 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
-    "category": "Marketing",
-    "capabilities": [
-      "Interactive",
-      "Read",
-      "Write"
-    ],
-    "brandColor": "#7C3AED",
-    "defaultPrompt": [
-      "Follow 00-manba: never state ad metrics or benchmarks without a verified source and explicit model assumptions.",
-      "Follow 40-xavfsizlik-va-hisob: all ad account mutations require explicit user confirmation, Spend-Guard verification, and a rollback plan.",
-      "Follow 50-topshirish-dod & 70-charter-baseline: deliverables must be actionable files in outputs/ with concrete numbers, Prompt Defense Baseline, and zero hallucinated findings."
-    ]
   }
 }
