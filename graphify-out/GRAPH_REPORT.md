@@ -1,28 +1,28 @@
 # GRAPH_REPORT — Tyrion bilim grafi (deterministik)
 
-> Qurilgan: 2026-10-21T14:27:53+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
+> Qurilgan: 2026-10-21T14:54:03+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
 
-**Tugunlar:** 184 · **Qirralar:** 874 · **Klasterlar:** 44
+**Tugunlar:** 192 · **Qirralar:** 868 · **Klasterlar:** 44
 
 ## Eng bog'langan tugunlar (hublar)
 
 | # | Tugun | Kiruvchi | Fayl |
 |---|-------|----------|------|
-| 1 | 00-manba | 53 | `rules/00-manba.md` |
+| 1 | 00-manba | 52 | `rules/00-manba.md` |
 | 2 | 40-xavfsizlik-va-hisob | 50 | `rules/40-xavfsizlik-va-hisob.md` |
 | 3 | 70-charter-baseline | 41 | `rules/70-charter-baseline.md` |
 | 4 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
-| 5 | ad-iteration | 16 | `wiki/ad-iteration.md` |
-| 6 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
+| 5 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
+| 6 | ad-iteration | 16 | `wiki/ad-iteration.md` |
 | 7 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
-| 8 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
+| 8 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
 | 9 | meta-ads-sozlamalari | 15 | `wiki/meta-ads-sozlamalari.md` |
-| 10 | 50-topshirish-dod | 14 | `rules/50-topshirish-dod.md` |
-| 11 | survey-funnel | 14 | `wiki/survey-funnel.md` |
-| 12 | 30-ozbekiston-konteksti | 13 | `rules/30-ozbekiston-konteksti.md` |
-| 13 | token-gigiyenasi | 13 | `wiki/token-gigiyenasi.md` |
+| 10 | survey-funnel | 14 | `wiki/survey-funnel.md` |
+| 11 | 50-topshirish-dod | 13 | `rules/50-topshirish-dod.md` |
+| 12 | token-gigiyenasi | 13 | `wiki/token-gigiyenasi.md` |
+| 13 | etiroz-javob-patternlari | 13 | `wiki/etiroz-javob-patternlari.md` |
 | 14 | more-better-new | 13 | `wiki/more-better-new.md` |
-| 15 | etiroz-javob-patternlari | 13 | `wiki/etiroz-javob-patternlari.md` |
+| 15 | 30-ozbekiston-konteksti | 12 | `rules/30-ozbekiston-konteksti.md` |
 
 ## Klasterlar
 
@@ -30,7 +30,7 @@
 |---------|----------|
 | agents | 36 |
 | meta-ads | 35 |
-| commands | 18 |
+| commands | 26 |
 | sop | 16 |
 | playbook | 9 |
 | rules | 9 |

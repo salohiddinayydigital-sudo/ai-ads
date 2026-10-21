@@ -1,40 +1,30 @@
----
-name: security-policy
-description: Tyrion v5.0 Security & Governance Policy — Read-only default, Spend-Guard 6 gates, TyrionShield static scanner, and explicit scope disclosures
-tags: [security, shield, spend-guard, policy]
-source: "rules/40-xavfsizlik-va-hisob.md + tools/tyrion-shield.py"
-updated: 2026-10-20
----
+# Security Policy & Spend-Guard Architecture (`SECURITY.md`)
 
-# 🔒 Security Policy (TyrionShield v5.0 & Spend-Guard)
+## 1. Supported Versions & Inventory
 
-Tyrion v5.0 enforces deterministic security, secret hygiene, and financial safety across all **36 agents**, **62 skills**, **26 slash commands**, and **29 CLI tools**.
+| Version | Status | Architecture Inventory |
+|---|---|---|
+| **6.0.x** | Supported (Current Global Release) | **36 agents**, **62 skills**, **26 slash commands**, **29 CLI tools**, 100 wiki notes |
+| **5.0.x** | Maintenance | Single-Root ECC (Uzbekistan default) |
 
-## 1. Read-Only Default & 6 Spend-Guard Gates (`rules/40-xavfsizlik-va-hisob.md`)
+## 2. Reporting a Vulnerability
 
-No AI agent or skill in Tyrion may directly mutate a live advertising account without passing all 6 gates (`python3 tools/spend-guard.py`):
-1. **Preview**: Explicit before/after diff of the proposed change.
-2. **Human Approval**: Explicit confirmation from the operator.
-3. **Budget Velocity Guard**: Daily budget increases strictly $\le +20\%$ within 48 hours to prevent learning-phase resets.
-4. **Hard Spend Ceiling**: Daily spend never exceeds the configured `max_daily_cap`.
-5. **Stop-Loss Condition**: Every Change Packet defines an automatic kill threshold (e.g., `2x Target CPA` with `0` conversions).
-6. **Rollback Plan**: Step-by-step reversal instructions included in every deliverable.
+If you discover a security vulnerability, prompt injection vector, or credential leak risk:
+- **GitHub Security Advisories:** [https://github.com/salohiddinayydigital-sudo/ai-ads/security/advisories](https://github.com/salohiddinayydigital-sudo/ai-ads/security/advisories)
+- **Repository Maintainer:** [@salohiddinayydigital-sudo](https://github.com/salohiddinayydigital-sudo)
+- Do **not** open a public issue containing live tokens, ad account IDs, or exploit payloads.
 
-## 2. Prompt Injection Defense (`rules/70-charter-baseline.md`)
+## 3. Spend-Guard & Ad Account Mutation Safety (6 Mandatory Gates)
 
-All **36 agent charters** enforce the **ECC Prompt Defense Baseline**:
-- Ad exports (CSV/JSON), landing pages, competitor scrapes, MCP responses, and video transcripts are treated strictly as **untrusted data**, never as executable instructions.
-- Unicode homoglyphs, zero-width characters, and fake urgency prompts are ignored and flagged.
+Tyrion enforces strict read-only default operation. Any action that mutates a live ad account (budget change, pausing campaigns, bid modification) is blocked by `tools/spend-guard.py` and the Universal Auto-Router until all 6 gates pass:
+1. **Preview Diff (`1_preview_diff`)**
+2. **Explicit Human Approval (`2_human_approval` / `--approved`)**
+3. **Budget Velocity Limit (`3_budget_velocity_le_20pct` — max +20% per 48–72h)**
+4. **Hard Daily Ceiling (`4_max_daily_cap`)**
+5. **Automated Stop-Loss Rule (`5_stop_loss_rule`)**
+6. **Instant Rollback Plan (`6_rollback_plan`)**
 
-## 3. Secret Hygiene & AST Verification (`tools/tyrion-shield.py`)
+## 4. Privacy, Consent Gate & PII Protection
 
-- Credentials (`META_ACCESS_TOKEN`, API keys, bot tokens) must reside only in local `.env` files (which are git-ignored) and are transmitted exclusively via `Authorization: Bearer` headers (never in URL query strings). Use `.env.example` as a template.
-- Run `python3 tools/tyrion-shield.py scan` before every commit to verify zero secret exposure across the entire repository (including `tests/`), valid hook/MCP configs, complete agent/skill frontmatter, and zero unreachable dead code across Python tools.
-
-## 4. Scope & Honest Limitations of TyrionShield
-
-Passing all **6/6 TyrionShield checks** confirms static repository hygiene, but operators must understand its boundaries:
-- **What TyrionShield covers:** Static regex detection for known token formats (OpenAI, Anthropic, Google, Meta `EAA...`, Telegram Bot, GitHub `ghp_`, AWS `AKIA...`, SSH/TLS private keys) across all directories including `tests/`; hook/MCP JSON safety; agent charter prompt-defense headers; skill YAML frontmatter integrity; Spend-Guard gate presence; and Python AST syntax/dead-code checks.
-- **What TyrionShield does NOT replace:** It is **not** a substitute for a full external cybersecurity penetration test, runtime OS/container sandboxing, or auditing live OAuth permission scopes inside Meta Business Manager / Google Ads Manager. Always use least-privilege, read-only (`ads_read`) tokens for analysis workflows.
-
-**Related:** [[40-xavfsizlik-va-hisob]] · [[70-charter-baseline]] · [[00-manba]]
+- **CAPI Consent Gate (`tools/capi-utm-builder.py`):** When `--no-consent` (`consent_granted=False`) is passed, Tyrion strips all PII (`ph`, `em`, `fn`, `ct`, `fbp`, `fbc`) before hashing or transmission (`BLOCKED_PII_NO_CONSENT`), enforces Google Consent Mode v2 (`denied`), and enables Meta Limited Data Use (`data_processing_options=['LDU']`).
+- **Secret Redaction (`tools/tyrion_core.py` & `tools/tyrion-shield.py`):** Automatically scans and masks Meta (`EAA...`), OpenAI (`sk-...`), Anthropic (`sk-ant-...`), Google (`AIza...`), Telegram, and GitHub tokens.

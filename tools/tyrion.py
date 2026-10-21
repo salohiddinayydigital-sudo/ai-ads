@@ -37,7 +37,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-VERSION = "5.0.0"
+VERSION = "6.0.0"
 
 ROUTES = {
     "route": ("skill-search.py", ["route"]),
