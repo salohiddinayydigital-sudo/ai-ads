@@ -10,7 +10,7 @@ updated: 2026-10-20
 
 > **Bir qator:** Tyrion v5.0 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 36 ixtisoslashgan agent, 62 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 18 slash buyruq va 29 ta 0-token deterministik Python asbobi.
 
-<!-- tyrion:catalog agents=36 skills=62 wiki=100 playbooks=9 contexts=6 commands=18 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=36 skills=62 wiki=100 playbooks=9 contexts=6 commands=26 rules=9 tools=29 -->
 
 ## 1. Boot Tartibi (Token Tejamkor)
 

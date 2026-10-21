@@ -15,10 +15,10 @@ Yechim: bitta buyruq standart ish maydonini ochadi va tayyor skeletlarni beradi:
     qa.md       — topshirish darvozasi jadvali (to'ldiriladi)
 
 Buyruqlar:
-  py -3 tools\\video-run.py new --client dilobar --topic "kuz-aksiya" --task video-editor --format 9x16
-  py -3 tools\\video-run.py list
-  py -3 tools\\video-run.py status <run_id>
-  py -3 tools\\video-run.py new --dry-run --client test --topic demo     # reja ko'rsatiladi, yozilmaydi
+  python3 tools\\video-run.py new --client dilobar --topic "kuz-aksiya" --task video-editor --format 9x16
+  python3 tools\\video-run.py list
+  python3 tools\\video-run.py status <run_id>
+  python3 tools\\video-run.py new --dry-run --client test --topic demo     # reja ko'rsatiladi, yozilmaydi
 
 Qoidalar: mavjud fayl ustiga YOZILMAYDI (xato qaytaradi — hech narsa o'chirilmaydi);
 qayta ishga tushirish idempotent (bo'sh papkalar va yo'q fayllar to'ldiriladi).
@@ -50,7 +50,7 @@ SLUG_RE = re.compile(r"[^a-z0-9]+")
 BUILD_PY = r'''#!/usr/bin/env python3
 """Render skripti — {run_id}/{task}: normalizatsiya → kesim → kadr → rang → subtitr → miks → eksport → QA.
 
-Qayta ishga tushiriladi: `py -3 build.py` (bir martalik buyruq emas).
+Qayta ishga tushiriladi: `python3 build.py` (bir martalik buyruq emas).
 Manba fayllar o'zgartirilmaydi: hash solishtiriladi va natija MANIFEST'ga yoziladi.
 """
 from __future__ import annotations
@@ -369,7 +369,7 @@ def cmd_new(args: argparse.Namespace) -> int:
     print("\n".join(created))
     if not args.dry_run:
         print("\nKeyingi qadamlar: manba nusxasini assets/ ga qo'y → props.json ni to'ldir →")
-        print("  py -3 build.py --draft   (tez ko'rish)  →  py -3 build.py  (final)  →  qa.md")
+        print("  python3 build.py --draft   (tez ko'rish)  →  python3 build.py  (final)  →  qa.md")
     return 0
 
 

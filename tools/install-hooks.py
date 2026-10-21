@@ -65,13 +65,14 @@ def _substitute(node: object, needle: str, value: str) -> object:
 
 
 def build_config(target_root: Path, vault: Path) -> dict:
-    """Kanonik hook'larni o'qib, `{{VAULT}}` ni almashtiradi."""
+    """Kanonik hook'larni o'qib, `${CLAUDE_PLUGIN_ROOT}` va `{{VAULT}}` ni almashtiradi."""
     try:
         data = json.loads(HOOKS_JSON.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         raise SystemExit(f"✗ hooks/hooks.json buzilgan: {exc}")
     py_cmd = detect_python_launcher()
     sub_v = _substitute(data, "{{VAULT}}", str(vault))
+    sub_v = _substitute(sub_v, "${CLAUDE_PLUGIN_ROOT}", str(vault))
     return _substitute(sub_v, "py -3", py_cmd)  # type: ignore[return-value]
 
 

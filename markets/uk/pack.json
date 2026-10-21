@@ -1,0 +1,214 @@
+{
+  "market_id": "uk",
+  "display_name": "United Kingdom (UK)",
+  "default_currency": "GBP",
+  "supported_currencies": [
+    "GBP"
+  ],
+  "payment_methods": [
+    "Visa/Mastercard",
+    "Apple Pay",
+    "PayPal",
+    "Open Banking"
+  ],
+  "bnpl_providers": [
+    "Klarna",
+    "Clearpay",
+    "PayPal Pay in 3"
+  ],
+  "price_anchor_template": "Or 3 interest-free payments of {installment} with {bnpl}",
+  "primary_funnels": [
+    "Ad -> PECR/UK-GDPR Consent Banner -> Shopify/WooCommerce -> Apple Pay / Klarna Checkout",
+    "Ad -> Lead Form / Landing Page -> CRM -> Inside Sales"
+  ],
+  "messaging_channels": [
+    "WhatsApp",
+    "Email",
+    "SMS",
+    "Instagram DM"
+  ],
+  "platform_share": {
+    "Google/YouTube Ads": "45%",
+    "Meta Ads": "35%",
+    "TikTok/LinkedIn": "20%"
+  },
+  "seasonality_calendar": [
+    {
+      "period": "Nov-Dec",
+      "events": [
+        "Black Friday",
+        "Christmas",
+        "Boxing Day Sales (26 Dec)"
+      ],
+      "cpm_pressure": "Extreme"
+    }
+  ],
+  "regulations": {
+    "frameworks": [
+      "UK GDPR & Data Protection Act 2018",
+      "PECR (Privacy and Electronic Communications Regulations)",
+      "Google Consent Mode v2 (UK)",
+      "ASA CAP Code & FCA Financial Promotions Regime"
+    ],
+    "consent_required_for_pii": true,
+    "consent_mode_v2_required": true,
+    "special_ad_categories": [
+      "HOUSING",
+      "EMPLOYMENT",
+      "CREDIT",
+      "FINANCIAL_PRODUCTS_SERVICES",
+      "ISSUES_ELECTIONS_POLITICS"
+    ]
+  },
+  "languages": [
+    "en-GB"
+  ],
+  "rtl_languages": [],
+  "niche_taxonomy": {
+    "ecom": {
+      "name": "E-Commerce & DTC Retail",
+      "core_interests": [
+        "Online shopping",
+        "Engaged Shoppers",
+        "Boutique",
+        "Consumer electronics",
+        "Skin care"
+      ],
+      "behaviors": [
+        "Engaged Shoppers"
+      ],
+      "exclusions": [
+        "30d Purchasers (Custom Audience)",
+        "Payment page drop-offs (Retargeting pool)"
+      ]
+    },
+    "saas": {
+      "name": "B2B SaaS & Software",
+      "core_interests": [
+        "Software as a service",
+        "Cloud computing",
+        "Project management software",
+        "Business intelligence",
+        "CRM"
+      ],
+      "behaviors": [
+        "Business page admins",
+        "Small business owners"
+      ],
+      "exclusions": [
+        "Existing active subscribers",
+        "Job seekers"
+      ]
+    },
+    "real-estate": {
+      "name": "Real Estate & Property",
+      "core_interests": [
+        "Real estate",
+        "Property investment",
+        "Mortgage loans",
+        "Interior design",
+        "Architecture"
+      ],
+      "behaviors": [
+        "Likely to move (where available)"
+      ],
+      "exclusions": [
+        "Existing closed buyers",
+        "Real estate agents (B2C exclusion)"
+      ]
+    },
+    "education": {
+      "name": "EdTech, Courses & Higher Education",
+      "core_interests": [
+        "Online learning",
+        "Professional certification",
+        "Higher education",
+        "Career development",
+        "Language learning"
+      ],
+      "behaviors": [
+        "Continuous learners"
+      ],
+      "exclusions": [
+        "Current enrolled students (30d)"
+      ]
+    },
+    "b2b": {
+      "name": "B2B Services & Enterprise",
+      "core_interests": [
+        "Business-to-business",
+        "Enterprise resource planning",
+        "Supply chain management",
+        "Corporate finance"
+      ],
+      "behaviors": [
+        "B2B decision makers",
+        "Business page admins"
+      ],
+      "exclusions": [
+        "Current clients",
+        "Students / Interns"
+      ]
+    },
+    "fintech": {
+      "name": "Fintech, Banking & Insurance",
+      "core_interests": [
+        "Personal finance",
+        "Financial technology",
+        "Digital banking",
+        "Investment management",
+        "Insurance"
+      ],
+      "behaviors": [
+        "Early technology adopters"
+      ],
+      "exclusions": [
+        "Existing account holders"
+      ]
+    },
+    "med": {
+      "name": "Healthcare, Clinics & Wellness",
+      "core_interests": [
+        "Preventive healthcare",
+        "Dental care",
+        "Dermatology",
+        "Physical fitness",
+        "Wellness"
+      ],
+      "behaviors": [
+        "Health & wellness buyers"
+      ],
+      "exclusions": [
+        "Recent 30d booked patients"
+      ]
+    },
+    "horeca": {
+      "name": "Hospitality, Travel & Dining",
+      "core_interests": [
+        "Fine dining",
+        "Food delivery",
+        "Boutique hotels",
+        "Travel & tourism",
+        "Coffeehouse"
+      ],
+      "behaviors": [
+        "Frequent travelers",
+        "Commuters"
+      ],
+      "exclusions": [
+        "Staff / Employees"
+      ]
+    }
+  },
+  "verified_date": "2026-10-21",
+  "sources": [
+    {
+      "title": "ICO — Guide to UK GDPR & PECR",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/"
+    },
+    {
+      "title": "ASA — UK Code of Non-broadcast Advertising (CAP Code)",
+      "url": "https://www.asa.org.uk/codes-and-rulings/advertising-codes/non-broadcast-code.html"
+    }
+  ]
+}

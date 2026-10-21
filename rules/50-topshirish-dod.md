@@ -29,9 +29,9 @@ updated: 2026-09-16
 
 ## Tizim ishi uchun (Tyrion o'zi)
 
-- `py -3 tools\vault-audit.py` — 0 muammo
-- `py -3 tools\catalog.py check` — katalog mos
-- `py -3 tools\doctor.py` — umumiy hisobot yashil
+- `python3 tools/vault-audit.py` — 0 muammo
+- `python3 tools/catalog.py check` — katalog mos
+- `python3 tools/doctor.py` — umumiy hisobot yashil
 - Yangi bilim → `INDEX.md` + `LOG.md` yangilangan
 - Kod o'zgargan bo'lsa → `tests/` da testi bor
 

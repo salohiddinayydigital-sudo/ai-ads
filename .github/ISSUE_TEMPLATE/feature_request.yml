@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Have a feature idea? You can also discuss it in [GitHub Discussions](https://github.com/AgriciDaniel/claude-ads/discussions) for community input before opening a formal request.
+        Have a feature idea? You can also discuss it in [GitHub Discussions](https://github.com/salohiddinayydigital-sudo/ai-ads/discussions) for community input before opening a formal request.
 
   - type: textarea
     id: problem

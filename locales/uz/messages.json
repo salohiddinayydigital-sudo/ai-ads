@@ -1,0 +1,10 @@
+{
+  "locale": "uz",
+  "language_name": "O'zbek (Lotin)",
+  "cli_status_header": "TYRION GLOBAL PAID-MEDIA VA TARGETOLOGIYA TIZIMI",
+  "router_header": "TYRION UNIVERSAL AUTO-ROUTER — ORKESTRATSIYA REJASI",
+  "market_detected": "Aniqlangan bozor paketi",
+  "currency_detected": "Faol valyuta",
+  "consent_blocked_warning": "PII xeshlash to'xtatildi: regulyatsiya qilinadigan bozorlarda rozilik (--consent-granted) talab qilinadi.",
+  "ColdStartBenchmarkNote": "Akkaunt tarixi birinchi; yangi akkaunt uchun bozor benchmark oraliqlari olindi."
+}

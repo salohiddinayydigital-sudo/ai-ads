@@ -8,11 +8,11 @@ Yechim: fayl tizimidan deterministik indeks (frontmatter + wikilinklar) — 0 to
 0 API, darhol javob. Grafik faqat munosabat (path/explain) kerak bo'lganda.
 
 Buyruqlar:
-  py -3 tools\\brain-search.py search "katta byudjet meta scaling" --top 5
-  py -3 tools\\brain-search.py show <nom>
-  py -3 tools\\brain-search.py links <nom>
-  py -3 tools\\brain-search.py hubs --top 10
-  py -3 tools\\brain-search.py stats
+  python3 tools\\brain-search.py search "katta byudjet meta scaling" --top 5
+  python3 tools\\brain-search.py show <nom>
+  python3 tools\\brain-search.py links <nom>
+  python3 tools\\brain-search.py hubs --top 10
+  python3 tools\\brain-search.py stats
 
 Chiqish: qisqa qatorlar (token tejamkor). Kod: 0 — topildi, 1 — topilmadi, 2 — xato.
 """

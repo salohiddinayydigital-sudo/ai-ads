@@ -10,10 +10,10 @@ Hech qanday jonli hisob o'zgarmaydi. Tavsiyalar qat'iy tekshiriladi:
   5. Tracking: CAPI event_id deduplikatsiyasi, fbp/fbc, xeshlangan ma'lumotlar
 
 Buyruqlar:
-  py -3 tools\\spend-guard.py budget --current 100 --proposed 115 --max-cap 200
-  py -3 tools\\spend-guard.py packet path/to/change-packet.md
-  py -3 tools\\spend-guard.py copy --platform telegram --text "Matn..."
-  py -3 tools\\spend-guard.py tracking --event-id "evt_123" --has-pixel --has-capi
+  python3 tools\\spend-guard.py budget --current 100 --proposed 115 --max-cap 200
+  python3 tools\\spend-guard.py packet path/to/change-packet.md
+  python3 tools\\spend-guard.py copy --platform telegram --text "Matn..."
+  python3 tools\\spend-guard.py tracking --event-id "evt_123" --has-pixel --has-capi
 """
 
 from __future__ import annotations

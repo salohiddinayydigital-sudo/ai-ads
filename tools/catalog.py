@@ -9,13 +9,13 @@ Yechim: katalog HAR DOIM fayl tizimidan generatsiya qilinadi. Qo'lda tahrirlanma
 `check` buyrug'i katalog bilan haqiqatni solishtiradi va farq bo'lsa xato qaytaradi.
 
 Buyruqlar:
-  py -3 tools\\catalog.py build            # manifests/catalog.json ni qayta yozadi
-  py -3 tools\\catalog.py check            # katalog haqiqatga mos keladimi (CI/doctor uchun)
-  py -3 tools\\catalog.py drift            # nusxalar (mirror) farqini ko'rsatadi
-  py -3 tools\\catalog.py sync-mirrors     # nusxalarni kanonikdan qayta quradi (eskisi arxivga)
-  py -3 tools\\catalog.py sync-claims      # hujjatlardagi (marker + oddiy matn) raqamlarni moslashtiradi
-  py -3 tools\\catalog.py list --layer agents
-  py -3 tools\\catalog.py summary
+  python3 tools\\catalog.py build            # manifests/catalog.json ni qayta yozadi
+  python3 tools\\catalog.py check            # katalog haqiqatga mos keladimi (CI/doctor uchun)
+  python3 tools\\catalog.py drift            # nusxalar (mirror) farqini ko'rsatadi
+  python3 tools\\catalog.py sync-mirrors     # nusxalarni kanonikdan qayta quradi (eskisi arxivga)
+  python3 tools\\catalog.py sync-claims      # hujjatlardagi (marker + oddiy matn) raqamlarni moslashtiradi
+  python3 tools\\catalog.py list --layer agents
+  python3 tools\\catalog.py summary
 
 Chiqish kodi: 0 — mos, 1 — farq bor, 2 — xato.
 """
@@ -85,16 +85,16 @@ HUMAN_CLAIMS: list[tuple[str, "re.Pattern[str]", str]] = [
      re.compile(r"(Bilim: atomik qaydlar \()(\d+)(\))"),
      "wiki"),
     ("README.md",
-     re.compile(r"(\*\*)(\d+)( ta ixtisoslashgan agent\*\*)"),
+     re.compile(r"(\*\*)(\d+)( specialist agents\*\*)"),
      "agents"),
     ("README.md",
-     re.compile(r"(\*\*)(\d+)( ta platforma va marketing skilli\*\*)"),
+     re.compile(r"(\*\*)(\d+)( platform & marketing skills\*\*)"),
      "skills"),
     ("README.md",
-     re.compile(r"(\*\*)(\d+)( ta slash buyruq\*\*)"),
+     re.compile(r"(\*\*)(\d+)( slash commands\*\*)"),
      "commands"),
     ("README.md",
-     re.compile(r"(\*\*)(\d+)( ta 0-token deterministik Python CLI asbob\*\*)"),
+     re.compile(r"(\*\*)(\d+)( deterministic 0-token Python CLI tools\*\*)"),
      "tools"),
     ("SECURITY.md",
      re.compile(r"(\*\*)(\d+)( agents\*\*)"),
@@ -136,22 +136,25 @@ HUMAN_CLAIMS: list[tuple[str, "re.Pattern[str]", str]] = [
      re.compile(r"(├── tools/\s+# )(\d+)( ta 0-Token Deterministik CLI Asbob)"),
      "tools"),
     ("plugin.json",
-     re.compile(r"(18 slash commands, )(\d+)( deterministic CLI tools)"),
+     re.compile(r"(\d+ slash commands, )(\d+)( deterministic CLI tools)"),
      "tools"),
     (".claude-plugin/plugin.json",
-     re.compile(r"(18 slash commands, )(\d+)( deterministic CLI tools)"),
+     re.compile(r"(\d+ slash commands, )(\d+)( deterministic CLI tools)"),
      "tools"),
     (".codex-plugin/plugin.json",
-     re.compile(r"(18 slash commands, )(\d+)( deterministic CLI tools)"),
+     re.compile(r"(\d+ slash commands, )(\d+)( deterministic CLI tools)"),
      "tools"),
     ("marketplace.json",
-     re.compile(r"(18 slash commands, )(\d+)( CLI tools)"),
+     re.compile(r"(\d+ slash commands, )(\d+)( CLI tools)"),
+     "tools"),
+    (".claude-plugin/marketplace.json",
+     re.compile(r"(\d+ slash commands, )(\d+)( CLI tools)"),
      "tools"),
     (".claude-plugin/marketplace.json",
      re.compile(r"(18 slash commands, )(\d+)( CLI tools)"),
      "tools"),
     ("package.json",
-     re.compile(r"(18 commands, )(\d+)( tools\))"),
+     re.compile(r"(\d+ commands, )(\d+)( tools\))"),
      "tools"),
 ]
 
@@ -276,7 +279,7 @@ def scan() -> dict:
         "schema": SCHEMA,
         "generated": datetime.now().astimezone().isoformat(timespec="seconds"),
         "generator": "tools/catalog.py",
-        "vault": str(VAULT),
+        "vault": ".",
         "counts": counts,
         "items": items,
         "mirrors": mirror_status(items),
@@ -370,7 +373,7 @@ def _comparable(data: dict) -> dict:
 
 def cmd_check(_args: argparse.Namespace) -> int:
     if not MANIFEST.is_file():
-        print("✗ katalog yo'q — avval: py -3 tools\\catalog.py build")
+        print("✗ katalog yo'q — avval: python3 tools\\catalog.py build")
         return 2
     stored = json.loads(MANIFEST.read_text(encoding="utf-8"))
     current = scan()
@@ -396,7 +399,7 @@ def cmd_check(_args: argparse.Namespace) -> int:
         if old["counts"].get(key) != new["counts"].get(key):
             print(f"  ~ soni: {key}: {old['counts'].get(key)} → {new['counts'].get(key)}")
             problems += 1
-    print(f"\n✗ katalog eskirgan — {problems} farq. Tuzatish: py -3 tools\\catalog.py build")
+    print(f"\n✗ katalog eskirgan — {problems} farq. Tuzatish: python3 tools\\catalog.py build")
     return 1
 
 
@@ -539,7 +542,7 @@ def cmd_sync_mirrors(args: argparse.Namespace) -> int:
         for line in orphans:
             print(f"  ? {line}")
     print("\n" + ("· --dry-run: hech narsa yozilmadi" if args.dry_run else
-                  "✓ tayyor. Tekshirish: py -3 tools\\catalog.py drift"))
+                  "✓ tayyor. Tekshirish: python3 tools\\catalog.py drift"))
     return 0
 
 

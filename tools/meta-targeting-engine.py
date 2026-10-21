@@ -1343,7 +1343,7 @@ def main(argv: list[str] | None = None) -> int:
     p_search.add_argument("--customer-profile", default="", help="Maqsadli mijoz profili")
     p_search.add_argument("--objective", default="SALES", choices=["SALES", "LEADS", "ENGAGEMENT", "TRAFFIC", "AWARENESS"])
     p_search.add_argument("--country", default="UZ")
-    p_search.add_argument("--language", default="auto", choices=["auto", "uz_latin", "uz_cyrillic", "ru", "en"])
+    p_search.add_argument("--language", default="auto", help="Any BCP 47 language code (en, de, fr, es, ar, uz-Latn, uz_latin, uz_cyrillic, ru, auto)")
     p_search.add_argument("--query", action="append", default=[], help="Aniq qidiruv so'rovi (bir nechta berish mumkin)")
     p_search.add_argument("--account-id", "--ad-account-id", dest="account_id", default="", help="Meta Ad Account ID (`act_...`) — targetingsearch va targetingvalidation uchun")
     p_search.add_argument("--special-ad-category", default="NONE", choices=list(SPECIAL_AD_CATEGORIES))

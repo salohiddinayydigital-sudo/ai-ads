@@ -24,6 +24,11 @@ import sys
 import urllib.parse
 from pathlib import Path
 
+_TOOLS_DIR = Path(__file__).resolve().parent
+if str(_TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(_TOOLS_DIR))
+import market_locale as mloc  # noqa: E402
+
 TOOLS = Path(__file__).resolve().parent
 if str(TOOLS) not in sys.path:
     sys.path.insert(0, str(TOOLS))
@@ -237,6 +242,8 @@ def build_architecture(
     aov: float | None = None,
     margin_pct: float | None = None,
     lead_to_sale_cvr: float | None = None,
+    currency: str = "USD",
+    market: str = "",
 ) -> dict:
     """Andromeda 2 + O'zbekiston bozori uchun 4-qatlamli Meta Ads auditoriya arxitekturasi."""
     daily_budget = _validate_finite_positive(daily_budget, "daily_budget", max_val=10_000_000.0)
@@ -321,6 +328,7 @@ def build_architecture(
     layers = [
         {
             "layer": "1-Qatlam: Broad + Creative Signal Steering (TOF)",
+            "budget_share": mloc.round_currency(cold_budget * 0.55, currency),
             "budget_share_usd": round(cold_budget * 0.55, 2),
             "targeting": f"Geo: {geo.upper()} | Yosh: 22-54 | Ochiq (Broad) — kreativ burchakning o'zi algoritm uchun filtr vazifasini bajaradi.",
             "language_rule": "O'zbek (Lotin/Kirill) va Rus tilidagi kreativlarni bitta ad setga aralashtirmang — til bo'yicha alohida ad set oching.",
@@ -328,6 +336,7 @@ def build_architecture(
         },
         {
             "layer": "2-Qatlam: Advantage+ Interest Stack & Solventnost Hypotheses (TOF)",
+            "budget_share": mloc.round_currency(cold_budget * 0.45, currency),
             "budget_share_usd": round(cold_budget * 0.45, 2),
             "targeting_verification_status": "RELATED_UNVERIFIED",
             "candidate_seed_terms": tax["core_interests"][:5],
@@ -345,6 +354,7 @@ def build_architecture(
         },
         {
             "layer": "3-Qatlam: First-Party (1P) Warm Retargeting (MOF — IG/Video/Telegram/Web)",
+            "budget_share": mloc.round_currency(warm_budget, currency),
             "budget_share_usd": warm_budget,
             "custom_audiences": [
                 f"IG_Engaged_30d (Instagram profil faollari — joriy obunachilar: {ig_followers:,})",
@@ -355,6 +365,7 @@ def build_architecture(
         },
         {
             "layer": "4-Qatlam: Value Lookalike (LAL) & Hot BOF Closing",
+            "budget_share": mloc.round_currency(hot_budget, currency),
             "budget_share_usd": hot_budget,
             "lal_strategy": (
                 "Value-Based LAL 1% va 1-2% — FAQAT CRM/CAPI dagi to'lov qilgan mijozlar (kamida 100-500 ta sifatli lid/xaridor) asosida. Xom, sifatsiz lidlardan LAL qurmang!"
@@ -377,7 +388,11 @@ def build_architecture(
         "niche": niche,
         "niche_title": tax["title"],
         "geo": geo,
+        "currency": currency.upper(),
+        "formatted_daily_budget": mloc.format_currency(daily_budget, currency),
+        "daily_budget": mloc.round_currency(daily_budget, currency),
         "daily_budget_usd": round(daily_budget, 2),
+        "estimated_target_cpa": mloc.round_currency(est_cpa, currency),
         "estimated_target_cpa_usd": est_cpa,
         "evidence_and_assumptions": {
             "cpa_source": cpa_source,
@@ -602,6 +617,7 @@ def get_interests(
         "niche": niche,
         "title": tax["title"],
         "graph_api_version": api_version,
+        "api_version_warning": mloc.get_configured_api_version("META_GRAPH_API_VERSION", DEFAULT_GRAPH_API_VERSION).get("warning"),
         "static_taxonomy_status": mte.STATUS_RELATED_UNVERIFIED,
         "static_taxonomy_warning": (
             "DIQQAT: `core_interest_clusters` va `high_intent_behaviors` statik qidiruv lug'ati (`RELATED_UNVERIFIED`) hisoblanadi. "
@@ -709,7 +725,7 @@ def calc_lookalike(
     country: str = "UZ",
 ) -> dict:
     """Lookalike (LAL) manba tayyorligi indeksi (Heuristic Seed Readiness Score) va 1%–5% pog'onali hajm hisoblagichi."""
-    country_reach = {"UZ": 9_200_000, "KZ": 13_500_000, "GLOBAL": 100_000_000}
+    country_reach = {"UZ": 9_200_000, "KZ": 13_500_000, "US": 240_000_000, "IN": 380_000_000, "BR": 170_000_000, "DE": 45_000_000, "GB": 42_000_000, "UK": 42_000_000, "FR": 40_000_000, "AE": 9_800_000, "SA": 24_000_000, "SG": 4_500_000, "ID": 140_000_000, "JP": 65_000_000, "KR": 32_000_000, "GLOBAL": 100_000_000}
     base_pop = country_reach.get(country.upper(), 9_200_000)
 
     type_weights = {
@@ -850,7 +866,9 @@ def main(argv: list[str] | None = None) -> int:
     p_arch = sub.add_parser("architect", help="4-qatlamli Meta Ads auditoriya arxitekturasi va Exclusion matritsasi")
     p_arch.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
     p_arch.add_argument("--daily-budget", type=float, required=True)
-    p_arch.add_argument("--geo", default="uzbekistan")
+    p_arch.add_argument("--geo", default="global", help="Any ISO 3166 country/region/city (e.g. DE, US, GB, UZ, Berlin, Tashkent)")
+    p_arch.add_argument("--currency", default="USD", help="ISO 4217 currency code (USD, EUR, GBP, JPY, UZS, etc.)")
+    p_arch.add_argument("--market", default="", help="Market pack override")
     p_arch.add_argument("--target-cpa", type=float, default=None, help="Foydalanuvchi maqsad qilgan CPA (goal)")
     p_arch.add_argument("--measured-cpa", type=float, default=None, help="Akkauntda haqiqatda o'lchangan tarixiy CPA")
     p_arch.add_argument("--aov", type=float, default=None, help="O'rtacha chek (>0) — unit-ekonomikadan CPA chiqarish uchun")
@@ -877,7 +895,7 @@ def main(argv: list[str] | None = None) -> int:
     p_dt.add_argument("--customer-profile", default="")
     p_dt.add_argument("--objective", default="SALES", choices=["SALES", "LEADS", "ENGAGEMENT", "TRAFFIC", "AWARENESS"])
     p_dt.add_argument("--country", default="UZ")
-    p_dt.add_argument("--language", default="auto", choices=["auto", "uz_latin", "uz_cyrillic", "ru", "en"])
+    p_dt.add_argument("--language", default="auto", help="Any BCP 47 language code (en, de, fr, es, ar, uz-Latn, ru, auto)")
     p_dt.add_argument("--query", action="append", default=[])
     p_dt.add_argument("--account-id", default="")
     p_dt.add_argument("--special-ad-category", default="NONE")

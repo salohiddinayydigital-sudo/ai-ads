@@ -7,10 +7,10 @@ Sessiya, audit yoki kampaniya sinovlaridan olingan tasdiqlangan qoidalarni
 va yuqori ishonchli instinktlarni `MEMORY.md` §6 ga ko'taradi.
 
 Buyruqlar:
-  py -3 tools/instincts.py list [--domain meta|google|telegram|kreativ|tracking|tizim]
-  py -3 tools/instincts.py add --id <slug> --domain <d> --trigger "<qachon>" --action "<nima>" --evidence "<manba>" [--confidence 3]
-  py -3 tools/instincts.py promote <id> [--dry-run]
-  py -3 tools/instincts.py check [--json]
+  python3 tools/instincts.py list [--domain meta|google|telegram|kreativ|tracking|tizim]
+  python3 tools/instincts.py add --id <slug> --domain <d> --trigger "<qachon>" --action "<nima>" --evidence "<manba>" [--confidence 3]
+  python3 tools/instincts.py promote <id> [--dry-run]
+  python3 tools/instincts.py check [--json]
 """
 
 from __future__ import annotations

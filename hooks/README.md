@@ -22,16 +22,16 @@ updated: 2026-09-16
 Qo'lda **qat'iy** rejim (ishni bloklaydi, exit 1):
 
 ```powershell
-py -3 hooks\tyrion-hook.py dod              # to'siq bo'lsa exit 1
-py -3 hooks\tyrion-hook.py ingest           # faqat ingest
+python3 hooks\tyrion-hook.py dod              # to'siq bo'lsa exit 1
+python3 hooks\tyrion-hook.py ingest           # faqat ingest
 ```
 
 ## O'rnatish
 
 ```powershell
-py -3 tools\install-hooks.py --dry-run      # nima qo'shilishini ko'rsatadi
-py -3 tools\install-hooks.py                # .claude/settings.json ga qo'shadi (nusxa olib)
-py -3 tools\install-hooks.py --target "claude-ads-main\.claude\settings.json"
+python3 tools/install-hooks.py --dry-run      # nima qo'shilishini ko'rsatadi
+python3 tools/install-hooks.py                # .claude/settings.json ga qo'shadi (nusxa olib)
+python3 tools/install-hooks.py --target "claude-ads-main\.claude\settings.json"
 ```
 
 `install-hooks.py` mavjud hook'larni **o'chirmaydi** — faqat o'zinikini qo'shadi (takrorlamaydi),

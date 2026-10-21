@@ -1,5 +1,28 @@
 # Changelog
 
+All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
+
+## [6.0.0] — 2026-10-21 (Breaking: Global Architecture & Cross-Platform Release)
+
+### Breaking Changes
+- **Default Market Pack (`default_market`):** Changed default market in `plugin.json` from `"uz"` to `"global"`. `rules/30-ozbekiston-konteksti.md` and `uzbekistan-market-intel` are now loaded **only** when `market=uz` is active or detected.
+- **Canonical English Slash Commands:** Added canonical English commands (`/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`) while preserving all Uzbek commands (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`) as aliases.
+- **Canonical Hook Configuration:** Consolidated hooks into `hooks/hooks.json` using `${CLAUDE_PLUGIN_ROOT}` and `hooks/run-hook.cjs`; removed duplicate root `hooks.json` and `.claude/settings.json`.
+
+### Added
+- **Cross-Platform Node Hook & MCP Launcher (`hooks/run-hook.cjs`):** Automatically resolves `${CLAUDE_PLUGIN_ROOT}`, detects `python3` -> `python` -> `py -3` across Windows, macOS, and Linux, gates `ingest` and `dod` behind `TYRION_DEV=1` (or plugin repo root), caps `Stop` timeout at 5s, and fails open (`exit 0`) unless `TYRION_HOOK_PROFILE=strict`.
+- **9 Regional Market Packs (`markets/`):** Added `global`, `uz`, `us`, `eu`, `uk`, `mena`, `latam`, `sea`, and `in` packs with currencies, BNPL providers (`Klarna`, `Afterpay`, `Affirm`, `Tabby`, `Tamara`, `Pix`, `Atome`, `Simpl`, `Uzum Nasiya`), seasonality calendars, privacy regulations, and source-cited `benchmarks.md`.
+- **3 UI/CLI Locales (`locales/`):** Added `en`, `uz`, and `ru` message bundles and `core/` market-independent English rules and playbooks.
+- **ISO 4217 Multi-Currency & Zero-Decimal Support:** Added `--currency` across CLI tools (`EUR`, `GBP`, `BRL`, `INR`, `JPY`, `KRW`, `UZS`, `USD`) and neutral currency keys alongside legacy `_usd` fields.
+- **Global Privacy & CAPI Consent Gate (`tools/capi-utm-builder.py`):** Added `--consent-granted` / `--no-consent` PII gate, Google Consent Mode v2 signals, Meta Limited Data Use (`data_processing_options=['LDU']`), and GDPR/CCPA/LGPD/DPDP checks.
+- **6 Regional Platform Audit Skills:** Added Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain audit skills under `markets/*/skills/`.
+- **Progressive Disclosure Router (`<= 15 KB` Budget):** Default `progressive` context mode keeps single-step query context under 15 KB.
+- **Upstream MIT Attributions:** Added `AgriciDaniel/claude-ads` and `affaan-m/everything-claude-code` notices in `LICENSE`, `NOTICE`, and `THIRD_PARTY.md`.
+
+---
+
+# Changelog
+
 All notable changes to **Tyrion** are documented in this file.
 
 ## [5.0.0] - 2026-10-20 — Calibrated Recommendation Engine, Live Meta Insights Sync & Single-Source Parity

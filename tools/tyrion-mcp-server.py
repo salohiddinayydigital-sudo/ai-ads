@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened v5.0.0).
+"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened v6.0.0).
 
 Guards against oversized payloads (>1 MB), malformed JSON (-32700), unknown methods (-32601),
 invalid/NaN parameters (-32602), and subprocess hangs (15s timeout).
@@ -24,7 +24,7 @@ sys.path.insert(0, str(TOOLS))
 
 import tyrion_core as tcore  # noqa: E402
 
-SERVER_VERSION = "5.0.0"
+SERVER_VERSION = "6.0.0"
 
 MCP_TOOLS = [
     {
@@ -385,7 +385,7 @@ def process_raw_line(raw_line: str) -> dict[str, Any] | None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v5.0.0 Native STDIO MCP Server")
+    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v6.0.0 Native STDIO MCP Server")
     parser.add_argument("--list-tools", action="store_true", help="Mavjud MCP tool'lar ro'yxatini JSON formatda chiqarish")
     args = parser.parse_args(argv)
     if args.list_tools:

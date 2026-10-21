@@ -1,0 +1,225 @@
+{
+  "market_id": "mena",
+  "display_name": "Middle East & North Africa (UAE, KSA, GCC)",
+  "default_currency": "AED",
+  "supported_currencies": [
+    "AED",
+    "SAR",
+    "QAR",
+    "KWD",
+    "EGP",
+    "USD"
+  ],
+  "payment_methods": [
+    "Mada (KSA)",
+    "Apple Pay",
+    "Visa/Mastercard",
+    "Cash on Delivery (COD)"
+  ],
+  "bnpl_providers": [
+    "Tabby",
+    "Tamara",
+    "Postpay"
+  ],
+  "price_anchor_template": "Split into 4 interest-free payments of {installment} with {bnpl} (Sharia-compliant)",
+  "primary_funnels": [
+    "Ad -> Click-to-WhatsApp (CTWA) -> Arabic/English Concierge Sales -> Payment Link / Tabby",
+    "Ad -> Bilingual (AR/EN) E-Commerce Store -> Tabby/Tamara/Apple Pay Checkout"
+  ],
+  "messaging_channels": [
+    "WhatsApp Business (Primary)",
+    "Instagram DM",
+    "Snapchat",
+    "TikTok"
+  ],
+  "platform_share": {
+    "Meta (Instagram/WhatsApp)": "40%",
+    "Snapchat & TikTok Ads": "30%",
+    "Google/YouTube Ads": "30%"
+  },
+  "seasonality_calendar": [
+    {
+      "period": "Ramadan & Eid al-Fitr / Eid al-Adha",
+      "events": [
+        "Ramadan Night Peak (21:00-03:00)",
+        "Eid Gifting"
+      ],
+      "cpm_pressure": "Extreme (+40% to +70%)"
+    },
+    {
+      "period": "Nov-Feb",
+      "events": [
+        "White Friday (Nov)",
+        "Saudi National/Founding Day",
+        "Dubai Shopping Festival (DSF)"
+      ],
+      "cpm_pressure": "High"
+    }
+  ],
+  "regulations": {
+    "frameworks": [
+      "Saudi PDPL (Personal Data Protection Law)",
+      "UAE Federal Decree-Law No. 45 of 2021 (PDPL)",
+      "UAE Media Council / KSA GCAM Ad Licensing Requirements"
+    ],
+    "consent_required_for_pii": true,
+    "special_ad_categories": [
+      "CULTURAL_MODESTY_COMPLIANCE",
+      "FINTECH_SAMA_DFSA_LICENSE"
+    ]
+  },
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "rtl_languages": [
+    "ar"
+  ],
+  "niche_taxonomy": {
+    "ecom": {
+      "name": "E-Commerce & DTC Retail",
+      "core_interests": [
+        "Online shopping",
+        "Engaged Shoppers",
+        "Boutique",
+        "Consumer electronics",
+        "Skin care"
+      ],
+      "behaviors": [
+        "Engaged Shoppers"
+      ],
+      "exclusions": [
+        "30d Purchasers (Custom Audience)",
+        "Payment page drop-offs (Retargeting pool)"
+      ]
+    },
+    "saas": {
+      "name": "B2B SaaS & Software",
+      "core_interests": [
+        "Software as a service",
+        "Cloud computing",
+        "Project management software",
+        "Business intelligence",
+        "CRM"
+      ],
+      "behaviors": [
+        "Business page admins",
+        "Small business owners"
+      ],
+      "exclusions": [
+        "Existing active subscribers",
+        "Job seekers"
+      ]
+    },
+    "real-estate": {
+      "name": "Real Estate & Property",
+      "core_interests": [
+        "Real estate",
+        "Property investment",
+        "Mortgage loans",
+        "Interior design",
+        "Architecture"
+      ],
+      "behaviors": [
+        "Likely to move (where available)"
+      ],
+      "exclusions": [
+        "Existing closed buyers",
+        "Real estate agents (B2C exclusion)"
+      ]
+    },
+    "education": {
+      "name": "EdTech, Courses & Higher Education",
+      "core_interests": [
+        "Online learning",
+        "Professional certification",
+        "Higher education",
+        "Career development",
+        "Language learning"
+      ],
+      "behaviors": [
+        "Continuous learners"
+      ],
+      "exclusions": [
+        "Current enrolled students (30d)"
+      ]
+    },
+    "b2b": {
+      "name": "B2B Services & Enterprise",
+      "core_interests": [
+        "Business-to-business",
+        "Enterprise resource planning",
+        "Supply chain management",
+        "Corporate finance"
+      ],
+      "behaviors": [
+        "B2B decision makers",
+        "Business page admins"
+      ],
+      "exclusions": [
+        "Current clients",
+        "Students / Interns"
+      ]
+    },
+    "fintech": {
+      "name": "Fintech, Banking & Insurance",
+      "core_interests": [
+        "Personal finance",
+        "Financial technology",
+        "Digital banking",
+        "Investment management",
+        "Insurance"
+      ],
+      "behaviors": [
+        "Early technology adopters"
+      ],
+      "exclusions": [
+        "Existing account holders"
+      ]
+    },
+    "med": {
+      "name": "Healthcare, Clinics & Wellness",
+      "core_interests": [
+        "Preventive healthcare",
+        "Dental care",
+        "Dermatology",
+        "Physical fitness",
+        "Wellness"
+      ],
+      "behaviors": [
+        "Health & wellness buyers"
+      ],
+      "exclusions": [
+        "Recent 30d booked patients"
+      ]
+    },
+    "horeca": {
+      "name": "Hospitality, Travel & Dining",
+      "core_interests": [
+        "Fine dining",
+        "Food delivery",
+        "Boutique hotels",
+        "Travel & tourism",
+        "Coffeehouse"
+      ],
+      "behaviors": [
+        "Frequent travelers",
+        "Commuters"
+      ],
+      "exclusions": [
+        "Staff / Employees"
+      ]
+    }
+  },
+  "verified_date": "2026-10-21",
+  "sources": [
+    {
+      "title": "SDAIA — Saudi Personal Data Protection Law (PDPL)",
+      "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/Personal%20Data%20English%20V2-23April2023-%20Reviewed-.pdf"
+    },
+    {
+      "title": "UAE Legislation — Federal Decree-Law No. 45 of 2021 on Personal Data Protection",
+      "url": "https://uaelegislation.gov.ae/en/legislations/1526"
+    }
+  ]
+}

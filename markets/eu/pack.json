@@ -1,0 +1,239 @@
+{
+  "market_id": "eu",
+  "display_name": "European Union & EEA (DE, FR, ES, IT, NL, PL, SE)",
+  "default_currency": "EUR",
+  "supported_currencies": [
+    "EUR",
+    "PLN",
+    "SEK",
+    "DKK",
+    "CHF"
+  ],
+  "payment_methods": [
+    "SEPA / Cards",
+    "PayPal",
+    "Apple Pay",
+    "iDEAL (NL)",
+    "Bancontact (BE)",
+    "BLIK (PL)",
+    "Sofort / Giropay (DE)"
+  ],
+  "bnpl_providers": [
+    "Klarna",
+    "PayPal Pay in 3/4",
+    "Scalapay",
+    "Alma"
+  ],
+  "price_anchor_template": "Pay in 3 interest-free installments of {installment} with {bnpl} (0% APR)",
+  "primary_funnels": [
+    "Ad -> GDPR Cookie Banner (Consent Mode v2) -> Localized E-Commerce Store -> Klarna/PayPal Checkout",
+    "Ad -> B2B Whitepaper / Webinar (Double Opt-In GDPR) -> HubSpot/Pipedrive -> Sales Call"
+  ],
+  "messaging_channels": [
+    "WhatsApp Business",
+    "Email (Double Opt-In)",
+    "Instagram DM"
+  ],
+  "platform_share": {
+    "Google/YouTube Ads": "45%",
+    "Meta Ads": "35%",
+    "TikTok/LinkedIn/Pinterest": "20%"
+  },
+  "seasonality_calendar": [
+    {
+      "period": "Jan & Jul",
+      "events": [
+        "Winter & Summer Soldes / Schlussverkauf"
+      ],
+      "cpm_pressure": "Moderate"
+    },
+    {
+      "period": "Nov-Dec",
+      "events": [
+        "Singles' Day",
+        "Black Week / Cyber Monday",
+        "St. Nicholas & Christmas"
+      ],
+      "cpm_pressure": "Very High"
+    }
+  ],
+  "regulations": {
+    "frameworks": [
+      "EU GDPR (Regulation 2016/679) & ePrivacy Directive (Prior opt-in consent before firing Meta Pixel / CAPI PII)",
+      "Google Consent Mode v2 (ad_storage, analytics_storage, ad_user_data, ad_personalization required in EEA)",
+      "EU Digital Markets Act (DMA) & Digital Services Act (DSA Ad Transparency)",
+      "EU Regulation 2024/900 on Transparency and Targeting of Political Advertising",
+      "Omnibus Directive (30-day lowest prior price display rule on discounts)"
+    ],
+    "consent_required_for_pii": true,
+    "consent_mode_v2_required": true,
+    "special_ad_categories": [
+      "HOUSING",
+      "EMPLOYMENT",
+      "CREDIT",
+      "ISSUES_ELECTIONS_POLITICS"
+    ]
+  },
+  "languages": [
+    "de",
+    "fr",
+    "es",
+    "it",
+    "nl",
+    "pl",
+    "sv",
+    "en"
+  ],
+  "rtl_languages": [],
+  "niche_taxonomy": {
+    "ecom": {
+      "name": "E-Commerce & DTC Retail",
+      "core_interests": [
+        "Online shopping",
+        "Engaged Shoppers",
+        "Boutique",
+        "Consumer electronics",
+        "Skin care"
+      ],
+      "behaviors": [
+        "Engaged Shoppers"
+      ],
+      "exclusions": [
+        "30d Purchasers (Custom Audience)",
+        "Payment page drop-offs (Retargeting pool)"
+      ]
+    },
+    "saas": {
+      "name": "B2B SaaS & Software",
+      "core_interests": [
+        "Software as a service",
+        "Cloud computing",
+        "Project management software",
+        "Business intelligence",
+        "CRM"
+      ],
+      "behaviors": [
+        "Business page admins",
+        "Small business owners"
+      ],
+      "exclusions": [
+        "Existing active subscribers",
+        "Job seekers"
+      ]
+    },
+    "real-estate": {
+      "name": "Real Estate & Property",
+      "core_interests": [
+        "Real estate",
+        "Property investment",
+        "Mortgage loans",
+        "Interior design",
+        "Architecture"
+      ],
+      "behaviors": [
+        "Likely to move (where available)"
+      ],
+      "exclusions": [
+        "Existing closed buyers",
+        "Real estate agents (B2C exclusion)"
+      ]
+    },
+    "education": {
+      "name": "EdTech, Courses & Higher Education",
+      "core_interests": [
+        "Online learning",
+        "Professional certification",
+        "Higher education",
+        "Career development",
+        "Language learning"
+      ],
+      "behaviors": [
+        "Continuous learners"
+      ],
+      "exclusions": [
+        "Current enrolled students (30d)"
+      ]
+    },
+    "b2b": {
+      "name": "B2B Services & Enterprise",
+      "core_interests": [
+        "Business-to-business",
+        "Enterprise resource planning",
+        "Supply chain management",
+        "Corporate finance"
+      ],
+      "behaviors": [
+        "B2B decision makers",
+        "Business page admins"
+      ],
+      "exclusions": [
+        "Current clients",
+        "Students / Interns"
+      ]
+    },
+    "fintech": {
+      "name": "Fintech, Banking & Insurance",
+      "core_interests": [
+        "Personal finance",
+        "Financial technology",
+        "Digital banking",
+        "Investment management",
+        "Insurance"
+      ],
+      "behaviors": [
+        "Early technology adopters"
+      ],
+      "exclusions": [
+        "Existing account holders"
+      ]
+    },
+    "med": {
+      "name": "Healthcare, Clinics & Wellness",
+      "core_interests": [
+        "Preventive healthcare",
+        "Dental care",
+        "Dermatology",
+        "Physical fitness",
+        "Wellness"
+      ],
+      "behaviors": [
+        "Health & wellness buyers"
+      ],
+      "exclusions": [
+        "Recent 30d booked patients"
+      ]
+    },
+    "horeca": {
+      "name": "Hospitality, Travel & Dining",
+      "core_interests": [
+        "Fine dining",
+        "Food delivery",
+        "Boutique hotels",
+        "Travel & tourism",
+        "Coffeehouse"
+      ],
+      "behaviors": [
+        "Frequent travelers",
+        "Commuters"
+      ],
+      "exclusions": [
+        "Staff / Employees"
+      ]
+    }
+  },
+  "verified_date": "2026-10-21",
+  "sources": [
+    {
+      "title": "EUR-Lex — General Data Protection Regulation (GDPR 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "title": "Google Ads Help — Consent Mode v2 in EEA",
+      "url": "https://support.google.com/google-ads/answer/10000067"
+    },
+    {
+      "title": "EUR-Lex — Regulation (EU) 2024/900 on Political Advertising",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/900/oj"
+    }
+  ]
+}

@@ -12,7 +12,7 @@ updated: 2026-09-16
 
 ## Bilim olish tartibi (arzon → qimmat)
 
-1. **Qidiruv avval (0 token):** `py -3 tools\brain-search.py search "<so'z>"` — deterministik, LLM'siz. Graf kerak bo'lsa `tools\gy.cmd build` (0 token, lahzali) yoki `tools\gy.cmd query "<savol>" --budget 1200`.
+1. **Qidiruv avval (0 token):** `python3 tools/brain-search.py search "<so'z>"` — deterministik, LLM'siz. Graf kerak bo'lsa `tools\gy.cmd build` (0 token, lahzali) yoki `tools\gy.cmd query "<savol>" --budget 1200`.
 2. **Ko'rsatilgan qayd:** faqat `INDEX.md` dagi kerakli fayl o'qiladi.
 3. **Xom manba (`raw/`, `vedio bilimlar/youtubedagilar/`)** — faqat aniq bir manba kerak bo'lganda.
 4. ❌ **Butun papkani yoppasiga o'qish** — taqiqlanadi (bir `extract` yuz minglab token yeydi).
