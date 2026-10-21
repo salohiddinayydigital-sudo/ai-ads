@@ -21,6 +21,11 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
+_TOOLS_DIR = Path(__file__).resolve().parent
+if str(_TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(_TOOLS_DIR))
+import market_locale as mloc
 
 # Windows UTF-8
 for _stream in (sys.stdout, sys.stderr):
@@ -37,6 +42,7 @@ def calc_breakeven(
     shipping: float = 0.0,
     processing_fee_pct: float = 2.0,
     target_profit_pct: float = 0.0,
+    currency: str = "USD",
 ) -> dict:
     """Break-even CPA, ROAS va sof marjani hisoblaydi."""
     if price <= 0:
@@ -62,8 +68,11 @@ def calc_breakeven(
     target_roas = (price / target_cpa) if target_cpa > 0 else 0.0
 
     return {
-        "price": round(price, 2),
-        "cogs": round(cogs, 2),
+        "currency": currency.upper(),
+        "formatted_price": mloc.format_currency(price, currency),
+        "formatted_breakeven_cpa": mloc.format_currency(breakeven_cpa, currency),
+        "price": mloc.round_currency(price, currency),
+        "cogs": mloc.round_currency(cogs, currency),
         "shipping": round(shipping, 2),
         "processing_fee": round(processing_fee, 2),
         "gross_profit_per_unit": round(gross_profit, 2),
@@ -127,6 +136,7 @@ def calc_google_sculpt(
     target_cpa: float,
     avg_cpc: float,
     irrelevant_query_waste_pct: float = 22.0,
+    currency: str = "USD",
 ) -> dict:
     """Google Ads qidiruv auksioni, max profitable CPC va salbiy kalit so'zlar tejamkori."""
     if monthly_budget <= 0 or avg_cpc <= 0:
@@ -148,7 +158,9 @@ def calc_google_sculpt(
     extra_conversions_unlocked = extra_clicks_unlocked * implied_cvr
 
     return {
-        "monthly_budget": round(monthly_budget, 2),
+        "currency": currency.upper(),
+        "formatted_monthly_budget": mloc.format_currency(monthly_budget, currency),
+        "monthly_budget": mloc.round_currency(monthly_budget, currency),
         "daily_budget": round(daily_budget, 2),
         "target_cpa": round(target_cpa, 2),
         "avg_cpc": round(avg_cpc, 2),
@@ -269,6 +281,7 @@ def main() -> int:
     p_be.add_argument("--shipping", type=float, default=0.0, help="Yetkazib berish xarajati")
     p_be.add_argument("--processing-fee-pct", type=float, default=2.0, help="To'lov tizimi komissiyasi foizi (default: 2.0)")
     p_be.add_argument("--target-profit-pct", type=float, default=0.0, help="Kutilayotgan sof foyda foizi")
+    p_be.add_argument("--currency", type=str, default="USD", help="ISO 4217 Currency (USD, EUR, GBP, JPY, BRL, INR, UZS)")
     p_be.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
     # Meta-155
@@ -284,6 +297,7 @@ def main() -> int:
     p_gs.add_argument("--target-cpa", type=float, required=True, help="Maqsadli CPA")
     p_gs.add_argument("--avg-cpc", type=float, required=True, help="O'rtacha CPC")
     p_gs.add_argument("--waste-pct", type=float, default=22.0, help="Keraksiz so'rovlar sarfi foizi (default: 22.0)")
+    p_gs.add_argument("--currency", type=str, default="USD", help="ISO 4217 Currency (USD, EUR, GBP, JPY, BRL, INR, UZS)")
     p_gs.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
     # Telegram-funnel
@@ -309,11 +323,11 @@ def main() -> int:
 
     try:
         if args.command == "breakeven":
-            res = calc_breakeven(args.price, args.cogs, args.shipping, args.processing_fee_pct, args.target_profit_pct)
+            res = calc_breakeven(args.price, args.cogs, args.shipping, args.processing_fee_pct, args.target_profit_pct, args.currency)
         elif args.command == "meta-155":
             res = calc_meta_155(args.daily_budget, args.target_cpa, args.currency)
         elif args.command == "google-sculpt":
-            res = calc_google_sculpt(args.monthly_budget, args.target_cpa, args.avg_cpc, args.waste_pct)
+            res = calc_google_sculpt(args.monthly_budget, args.target_cpa, args.avg_cpc, args.waste_pct, args.currency)
         elif args.command == "telegram-funnel":
             res = calc_telegram_funnel(args.budget, args.cpm, args.ctr, args.bot_start_pct, args.lead_pct, args.order_pct, args.aov, args.currency)
         elif args.command == "ladder":

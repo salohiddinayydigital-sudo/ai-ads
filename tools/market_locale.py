@@ -276,3 +276,36 @@ def load_locale_messages(locale: str = "en") -> dict[str, str]:
         return json.loads(p.read_text(encoding="utf-8"))
     except Exception:
         return {"locale": "en", "language_name": "English"}
+
+
+def round_currency(amount: float | int, currency: str = "USD") -> float | int:
+    code = (currency or "USD").strip().upper()
+    if code in ZERO_DECIMAL_CURRENCIES:
+        return int(round(float(amount)))
+    return round(float(amount), 2)
+
+
+def get_configured_api_version(env_key: str = "META_GRAPH_API_VERSION", default: str = "v26.0") -> dict[str, Any]:
+    raw = os.environ.get(env_key, "").strip()
+    if not raw:
+        env_file = VAULT / ".env"
+        if env_file.is_file():
+            for line in env_file.read_text(encoding="utf-8", errors="replace").splitlines():
+                if line.strip().startswith(f"{env_key}="):
+                    raw = line.split("=", 1)[1].strip().strip('"').strip("'")
+                    break
+    ver = raw if raw else default
+    m = re.match(r"^v?(\d+)(?:\.(\d+))?$", ver.strip(), re.I)
+    major = int(m.group(1)) if m else 26
+    is_deprecated = major < 25
+    warning = (
+        f"Configured {env_key}={ver} is older than v25.0 and may be deprecated or sunset by Meta Graph API; upgrade to {default}."
+        if is_deprecated else None
+    )
+    return {
+        "env_key": env_key,
+        "version": ver if ver.startswith("v") else f"v{ver}",
+        "major": major,
+        "is_deprecated": is_deprecated,
+        "warning": warning,
+    }
