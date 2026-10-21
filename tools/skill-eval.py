@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -79,6 +80,25 @@ def run_evals() -> dict:
             tcount = len((resp or {}).get("result", {}).get("tools", []))
             passed = tcount >= sc["min_tools"]
             detail = f"mcp_tools={tcount}"
+        elif stype == "detailed_targeting_guard":
+            mte = importlib.import_module("meta-targeting-engine")
+            old_tok = os.environ.pop("META_ACCESS_TOKEN", None)
+            try:
+                rep = mte.search_and_validate_targeting(product=sc["product"], niche=sc["niche"])
+            finally:
+                if old_tok is not None:
+                    os.environ["META_ACCESS_TOKEN"] = old_tok
+            passed = (
+                rep["live_check_status"]["status"] == sc["expected_status"]
+                and len(rep["verified_targeting_options"]) == 0
+                and all(x["validation_status"] == "RELATED_UNVERIFIED" for x in rep["related_unverified_ideas"])
+            )
+            detail = f"status={rep['live_check_status']['status']}, verified=0"
+        elif stype == "mcp_tool_present":
+            resp = mcp.handle_request({"jsonrpc": "2.0", "id": 1, "method": "tools/list"})
+            names = [t["name"] for t in (resp or {}).get("result", {}).get("tools", [])]
+            passed = sc["tool_name"] in names
+            detail = f"present={passed}"
 
         results.append({"id": sid, "type": stype, "passed": passed, "detail": detail})
 

@@ -14,7 +14,7 @@ Write-Host "====================================================================
 Write-Host "  🚀 TYRION v5.0 — GITHUB PRE-PUSH VERIFICATION & DEPLOY" -ForegroundColor Green
 Write-Host "====================================================================" -ForegroundColor Cyan
 
-Write-Host "[1/5] TyrionShield 5-qavatli xavfsizlik tekshiruvi..." -ForegroundColor White
+Write-Host "[1/5] TyrionShield 6-qavatli xavfsizlik tekshiruvi..." -ForegroundColor White
 & $pyCmd tools\tyrion-shield.py scan
 if ($LASTEXITCODE -ne 0) { throw "TyrionShield xavfsizlik tekshiruvidan o'tmadi!" }
 
@@ -23,13 +23,13 @@ Write-Host "[2/5] Bilim qatlami va Katalog sinxronligi tekshiruvi..." -Foregroun
 & $pyCmd tools\catalog.py check
 & $pyCmd tools\catalog.py drift
 
-Write-Host "[3/5] Eval Suite (10/10 stsenariy) tekshiruvi..." -ForegroundColor White
+Write-Host "[3/5] Eval Suite (12/12 stsenariy) tekshiruvi..." -ForegroundColor White
 & $pyCmd tools\skill-eval.py
 
 Write-Host "[4/5] Doctor salomatlik tekshiruvi..." -ForegroundColor White
 & $pyCmd tools\doctor.py --quick
 
-Write-Host "[5/5] GitHub repozitoriyga yuklanmoqda: $RemoteUrl ..." -ForegroundColor Yellow
+Write-Host "[6/6] GitHub repozitoriyga yuklanmoqda: $RemoteUrl ..." -ForegroundColor Yellow
 git remote set-url origin $RemoteUrl 2>$null
 if ($LASTEXITCODE -ne 0) { git remote add origin $RemoteUrl }
 

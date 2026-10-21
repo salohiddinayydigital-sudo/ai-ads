@@ -240,7 +240,7 @@ def _find_unreachable_in_body(stmts: list[ast.stmt], rel_path: str, issues: list
 def scan_python_ast() -> tuple[str, str, list[str]]:
     """tools/ va hooks/ dagi barcha Python skriptlarda AST sintaksis va unreachable dead code tekshiruvi."""
     issues: list[str] = []
-    py_files = sorted(list(TOOLS.glob("*.py")) + list((VAULT / "hooks").glob("*.py")))
+    py_files = sorted(list(TOOLS.glob("*.py")) + list((VAULT / "hooks").glob("*.py")) + list((VAULT / "tests").glob("*.py")))
     for py_path in py_files:
         rel = py_path.relative_to(VAULT).as_posix()
         try:

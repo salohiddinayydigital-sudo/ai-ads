@@ -72,6 +72,18 @@
       "id": "E10_mcp_protocol_tools",
       "type": "mcp_list",
       "min_tools": 7
+    },
+    {
+      "id": "E11_detailed_targeting_no_hallucination",
+      "type": "detailed_targeting_guard",
+      "product": "Klassik erkaklar kostyumi",
+      "niche": "ecom",
+      "expected_status": "API_UNAVAILABLE"
+    },
+    {
+      "id": "E12_mcp_detailed_targeting_registered",
+      "type": "mcp_tool_present",
+      "tool_name": "tyrion_meta_detailed_targeting"
     }
   ]
 }

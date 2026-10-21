@@ -391,7 +391,11 @@ def check_instincts(report: Report) -> None:
     try:
         import importlib
         inst_mod = importlib.import_module("instincts")
-        payload = inst_mod.validate_instincts()
+        import io, contextlib
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            inst_mod.main(["check", "--json"])
+        payload = json.loads(buf.getvalue() or "{}")
         if payload.get("passed"):
             report.add("Instinctlar (/learn)", OK,
                        f"{payload.get('count', 0)} instinkt ({payload.get('high_confidence', 0)} yuqori ishonchli)")

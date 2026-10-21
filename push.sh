@@ -20,7 +20,7 @@ echo "[2/5] Running Vault Audit & Catalog Sync Gate..."
 "$PY_CMD" tools/catalog.py check
 "$PY_CMD" tools/catalog.py drift
 
-echo "[3/5] Running Behavioral Eval Suite (10/10)..."
+echo "[3/5] Running Behavioral Eval Suite (12/12)..."
 "$PY_CMD" tools/skill-eval.py
 
 echo "[4/5] Running System Doctor..."
@@ -33,6 +33,6 @@ else
     git remote set-url origin "$REMOTE_URL"
 fi
 
-echo "[5/5] Pushing branch 'main' and tags to $REMOTE_URL ..."
+echo "[6/6] Pushing branch 'main' and tags to $REMOTE_URL ..."
 git push -u origin main --force --tags
 echo "✅ Successfully pushed Tyrion v5.0 to GitHub!"

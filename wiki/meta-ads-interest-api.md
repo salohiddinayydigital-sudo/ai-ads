@@ -1,57 +1,52 @@
 ---
 name: meta-ads-interest-api
-description: "Meta/Facebook Ads Graph API va lokal taksonomiya orqali qiziqishlar (interests), xulq-atvor (behaviors) va to'lov qobiliyati (solventnost) tadqiqoti"
-tags: [meta-ads, api, interests, auditoriya, targeting]
-source: "tools/meta-audience.py + Meta Marketing API v26.0 (2026-10-18)"
-updated: 2026-10-18
+description: "Meta/Facebook Ads Graph API v26.0 Detailed Targeting Accuracy Engine (`/search`, `targetingsearch`, `targetingsuggestions`, `targetingvalidation`) va 6-statusli aniqlik tizimi"
+tags: [meta-ads, api, interests, auditoriya, targeting, validation]
+source: "tools/meta-targeting-engine.py + tools/meta-audience.py + Meta Marketing API v26.0 (2026-10-20)"
+updated: 2026-10-20
 ---
 
-# 📘 Meta Ads Interest API & Qiziqishlar Taksonomiyasi
+# 📘 Meta Ads Detailed Targeting Accuracy Engine & API (`v26.0`)
 
-> **⚠️ Xavfsizlik va Ruxsatlar qoidasi ([[40-xavfsizlik-va-hisob]]):**
-> * Reklama kampaniyalarini o'chirish, yoqish yoki byudjetni o'zgartirish **QAT'IYAN TAQIQLANADI**.
-> * Bu vosita faqat **o'qish (read-only)** va auditoriya arxitekturasini loyihalash uchun ishlatiladi ([[meta-auditoriya-arxitekturasi]]).
+> **⚠️ Qat'iy Aniqlik va Xavfsizlik Qoidasi ([[40-xavfsizlik-va-hisob]] · [[00-manba]]):**
+> * **Hech qachon AI taxmini yoki statik ro'yxatni Meta'dagi real targeting opsiyasi sifatida ko'rsatmang!**
+> * Har bir variant rasmiy API dalili va 6 ta aniqlik holatidan (`VERIFIED_AVAILABLE`, `FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED`, `RELATED_UNVERIFIED`, `NOT_FOUND`, `API_UNAVAILABLE`) biri bilan tamg'alanishi shart.
+> * Reklama kampaniyalarini o'chirish, yoqish yoki byudjetni o'zgartirish **QAT'IYAN TAQIQLANADI** (faqat read-only qidiruv va tekshiruv).
 
-## 🔑 API va CLI Konfiguratsiyasi
+## 🔑 1. Rasmiy Meta Marketing API Endpointlari (`v26.0`)
 
-* **Asosiy CLI asbob (0 token, oflayn + onlayn):** `py -3 tools/meta-audience.py interests --niche <niche>`
-* **Access Token (ixtiyoriy jonli API uchun):** `.env` faylida saqlanadi (`META_ACCESS_TOKEN`, namuna: `.env.example`).
-* **Graph API Endpoint:** `GET https://graph.facebook.com/v26.0/search?type=adinterest&q=<keyword>&limit=20`
-
-## 📂 Saved Interest Categories (8 Asosiy Soha Bo'yicha Qiziqishlar Bazasi)
-
-| Soha (`--niche`) | Asosiy Interest Klasterlari | Yuqori Niyatli Behavior Signallari |
+| Endpoint | Yo'l (`META_GRAPH_API_VERSION=v26.0`) | Vazifasi |
 |---|---|---|
-| **E-Commerce (`ecom`)** | `Online shopping`, `Shopping and fashion`, `Boutique`, `Discount store`, `Consumer electronics` | `Engaged Shoppers`, `iPhone 14/15/16 Pro owners` |
-| **Ta'lim (`edu`)** | `Higher education`, `Online learning`, `Language school`, `IELTS`, `Career development` | `Parents (All / Teenagers 13-17)`, `International travelers` |
-| **Ko'chmas mulk (`real-estate`)** | `Real estate`, `Property investment`, `Apartment`, `Mortgage loan`, `Luxury real estate` | `Frequent International Travelers`, `Small Business Owners` |
-| **Tibbiyot (`medical`)** | `Healthcare`, `Dentistry`, `Cosmetic dentistry`, `Physical therapy`, `Wellness` | `Geo-radius (+5..15 km)`, `30-55 yosh to'lovga qodir qatlam` |
-| **B2B / SaaS (`b2b`)** | `Small and medium-sized enterprises`, `Entrepreneurship`, `Business management`, `CRM` | `Facebook Page Admins`, `Small Business Owners` |
-| **Go'zallik (`beauty`)** | `Cosmetics`, `Fragrances`, `Beauty salon`, `Skin care`, `Luxury goods` | `Engaged Shoppers`, `Instagram active engagers` |
-| **Avto (`auto`)** | `Automobile`, `Car dealership`, `Auto detailing`, `SUV`, `Automotive repair shop` | `Shahar markazidagi avto-egalari (24-55 yosh)` |
-| **Lokal xizmat (`local`)** | `Physical fitness`, `Gym`, `Restaurants`, `Tourism`, `Resort`, `Family entertainment` | `People living in or recently in location (+3..10 km)` |
+| **Global Search** | `GET /v26.0/search?type=adinterest&q=<query>` | Reklama akkaunt ID si bo'lmaganda global qiziqishlar qidiruvi (`FOUND_NOT_VALIDATED`). |
+| **Account Targeting Search** | `GET /v26.0/act_<id>/targetingsearch?q=<query>` | Akkaunt doirasida interest, behavior va demografiya qidiruvi (`audience_size_lower_bound` / `upper_bound` bilan). |
+| **Targeting Suggestions** | `GET /v26.0/act_<id>/targetingsuggestions?targeting_list=<json>` | Topilgan rasmiy ID'lar asosida Meta tavsiya qilgan o'xshash targeting variantlari. |
+| **Targeting Validation** | `GET /v26.0/act_<id>/targetingvalidation?targeting_list=<json>` | Variantning ayni vaqtda yaroqli (`VERIFIED_AVAILABLE`) yoki eskirgan/birlashtirilgan (`UNAVAILABLE_OR_CONSOLIDATED`) ekanini tekshiradi. |
 
-## 💎 O'zbekiston Bozori Uchun To'lov Qobiliyati (Solventnost) Filtrlari
+## 🏷️ 2. 6 ta Aniqlik Holati (`validation_status`)
 
-O'zbekistonda yuqori chekli mahsulot yoki B2B xizmat sotganda qiziqishlar ustiga (yoki alohida test ad setda) quyidagi qatlamlar qo'llanadi ([[30-ozbekiston-konteksti]]):
+- **`VERIFIED_AVAILABLE`**: Rasmiy API dan topilgan va `targetingvalidation` da `valid: true` bilan tasdiqlangan.
+- **`FOUND_NOT_VALIDATED`**: Rasmiy API dan topilgan (original `name` va `id` mavjud), ammo `targetingvalidation` bajarilmagan.
+- **`UNAVAILABLE_OR_CONSOLIDATED`**: Rasmiy API variantning eskirgani yoki boshqa variantga birlashtirilganini bildirgan (`consolidated_into` orqali yangi variantga bog'lanadi).
+- **`RELATED_UNVERIFIED`**: Statik `NICHE_TAXONOMY` urug'lari, ko'p tilli sinonimlar yoki `SOLVENTNOST_HYPOTHESES` — Meta API da tasdiqlanmagan!
+- **`NOT_FOUND`**: Bajarilgan qidiruv so'rovi bo'yicha rasmiy API dan `0` ta natija qaytdi (bu tushuncha Meta'da umuman yo'qligining mutlaq isboti emas, faqat shu so'rovda topilmadi).
+- **`API_UNAVAILABLE`**: Token yo'q, `401/403` ruxsat xatosi, `429` limit yoki tarmoq uzilishi. Bu holatda hech bir statik nom `VERIFIED_AVAILABLE` deb ko'rsatilmaydi.
 
-1. **`Engaged Shoppers`** — so'nggi 7 kunda reklamadagi CTA tugmasini bosgan faol xaridorlar.
-2. **`Frequent International Travelers`** — chet elga chiquvchi, valyuta/karta to'lov qobiliyatiga ega auditoriya.
-3. **`Mobile Device: iPhone Pro / Pro Max`** — premium segment filtri.
-4. **`Facebook Page Admins` / `Small Business Owners`** — tadbirkorlar va qaror qabul qiluvchilar.
-5. **Geo-Tiering:** Toshkent shahri va Viloyatlar **hech qachon** bitta CBO kampaniyada aralashtirilmaydi (viloyatning arzon CPM'i byudjetning 80% ini tortib oladi).
+## 💎 3. O'zbekiston To'lov Qobiliyati (Solventnost) Gipotezalari (`MARKETING_HYPOTHESIS`)
 
-## 💻 CLI va API Integratsiyasi (Agent Uchun)
+Quyidagi signallar **tasdiqlangan daromad filtri emas**, balki kampaniyada A/B sinov orqali tekshiriladigan marketing gipotezalaridir ([[30-ozbekiston-konteksti]]):
+1. **`Engaged Shoppers`** — onlayn xarid tugmasini bosganlar faolligi gipotezasi.
+2. **`Frequent International Travelers`** — chet elga safar qiluvchilar gipotezasi.
+3. **`Mobile Device: Flagship / iPhone Pro Series`** — qurilma modeli gipotezasi (nasiyaga olingan bo'lishi mumkin).
+4. **`Facebook Page Admins` / `Small Business Owners`** — B2B qaror qabul qiluvchilar gipotezasi.
 
-```powershell
-# 1. Nisha bo'yicha tayyor Interest klasterlar va Solventnost filtrlarini olish (0 token)
-py -3 tools/meta-audience.py interests --niche real-estate
+## 💻 4. CLI va MCP Ishlatish
 
-# 2. To'liq 4-qatlamli auditoriya arxitekturasi va Exclusion matritsasini tuzish
-py -3 tools/meta-audience.py architect --niche ecom --daily-budget 150 --geo tashkent --has-pixel --has-crm
+```bash
+# 1. To'liq 6-statusli Detailed Targeting qidiruvi va tekshiruvi
+python3 tools/meta-targeting-engine.py search --product "Klassik erkaklar kostyumi" --niche ecom --account-id act_123456789 --suggestions
 
-# 3. Agar .env da META_ACCESS_TOKEN bo'lsa, jonli Graph API dan o'qish
-py -3 tools/meta-audience.py interests --niche b2b --query "entrepreneurship" --live
+# 2. Ko'p tilli (O'zbek lotin, Kirill, Rus, Ingliz) so'rovlar bilan
+python3 tools/meta-audience.py detailed-targeting --product "Стоматология Ташкент" --niche medical --language ru --json
 ```
 
 **Bog'liq:** [[meta-auditoriya-arxitekturasi]] · [[meta-ads-sozlamalari]] · [[meta-kampaniya-tuzilmalari]] · [[content-is-targeting]]

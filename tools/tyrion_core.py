@@ -22,7 +22,7 @@ MAX_FILE_BYTES: int = 25 * 1024 * 1024  # 25 MB hard ceiling for CSV/JSON import
 MAX_RPC_LINE_BYTES: int = 1 * 1024 * 1024  # 1 MB hard ceiling for STDIO JSON-RPC lines
 
 SECRET_REDACT_RE = re.compile(
-    r"(EAA[A-Za-z0-9]{20,}|sk-[A-Za-z0-9_\-]{16,}|AIza[0-9A-Za-z_\-]{20,}|\b\d{8,10}:AA[A-Za-z0-9_\-]{20,}|ghp_[A-Za-z0-9]{20,})"
+    r"(EAA[A-Za-z0-9]{12,}|sk-[A-Za-z0-9_\-]{16,}|AIza[0-9A-Za-z_\-]{20,}|\b\d{8,10}:AA[A-Za-z0-9_\-]{20,}|ghp_[A-Za-z0-9]{20,}|Bearer\s+[A-Za-z0-9_\-\.]{12,})"
 )
 SAFE_SLUG_RE = re.compile(r"[^a-z0-9]+")
 CONTROL_AND_TAG_RE = re.compile(r"[\x00-\x1f\x7f<>\"'`\\]")
@@ -120,6 +120,10 @@ def atomic_write_bytes(target: Path, data: bytes) -> None:
                 os.fsync(fh.fileno())
             except OSError:
                 pass
+        try:
+            os.chmod(str(tmp_path), 0o644)
+        except OSError:
+            pass
         os.replace(str(tmp_path), str(target))
     except Exception:
         if tmp_path.exists():
@@ -141,50 +145,97 @@ def atomic_write_json(target: Path, payload: Any) -> None:
     atomic_write_text(target, serialized, encoding="utf-8")
 
 
+def _classify_http_status(status: int) -> str:
+    if status == 400:
+        return "BAD_REQUEST_400"
+    if status == 401:
+        return "AUTH_401"
+    if status == 403:
+        return "PERMISSION_403"
+    if status == 404:
+        return "NOT_FOUND_404"
+    if status == 429:
+        return "RATE_LIMIT_429"
+    if 500 <= status <= 599:
+        return "SERVER_5XX"
+    return f"HTTP_{status}"
+
+
 def http_get_json_with_backoff(
     url: str,
     headers: dict[str, str] | None = None,
     timeout: float = 8.0,
     max_retries: int = 3,
-    base_delay: float = 0.6,
+    base_delay: float = 0.25,
 ) -> dict[str, Any]:
-    """HTTP 429 (Rate Limit) va 5xx xatolarida eksponensial backoff + jitter bilan so'rov yuboradi.
-    Hech qachon URL ichida maxfiy tokenlarni oshkor qilmaydi.
+    """HTTP 429 (Rate Limit), 5xx va vaqtinchalik tarmoq xatolarida eksponensial backoff + jitter bilan so'rov yuboradi.
+    400/401/403/404 va noto'g'ri JSON xatolarida qayta urinmaydi. Maxfiy tokenlarni hech qachon oshkor qilmaydi.
     """
     clean_url = sanitize_url(url)
-    req_headers = {"Accept": "application/json", "User-Agent": "Tyrion-OS/4.1"}
+    req_headers = {"Accept": "application/json", "User-Agent": "Tyrion-OS/5.0"}
     if headers:
         req_headers.update(headers)
 
     last_err: str = "Noma'lum tarmoq xatosi"
+    last_status: int | None = None
+    last_category: str = "NETWORK_ERROR"
+    attempts_made = 0
+
     for attempt in range(max_retries + 1):
+        attempts_made = attempt + 1
         req = urllib.request.Request(clean_url, headers=req_headers, method="GET")
         try:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
+                status_code = getattr(resp, "status", 200) or 200
                 raw = resp.read(MAX_FILE_BYTES).decode("utf-8", errors="replace")
-                data = json.loads(raw)
-                return data if isinstance(data, dict) else {"data": data}
+                try:
+                    data = json.loads(raw)
+                except json.JSONDecodeError as jexc:
+                    return {
+                        "error": f"Invalid JSON response: {jexc.msg}",
+                        "http_status": status_code,
+                        "error_category": "INVALID_JSON",
+                        "retries_attempted": attempt,
+                    }
+                if isinstance(data, dict):
+                    return data
+                if isinstance(data, list):
+                    return {"data": data}
+                return {
+                    "error": f"Unexpected JSON root type: {type(data).__name__}",
+                    "http_status": status_code,
+                    "error_category": "UNEXPECTED_PAYLOAD_SHAPE",
+                    "retries_attempted": attempt,
+                }
         except urllib.error.HTTPError as exc:
-            status = exc.code
+            status = int(exc.code)
+            last_status = status
+            last_category = _classify_http_status(status)
             body_preview = ""
             try:
                 body_preview = redact_secrets(exc.read(2048).decode("utf-8", errors="replace"))
             except Exception:
                 pass
-            last_err = f"HTTP {status}: {redact_secrets(str(exc.reason))} {body_preview[:160]}".strip()
-            # Retry on 429 Too Many Requests or 5xx transient errors
+            last_err = f"HTTP {status}: {redact_secrets(str(exc.reason))} {body_preview[:200]}".strip()
             if status in (429, 500, 502, 503, 504) and attempt < max_retries:
                 retry_after = exc.headers.get("Retry-After") if exc.headers else None
-                delay = safe_float(retry_after, default=base_delay * (2 ** attempt)) + random.uniform(0.05, 0.25)
-                time.sleep(min(delay, 5.0))
+                delay = safe_float(retry_after, default=base_delay * (2 ** attempt)) + random.uniform(0.02, 0.12)
+                time.sleep(min(delay, 2.5))
                 continue
             break
-        except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            last_status = None
+            last_category = "TIMEOUT_ERROR" if isinstance(exc, TimeoutError) else "NETWORK_ERROR"
             last_err = redact_secrets(str(exc))
             if attempt < max_retries:
-                delay = base_delay * (2 ** attempt) + random.uniform(0.05, 0.25)
-                time.sleep(min(delay, 5.0))
+                delay = base_delay * (2 ** attempt) + random.uniform(0.02, 0.12)
+                time.sleep(min(delay, 2.5))
                 continue
             break
 
-    return {"error": last_err, "retries_attempted": max_retries}
+    return {
+        "error": last_err,
+        "http_status": last_status,
+        "error_category": last_category,
+        "retries_attempted": max(0, attempts_made - 1),
+    }

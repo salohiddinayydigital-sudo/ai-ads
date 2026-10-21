@@ -1,32 +1,32 @@
 #!/usr/bin/env python3
-"""Tyrion Meta Ads Audience Engine v5.1 — Andromeda 2 va O'zbekiston bozori uchun kalibrlangan auditoriya arxitektori (0 token).
+"""Tyrion Meta Ads Audience Engine v5.0 — Andromeda 2, O'zbekiston bozori va Detailed Targeting Accuracy integratsiyasi (0 token).
 
-Yangi imkoniyatlar (v5.1 Ikkinchi Audit Yechimlari):
-  1. Unit-ekonomika parametrlari (`--aov`, `--margin-pct`, `--lead-to-sale-cvr`) uchun qat'iy iqtisodiy diapazon
-     tekshiruvi (`0 < margin_pct <= 100`, `0 < lead_to_sale_cvr <= 100`, `aov > 0`). 150% marja yoki 250% konversiya
-     kabi iqtisodiy jihatdan imkonsiz qiymatlar `ValueError` bilan rad etiladi.
-  2. `--target-cpa` (foydalanuvchi maqsadi -> `USER_SPECIFIED_TARGET_GOAL`, `UNVERIFIED_USER_TARGET`) bilan
-     `--measured-cpa` (o'lchangan tarixiy natija -> `MEASURED_HISTORICAL_CPA`, `MODERATE_HISTORICAL_BASELINE`) farqlanadi.
-  3. `saturation` modulidagi charchash oralig'i statistik "confidence interval" emas, balki deterministik
-     **ssenariy sezgirlik oralig'i (`scenario_sensitivity_window_days`)** ekanligi ochiq ko'rsatiladi va
-     7 kunlik frequency kiritilganda chiziqli ekstrapolyatsiya cheklovi (`MODERATE_CALIBRATED_LINEAR_PROJECTION`) yoziladi.
-
-Buyruqlar:
-  python3 tools/meta-audience.py architect --niche ecom --daily-budget 150 --aov 80 --margin-pct 35 --geo uzbekistan --has-pixel --has-crm
-  python3 tools/meta-audience.py interests --niche edu
-  python3 tools/meta-audience.py overlap --size-a 180000 --size-b 120000 --shared 45000
-  python3 tools/meta-audience.py saturation --audience-size 250000 --daily-budget 80 --cpm 3.2
-  python3 tools/meta-audience.py retargeting --aov 100 --daily-visitors 300 --no-telegram-bot
+Asosiy modullar:
+  1. architect          : Unit-ekonomikaga tayangan 4-qatlamli auditoriya rejasi + Exclusion matritsasi
+  2. interests          : Nisha bo'yicha boshlang'ich qidiruv lug'ati (`RELATED_UNVERIFIED`) + Graph API v26.0 tekshiruvi
+  3. detailed-targeting : To'liq 6-statusli (`VERIFIED_AVAILABLE`, `FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED`,
+                          `RELATED_UNVERIFIED`, `NOT_FOUND`, `API_UNAVAILABLE`) Detailed Targeting Accuracy hisoboti
+  4. overlap            : Static Pool Overlap (<20% qoidasi) va Live Auction Overlap farqi
+  5. saturation         : Ssenariy sezgirlik oralig'i (`scenario_sensitivity_window_days`) va charchash prognozi
+  6. retargeting        : Haqiqiy trafikka tayangan dinamik Retargeting oynalari (--no-telegram-bot qo'llab-quvvatlanadi)
+  7. lookalike          : Heuristic Seed Readiness Score (0-100) va 1%–5% hajm pog'onasi
+  8. diagnose           : Meta Ads metrikalar zanjiridan (CPM->CTR->CVR->Sale) tor joyni topish
 """
 
 from __future__ import annotations
 
 import argparse
+import importlib
 import json
 import math
 import os
 import sys
 import urllib.parse
+from pathlib import Path
+
+TOOLS = Path(__file__).resolve().parent
+if str(TOOLS) not in sys.path:
+    sys.path.insert(0, str(TOOLS))
 
 for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):
@@ -73,7 +73,8 @@ def _validate_percentage(val: float, name: str) -> float:
     return fval
 
 
-# 8 ta asosiy nisha bo'yicha Meta Ads Interest Cluster va Behavior taksonomiyasi
+# 8 ta asosiy nisha bo'yicha boshlang'ich qidiruv urug'lari (CANDIDATE SEARCH SEEDS — RELATED_UNVERIFIED)
+# MUHIM: Ushbu ro'yxat faqat qidiruv uchun boshlang'ich lug'atdir; live API tasdig'isiz `VERIFIED_AVAILABLE` deb ko'rsatilmaydi!
 NICHE_TAXONOMY: dict[str, dict] = {
     "ecom": {
         "title": "E-Commerce, Onlayn Do'kon va Chakana Savdo",
@@ -82,8 +83,8 @@ NICHE_TAXONOMY: dict[str, dict] = {
             "Consumer electronics", "Home appliances", "Department store"
         ],
         "behaviors": [
-            "Engaged Shoppers (Xarid tugmasini bosgan faol xaridorlar)",
-            "Mobile Device User: iPhone 14/15/16 Pro & High-end Android",
+            "Engaged Shoppers (Xarid tugmasini bosgan faol xaridorlar — gipoteza)",
+            "Mobile Device User: Flagship Smartphone Users (qurilma gipotezasi)",
         ],
         "creative_angles": [
             "TOF Problem/Solution: Mahsulot muammoni 3 soniyada qanday hal qiladi (UGC unboxing)",
@@ -116,9 +117,9 @@ NICHE_TAXONOMY: dict[str, dict] = {
             "Luxury real estate", "Interior design", "Architecture"
         ],
         "behaviors": [
-            "Frequent International Travelers (yuqori daromad signali)",
+            "Frequent International Travelers (to'lov qobiliyati bo'yicha marketing gipotezasi)",
             "Business Decision Makers / Small Business Owners",
-            "iPhone Pro / Flagship device owners"
+            "Flagship device owners (marketing gipotezasi)"
         ],
         "creative_angles": [
             "TOF Financial Plan: Boshlang'ich to'lov va 0% muddatli to'lov (rassrochka) hisob-kitobi",
@@ -135,7 +136,7 @@ NICHE_TAXONOMY: dict[str, dict] = {
         ],
         "behaviors": [
             "Geo-radius targeting (klinika atrofida +5..15 km yoki shahar bo'yicha)",
-            "Age-segmented cohorts (30-55 yosh to'lovga qodir qatlam)"
+            "Age-segmented cohorts (30-55 yosh qatlam)"
         ],
         "creative_angles": [
             "TOF Doctor Authority: Shifokor tushuntirishi — og'riqsiz va xavfsiz davolash mexanizmi (Policy-safe!)",
@@ -216,11 +217,11 @@ NICHE_TAXONOMY: dict[str, dict] = {
 }
 
 SOLVENTNOST_FILTERS = [
-    "Engaged Shoppers (So'nggi 7 kunda 'Shop Now' bosganlar)",
-    "Frequent International Travelers (Chet elga tez-tez chiquvchi to'lov qobiliyati yuqori qatlam)",
-    "Mobile Device: iPhone 14 / 15 / 16 Pro & Pro Max (Yuqori chekli mahsulotlar uchun)",
-    "Facebook Page Admins & Small Business Owners (B2B va yuqori chekli xizmatlar uchun)",
-    "Geo-Tiering: Toshkent shahri alohida kampaniya/ad setda, Viloyatlar alohida ad setda (CPM va to'lov qobiliyati farqi sababli)",
+    "Engaged Shoppers (So'nggi 7 kunda 'Shop Now' bosganlar — xarid faolligi gipotezasi, `RELATED_UNVERIFIED`)",
+    "Frequent International Travelers (Chet elga chiquvchilar — to'lov qobiliyati bo'yicha marketing gipotezasi, `RELATED_UNVERIFIED`)",
+    "Mobile Device: Flagship / iPhone Pro Series (Yuqori chekli mahsulotlar uchun qurilma gipotezasi — tasdiqlangan daromad filtri emas, `RELATED_UNVERIFIED`)",
+    "Facebook Page Admins & Small Business Owners (B2B qaror qabul qiluvchilar gipotezasi, `RELATED_UNVERIFIED`)",
+    "Geo-Tiering: Toshkent shahri alohida kampaniya/ad setda, Viloyatlar alohida ad setda (CPM farqi sababli arxitektura qoidasi)",
 ]
 
 
@@ -237,14 +238,7 @@ def build_architecture(
     margin_pct: float | None = None,
     lead_to_sale_cvr: float | None = None,
 ) -> dict:
-    """Andromeda 2 + O'zbekiston bozori uchun 4-qatlamli Meta Ads auditoriya arxitekturasi.
-
-    CPA maqsadi quyidagi aniq shaffof manbalardan biriga asoslanadi:
-      1. `--measured-cpa` : Akkauntda haqiqatda o'lchangan tarixiy CPA (`MEASURED_HISTORICAL_CPA`)
-      2. `--aov` + `--margin-pct` (+ `--lead-to-sale-cvr`) : Unit-ekonomikadan hisoblangan CPA (`UNIT_ECONOMICS_DERIVED`)
-      3. `--target-cpa`   : Operator kiritgan maqsadli ko'rsatkich (`USER_SPECIFIED_TARGET_GOAL` -> `UNVERIFIED_USER_TARGET`)
-      4. Fallback         : Nisha koeffitsiyenti asosidagi dastlabki taxmin (`PROVISIONAL_HEURISTIC_FALLBACK`)
-    """
+    """Andromeda 2 + O'zbekiston bozori uchun 4-qatlamli Meta Ads auditoriya arxitekturasi."""
     daily_budget = _validate_finite_positive(daily_budget, "daily_budget", max_val=10_000_000.0)
     if target_cpa is not None:
         target_cpa = _validate_finite_positive(target_cpa, "target_cpa", max_val=1_000_000.0)
@@ -270,7 +264,7 @@ def build_architecture(
         cpa_explanation = f"Akkauntning haqiqiy o'lchangan tarixiy CPA ko'rsatkichidan (${est_cpa}) olindi."
     elif aov is not None and margin_pct is not None:
         gross_margin_usd = aov * (margin_pct / 100.0)
-        sale_target_cpa = gross_margin_usd * 0.65  # 35% sof foyda zaxirasi
+        sale_target_cpa = gross_margin_usd * 0.65
         if lead_to_sale_cvr is not None:
             est_cpa = max(0.5, round(sale_target_cpa * (lead_to_sale_cvr / 100.0), 2))
             cpa_explanation = (
@@ -333,9 +327,19 @@ def build_architecture(
             "exclusions": ["Purchase_180d", "CRM_Active_Clients", "LeadForm_Submitted_90d"],
         },
         {
-            "layer": "2-Qatlam: Advantage+ Interest Stack & Solventnost (TOF)",
+            "layer": "2-Qatlam: Advantage+ Interest Stack & Solventnost Hypotheses (TOF)",
             "budget_share_usd": round(cold_budget * 0.45, 2),
-            "targeting": f"Interest Cluster: {', '.join(tax['core_interests'][:5])} + Behavior: {tax['behaviors'][0]}",
+            "targeting_verification_status": "RELATED_UNVERIFIED",
+            "candidate_seed_terms": tax["core_interests"][:5],
+            "targeting": (
+                f"Nomzod qidiruv urug'lari (RELATED_UNVERIFIED — avval live API da tekshiring!): "
+                f"{', '.join(tax['core_interests'][:5])} | Behavior gipotezasi: {tax['behaviors'][0]}"
+            ),
+            "verification_instruction": (
+                "MUHIM: Ushbu nomlar statik qidiruv lug'atidan olingan (`RELATED_UNVERIFIED`). "
+                "Reklamani yoqishdan oldin `python3 tools/meta-targeting-engine.py search --niche "
+                f"{niche} --account-id act_...` orqali ularning Meta API da `VERIFIED_AVAILABLE` ekanini tasdiqlang."
+            ),
             "advantage_plus_mode": "Yuqori chekli/B2B nishada Hard Interest (Advantage+ Audience OFF), ommaviy B2C da Advantage+ Audience ON (Suggestion sifatida).",
             "exclusions": ["Purchase_180d", "CRM_Active_Clients", "LeadForm_Submitted_90d"],
         },
@@ -380,6 +384,11 @@ def build_architecture(
             "confidence_level": cpa_confidence,
             "cpa_derivation": cpa_explanation,
             "economic_warnings": economic_warnings,
+            "detailed_targeting_status": "RELATED_UNVERIFIED_CANDIDATE_SEEDS",
+            "solventnost_hypothesis_disclosure": (
+                "Solventnost signallari (iPhone, xalqaro sayohat, Page Admin) Meta tomonidan tasdiqlangan rasmiy daromad "
+                "filtri EMAS, balki kampaniyada A/B sinov orqali tekshiriladigan marketing gipotezasidir."
+            ),
             "learning_phase_assumption": "Meta Andromeda 2 ad set Learning Phase'dan chiqishi uchun 7 kunda >=50 optimizatsiya hodisasi talab qilinadi.",
         },
         "learning_phase_guardrail": {
@@ -401,13 +410,7 @@ def build_architecture(
 
 
 def calc_overlap(size_a: int, size_b: int, shared: int) -> dict:
-    """Ikki ad set auditoriyasi o'rtasidagi geometrik kesishmani (Static Pool Overlap) hisoblaydi.
-
-    Yagona chegara qoidasi (hujjatlar va kod o'rtasida 100% birxillashtirilgan):
-      - < 20.0%  : HEALTHY_ISOLATION (Xavfsiz)
-      - 20..29.9%: MODERATE_OVERLAP (20% chegaradan oshdi — Exclusion yoki konsolidatsiya kerak)
-      - >= 30.0% : CRITICAL_COLLISION (Darhol bitta ad setga birlashtiring)
-    """
+    """Ikki ad set auditoriyasi o'rtasidagi geometrik kesishmani (Static Pool Overlap) hisoblaydi."""
     if size_a <= 0 or size_b <= 0 or shared < 0:
         raise ValueError("Auditoriya hajmlari musbat bo'lishi shart.")
     if shared > min(size_a, size_b):
@@ -551,47 +554,71 @@ def calc_saturation(
     }
 
 
-def query_live_graph_api(query: str, limit: int = 15) -> list[dict]:
-    """Agar META_ACCESS_TOKEN muhitda mavjud bo'lsa, Meta Graph API v26.0 dan Authorization Bearer header
-    va eksponensial backoff (HTTP 429/5xx) orqali read-only interest qidiradi. Token URL ichiga qo'yilmaydi.
-    """
-    import tyrion_core as tcore
-    token = os.environ.get("META_ACCESS_TOKEN", "").strip()
-    if not token or token == "your_meta_access_token_here":
+def query_live_graph_api(query: str, limit: int = 15, ad_account_id: str = "") -> list[dict]:
+    """`meta-targeting-engine.py` orqali rasmiy Meta Graph API qidiruvini bajaradi."""
+    mte = importlib.import_module("meta-targeting-engine")
+    report = mte.search_and_validate_targeting(
+        queries=[query] if query else None,
+        ad_account_id=ad_account_id,
+        limit_per_query=limit,
+    )
+    if not report["live_check_status"]["executed"]:
         return []
-    version = get_graph_api_version()
-    base = os.environ.get("META_GRAPH_API_BASE_URL", "https://graph.facebook.com").strip().rstrip("/")
-    safe_limit = tcore.safe_int(limit, default=15, min_val=1, max_val=100, field_name="limit")
-    params = urllib.parse.urlencode({
-        "type": "adinterest",
-        "q": str(query or "").strip()[:120],
-        "limit": str(safe_limit),
-        "locale": "en_US",
-    })
-    url = f"{base}/{version}/search?{params}"
-    headers = {"Authorization": f"Bearer {token}"}
-    payload = tcore.http_get_json_with_backoff(url, headers=headers, timeout=8.0, max_retries=3)
-    if "error" in payload:
-        return [{"error": f"Meta Graph API xatosi: {tcore.redact_secrets(str(payload['error']))}"}]
-    data = payload.get("data", [])
-    return data if isinstance(data, list) else []
+    return report["verified_targeting_options"]
 
 
-def get_interests(niche: str, query: str = "", live: bool = False) -> dict:
+def get_interests(
+    niche: str,
+    query: str = "",
+    live: bool = False,
+    product: str = "",
+    customer_profile: str = "",
+    ad_account_id: str = "",
+    special_ad_category: str = "NONE",
+) -> dict:
+    """Nisha bo'yicha qidiruv urug'lari (`RELATED_UNVERIFIED`) va ixtiyoriy live Graph API (`meta-targeting-engine.py`) hisobotini qaytaradi."""
     tax = NICHE_TAXONOMY.get(niche, NICHE_TAXONOMY["ecom"])
     q_term = query or tax["core_interests"][0]
     api_version = get_graph_api_version()
-    api_results = query_live_graph_api(q_term) if live else []
+
+    mte = importlib.import_module("meta-targeting-engine")
+    if live:
+        accuracy_report = mte.search_and_validate_targeting(
+            product=product,
+            niche=niche,
+            customer_profile=customer_profile,
+            queries=[query] if query else None,
+            ad_account_id=ad_account_id,
+            special_ad_category=special_ad_category,
+        )
+        live_results = accuracy_report["verified_targeting_options"]
+        live_status = accuracy_report["live_check_status"]["status"]
+    else:
+        accuracy_report = None
+        live_results = []
+        live_status = "NOT_REQUESTED_OFFLINE_SEED_MODE"
+
     return {
         "niche": niche,
         "title": tax["title"],
         "graph_api_version": api_version,
+        "static_taxonomy_status": mte.STATUS_RELATED_UNVERIFIED,
+        "static_taxonomy_warning": (
+            "DIQQAT: `core_interest_clusters` va `high_intent_behaviors` statik qidiruv lug'ati (`RELATED_UNVERIFIED`) hisoblanadi. "
+            "Ularni Meta Ads Manager'da tasdiqlangan (`VERIFIED_AVAILABLE`) deb qabul qilmang — `--live` yoki `meta-targeting-engine.py` orqali tekshiring!"
+        ),
+        "live_verification_status": live_status,
         "core_interest_clusters": tax["core_interests"],
         "high_intent_behaviors": tax["behaviors"],
         "uzbekistan_solventnost_filters": SOLVENTNOST_FILTERS,
+        "solventnost_hypothesis_disclaimer": (
+            "Solventnost signallari (iPhone, xalqaro sayohat, Page Admin) Meta tomonidan tasdiqlangan daromad filtri EMAS, "
+            "balki faqat tekshiriladigan marketing gipotezasidir (`MARKETING_HYPOTHESIS`)."
+        ),
         "creative_angles": tax["creative_angles"],
         "graph_api_readonly_endpoint": f"GET https://graph.facebook.com/{api_version}/search?type=adinterest&q={urllib.parse.quote(q_term)}&limit=20",
-        "live_api_results": api_results,
+        "live_api_results": live_results,
+        "detailed_targeting_accuracy_report": accuracy_report,
     }
 
 
@@ -602,11 +629,7 @@ def calc_retargeting(
     video_viewers_14d: int = 8000,
     has_telegram_bot: bool = True,
 ) -> dict:
-    """Dinamik Retargeting Oynalari (3d/7d/14d/30d/180d) va byudjet sig'imi hisoblagichi.
-
-    Haqiqiy manba trafigi 0 bo'lsa, sun'iy 100/500/1000 minimal sonlar QO'SHILMAYDI —
-    baza yetarli emasligi (INSUFFICIENT_RETARGETING_POOL) ochiq ko'rsatiladi.
-    """
+    """Dinamik Retargeting Oynalari (3d/7d/14d/30d/180d) va byudjet sig'imi hisoblagichi."""
     if daily_visitors < 0 or ig_engagers_30d < 0 or video_viewers_14d < 0:
         raise ValueError("Trafik va auditoriya ko'rsatkichlari manfiy bo'lishi mumkin emas.")
 
@@ -820,7 +843,7 @@ def diagnose_metrics(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="meta-audience.py",
-        description="Tyrion v5.1 Meta Ads Audience Architecture Engine (Andromeda 2 + UZ Market + Calibrated Disclosures)",
+        description="Tyrion v5.0 Meta Ads Audience & Detailed Targeting Accuracy Engine",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -838,11 +861,29 @@ def main(argv: list[str] | None = None) -> int:
     p_arch.add_argument("--ig-followers", type=int, default=5000)
     p_arch.add_argument("--json", action="store_true")
 
-    p_int = sub.add_parser("interests", help="Nisha bo'yicha Interest Cluster, Behavior va Solventnost filtrlari")
+    p_int = sub.add_parser("interests", help="Nisha bo'yicha qidiruv urug'lari (`RELATED_UNVERIFIED`) va live Graph API tekshiruvi")
     p_int.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
     p_int.add_argument("--query", default="")
-    p_int.add_argument("--live", action="store_true", help="META_ACCESS_TOKEN orqali jonli Graph API v26.0 qidiruvi")
+    p_int.add_argument("--product", default="", help="Mahsulot yoki xizmat tavsifi")
+    p_int.add_argument("--customer-profile", default="", help="Maqsadli mijoz profili")
+    p_int.add_argument("--account-id", default="", help="Meta Ad Account ID (`act_...`) — targetingsearch va targetingvalidation uchun")
+    p_int.add_argument("--special-ad-category", default="NONE")
+    p_int.add_argument("--live", action="store_true", help="META_ACCESS_TOKEN orqali jonli Graph API v26.0 qidiruvi va tekshiruvi")
     p_int.add_argument("--json", action="store_true")
+
+    p_dt = sub.add_parser("detailed-targeting", help="6-statusli Detailed Targeting Accuracy Engine hisoboti")
+    p_dt.add_argument("--product", default="")
+    p_dt.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
+    p_dt.add_argument("--customer-profile", default="")
+    p_dt.add_argument("--objective", default="SALES", choices=["SALES", "LEADS", "ENGAGEMENT", "TRAFFIC", "AWARENESS"])
+    p_dt.add_argument("--country", default="UZ")
+    p_dt.add_argument("--language", default="auto", choices=["auto", "uz_latin", "uz_cyrillic", "ru", "en"])
+    p_dt.add_argument("--query", action="append", default=[])
+    p_dt.add_argument("--account-id", default="")
+    p_dt.add_argument("--special-ad-category", default="NONE")
+    p_dt.add_argument("--suggestions", action="store_true")
+    p_dt.add_argument("--no-validate", action="store_true")
+    p_dt.add_argument("--json", action="store_true")
 
     p_ovl = sub.add_parser("overlap", help="Ikki ad set o'rtasidagi Static Pool Overlap (<20% qoidasi) ni hisoblash")
     p_ovl.add_argument("--size-a", type=int, required=True)
@@ -917,7 +958,30 @@ def main(argv: list[str] | None = None) -> int:
                 lead_to_sale_cvr=args.lead_to_sale_cvr,
             )
         elif args.command == "interests":
-            res = get_interests(args.niche, args.query, args.live)
+            res = get_interests(
+                niche=args.niche,
+                query=args.query,
+                live=args.live,
+                product=args.product,
+                customer_profile=args.customer_profile,
+                ad_account_id=args.account_id,
+                special_ad_category=args.special_ad_category,
+            )
+        elif args.command == "detailed-targeting":
+            mte = importlib.import_module("meta-targeting-engine")
+            res = mte.search_and_validate_targeting(
+                product=args.product,
+                niche=args.niche,
+                customer_profile=args.customer_profile,
+                objective=args.objective,
+                country=args.country,
+                language=args.language,
+                queries=args.query,
+                ad_account_id=args.account_id,
+                special_ad_category=args.special_ad_category,
+                include_suggestions=args.suggestions,
+                validate_results=not args.no_validate,
+            )
         elif args.command == "overlap":
             res = calc_overlap(args.size_a, args.size_b, args.shared)
         elif args.command == "saturation":
@@ -946,7 +1010,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 66)
-    print(f"  🎯 TYRION v5.1 META AUDIENCE ENGINE — {args.command.upper()}")
+    print(f"  🎯 TYRION v5.0 META AUDIENCE ENGINE — {args.command.upper()}")
     print("=" * 66)
     for k, v in res.items():
         if isinstance(v, list):

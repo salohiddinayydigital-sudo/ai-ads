@@ -1,66 +1,51 @@
 ---
 name: ads-meta-audience
-description: "Design, audit, and optimize Meta Ads audience architecture for Andromeda 2 and Uzbekistan/global markets — 4-layer funnel (Broad signal steering, Advantage+ interest stacks, 1P IG/Telegram/CAPI custom audiences, Value Lookalikes), Exclusion matrices, auction overlap math, and audience saturation modeling. Use when working with Meta Ads targeting, audiences, retargeting, lookalikes, exclusions, or audience fatigue."
+description: "Design, audit, and optimize Meta Ads audience architecture for Andromeda 2 and Uzbekistan/global markets — 4-layer funnel, Detailed Targeting Accuracy Engine (6-status official API verification), Exclusion matrices, static vs auction overlap math, and audience saturation sensitivity modeling. Use when working with Meta Ads targeting, interests, behaviors, audiences, retargeting, lookalikes, exclusions, or audience fatigue."
 attached_agents: [audit-meta, campaign-ideator, creative-strategist, meta-audience-architect]
 ---
 
-# 🎯 Meta Ads Audience Architecture & Targeting Skill
+# 🎯 Meta Ads Audience Architecture & Detailed Targeting Accuracy Skill
 
-Build evidence-backed, non-cannibalizing Meta Ads audience structures powered by `tools/meta-audience.py` and [[meta-auditoriya-arxitekturasi]].
+Build evidence-backed, non-cannibalizing Meta Ads audience structures powered by `tools/meta-audience.py`, `tools/meta-targeting-engine.py`, `docs/DETAILED-TARGETING-ACCURACY.md`, and [[meta-auditoriya-arxitekturasi]].
 
 ## When to Activate
 
 - Designing cold, warm, and hot targeting structures for Meta Ads (Facebook & Instagram).
-- Auditing audience overlap, retargeting windows, Lookalike (LAL) seed quality, or missing exclusions (`M19–M24`).
-- Selecting interest clusters, behaviors, or purchasing-power (*solventnost*) filters for Uzbekistan or international markets.
+- Searching and validating **Detailed Targeting (Interests, Behaviors, Demographics)** without hallucinating non-existent interest names.
+- Auditing audience overlap, retargeting windows, Lookalike (LAL) seed readiness, or missing exclusions (`M19–M24`).
 - Calculating whether an audience size can sustain a proposed daily budget without rapid frequency saturation.
 
 ## Core Concepts
 
-1. **4-Layer Andromeda 2 Funnel (`architect`):**
+1. **Detailed Targeting Accuracy Rules (`tools/meta-targeting-engine.py`):**
+   - Never present AI-guessed keywords or static `NICHE_TAXONOMY` strings as confirmed Meta options.
+   - Every option must carry one of 6 strict statuses: `VERIFIED_AVAILABLE`, `FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED`, `RELATED_UNVERIFIED`, `NOT_FOUND`, or `API_UNAVAILABLE`.
+   - Preserve exact English/original `name` and `id` returned by Meta API (`GET /v26.0/search`, `/act_<id>/targetingsearch`, `/targetingsuggestions`, `/targetingvalidation`), deduplicating strictly by `(id, type)`.
+   - Frame purchasing-power (*Solventnost*) signals (`Engaged Shoppers`, `Frequent International Travelers`, `Page Admins`, flagship devices) as **testable marketing hypotheses (`MARKETING_HYPOTHESIS`)**, never as guaranteed income filters.
+2. **4-Layer Andromeda 2 Funnel (`architect`):**
    - **Layer 1 — Broad + Creative Signal Steering (TOF):** Geo + Age + Language isolation, letting the 3-second creative hook filter the auction.
-   - **Layer 2 — Advantage+ Interest Stack & Purchasing Power (TOF):** Curated interest clusters paired with high-intent behaviors (`Engaged Shoppers`, `Frequent International Travelers`, `Page Admins`, `Flagship Devices`).
-   - **Layer 3 — First-Party (1P) Warm Retargeting (MOF):** `IG_Engaged_30d` (critical when traffic goes to Telegram/Direct), `Video_Viewers_50pct_14d`, `LeadForm_Opened_Not_Submitted_30d`, and `Web_Visitors_30d`.
+   - **Layer 2 — Verified Detailed Targeting Stack & Solventnost Hypotheses (TOF):** Built strictly from `VERIFIED_AVAILABLE` (or `FOUND_NOT_VALIDATED`) API options; if live API is unavailable (`API_UNAVAILABLE`), clearly label candidate seeds as `RELATED_UNVERIFIED`.
+   - **Layer 3 — First-Party (1P) Warm Retargeting (MOF):** `IG_Engaged_30d`, `Video_Viewers_50pct_14d`, `LeadForm_Opened_Not_Submitted_30d`, and `Web_Visitors_30d` (no fake minimum pool floors when traffic is `0`).
    - **Layer 4 — Value Lookalike & Hot BOF Closing:** 1% and 1–2% LAL built strictly from *qualified/paying* CRM records ($\ge 100$ events), plus `AddToCart_14d` / `Checkout_7d` closing sets.
-2. **Geo & Language Isolation (`30-ozbekiston-konteksti`):**
-   - Never mix Tashkent city and regional audiences in the same CBO campaign (cheaper regional CPM starves Tashkent delivery).
-   - Separate Uzbek (Latin/Cyrillic) and Russian creatives into distinct ad sets.
 3. **Exclusion Discipline & Overlap Cap:**
    - Every TOF ad set must exclude `Purchase_180d`, `CRM_Active_Clients`, and `LeadForm_Submitted_90d`.
-   - Advantage+ Shopping (ASC) must lock `Existing Customer Budget Cap` at **25–30%**.
-   - Keep inter-ad-set Auction Overlap **$\le 20\%$** of the smaller ad set.
+   - Keep inter-ad-set Static Pool Overlap **$< 20\%$** of the smaller ad set (`20%–29.9%` = warning, $\ge 30\%$ = critical consolidation), while checking Ads Manager Delivery Insights for live Auction Overlap.
 
 ## Workflow
 
-1. **Step 1 — Generate Full Audience Blueprint:**
-   ```powershell
-   py -3 tools/meta-audience.py architect --niche <ecom|edu|real-estate|medical|b2b|beauty|auto|local> --daily-budget <USD> --geo <tashkent|regions|uzbekistan|global> --has-pixel --has-crm
+1. **Step 1 — Search & Validate Detailed Targeting Options:**
+   ```bash
+   python3 tools/meta-targeting-engine.py search --product "<mahsulot>" --niche <niche> --account-id <act_id> --json
    ```
-2. **Step 2 — Select Interest Clusters & Behaviors:**
-   ```powershell
-   py -3 tools/meta-audience.py interests --niche <niche>
+2. **Step 2 — Generate 4-Layer Audience Blueprint (with Unit Economics):**
+   ```bash
+   python3 tools/meta-audience.py architect --niche <ecom|edu|real-estate|medical|b2b|beauty|auto|local> --daily-budget <USD> --aov <USD> --margin-pct <PCT> --geo <tashkent|regions|uzbekistan|global> --has-pixel --has-crm
    ```
-3. **Step 3 — Verify Overlap & Saturation Capacity:**
-   ```powershell
-   py -3 tools/meta-audience.py overlap --size-a <N> --size-b <M> --shared <K>
-   py -3 tools/meta-audience.py saturation --audience-size <N> --daily-budget <USD> --cpm <CPM>
+3. **Step 3 — Verify Overlap & Saturation Sensitivity Window:**
+   ```bash
+   python3 tools/meta-audience.py overlap --size-a <N> --size-b <M> --shared <K>
+   python3 tools/meta-audience.py saturation --audience-size <N> --daily-budget <USD> --cpm <CPM>
    ```
-4. **Step 4 — Validate Budget & Learning Phase Math:**
-   Ensure each active ad set receives $\ge (	ext{Target CPA} 	imes 50 / 7)$ daily budget (`tools/calculator.py meta-155`).
-
-## Anti-Patterns (WRONG vs CORRECT)
-
-- **FAIL: WRONG** — Building a 1% Lookalike audience from all raw Lead Form submissions (including spam/unqualified leads), teaching Meta's algorithm to optimize for low-quality form fillers.
-- **PASS: CORRECT** — Filtering leads in CRM (AmoCRM/Bitrix24) first and feeding only `Qualified_Leads` or `Purchases` ($\ge 100	ext{–}500$ records via CAPI/CSV) as the Lookalike seed.
-
-- **FAIL: WRONG** — Running 6 micro-interest ad sets on a $30/day budget with zero exclusions, causing 40% auction overlap and permanent `Learning Limited` status.
-- **PASS: CORRECT** — Consolidating into 1 Broad ad set + 1 stacked Interest/Behavior ad set ($15/day each) with full `Purchase_180d` and `LeadForm_90d` exclusions.
-
-## Best Practices
-
-1. Always pair audience recommendations with matching creative angles (TOF Problem/Solution vs BOF Objection Crusher).
-2. Cite exact tool output from `tools/meta-audience.py` in `outputs/<client>/<date>-meta-audience.md`.
-3. Follow [[70-charter-baseline]]: if current account audience controls (`M19–M24`) are already healthy, return zero findings (`pass`).
 
 ## Related Skills
 

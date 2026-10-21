@@ -6,6 +6,7 @@ Ishlatish:
   python3 tools/tyrion.py doctor [--quick]
   python3 tools/tyrion.py shield
   python3 tools/tyrion.py audience <subcommand> [args...]
+  python3 tools/tyrion.py targeting <subcommand> [args...]
   python3 tools/tyrion.py sync <subcommand> [args...]
   python3 tools/tyrion.py analyze <subcommand> [args...]
   python3 tools/tyrion.py creative <subcommand> [args...]
@@ -41,6 +42,7 @@ ROUTES = {
     "shield": ("tyrion-shield.py", ["scan"]),
     "eval": ("skill-eval.py", []),
     "audience": ("meta-audience.py", []),
+    "targeting": ("meta-targeting-engine.py", []),
     "sync": ("meta-insights-sync.py", []),
     "analyze": ("ad-export-analyzer.py", []),
     "creative": ("creative-matrix.py", []),
@@ -74,7 +76,7 @@ def show_status() -> int:
     print(f"  Kontekstlar : {counts.get('contexts', 6)} ta (audit, launch, scale, creative, uzbekistan)")
     print(f"  Wiki Qaydlar: {counts.get('wiki', 100)} ta atomik qayd (0 orphan, 0 xato)")
     print(f"  Buyruqlar   : {counts.get('commands', 18)} ta slash buyruq (/audit, /auditoriya, /kreativ, /voronka...)")
-    print(f"  Asboblar    : {counts.get('tools', 28)} ta deterministik CLI vosita (Meta Graph API v26.0)")
+    print(f"  Asboblar    : {counts.get('tools', 29)} ta deterministik CLI vosita (Meta Graph API v26.0)")
     print("-" * 68)
     print("  Tezkor CLI Buyruqlar:")
     for cmd, (script, def_args) in ROUTES.items():

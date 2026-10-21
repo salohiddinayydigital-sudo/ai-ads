@@ -26,7 +26,7 @@ Tyrion v5.0 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 | `playbooks/` | **9 ta playbook fayli** (8 ta amaliy nisha/platforma playbooki + `playbooks/README.md`) | Kampaniya / nisha strategiyasida ([[playbooks/README]]) |
 | `wiki/` | **100 ta atomik bilim qaydi** (Andromeda 2, Meta Audience, Google Coliseum, Telegram Ads, CJM, 16 SOP) | Faqat kerakli qayd (`brain-search.py`) |
 | `rules/` | **9 ta qoida fayli** (`00-manba` .. `70-charter-baseline` + `rules/README.md`) | Vazifaga mos 1–2 qoida ([[rules/README]]) |
-| `tools/` | **28 ta 0-token deterministik CLI asbob** (`tyrion.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py`) | Har tahlil, hisob va tekshiruvda ([[tools/README]]) |
+| `tools/` | **29 ta 0-token deterministik CLI asbob** (`tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py`) | Har tahlil, hisob va tekshiruvda ([[tools/README]]) |
 | `hooks/` | **Deterministik lifecycle hooklar** (`SessionStart`, `PreToolUse`, `PostToolUse`, `Stop`) | Avtomatik ([[hooks/README]]) |
 | `manifests/` | `catalog.json` (generatsiya reestri) va `instincts.json` (`/learn` xotirasi) | `tools/catalog.py` va `tools/instincts.py` |
 
@@ -45,6 +45,7 @@ Tyrion v5.0 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 | `python3 tools/tyrion.py status` | **Yagona Master CLI** — tizim holati va barcha buyruqlar menyusi |
 | `python3 tools/doctor.py` | **Tizim sog'lig'i** — 14 qatlamli tekshiruv (bilim, katalog, skill, sirlar, testlar) |
 | `python3 tools/tyrion-shield.py scan` | **TyrionShield v5.0 (/shield)** — 6 qavatli statik xavfsizlik, AST va governance skaneri |
+| `python3 tools/meta-targeting-engine.py` | **Detailed Targeting Accuracy Engine (/auditoriya)** — 6-statusli rasmiy Graph API v26.0 interest qidiruv va validation dvigateli |
 | `python3 tools/meta-audience.py <cmd>` | **Meta Ads Audience Studio (/auditoriya)** — `architect`, `interests`, `overlap` (<20%), `saturation`, `retargeting`, `lookalike`, `diagnose` |
 | `python3 tools/meta-insights-sync.py pull` | **Live Meta Ads Insights (/eksport)** — Graph API v26.0 `/act_<id>/insights` sinxronizatsiyasi va auditi |
 | `python3 tools/creative-matrix.py <cmd>` | **Andromeda 2 Creative Studio (/kreativ)** — 3x3 Angle×Format matritsa, 3 tilli Hook va charchoq tahlili |

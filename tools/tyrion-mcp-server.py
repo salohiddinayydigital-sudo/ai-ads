@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened v5.1.0).
+"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened v5.0.0).
 
 Guards against oversized payloads (>1 MB), malformed JSON (-32700), unknown methods (-32601),
 invalid/NaN parameters (-32602), and subprocess hangs (15s timeout).
-Includes `tyrion_meta_live_insights` for paginated Meta Ads Graph API v26.0 account telemetry,
-currency detection, and conversion-family separation.
+Includes:
+  - `tyrion_meta_detailed_targeting` (6-status Detailed Targeting Accuracy Engine with official API provenance)
+  - `tyrion_meta_live_insights` (paginated Meta Ads Graph API v26.0 account telemetry & conversion separation)
 """
 
 from __future__ import annotations
@@ -23,12 +24,32 @@ sys.path.insert(0, str(TOOLS))
 
 import tyrion_core as tcore  # noqa: E402
 
-SERVER_VERSION = "5.1.0"
+SERVER_VERSION = "5.0.0"
 
 MCP_TOOLS = [
     {
+        "name": "tyrion_meta_detailed_targeting",
+        "description": "Search and validate Meta Ads Detailed Targeting options (Interests, Behaviors, Demographics) via official Meta Graph API endpoints (/search, /act_<id>/targetingsearch, /targetingsuggestions, /targetingvalidation) with 6 strict verification statuses (VERIFIED_AVAILABLE, FOUND_NOT_VALIDATED, UNAVAILABLE_OR_CONSOLIDATED, RELATED_UNVERIFIED, NOT_FOUND, API_UNAVAILABLE). Never hallucinates unverified interests as valid Meta options.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "product": {"type": "string", "default": ""},
+                "niche": {"type": "string", "default": "ecom"},
+                "customer_profile": {"type": "string", "default": ""},
+                "objective": {"type": "string", "default": "SALES"},
+                "country": {"type": "string", "default": "UZ"},
+                "language": {"type": "string", "default": "auto"},
+                "queries": {"type": "array", "items": {"type": "string"}},
+                "ad_account_id": {"type": "string", "default": ""},
+                "special_ad_category": {"type": "string", "default": "NONE"},
+                "include_suggestions": {"type": "boolean", "default": False},
+                "validate_results": {"type": "boolean", "default": True},
+            },
+        },
+    },
+    {
         "name": "tyrion_meta_audience",
-        "description": "Build 4-layer Meta Ads Andromeda 2 audience architecture with calibrated unit-economics CPA derivation, exclusion matrix, and solventnost filters.",
+        "description": "Build 4-layer Meta Ads Andromeda 2 audience architecture with calibrated unit-economics CPA derivation, exclusion matrix, and solventnost hypotheses.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -148,6 +169,23 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(args, dict):
         raise ValueError("Tool arguments must be a JSON object")
 
+    if name == "tyrion_meta_detailed_targeting":
+        mte = importlib.import_module("meta-targeting-engine")
+        raw_queries = args.get("queries")
+        q_list = [str(x) for x in raw_queries] if isinstance(raw_queries, list) else None
+        return mte.search_and_validate_targeting(
+            product=str(args.get("product", "")),
+            niche=str(args.get("niche", "ecom")),
+            customer_profile=str(args.get("customer_profile", "")),
+            objective=str(args.get("objective", "SALES")),
+            country=str(args.get("country", "UZ")),
+            language=str(args.get("language", "auto")),
+            queries=q_list,
+            ad_account_id=str(args.get("ad_account_id", "")),
+            special_ad_category=str(args.get("special_ad_category", "NONE")),
+            include_suggestions=bool(args.get("include_suggestions", False)),
+            validate_results=bool(args.get("validate_results", True)),
+        )
     if name == "tyrion_meta_audience":
         ma = importlib.import_module("meta-audience")
         budget = tcore.safe_float(args.get("daily_budget", 100.0), min_val=1.0, max_val=1_000_000.0, field_name="daily_budget")
@@ -293,7 +331,7 @@ def process_raw_line(raw_line: str) -> dict[str, Any] | None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v5.1.0 Native STDIO MCP Server")
+    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v5.0.0 Native STDIO MCP Server")
     parser.add_argument("--list-tools", action="store_true", help="Mavjud MCP tool'lar ro'yxatini JSON formatda chiqarish")
     args = parser.parse_args(argv)
     if args.list_tools:

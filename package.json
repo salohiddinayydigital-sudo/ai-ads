@@ -1,7 +1,7 @@
 {
   "name": "tyrion-ai",
   "version": "5.0.0",
-  "description": "Tyrion v5.0 — The calibrated advertising & marketing operating system for AI coding agents (36 agents, 62 skills, 100 wiki notes, 18 commands, 28 tools)",
+  "description": "Tyrion v5.0 — The calibrated advertising & marketing operating system for AI coding agents (36 agents, 62 skills, 100 wiki notes, 18 commands, 29 tools)",
   "main": "plugin.json",
   "scripts": {
     "status": "python3 tools/tyrion.py status",
@@ -9,6 +9,7 @@
     "doctor": "python3 tools/doctor.py",
     "shield": "python3 tools/tyrion-shield.py scan",
     "audience": "python3 tools/meta-audience.py",
+    "targeting": "python3 tools/meta-targeting-engine.py",
     "sync": "python3 tools/meta-insights-sync.py",
     "creative": "python3 tools/creative-matrix.py",
     "client": "python3 tools/client-workspace.py",
