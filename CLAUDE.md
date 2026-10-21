@@ -33,7 +33,7 @@ Tyrion v5.0 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 ## 2. Qat'iy Qoidalar
 
 1. **95% Ishonch Qonuni:** Maqsad, byudjet yoki voronka noaniq bo'lsa — taxmin qilma, avval foydalanuvchidan so'ra.
-2. **Token Gigiyenasi:** Butun omborni yoppasiga O'QIMA; avval `python3 tools/brain-search.py search "<so'z>"` yoki `python3 tools/skill-search.py brief "<vazifa>"` (0 token) ishlatiladi ([[token-gigiyenasi]]).
+2. **Universal Auto-Router va Token Gigiyenasi:** Butun omborni yoppasiga O'QIMA; har bir vazifada `python3 tools/skill-search.py execute "<vazifa>"` (yoki `route "<vazifa>" --load`) orqali faqat tanlangan charter, `SKILL.md` va reference to'liq matni (`compiled_context_package`) yuklanadi ([[token-gigiyenasi]], [[skill-router]]).
 3. **Manbasiz Fakt Yo'q va Model Shaffofligi:** Har bir tavsiyada ma'lumot manbasi (`MEASURED_ACCOUNT_DATA` vs `HEURISTIC_PRIOR_MODEL`), taxminlar va ishonchlilik darajasi ochiq ko'rsatiladi ([[00-manba]]).
 4. **Spend-Guard Himoyasi:** Reklama hisobiga har qanday o'zgartirish (`budget >20%`, yangi kampaniya, pauza) `tools/spend-guard.py` tekshiruvi va foydalanuvchi tasdig'isiz bajarilmaydi ([[40-xavfsizlik-va-hisob]]).
 5. **Atomiklik va Yagona Manba:** 1 qayd = 1 tushuncha, YAML frontmatter (`name/description/tags/source/updated`, `\` o'rniga `/`), kamida 2 ta wikilink (`[[...]]`). Barcha raqamlar `manifests/catalog.json` dan avtomatik sinxronlanadi (`python3 tools/catalog.py sync-claims`).
@@ -43,9 +43,10 @@ Tyrion v5.0 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 | Buyruq | Vazifasi |
 |---|---|
 | `python3 tools/tyrion.py status` | **Yagona Master CLI** — tizim holati va barcha buyruqlar menyusi |
+| `python3 tools/tyrion.py route "<vazifa>"` | **Universal Auto-Router** — oddiy tildagi topshiriqdan agent, skill, reference va workflow'ni avtomatik tanlash va yuklash |
 | `python3 tools/doctor.py` | **Tizim sog'lig'i** — 14 qatlamli tekshiruv (bilim, katalog, skill, sirlar, testlar) |
 | `python3 tools/tyrion-shield.py scan` | **TyrionShield v5.0 (/shield)** — 6 qavatli statik xavfsizlik, AST va governance skaneri |
-| `python3 tools/meta-targeting-engine.py` | **Detailed Targeting Accuracy Engine (/auditoriya)** — 6-statusli rasmiy Graph API v26.0 interest qidiruv va validation dvigateli |
+| `python3 tools/meta-targeting-engine.py search` | **Detailed Targeting Accuracy Engine (/auditoriya)** — 6-statusli rasmiy Graph API v26.0 interest qidiruv va validation dvigateli |
 | `python3 tools/meta-audience.py <cmd>` | **Meta Ads Audience Studio (/auditoriya)** — `architect`, `interests`, `overlap` (<20%), `saturation`, `retargeting`, `lookalike`, `diagnose` |
 | `python3 tools/meta-insights-sync.py pull` | **Live Meta Ads Insights (/eksport)** — Graph API v26.0 `/act_<id>/insights` sinxronizatsiyasi va auditi |
 | `python3 tools/creative-matrix.py <cmd>` | **Andromeda 2 Creative Studio (/kreativ)** — 3x3 Angle×Format matritsa, 3 tilli Hook va charchoq tahlili |

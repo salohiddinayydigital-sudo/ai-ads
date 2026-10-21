@@ -5,12 +5,13 @@ Tekshiradi:
   1. wiki/ qaydlari: frontmatter (name/description/tags/source/updated), YAML to'g'riligi
      (PyYAML bor bo'lsa qat'iy — qo'shtirnoq ichidagi `\` kabi escape xatolari tutiladi)
   2. har qaydda kamida 2 ta wikilink
-  3. butun vault bo'ylab buzilgan wikilinklar
+  3. butun vault bo'ylab buzilgan wikilinklar (templates/ ichida Obsidian `<% ... %>` / `{{ ... }}`
+     shablon sintaksisi ajratiladi, ammo haqiqiy buzilgan wikilinklar tekshiriladi!)
   4. yetim (orphan) qaydlar — hech kim havola qilmagan
   5. INDEX.md qamrovi — har qayd jadvalda bormi
   6. CLAUDE.md <= 300 qator
   7. dublikat nomlar
-  8. LOG.md format bir xilligi (qator + jadval aralashmasi)
+  8. LOG.md format bir xilligi (qator + jadval aralashmasi) va Delivery Gate
 
 ECC (affaan-m/ECC) rejimlar:
   --gate   : Stop hook deterministik darvozasi (0 muammo + kompleks sessiyada LOG/wiki yangilanganligi)
@@ -24,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import date, datetime
@@ -46,6 +48,7 @@ SKIP_DIRS = {
 }
 REQUIRED_FM = ("name", "description", "tags", "source", "updated")
 WIKILINK = re.compile(r"\[\[([^\]\|#]+)(?:#[^\]\|]*)?(?:\|[^\]]*)?\]\]")
+OBSIDIAN_TEMPLATE_EXPR = re.compile(r"^(?:<%.*?%>|\{\{.*?\}\})$")
 FENCED = re.compile(r"```.*?```", re.S)
 INLINE_CODE = re.compile(r"`[^`\n]*`")
 INVALID_ESCAPE = re.compile(r'\\(?![0abtnvfre "\\/N_LPuxU])')
@@ -59,6 +62,14 @@ def read(path: Path) -> str:
 def strip_code(text: str) -> str:
     """Kod bloklari va inline kod ichidagi `[[...]]` — havola emas."""
     return INLINE_CODE.sub(" ", FENCED.sub(" ", text))
+
+
+def is_template_placeholder(target: str, is_template_file: bool) -> bool:
+    """Faqat `templates/` fayllari ichidagi Obsidian Templater (`<% tp... %>`) yoki `{{...}}` ifodalarini taniydi."""
+    if not is_template_file:
+        return False
+    clean = target.strip()
+    return bool(OBSIDIAN_TEMPLATE_EXPR.match(clean))
 
 
 def frontmatter_block(text: str) -> str | None:
@@ -121,6 +132,46 @@ def frontmatter(text: str) -> dict | None:
         key, _, value = line.partition(":")
         data[key.strip()] = value.strip()
     return data
+
+
+def _detect_touched_wiki_notes_today(root: Path, notes: list[Path], today_str: str) -> list[Path]:
+    """Bugun haqiqatan tahrirlangan wiki qaydlarni aniqlaydi (CI `git checkout` mtime shovqinisiz).
+
+    1. Agar qaydning YAML frontmatterida `updated: <today_str>` yozilgan bo'lsa — u bugun yangilangan.
+    2. Agar Git ishchi daraxtida (`git status --porcelain -- wiki/`) o'zgargan yoki yangi qayd bo'lsa — u bugun tahrirlangan.
+    3. Agar `.git` papkasi bo'lmasa va fayllar bitta arxiv/checkout vaqtiga ega bo'lmasa, `st_mtime == today_str` tekshiriladi.
+    """
+    touched: set[Path] = set()
+    for p in notes:
+        fm = frontmatter(read(p)) or {}
+        upd = str(fm.get("updated") or "").strip().strip('"').strip("'")
+        if upd == today_str:
+            touched.add(p)
+
+    if (root / ".git").exists():
+        try:
+            proc = subprocess.run(
+                ["git", "status", "--porcelain", "--", "wiki/"],
+                cwd=str(root), capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=15,
+            )
+            if proc.returncode == 0:
+                for line in (proc.stdout or "").splitlines():
+                    if len(line) > 3:
+                        rel_part = line[3:].strip().strip('"')
+                        cand = root / rel_part
+                        if cand.is_file() and cand.suffix.lower() == ".md":
+                            touched.add(cand)
+        except Exception:
+            pass
+    else:
+        mtimes_sec = {int(p.stat().st_mtime) for p in notes}
+        # Agar barcha 100 ta qayd bir xil soniyada arxivdan chiqarilgan bo'lmasa, mtime tekshiriladi
+        if len(mtimes_sec) > 5:
+            for p in notes:
+                if datetime.fromtimestamp(p.stat().st_mtime).date().isoformat() == today_str:
+                    touched.add(p)
+
+    return sorted(touched)
 
 
 def auto_fix_index(root: Path, not_indexed: list[str]) -> int:
@@ -205,8 +256,11 @@ def main(argv: list[str] | None = None) -> int:
         rel_path = p.relative_to(root)
         rel = rel_path.as_posix()
         first_part = rel_path.parts[0] if rel_path.parts else ""
-        is_source = first_part in ("raw", "youtubedagilar", "vedio bilimlar", "templates")
+        is_source = first_part in ("raw", "youtubedagilar", "vedio bilimlar")
+        is_template_file = first_part == "templates"
         for target in WIKILINK.findall(strip_code(read(p))):
+            if is_template_placeholder(target, is_template_file):
+                continue
             t = target.strip().replace("\\", "/")
             stem = t.split("/")[-1]
             stem_no_ext = stem[:-3] if stem.lower().endswith(".md") else stem
@@ -249,10 +303,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.gate:
         today_str = date.today().isoformat()
-        touched_today = [
-            p for p in notes
-            if datetime.fromtimestamp(p.stat().st_mtime).date().isoformat() == today_str
-        ]
+        touched_today = _detect_touched_wiki_notes_today(root, notes, today_str)
         if len(touched_today) >= 3 and today_str not in log_text:
             issues.append(f"Delivery Gate: bugun {len(touched_today)} wiki qayd o'zgargan, lekin LOG.md da '{today_str}' qatori yo'q")
 

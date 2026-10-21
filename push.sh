@@ -20,13 +20,13 @@ echo "[2/5] Running Vault Audit & Catalog Sync Gate..."
 "$PY_CMD" tools/catalog.py check
 "$PY_CMD" tools/catalog.py drift
 
-echo "[3/5] Running Behavioral Eval Suite (12/12)..."
+echo "[3/5] Running Behavioral Eval Suite (24/24)..."
 "$PY_CMD" tools/skill-eval.py
 
 echo "[4/5] Running System Doctor..."
 "$PY_CMD" tools/doctor.py --quick
 
-REMOTE_URL="${1:-https://github.com/salohiddinayydigital-sudo/tyrion-vault.git}"
+REMOTE_URL="${1:-https://github.com/salohiddinayydigital-sudo/ai-ads.git}"
 if ! git remote get-url origin >/dev/null 2>&1; then
     git remote add origin "$REMOTE_URL"
 else
@@ -34,5 +34,5 @@ else
 fi
 
 echo "[6/6] Pushing branch 'main' and tags to $REMOTE_URL ..."
-git push -u origin main --force --tags
+git push -u origin main --tags
 echo "✅ Successfully pushed Tyrion v5.0 to GitHub!"

@@ -9,7 +9,7 @@
 
 ## §2. Tezkor Orkestratsiya va Asboblar (`AGENTS.md`)
 - **Bilim qidirish (0 token):** `py -3 tools/brain-search.py search "<so'z>"` → `tools/gy.cmd query "<savol>"` → `INDEX.md`.
-- **Skill tanlash (0-qadam):** `py -3 tools/skill-search.py brief "<vazifa>" --agent <agent_nomi>`.
+- **Universal Auto-Router (0-qadam):** `python3 tools/skill-search.py execute "<vazifa>"` (`route --load`; `/audit`, `/auditoriya` kabi slash buyruqlar — tezkor yorliqlar).
 - **Matematika va Xavfsizlik:** `py -3 tools/calculator.py ...` va `py -3 tools/spend-guard.py ...`.
 - **Tizim va Xavfsizlik Auditi:** `py -3 tools/doctor.py --quick` va `py -3 tools/tyrion-shield.py scan`.
 

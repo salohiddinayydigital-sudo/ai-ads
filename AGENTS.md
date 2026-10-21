@@ -17,7 +17,7 @@ updated: 2026-10-20
 1. **Shu fayl (`AGENTS.md`)** — qatlamlar, 36 agent, orkestratsiya va xavfsizlik chegaralari.
 2. **`MEMORY.md`** — operator xotirasi (`<=90` qator: til qonuni, O'zbekiston bozori asoslari, aktiv Bet Ledger va saboqlar).
 3. **Vazifaga mos Kontekst va Qoida:** `contexts/` dan 1 ta ish rejimi (`audit-mode`, `launch-mode`, `scale-mode`, `creative-mode`, `uzbekistan-market`) va `rules/` dan 1–2 qoida.
-4. **0-Token Qidiruv:** Bilim kerak bo'lsa `python3 tools/brain-search.py search "<so'z>"`, skill kerak bo'lsa `python3 tools/skill-search.py brief "<vazifa>" --agent <agent>`. Butun papkani yoppasiga o'qish taqiqlanadi ([[20-token-gigiyena]]).
+4. **Universal Auto-Router va 0-Token Kontekst Yuklash:** Foydalanuvchi oddiy tilda topshiriq berganda (`/skill-search` yoki `/agent` yozishi shart emas!), `python3 tools/skill-search.py route "<vazifa>" --load` avtomatik ravishda `primary_agent`, `supporting_agents`, `required_skills`, `references_to_load`, `rules_to_load` va `tools_to_use` ni aniqlaydi hamda faqat kerakli charter va `SKILL.md` fayllarini yuklaydi ([[20-token-gigiyena]], [[70-charter-baseline]]).
 
 ## 2. Yagona Ildizli Qatlamlar (Single-Root Layers)
 
@@ -46,11 +46,18 @@ updated: 2026-10-20
 | **Rejalash (3)** | `content-planner`, `launch-planner`, `seo-auditor` | Kontent tizimi, kampaniya launch rejasi, SEO va landing audit |
 | **Tadqiqot va Nazorat (5)** | `research-worker`, `source-verifier`, `release-verifier`, `skill-reviewer`, `tracking-specialist` | Manbali tadqiqot, GTM/CAPI arxitekturasi va topshirish darvozasi |
 
-## 4. Orkestratsiya Qonuni (Conductor → Workers)
+## 4. Kanonik 6-Bosqichli Avtonom Marshrutlash va Orkestratsiya Oqimi
 
-- **Conductor — asosiy sessiya (`skills/ads/SKILL.md`).** Worker sub-agentlar bir-biri bilan to'g'ridan-to'g'ri gaplashmaydi va yakuniy mijoz hisobotini yozmaydi; ular faqat conductor'ga tekshirilgan topilmalarni qaytaradi ([[bosh-agent-protokoli]]).
-- **Fan-out e'loni:** Har qanday parallel ish oldidan bitta qatorda e'lon qilinadi: `Maqsad: <X> · Kontekst: <rejim> · Jamoa: <agentlar>`.
-- **Zero-Findings Tamoyili:** Auditda muammo bo'lmasa, sun'iy kamchilik to'qish taqiqlanadi ([[70-charter-baseline]]).
+Barcha muhitlarda (Claude Code, Codex, Cursor, Windsurf, CLI/MCP) bitta kanonik oqim amal qiladi:
+
+1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 18 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
+2. **Avtomatik tanlash (`route_task`):** `primary_agent`, `supporting_agents` (faqat haqiqatan mustaqil ko'p bosqichli vazifalarda), `required_skills`, `supporting_skills`, `rules_to_load` va `references_to_load` avtomatik aniqlanadi.
+3. **To'liq ko'rsatmalarni yuklash (`full` vs `manifest`):** Standart `full` rejimda tanlangan agent charterlari, `SKILL.md`, qoidalar va reference fayllarning **to'liq matni** (`compiled_context_package`) kontekst byudjeti (`max_context_bytes=180,000`) nazorati ostida yuklanadi. To'liq o'qilmagan skill hech qachon "qo'llanildi" deb ko'rsatilmaydi.
+4. **Amaliy ijro (`execute_task`) va Multi-Harness halolligi:**
+   - **Claude Code:** `.claude/commands/`, `.claude/settings.json` hooklari, `.mcp.json` va native `Task` sub-agent dispatch'ni qo'llaydi.
+   - **Codex / Cursor / Windsurf / Standalone CLI:** `.codex-plugin/plugin.json`, `.cursor/rules/*.mdc` yoki `.windsurfrules` hamda `.mcp.json` (`tyrion_universal_router`) orqali **`single_conductor_fallback`** rejimida ishlaydi (`subagents_actually_spawned: False` ochiq ko'rsatiladi, Conductor to'liq yuklangan ko'rsatmalar va deterministik CLI asboblar yordamida vazifani o'zi bajaradi).
+5. **Dinamik qayta marshrutlash (`reroute_task` / `--reroute-with`):** Ish davomida yangi domen ehtiyoji (masalan, kreativdan keyin CAPI tekshiruvi yoki CRO) paydo bo'lsa, yangi agent va skill to'liq matni bilan dinamik ulanadi.
+6. **Tekshirish va yakunlash:** Worker va deterministik asboblar natijalari Conductor tomonidan yig'iladi, ziddiyatlar tekshiriladi va [[50-topshirish-dod]] bo'yicha yakunlanadi.
 
 ## 5. Qoidalar (`rules/`)
 

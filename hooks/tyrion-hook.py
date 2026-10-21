@@ -116,7 +116,9 @@ def cmd_guard(args: argparse.Namespace) -> int:
     if any(target.endswith(p) for p in PROTECTED_GENERATED):
         msg = f"⚠ HIMOYA (pre:guard): '{target}' generatsiya fayli — qo'lda tahrirlamang (`catalog.py build` / `brain-graph.py build` ishlating)."
         print(msg)
-        return 0 if args.warn_only or get_profile() != "strict" else 2
+        if get_profile() == "strict":
+            return 2
+        return 0 if args.warn_only else 2
     if not args.quiet:
         print("✓ pre:guard: ruxsat berildi")
     return 0
@@ -145,10 +147,14 @@ def cmd_ingest(args: argparse.Namespace) -> int:
     log_text = log_path.read_text(encoding="utf-8") if log_path.is_file() else ""
     today = _today()
 
-    today_notes = [
-        n for n in notes
-        if datetime.fromisoformat(n["updated"]).date().isoformat() == today
-    ]
+    today_notes = []
+    for n in notes:
+        n_path = VAULT / n["path"]
+        if n_path.is_file():
+            raw_txt = n_path.read_text(encoding="utf-8", errors="replace")
+            m_upd = re.search(r"^updated:\s*['\"]?(\d{4}-\d{2}-\d{2})['\"]?\s*$", raw_txt, re.M)
+            if m_upd and m_upd.group(1) == today:
+                today_notes.append(n)
     if today_notes and today not in log_text:
         problems.append(f"bugun {len(today_notes)} qayd yozilgan, LOG.md da '{today}' qatori yo'q")
 
@@ -188,11 +194,22 @@ def cmd_dod(args: argparse.Namespace) -> int:
     try:
         proc = run([sys.executable, str(TOOLS / "doctor.py"), "--quick", "--json"], timeout=180)
         payload = json.loads(proc.stdout or "{}")
-        for check in payload.get("checks", []):
+        checks = payload.get("checks", [])
+        if not checks and proc.returncode != 0:
+            failures.append(f"doctor xato kodi bilan tugadi (rc={proc.returncode})")
+        for check in checks:
             if check["status"] == "fail":
                 failures.append(f"{check['check']}: {check['detail']}")
     except Exception as exc:
         failures.append(f"doctor ishga tushmadi: {exc}")
+
+    try:
+        shield_proc = run([sys.executable, str(TOOLS / "tyrion-shield.py"), "scan", "--json"], timeout=60)
+        sh_payload = json.loads(shield_proc.stdout or "{}")
+        if sh_payload.get("summary", {}).get("errors", 0) > 0 or shield_proc.returncode != 0:
+            failures.append("TyrionShield xavfsizlik tekshiruvida xato topildi")
+    except Exception as exc:
+        failures.append(f"TyrionShield ishga tushmadi: {exc}")
 
     ingest = cmd_ingest(argparse.Namespace(warn_only=True, quiet=True))
     if ingest != 0:

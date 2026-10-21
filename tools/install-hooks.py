@@ -34,6 +34,20 @@ for _stream in (sys.stdout, sys.stderr):
             pass
 
 
+
+def detect_python_launcher() -> str:
+    """Operatsion tizimga (Windows, macOS, Linux) mos portativ Python launcher'ni aniqlaydi (qotirilgan yo'lsiz)."""
+    if sys.platform == "win32":
+        if shutil.which("py"):
+            return "py -3"
+        return "python"
+    if shutil.which("python3"):
+        return "python3"
+    if shutil.which("python"):
+        return "python"
+    return "py -3"
+
+
 def _substitute(node: object, needle: str, value: str) -> object:
     """Tuzilmadagi matnlarda `needle` ni almashtiradi.
 
@@ -56,7 +70,9 @@ def build_config(target_root: Path, vault: Path) -> dict:
         data = json.loads(HOOKS_JSON.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         raise SystemExit(f"✗ hooks/hooks.json buzilgan: {exc}")
-    return _substitute(data, "{{VAULT}}", str(vault))  # type: ignore[return-value]
+    py_cmd = detect_python_launcher()
+    sub_v = _substitute(data, "{{VAULT}}", str(vault))
+    return _substitute(sub_v, "py -3", py_cmd)  # type: ignore[return-value]
 
 
 def merge(settings: dict, canonical: dict) -> tuple[dict, list[str]]:
@@ -97,7 +113,7 @@ def sync_commands(target_root: Path, dry_run: bool) -> list[str]:
         target = destination / path.name
         # Bayt-aniq taqqoslash: `write_text` Windows'da \n ni \r\n ga aylantirib,
         # nusxani "farqli" qilib ko'rsatardi (drift noto'g'ri signali).
-        if target.is_file() and target.read_bytes() == path.read_bytes():
+        if target.is_file() and target.read_bytes().replace(b'\r\n', b'\n') == path.read_bytes().replace(b'\r\n', b'\n'):
             continue
         changed.append(f"commands/{path.name}")
         if not dry_run:

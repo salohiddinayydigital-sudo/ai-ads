@@ -28,6 +28,25 @@ SERVER_VERSION = "5.0.0"
 
 MCP_TOOLS = [
     {
+        "name": "tyrion_universal_router",
+        "description": "Universal Auto-Router & Autonomous Agent Orchestrator: analyzes any natural-language marketing task (UZ Latin, UZ Cyrillic, RU, EN), selects primary_agent, supporting_agents, required_skills, supporting_skills, references_to_load, rules_to_load, tools_to_use, and workflow, enforces Spend-Guard mutation gates, and loads the required charter/skill/reference context.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string"},
+                "agent_hint": {"type": "string", "default": ""},
+                "load": {"type": "boolean", "default": True},
+                "context_mode": {"type": "string", "default": "full"},
+                "max_context_bytes": {"type": "integer", "default": 180000},
+                "execute": {"type": "boolean", "default": False},
+                "harness": {"type": "string", "default": ""},
+                "mutation_approved": {"type": "boolean", "default": False},
+                "reroute_with": {"type": "string", "default": ""},
+            },
+            "required": ["query"],
+        },
+    },
+    {
         "name": "tyrion_meta_detailed_targeting",
         "description": "Search and validate Meta Ads Detailed Targeting options (Interests, Behaviors, Demographics) via official Meta Graph API endpoints (/search, /act_<id>/targetingsearch, /targetingsuggestions, /targetingvalidation) with 6 strict verification statuses (VERIFIED_AVAILABLE, FOUND_NOT_VALIDATED, UNAVAILABLE_OR_CONSOLIDATED, RELATED_UNVERIFIED, NOT_FOUND, API_UNAVAILABLE). Never hallucinates unverified interests as valid Meta options.",
         "inputSchema": {
@@ -169,6 +188,41 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(args, dict):
         raise ValueError("Tool arguments must be a JSON object")
 
+    if name == "tyrion_universal_router":
+        ss = importlib.import_module("skill-search")
+        q = str(args.get("query", "")).strip()
+        if not q:
+            raise ValueError("'query' bo'sh bo'lishi mumkin emas")
+        max_b = tcore.safe_int(args.get("max_context_bytes", 180000), default=180000, min_val=1024, max_val=2_000_000, field_name="max_context_bytes")
+        if bool(args.get("execute", False)):
+            return ss.execute_task(
+                query=q,
+                agent_hint=str(args.get("agent_hint", "")),
+                reroute_with=str(args.get("reroute_with", "")).strip(),
+                mutation_approved=bool(args.get("mutation_approved", False)),
+                harness_override=str(args.get("harness", "")),
+                max_context_bytes=max_b,
+            )
+        cmode = str(args.get("context_mode", "full")).strip().lower()
+        if cmode not in ("full", "manifest"):
+            cmode = "full"
+        plan = ss.route_task(
+            query=q,
+            agent_hint=str(args.get("agent_hint", "")),
+            load=bool(args.get("load", True)) and (cmode == "full"),
+            context_mode=cmode,
+            max_context_bytes=max_b,
+            mutation_approved=bool(args.get("mutation_approved", False)),
+        )
+        reroute_q = str(args.get("reroute_with", "")).strip()
+        if reroute_q:
+            plan = ss.reroute_task(
+                current_plan=plan,
+                emergent_requirement=reroute_q,
+                load=bool(args.get("load", True)) and (cmode == "full"),
+                max_context_bytes=max_b,
+            )
+        return plan
     if name == "tyrion_meta_detailed_targeting":
         mte = importlib.import_module("meta-targeting-engine")
         raw_queries = args.get("queries")

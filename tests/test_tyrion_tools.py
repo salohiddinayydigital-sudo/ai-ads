@@ -109,7 +109,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_build_and_check_roundtrip(self) -> None:
         """build → check mos kelishi kerak (katalog haqiqatni aks ettiradi)."""
-        before = catalog.MANIFEST.read_text(encoding="utf-8") if catalog.MANIFEST.is_file() else None
+        before = catalog.MANIFEST.read_bytes() if catalog.MANIFEST.is_file() else None
         try:
             self.assertEqual(catalog.cmd_build(_ns()), 0)
             self.assertEqual(catalog.cmd_check(_ns()), 0)
@@ -117,18 +117,18 @@ class CatalogTests(unittest.TestCase):
             if before is None and catalog.MANIFEST.is_file():
                 catalog.MANIFEST.unlink()
             elif before is not None:
-                catalog.MANIFEST.write_text(before, encoding="utf-8")
+                catalog.MANIFEST.write_bytes(before)
 
     def test_check_detects_stale_manifest(self) -> None:
         """Katalog eskirsa `check` xato qaytarishi kerak (jim qolmasligi)."""
-        original = catalog.MANIFEST.read_text(encoding="utf-8")
+        original_bytes = catalog.MANIFEST.read_bytes()
         try:
-            data = json.loads(original)
+            data = json.loads(original_bytes.decode("utf-8"))
             data["counts"]["wiki"] = -1
             catalog.MANIFEST.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
             self.assertNotEqual(catalog.cmd_check(_ns()), 0, "eskirgan katalog sezilmadi")
         finally:
-            catalog.MANIFEST.write_text(original, encoding="utf-8")
+            catalog.MANIFEST.write_bytes(original_bytes)
 
     def test_mirror_status_classifies_pairs(self) -> None:
         items = {
@@ -993,7 +993,7 @@ class TyrionV4EnginesTests(unittest.TestCase):
             for md in (VAULT / folder).rglob("*.md"):
                 txt = md.read_text(encoding="utf-8")
                 self.assertNotIn("D:\tyrion", txt, f"Hardcoded D:\tyrion in {md}")
-                self.assertNotIn("D:\projects", txt, f"Hardcoded D:\projects in {md}")
+                self.assertNotIn(r"D:\projects", txt, f"Hardcoded D:\\projects in {md}")
 
 
 class ProductionHardeningTests(unittest.TestCase):
@@ -1833,12 +1833,14 @@ class DetailedTargetingAccuracyTests(unittest.TestCase):
                 },
             }
             cfile.write_text(json.dumps(expired_data), encoding="utf-8")
-            loaded, warn = self.mte._load_valid_cache(cfile, "test_key", "v26.0", 60)
+            loaded, cstat, warn = self.mte._load_valid_cache(cfile, "test_key", {"api_version": "v26.0"}, 60)
             self.assertIsNone(loaded)
+            self.assertEqual(cstat, "EXPIRED")
             self.assertIn("Kesh muddati tugagan", warn)
 
-            loaded_ver, warn_ver = self.mte._load_valid_cache(cfile, "test_key", "v25.0", 60)
+            loaded_ver, cstat_ver, warn_ver = self.mte._load_valid_cache(cfile, "test_key", {"api_version": "v25.0"}, 60)
             self.assertIsNone(loaded_ver)
+            self.assertEqual(cstat_ver, "VERSION_MISMATCH")
             self.assertIn("Kesh versiyasi eskirgan", warn_ver)
 
 
@@ -1852,4 +1854,679 @@ class LiveMetaSmokeTests(unittest.TestCase):
         rep = mte.search_and_validate_targeting(queries=["Online shopping"], limit_per_query=5)
         self.assertTrue(rep["live_check_status"]["executed"])
         self.assertGreater(len(rep["verified_targeting_options"]), 0)
+
+
+class PostImplementationFixTests(unittest.TestCase):
+    """Part 1 Post-Implementation Verification: CRLF resilience, Pagination/Truncation, Malformed vs NOT_FOUND, Cache Isolation, CLI Docs."""
+
+    def setUp(self) -> None:
+        self.mte = importlib.import_module("meta-targeting-engine")
+        self.ss = importlib.import_module("skill-search")
+
+    def test_p1_crlf_vs_lf_sha256_and_bytes_resilience(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            f_lf = Path(tmp) / "sample_lf.md"
+            f_crlf = Path(tmp) / "sample_crlf.md"
+            content_lf = b"---\nname: test\ndescription: hello\n---\n\nLine 1\nLine 2\n"
+            content_crlf = content_lf.replace(b"\n", b"\r\n")
+            f_lf.write_bytes(content_lf)
+            f_crlf.write_bytes(content_crlf)
+
+            self.assertEqual(catalog._sha256(f_lf), catalog._sha256(f_crlf))
+            self.assertEqual(len(catalog._normalized_bytes(f_lf)), len(catalog._normalized_bytes(f_crlf)))
+
+    def _start_server(self, handler_cls):
+        import http.server
+        import threading
+        srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler_cls)
+        t = threading.Thread(target=srv.serve_forever, daemon=True)
+        t.start()
+        return srv, f"http://127.0.0.1:{srv.server_address[1]}"
+
+    def test_p2_pagination_truncation_reported_and_not_marked_complete(self) -> None:
+        import http.server
+        holder = {"base": ""}
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, format: str, *args: object) -> None:
+                pass
+            def do_GET(self) -> None:
+                body = {
+                    "data": [{"id": "600111", "name": "Real estate", "type": "adinterest"}],
+                    "paging": {"next": f"{holder['base']}/v26.0/search?type=adinterest&q=Real+estate&after=cursor_p2"},
+                }
+                raw = json.dumps(body).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(raw)))
+                self.end_headers()
+                self.wfile.write(raw)
+
+        srv, base_url = self._start_server(Handler)
+        holder["base"] = base_url
+        old_base = os.environ.get("META_GRAPH_API_BASE_URL")
+        old_tok = os.environ.get("META_ACCESS_TOKEN")
+        try:
+            os.environ["META_GRAPH_API_BASE_URL"] = base_url
+            os.environ["META_ACCESS_TOKEN"] = "mock_tok_trunc"
+            with tempfile.TemporaryDirectory() as tmp:
+                cfile = Path(tmp) / "trunc_cache.json"
+                rep = self.mte.search_and_validate_targeting(
+                    queries=["Real estate"],
+                    niche="real-estate",
+                    max_pages_per_query=1,
+                    cache_path=cfile,
+                )
+                lcs = rep["live_check_status"]
+                self.assertTrue(lcs["is_truncated"])
+                self.assertFalse(lcs["is_complete"])
+                self.assertIn("TRUNCATED", lcs["status"])
+                first_diag = rep["query_diagnostics"][0]
+                self.assertEqual(first_diag["pages_fetched"], 1)
+                self.assertTrue(first_diag["is_truncated"])
+                self.assertEqual(first_diag["results_count"], 1)
+                self.assertTrue(any("Pagination Truncated" in lim for lim in rep["limitations_and_disclosures"]))
+                self.assertFalse(cfile.is_file())
+        finally:
+            srv.shutdown()
+            srv.server_close()
+            if old_base is None: os.environ.pop("META_GRAPH_API_BASE_URL", None)
+            else: os.environ["META_GRAPH_API_BASE_URL"] = old_base
+            if old_tok is None: os.environ.pop("META_ACCESS_TOKEN", None)
+            else: os.environ["META_ACCESS_TOKEN"] = old_tok
+
+    def test_p3_malformed_or_empty_shape_payload_never_classified_as_not_found(self) -> None:
+        import http.server
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, format: str, *args: object) -> None:
+                pass
+            def do_GET(self) -> None:
+                raw = json.dumps({"data": [{"id": "", "name": ""}, {"foo": "bar"}]}).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(raw)))
+                self.end_headers()
+                self.wfile.write(raw)
+
+        srv, base_url = self._start_server(Handler)
+        old_base = os.environ.get("META_GRAPH_API_BASE_URL")
+        old_tok = os.environ.get("META_ACCESS_TOKEN")
+        try:
+            os.environ["META_GRAPH_API_BASE_URL"] = base_url
+            os.environ["META_ACCESS_TOKEN"] = "mock_tok_malformed"
+            rep = self.mte.search_and_validate_targeting(queries=["BrokenQuery"], niche="ecom")
+            self.assertEqual(rep["live_check_status"]["status"], "API_UNAVAILABLE")
+            self.assertEqual(rep["live_check_status"]["error_category"], "MALFORMED_ITEM_PAYLOAD")
+            self.assertEqual(rep["not_found_queries"], [])
+        finally:
+            srv.shutdown()
+            srv.server_close()
+            if old_base is None: os.environ.pop("META_GRAPH_API_BASE_URL", None)
+            else: os.environ["META_GRAPH_API_BASE_URL"] = old_base
+            if old_tok is None: os.environ.pop("META_ACCESS_TOKEN", None)
+            else: os.environ["META_ACCESS_TOKEN"] = old_tok
+
+    def test_p4_cache_key_isolation_across_special_ad_category_country_objective_locale_and_corrupted_states(self) -> None:
+        import http.server
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, format: str, *args: object) -> None:
+                pass
+            def do_GET(self) -> None:
+                raw = json.dumps({"data": [{"id": "600999", "name": "Mortgage loan", "type": "adinterest"}]}).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(raw)))
+                self.end_headers()
+                self.wfile.write(raw)
+
+        srv, base_url = self._start_server(Handler)
+        old_base = os.environ.get("META_GRAPH_API_BASE_URL")
+        old_tok = os.environ.get("META_ACCESS_TOKEN")
+        try:
+            os.environ["META_GRAPH_API_BASE_URL"] = base_url
+            os.environ["META_ACCESS_TOKEN"] = "mock_tok_cache"
+            with tempfile.TemporaryDirectory() as tmp:
+                cfile = Path(tmp) / "isolated_cache.json"
+
+                # 1. Cache miss on non-existent file
+                r_none = self.mte.search_and_validate_targeting(
+                    product="Ipoteka", niche="real-estate", special_ad_category="NONE",
+                    country="UZ", objective="LEADS", locale="en_US", cache_path=cfile,
+                )
+                self.assertFalse(r_none["live_check_status"]["served_from_valid_cache"])
+                self.assertEqual(r_none["live_check_status"]["cache_status"], "MISS_NO_FILE")
+
+                # 2. Exact same context -> HIT_VALID
+                r_hit = self.mte.search_and_validate_targeting(
+                    product="Ipoteka", niche="real-estate", special_ad_category="NONE",
+                    country="UZ", objective="LEADS", locale="en_US", cache_path=cfile,
+                )
+                self.assertTrue(r_hit["live_check_status"]["served_from_valid_cache"])
+                self.assertEqual(r_hit["live_check_status"]["cache_status"], "HIT_VALID")
+
+                # 3. Different special_ad_category (HOUSING) -> CONTEXT_MISMATCH, must NOT serve NONE cache and MUST include HOUSING warning
+                r_housing = self.mte.search_and_validate_targeting(
+                    product="Ipoteka", niche="real-estate", special_ad_category="HOUSING",
+                    country="UZ", objective="LEADS", locale="en_US", cache_path=cfile,
+                )
+                self.assertFalse(r_housing["live_check_status"]["served_from_valid_cache"])
+                self.assertEqual(r_housing["live_check_status"]["cache_status"], "CONTEXT_MISMATCH")
+                self.assertNotEqual(r_none["query_context"]["cache_key"], r_housing["query_context"]["cache_key"])
+                self.assertTrue(any("Special Ad Category = HOUSING" in lim for lim in r_housing["limitations_and_disclosures"]))
+
+                # 4. Different country / objective / locale -> CONTEXT_MISMATCH
+                r_kz = self.mte.search_and_validate_targeting(
+                    product="Ipoteka", niche="real-estate", special_ad_category="HOUSING",
+                    country="KZ", objective="SALES", locale="ru_RU", cache_path=cfile,
+                )
+                self.assertFalse(r_kz["live_check_status"]["served_from_valid_cache"])
+                self.assertEqual(r_kz["live_check_status"]["cache_status"], "CONTEXT_MISMATCH")
+
+                # 5. Corrupted cache file -> CORRUPTED
+                cfile.write_text("{corrupted_json", encoding="utf-8")
+                r_corrupt = self.mte.search_and_validate_targeting(
+                    product="Ipoteka", niche="real-estate", special_ad_category="NONE",
+                    country="UZ", objective="LEADS", locale="en_US", cache_path=cfile,
+                )
+                self.assertFalse(r_corrupt["live_check_status"]["served_from_valid_cache"])
+                self.assertEqual(r_corrupt["live_check_status"]["cache_status"], "CORRUPTED")
+        finally:
+            srv.shutdown()
+            srv.server_close()
+            if old_base is None: os.environ.pop("META_GRAPH_API_BASE_URL", None)
+            else: os.environ["META_GRAPH_API_BASE_URL"] = old_base
+            if old_tok is None: os.environ.pop("META_ACCESS_TOKEN", None)
+            else: os.environ["META_ACCESS_TOKEN"] = old_tok
+
+    def test_p5_readme_and_docs_cli_examples_parse_and_smoke_test(self) -> None:
+        old_tok = os.environ.pop("META_ACCESS_TOKEN", None)
+        try:
+            # Verify README.md command: python3 tools/meta-targeting-engine.py search --niche real-estate --query "interyer" --query "новостройки" --account-id act_123456789
+            proc1 = _run_tool_inproc(
+                "meta-targeting-engine.py", "search",
+                "--niche", "real-estate", "--query", "interyer", "--query", "новостройки",
+                "--account-id", "act_123456789", "--json",
+            )
+            self.assertEqual(proc1.returncode, 0, proc1.stderr)
+            data1 = json.loads(proc1.stdout)
+            self.assertEqual(data1["query_context"]["ad_account_id"], "act_123456789")
+
+            # Verify --ad-account-id alias and implicit search subcommand also work
+            proc2 = _run_tool_inproc(
+                "meta-targeting-engine.py",
+                "--niche", "real-estate", "--query", "interyer", "--ad-account-id", "act_123456789", "--json",
+            )
+            self.assertEqual(proc2.returncode, 0, proc2.stderr)
+
+            # Verify README.md universal router command: python3 tools/tyrion.py route "Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top"
+            proc3 = _run_tool_inproc(
+                "skill-search.py", "route", "Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top", "--json",
+            )
+            self.assertEqual(proc3.returncode, 0, proc3.stderr)
+            route_data = json.loads(proc3.stdout)
+            self.assertEqual(route_data["primary_agent"], "audit-meta")
+        finally:
+            if old_tok is not None:
+                os.environ["META_ACCESS_TOKEN"] = old_tok
+
+
+class UniversalAutoRouterTests(unittest.TestCase):
+    """Part 2: 18 Mandatory Automated Tests for Universal Auto-Router & Autonomous Agent Orchestration."""
+
+    def setUp(self) -> None:
+        self.ss = importlib.import_module("skill-search")
+        self.mcp = importlib.import_module("tyrion-mcp-server")
+        self.ss.SESSION_CACHE.reset()
+
+    def test_01_simple_task_selects_single_agent_and_skill_automatically(self) -> None:
+        plan = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True)
+        self.assertEqual(plan["primary_agent"], "tracking-specialist")
+        self.assertEqual(plan["supporting_agents"], [])
+        self.assertEqual(plan["required_skills"], ["ads-server-side-tracking"])
+        self.assertEqual(plan["intent_analysis"]["complexity"], "single_step")
+
+    def test_02_multistep_marketing_task_selects_complementary_skills_and_supporting_agents(self) -> None:
+        plan = self.ss.route_task("Yangi mijoz uchun to'liq marketing strategiyasi tuz.", load=True)
+        self.assertEqual(plan["primary_agent"], "launch-planner")
+        self.assertEqual(plan["intent_analysis"]["complexity"], "multi_step")
+        self.assertGreaterEqual(len(plan["required_skills"]), 2)
+        self.assertIn("ads-plan", plan["required_skills"])
+        self.assertGreaterEqual(len(plan["supporting_agents"]), 1)
+
+    def test_03_global_registry_fallback_when_agent_hint_skills_insufficient(self) -> None:
+        # Hinting `video-editor` for a CAPI server-side tracking query must automatically discover `ads-server-side-tracking` from the global registry
+        plan = self.ss.route_task("Meta CAPI va event_id deduplikatsiya xatolarini tekshir", agent_hint="video-editor", load=True)
+        self.assertTrue(plan["global_registry_fallback_used"])
+        self.assertIn("ads-server-side-tracking", plan["required_skills"])
+        self.assertEqual(plan["primary_agent"], "tracking-specialist")
+
+    def test_04_multilingual_tasks_uz_latin_uz_cyrillic_ru_en_routed_accurately(self) -> None:
+        cases = [
+            ("Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top", "uz_latin", "audit-meta", "ads-meta"),
+            ("Мета рекламада CAPI ишлашини текшир ва пиксель хатоларини топ", "uz_cyrillic", "tracking-specialist", "ads-server-side-tracking"),
+            ("Подбери детальный таргетинг и интересы в Мета для недвижимости", "ru", "meta-audience-architect", "ads-meta-audience"),
+            ("Audit my Google Ads Performance Max and search terms negative keywords", "en", "audit-google", "ads-google"),
+        ]
+        for query, exp_lang, exp_agent, exp_skill in cases:
+            with self.subTest(lang=exp_lang):
+                plan = self.ss.route_task(query, load=True)
+                self.assertEqual(plan["intent_analysis"]["detected_language"], exp_lang)
+                self.assertEqual(plan["primary_agent"], exp_agent)
+                self.assertIn(exp_skill, plan["required_skills"])
+
+    def test_05_generic_common_words_do_not_trigger_wrong_specialist_agent(self) -> None:
+        plan = self.ss.route_task("iltimos menga hozir tez yordam qilib ber", load=True)
+        self.assertEqual(plan["status"], "fallback_ready")
+        self.assertTrue(plan["fallback_plan"]["triggered"])
+        self.assertNotIn(plan["primary_agent"], ("audit-amazon", "audit-apple", "video-editor"))
+
+    def test_06_universal_fallback_works_when_no_skill_matches(self) -> None:
+        plan = self.ss.route_task("zzz qqq unknown holographic billboard telemetry xyz", load=True)
+        self.assertEqual(plan["status"], "fallback_ready")
+        self.assertTrue(plan["fallback_plan"]["triggered"])
+        self.assertEqual(plan["fallback_plan"]["conductor"], "ads")
+        self.assertIn("ads", plan["required_skills"])
+        self.assertGreaterEqual(len(plan["fallback_plan"]["steps"]), 2)
+
+    def test_07_only_dangerous_or_missing_critical_input_blocks_execution(self) -> None:
+        safe_plan = self.ss.route_task("Instagram uchun bir oylik kontent reja tayyorla", load=True)
+        self.assertEqual(safe_plan["status"], "ready")
+        self.assertFalse(safe_plan["mutation_gate"]["blocked"])
+
+        dangerous_plan = self.ss.route_task("Meta kampaniyamda byudjetni 300% oshir va reklamalarni hoziroq o'chir", load=True)
+        self.assertEqual(dangerous_plan["status"], "blocked_mutation_approval")
+        self.assertTrue(dangerous_plan["mutation_gate"]["blocked"])
+        self.assertTrue(len(dangerous_plan["missing_inputs"]) > 0)
+
+    def test_08_mid_task_dynamic_rerouting_adds_specialist_skill_and_agent(self) -> None:
+        initial = self.ss.route_task("Instagram uchun bir oylik kontent reja tayyorla", load=True)
+        self.assertEqual(initial["primary_agent"], "social-content-writer")
+        self.assertNotIn("tracking-specialist", [initial["primary_agent"]] + initial["supporting_agents"])
+
+        rerouted = self.ss.reroute_task(initial, "CAPI ishlashini tekshir va event_id deduplikatsiya xatolarini top", load=True)
+        self.assertTrue(rerouted.get("rerouted"))
+        self.assertIn("tracking-specialist", rerouted["supporting_agents"])
+        self.assertIn("ads-server-side-tracking", rerouted["supporting_skills"] + rerouted["required_skills"])
+        self.assertIn("ads-server-side-tracking", rerouted["loaded_context"]["loaded_skill_names"])
+
+    def test_09_skill_references_loaded_selectively_only_when_needed(self) -> None:
+        plan = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True)
+        refs = plan["references_to_load"]
+        self.assertIn("skills/ads/references/conversion-tracking.md", refs)
+        self.assertLessEqual(len(refs), 4, "Should never dump all 39 references into context")
+        for r in refs:
+            self.assertTrue((VAULT / r).is_file(), f"Reference does not exist: {r}")
+
+    def test_10_no_duplicate_or_redundant_agents_selected(self) -> None:
+        for q in (
+            "Yangi mijoz uchun to'liq marketing strategiyasi tuz",
+            "Raqobatchilarimni o'rganib, menga reklama strategiyasi tuz",
+            "Saytimni SEO va konversiya bo'yicha yaxshila",
+        ):
+            plan = self.ss.route_task(q, load=True)
+            all_agents = [plan["primary_agent"]] + plan["supporting_agents"]
+            self.assertEqual(len(all_agents), len(set(all_agents)), f"Duplicate agent in {all_agents}")
+            all_skills = plan["required_skills"] + plan["supporting_skills"]
+            self.assertEqual(len(all_skills), len(set(all_skills)), f"Duplicate skill in {all_skills}")
+
+    def test_11_validator_detects_broken_reference_links_in_skill_metadata(self) -> None:
+        skills = self.ss.load_skills()
+        agents = self.ss.load_agents()
+        tampered = [dict(s) for s in skills]
+        tampered[0]["declared_references"] = ["skills/non_existent_broken_ref_xyz.md"]
+        problems, _warnings = self.ss.validate_registry(tampered, agents)
+        self.assertTrue(any("non_existent_broken_ref_xyz.md" in p for p in problems))
+
+    def test_12_bidirectional_skill_agent_links_100pct_consistent(self) -> None:
+        problems, _warnings = self.ss.validate_registry()
+        self.assertEqual(problems, [], f"Registry validation problems found: {problems}")
+
+    def test_13_conductor_and_worker_packets_comply_with_contract_schema(self) -> None:
+        plan = self.ss.route_task("Raqobatchilarimni o'rganib, menga reklama strategiyasi tuz.", load=True)
+        self.assertGreaterEqual(len(plan["worker_packets"]), 1)
+        required_packet_keys = {
+            "step", "role", "agent", "goal", "scope_boundary", "assigned_skills",
+            "references_to_load", "input_data", "expected_output_format",
+            "evidence_requirements", "safety_constraints", "verification_criteria",
+        }
+        for wp in plan["worker_packets"]:
+            self.assertTrue(required_packet_keys.issubset(set(wp.keys())))
+
+    def test_14_existing_slash_commands_audit_auditoriya_kreativ_budget_hisobot_intact(self) -> None:
+        for cmd_name in ("audit", "auditoriya", "kreativ", "budget", "hisobot", "tracking", "voronka", "mijoz"):
+            cmd_path = VAULT / "commands" / f"{cmd_name}.md"
+            mirror_path = VAULT / ".claude" / "commands" / f"{cmd_name}.md"
+            self.assertTrue(cmd_path.is_file(), f"Missing command: {cmd_path}")
+            self.assertTrue(mirror_path.is_file(), f"Missing command mirror: {mirror_path}")
+            self.assertEqual(
+                cmd_path.read_bytes().replace(b"\r\n", b"\n"),
+                mirror_path.read_bytes().replace(b"\r\n", b"\n"),
+            )
+
+    def test_15_router_never_asks_user_to_choose_skill_or_agent_name(self) -> None:
+        for q in (
+            "Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top",
+            "zzz qqq unknown holographic billboard telemetry xyz",
+            "Meta kampaniyamda byudjetni 300% oshir",
+        ):
+            plan = self.ss.route_task(q, load=True)
+            self.assertFalse(plan["asks_user_for_skill_or_agent"])
+            for msg in plan["missing_inputs"]:
+                self.assertNotIn("skill tanlang", msg.lower())
+                self.assertNotIn("agent tanlang", msg.lower())
+
+    def test_16_mcp_and_cli_router_share_identical_agent_and_skill_metadata(self) -> None:
+        query = "Saytimni SEO va konversiya bo'yicha yaxshila."
+        cli_plan = self.ss.route_task(query, load=True)
+        mcp_resp = self.mcp.handle_request({
+            "jsonrpc": "2.0",
+            "id": 901,
+            "method": "tools/call",
+            "params": {"name": "tyrion_universal_router", "arguments": {"query": query, "load": True}},
+        })
+        mcp_plan = json.loads(mcp_resp["result"]["content"][0]["text"])
+        self.assertEqual(cli_plan["primary_agent"], mcp_plan["primary_agent"])
+        self.assertEqual(cli_plan["required_skills"], mcp_plan["required_skills"])
+        self.assertEqual(cli_plan["supporting_skills"], mcp_plan["supporting_skills"])
+        self.assertEqual(cli_plan["rules_to_load"], mcp_plan["rules_to_load"])
+
+    def test_17_router_never_claims_unloaded_skill_was_loaded_or_applied(self) -> None:
+        plan_no_load = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=False)
+        self.assertFalse(plan_no_load["loaded_context"]["actually_loaded"])
+        self.assertEqual(plan_no_load["loaded_context"]["loaded_skill_names"], [])
+        self.assertEqual(plan_no_load["loaded_context"]["loaded_skills"], [])
+
+        # When load=True, verify every claimed loaded skill was read from disk and session cache works on 2nd read
+        cache = self.ss.SessionContextCache()
+        plan_loaded_1 = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True, session_cache=cache)
+        self.assertTrue(plan_loaded_1["loaded_context"]["actually_loaded"])
+        self.assertIn("ads-server-side-tracking", plan_loaded_1["loaded_context"]["loaded_skill_names"])
+        self.assertFalse(plan_loaded_1["loaded_context"]["loaded_skills"][0]["from_session_cache"])
+
+        plan_loaded_2 = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True, session_cache=cache)
+        self.assertTrue(plan_loaded_2["loaded_context"]["loaded_skills"][0]["from_session_cache"])
+        self.assertGreater(cache.hits, 0)
+
+    def test_18_mutation_gate_blocks_unapproved_account_changes_until_approved(self) -> None:
+        q = "Meta kampaniyamda byudjetni 50% oshir va reklamalarni hoziroq o'chir"
+        blocked = self.ss.route_task(q, mutation_approved=False, load=True)
+        self.assertEqual(blocked["status"], "blocked_mutation_approval")
+        self.assertTrue(blocked["mutation_gate"]["blocked"])
+        self.assertIn("rules/40-xavfsizlik-va-hisob.md", blocked["rules_to_load"])
+
+        approved = self.ss.route_task(q, mutation_approved=True, load=True)
+        self.assertEqual(approved["status"], "ready")
+        self.assertFalse(approved["mutation_gate"]["blocked"])
+        self.assertTrue(approved["mutation_gate"]["approved"])
+
+
+class AutoRouterExecutionGapTests(unittest.TestCase):
+    """Tyrion v5.0 — Auto-Router Execution Gap Audit & Fix: 10 End-to-End Acceptance Tests."""
+
+    def setUp(self) -> None:
+        self.ss = importlib.import_module("skill-search")
+        self.mcp = importlib.import_module("tyrion-mcp-server")
+        self.he = importlib.import_module("harness-export")
+        self.ss.SESSION_CACHE.reset()
+
+    def test_gap_01_router_returns_full_text_of_selected_skills_charters_and_references(self) -> None:
+        plan = self.ss.route_task("Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top.", load=True, context_mode="full")
+        lc = plan["loaded_context"]
+        self.assertEqual(plan["context_mode"], "full")
+        self.assertTrue(lc["actually_loaded"])
+        self.assertTrue(lc["full_instructions_loaded"])
+        self.assertIn("ads-meta", lc["applied_skills_verified"])
+
+        # Verify full text (`content` and `body_markdown`) is present and much longer than the 360-char excerpt
+        sk_entry = lc["loaded_skills"][0]
+        self.assertIn("content", sk_entry)
+        self.assertIn("body_markdown", sk_entry)
+        self.assertGreater(len(sk_entry["content"]), 1000)
+        self.assertGreater(len(sk_entry["content"]), len(sk_entry["instructions_excerpt"]))
+
+        ch_entry = lc["loaded_agent_charters"][0]
+        self.assertGreater(len(ch_entry["content"]), 1000)
+
+        # Verify compiled_context_package contains the full markdown bundle
+        bundle = lc["compiled_context_package"]["full_markdown_bundle"]
+        self.assertIn("<!-- AGENT_CHARTER: audit-meta", bundle)
+        self.assertIn("<!-- SKILL_INSTRUCTIONS: ads-meta", bundle)
+        self.assertGreater(lc["compiled_context_package"]["total_bytes"], 3000)
+
+    def test_gap_02_worker_packet_receives_full_skill_and_reference_content_and_manifest_mode_is_distinct(self) -> None:
+        plan_full = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True, context_mode="full")
+        wp = plan_full["worker_packets"][0]
+        self.assertTrue(wp["full_instructions_attached"])
+        self.assertIsNotNone(wp["full_charter_markdown"])
+        self.assertIn("ads-server-side-tracking", wp["full_skill_instructions"])
+        self.assertGreater(len(wp["full_skill_instructions"]["ads-server-side-tracking"]), 800)
+        self.assertIn("skills/ads/references/conversion-tracking.md", wp["full_reference_contents"])
+
+        # In manifest mode, router must NOT claim full instructions were loaded or applied
+        plan_manifest = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=False, context_mode="manifest")
+        self.assertEqual(plan_manifest["context_mode"], "manifest")
+        self.assertFalse(plan_manifest["loaded_context"]["actually_loaded"])
+        self.assertFalse(plan_manifest["loaded_context"]["full_instructions_loaded"])
+        self.assertEqual(plan_manifest["loaded_context"]["applied_skills_verified"], [])
+        self.assertFalse(plan_manifest["worker_packets"][0]["full_instructions_attached"])
+
+    def test_gap_03_execute_task_runs_tools_and_honestly_distinguishes_subagent_vs_single_conductor(self) -> None:
+        # 1. Without native subagent_runner (CLI / single-conductor environment): must honestly report subagents_actually_spawned=False
+        rep_single = self.ss.execute_task("Yangi mijoz uchun to'liq marketing strategiyasi tuz.")
+        self.assertEqual(rep_single["execution_status"], "completed")
+        self.assertEqual(rep_single["execution_mode"], "single_conductor_fallback")
+        self.assertFalse(rep_single["subagents_actually_spawned"])
+        self.assertGreaterEqual(len(rep_single["worker_executions"]), 2)
+        for we in rep_single["worker_executions"]:
+            self.assertFalse(we["subagent_spawned"])
+            self.assertGreater(we["full_skill_chars_loaded"], 500)
+        self.assertGreaterEqual(len(rep_single["deterministic_tool_outputs"]), 1)
+
+        # 2. With native subagent_runner callback: dispatches workers with full instructions and collects results
+        dispatched_agents: list[str] = []
+        def mock_subagent_runner(packet: dict) -> dict:
+            dispatched_agents.append(packet["agent"])
+            self.assertTrue(packet["full_instructions_attached"])
+            return {"agent": packet["agent"], "status": "ok", "findings": []}
+
+        rep_native = self.ss.execute_task(
+            "Yangi mijoz uchun to'liq marketing strategiyasi tuz.",
+            subagent_runner=mock_subagent_runner,
+        )
+        self.assertEqual(rep_native["execution_mode"], "native_subagent_dispatch")
+        self.assertTrue(rep_native["subagents_actually_spawned"])
+        self.assertIn("launch-planner", dispatched_agents)
+        self.assertGreaterEqual(len(dispatched_agents), 2)
+
+    def test_gap_04_context_budget_defers_overflow_references_honestly(self) -> None:
+        # Set a tight budget (e.g., 16,000 bytes) so charter + skill fit, but large reference is deferred
+        plan = self.ss.route_task(
+            "Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top.",
+            load=True,
+            context_mode="full",
+            max_context_bytes=16_000,
+        )
+        lc = plan["loaded_context"]
+        self.assertTrue(lc["full_instructions_loaded"])
+        self.assertGreaterEqual(len(lc["deferred_references"]), 1)
+        self.assertFalse(lc["deferred_references"][0]["full_instructions_loaded"])
+
+    def test_gap_05_missing_file_utf8_error_path_traversal_and_agent_error_recovery(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_vault = Path(tmp)
+            cache = self.ss.SessionContextCache(vault_root=tmp_vault)
+
+            # Missing file
+            rec_missing, err_missing = cache.read_verified_with_error("skills/non_existent/SKILL.md")
+            self.assertIsNone(rec_missing)
+            self.assertEqual(err_missing["error_code"], "FILE_NOT_FOUND")
+
+            # Path traversal outside vault
+            rec_trav, err_trav = cache.read_verified_with_error("../../etc/passwd")
+            self.assertIsNone(rec_trav)
+            self.assertEqual(err_trav["error_code"], "PATH_TRAVERSAL_BLOCKED")
+
+            # Invalid UTF-8 file
+            bad_utf8 = tmp_vault / "bad.md"
+            bad_utf8.write_bytes(b"---\nname: bad\n---\n\xff\xfeinvalid utf8")
+            rec_utf8, err_utf8 = cache.read_verified_with_error("bad.md")
+            self.assertIsNone(rec_utf8)
+            self.assertEqual(err_utf8["error_code"], "UTF8_DECODE_ERROR")
+
+        # Sub-agent runtime failure -> graceful recovery via conductor fallback
+        def failing_subagent_runner(packet: dict) -> dict:
+            raise RuntimeError("Simulated sub-agent timeout")
+
+        rep_err = self.ss.execute_task("CAPI ishlashini tekshir, xatolarni top.", subagent_runner=failing_subagent_runner)
+        self.assertEqual(rep_err["execution_status"], "completed_with_warnings")
+        self.assertEqual(rep_err["worker_executions"][0]["status"], "recovered_via_conductor_fallback")
+        self.assertEqual(rep_err["execution_errors"][0]["error_code"], "SUBAGENT_EXECUTION_ERROR")
+
+    def test_gap_06_persistent_session_cache_and_sha256_invalidation_on_file_edit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_vault = Path(tmp)
+            sample_md = tmp_vault / "sample_skill.md"
+            sample_md.write_text("---\nname: s1\n---\nVersion 1 content", encoding="utf-8")
+            cache_file = tmp_vault / "session_cache.json"
+
+            # Process 1 writes to persistent cache
+            cache1 = self.ss.SessionContextCache(persist_path=cache_file, vault_root=tmp_vault)
+            r1, e1 = cache1.read_verified_with_error("sample_skill.md")
+            self.assertIsNone(e1)
+            self.assertFalse(r1["from_session_cache"])
+            self.assertTrue(cache_file.is_file())
+
+            # Process 2 loads from persistent cache -> cache hit!
+            cache2 = self.ss.SessionContextCache(persist_path=cache_file, vault_root=tmp_vault)
+            r2, e2 = cache2.read_verified_with_error("sample_skill.md")
+            self.assertIsNone(e2)
+            self.assertTrue(r2["from_session_cache"])
+            self.assertEqual(r2["content"], "---\nname: s1\n---\nVersion 1 content")
+
+            # Modify file on disk -> Process 2 immediately invalidates stale cache and reads Version 2!
+            sample_md.write_text("---\nname: s1\n---\nVersion 2 updated content", encoding="utf-8")
+            r3, e3 = cache2.read_verified_with_error("sample_skill.md")
+            self.assertIsNone(e3)
+            self.assertFalse(r3["from_session_cache"])
+            self.assertTrue(r3["cache_invalidated"])
+            self.assertGreaterEqual(cache2.invalidations, 1)
+            self.assertIn("Version 2 updated content", r3["content"])
+
+    def test_gap_07_multi_harness_integration_paths_verified_for_claude_codex_cursor_windsurf(self) -> None:
+        for h_name in ("claude_code", "codex", "cursor", "windsurf"):
+            cap = self.ss.detect_harness_capabilities(VAULT, harness_override=h_name)
+            self.assertEqual(cap["active_harness"], h_name)
+            self.assertTrue(cap["active_harness_capabilities"]["supported"], f"{h_name} not supported")
+            self.assertTrue(cap["active_harness_capabilities"]["supports_mcp_stdio"])
+
+        # Verify harness-export.py exports all 4 targets cleanly into a temp directory
+        with tempfile.TemporaryDirectory() as tmp:
+            proc = _run_tool_inproc("harness-export.py", "--target", "all", "--out", tmp, "--json")
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            res = json.loads(proc.stdout)
+            self.assertGreaterEqual(res["exported_count"], 28)
+            self.assertTrue((Path(tmp) / ".cursor" / "rules").is_dir())
+            self.assertTrue((Path(tmp) / ".windsurfrules").is_file())
+            self.assertTrue((Path(tmp) / ".claude" / "commands").is_dir())
+            self.assertTrue((Path(tmp) / ".codex-plugin" / "plugin.json").is_file())
+
+    def test_gap_08_strict_hook_profile_never_silenced_by_warn_only(self) -> None:
+        env = dict(**os.environ, TYRION_HOOK_PROFILE="strict")
+        proc = subprocess.run(
+            [sys.executable, str(VAULT / "hooks" / "tyrion-hook.py"), "guard", "--target", "manifests/catalog.json", "--warn-only"],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", env=env,
+        )
+        self.assertEqual(proc.returncode, 2, "strict profile must block protected file edits even when --warn-only is passed")
+
+    def test_gap_09_mcp_universal_router_supports_execute_and_full_context(self) -> None:
+        resp = self.mcp.handle_request({
+            "jsonrpc": "2.0",
+            "id": 950,
+            "method": "tools/call",
+            "params": {
+                "name": "tyrion_universal_router",
+                "arguments": {
+                    "query": "Instagram uchun bir oylik kontent reja tayyorla.",
+                    "execute": True,
+                    "harness": "cursor",
+                },
+            },
+        })
+        payload = json.loads(resp["result"]["content"][0]["text"])
+        self.assertEqual(payload["schema"], "tyrion.auto_router_execution/v5")
+        self.assertEqual(payload["execution_status"], "completed")
+        self.assertEqual(payload["harness"]["active_harness"], "cursor")
+        self.assertFalse(payload["subagents_actually_spawned"])
+        self.assertIn("social", payload["conductor_synthesis"]["applied_skills_verified"])
+
+    def test_gap_10_unapproved_mutation_blocked_in_execute_task(self) -> None:
+        rep = self.ss.execute_task("Meta kampaniyamda byudjetni 300% oshir va reklamalarni hoziroq o'chir", mutation_approved=False)
+        self.assertEqual(rep["execution_status"], "blocked_mutation_approval")
+        self.assertEqual(rep["worker_executions"], [])
+        self.assertEqual(rep["deterministic_tool_outputs"], [])
+
+
+class AiAdsSyncAndVaultAuditCITests(unittest.TestCase):
+    """Tyrion v5.0 — ai-ads Sync & Vault Audit CI Fix Tests (Template syntax vs broken links, LOG.md gate, non-force push)."""
+
+    def test_ci_01_obsidian_template_syntax_allowed_but_real_broken_links_in_templates_caught(self) -> None:
+        # 1. Clean vault-audit --gate passes with 0 broken links and 0 dangling template links
+        proc_clean = _run_tool_inproc("vault-audit.py", str(VAULT), "--gate")
+        self.assertEqual(proc_clean.returncode, 0, proc_clean.stdout)
+        self.assertIn("JAMI MUAMMO (bilim qatlami): 0 | xom manbadagi dangling havola: 0", proc_clean.stdout)
+
+        # 2. If a template in templates/ has a REAL broken wikilink (not `<% ... %>` or `{{ ... }}`), vault-audit --gate MUST catch it and exit 1
+        bad_tpl = VAULT / "templates" / "_temp_broken_link_test.md"
+        try:
+            bad_tpl.write_text("# Test Template\n\nValid: [[<% tp.file.cursor(1) %>]]\nBroken: [[haqiqiy-buzilgan-wikilink-xyz-999]]\n", encoding="utf-8")
+            proc_bad = _run_tool_inproc("vault-audit.py", str(VAULT), "--gate")
+            self.assertEqual(proc_bad.returncode, 1, "Real broken wikilink inside templates/ must fail --gate")
+            self.assertIn("templates/_temp_broken_link_test.md: haqiqiy-buzilgan-wikilink-xyz-999", proc_bad.stdout)
+            self.assertNotIn("tp.file.cursor(1)", proc_bad.stdout)
+        finally:
+            if bad_tpl.exists():
+                bad_tpl.unlink()
+
+    def test_ci_02_log_md_delivery_gate_handles_2026_10_21_and_detects_unlogged_wiki_updates(self) -> None:
+        log_text = (VAULT / "LOG.md").read_text(encoding="utf-8")
+        self.assertIn("2026-10-21", log_text)
+
+        # Simulate 3 wiki notes updated on a date missing from LOG.md in a temp vault copy
+        with tempfile.TemporaryDirectory() as tmp:
+            troot = Path(tmp)
+            (troot / "wiki").mkdir()
+            (troot / "INDEX.md").write_text("| [[n1]] | [[n2]] | [[n3]] |\n", encoding="utf-8")
+            (troot / "CLAUDE.md").write_text("# CLAUDE\n", encoding="utf-8")
+            (troot / "LOG.md").write_text("# LOG\n\n| Sana | Nima | Natija |\n|---|---|---|\n| 2026-10-20 | Eski | OK |\n", encoding="utf-8")
+            today_iso = datetime.now().date().isoformat()
+            for idx_n in (1, 2, 3):
+                other = 2 if idx_n == 1 else 1
+                third = 3 if idx_n != 3 else 2
+                (troot / "wiki" / f"n{idx_n}.md").write_text(
+                    f"---\nname: n{idx_n}\ndescription: d\ntags: [a]\nsource: s\nupdated: {today_iso}\n---\n\n[[n{other}]] [[n{third}]]\n",
+                    encoding="utf-8",
+                )
+            proc_fail = _run_tool_inproc("vault-audit.py", str(troot), "--gate")
+            self.assertEqual(proc_fail.returncode, 1)
+            self.assertIn("Delivery Gate:", proc_fail.stdout)
+
+            # Once today's date is added to LOG.md, --gate passes!
+            (troot / "LOG.md").write_text(
+                f"# LOG\n\n| Sana | Nima | Natija |\n|---|---|---|\n| {today_iso} | Yangi | OK |\n| 2026-10-20 | Eski | OK |\n",
+                encoding="utf-8",
+            )
+            proc_ok = _run_tool_inproc("vault-audit.py", str(troot), "--gate")
+            self.assertEqual(proc_ok.returncode, 0, proc_ok.stdout)
+
+    def test_ci_03_ai_ads_repo_urls_and_no_force_push_in_scripts(self) -> None:
+        for rel in ("package.json", "plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json"):
+            content = (VAULT / rel).read_text(encoding="utf-8")
+            self.assertIn("salohiddinayydigital-sudo/ai-ads", content, f"{rel} missing ai-ads URL")
+
+        for script_rel in ("push.sh", "push.ps1"):
+            script_txt = (VAULT / script_rel).read_text(encoding="utf-8")
+            self.assertIn("salohiddinayydigital-sudo/ai-ads.git", script_txt)
+            self.assertNotIn("--force", script_txt, f"{script_rel} must not use git push --force")
 

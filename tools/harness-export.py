@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""Tyrion Multi-Harness Exporter — Cursor (.mdc), Windsurf (.windsurfrules), Codex va Claude Code adapteri (0 token).
+"""Tyrion Multi-Harness Exporter — Claude Code, Codex, Cursor (.mdc) va Windsurf (.windsurfrules) adapteri (0 token).
 
-affaan-m/ECC `install-targets` arxitekturasi asosida:
-Kanonik `rules/*.md` va `AGENTS.md` ni dublikat saqlamasdan, faqat foydalanuvchi
-so'ragan AI IDE / harness uchun mos formatga eksport qiladi.
+Har bir qo'llab-quvvatlanadigan AI harness uchun haqiqiy integratsiya yo'lini yaratadi va tekshiradi:
+  - Claude Code : `.claude/commands/*.md`, `.claude-plugin/plugin.json`, `.claude/settings.json`, `CLAUDE.md`, `.mcp.json`
+  - Codex       : `.codex-plugin/plugin.json`, `AGENTS.md`, `skills/*/SKILL.md`, `.mcp.json`
+  - Cursor      : `.cursor/rules/tyrion-*.mdc`, `AGENTS.md`, `.mcp.json`
+  - Windsurf    : `.windsurfrules`, `AGENTS.md`, `.mcp.json`
 
 Ishlatish:
   python3 tools/harness-export.py --target cursor [--dry-run]
   python3 tools/harness-export.py --target windsurf [--dry-run]
   python3 tools/harness-export.py --target claude [--dry-run]
+  python3 tools/harness-export.py --target codex [--dry-run]
+  python3 tools/harness-export.py --target all [--dry-run]
 """
 
 from __future__ import annotations
@@ -75,13 +79,24 @@ def export_claude(out_root: Path, dry_run: bool) -> list[str]:
         target = cmd_dst / cmd_md.name
         written.append(target.relative_to(out_root).as_posix())
         if not dry_run:
-            target.write_bytes(cmd_md.read_bytes())
+            target.write_bytes(cmd_md.read_bytes().replace(b"\r\n", b"\n"))
     return written
 
 
+def export_codex(out_root: Path, dry_run: bool) -> list[str]:
+    codex_dir = out_root / ".codex-plugin"
+    dst = codex_dir / "plugin.json"
+    src_plugin = VAULT / "plugin.json"
+    if not dry_run:
+        codex_dir.mkdir(parents=True, exist_ok=True)
+        if src_plugin.is_file():
+            dst.write_bytes(src_plugin.read_bytes().replace(b"\r\n", b"\n"))
+    return [dst.relative_to(out_root).as_posix()]
+
+
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="harness-export.py", description="ECC Multi-Harness Exporter")
-    parser.add_argument("--target", required=True, choices=["cursor", "windsurf", "claude", "all"])
+    parser = argparse.ArgumentParser(prog="harness-export.py", description="ECC Multi-Harness Exporter (Claude, Codex, Cursor, Windsurf)")
+    parser.add_argument("--target", required=True, choices=["cursor", "windsurf", "claude", "codex", "all"])
     parser.add_argument("--out", default=str(VAULT))
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--json", action="store_true")
@@ -89,7 +104,7 @@ def main(argv: list[str] | None = None) -> int:
 
     out_root = Path(args.out)
     files: list[str] = []
-    targets = ["cursor", "windsurf", "claude"] if args.target == "all" else [args.target]
+    targets = ["cursor", "windsurf", "claude", "codex"] if args.target == "all" else [args.target]
     for t in targets:
         if t == "cursor":
             files.extend(export_cursor(out_root, args.dry_run))
@@ -97,6 +112,8 @@ def main(argv: list[str] | None = None) -> int:
             files.extend(export_windsurf(out_root, args.dry_run))
         elif t == "claude":
             files.extend(export_claude(out_root, args.dry_run))
+        elif t == "codex":
+            files.extend(export_codex(out_root, args.dry_run))
 
     res = {"target": args.target, "dry_run": args.dry_run, "exported_count": len(files), "files": files}
     if args.json:
