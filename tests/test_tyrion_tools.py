@@ -1413,10 +1413,11 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
             jdata = json.loads((VAULT / jpath).read_text(encoding="utf-8"))
             self.assertEqual(jdata["version"], "6.0.0", f"Version drift in {jpath}")
 
-        mp = json.loads((VAULT / "marketplace.json").read_text(encoding="utf-8"))
-        self.assertEqual(mp["metadata"]["version"], "6.0.0")
-        self.assertEqual(mp["plugins"][0]["version"], "6.0.0")
-        self.assertIn("36 specialist agents", mp["metadata"]["description"])
+        for mppath in ("marketplace.json", ".claude-plugin/marketplace.json"):
+            mp = json.loads((VAULT / mppath).read_text(encoding="utf-8"))
+            self.assertEqual(mp["metadata"]["version"], "6.0.0")
+            self.assertEqual(mp["plugins"][0]["version"], "6.0.0")
+            self.assertIn("36 specialist agents", mp["metadata"]["description"])
 
         sec_txt = (VAULT / "SECURITY.md").read_text(encoding="utf-8")
         self.assertIn("36 agents", sec_txt)
