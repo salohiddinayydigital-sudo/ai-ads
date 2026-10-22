@@ -84,3 +84,22 @@ TYRION_RUN_LIVE_META_SMOKE=1 python3 -m unittest tests/test_tyrion_tools.py -k L
 - **Regional Reach Bounds:** `audience_size_lower_bound` and `audience_size_upper_bound` returned by `targetingsearch` reflect global or default locale bounds unless scoped via `reachestimate` / `delivery_estimate` with full geo-targeting specs.
 
 **Related:** [[meta-ads-interest-api]] · [[meta-auditoriya-arxitekturasi]] · [[40-xavfsizlik-va-hisob]] · [[00-manba]]
+
+
+## 4. Business-Context Query Generation & 5-Factor Relevance Ranking (v6.0 Upgrade)
+
+### 4.1 Prioritized Business-Context Query Expansion (`expand_search_queries`)
+Search queries are generated from the actual business context in strict priority order so explicit user queries are **never** crowded out by synonyms or generic niche seeds:
+1. **`P1_EXPLICIT_USER_QUERY`**: All `--query` arguments passed by the user (guaranteed inclusion; `effective_max` expands if explicit queries exceed `--max-queries`).
+2. **`P2_EXPLICIT_QUERY_EXPANSION`**: Curated Uzbek Latin, Uzbek Cyrillic, Russian, and English domain concepts for explicit queries.
+3. **`P3_BUSINESS_CONTEXT_SYNONYM` & `P3_DIRECT_PRODUCT`**: Concepts extracted from `--product`, `--problem` (`problem_solved`), `--needs` (`customer_needs`), `--intent` (`purchase_intent`), `--customer-profile`, and `--complementary` (`complementary_products`).
+4. **`P4_PROBLEM_AND_INTENT` & `P5_NICHE_INTENT`**: Problem/intent phrases and campaign objective signals (`SALES`, `LEADS`, `ENGAGEMENT`, `TRAFFIC`, `AWARENESS`).
+5. **`P6_NICHE_SEED_FALLBACK`**: Fallback niche seeds (used only if slots remain under `--max-queries`).
+
+### 4.2 Transparent 5-Factor Relevance Ranking (`score_and_rank_candidate`)
+Instead of recommending the first 5 API results in arrival order, every candidate is scored (`0..100`, labeled `SYSTEM_RELEVANCE_ESTIMATE_NOT_META_SCORE_OR_PERFORMANCE_GUARANTEE`) across 5 transparent factors:
+- **Direct Product/Service Match (`0..35` pts)**
+- **Customer Problem & Purchase Intent Alignment (`0..25` pts)**
+- **Semantic & Complementary Offer Relationship (`0..20` pts)**
+- **Meta Category Path, Topic & Description Fit (`0..10` pts)**
+- **Specificity, Breadth & Noise Adjustment (`-45..+10` pts)** — penalizes entertainment homonyms (bands, movies, games, freebies) and overly broad generic terms, moving results with `relevance_score < --min-relevance` (`35.0`) into `excluded_low_relevance_options`.

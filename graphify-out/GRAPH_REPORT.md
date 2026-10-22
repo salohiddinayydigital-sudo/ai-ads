@@ -1,6 +1,6 @@
 # GRAPH_REPORT — Tyrion bilim grafi (deterministik)
 
-> Qurilgan: 2026-10-21T14:54:03+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
+> Qurilgan: 2026-10-22T09:29:12+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
 
 **Tugunlar:** 192 · **Qirralar:** 868 · **Klasterlar:** 44
 
@@ -12,10 +12,10 @@
 | 2 | 40-xavfsizlik-va-hisob | 50 | `rules/40-xavfsizlik-va-hisob.md` |
 | 3 | 70-charter-baseline | 41 | `rules/70-charter-baseline.md` |
 | 4 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
-| 5 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
+| 5 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
 | 6 | ad-iteration | 16 | `wiki/ad-iteration.md` |
-| 7 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
-| 8 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
+| 7 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
+| 8 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
 | 9 | meta-ads-sozlamalari | 15 | `wiki/meta-ads-sozlamalari.md` |
 | 10 | survey-funnel | 14 | `wiki/survey-funnel.md` |
 | 11 | 50-topshirish-dod | 13 | `rules/50-topshirish-dod.md` |

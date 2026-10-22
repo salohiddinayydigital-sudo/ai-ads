@@ -231,6 +231,10 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
             product=str(args.get("product", "")),
             niche=str(args.get("niche", "ecom")),
             customer_profile=str(args.get("customer_profile", "")),
+            problem_solved=str(args.get("problem_solved", "")),
+            customer_needs=str(args.get("customer_needs", "")),
+            purchase_intent=str(args.get("purchase_intent", "")),
+            complementary_products=str(args.get("complementary_products", "")),
             objective=str(args.get("objective", "SALES")),
             country=str(args.get("country", "UZ")),
             language=str(args.get("language", "auto")),
@@ -239,6 +243,9 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
             special_ad_category=str(args.get("special_ad_category", "NONE")),
             include_suggestions=bool(args.get("include_suggestions", False)),
             validate_results=bool(args.get("validate_results", True)),
+            max_queries=int(args.get("max_queries", 12)),
+            min_relevance_score=float(args.get("min_relevance_score", 35.0)),
+            locale=str(args.get("locale", "en_US")),
         )
     if name == "tyrion_meta_audience":
         ma = importlib.import_module("meta-audience")

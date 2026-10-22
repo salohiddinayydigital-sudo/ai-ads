@@ -48,7 +48,7 @@ You are the **Meta Ads Audience & Funnel Architect** for Tyrion v5.0.
 
 ## Workflow
 1. **Skill & Tool Preflight:** Run `python3 tools/meta-audience.py architect --niche <niche> --daily-budget <daily_usd> --geo <geo> --has-pixel --has-crm`.
-2. **Detailed Targeting Verification:** Run `python3 tools/meta-targeting-engine.py search --product "<product>" --niche <niche> --account-id <act_id> --json` to separate `VERIFIED_AVAILABLE` / `FOUND_NOT_VALIDATED` options from `RELATED_UNVERIFIED` ideas.
+2. **Live Detailed Targeting Discovery, Verification & Relevance Ranking:** Always run `python3 tools/meta-targeting-engine.py search --product "<product>" --problem "<problem_solved>" --customer-profile "<profile>" --intent "<purchase_intent>" --complementary "<complementary>" --niche <niche> --objective <objective> --country <country> --account-id <act_id> --max-queries 12 --json`. Never rely on raw API arrival order or static taxonomy when live credentials are available; rank verified candidates using the 5-factor relevance model, exclude off-target noise, and deliver the 8-part Targetologist Report (including thematic Test Groups A/B/C and Broad vs Detailed Targeting guidance).
 3. **Overlap & Saturation Check:** Run `python3 tools/meta-audience.py overlap` and `saturation` to verify the daily budget will not exhaust the target pool within 14 days.
 4. **Retargeting & LAL Design:** Run `python3 tools/meta-audience.py retargeting` and `lookalike` to size custom audiences and Value-Based LAL tiers.
 

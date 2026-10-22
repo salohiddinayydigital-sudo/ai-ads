@@ -230,6 +230,71 @@ SOLVENTNOST_FILTERS = [
 ]
 
 
+
+def _build_layer_2_targeting(
+    niche: str,
+    tax: dict,
+    cold_budget: float,
+    currency: str,
+    product: str = "",
+    customer_profile: str = "",
+    problem_solved: str = "",
+    queries: list[str] | None = None,
+    ad_account_id: str = "",
+    live_targeting: bool | None = None,
+) -> dict:
+    tok = os.environ.get("META_ACCESS_TOKEN", "").strip()
+    has_token = bool(tok and tok != "your_meta_access_token_here")
+    run_live = bool(live_targeting) if live_targeting is not None else (has_token and bool(product or problem_solved or queries or ad_account_id))
+
+    if run_live:
+        mte = importlib.import_module("meta-targeting-engine")
+        rep = mte.search_and_validate_targeting(
+            product=product,
+            niche=niche,
+            customer_profile=customer_profile,
+            problem_solved=problem_solved,
+            queries=queries,
+            ad_account_id=ad_account_id,
+        )
+        prim = rep.get("primary_recommended_interests") or []
+        if prim:
+            top_status = prim[0]["validation_status"]
+            top_names = [f"{it['name']} (id={it['id']}, score={it['relevance_score']}/100)" for it in prim[:5]]
+            return {
+                "layer": "2-Qatlam: Verified Detailed Targeting Test Groups & Solventnost Hypotheses (TOF)",
+                "budget_share": mloc.round_currency(cold_budget * 0.45, currency),
+                "budget_share_usd": round(cold_budget * 0.45, 2),
+                "targeting_verification_status": top_status,
+                "verified_interests": prim[:5],
+                "suggested_test_groups": rep["recommended_audience_combinations"].get("suggested_test_groups", []),
+                "candidate_seed_terms": tax["core_interests"][:5],
+                "targeting": f"Rasmiy Meta API tasdiqlagan ({top_status}) va moslik bo'yicha saralangan variantlar: {', '.join(top_names)}",
+                "verification_instruction": rep["recommended_audience_combinations"]["note"],
+                "advantage_plus_mode": "Yuqori chekli/B2B nishada Hard Interest (Advantage+ Audience OFF), ommaviy B2C da Advantage+ Audience ON (Suggestion sifatida).",
+                "exclusions": ["Purchase_180d", "CRM_Active_Clients", "LeadForm_Submitted_90d"],
+            }
+
+    return {
+        "layer": "2-Qatlam: Advantage+ Interest Stack & Solventnost Hypotheses (TOF)",
+        "budget_share": mloc.round_currency(cold_budget * 0.45, currency),
+        "budget_share_usd": round(cold_budget * 0.45, 2),
+        "targeting_verification_status": "RELATED_UNVERIFIED",
+        "candidate_seed_terms": tax["core_interests"][:5],
+        "targeting": (
+            f"Nomzod qidiruv urug'lari (RELATED_UNVERIFIED — avval live API da tekshiring!): "
+            f"{', '.join(tax['core_interests'][:5])} | Behavior gipotezasi: {tax['behaviors'][0]}"
+        ),
+        "verification_instruction": (
+            "MUHIM: Ushbu nomlar statik qidiruv lug'atidan olingan (`RELATED_UNVERIFIED`). "
+            "Reklamani yoqishdan oldin `python3 tools/meta-targeting-engine.py search --niche "
+            f"{niche} --account-id act_...` orqali ularning Meta API da `VERIFIED_AVAILABLE` ekanini tasdiqlang."
+        ),
+        "advantage_plus_mode": "Yuqori chekli/B2B nishada Hard Interest (Advantage+ Audience OFF), ommaviy B2C da Advantage+ Audience ON (Suggestion sifatida).",
+        "exclusions": ["Purchase_180d", "CRM_Active_Clients", "LeadForm_Submitted_90d"],
+    }
+
+
 def build_architecture(
     niche: str,
     daily_budget: float,
@@ -244,6 +309,12 @@ def build_architecture(
     lead_to_sale_cvr: float | None = None,
     currency: str = "USD",
     market: str = "",
+    product: str = "",
+    customer_profile: str = "",
+    problem_solved: str = "",
+    queries: list[str] | None = None,
+    ad_account_id: str = "",
+    live_targeting: bool | None = None,
 ) -> dict:
     """Andromeda 2 + O'zbekiston bozori uchun 4-qatlamli Meta Ads auditoriya arxitekturasi."""
     daily_budget = _validate_finite_positive(daily_budget, "daily_budget", max_val=10_000_000.0)
@@ -334,24 +405,18 @@ def build_architecture(
             "language_rule": "O'zbek (Lotin/Kirill) va Rus tilidagi kreativlarni bitta ad setga aralashtirmang — til bo'yicha alohida ad set oching.",
             "exclusions": ["Purchase_180d", "CRM_Active_Clients", "LeadForm_Submitted_90d"],
         },
-        {
-            "layer": "2-Qatlam: Advantage+ Interest Stack & Solventnost Hypotheses (TOF)",
-            "budget_share": mloc.round_currency(cold_budget * 0.45, currency),
-            "budget_share_usd": round(cold_budget * 0.45, 2),
-            "targeting_verification_status": "RELATED_UNVERIFIED",
-            "candidate_seed_terms": tax["core_interests"][:5],
-            "targeting": (
-                f"Nomzod qidiruv urug'lari (RELATED_UNVERIFIED — avval live API da tekshiring!): "
-                f"{', '.join(tax['core_interests'][:5])} | Behavior gipotezasi: {tax['behaviors'][0]}"
-            ),
-            "verification_instruction": (
-                "MUHIM: Ushbu nomlar statik qidiruv lug'atidan olingan (`RELATED_UNVERIFIED`). "
-                "Reklamani yoqishdan oldin `python3 tools/meta-targeting-engine.py search --niche "
-                f"{niche} --account-id act_...` orqali ularning Meta API da `VERIFIED_AVAILABLE` ekanini tasdiqlang."
-            ),
-            "advantage_plus_mode": "Yuqori chekli/B2B nishada Hard Interest (Advantage+ Audience OFF), ommaviy B2C da Advantage+ Audience ON (Suggestion sifatida).",
-            "exclusions": ["Purchase_180d", "CRM_Active_Clients", "LeadForm_Submitted_90d"],
-        },
+        (lambda: _build_layer_2_targeting(
+            niche=niche,
+            tax=tax,
+            cold_budget=cold_budget,
+            currency=currency,
+            product=product,
+            customer_profile=customer_profile,
+            problem_solved=problem_solved,
+            queries=queries,
+            ad_account_id=ad_account_id,
+            live_targeting=live_targeting,
+        ))(),
         {
             "layer": "3-Qatlam: First-Party (1P) Warm Retargeting (MOF — IG/Video/Telegram/Web)",
             "budget_share": mloc.round_currency(warm_budget, currency),
@@ -585,26 +650,43 @@ def query_live_graph_api(query: str, limit: int = 15, ad_account_id: str = "") -
 def get_interests(
     niche: str,
     query: str = "",
-    live: bool = False,
+    live: bool | None = None,
     product: str = "",
     customer_profile: str = "",
+    problem_solved: str = "",
+    customer_needs: str = "",
+    purchase_intent: str = "",
+    complementary_products: str = "",
     ad_account_id: str = "",
     special_ad_category: str = "NONE",
+    max_queries: int = 12,
+    locale: str = "en_US",
 ) -> dict:
-    """Nisha bo'yicha qidiruv urug'lari (`RELATED_UNVERIFIED`) va ixtiyoriy live Graph API (`meta-targeting-engine.py`) hisobotini qaytaradi."""
+    """Nisha bo'yicha qidiruv urug'lari (`RELATED_UNVERIFIED`) va live Graph API (`meta-targeting-engine.py`) hisobotini qaytaradi.
+    Agar `META_ACCESS_TOKEN` sozlangan bo'lsa (yoki `live=True` berilsa), avtomatik live qidiruv va moslik saralashni bajaradi.
+    """
     tax = NICHE_TAXONOMY.get(niche, NICHE_TAXONOMY["ecom"])
     q_term = query or tax["core_interests"][0]
     api_version = get_graph_api_version()
 
     mte = importlib.import_module("meta-targeting-engine")
-    if live:
+    token_present = bool(os.environ.get("META_ACCESS_TOKEN", "").strip() and os.environ.get("META_ACCESS_TOKEN", "").strip() != "your_meta_access_token_here")
+    should_run_live = bool(live) if live is not None else token_present
+
+    if should_run_live:
         accuracy_report = mte.search_and_validate_targeting(
             product=product,
             niche=niche,
             customer_profile=customer_profile,
+            problem_solved=problem_solved,
+            customer_needs=customer_needs,
+            purchase_intent=purchase_intent,
+            complementary_products=complementary_products,
             queries=[query] if query else None,
             ad_account_id=ad_account_id,
             special_ad_category=special_ad_category,
+            max_queries=max_queries,
+            locale=locale,
         )
         live_results = accuracy_report["verified_targeting_options"]
         live_status = accuracy_report["live_check_status"]["status"]
@@ -893,11 +975,18 @@ def main(argv: list[str] | None = None) -> int:
     p_dt.add_argument("--product", default="")
     p_dt.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
     p_dt.add_argument("--customer-profile", default="")
+    p_dt.add_argument("--problem", "--problem-solved", dest="problem_solved", default="")
+    p_dt.add_argument("--needs", "--customer-needs", dest="customer_needs", default="")
+    p_dt.add_argument("--intent", "--purchase-intent", dest="purchase_intent", default="")
+    p_dt.add_argument("--complementary", "--complementary-products", dest="complementary_products", default="")
     p_dt.add_argument("--objective", default="SALES", choices=["SALES", "LEADS", "ENGAGEMENT", "TRAFFIC", "AWARENESS"])
     p_dt.add_argument("--country", default="UZ")
     p_dt.add_argument("--language", default="auto", help="Any BCP 47 language code (en, de, fr, es, ar, uz-Latn, ru, auto)")
     p_dt.add_argument("--query", action="append", default=[])
-    p_dt.add_argument("--account-id", default="")
+    p_dt.add_argument("--max-queries", type=int, default=12)
+    p_dt.add_argument("--min-relevance", type=float, default=35.0)
+    p_dt.add_argument("--locale", default="en_US")
+    p_dt.add_argument("--account-id", "--ad-account-id", dest="account_id", default="")
     p_dt.add_argument("--special-ad-category", default="NONE")
     p_dt.add_argument("--suggestions", action="store_true")
     p_dt.add_argument("--no-validate", action="store_true")
@@ -991,6 +1080,10 @@ def main(argv: list[str] | None = None) -> int:
                 product=args.product,
                 niche=args.niche,
                 customer_profile=args.customer_profile,
+                problem_solved=args.problem_solved,
+                customer_needs=args.customer_needs,
+                purchase_intent=args.purchase_intent,
+                complementary_products=args.complementary_products,
                 objective=args.objective,
                 country=args.country,
                 language=args.language,
@@ -999,6 +1092,9 @@ def main(argv: list[str] | None = None) -> int:
                 special_ad_category=args.special_ad_category,
                 include_suggestions=args.suggestions,
                 validate_results=not args.no_validate,
+                max_queries=args.max_queries,
+                min_relevance_score=args.min_relevance,
+                locale=args.locale,
             )
         elif args.command == "overlap":
             res = calc_overlap(args.size_a, args.size_b, args.shared)

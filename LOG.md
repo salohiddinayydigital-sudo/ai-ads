@@ -1,5 +1,6 @@
 # LOG — O'zgarishlar tarixi
 
+| 2026-10-22 | Detailed Targeting Engine v6.1 Upgrade (Relevance Ranking + Business-Context Queries + 8-Part Targetologist Report) | OK |
 | Sana | Nima qilindi | Natija |
 |---|---|---|
 | 2026-10-21 | **Tyrion v5.0 Universal Auto-Router & Post-Implementation Hardening:** `tools/skill-search.py` Universal Auto-Router (`route`, `reroute`, `SessionContextCache`, 4 tilli intent tahlili, Conductor↔Worker paketlari, Spend-Guard mutation gate, universal fallback) qurildi; 62 skill va 36 agent charteriga boyitilgan metadata (`triggers`, `aliases`, `domains`, `platforms`, `references`, `risk_level`, `output_contract`) qo'shildi; `meta-targeting-engine.py` sahifalash (`pages_fetched`, `is_truncated`), buzilgan javob vs `NOT_FOUND` ajratilishi va to'liq kontekstli kesh izolyatsiyasi kuchaytirildi; `catalog.py` CRLF-chidamli SHA-256 ga o'tkazildi | `doctor.py` 17/17 toza · `tyrion-shield.py` 6/6 toza · 24/24 eval (7/7 router metrika 100%) · 172/172 unit-test (+1 live smoke) OK |

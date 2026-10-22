@@ -69,7 +69,7 @@ Build evidence-backed, non-cannibalizing Meta Ads audience structures powered by
 
 1. **Step 1 — Search & Validate Detailed Targeting Options:**
    ```bash
-   python3 tools/meta-targeting-engine.py search --product "<mahsulot>" --niche <niche> --account-id <act_id> --json
+   python3 tools/meta-targeting-engine.py search --product "<mahsulot>" --problem "<muammo>" --customer-profile "<mijoz_profili>" --intent "<xarid_niyati>" --complementary "<yondosh_kategoriyalar>" --niche <niche> --objective <SALES|LEADS> --country <UZ|US|DE> --account-id <act_id> --max-queries 12 --json
    ```
 2. **Step 2 — Generate 4-Layer Audience Blueprint (with Unit Economics):**
    ```bash
