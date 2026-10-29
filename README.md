@@ -1,4 +1,4 @@
-# Tyrion v6.0 — Global Paid-Media & Targetology Operating System (`ai-ads`)
+# Tyrion v7.0 — Global Paid-Media & Targetology Operating System (`ai-ads`)
 
 <!-- tyrion:catalog agents=36 skills=63 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 
@@ -42,8 +42,8 @@ ai-ads/
 ├── markets/                 # Modular regional Market Packs (global, us, eu, uk, mena, latam, sea, in, uz)
 ├── locales/                 # UI & CLI locale bundles (en, uz, ru)
 ├── agents/                  # 36 specialist agent charters
-├── skills/                  # 62 canonical paid-media & CRO skills
-├── commands/                # 26 slash commands (English canonical + Uzbek aliases)
+├── skills/                  # 63 canonical paid-media & CRO skills
+├── commands/                # 27 slash commands (English canonical + Uzbek aliases)
 ├── hooks/                   # Cross-platform ${CLAUDE_PLUGIN_ROOT} hook launcher & guard
 ├── tools/                   # 29 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
 └── wiki/                    # 100 atomic wikilinked knowledge notes
