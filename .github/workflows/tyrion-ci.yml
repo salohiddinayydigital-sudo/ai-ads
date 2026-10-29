@@ -1,4 +1,4 @@
-name: Tyrion v6.0 Global CI & Security Gate
+name: Tyrion v7.0 Global CI & Security Gate
 
 on:
   push:
@@ -56,7 +56,7 @@ jobs:
       - name: Behavioral Eval Suite (24/24 Scenarios)
         run: python tools/skill-eval.py
 
-      - name: Full Unit Test Suite (185 Tests including External-CWD Hook & MCP Verification)
+      - name: Full Unit Test Suite (196 Tests including External-CWD Hook & MCP Verification)
         run: python -m unittest discover -s tests -t . -v
 
       - name: Doctor System Health Check
