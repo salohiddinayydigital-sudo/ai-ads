@@ -23,7 +23,7 @@ triggers:
 - эълон матни
 - продающий текст
 - копирайтинг
-skills: [ads-create, ads-landing, copy-editing, copywriting, longform-direct-response, uzbekistan-market-intel, writing-guidelines]
+skills: [ad-creative, ads-create, ads-landing, copy-editing, copywriting, longform-direct-response, uzbekistan-market-intel, writing-guidelines]
 authority_boundary: Copywriting & copy editing only; respects platform character limits and never invents unapproved claims
 output_contract: Multilingual (UZ Latin/Cyrillic/RU/EN) conversion copy variants with character counts and angle labels
 ---

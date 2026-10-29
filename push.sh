@@ -26,7 +26,7 @@ echo "[3/5] Running Behavioral Eval Suite (24/24)..."
 echo "[4/5] Running System Doctor..."
 "$PY_CMD" tools/doctor.py --quick
 
-REMOTE_URL="${1:-https://github.com/salohiddinayydigital-sudo/ai-ads.git}"
+REMOTE_URL="${1:-git@github.com:salohiddinayydigital-sudo/ai-ads.git}"
 if ! git remote get-url origin >/dev/null 2>&1; then
     git remote add origin "$REMOTE_URL"
 else

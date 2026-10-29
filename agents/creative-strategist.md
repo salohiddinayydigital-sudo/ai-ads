@@ -21,7 +21,7 @@ triggers:
 - andromeda kreativ
 - креативная стратегия
 - хуки для рекламы
-skills: [ads-creative, ads-dna, ads-meta-audience, ads-test, marketing-psychology]
+skills: [ad-creative, ads-creative, ads-dna, ads-meta-audience, ads-test, marketing-psychology]
 authority_boundary: Creative angles, avatars, and 3x3 testing matrices only; does not execute account budget changes
 output_contract: 3x3 Angle x Format Creative Matrix, 3-second multilingual hooks, and falsifiable test hypotheses
 ---

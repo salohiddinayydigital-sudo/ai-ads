@@ -1,6 +1,6 @@
 # push.ps1 — Tyrion v5.0 Automated Pre-Flight Verification & GitHub Push Script (Windows PowerShell)
 param(
-    [string]$RemoteUrl = "https://github.com/salohiddinayydigital-sudo/ai-ads.git"
+    [string]$RemoteUrl = "git@github.com:salohiddinayydigital-sudo/ai-ads.git"
 )
 $ErrorActionPreference = 'Stop'
 

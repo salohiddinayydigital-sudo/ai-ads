@@ -37,11 +37,14 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-VERSION = "6.0.0"
+VERSION = "7.0.0"
 
 ROUTES = {
     "route": ("skill-search.py", ["route"]),
     "execute": ("skill-search.py", ["execute"]),
+    "tokens": ("skill-search.py", ["tokens"]),
+    "launch-pack": ("meta-audience.py", ["launch-blueprint"]),
+    "intel": ("meta-audience.py", ["market-intel"]),
     "doctor": ("doctor.py", []),
     "shield": ("tyrion-shield.py", ["scan"]),
     "eval": ("skill-eval.py", []),
@@ -98,7 +101,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"✗ Noma'lum buyruq: {cmd}. Mavjud: status, {', '.join(ROUTES)}", file=sys.stderr)
         return 2
     script, default_sub = ROUTES[cmd]
-    final_args = rest if rest else default_sub
+    if not rest:
+        final_args = default_sub
+    elif default_sub and rest[0] != default_sub[0]:
+        final_args = [*default_sub, *rest]
+    else:
+        final_args = rest
     proc = subprocess.run([sys.executable, str(TOOLS / script), *final_args], cwd=str(VAULT))
     return proc.returncode
 

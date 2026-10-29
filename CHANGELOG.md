@@ -2,6 +2,16 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
+## [7.0.0] — 2026-10-29 (Practitioner Targetology, `/ad-creative` Video Studio & Meta 2026 5-System AI Stack)
+
+### Added
+- **`/ad-creative` Skill & Slash Command (`skills/ad-creative/SKILL.md`, `commands/ad-creative.md`):** Full integration of the 4-mode Ad Creative & Video Ad Studio (`Generate from Scratch`, `Iterate from Performance Data`, `Grounded Static & Video Batches`, `Creative Strategy Roadmap & Retro`) with the 2026 S->F Meta Ad Format Tier List (`meta-creative-formats.md`), 9:16 vertical video safe-zone spec (`720x1200` inside `1080x1920`, `video-ad-scripts-and-specs.md`), Falsifiable Test Hypotheses, and strict No-AI-Tells linter (`no-ai-tells-and-hypotheses.md`).
+- **Zero-Friction Video Ad Scripting (`tools/creative-matrix.py video-script`, `skills/reels-scripting/SKILL.md`):** Generates ready-to-shoot 9:16 scripts across 7 S/A-tier formats (`ugc_reaction_demo`, `founder_authority`, `no_yapping_split_screen`, `imessage_reveal`, `chatgpt_reveal`, `greenscreen_proof`, `faceless_motion_explainer`) with 3 opening hook variants, time-coded storyboards, and `720x1200` safe-zone overlays — with zero mandatory external API keys (`APIFY_API_TOKEN` removed) and zero coding required.
+- **Andromeda Entity-ID & Persona-Desire-Awareness (PDA) Engine (`tools/creative-matrix.py pda-matrix`):** Builds 6–9 visually distinct concepts across Personas x Desires x Schwartz's 5 Awareness Stages so Meta Andromeda's computer-vision clustering assigns independent retrieval tickets.
+- **Platform-Validated Ad Copy & AI-Tell Linter (`tools/creative-matrix.py ad-copy`):** Character-counted copy generation for Meta (`125/40/30`), Google RSA (`30/90`), TikTok (`80/100`), LinkedIn (`150/70/100`), and Telegram (`160`) with automatic removal of AI tells (*"It's not X, it's Y"*, *"Stop scrolling"*, em-dashes).
+- **Meta 2026 Five-System AI Stack & Practitioner Targetologist Playbook (`tools/meta-targeting-engine.py`, `tools/meta-audience.py`, `skills/ads/references/meta-ai-stack.md`):** Added `GEM` (Teacher Foundation Model), `Andromeda` (Retrieval + Entity ID), `Lattice` (Unified Ranking + Sequence Learning), `UTIS` (User True Interest Survey Calibrator), `Adaptive Ranking Model` (`<100ms`), `Value Rules` (`+200%` to `-90%` bid multipliers), `GUIDED_CREATION` ASC API (`v25.0+`), Meta AI Chat Signal regional GDPR carve-outs, and the 9-section practitioner zero-coding Ads Manager setup guide.
+- **Shared Product Marketing Context Template (`templates/product-marketing.md`):** Compatible with `.claude/product-marketing.md` and `.agents/product-marketing.md`.
+
 ## [6.0.0] — 2026-10-21 (Breaking: Global Architecture & Cross-Platform Release)
 
 ### Breaking Changes

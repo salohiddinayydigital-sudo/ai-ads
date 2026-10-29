@@ -1266,6 +1266,51 @@ def _build_test_groups(primary_recommended: list[dict[str, Any]], pool_status: s
     return [g for g in groups_map.values() if g["interests"]]
 
 
+
+def _build_practitioner_ads_manager_playbook(
+    niche: str,
+    objective: str,
+    country: str,
+    special_ad_category: str,
+    test_groups: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Zero-coding step-by-step Ads Manager setup playbook for working targetologists (2026 Andromeda + GEM + Lattice + UTIS + Value Rules)."""
+    is_eu_uk_kr = country.upper() in ("DE", "FR", "ES", "IT", "NL", "PL", "SE", "AT", "BE", "IE", "PT", "EU", "UK", "GB", "KR")
+    return {
+        "mode": "PRACTITIONER_ZERO_CODING_ADS_MANAGER_SETUP",
+        "meta_2026_5_system_stack": {
+            "GEM": "Generative Ads Recommendation Model (LLM-scale teacher model that distills cross-surface knowledge into Lattice & Andromeda).",
+            "Andromeda": "Retrieval engine narrowing millions of ads to ~1,000-1,500 candidates via computer vision & Entity ID clustering.",
+            "Lattice": "Unified cross-surface/objective ranking with Sequence Learning (models multi-touch journey across Reels, Feed, Stories, WhatsApp).",
+            "UTIS": "User True Interest Survey model (Jan 2026) calibrating Late Stage Ranking on genuine viewer interest match (demotes clickbait).",
+            "Adaptive_Ranking_Model": "Trillion-parameter sub-100ms inference layer (Mar 2026).",
+        },
+        "step_by_step_ads_manager_setup": [
+            f"1. Kampaniya (Campaign): Objective = {objective.upper()}. Agar e-commerce bo'lsa va haftasiga >=50 xarid bo'lsa, Advantage+ Sales (`GUIDED_CREATION`) yoqing; Lead-Gen / B2B / Yuqori chekli xizmat bo'lsa, ABO (Ad Set Budget Optimization) sinov kampaniyasi oching.",
+            "2. Ad Set #1 (Nazorat / Broad Benchmark): Faqat Geo + Yosh + Til (hech qanday interest qo'shmang). Andromeda algoritmi kreativning birinchi 3 soniyasi orqali auditoriyani o'zi topadi.",
+            (
+                f"3. Ad Set #2..#{1 + len(test_groups)} (Mavzuli Detailed Targeting Sinov Guruhlari): "
+                + ", ".join(f"{tg['group_name']} ({len(tg['interests'])} ta tasdiqlangan interest)" for tg in test_groups)
+                if test_groups
+                else "3. Ad Set #2 (Detailed Targeting): Live API ulanmagani sababli tasdiqlangan interest guruhi yo'q — avval `META_ACCESS_TOKEN` bilan live qidiruv qiling yoki Broad ad set ishlating."
+            ),
+            "4. Majburiy Istisnolar (Exclusions): Barcha sovuq (TOF) ad setlardan `Purchase_180d`, `CRM_Active_Clients` va `LeadForm_Submitted_90d` auditoriyalarini Exclude qiling.",
+            "5. Value Rules (2026 Bid Multipliers): Agar haftasiga >=50 konversiya bo'lsa, alohida ad set ochish o'rniga Value Rules orqali yuqori marjali hudud/yosh segmentiga +30%..+50% bid multiplier bering.",
+            "6. Kreativ va Entity ID Qoidasi: Har bir ad setga kamida 3-4 ta VIZUAL JIHATDAN FARQLI format joylang (masalan: 1 ta Founder Face-to-Camera + 1 ta UGC Reaction+Demo + 1 ta iMessage/Greenscreen + 1 ta Static Us-vs-Them) — bir xil videoga 10 xil matn yozish bitta Entity ID beradi!",
+        ],
+        "meta_ai_chat_signal_note": (
+            "EU/UK/Janubiy Koreya bozorida GDPR sababli Meta AI chat tarixi targeting signali sifatida ISHLATILMAYDI (CAPI EMQ >= 8.0 va kreativ signali yanada muhim)."
+            if is_eu_uk_kr
+            else "2025-yil 16-dekabrdan boshlab foydalanuvchilarning Meta AI (IG/FB/WhatsApp) bilan yozishmalari Andromeda va GEM uchun ichki niyat signali sifatida ishlaydi."
+        ),
+        "sources": [
+            "https://greghal.no/en/blog/meta-ads-algorithm-2026-complete-guide/",
+            "https://lineardesign.com/blog/metas-advantage-audience/",
+            "https://storehero.ai/metas-andromeda-update-explained-what-it-means-for-businesses/",
+        ],
+    }
+
+
 def _build_targetologist_report(
     product: str,
     niche: str,
@@ -1402,6 +1447,7 @@ def _build_targetologist_report(
         },
         "6_suggested_test_groups": test_groups,
         "7_broad_targeting_alternatives": broad_guidance,
+        "9_practitioner_ads_manager_playbook": _build_practitioner_ads_manager_playbook(niche, objective, country, special_ad_category, test_groups),
         "8_missing_inputs_limitations_and_next_steps": {
             "missing_inputs": missing_inputs,
             "failure_category": err_cat,

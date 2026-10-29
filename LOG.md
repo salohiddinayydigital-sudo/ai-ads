@@ -1,5 +1,6 @@
 # LOG — O'zgarishlar tarixi
 
+| 2026-10-29 | Tyrion v7.0.0 Release: `/ad-creative` Video Ad Studio, Andromeda Entity-ID/PDA Engine, Meta 2026 5-System Stack (GEM/Lattice/UTIS/Value Rules) & Practitioner Targetology | OK |
 | 2026-10-22 | Detailed Targeting Engine v6.1 Upgrade (Relevance Ranking + Business-Context Queries + 8-Part Targetologist Report) | OK |
 | Sana | Nima qilindi | Natija |
 |---|---|---|

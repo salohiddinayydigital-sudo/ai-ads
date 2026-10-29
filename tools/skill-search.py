@@ -63,6 +63,8 @@ SKILL_ROOT = VAULT / "skills"
 AGENT_ROOT = VAULT / "agents"
 VALID_RISK_LEVELS = {"low", "medium", "high"}
 DEFAULT_MAX_CONTEXT_BYTES = 180_000
+COMPACT_CONTEXT_BUDGET = 4_500
+NAIVE_FULL_VAULT_BYTES = 1_120_000
 
 PROGRESSIVE_SINGLE_STEP_BUDGET = 15_000  # <= 15 KB budget for simple queries (Progressive Disclosure)
 
@@ -103,6 +105,22 @@ UZ_CYR_TO_LAT = str.maketrans({
 })
 
 MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
+    (
+        ("ad-creative", "ad creative", "ad-cratinv", "video kontent", "vedio kontent", "video reklama", "reels skript", "reels ssenariy", "ugc video", "imessage ad", "chatgpt ad", "greenscreen ad", "motion video ad", "faceless video ad", "kreativ yozib ber", "видео креатив", "сценарий видео рекламы", "сценарий рилс"),
+        {
+            "domains": ["creative", "video", "copywriting"],
+            "platforms": ["meta", "tiktok", "youtube", "instagram"],
+            "boost_agents": {"creative-strategist": 38.0, "reels-scriptwriter": 36.0, "copy-writer": 22.0},
+            "boost_skills": {"ad-creative": 42.0, "reels-scripting": 36.0, "ads-creative": 28.0},
+            "refs": [
+                "skills/ad-creative/references/meta-creative-formats.md",
+                "skills/ad-creative/references/video-ad-scripts-and-specs.md",
+                "skills/ad-creative/references/no-ai-tells-and-hypotheses.md",
+            ],
+            "tools": ["tools/creative-matrix.py"],
+            "multi_step": False,
+        },
+    ),
     (
         ("byudjetni", "oshir", "kill keep scale", "masshtablash", "byudjet oshirish", "увеличить бюджет", "масштабирование бюджета", "scale budget", "increase budget"),
         {
@@ -160,15 +178,15 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         },
     ),
     (
-        ("raqobatchilarimni o'rganib", "raqobatchilarni o'rganib", "raqobatchilar tahlili", "изучи конкурентов", "анализ конкурентов и стратегия", "competitor analysis and strategy", "рақобатчиларни ўрганиб"),
+        ("raqobatchilarimni o'rganib", "raqobatchilarni o'rganib", "raqobatchilar tahlili", "raqobatchilar analiz", "rabotchilar analiz", "rabotchilar", "audioturiya va rabotchilar", "auditoriya va raqobatchilar", "turi taklif", "to'g'ri taklif", "auditoriyaga taklif", "audioturiyaga", "изучи конкурентов", "анализ конкурентов и стратегия", "competitor analysis and strategy", "рақобатчиларни ўрганиб"),
         {
-            "domains": ["competitor", "research", "strategy", "positioning"],
+            "domains": ["competitor", "research", "strategy", "positioning", "offers", "audience"],
             "platforms": ["multi-platform"],
             "multi_step": True,
-            "boost_skills": {"ads-competitor": 30.0, "product-marketing": 22.0, "ads-plan": 20.0, "customer-research": 15.0},
-            "boost_agents": {"positioning-strategist": 28.0, "research-worker": 26.0, "creative-strategist": 16.0},
-            "refs": ["skills/ads/references/thinking-framework.md"],
-            "tools": ["tools/brain-search.py", "tools/creative-matrix.py"],
+            "boost_skills": {"ads-competitor": 38.0, "offers": 34.0, "product-marketing": 22.0, "ads-plan": 20.0, "customer-research": 15.0},
+            "boost_agents": {"positioning-strategist": 32.0, "research-worker": 26.0, "creative-strategist": 16.0},
+            "refs": ["skills/ads/references/thinking-framework.md", "skills/offers/references/value-equation.md"],
+            "tools": ["tools/meta-audience.py", "tools/brain-search.py", "tools/creative-matrix.py"],
         },
     ),
     (
@@ -613,7 +631,7 @@ def detect_language(text: str) -> str:
         return "uz_cyrillic"
     if re.search(r"[а-яА-ЯёЁ]", s):
         return "ru"
-    if re.search(r"\b(uchun|bo'yicha|reklama|kampaniyamda|byudjetni|oshir|o'chir|mijoz|strategiya|lidlar|sifatsiz|kontent|tayyorla|tekshir|saytimni|o'rganib|montaj|yasab)\b", low):
+    if re.search(r"\b(uchun|bo'yicha|reklama|kampaniyamda|byudjetni|oshir|o'chir|mijoz|strategiya|lidlar|sifatsiz|kontent|tayyorla|tekshir|saytimni|o'rganib|montaj|yasab|qilish|taklif|berish|berishchi|auditoriya|audioturiya|audioturiyaga|auditoriyaga|raqobatchi|raqobatchilar|rabotchilar|tahlil)\b", low):
         return "uz_latin"
     return "en"
 
@@ -864,13 +882,15 @@ def route_task(
     agents = load_agents()
     skills_by_name = {s["name"]: s for s in skills}
 
-    if not load or context_mode == "manifest":
+    if not load or context_mode in ("manifest", "manifest_only"):
         effective_mode = "manifest"
-    elif context_mode == "full":
+    elif context_mode in ("full", "full_context"):
         effective_mode = "full"
+    elif context_mode == "compact":
+        effective_mode = "compact"
     else:
         effective_mode = "progressive"
-    should_load_files = effective_mode in ("full", "progressive")
+    should_load_files = effective_mode in ("full", "progressive", "compact")
 
     clean_query = str(query or "").strip()
     lang = (language or "").strip() or detect_language(clean_query)
@@ -1073,7 +1093,7 @@ def route_task(
             for t in ("tools/calculator.py", "tools/spend-guard.py"):
                 if t not in tools_to_use:
                     tools_to_use.append(t)
-        if {"ads-creative", "reels-scripting", "social"} & all_sel_skills or primary_agent in ("creative-strategist", "social-content-writer"):
+        if {"ad-creative", "ads-creative", "reels-scripting", "social"} & all_sel_skills or primary_agent in ("creative-strategist", "social-content-writer"):
             if "tools/creative-matrix.py" not in tools_to_use:
                 tools_to_use.append("tools/creative-matrix.py")
         if {"video-editing", "video-motion-graphics"} & all_sel_skills or primary_agent == "video-editor":
@@ -1154,9 +1174,13 @@ def route_task(
     rules_loaded_by_path: dict[str, dict[str, Any]] = {}
 
     effective_budget = (
-        min(max_context_bytes, PROGRESSIVE_SINGLE_STEP_BUDGET)
-        if (effective_mode == "progressive" and complexity == "single_step" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES)
-        else (min(max_context_bytes, 28_000) if (effective_mode == "progressive" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES) else max_context_bytes)
+        min(max_context_bytes, COMPACT_CONTEXT_BUDGET)
+        if (effective_mode == "compact" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES)
+        else (
+            min(max_context_bytes, PROGRESSIVE_SINGLE_STEP_BUDGET)
+            if (effective_mode == "progressive" and complexity == "single_step" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES)
+            else (min(max_context_bytes, 28_000) if (effective_mode == "progressive" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES) else max_context_bytes)
+        )
     )
 
     if should_load_files:
@@ -1175,7 +1199,7 @@ def route_task(
                 load_errors.append(err)
                 continue
             if rec:
-                c_text = _progressive_slice(rec["content"], 3400) if effective_mode == "progressive" else rec["content"]
+                c_text = _progressive_slice(rec["content"], 1100) if effective_mode == "compact" else (_progressive_slice(rec["content"], 3400) if effective_mode == "progressive" else rec["content"])
                 c_bytes = len(c_text.encode("utf-8"))
                 used_context_bytes += c_bytes
                 entry = {
@@ -1188,7 +1212,7 @@ def route_task(
                     "full_instructions_loaded": True,
                     "disclosure_mode": effective_mode,
                     "content": c_text,
-                    "body_markdown": _progressive_slice(rec["body_markdown"], 3000) if effective_mode == "progressive" else rec["body_markdown"],
+                    "body_markdown": _progressive_slice(rec["body_markdown"], 900) if effective_mode == "compact" else (_progressive_slice(rec["body_markdown"], 3000) if effective_mode == "progressive" else rec["body_markdown"]),
                     "excerpt": rec["excerpt"],
                 }
                 loaded_charters.append(entry)
@@ -1210,7 +1234,7 @@ def route_task(
                 load_errors.append(err)
                 continue
             if rec:
-                s_text = _progressive_slice(rec["content"], 3600) if effective_mode == "progressive" else rec["content"]
+                s_text = _progressive_slice(rec["content"], 1300) if effective_mode == "compact" else (_progressive_slice(rec["content"], 3600) if effective_mode == "progressive" else rec["content"])
                 s_bytes = len(s_text.encode("utf-8"))
                 used_context_bytes += s_bytes
                 entry = {
@@ -1225,7 +1249,7 @@ def route_task(
                     "disclosure_mode": effective_mode,
                     "output_contract": sk_obj.get("output_contract", ""),
                     "content": s_text,
-                    "body_markdown": _progressive_slice(rec["body_markdown"], 3200) if effective_mode == "progressive" else rec["body_markdown"],
+                    "body_markdown": _progressive_slice(rec["body_markdown"], 1100) if effective_mode == "compact" else (_progressive_slice(rec["body_markdown"], 3200) if effective_mode == "progressive" else rec["body_markdown"]),
                     "instructions_excerpt": rec["excerpt"],
                 }
                 loaded_skill_files.append(entry)
@@ -1238,7 +1262,7 @@ def route_task(
                 load_errors.append(err)
                 continue
             if rec:
-                r_text = _progressive_slice(rec["content"], 900) if effective_mode == "progressive" else rec["content"]
+                r_text = _progressive_slice(rec["content"], 420) if effective_mode == "compact" else (_progressive_slice(rec["content"], 900) if effective_mode == "progressive" else rec["content"])
                 r_bytes = len(r_text.encode("utf-8"))
                 if used_context_bytes + r_bytes <= effective_budget:
                     used_context_bytes += r_bytes
@@ -1250,7 +1274,7 @@ def route_task(
                         "full_instructions_loaded": True,
                         "disclosure_mode": effective_mode,
                         "content": r_text,
-                        "body_markdown": _progressive_slice(rec["body_markdown"], 800) if effective_mode == "progressive" else rec["body_markdown"],
+                        "body_markdown": _progressive_slice(rec["body_markdown"], 360) if effective_mode == "compact" else (_progressive_slice(rec["body_markdown"], 800) if effective_mode == "progressive" else rec["body_markdown"]),
                     }
                     loaded_rule_files.append(entry)
                     rules_loaded_by_path[rule_rel] = entry
@@ -1263,7 +1287,7 @@ def route_task(
                 continue
             if rec:
                 is_explicit_ref = bool(extra_references and ref_rel in extra_references)
-                if effective_mode == "progressive" and not is_explicit_ref:
+                if effective_mode in ("progressive", "compact") and not is_explicit_ref:
                     deferred_references.append({
                         "path": rec["path"],
                         "bytes": rec["bytes"],
@@ -1457,6 +1481,14 @@ def route_task(
                 "max_bytes": effective_budget,
                 "within_budget": used_context_bytes <= effective_budget,
             },
+            "token_telemetry": {
+                "estimated_loaded_tokens": int(round(used_context_bytes / 3.5)),
+                "naive_full_vault_tokens": int(round(NAIVE_FULL_VAULT_BYTES / 3.5)),
+                "tokens_saved_vs_full_vault": max(0, int(round((NAIVE_FULL_VAULT_BYTES - used_context_bytes) / 3.5))),
+                "token_savings_pct": round((1.0 - (used_context_bytes / float(NAIVE_FULL_VAULT_BYTES))) * 100.0, 2),
+                "deterministic_cli_tools_token_cost": 0,
+                "recommended_mode_for_lowest_tokens": "compact (~700-1,100 loaded tokens) or progressive (<=4,200 loaded tokens)",
+            },
             "compiled_context_package": {
                 "total_bytes": len(compiled_bundle_text.encode("utf-8")),
                 "sections_count": len(bundle_sections),
@@ -1590,19 +1622,34 @@ def _run_deterministic_tools_for_plan(plan: dict[str, Any]) -> list[dict[str, An
 
     for tool_rel in plan.get("tools_to_use", []):
         try:
-            if tool_rel == "tools/meta-audience.py":
+            if tool_rel in ("tools/meta-audience.py", "tools/meta-audience.py market-intel"):
                 ma = importlib.import_module("meta-audience")
-                arch = ma.build_architecture(niche=niche, daily_budget=100.0, geo="tashkent")
-                outputs.append({
-                    "tool": tool_rel,
-                    "action": "build_architecture",
-                    "status": "executed",
-                    "summary": {
-                        "niche": arch.get("niche"),
-                        "layers_count": len(arch.get("layers", [])),
-                        "exclusions": arch.get("global_exclusions", []),
-                    },
-                })
+                req_sk = set(plan.get("required_skills", []) + plan.get("supporting_skills", []))
+                if tool_rel == "tools/meta-audience.py market-intel" or bool(req_sk & {"ads-competitor", "offers", "product-marketing"}):
+                    intel = ma.analyze_audience_competitors_and_offers(product=query[:60] or "Offer", niche=niche)
+                    outputs.append({
+                        "tool": "tools/meta-audience.py",
+                        "action": "analyze_audience_competitors_and_offers",
+                        "status": "executed",
+                        "summary": {
+                            "niche": intel.get("niche"),
+                            "segments_count": len(intel.get("1_audience_jtbd_and_4_segments", [])),
+                            "ad_spy_links": intel.get("2_competitor_teardown_and_gaps", {}).get("official_ad_spy_links", {}),
+                            "grand_slam_offer": intel.get("3_master_grand_slam_offer", {}).get("1_core_promise"),
+                        },
+                    })
+                else:
+                    arch = ma.build_architecture(niche=niche, daily_budget=100.0, geo="tashkent")
+                    outputs.append({
+                        "tool": tool_rel,
+                        "action": "build_architecture",
+                        "status": "executed",
+                        "summary": {
+                            "niche": arch.get("niche"),
+                            "layers_count": len(arch.get("audience_layers", [])),
+                            "exclusions": arch.get("mandatory_exclusions", []),
+                        },
+                    })
             elif tool_rel == "tools/meta-targeting-engine.py":
                 mte = importlib.import_module("meta-targeting-engine")
                 targ = mte.search_and_validate_targeting(product=query[:80], niche=niche)
@@ -1948,7 +1995,7 @@ def cmd_route(args: argparse.Namespace) -> int:
     plan = route_task(
         query=args.query,
         agent_hint=args.agent,
-        load=(mode == "full"),
+        load=(mode != "manifest"),
         context_mode=mode,
         max_context_bytes=getattr(args, "max_context_bytes", DEFAULT_MAX_CONTEXT_BYTES),
         mutation_approved=args.approved,
@@ -1961,7 +2008,7 @@ def cmd_route(args: argparse.Namespace) -> int:
         plan = reroute_task(
             current_plan=plan,
             emergent_requirement=args.reroute_with,
-            load=(mode == "full"),
+            load=(mode != "manifest"),
             max_context_bytes=getattr(args, "max_context_bytes", DEFAULT_MAX_CONTEXT_BYTES),
             session_cache=cache,
         )
@@ -2118,6 +2165,92 @@ def cmd_check(_args: argparse.Namespace) -> int:
     return 0
 
 
+
+
+def compute_token_profile(sample_query: str = "Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top") -> dict[str, Any]:
+    """Butun plagin bo'yicha aniq token sarfi, rejimlar solishtirmasi va tejamkorlik hisoboti."""
+    always_on_files = ["CLAUDE.md", "AGENTS.md", ".mcp.json", "hooks/hooks.json"]
+    always_on_breakdown: dict[str, dict[str, int]] = {}
+    always_on_bytes = 0
+    for rel in always_on_files:
+        p = VAULT / rel
+        b = p.stat().st_size if p.is_file() else 0
+        always_on_bytes += b
+        always_on_breakdown[rel] = {"bytes": b, "estimated_tokens": int(round(b / 3.5))}
+
+    total_vault_md_bytes = sum(
+        p.stat().st_size
+        for folder in ("skills", "agents", "wiki", "playbooks", "rules", "contexts")
+        if (VAULT / folder).is_dir()
+        for p in (VAULT / folder).rglob("*.md")
+    )
+    naive_tokens = int(round(total_vault_md_bytes / 3.5))
+
+    modes_comparison: dict[str, dict[str, Any]] = {}
+    for m_name in ("manifest", "compact", "progressive", "full"):
+        pkt = route_task(sample_query, load=(m_name != "manifest"), context_mode=m_name)
+        used_b = pkt["loaded_context"]["context_budget"]["used_bytes"]
+        est_tok = int(round(used_b / 3.5))
+        saved_pct = round((1.0 - (used_b / float(max(1, total_vault_md_bytes)))) * 100.0, 2)
+        modes_comparison[m_name] = {
+            "loaded_bytes": used_b,
+            "estimated_loaded_tokens": est_tok,
+            "tokens_saved_vs_naive": max(0, naive_tokens - est_tok),
+            "savings_pct": saved_pct,
+            "use_case": {
+                "manifest": "Faqat qaysi agent/skill/tool kerakligini 0 fayl yuklab aniqlash (0 loaded tokens)",
+                "compact": "Maksimal tejamkor rejim (~700-1,100 token) — Claude Pro / API limitini tejash uchun",
+                "progressive": "Standart muvozanatli rejim (<=15 KB, ~2,500-4,200 token) — asosiy ko'rsatma + shartnoma",
+                "full": "Chuqur audit/ijro rejimi (~6,500-12,000 token) — barcha reference jadval va formulalar bilan",
+            }[m_name],
+        }
+
+    return {
+        "schema": "tyrion.token_profile/v7.1",
+        "sample_query": sample_query,
+        "naive_full_vault": {
+            "total_markdown_bytes": total_vault_md_bytes,
+            "estimated_tokens": naive_tokens,
+            "why_avoided": "Tyrion hech qachon 63 ta skill va 100 ta wiki qaydni birvarakayiga yuklamaydi — faqat vazifaga mos 1-2 skill va kerakli bozor kontekstini tanlab yuklaydi.",
+        },
+        "always_on_session_overhead": {
+            "files": always_on_breakdown,
+            "total_bytes": always_on_bytes,
+            "estimated_tokens": int(round(always_on_bytes / 3.5)),
+        },
+        "router_modes_comparison": modes_comparison,
+        "zero_token_python_engines": {
+            "tools_count": 29,
+            "llm_token_cost": 0,
+            "description": "Barcha 29 ta hisob-kitob, targeting, video ssenariy, CAPI hash, Spend-Guard va audit skriptlari lokal Python'da 0 LLM token sarflab ishlaydi.",
+        },
+    }
+
+
+def cmd_tokens(args: argparse.Namespace) -> int:
+    prof = compute_token_profile(getattr(args, "query", "Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top"))
+    if getattr(args, "json", False):
+        print(json.dumps(prof, ensure_ascii=False, indent=2))
+        return 0
+    print("=" * 74)
+    print("  ⚡ TYRION v7.1 TOKEN CONSUMPTION & COST EFFICIENCY REPORT")
+    print("=" * 74)
+    nv = prof["naive_full_vault"]
+    print(f"  Butun baza hajmi (63 skill + 100 wiki + 36 agent): {nv['total_markdown_bytes']:,} bayt (~{nv['estimated_tokens']:,} token)")
+    ao = prof["always_on_session_overhead"]
+    print(f"  Doimiy sessiya yuklamasi (CLAUDE.md + hooklar)   : {ao['total_bytes']:,} bayt (~{ao['estimated_tokens']:,} token)")
+    print("  29 ta Python CLI hisoblagich va targeting dvigateli: 0 LLM token!")
+    print("-" * 74)
+    print("  Router Kontekst Rejimlari Solishtirmasi:")
+    for m_name, m_info in prof["router_modes_comparison"].items():
+        print(
+            f"    • {m_name:12s}: {m_info['loaded_bytes']:6,d} bayt (~{m_info['estimated_loaded_tokens']:5,d} token) "
+            f"| Tejaldi: {m_info['savings_pct']}% | {m_info['use_case']}"
+        )
+    print("=" * 74)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="skill-search.py",
@@ -2134,7 +2267,7 @@ def main(argv: list[str] | None = None) -> int:
         p_r.add_argument("--agent", default="", help="Ixtiyoriy boshlang'ich agent ishorasi")
         p_r.add_argument("--load", action="store_true", default=True, help="Tanlangan charter, SKILL.md va reference to'liq matnini yuklash (default: True)")
         p_r.add_argument("--no-load", "--manifest-only", dest="no_load", action="store_true", help="Fayllarni o'qimasdan faqat manifest rejasini chiqarish")
-        p_r.add_argument("--context-mode", choices=["progressive", "full", "manifest"], default="progressive", help="Context loading mode: progressive (<=15KB frontmatter+core body), full (all references), or manifest")
+        p_r.add_argument("--context-mode", choices=["compact", "progressive", "full", "manifest"], default="progressive", help="Context loading mode: progressive (<=15KB frontmatter+core body), full (all references), or manifest")
         p_r.add_argument("--max-context-bytes", type=int, default=DEFAULT_MAX_CONTEXT_BYTES, help="Kontekst paketi maksimal hajmi (bayt)")
         p_r.add_argument("--reroute-with", default="", help="Ish davomida paydo bo'lgan qo'shimcha ehtiyojni dinamik qo'shish")
         p_r.add_argument("--approved", action="store_true", help="Reklama hisobiga o'zgartirish (mutation) tasdiqlanganligi")
@@ -2170,6 +2303,11 @@ def main(argv: list[str] | None = None) -> int:
 
     p = sub.add_parser("check", help="ulanish va frontmatter tekshiruvi")
     p.set_defaults(func=cmd_check)
+
+    p_tok = sub.add_parser("tokens", help="plaginning aniq token sarfi va tejamkorlik hisoboti")
+    p_tok.add_argument("--query", default="Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top")
+    p_tok.add_argument("--json", action="store_true")
+    p_tok.set_defaults(func=cmd_tokens)
 
     args = parser.parse_args(argv)
     return args.func(args)

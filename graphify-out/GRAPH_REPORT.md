@@ -1,21 +1,21 @@
 # GRAPH_REPORT — Tyrion bilim grafi (deterministik)
 
-> Qurilgan: 2026-10-22T09:29:12+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
+> Qurilgan: 2026-10-29T15:19:59+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
 
-**Tugunlar:** 192 · **Qirralar:** 868 · **Klasterlar:** 44
+**Tugunlar:** 193 · **Qirralar:** 865 · **Klasterlar:** 44
 
 ## Eng bog'langan tugunlar (hublar)
 
 | # | Tugun | Kiruvchi | Fayl |
 |---|-------|----------|------|
-| 1 | 00-manba | 52 | `rules/00-manba.md` |
-| 2 | 40-xavfsizlik-va-hisob | 50 | `rules/40-xavfsizlik-va-hisob.md` |
-| 3 | 70-charter-baseline | 41 | `rules/70-charter-baseline.md` |
+| 1 | 00-manba | 51 | `rules/00-manba.md` |
+| 2 | 40-xavfsizlik-va-hisob | 49 | `rules/40-xavfsizlik-va-hisob.md` |
+| 3 | 70-charter-baseline | 40 | `rules/70-charter-baseline.md` |
 | 4 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
-| 5 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
-| 6 | ad-iteration | 16 | `wiki/ad-iteration.md` |
-| 7 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
-| 8 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
+| 5 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
+| 6 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
+| 7 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
+| 8 | ad-iteration | 16 | `wiki/ad-iteration.md` |
 | 9 | meta-ads-sozlamalari | 15 | `wiki/meta-ads-sozlamalari.md` |
 | 10 | survey-funnel | 14 | `wiki/survey-funnel.md` |
 | 11 | 50-topshirish-dod | 13 | `rules/50-topshirish-dod.md` |
@@ -30,7 +30,7 @@
 |---------|----------|
 | agents | 36 |
 | meta-ads | 35 |
-| commands | 26 |
+| commands | 27 |
 | sop | 16 |
 | playbook | 9 |
 | rules | 9 |

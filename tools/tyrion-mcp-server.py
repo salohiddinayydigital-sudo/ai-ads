@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened v6.0.0).
+"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened v7.0.0).
 
 Guards against oversized payloads (>1 MB), malformed JSON (-32700), unknown methods (-32601),
 invalid/NaN parameters (-32602), and subprocess hangs (15s timeout).
@@ -24,7 +24,7 @@ sys.path.insert(0, str(TOOLS))
 
 import tyrion_core as tcore  # noqa: E402
 
-SERVER_VERSION = "6.0.0"
+SERVER_VERSION = "7.0.0"
 
 MCP_TOOLS = [
     {
@@ -68,10 +68,13 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_meta_audience",
-        "description": "Build 4-layer Meta Ads Andromeda 2 audience architecture with calibrated unit-economics CPA derivation, exclusion matrix, and solventnost hypotheses.",
+        "description": "Build 4-layer Meta Ads 2026 audience architecture (mode='architect'), Audience JTBD + Competitor Ad Teardown + Segment-Matched Grand Slam Offers (mode='market-intel'), or 9-section Turnkey Launch Blueprint (mode='launch-blueprint').",
         "inputSchema": {
             "type": "object",
             "properties": {
+                "mode": {"type": "string", "default": "architect", "enum": ["architect", "market-intel", "launch-blueprint"]},
+                "product": {"type": "string", "default": ""},
+                "competitors": {"type": "array", "items": {"type": "string"}},
                 "niche": {"type": "string", "default": "ecom"},
                 "daily_budget": {"type": "number", "default": 100.0},
                 "geo": {"type": "string", "default": "tashkent"},
@@ -204,12 +207,12 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
                 max_context_bytes=max_b,
             )
         cmode = str(args.get("context_mode", "full")).strip().lower()
-        if cmode not in ("full", "manifest"):
+        if cmode not in ("compact", "progressive", "full", "manifest"):
             cmode = "full"
         plan = ss.route_task(
             query=q,
             agent_hint=str(args.get("agent_hint", "")),
-            load=bool(args.get("load", True)) and (cmode == "full"),
+            load=bool(args.get("load", True)) and (cmode != "manifest"),
             context_mode=cmode,
             max_context_bytes=max_b,
             mutation_approved=bool(args.get("mutation_approved", False)),
@@ -249,14 +252,34 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
         )
     if name == "tyrion_meta_audience":
         ma = importlib.import_module("meta-audience")
+        mode = str(args.get("mode", "architect")).strip().lower()
+        niche = str(args.get("niche", "ecom"))
         budget = tcore.safe_float(args.get("daily_budget", 100.0), min_val=1.0, max_val=1_000_000.0, field_name="daily_budget")
+        aov = tcore.safe_float(args["aov"], min_val=0.01, field_name="aov") if args.get("aov") is not None else None
+        if mode == "market-intel":
+            comp_raw = args.get("competitors")
+            comp_list = [str(c) for c in comp_raw] if isinstance(comp_raw, list) else None
+            return ma.analyze_audience_competitors_and_offers(
+                product=str(args.get("product", "") or f"{niche} offer"),
+                niche=niche,
+                competitors=comp_list,
+                price=aov or 100.0,
+                country=str(args.get("geo", "UZ")),
+            )
+        if mode == "launch-blueprint":
+            return ma.build_launch_blueprint(
+                product=str(args.get("product", "") or f"{niche} offer"),
+                niche=niche,
+                daily_budget=budget,
+                aov=aov or 100.0,
+                country=str(args.get("geo", "UZ")),
+            )
         target_cpa = tcore.safe_float(args["target_cpa"], min_val=0.01, field_name="target_cpa") if args.get("target_cpa") is not None else None
         measured_cpa = tcore.safe_float(args["measured_cpa"], min_val=0.01, field_name="measured_cpa") if args.get("measured_cpa") is not None else None
-        aov = tcore.safe_float(args["aov"], min_val=0.01, field_name="aov") if args.get("aov") is not None else None
         margin_pct = tcore.safe_float(args["margin_pct"], min_val=0.01, max_val=100.0, field_name="margin_pct") if args.get("margin_pct") is not None else None
         cvr = tcore.safe_float(args["lead_to_sale_cvr"], min_val=0.01, max_val=100.0, field_name="lead_to_sale_cvr") if args.get("lead_to_sale_cvr") is not None else None
         return ma.build_architecture(
-            niche=str(args.get("niche", "ecom")),
+            niche=niche,
             daily_budget=budget,
             geo=str(args.get("geo", "tashkent")),
             target_cpa=target_cpa,
@@ -299,7 +322,26 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
         if not product:
             raise ValueError("'product' bo'sh bo'lishi mumkin emas")
         price = tcore.safe_float(args.get("price", 100.0), min_val=0.0, field_name="price")
-        return cm.build_matrix(str(args.get("niche", "ecom")), product, price)
+        mode = str(args.get("mode", "matrix")).strip().lower()
+        niche = str(args.get("niche", "ecom"))
+        market = str(args.get("market", "global"))
+        currency = str(args.get("currency", ""))
+        language = str(args.get("language", "uz_latin"))
+        if mode == "video-script":
+            return cm.generate_video_script(
+                niche=niche, product=product, problem=str(args.get("problem", "")),
+                format_name=str(args.get("format", "ugc_reaction_demo")),
+                price=price, market=market, currency=currency, language=language,
+            )
+        if mode == "pda-matrix":
+            return cm.build_pda_diversity_plan(niche=niche, product=product, price=price, market=market, currency=currency)
+        if mode == "ad-copy":
+            return cm.generate_ad_copy_pack(
+                platform=str(args.get("platform", "meta")), product=product,
+                problem=str(args.get("problem", "")), proof=str(args.get("proof", "")),
+                language=language, market=market, price=price, currency=currency,
+            )
+        return cm.build_matrix(niche, product, price, market=market, currency=currency)
     if name == "tyrion_capi_utm":
         cu = importlib.import_module("capi-utm-builder")
         return cu.build_utm_links(
@@ -392,7 +434,7 @@ def process_raw_line(raw_line: str) -> dict[str, Any] | None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v6.0.0 Native STDIO MCP Server")
+    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v7.0.0 Native STDIO MCP Server")
     parser.add_argument("--list-tools", action="store_true", help="Mavjud MCP tool'lar ro'yxatini JSON formatda chiqarish")
     args = parser.parse_args(argv)
     if args.list_tools:

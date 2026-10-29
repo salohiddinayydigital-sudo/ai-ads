@@ -476,6 +476,16 @@ def build_architecture(
             "recommended_active_adsets": max_adsets,
             "rule": "Har bir ad set haftasiga >=50 konversiya olishi shart; aks holda ad setlarni birlashtiring.",
         },
+        "meta_2026_ai_stack_and_value_rules": {
+            "five_system_hierarchy": ["GEM (Teacher Foundation Model)", "Andromeda (Retrieval + Entity ID Clustering)", "Lattice (Unified Cross-Surface Ranking + Sequence Learning)", "UTIS (User True Interest Survey Calibrator)", "Adaptive Ranking Model (<100ms Inference)"],
+            "asc_api_mode": "smart_promotion_type=GUIDED_CREATION (Marketing API v25.0+ standard)",
+            "value_rules_guidance": "When >=50 weekly conversions are reached, use Meta Value Rules (+200% to -90% bid multipliers, up to 10 rules per campaign) to prioritize high-LTV geo/age segments instead of splitting ad sets.",
+            "entity_id_creative_rule": "Andromeda groups visually similar ads under 1 Entity ID (1 retrieval ticket). Pair each audience layer with 4-6 visually distinct PDA concepts (UGC Demo, Founder Authority, iMessage Reveal, Greenscreen, Static Comparison).",
+            "verified_sources": [
+                "https://greghal.no/en/blog/meta-ads-algorithm-2026-complete-guide/",
+                "https://lineardesign.com/blog/metas-advantage-audience/",
+            ],
+        },
         "recommended_structure": structure_mode,
         "budget_split_usd": {
             f"cold_prospecting_{cold_pct}pct": cold_budget,
@@ -938,6 +948,316 @@ def diagnose_metrics(
     }
 
 
+
+
+
+
+def analyze_audience_competitors_and_offers(
+    product: str,
+    niche: str = "ecom",
+    competitors: list[str] | None = None,
+    price: float = 100.0,
+    country: str = "UZ",
+    language: str = "uz_latin",
+    currency: str = "USD",
+    problem_solved: str = "Vaqt va pul yo'qotish, natija kafolati yo'qligi",
+    unique_mechanism: str = "Bosqichma-bosqich shaffof tizim va shartnomaviy kafolat",
+    proof_point: str = "30 kunda 240+ tasdiqlangan mijoz natijasi",
+) -> dict:
+    """Deep Audience Psychographics (JTBD), Competitor Ad Teardown, and Segment-Matched Offer Engine (0 LLM tokens)."""
+    clean_prod = (product or "Asosiy Mahsulot").strip()
+    comp_list = [c.strip() for c in (competitors or []) if c.strip()] or [
+        f"{niche.upper()} bozoridagi odatiy arzon/shablon o'yinchilar",
+        f"{niche.upper()} sohasidagi qimmat, lekin kafolatsiz brendlar",
+    ]
+    c_code = (country or "UZ").strip().upper()
+    q_encoded = urllib.parse.quote(clean_prod)
+    mkt_info = mloc.detect_market(text=f"{clean_prod} {c_code}", explicit_market=c_code.lower() if c_code.lower() in ("uz", "us", "eu", "uk", "mena", "latam", "sea", "in") else None, currency=currency)
+    bnpl_methods = ", ".join(mkt_info.get("payment_methods", [])[:3]) or "Bo'lib to'lash (0% muddatli to'lov)"
+    fmt_price = mloc.format_currency(price, currency)
+    monthly_bnpl = mloc.format_currency(round(price / 6.0, 2), currency)
+
+    # 1. Deep Audience JTBD & 4 Buyer Personas
+    audience_segments = [
+        {
+            "segment_id": "S1_SKEPTICAL_BURNED",
+            "segment_name": "1-Segment: 'Oldin kuygan va shubhali' (Skeptical / Risk-Averse — ~35% bozor)",
+            "jtbd_functional": f"{clean_prod} orqali {problem_solved} muammosini aldanmasdan hal qilish.",
+            "jtbd_emotional": "Yana pul va vaqt yo'qotib, oila/jamoa oldida uyalib qolmaslik.",
+            "hidden_objection": "Hamma chiroyli va'da beradi, lekin pulni olgach xizmat sifati tushib ketadi.",
+            "schwartz_awareness": "Solution Aware / Jaded (Vadalardan charchagan — faqat ISBOT va KAFOLAT ishlaydi)",
+            "andromeda_creative_signal": "Video 0-3s da mijozning real shartnomasi, jonli natija skrinshoti yoki jarayon ichidan isbot (Greenscreen / Case Study).",
+            "matched_offer_type": "RISK_REVERSAL_GUARANTEE_OFFER",
+            "tailored_offer": {
+                "offer_headline": f"{clean_prod}: Natija shartnomada yoziladi yoki bosqichma-bosqich kafolatlanadi",
+                "core_hook": f"Oldin {clean_prod} dan ko'nglingiz qolganmi? Shu sababli biz quruq va'da emas, {unique_mechanism} va {proof_point} asosida ishlaymiz.",
+                "risk_reversal": "Birinchi bosqichda kelishilgan KPI/standart bajarilmasa, keyingi bosqich to'lovi olinmaydi yoki bepul qayta ishlanadi.",
+                "cta": "Shartnoma shartlari va real mijozlar natijasini ko'rish",
+            },
+        },
+        {
+            "segment_id": "S2_URGENT_FAST_RESULT",
+            "segment_name": "2-Segment: 'Vaqt tig'iz — tez va tayyor yechim kerak' (Speed & Convenience — ~25% bozor)",
+            "jtbd_functional": f"Ortiqcha bosh og'riqsiz va uzoq kutmasdan {clean_prod} natijasini olish.",
+            "jtbd_emotional": "Vaqtni tejash va jarayonni mutaxassislarga to'liq topshirish (Done-For-You).",
+            "hidden_objection": "Bunga mening vaqtim yo'q, jarayon juda uzoq va murakkab bo'lsa kerak.",
+            "schwartz_awareness": "Product Aware (Tezlik va qulaylik qidiryapti)",
+            "andromeda_creative_signal": "Video 0-3s da 'Qanday qilib X vaqtda ortiqcha ovoragarchiliksiz...' + tayyor 'kalitgacha' (turnkey) jarayon.",
+            "matched_offer_type": "FAST_TRACK_DFY_OFFER",
+            "tailored_offer": {
+                "offer_headline": f"Tayyor '{clean_prod}' paketi — 24 soat ichida ishga tushiramiz",
+                "core_hook": f"{problem_solved} bilan o'zingiz kurashib vaqt yo'qotmang: {unique_mechanism} orqali barcha texnik ishni o'zimiz bajaramiz.",
+                "speed_bonus": "Bugun murojaat qilganlarga 15 daqiqalik tezkor audit / ekspress-diagnostika bepul.",
+                "cta": "Tayyor paket va muddatni 2 daqiqada hisoblatish",
+            },
+        },
+        {
+            "segment_id": "S3_CASHFLOW_BNPL_SMART",
+            "segment_name": "3-Segment: 'Ehtiyoji kuchli, lekin birvarakayiga katta to'lovga ikkilanadi' (Smart Cash-Flow / BNPL — ~25% bozor)",
+            "jtbd_functional": f"Byudjetni qiynamasdan hoziroq {clean_prod} dan foydalanishni boshlash.",
+            "jtbd_emotional": "Sifatdan voz kechmasdan oylik kichik to'lov bilan maqsadga erishish.",
+            "hidden_objection": f"{fmt_price} ni bitta to'lovda chiqarish hozirgi byudjetimga og'irlik qiladi.",
+            "schwartz_awareness": "Most Aware (Mahsulotni xohlaydi, faqat to'lov sharti to'xtatib turibdi)",
+            "andromeda_creative_signal": f"Video va bannerda yirik {fmt_price} o'rniga 'Oyiga atigi {monthly_bnpl} dan ({bnpl_methods})' langari.",
+            "matched_offer_type": "PAYMENT_STRUCTURED_OR_DIAGNOSTIC_ENTRY_OFFER",
+            "tailored_offer": {
+                "offer_headline": f"{clean_prod} — boshlang'ich to'lovsiz oyiga {monthly_bnpl} dan ({bnpl_methods})",
+                "core_hook": f"To'liq summani hozir to'lash shart emas: {clean_prod} ni bugun boshlang va {bnpl_methods} orqali qulay bo'lib to'lang.",
+                "entry_step": "Bepul dastlabki hisob-kitob va individual to'lov grafigi.",
+                "cta": "Oylik to'lov jadvalini Telegramda olish",
+            },
+        },
+        {
+            "segment_id": "S4_VIP_PRESTIGE_QUALITY",
+            "segment_name": "4-Segment: 'Premium sifat, status va maksimal e'tibor' (VIP / High-LTV — ~15% bozor, lekin 50%+ foyda)",
+            "jtbd_functional": f"Bozordagi eng ishonchli, individual yondashuvli {clean_prod} yechimini olish.",
+            "jtbd_emotional": "Status, xotirjamlik va eng kuchli mutaxassis bilan bevosita ishlash.",
+            "hidden_objection": "Arzon ommaviy xizmatlarda sifat va shaxsiy nazorat bo'lmaydi.",
+            "schwartz_awareness": "Problem/Solution Aware (Eng yuqori sifat va ekspertlikni tanlaydi)",
+            "andromeda_creative_signal": "Founder / Bosh ekspert yuzi bilan chuqur tahliliy video, yuqori estetika, CHEGIRMA SO'ZI YO'Q (chegirma VIP mijozni cho'chitadi).",
+            "matched_offer_type": "VIP_CONCIERGE_VALUE_STACK_OFFER",
+            "tailored_offer": {
+                "offer_headline": f"{clean_prod} VIP Individual Dasturi (Oyiga faqat cheklangan mijozlar uchun)",
+                "core_hook": f"Standart shablonlar sizning darajangizga to'g'ri kelmaydi: bosh ekspert nazorati ostidagi {clean_prod} tizimi.",
+                "vip_bonus_stack": "Shaxsiy menejer + ustuvor xizmat + yopiq audit va 90 kunlik kuzatuv.",
+                "cta": "VIP konsultatsiya uchun bo'sh vaqtni band qilish",
+            },
+        },
+    ]
+
+    # 2. Competitor Teardown & Counter-Positioning Matrix
+    competitor_teardown = {
+        "official_ad_spy_links": {
+            "meta_ad_library_url": f"https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country={c_code}&q={q_encoded}",
+            "google_ads_transparency_url": f"https://adstransparency.google.com/?region={c_code}&query={q_encoded}",
+            "tiktok_creative_center_url": "https://ads.tiktok.com/business/creativecenter/inspiration/topads/pc/en",
+        },
+        "analyzed_competitors": comp_list,
+        "competitor_weaknesses_to_exploit": [
+            {
+                "weakness": "1. Bir xil quruq va'da ('Yuqori sifat va hamyonbop narx')",
+                "why_they_lose": "Bozorda hamma shu gapni aytgani uchun mijozda 'banner blindness' paydo bo'lgan — hech kim ularga ishonmaydi.",
+                "our_counter_wedge": f"Va'da emas, MEZANIZM va ISBOT ko'rsating: '{unique_mechanism}' + '{proof_point}' (`Proof > Promise` qoidasi).",
+            },
+            {
+                "weakness": "2. Faqat 'Chegirma -30%' bilan sotishga urinish",
+                "why_they_lose": "Chegirma faqat arzonchi/bepulchi auditoriyani tortadi va brend qadrini tushiradi.",
+                "our_counter_wedge": "Chegirma o'rniga BONUS STACK (asosiy mahsulot qadrini oshiruvchi 3 ta qo'shimcha qiymat) va shartli KAFOLAT bering.",
+            },
+            {
+                "weakness": "3. Lid tushgach sekin va skriptsiz sotuv (>30 daqiqa kutish)",
+                "why_they_lose": "Mijoz raqam qoldirgach 15 daqiqa ichida sovib ketadi yoki boshqa raqobatchidan oladi.",
+                "our_counter_wedge": "Lid tushgan soniyada Telegram/WhatsApp orqali 45s video-keyslar yuborish va <5 daqiqada diagnostik qo'ng'iroq qilish.",
+            },
+            {
+                "weakness": "4. Barcha auditoriyaga bitta umumiy reklama aylantirish",
+                "why_they_lose": "Meta Andromeda algoritmi bitta umumiy reklamani faqat eng arzon segmentga ko'rsatadi.",
+                "our_counter_wedge": "Yuqoridagi 4 ta segment (Skeptik, Shoshilinch, BNPL/Bo'lib to'lov, VIP) uchun 4 xil alohida Hook va Offer ishlatish.",
+            },
+        ],
+        "competitor_ad_longevity_rule": (
+            "Meta Ad Library'da raqobatchining qaysi reklamasi 30+ kundan beri o'chirilmasdan aylanayotgan bo'lsa — "
+            "o'sha kreativ ularga pul keltiryapti. Uning so'zlarini ko'chirmang: uning Hook strukturasi va Offer kuchini tahlil qilib, undan kuchliroq Proof bering."
+        ),
+    }
+
+    # 3. Hormozi Value Equation Master Offer Construction
+    master_grand_slam_offer = {
+        "framework": "Alex Hormozi Value Equation: (Dream Outcome x Perceived Likelihood) / (Time Delay x Effort & Sacrifice)",
+        "1_core_promise": f"{clean_prod} orqali {problem_solved} muammosini {unique_mechanism} yordamida hal qilish.",
+        "2_proof_and_likelihood_booster": f"Quruq gap emas: {proof_point} (jonli keyslar, shartnoma va shaffof jarayon).",
+        "3_speed_first_win_lever": "Murojaat qilgan kuniyoq (24 soat ichida) dastlabki diagnostika / 1-bosqich natijasini ko'rsatish (Time Delay -> minimal).",
+        "4_effort_reduction_lever": "Mijozdan minimal harakat talab qilinadigan 'Tayyor Tizim' (Done-For-You / shaxsiy kuzatuv).",
+        "5_bonus_stack": [
+            f"Bonus #1 (Boshlang'ich to'siqni yechish): Bepul dastlabki audit / shaxsiy reja ({mloc.format_currency(round(price * 0.25, 2), currency)} qiymatida — bugun murojaat qilganlarga 0).",
+            f"Bonus #2 (Tezlikni oshirish): Tayyor shablonlar / tekshiruv ro'yxati / ekspress yo'riqnoma.",
+            f"Bonus #3 (Xavfsizlik): 30 kunlik qo'llab-quvvatlash va sifat nazorati.",
+        ],
+        "6_risk_reversal_guarantee": "Shartli Natija Kafolati: Kelishilgan standart va muddat bajarilmasa, kamchilik o'z hisobimizdan bepul bartaraf etiladi.",
+        "7_honest_scarcity": "Sifatni saqlash uchun har haftada jamoa sig'imiga qarab cheklangan miqdordagi mijozlar qabul qilinadi (soxta taymerlarsiz).",
+        "8_price_and_payment_anchor": f"To'liq qiymat: {fmt_price} | Qulay kirish varianti: oyiga {monthly_bnpl} dan ({bnpl_methods}).",
+    }
+
+    return {
+        "schema": "tyrion.market_intel_and_offers/v7.2",
+        "zero_llm_tokens_execution": True,
+        "product": clean_prod,
+        "niche": niche,
+        "country": c_code,
+        "currency": currency.upper(),
+        "1_audience_jtbd_and_4_segments": audience_segments,
+        "2_competitor_teardown_and_gaps": competitor_teardown,
+        "3_master_grand_slam_offer": master_grand_slam_offer,
+    }
+
+
+def build_launch_blueprint(
+    product: str,
+    niche: str = "ecom",
+    daily_budget: float = 50.0,
+    aov: float = 100.0,
+    margin_pct: float = 40.0,
+    lead_to_sale_cvr: float = 15.0,
+    country: str = "UZ",
+    language: str = "uz",
+    currency: str = "USD",
+    problem_solved: str = "Reklama byudjeti kuyishi va sifatsiz lidlar",
+    proof_point: str = "30 kunda 3.2x ROAS va 240+ tasdiqlangan sotuv",
+    video_format: str = "pas",
+    ad_account_id: str = "",
+) -> dict:
+    """Turnkey 10-Point Result-Maximizer Launch Blueprint (0 LLM tokens).
+
+    Combines Unit Economics, 2026 Meta 5-System Targeting, Andromeda P x D x A Creative Plan,
+    30s 9:16 Video Script, AI-Tell-Free Ad Copy, Anti-Junk-Lead Conversion Gate, and 7-Day Kill/Scale Protocol.
+    """
+    clean_prod = (product or "Premium Offer").strip()
+    arch = build_architecture(
+        niche=niche,
+        daily_budget=daily_budget,
+        geo=country,
+        currency=currency,
+        aov=aov,
+        margin_pct=margin_pct,
+        lead_to_sale_cvr=lead_to_sale_cvr,
+        has_pixel=True,
+        has_crm=True,
+    )
+    mte = importlib.import_module("meta-targeting-engine")
+    targeting_rep = mte.search_and_validate_targeting(
+        product=clean_prod,
+        niche=niche,
+        problem_solved=problem_solved,
+        purchase_intent=f"{clean_prod} buyurtma va narx",
+        objective="SALES" if niche == "ecom" else "LEADS",
+        country=country,
+        language=language,
+        ad_account_id=ad_account_id,
+        max_queries=8,
+    )
+    cm = importlib.import_module("creative-matrix")
+    pda_plan = cm.build_pda_diversity_plan(niche=niche, product=clean_prod, price=aov, currency=currency)
+    lang_code = "uz_latin" if language in ("uz", "uz_latin", "uz-Latn") else language
+    video_script = cm.generate_video_script(
+        niche=niche,
+        product=clean_prod,
+        problem=problem_solved,
+        format_name=video_format,
+        duration_sec=30,
+        price=aov,
+        market=country.lower(),
+        currency=currency,
+        language=lang_code,
+    )
+    ad_copy = cm.generate_ad_copy_pack(
+        product=clean_prod,
+        problem=problem_solved,
+        proof=proof_point,
+        platform="meta",
+        language=lang_code,
+        price=aov,
+        currency=currency,
+    )
+    target_cpa = arch.get("unit_economics", {}).get("derived_target_cpa") or round(aov * (margin_pct / 100.0) * 0.5, 2)
+    kill_cpa = round(float(target_cpa) * 1.5, 2)
+
+    lead_quality_gate = {
+        "why_junk_leads_happen": (
+            "Meta Instant Form default 'More Volume' rejimida avto-to'ldirilgan raqamlarni yuboradi va "
+            "algoritm (GEM + Andromeda) xaridorni emas, shunchaki arzon forma to'ldiruvchilarni qidiradi."
+        ),
+        "mandatory_fixes_for_real_sales": [
+            "1. FORM FRICTION GATE: Instant Form turini 'Higher Intent' (Review screen bilan) ga o'tkazing va 2 ta saralovchi savol (byudjet / muddat) qo'shing.",
+            "2. CAPI DOWN-FUNNEL SIGNAL: Xom 'Lead' emas, CRM yoki Telegram botda tasdiqlangan 'QualifiedLead' va 'Purchase' hodisasini Meta CAPI v26.0 orqali (EMQ >= 8.0) qaytarib yuboring.",
+            "3. CREATIVE PRICE/SOLVENTNOST ANCHOR: Video va matnning birinchi 5 soniyasida narx diapazoni yoki minimal paket shartini ochiq ayting — bepulchilar o'zi bosmaydi (UTIS filtr).",
+            "4. 5-MINUTE SPEED-TO-LEAD SLA: Lid tushgach < 5 daqiqada qo'ng'iroq qiling va qo'ng'iroqqacha Telegram/WhatsApp orqali 45 soniyalik isbot videosini avto-yuboring (ko'tarish foizi 35% dan 75%+ ga oshadi).",
+        ],
+    }
+
+    seven_day_protocol = [
+        {
+            "days": "1–2 kun (Learning Phase — Tegilmasin)",
+            "rule": "48 soat ichida byudjet, auditoriya yoki kreativni o'zgartirmang. Lattice va Andromeda dastlabki 1,500–3,000 ko'rishda xaridorga mos klasterlarni qidiradi.",
+        },
+        {
+            "days": "3-kun (Hook va CTR Darvozasi)",
+            "rule": "3-soniyalik Hook Rate >= 25%, 15-soniyalik Hold Rate >= 12% va Link CTR >= 1.0% ekanini tekshiring. Agar Hook < 25% bo'lsa, videoning faqat 0–3s boshini almashtiring.",
+        },
+        {
+            "days": "5-kun (Stop-Loss / Kill Darvozasi)",
+            "rule": f"Agar biror Ad Set yoki reklama ${kill_cpa} (1.5x Target CPA) sarflab 0 ta sifatli konversiya bersa, darhol o'chiring va byudjetni g'olib Entity ID kontseptsiyasiga o'tkazing.",
+        },
+        {
+            "days": "7-kun (Spend-Guard Scaling + More/Better/New)",
+            "rule": f"CPA <= ${target_cpa} bo'lgan g'olib Ad Set byudjetini har 48–72 soatda maksimal +20% ga oshiring (Spend-Guard qoidasi) va g'olib hook atrofida 3 ta yangi 'More/Better/New' variatsiya chiqaring.",
+        },
+    ]
+
+    return {
+        "schema": "tyrion.launch_blueprint/v7.1",
+        "zero_llm_tokens_execution": True,
+        "product": clean_prod,
+        "niche": niche,
+        "country": country.upper(),
+        "currency": currency.upper(),
+        "daily_budget": daily_budget,
+        "1_unit_economics_and_guardrails": {
+            "aov": aov,
+            "margin_pct": margin_pct,
+            "lead_to_sale_cvr_pct": lead_to_sale_cvr,
+            "target_cpa": target_cpa,
+            "stop_loss_kill_cpa": kill_cpa,
+            "max_safe_budget_step_pct": 20.0,
+        },
+        "2_audience_architecture_and_meta_2026_stack": {
+            "recommended_structure": arch.get("recommended_structure"),
+            "audience_layers": arch.get("audience_layers"),
+            "mandatory_exclusions": arch.get("mandatory_exclusions"),
+            "meta_2026_ai_stack": arch.get("meta_2026_ai_stack_and_value_rules"),
+        },
+        "3_detailed_targeting_and_ads_manager_setup": {
+            "verification_mode": targeting_rep.get("targetologist_report", {}).get("1_overview", {}).get("verification_mode"),
+            "recommended_packs": targeting_rep.get("targetologist_report", {}).get("7_recommended_targeting_packs"),
+            "practitioner_ads_manager_playbook": targeting_rep.get("targetologist_report", {}).get("9_practitioner_ads_manager_playbook"),
+        },
+        "4_andromeda_pda_creative_diversity": pda_plan,
+        "5_ready_to_shoot_video_script_9x16": video_script,
+        "6_platform_native_ad_copy": ad_copy,
+        "7_lead_quality_and_sales_conversion_gate": lead_quality_gate,
+        "8_seven_day_kill_scale_protocol": seven_day_protocol,
+        "9_audience_competitor_and_offer_matrix": analyze_audience_competitors_and_offers(
+            product=clean_prod,
+            niche=niche,
+            price=aov,
+            country=country,
+            language=lang_code,
+            currency=currency,
+            problem_solved=problem_solved,
+            proof_point=proof_point,
+        ),
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="meta-audience.py",
@@ -1047,6 +1367,35 @@ def main(argv: list[str] | None = None) -> int:
     p_diag.add_argument("--ftir", type=float, default=72.0)
     p_diag.add_argument("--json", action="store_true")
 
+    p_bp = sub.add_parser("launch-blueprint", help="10-bandlik tayyor Result-Maximizer Launch Blueprint (Targeting + Video Script + Ad Copy + Lead Quality Gate + 7-Day Protocol)")
+    p_bp.add_argument("--product", required=True, help="Mahsulot yoki xizmat nomi")
+    p_bp.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
+    p_bp.add_argument("--daily-budget", type=float, default=50.0)
+    p_bp.add_argument("--aov", type=float, default=100.0)
+    p_bp.add_argument("--margin-pct", type=float, default=40.0)
+    p_bp.add_argument("--lead-to-sale-cvr", type=float, default=15.0)
+    p_bp.add_argument("--country", default="UZ")
+    p_bp.add_argument("--language", default="uz")
+    p_bp.add_argument("--currency", default="USD")
+    p_bp.add_argument("--problem", default="Reklama byudjeti kuyishi va sifatsiz lidlar")
+    p_bp.add_argument("--proof", default="30 kunda 3.2x ROAS va 240+ tasdiqlangan sotuv")
+    p_bp.add_argument("--format", default="pas", choices=["ugc_testimonial", "founder_story", "pas", "greenscreen", "split_screen", "street_interview", "faceless_broll"])
+    p_bp.add_argument("--account-id", default="")
+    p_bp.add_argument("--json", action="store_true")
+
+    p_mi = sub.add_parser("market-intel", help="Chuqur Auditoriya (4 JTBD segment), Raqobatchilar tahlili (Ad Library + Counter-Wedge) va Segmentga mos Offer generatori")
+    p_mi.add_argument("--product", required=True, help="Mahsulot yoki xizmat nomi")
+    p_mi.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
+    p_mi.add_argument("--competitor", action="append", default=[], help="Raqobatchi nomi (bir nechta berish mumkin)")
+    p_mi.add_argument("--price", type=float, default=100.0, help="Mahsulot narxi / o'rtacha chek")
+    p_mi.add_argument("--country", default="UZ")
+    p_mi.add_argument("--language", default="uz_latin")
+    p_mi.add_argument("--currency", default="USD")
+    p_mi.add_argument("--problem", default="Vaqt va pul yo'qotish, natija kafolati yo'qligi")
+    p_mi.add_argument("--mechanism", default="Bosqichma-bosqich shaffof tizim va shartnomaviy kafolat")
+    p_mi.add_argument("--proof", default="30 kunda 240+ tasdiqlangan mijoz natijasi")
+    p_mi.add_argument("--json", action="store_true")
+
     args = parser.parse_args(argv)
 
     try:
@@ -1113,6 +1462,35 @@ def main(argv: list[str] | None = None) -> int:
             res = calc_lookalike(args.seed_size, args.seed_type, args.country)
         elif args.command == "diagnose":
             res = diagnose_metrics(args.cpm, args.ctr, args.cpc, args.lp_cvr, args.lead_to_sale, args.frequency, args.ftir)
+        elif args.command == "launch-blueprint":
+            res = build_launch_blueprint(
+                product=args.product,
+                niche=args.niche,
+                daily_budget=args.daily_budget,
+                aov=args.aov,
+                margin_pct=args.margin_pct,
+                lead_to_sale_cvr=args.lead_to_sale_cvr,
+                country=args.country,
+                language=args.language,
+                currency=args.currency,
+                problem_solved=args.problem,
+                proof_point=args.proof,
+                video_format=args.format,
+                ad_account_id=args.account_id,
+            )
+        elif args.command == "market-intel":
+            res = analyze_audience_competitors_and_offers(
+                product=args.product,
+                niche=args.niche,
+                competitors=args.competitor,
+                price=args.price,
+                country=args.country,
+                language=args.language,
+                currency=args.currency,
+                problem_solved=args.problem,
+                unique_mechanism=args.mechanism,
+                proof_point=args.proof,
+            )
         else:
             return 2
     except Exception as exc:

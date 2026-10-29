@@ -22,7 +22,7 @@ triggers:
 - ctr tushib ketdi
 - выгорание креативов
 - аудит креативов
-skills: [ads-creative, ads-monitor, ads-optimize, ads-test]
+skills: [ad-creative, ads-creative, ads-monitor, ads-optimize, ads-test]
 authority_boundary: Creative performance & fatigue diagnostics only; does not mutate ad sets or tracking
 output_contract: JSON creative audit findings (hook/hold/FTIR diagnostics, format gaps, test queue)
 ---

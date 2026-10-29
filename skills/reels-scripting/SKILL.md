@@ -1,6 +1,6 @@
 ---
 name: reels-scripting
-description: Turn a reference Instagram Reel into a script for your own Reel, tuned to your voice and repurposed from your newsletter content. Takes a Reel URL or Notion reference link, uses Apify to scrape the video, sends it to Gemini 2.5 Flash for full transcript + hook + structure analysis, then writes a new script applying the same patterns to your newsletter topic. Use this skill whenever the user says "script a reel", "reels scripting", "turn this into a reel", pastes an Instagram Reel URL, or references their Notion outlier reels database. Requires APIFY_API_TOKEN and GOOGLE_AI_API_KEY environment variables.
+description: "Write high-converting, ready-to-shoot 9:16 short-form video scripts for Instagram Reels, TikTok, YouTube Shorts, and Meta Video Ads (UGC, Founder Authority, iMessage/ChatGPT Reveal, Greenscreen, No-Yapping Split-Screen, Problem-Solution, and Reference Reel Adaptation) in Uzbek, Russian, English, or any BCP 47 language. Works out-of-the-box with zero external API keys required."
 triggers:
 - reels skript
 - reels ssenariy
@@ -10,10 +10,16 @@ triggers:
 - сценарий рилс
 - рилс сценарий
 - видео скрипт
+- video ssenariy
+- ugc skript
+- script a reel
+- reels scripting
+- turn this into a reel
 aliases:
 - reels-script
 - short-form-script
 - ugc-script
+- video-ad-script
 domains:
 - creative
 - video
@@ -25,227 +31,64 @@ platforms:
 - youtube
 attached_agents: [reels-scriptwriter]
 related_skills:
+- ad-creative
 - ads-creative
 - video-editing
 - social
-references: []
+references:
+- skills/ad-creative/references/video-ad-scripts-and-specs.md
+- skills/ad-creative/references/meta-creative-formats.md
 risk_level: low
-output_contract: Time-coded Reels/Shorts script (0-3s Hook, Body, Proof, CTA, Visual & Audio cues)
+output_contract: Complete Time-Coded 9:16 Video Script (3 Visual/Verbal Hook Options, Scene-by-Scene A-Roll/B-Roll Table, 720x1200 Safe-Zone Text Overlays, Audio/SFX Cues & Falsifiable Test Hypothesis)
 ---
 
-# Reels Scripting
+# 🎬 Reels, TikTok & Meta Video Ad Scripting Engine (`reels-scripting`)
 
-## CRITICAL: Auto-start on load
+Generate ready-to-shoot, high-retention `9:16` vertical video scripts for **paid Meta/TikTok/YouTube video ads** and **organic Reels/Shorts** — immediately and with **zero mandatory external API keys** (`APIFY_API_TOKEN` is never required).
 
-When this skill triggers, go straight to Step 1. Do not summarise.
+## 1. Deterministic Video Script Generation (`tools/creative-matrix.py video-script`)
 
-## Prerequisites
+Always run the built-in zero-token video script generator first to scaffold the time-coded storyboard, 3-second hook variants, `720x1200` safe-zone overlays, and BNPL/offer anchors:
 
-This skill needs:
-
-- `APIFY_API_TOKEN` environment variable (Instagram scraping)
-- `GOOGLE_AI_API_KEY` environment variable (Gemini 2.5 Flash video analysis)
-- Node.js 18+ and the `apify-client` and `@google/generative-ai` packages
-
-If either env var is missing, tell the user to run:
-
-```
-! export APIFY_API_TOKEN=your_token
-! export GOOGLE_AI_API_KEY=your_key
-```
-
-Then stop until both are set.
-
-## Step 1. Get the reference
-
-Ask:
-
-> Paste the reference Reel URL or Notion link. This is the outlier Reel you want to reverse-engineer the format from.
-
-Wait for the URL.
-
-If the user pastes a Notion link, follow it via WebFetch, locate the Instagram Reel URL on the page, and extract it. If no Reel URL is found on the Notion page, ask the user to paste the Reel URL directly.
-
-## Step 2. Get the newsletter topic
-
-Ask:
-
-> What's the topic from your newsletter you want to repurpose into this Reel? Paste the relevant newsletter section, or type the core idea in a sentence.
-
-Wait for the topic. Read newsletter-voice.md, voice.md, and about-me.md from the project if they exist, so the script matches the user's voice.
-
-## Step 3. Scrape and download the Reel
-
-Create `~/Desktop/Reels/` if it does not exist. Write a Node.js script at `~/Desktop/Reels/analyse-reel.js` that:
-
-1. Uses `apify-client` to call `apify/instagram-reel-scraper` with `{ directUrls: [reelUrl], resultsLimit: 1 }`. If that returns no items, fall back to `{ urls: [reelUrl], resultsLimit: 1 }`, then `apify/instagram-scraper` with `{ directUrls: [reelUrl], resultsType: 'posts', resultsLimit: 1 }`.
-2. Extracts `videoUrl` from the returned item.
-3. Downloads the video to `~/Desktop/Reels/downloads/{username}_{shortCode}.mp4`.
-4. Saves raw scrape data to `~/Desktop/Reels/reel_data_{shortCode}.json`.
-
-Run the script. Confirm file size and metadata (views, likes, comments, caption first 200 chars) before continuing.
-
-## Step 4. Analyse with Gemini 2.5 Flash
-
-Extend the Node script (or run a second pass) that:
-
-1. Reads the downloaded `.mp4` as base64.
-2. Calls `genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })`.
-3. Sends the video with this exact prompt:
-
-```
-I'm studying this Reel to write my own script in a similar style for my audience of [AUDIENCE FROM about-me.md].
-
-## Full Transcript
-- Transcribe EVERY word with timestamps
-
-## Hook
-- Exact first words spoken
-- Word count of the hook
-- What makes it stop the scroll?
-
-## Language Patterns
-- Average sentence length
-- You/your vs I/me ratio
-- Transitions between points
-- Where are the 'just' minimisers?
-
-## Structure
-- Total duration
-- Section breakdown with timings
-- What's the before/after moment?
-- What's the CTA?
-
-## One key insight
-- The single most important technique to learn from this Reel
+```bash
+python3 tools/creative-matrix.py video-script \
+  --niche <ecom|edu|real-estate|medical|b2b|beauty|auto|local> \
+  --product "<product_or_offer>" \
+  --problem "<main_customer_pain>" \
+  --format <ugc_reaction_demo|founder_authority|imessage_reveal|chatgpt_reveal|greenscreen_proof|no_yapping_split_screen|faceless_motion_explainer> \
+  --duration <15|30|45> \
+  --price <price> \
+  --market <uz|global|eu|us|mena|latam|sea|in> \
+  --language <uz_latin|uz_cyrillic|ru|en>
 ```
 
-Save the analysis to `~/Desktop/Reels/analysis_reference_{shortCode}.md`.
+## 2. Supported Video Ad & Reels Formats (2026 S/A-Tier)
 
-## Step 5. Write the new Reel script
+1. **`ugc_reaction_demo` (S-Tier UGC Reaction + Hard-Cut Demo):**
+   - `0–3s`: Visceral problem/reaction hook + bold `720x1200` text overlay.
+   - `3–12s`: Immediate hard cut to hands-on product/service demonstration (no intro rambling).
+   - `12–22s`: Quantified result + objection crusher (guarantee / installment anchor).
+   - `22–30s`: Direct CTA with concrete next step.
+2. **`founder_authority` (S-Tier Founder / Doctor / Expert Direct-to-Camera):**
+   - `0–3s`: Counter-intuitive industry truth or costly mistake 90% of buyers make.
+   - `3–15s`: Transparent mechanism breakdown with B-roll proof overlays every `2s`.
+   - `15–25s`: Real client case study + risk-reversal guarantee.
+   - `25–30s`: Low-friction consultation/order CTA.
+3. **`imessage_reveal` / `chatgpt_reveal` (A-Tier iOS-Native Screen Reveal):**
+   - `0–3s`: Notification / screenshot hook (*"Did you see what they quoted me?!"* or typed prompt).
+   - `3–15s`: Bubble-by-bubble message thread or streaming answer revealing the hidden gem solution.
+   - `15–25s`: Quick cut to real product/clinic/platform proof + offer code/anchor.
+4. **`greenscreen_proof` (A-Tier Greenscreen Comment / Price Breakdown):**
+   - Creator points to a real customer comment, competitor comparison table, or contract/pricing sheet behind them while walking through the proof.
+5. **`no_yapping_split_screen` (S-Tier Split-Screen Fast Demo):**
+   - Top 50% of `9:16` frame shows continuous uninterrupted visual demo; bottom 50% shows rapid-fire proof callouts.
+6. **`faceless_motion_explainer` (A-Tier Faceless Motion / B-Roll + Voiceover):**
+   - Designed for teams who do not want to appear on camera: dynamic B-roll / motion graphics + word-timed captions + energetic TTS/voiceover.
 
-Using the analysis from Step 4, the newsletter topic from Step 2, and the user's voice files, write a new Reel script to `~/Desktop/Reels/reel-[slug].md`.
+## 3. Mandatory Output Structure for Every Script
 
-Apply these rules (non-negotiable):
-
-### Hook
-- Never open with "I". Use "this", "you", a fact, or a name drop.
-- Proven formats: "This changed... forever" / negative flip ("X is useless unless...") / capability statement.
-- Hook creates curiosity or pattern interrupt within 3 seconds.
-- Mirror the hook's word count and structure from the reference analysis.
-
-### Body
-- British English. Short sentences. No em dashes, no semicolons.
-- Use "you" and "just" conversationally ("you just drop in...").
-- Never merge three or more staccato fragments. Combine into one flowing sentence.
-- Never state the conclusion. Let the facts do the work.
-- No "link in bio". Use comment automation.
-
-### Comment trigger
-- Single caps word only (SCRIPT, WIKI, PROMPTS, VIDEO).
-- Must directly relate to what is being promised.
-- No quotes, no "below", no trailing punctuation.
-
-### CTA
-- "Comment [WORD] and I'll send you [specific thing]"
-- Short. No "the link to my full" padding.
-
-### Duration and structure
-- Target 30 to 45 seconds total.
-- 2 key points maximum, not 3.
-- Caption mirrors the script. Update both together.
-
-### Script file structure
-
-```
-# Reel: [title]
-
-## Reference analysis
-- URL: [reel url]
-- Views: [number]
-- Key technique: [from Gemini analysis]
-
-## Duration target
-30-45 seconds
-
-## Hook (0-3s)
-[Exact words]
-
-## Point 1 ([start]-[end]s)
-[Exact words]
-
-## Point 2 ([start]-[end]s)
-[Exact words]
-
-## CTA ([start]-[end]s)
-[Exact words including "Comment [WORD]"]
-
----
-
-## Caption
-[Mirror the script, formatted for Instagram]
-
-## Comment trigger
-[WORD]
-
-## Deliverable
-[What the comment trigger unlocks]
-
----
-
-## Visual notes
-[Cuts, B-roll ideas, text overlays]
-```
-
-## Step 6. QA loop
-
-Score the script against the rules in Step 5. Every violation must be fixed. Re-score until the script hits 95/100. Never show the user anything below 95.
-
-Common violations to check:
-- Opens with "I"
-- Staccato fragments of three or more
-- States the conclusion
-- Multi-word or stylised comment trigger
-- Duration over 45 seconds when read aloud
-- 3 points instead of 2
-- Caption does not mirror script
-
-## Step 7. Offer the pipeline
-
-After the script is approved, offer:
-
-> Two paths from here:
->
-> 1. Record it yourself.
-> 2. Auto-generate with ElevenLabs (voice) + HeyGen (avatar) + Remotion (motion graphics). If you have the my-video project configured, run `npm run pipeline:claude-routines` with this script config.
-
-## Rules
-
-- Never skip the 95/100 QA gate.
-- Always read voice.md and about-me.md before writing. Voice match is non-negotiable.
-- Never invent metrics from the reference Reel. Use only what Apify returns.
-- British English. No em dashes. No semicolons.
-- Every script deliverable includes the exact caption and comment trigger alongside the script. Never deliver just the script.
-- If the reference Reel scrape fails across all three actor variants, report the failure and stop. Do not fabricate analysis.
-- Gemini 2.5 Flash is the model. Do not substitute without the user's approval.
-
----
-
-## Operator qatlami (Tyrion lokal bilimi)
-
-> Bu bo'lim — Tyrion (O'zbekiston targetolog agentligi) uchun lokal moslashuv. Vendor metodika o'zgarishsiz.
-
-### Qachon ishlatiladi (UZ triggerlari)
-- "reels skripti yoz", "bu videodan skript tuz", "reels uchun hook/ssenariy"
-- "outlier reel tahlil qil", "reels uchun matn tayyorla"
-
-### UZ amaliyot qoidalari (manbalardan)
-- Ovoz/til moslashuvi: asl skill'dagi British English ovoz qoidasi o'zbekcha kontentda moslashtiriladi — skript tili auditoriya segmentiga qarab o'zbekcha (lotin) yoki ruscha yoziladi; qisqa jumlalar, em dash/semicolon taqiqlari va sarlavha/jumla qisqaligi saqlanadi (ozbekiston-konteksti)
-- Skript yozilgan tilda bir xil yuritiladi — o'zbekcha va ruscha aralash yozilmaydi; yoshlar/IT nishasida o'zbekcha + inglizcha atamalar ruxsat etiladi (ozbekiston-konteksti)
-- Hook xalq tilida, nishaga moslab o'z so'zlari bilan yoziladi (nusxa ko'chirilmaydi): "99% bilmaydi", "xato qilyapsiz", "5 soniyada..." oilalari; hook qisqaligi (0–3 soniya) va pattern-interrupt saqlanadi (kontent-formulalari)
-- Comment trigger → UZ amaliyoti bilan mos: "izohda kalit so'z" sxemasi — DM'da obuna tekshirish → material (ManyChat/Chatplace); natijaviy lead qabuli Telegram/botda rejalashtiriladi (kontent-formulalari, ozbekiston-konteksti)
-- APIFY_API_TOKEN / GOOGLE_AI_API_KEY yo'q bo'lsa: asl qoidaga muvofiq (ikkalasi o'rnatilmaguncha stop) foydalanuvchidan kalitlarni o'rnatishni so'rab to'xtang; kalit o'rnatish imkonsiz bo'lganda — reference Reel transkriptini qo'lda so'rash tartibi qo'llanadi: to'liq transkriptni so'rang va skriptni shu matn ustida yuriting, lekin bu Gemini tahlili (Step 4) o'rnini bosmasligi foydalanuvchiga ochiq aytiladi.
-
-### Bog'liq lokal fayllar
-- `local/ozbekiston-konteksti.md`
-- `local/wiki/kontent-formulalari.md`
+For every video request, deliver:
+1. **3 Distinct 0–3s Hook Variations** (Curiosity/Truth, Pain/Mistake, Quantified Proof/Filter) — each with **Visual Action**, **On-Screen Safe-Zone Text (`<=7 words`)**, and **Spoken Line**.
+2. **Time-Coded Scene-by-Scene Production Table (`00:00` to `00:30`):**
+   - `Timecode` | `Visual / Camera / B-Roll` | `On-Screen Text (720x1200 Safe Zone)` | `Spoken Audio / VO (Native Language)`
+3. **Production & Editing Notes:** `0.5-1.5s` cut cadence, lighting/props checklist, `-14 LUFS` audio rule, and Falsifiable Test Hypothesis.

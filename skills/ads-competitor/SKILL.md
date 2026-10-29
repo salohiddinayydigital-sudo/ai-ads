@@ -4,6 +4,7 @@ description: Research competitor paid-ad presence, messaging, creative, formats,
 triggers:
 - raqobatchi
 - raqobatchilar
+- rabotchilar
 - competitor analysis
 - meta ads library
 - ad library
@@ -87,3 +88,5 @@ Before generating recommendations or mutating plans for `ads-competitor`, execut
 | **Budget Scaling** | Doubling (+100%) an active ad set's budget overnight and resetting the Learning Phase. | Scaling vertically by at most **+20% every 48–72 hours** (`tools/spend-guard.py`) or cloning winning angles horizontally (`[[learning-phase-qoidalari]]`). |
 | **Audience Isolation** | Running cold prospecting (`TOF`) without excluding `Purchase 180d`, `Leads 30d`, and `Active DM 14d`. | Enforcing the 4-layer Exclusion Matrix via `tools/meta-audience.py architect` (`[[meta-auditoriya-arxitekturasi]]`). |
 | **Placement Pruning** | Pausing high-volume placements (e.g., Instagram Reels) solely due to higher average CPA (*Breakdown Effect*). | Running `tools/ad-export-analyzer.py breakdown-effect` to evaluate marginal CPA impact (`[[meta-breakdown-effekti]]`). |
+
+- **Audience, Competitor & Segment-Matched Offer Engine (`0 Token`):** `python3 tools/tyrion.py intel --product "<Offer>" --niche <niche> --price <AOV>`
