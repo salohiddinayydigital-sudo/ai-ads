@@ -40,32 +40,19 @@
   "userConfig": {
     "hooks_enabled": {
       "type": "boolean",
+      "title": "Enable Tyrion hooks",
       "default": true,
       "description": "Enable Tyrion deterministic lifecycle hooks (SessionStart, PreToolUse, PostToolUse, Stop)"
     },
     "hook_profile": {
       "type": "string",
-      "enum": [
-        "minimal",
-        "standard",
-        "strict"
-      ],
+      "title": "Hook enforcement profile",
       "default": "standard",
       "description": "Hook enforcement profile (minimal=SessionStart/Stop only, standard=warn on ingest/guard, strict=block on gate violations)"
     },
     "default_market": {
       "type": "string",
-      "enum": [
-        "global",
-        "uz",
-        "us",
-        "eu",
-        "uk",
-        "mena",
-        "latam",
-        "sea",
-        "in"
-      ],
+      "title": "Default market pack",
       "default": "global",
       "description": "Default market pack (global is market-agnostic; uz/us/eu/uk/mena/latam/sea/in load regional funnels, BNPL, currency, and regulations)"
     }
