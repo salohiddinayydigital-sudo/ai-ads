@@ -41,7 +41,9 @@
         "--mcp"
       ],
       "env": {
-        "TYRION_DEFAULT_MARKET": "${user_config.default_market}"
+        "TYRION_CFG_DEFAULT_MARKET": "${user_config.default_market}",
+        "TYRION_CFG_META_ACCESS_TOKEN": "${user_config.meta_access_token}",
+        "TYRION_CFG_META_AD_ACCOUNT_ID": "${user_config.meta_ad_account_id}"
       }
     }
   },
@@ -79,6 +81,17 @@
       ],
       "default": "uz",
       "description": "Topshiriqda mamlakat, shahar yoki valyuta aytilmaganda ishlatiladigan bozor (valyuta, to'lov usullari, qoidalar)."
+    },
+    "meta_access_token": {
+      "type": "string",
+      "title": "Meta access token",
+      "sensitive": true,
+      "description": "Ixtiyoriy. `ads_read` ruxsatli token — interestlarni jonli tekshirish va Insights uchun. Xavfsiz saqlanadi, faqat Tyrion MCP serveriga beriladi. Faqat o'qish so'rovlari yuboriladi."
+    },
+    "meta_ad_account_id": {
+      "type": "string",
+      "title": "Meta reklama akkaunti",
+      "description": "Ixtiyoriy. Standart akkaunt ID (masalan act_123...). Buyruqda boshqa akkaunt berilsa, o'sha ishlatiladi."
     }
   }
 }

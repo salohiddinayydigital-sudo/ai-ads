@@ -331,6 +331,11 @@ def lint_plugin_manifest(vault: Path = VAULT) -> tuple[list[str], list[str]]:
             if not isinstance(cfg, dict) or not (cfg.get("command") or cfg.get("url")):
                 errors.append(f"mcpServers.{sname}: command yoki url kerak")
 
+    # `${user_config.KEY}` faqat e'lon qilingan sozlamaga ishora qilishi mumkin.
+    for ref in sorted(set(re.findall(r"\$\{user_config\.(\w+)\}", json.dumps(servers or {})))):
+        if ref not in options:
+            errors.append(f"mcpServers: ${{user_config.{ref}}} — userConfig da bunday sozlama yo'q")
+
     # Loyiha rejimi: repo to'g'ridan-to'g'ri ochilganda `${CLAUDE_PLUGIN_ROOT}` bo'sh qoladi,
     # shuning uchun `.mcp.json` da faqat `${CLAUDE_PLUGIN_ROOT:-.}` shakli ishlaydi.
     project_mcp = vault / ".mcp.json"

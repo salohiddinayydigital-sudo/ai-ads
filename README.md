@@ -20,7 +20,7 @@
 ```
 On Claude Code older than 2.1.275, add the marketplace first: `/plugin marketplace add salohiddinayydigital-sudo/ai-ads`, then `/plugin install tyrion`.
 
-Settings (`/plugin configure tyrion`): **Standart bozor** (default market, `uz` out of the box), **Hook qat'iyligi** (`minimal` · `standard` · `strict`) and a switch for the hooks.
+Settings (`/plugin configure tyrion`): **Standart bozor** (default market, `uz` out of the box), **Hook qat'iyligi** (`minimal` · `standard` · `strict`), a switch for the hooks, and an optional **Meta access token** (`ads_read`, stored in secure storage and passed only to Tyrion's own MCP server) with a default ad account. The token can also come from `META_ACCESS_TOKEN` in the environment or from a `.env` file in your project; the environment wins, then the plugin setting, then `.env`.
 
 ### Requirements & OS Compatibility
 - **Python:** `3.10` – `3.13` (`python3`, `python`, or `py -3` on Windows — automatically detected by `hooks/run-hook.cjs`)

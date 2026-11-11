@@ -26,6 +26,9 @@ import catalog  # noqa: E402
 import doctor  # noqa: E402
 import tyrion_core  # noqa: E402
 
+# Tests must never pick up a developer's real token from a local .env file.
+os.environ.setdefault("TYRION_NO_DOTENV", "1")
+
 # The release version lives only in .claude-plugin/plugin.json; nothing here hardcodes it.
 CURRENT_VERSION = tyrion_core.plugin_version(VAULT)
 
@@ -3512,8 +3515,16 @@ class TyrionV8InstalledModeTests(unittest.TestCase):
         self.assertEqual(cfg["hook_profile"]["options"], ["minimal", "standard", "strict"])
         self.assertEqual(sorted(cfg["default_market"]["options"]), sorted(self.mloc.SUPPORTED_MARKETS))
         self.assertEqual(cfg["default_market"]["default"], "uz")
-        self.assertEqual(data["mcpServers"]["tyrion-core"]["env"]["TYRION_DEFAULT_MARKET"],
-                         "${user_config.default_market}")
+        env = data["mcpServers"]["tyrion-core"]["env"]
+        # Settings travel under TYRION_CFG_* so an unset option can never blank a shell variable.
+        self.assertEqual(env, {
+            "TYRION_CFG_DEFAULT_MARKET": "${user_config.default_market}",
+            "TYRION_CFG_META_ACCESS_TOKEN": "${user_config.meta_access_token}",
+            "TYRION_CFG_META_AD_ACCOUNT_ID": "${user_config.meta_ad_account_id}",
+        })
+        self.assertEqual(set(env), set(tyrion_core.PLUGIN_SETTING_ENV))
+        self.assertTrue(cfg["meta_access_token"]["sensitive"], "the token must be stored in secure storage")
+        self.assertNotIn("default", cfg["meta_access_token"])
 
     # ---- MCP fayl argumentlari ------------------------------------------------
 
@@ -3652,3 +3663,78 @@ class TyrionV8EvalSuiteTests(unittest.TestCase):
         roas_fm, _ = self._frontmatter(VAULT / "evals" / "breakeven-hisob" / "graders" / "roas.md")
         self.assertRegex(f"{calc['breakeven_cpa']:.2f}", cpa_fm["pattern"])
         self.assertRegex(f"{calc['breakeven_roas']:.2f}", roas_fm["pattern"])
+
+
+class TyrionV8SettingsTests(unittest.TestCase):
+    """v8.0 4-bosqich — token va sozlamalar: muhit > plugin sozlamasi > .env, placeholder hech qachon token emas."""
+
+    KEYS = ("META_ACCESS_TOKEN", "META_AD_ACCOUNT_ID", "TYRION_DEFAULT_MARKET", "TYRION_NO_DOTENV",
+            "TYRION_CFG_META_ACCESS_TOKEN", "TYRION_CFG_META_AD_ACCOUNT_ID", "TYRION_CFG_DEFAULT_MARKET",
+            "DATABASE_URL", "TYRION_HOME")
+
+    def setUp(self) -> None:
+        self.saved = {k: os.environ.pop(k, None) for k in self.KEYS}
+        self.cwd = os.getcwd()
+        self.tmp = tempfile.TemporaryDirectory()
+        os.chdir(self.tmp.name)
+        os.environ["TYRION_HOME"] = str(Path(self.tmp.name) / "state")
+
+    def tearDown(self) -> None:
+        os.chdir(self.cwd)
+        self.tmp.cleanup()
+        for key, value in self.saved.items():
+            os.environ.pop(key, None)
+            if value is not None:
+                os.environ[key] = value
+
+    def test_v8_50_dotenv_supplies_only_tyrion_keys_and_drops_placeholders(self) -> None:
+        token = "EAA" + "d" * 20
+        Path(".env").write_text(
+            f"# comment\nexport META_ACCESS_TOKEN='{token}'\nDATABASE_URL=postgres://secret\n"
+            "META_AD_ACCOUNT_ID=act_1234567890\n", encoding="utf-8")
+        sources = tyrion_core.load_settings(VAULT)
+        self.assertEqual(os.environ.get("META_ACCESS_TOKEN"), token)
+        self.assertTrue(sources["META_ACCESS_TOKEN"].endswith(".env"))
+        self.assertNotIn("DATABASE_URL", os.environ, "an unrelated project secret was loaded")
+        self.assertNotIn("META_AD_ACCOUNT_ID", os.environ, "the .env.example placeholder is not an account id")
+
+    def test_v8_51_precedence_is_environment_then_plugin_settings_then_dotenv(self) -> None:
+        Path(".env").write_text("META_ACCESS_TOKEN=EAAfromdotenv0000000\n", encoding="utf-8")
+        os.environ["TYRION_CFG_META_ACCESS_TOKEN"] = "EAAfromplugin0000000"
+        self.assertEqual(tyrion_core.load_settings(VAULT)["META_ACCESS_TOKEN"], "plugin settings")
+        self.assertEqual(os.environ["META_ACCESS_TOKEN"], "EAAfromplugin0000000")
+        os.environ["META_ACCESS_TOKEN"] = "EAAfromshell00000000"
+        self.assertEqual(tyrion_core.load_settings(VAULT)["META_ACCESS_TOKEN"], "environment")
+        self.assertEqual(os.environ["META_ACCESS_TOKEN"], "EAAfromshell00000000")
+
+    def test_v8_52_unsubstituted_or_template_values_read_as_missing(self) -> None:
+        os.environ["TYRION_NO_DOTENV"] = "1"
+        for bogus in ("${user_config.meta_access_token}", "your_meta_access_token_here", "", "   "):
+            os.environ["META_ACCESS_TOKEN"] = bogus
+            os.environ["TYRION_CFG_META_ACCESS_TOKEN"] = bogus
+            tyrion_core.load_settings(VAULT)
+            self.assertNotIn("META_ACCESS_TOKEN", os.environ, f"{bogus!r} was treated as a token")
+        os.environ["TYRION_CFG_DEFAULT_MARKET"] = "uz"
+        tyrion_core.load_settings(VAULT)
+        self.assertEqual(os.environ.get("TYRION_DEFAULT_MARKET"), "uz")
+
+    def test_v8_53_no_dotenv_switch_keeps_tests_hermetic(self) -> None:
+        Path(".env").write_text("META_ACCESS_TOKEN=EAAshouldnotload00000\n", encoding="utf-8")
+        os.environ["TYRION_NO_DOTENV"] = "1"
+        tyrion_core.load_settings(VAULT)
+        self.assertNotIn("META_ACCESS_TOKEN", os.environ)
+
+    def test_v8_54_every_user_config_reference_in_the_manifest_is_declared(self) -> None:
+        data = json.loads((VAULT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        referenced = set(re.findall(r"\$\{user_config\.(\w+)\}", json.dumps(data["mcpServers"])))
+        self.assertTrue(referenced)
+        self.assertEqual(referenced - set(data["userConfig"]), set())
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".claude-plugin").mkdir()
+            (root / ".claude-plugin" / "plugin.json").write_text(json.dumps({
+                "name": "tyrion",
+                "mcpServers": {"x": {"command": "node", "env": {"T": "${user_config.missing_option}"}}},
+            }), encoding="utf-8")
+            errors, _ = doctor.lint_plugin_manifest(root)
+        self.assertTrue(any("missing_option" in e for e in errors), errors)

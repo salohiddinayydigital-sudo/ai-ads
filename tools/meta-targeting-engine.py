@@ -317,7 +317,7 @@ SOLVENTNOST_HYPOTHESES: list[dict[str, str]] = [
 FAILURE_DIAGNOSTIC_GUIDE: dict[str, dict[str, str]] = {
     "MISSING_TOKEN": {
         "category_explanation": "META_ACCESS_TOKEN muhit o'zgaruvchisi o'rnatilmagan yoki bo'sh. Shu sababli Meta Graph API ga real HTTP so'rov yuborilmadi.",
-        "next_diagnostic_step": "1) `.env` fayliga yoki terminalga `export META_ACCESS_TOKEN='EAA...'` (kamida `ads_read` ruxsatiga ega System User yoki User token) kiriting; 2) `python3 tools/meta-targeting-engine.py search --product '...' --account-id act_...` buyrug'ini qayta ishga tushiring.",
+        "next_diagnostic_step": "1) Kamida `ads_read` ruxsatiga ega System User yoki User tokenini uch yo'ldan biri bilan bering: plugin sozlamasi (`/plugin configure tyrion` → Meta access token), terminalda `export META_ACCESS_TOKEN='EAA...'`, yoki loyiha papkasidagi (yoki `~/.tyrion/`) `.env` fayli; 2) `meta-targeting-engine.py search --product '...' --account-id act_...` buyrug'ini (yoki `tyrion_meta_detailed_targeting` MCP asbobini) qayta ishga tushiring.",
     },
     "AUTH_401": {
         "category_explanation": "Autentifikatsiya xatosi (HTTP 401): `META_ACCESS_TOKEN` muddati tugagan (expired), bekor qilingan yoki noto'g'ri formatda.",
@@ -2332,6 +2332,7 @@ def search_and_validate_targeting(
 
 
 def main(argv: list[str] | None = None) -> int:
+    tcore.load_settings(VAULT)  # token: environment, then plugin settings, then .env
     effective_argv = list(sys.argv[1:] if argv is None else argv)
     if effective_argv and effective_argv[0].startswith("-") and effective_argv[0] not in ("-h", "--help"):
         effective_argv = ["search", *effective_argv]

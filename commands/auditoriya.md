@@ -24,6 +24,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" saturation --audience-siz
 ```
 
 - `META_ACCESS_TOKEN` berilgan bo'lsa, 1-qadam faqat o'qish rejimida jonli so'rov yuboradi: `GET /{api_version}/act_{id}/targetingsearch` (yoki global `/search?type=adinterest`) va nomzodlarni `GET /{api_version}/act_{id}/targetingvalidation` orqali tekshiradi.
+- Token uch joydan olinadi: muhit o'zgaruvchisi, plugin sozlamasi (`/plugin configure tyrion`) yoki loyiha papkasidagi `.env`. Plugin sozlamasidagi token faqat Tyrion MCP serveriga beriladi — u holda jonli tekshiruvni `tyrion_meta_detailed_targeting` MCP asbobi orqali bajaring.
 - Token yo'q yoki so'rov muvaffaqiyatsiz bo'lsa (`API_UNAVAILABLE`), aniq sababni (`MISSING_TOKEN`, `AUTH_401`, `PERMISSION_403`, `RATE_LIMIT_429` va h.k.) va keyingi diagnostika qadamini ayting; `verified_targeting_options` bo'sh (`[]`) qoladi.
 
 ## 2. Qat'iy Qoidalar ([[meta-auditoriya-arxitekturasi]] · [[meta-ads-interest-api]])

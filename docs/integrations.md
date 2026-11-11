@@ -30,7 +30,7 @@ Add the following entry to your project or user `.mcp.json` (`~/.claude.json` or
 }
 ```
 
-> **Note:** Tyrion also includes a zero-dependency built-in live Meta Graph API client (`tools/meta-targeting-engine.py` and `tools/meta-insights-sync.py`) that works directly with `META_ACCESS_TOKEN` without requiring `uvx`.
+> **Note:** Tyrion also includes a zero-dependency built-in live Meta Graph API client (`tools/meta-targeting-engine.py` and `tools/meta-insights-sync.py`) that works directly with `META_ACCESS_TOKEN` (from the environment, the plugin setting `Meta access token`, or a project `.env`) without requiring `uvx`.
 
 ---
 

@@ -1260,6 +1260,7 @@ def build_launch_blueprint(
 
 
 def main(argv: list[str] | None = None) -> int:
+    tcore.load_settings(TOOLS.parent)  # token: environment, then plugin settings, then .env
     parser = argparse.ArgumentParser(
         prog="meta-audience.py",
         description="Tyrion Meta Ads Audience & Detailed Targeting Accuracy Engine",

@@ -126,6 +126,90 @@ def work_root(vault: Path) -> Path:
     return Path.cwd() if is_installed_plugin(vault) else Path(vault)
 
 
+# --------------------------------------------------------------------------- #
+# Settings: one place decides where a credential comes from
+# --------------------------------------------------------------------------- #
+
+# Only these keys are ever read from a `.env` file. A project's `.env` often holds
+# unrelated secrets; none of them is loaded into a Tyrion process.
+SETTING_KEYS = (
+    "META_ACCESS_TOKEN", "META_AD_ACCOUNT_ID", "META_GRAPH_API_VERSION", "META_GRAPH_API_BASE_URL",
+    "TYRION_MARKET", "TYRION_DEFAULT_MARKET", "TYRION_HOOK_PROFILE",
+)
+# Plugin settings (userConfig) arrive under their own names so that an empty or unset
+# option can never blank out a variable the operator exported in the shell.
+PLUGIN_SETTING_ENV = {
+    "TYRION_CFG_META_ACCESS_TOKEN": "META_ACCESS_TOKEN",
+    "TYRION_CFG_META_AD_ACCOUNT_ID": "META_AD_ACCOUNT_ID",
+    "TYRION_CFG_DEFAULT_MARKET": "TYRION_DEFAULT_MARKET",
+}
+_PLACEHOLDER_RE = re.compile(r"\$\{|^your_|_here$|^act_1234567890$|^<.*>$", re.I)
+_ENV_LINE_RE = re.compile(r"^\s*(?:export\s+)?([A-Z][A-Z0-9_]*)\s*=\s*(.*?)\s*$")
+
+
+def usable_setting(value: Any) -> str:
+    """The value, or "" when it is empty, an unsubstituted `${...}` or a template placeholder."""
+    text = str(value or "").strip().strip('"').strip("'").strip()
+    return "" if not text or _PLACEHOLDER_RE.search(text) else text
+
+
+def read_env_file(path: Path) -> dict[str, str]:
+    """KEY=VALUE pairs for SETTING_KEYS from one `.env` file (comments and other keys ignored)."""
+    found: dict[str, str] = {}
+    try:
+        lines = Path(path).read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return found
+    for line in lines:
+        match = _ENV_LINE_RE.match(line)
+        if not match or match.group(1) not in SETTING_KEYS:
+            continue
+        value = usable_setting(match.group(2).split(" #", 1)[0])
+        if value:
+            found[match.group(1)] = value
+    return found
+
+
+def load_settings(vault: Path) -> dict[str, str]:
+    """Fill missing settings in os.environ and report where each one came from.
+
+    Precedence, highest first — a later source never overrides an earlier one:
+      1. the process environment (what the operator exported);
+      2. the plugin settings (`/plugin configure tyrion`), which Claude Code passes to the
+         MCP server as TYRION_CFG_*;
+      3. `.env` in the current project, then in the state directory (~/.tyrion), then in a checkout.
+    Placeholder values are dropped everywhere, so a template token reads as "missing"
+    instead of being sent to an API. TYRION_NO_DOTENV=1 skips step 3 (used by the tests).
+    """
+    sources: dict[str, str] = {}
+    for key in SETTING_KEYS:
+        if key in os.environ:
+            if usable_setting(os.environ[key]):
+                sources[key] = "environment"
+            else:
+                del os.environ[key]
+    for cfg_key, key in PLUGIN_SETTING_ENV.items():
+        value = usable_setting(os.environ.get(cfg_key))
+        if value and key not in os.environ:
+            os.environ[key] = value
+            sources[key] = "plugin settings"
+    if os.environ.get("TYRION_NO_DOTENV", "").strip() not in ("1", "true", "yes"):
+        seen: set[Path] = set()
+        for folder in (Path.cwd(), state_dir(vault), Path(vault)):
+            try:
+                env_file = (Path(folder) / ".env").resolve()
+            except OSError:
+                continue
+            if env_file in seen or not env_file.is_file():
+                continue
+            seen.add(env_file)
+            for key, value in read_env_file(env_file).items():
+                if key not in os.environ:
+                    os.environ[key] = value
+                    sources[key] = str(env_file)
+    return sources
+
+
 def redact_secrets(text: str) -> str:
     """Har qanday xato xabari yoki log ichidan API tokenlarni to'liq yashiradi."""
     if not text:

@@ -483,6 +483,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion Native STDIO MCP Server")
     parser.add_argument("--list-tools", action="store_true", help="Mavjud MCP tool'lar ro'yxatini JSON formatda chiqarish")
     args = parser.parse_args(argv)
+    # The MCP server is the one process that receives the plugin settings (TYRION_CFG_*).
+    tcore.load_settings(VAULT)
     if args.list_tools:
         print(json.dumps({"server": "tyrion-mcp-server", "version": SERVER_VERSION, "tools": MCP_TOOLS}, ensure_ascii=False, indent=2))
         return 0

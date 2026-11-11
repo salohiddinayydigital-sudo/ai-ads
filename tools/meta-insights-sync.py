@@ -228,8 +228,9 @@ def fetch_live_meta_insights(
     token = os.environ.get("META_ACCESS_TOKEN", "").strip()
     if not token or token == "your_meta_access_token_here":
         raise PermissionError(
-            "META_ACCESS_TOKEN topilmadi. Jonli Meta Ads ma'lumotlarini tortish uchun `.env` fayliga "
-            "haqiqiy `META_ACCESS_TOKEN` qo'ying yoki `--from-raw-json` orqali eksport faylini bering."
+            "META_ACCESS_TOKEN topilmadi. Jonli Meta Ads ma'lumotlarini tortish uchun tokenni plugin sozlamasiga "
+            "(`/plugin configure tyrion`), muhit o'zgaruvchisiga yoki loyiha papkasidagi `.env` fayliga qo'ying, "
+            "yoki `--from-raw-json` orqali eksport faylini bering."
         )
 
     api_version = get_graph_api_version()
@@ -296,7 +297,7 @@ def verify_live_connection(account_id: str = "") -> dict[str, Any]:
     acct = normalize_account_id(account_id)
     token = os.environ.get("META_ACCESS_TOKEN", "").strip()
     if not token or token == "your_meta_access_token_here":
-        raise PermissionError("META_ACCESS_TOKEN o'rnatilmagan (.env faylini tekshiring).")
+        raise PermissionError("META_ACCESS_TOKEN o'rnatilmagan (plugin sozlamasi, muhit o'zgaruvchisi yoki .env).")
     api_version = get_graph_api_version()
     base = os.environ.get("META_GRAPH_API_BASE_URL", "https://graph.facebook.com").strip().rstrip("/")
     params = urllib.parse.urlencode({"fields": "id,name,account_status,currency,timezone_name,amount_spent"})
@@ -428,6 +429,7 @@ def sync_and_analyze(
 
 
 def main(argv: list[str] | None = None) -> int:
+    tcore.load_settings(VAULT)  # token: environment, then plugin settings, then .env
     parser = argparse.ArgumentParser(
         prog="meta-insights-sync.py",
         description="Tyrion Live Meta Ads Graph API v26.0 Insights Connector (Cursor Pagination + Currency + Conversion Separation)",
