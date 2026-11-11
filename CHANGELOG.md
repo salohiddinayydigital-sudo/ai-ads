@@ -10,7 +10,7 @@ All notable changes to **Tyrion (`ai-ads`)** are documented in this file followi
 - **Tools were unreachable from an installed plugin.** Every documented call was `python3 tools/<tool>.py`, relative to a working directory that is the user's project. Commands, skills and agent charters now use `python3 "${CLAUDE_PLUGIN_ROOT}/tools/<tool>.py"` (236 calls in 87 files); `.claude/commands/` is generated in project-mode form and the router expands the token in the context it loads.
 - **State was written into the plugin directory**, which is replaced on every update. Operator memory and instincts now live in `~/.tyrion/` (`TYRION_HOME`) for an installed plugin; client workspaces and video runs are created in the user's project. `tyrion.py` no longer forces the working directory to its own root.
 - **32 agent charters asked shell-less agents to execute a command.** They now use their preloaded skills and report missing figures under `missing_inputs`.
-- **`userConfig` options were read by nothing.** `hooks_enabled`, `hook_profile` and `default_market` now reach the hooks and the MCP server.
+- **`userConfig` options were read by nothing.** `hooks_enabled`, `hook_profile` and `default_market` now reach the hooks and the MCP server. Their allowed values are named in the description and validated in code; the `options` picker is not used, because the CLI published on npm rejects that key and a plugin with an unknown `userConfig` key does not load.
 - **MCP server:** answers `ping`, negotiates the protocol revision, reports tool runtime failures as `isError` results, and resolves file arguments against the user's project.
 
 ### Breaking Changes

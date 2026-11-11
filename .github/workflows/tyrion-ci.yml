@@ -80,4 +80,6 @@ jobs:
         run: npm install -g @anthropic-ai/claude-code
 
       - name: claude plugin validate
-        run: claude plugin validate .
+        run: |
+          claude --version
+          claude plugin validate .

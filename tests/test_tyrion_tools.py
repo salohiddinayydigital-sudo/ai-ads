@@ -3262,15 +3262,20 @@ class TyrionV8PluginFoundationTests(unittest.TestCase):
         self.assertIn("userConfig.profile.enum", joined)
         self.assertTrue(any(n.startswith("interface:") for n in notes), notes)
 
-    def test_v8_03_lint_rejects_userconfig_options_without_matching_default(self) -> None:
+    def test_v8_03_lint_rejects_userconfig_options_which_the_published_cli_does_not_accept(self) -> None:
+        """`options` made the official validator fail in CI (npm build): an unknown userConfig key
+        means the plugin does not load. The shipped manifest must not use it."""
         with tempfile.TemporaryDirectory() as tmp:
             root = self._vault_copy(tmp, {
                 "name": "tyrion",
                 "userConfig": {"market": {"type": "string", "title": "t", "description": "d",
-                                          "options": ["uz", "global"], "default": "mars"}},
+                                          "options": ["uz", "global"], "default": "uz"}},
             })
             errors, _notes = doctor.lint_plugin_manifest(root)
-        self.assertTrue(any("userConfig.market.default" in e for e in errors), errors)
+        self.assertTrue(any("userConfig.market.options" in e for e in errors), errors)
+        shipped = json.loads((VAULT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))["userConfig"]
+        for name, spec in shipped.items():
+            self.assertEqual(set(spec) - doctor.USERCONFIG_KEYS, set(), f"userConfig.{name} has a key the CLI rejects")
 
     def test_v8_04_project_mcp_json_must_not_use_bare_plugin_root(self) -> None:
         bare = {"mcpServers": {"tyrion-core": {"command": "node",
@@ -3509,11 +3514,14 @@ class TyrionV8InstalledModeTests(unittest.TestCase):
                 if value is not None:
                     os.environ[key] = value
 
-    def test_v8_19_manifest_settings_use_pickers_and_feed_the_mcp_server(self) -> None:
+    def test_v8_19_manifest_settings_name_their_values_and_feed_the_mcp_server(self) -> None:
         data = json.loads((VAULT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
         cfg = data["userConfig"]
-        self.assertEqual(cfg["hook_profile"]["options"], ["minimal", "standard", "strict"])
-        self.assertEqual(sorted(cfg["default_market"]["options"]), sorted(self.mloc.SUPPORTED_MARKETS))
+        # No pickers: allowed values are named in the description and validated in code.
+        for profile in ("minimal", "standard", "strict"):
+            self.assertIn(profile, cfg["hook_profile"]["description"])
+        for market in self.mloc.SUPPORTED_MARKETS:
+            self.assertRegex(cfg["default_market"]["description"], rf"\b{market}\b")
         self.assertEqual(cfg["default_market"]["default"], "uz")
         env = data["mcpServers"]["tyrion-core"]["env"]
         # Settings travel under TYRION_CFG_* so an unset option can never blank a shell variable.

@@ -57,30 +57,14 @@
     "hook_profile": {
       "type": "string",
       "title": "Hook qat'iyligi",
-      "options": [
-        "minimal",
-        "standard",
-        "strict"
-      ],
       "default": "standard",
-      "description": "minimal — faqat sessiya boshi; standard — ogohlantiradi; strict — qoida buzilsa to'xtatadi."
+      "description": "minimal, standard yoki strict. minimal — faqat sessiya boshi; standard — ogohlantiradi; strict — qoida buzilsa to'xtatadi. Boshqa qiymat yozilsa standard ishlatiladi."
     },
     "default_market": {
       "type": "string",
       "title": "Standart bozor",
-      "options": [
-        "global",
-        "uz",
-        "us",
-        "eu",
-        "uk",
-        "mena",
-        "latam",
-        "sea",
-        "in"
-      ],
       "default": "uz",
-      "description": "Topshiriqda mamlakat, shahar yoki valyuta aytilmaganda ishlatiladigan bozor (valyuta, to'lov usullari, qoidalar)."
+      "description": "Topshiriqda mamlakat, shahar yoki valyuta aytilmaganda ishlatiladigan bozor: global, uz, us, eu, uk, mena, latam, sea yoki in. Boshqa qiymat yozilsa e'tiborga olinmaydi."
     },
     "meta_access_token": {
       "type": "string",

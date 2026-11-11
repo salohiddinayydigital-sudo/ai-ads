@@ -246,7 +246,10 @@ MANIFEST_KEYS = {
     "userConfig", "types", "channels", "skills", "commands", "agents", "hooks", "mcpServers",
     "lspServers", "outputStyles", "workflows", "experimental",
 }
-USERCONFIG_KEYS = {"type", "title", "description", "required", "default", "options",
+# `options` (a value picker) is documented for newer builds, but the CLI published on npm
+# rejected it as an unrecognized key on 2026-11-11 — and an unknown key here means the plugin
+# does not load at all. Allowed values are named in the description and validated in code.
+USERCONFIG_KEYS = {"type", "title", "description", "required", "default",
                    "multiple", "sensitive", "min", "max"}
 USERCONFIG_TYPES = {"string", "number", "boolean", "directory", "file"}
 BARE_PLUGIN_ROOT_RE = re.compile(r"\$\{CLAUDE_PLUGIN_ROOT\}")
@@ -318,12 +321,6 @@ def lint_plugin_manifest(vault: Path = VAULT) -> tuple[list[str], list[str]]:
         for required in ("title", "description"):
             if not spec.get(required):
                 errors.append(f"userConfig.{opt}.{required}: majburiy")
-        choices = spec.get("options")
-        if choices is not None:
-            if spec.get("type") != "string" or spec.get("multiple") or spec.get("sensitive"):
-                errors.append(f"userConfig.{opt}.options: faqat oddiy string maydonda ishlaydi")
-            elif spec.get("default") not in choices and not spec.get("required"):
-                errors.append(f"userConfig.{opt}.default: options ro'yxatidan bo'lishi shart")
 
     servers = data.get("mcpServers")
     if isinstance(servers, dict):
