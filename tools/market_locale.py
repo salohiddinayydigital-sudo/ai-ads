@@ -19,6 +19,9 @@ VAULT = TOOLS.parent
 MARKETS_DIR = VAULT / "markets"
 LOCALES_DIR = VAULT / "locales"
 
+# Qaror (2026-11-11): asosiy auditoriya — O'zbekiston operatori. Boshqa bozor: --market / TYRION_MARKET / default_market.
+DEFAULT_MARKET_FALLBACK = "uz"
+
 SUPPORTED_MARKETS = ("global", "uz", "us", "eu", "uk", "mena", "latam", "sea", "in")
 
 ZERO_DECIMAL_CURRENCIES = {
@@ -174,12 +177,12 @@ def normalize_bcp47_language(lang: str) -> dict[str, Any]:
 
 
 def configured_default_market() -> str:
-    """Standart bozor: TYRION_MARKET > plugin userConfig (CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET) > global."""
+    """Standart bozor: TYRION_MARKET > plugin userConfig (CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET) > DEFAULT_MARKET_FALLBACK (uz)."""
     for key in ("TYRION_MARKET", "CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET"):
         val = (os.environ.get(key) or "").strip().lower()
         if val in SUPPORTED_MARKETS:
             return val
-    return "global"
+    return DEFAULT_MARKET_FALLBACK
 
 
 def detect_market(

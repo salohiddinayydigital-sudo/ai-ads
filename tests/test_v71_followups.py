@@ -66,7 +66,7 @@ class PhoneTests(unittest.TestCase):  # B17
 
     def test_unknown_country_code_left_untouched_and_warned(self) -> None:
         self.assertEqual(cu.normalize_phone("5551234567", ""), "5551234567")
-        res = cu.build_capi_payload("Lead", phone="5551234567", event_id="e1")
+        res = cu.build_capi_payload("Lead", phone="5551234567", event_id="e1", market="global")
         self.assertTrue(any("mamlakat kodisiz" in w for w in res["warnings"]))
 
     def test_country_drives_hash(self) -> None:
@@ -176,16 +176,21 @@ class PluginOptionsTests(unittest.TestCase):  # B09
         self.assertIn("hook script not found", s.stderr)
 
     def test_default_market_option(self) -> None:
-        env = {k: v for k, v in os.environ.items() if k != "TYRION_MARKET"}
+        env = {k: v for k, v in os.environ.items() if k not in ("TYRION_MARKET", "CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET")}
         with mock.patch.dict(os.environ, env, clear=True):
-            self.assertEqual(mloc.detect_market("Meta audit")["market_id"], "global")
-            os.environ["CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET"] = "uz"
-            self.assertEqual(mloc.detect_market("Meta audit")["market_id"], "uz")
-            os.environ["TYRION_MARKET"] = "eu"   # aniq o'zgaruvchi ustun
-            self.assertEqual(mloc.configured_default_market(), "eu")
+            self.assertEqual(mloc.detect_market("Meta audit")["market_id"], "uz")  # qaror: asosiy auditoriya uz
+            os.environ["CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET"] = "eu"
+            self.assertEqual(mloc.detect_market("Meta audit")["market_id"], "eu")
+            os.environ["TYRION_MARKET"] = "us"   # aniq o'zgaruvchi ustun
+            self.assertEqual(mloc.configured_default_market(), "us")
             os.environ["CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET"] = "narnia"
             os.environ.pop("TYRION_MARKET")
-            self.assertEqual(mloc.configured_default_market(), "global")
+            self.assertEqual(mloc.configured_default_market(), "uz")
+
+    def test_plugin_manifests_default_to_uz(self) -> None:
+        for rel in ("plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json"):
+            cfg = json.loads((VAULT / rel).read_text(encoding="utf-8"))
+            self.assertEqual(cfg["userConfig"]["default_market"]["default"], "uz", rel)
 
 
 class ApiRegistryTests(unittest.TestCase):  # B19

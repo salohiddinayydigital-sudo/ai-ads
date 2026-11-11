@@ -24,8 +24,12 @@ Market facts that could not be confirmed against official sources (Meta API v27.
 - `doctor`: `Yangilik (refresh_due)`, `Wiki manbalari` and `Versiya` checks.
 - Spend-Guard copy check warns on credit/instalment wording in Uzbek ads (labelled `UNVERIFIED_SECONDARY_SOURCE`).
 
+### Decisions (2026-11-11)
+- Primary audience: Uzbekistan operator — default market is now `uz` (`plugin.json` `default_market`, `market_locale.DEFAULT_MARKET_FALLBACK`); other markets via `--market`/`TYRION_MARKET`/`default_market`.
+- Meta account access stays read-only/recommend (no write tools via official Ads MCP). The 20% budget rule stays a hard block.
+
 ### Tests
-- `tests/test_v71_followups.py` (40 tests). Suite: 242 → 282.
+- `tests/test_v71_followups.py` (41 tests). Suite: 242 → 283.
 
 ### Not done (needs official sources or a decision)
 B21 wiki sources (restore or mark), B22 splitting the 3 000-line test file, B01-B06 fixtures for real Google/Telegram files, Meta Ads MCP integration, attribution/Telegram/Google reference rewrites, Detailed Targeting repositioning, Uzbek SMS/call-hours checks.
