@@ -26,13 +26,24 @@ echo "[3/5] Running Behavioral Eval Suite (24/24)..."
 echo "[4/5] Running System Doctor..."
 "$PY_CMD" tools/doctor.py --quick
 
-REMOTE_URL="${1:-git@github.com:salohiddinayydigital-sudo/ai-ads.git}"
+echo "[5/6] Unit testlar..."
+"$PY_CMD" -m unittest discover -s tests -q
+
+# Mavjud remote'ga tegilmaydi; faqat remote umuman yo'q bo'lsa va URL berilgan bo'lsa qo'shiladi.
 if ! git remote get-url origin >/dev/null 2>&1; then
-    git remote add origin "$REMOTE_URL"
-else
-    git remote set-url origin "$REMOTE_URL"
+    if [ -n "${1:-}" ]; then
+        git remote add origin "$1"
+    else
+        echo "Xato: 'origin' remote yo'q. Ishlatish: ./push.sh <remote-url>" >&2
+        exit 1
+    fi
 fi
 
-echo "[6/6] Pushing branch 'main' and tags to $REMOTE_URL ..."
-git push -u origin main --tags
-echo "✅ Successfully pushed Tyrion v5.0 to GitHub!"
+BRANCH="$(git branch --show-current)"
+if [ -z "$BRANCH" ]; then
+    echo "Xato: detached HEAD — branch tanlang." >&2
+    exit 1
+fi
+echo "[6/6] Pushing branch '$BRANCH' and tags to $(git remote get-url origin) ..."
+git push -u origin "$BRANCH" --tags
+echo "✅ Successfully pushed '$BRANCH' to GitHub!"

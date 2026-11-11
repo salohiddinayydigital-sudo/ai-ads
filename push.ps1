@@ -1,6 +1,6 @@
 # push.ps1 — Tyrion v5.0 Automated Pre-Flight Verification & GitHub Push Script (Windows PowerShell)
 param(
-    [string]$RemoteUrl = "git@github.com:salohiddinayydigital-sudo/ai-ads.git"
+    [string]$RemoteUrl = ""
 )
 $ErrorActionPreference = 'Stop'
 
@@ -29,9 +29,17 @@ Write-Host "[3/5] Eval Suite (24/24 stsenariy) tekshiruvi..." -ForegroundColor W
 Write-Host "[4/5] Doctor salomatlik tekshiruvi..." -ForegroundColor White
 & $pyCmd tools\doctor.py --quick
 
-Write-Host "[6/6] GitHub repozitoriyga yuklanmoqda: $RemoteUrl ..." -ForegroundColor Yellow
-git remote set-url origin $RemoteUrl 2>$null
-if ($LASTEXITCODE -ne 0) { git remote add origin $RemoteUrl }
+Write-Host "[5/6] Unit testlar..." -ForegroundColor White
+& $pyCmd -m unittest discover -s tests -q
+if ($LASTEXITCODE -ne 0) { throw "Unit testlar o'tmadi!" }
+
+# Mavjud remote'ga tegilmaydi; faqat remote yo'q bo'lsa va URL berilgan bo'lsa qo'shiladi.
+git remote get-url origin 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    if (-not $RemoteUrl) { throw "'origin' remote yo'q. Ishlatish: .\push.ps1 -RemoteUrl <url>" }
+    git remote add origin $RemoteUrl
+}
+Write-Host "[6/6] GitHub repozitoriyga yuklanmoqda ..." -ForegroundColor Yellow
 
 $targetBranch = (git branch --show-current).Trim()
 git push -u origin $targetBranch --tags

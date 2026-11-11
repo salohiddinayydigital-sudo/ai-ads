@@ -613,7 +613,8 @@ class SpendGuardTests(unittest.TestCase):
         self.assertTrue(any("event_id" in e for e in res["errors"]))
 
     def test_change_packet_validation(self) -> None:
-        valid_packet = "## Reja\nBoshlang'ich holat: CPA $15.\nXavf: past.\nTeskari qadam: qaytarish mumkin.\nStop-loss: CPA > $20 bo'lsa to'xtatish."
+        valid_packet = ("## Reja\nBoshlang'ich holat: CPA $15.\nXavf: past.\nTeskari qadam: qaytarish mumkin.\n"
+                        "Stop-loss: CPA > $20 bo'lsa to'xtatish.\nOperator tasdig'i: Ali, 2026-11-11")
         res_valid = self.sg.check_change_packet(valid_packet)
         self.assertTrue(res_valid["passed"])
 
@@ -1545,8 +1546,9 @@ class TyrionV4EnginesTests(unittest.TestCase):
     def test_capi_v22_payload_hashes_pii_and_scores_emq(self) -> None:
         import importlib
         cu = importlib.import_module("capi-utm-builder")
-        res = cu.build_capi_payload("Lead", phone="+998 (90) 123-45-67", email="Test@Brand.uz", city="Tashkent", value=200.0, order_id="ORD_55")
-        self.assertGreaterEqual(res["estimated_emq_score_10"], 8.0)
+        res = cu.build_capi_payload("Lead", phone="+998 (90) 123-45-67", email="Test@Brand.uz", city="Tashkent", value=200.0, currency="USD", order_id="ORD_55",
+                                    fbp="fb.1.1729200000.123456789", fbc="fb.1.1729200000.IwAR0xyz")
+        self.assertGreaterEqual(res["estimated_emq_score_10"], 7.5)
         ud = res["capi_v22_payload"]["data"][0]["user_data"]
         # SHA-256 hex digest is 64 chars, never plaintext phone/email
         self.assertEqual(len(ud["ph"][0]), 64)
@@ -3191,6 +3193,8 @@ class AiAdsSyncAndVaultAuditCITests(unittest.TestCase):
 
         for script_rel in ("push.sh", "push.ps1"):
             script_txt = (VAULT / script_rel).read_text(encoding="utf-8")
-            self.assertIn("salohiddinayydigital-sudo/ai-ads.git", script_txt)
             self.assertNotIn("--force", script_txt, f"{script_rel} must not use git push --force")
+            self.assertNotIn("remote set-url", script_txt, f"{script_rel} must not overwrite the existing origin")
+            self.assertNotIn("push -u origin main", script_txt, f"{script_rel} must push the current branch")
+            self.assertIn("unittest", script_txt, f"{script_rel} must run unit tests before pushing")
 

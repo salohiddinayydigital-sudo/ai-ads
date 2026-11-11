@@ -35,22 +35,122 @@ def redact_secrets(text: str) -> str:
     return SECRET_REDACT_RE.sub("[REDACTED_SECRET]", str(text))
 
 
+class AmbiguousNumberError(ValueError):
+    """Son o'nlik yoki minglik ajratgich bilan noaniq yozilgan (masalan, "1,234")."""
+
+
+_NUM_CLEAN_RE = re.compile(r"[\s\u00a0\u202f'\u2019$€£₽%]")
+
+
+def parse_number(text: str, decimal: str | None = None) -> float:
+    """Lokalizatsiyalangan sonni (``61,230``, ``499,90``, ``1 234,56``, ``1.234,56``) o'qiydi.
+
+    ``decimal``: ``"dot"`` (EN: ``,`` minglik, ``.`` o'nlik), ``"comma"`` (RU/EU: ``,`` o'nlik,
+    ``.``/bo'shliq minglik) yoki ``None`` (ajratgichlardan aniqlanadi).
+    ``None`` rejimida bitta ``,`` dan keyin aynan 3 raqam kelsa ("1,234") — jim taxmin qilmasdan
+    ``AmbiguousNumberError`` ko'taradi. Bitta ``.`` doim o'nlik (JSON/API konvensiyasi).
+    """
+    s = _NUM_CLEAN_RE.sub("", str(text))
+    if not s:
+        raise ValueError("bo'sh son")
+    sign = 1.0
+    if s[0] in "+-":
+        sign = -1.0 if s[0] == "-" else 1.0
+        s = s[1:]
+    if not s or not re.fullmatch(r"[\d.,]+", s) or not re.search(r"\d", s):
+        raise ValueError(f"son emas: {text!r}")
+
+    if decimal == "dot":
+        if s.count(".") > 1:
+            raise ValueError(f"noto'g'ri son: {text!r}")
+        return sign * float(s.replace(",", ""))
+    if decimal == "comma":
+        if s.count(",") > 1:
+            raise ValueError(f"noto'g'ri son: {text!r}")
+        return sign * float(s.replace(".", "").replace(",", "."))
+    if decimal is not None:
+        raise ValueError(f"decimal 'dot' yoki 'comma' bo'lishi shart: {decimal!r}")
+
+    has_dot, has_comma = "." in s, "," in s
+    if has_dot and has_comma:
+        dec = "." if s.rfind(".") > s.rfind(",") else ","
+        thou = "," if dec == "." else "."
+        int_part, _, frac = s.rpartition(dec)
+        groups = int_part.split(thou)
+        if thou in frac or not groups[0] or not all(len(g) == 3 for g in groups[1:]) or not frac:
+            raise ValueError(f"noto'g'ri son: {text!r}")
+        return sign * float("".join(groups) + "." + frac)
+    sep = "," if has_comma else ("." if has_dot else "")
+    if not sep:
+        return sign * float(s)
+    parts = s.split(sep)
+    if len(parts) > 2:  # 1,234,567 -> minglik
+        if not parts[0] or not all(len(g) == 3 for g in parts[1:]) or len(parts[0]) > 3:
+            raise ValueError(f"noto'g'ri son: {text!r}")
+        return sign * float("".join(parts))
+    before, after = parts
+    if not after:
+        raise ValueError(f"noto'g'ri son: {text!r}")
+    if len(after) == 3 and sep == "," and before not in ("0", ""):
+        raise AmbiguousNumberError(
+            f"{text!r} noaniq: minglik (1234) yoki o'nlik (1.234)? "
+            "Fayl lokalizatsiyasini ko'rsating (decimal='dot'|'comma')."
+        )
+    return sign * float((before or "0") + "." + after)
+
+
+def detect_number_locale(cells: list[str], header_text: str = "") -> tuple[str, str]:
+    """Fayl sonlarining o'nlik formatini aniqlaydi: ``("dot"|"comma", asos)``.
+
+    Dalil: ``1,240.50`` -> dot; ``499,90`` yoki ``1.234,56`` -> comma. Dalillar to'qnashsa
+    ``ValueError``. Dalil bo'lmasa sarlavha tili: kirill -> comma, aks holda dot (EN).
+    """
+    votes: set[str] = set()
+    for c in cells:
+        t = _NUM_CLEAN_RE.sub("", str(c))
+        if not re.fullmatch(r"-?[\d.,]+", t) or not re.search(r"\d", t):
+            continue
+        if "," in t and "." in t:
+            votes.add("dot" if t.rfind(".") > t.rfind(",") else "comma")
+        elif t.count(",") == 1 and len(t.split(",")[1]) in (1, 2):
+            votes.add("comma")
+        elif t.count(".") == 1 and len(t.split(".")[1]) in (1, 2) and "," not in t:
+            votes.add("dot")
+    if len(votes) > 1:
+        raise ValueError("Faylda aralash son formatlari (1,234.50 va 1.234,50) — lokalizatsiyani aniqlab bo'lmadi.")
+    if votes:
+        return votes.pop(), "cell_evidence"
+    if re.search(r"[\u0400-\u04FF]", header_text):
+        return "comma", "header_language_cyrillic"
+    return "dot", "header_language_default_en"
+
+
 def safe_float(
     value: Any,
     default: float = 0.0,
     min_val: float | None = None,
     max_val: float | None = None,
     field_name: str = "value",
+    decimal: str | None = None,
 ) -> float:
-    """NaN, Infinity, manfiy yoki buzilgan satrlardan himoyalangan float parser."""
+    """NaN, Infinity, manfiy yoki buzilgan satrlardan himoyalangan float parser.
+
+    Lokalizatsiyalangan satrlar (``"499,90"``, ``"61,230"``) ``parse_number`` orqali o'qiladi;
+    noaniq yozuv (``"1,234"``) ``AmbiguousNumberError`` ko'taradi (jim taxmin yo'q).
+    """
     if value is None or isinstance(value, bool):
         res = default
     elif isinstance(value, (int, float)):
         res = float(value)
     else:
-        cleaned = str(value).replace("$", "").replace(",", "").replace("%", "").replace(" ", "").strip()
+        cleaned = str(value).strip()
         try:
-            res = float(cleaned) if cleaned else default
+            if decimal is None and not re.search(r"[,\s\u00a0\u202f]", cleaned):
+                res = float(cleaned.replace("$", "").replace("%", "")) if cleaned else default
+            else:
+                res = parse_number(cleaned, decimal) if cleaned else default
+        except AmbiguousNumberError:
+            raise
         except ValueError:
             res = default
 

@@ -52,6 +52,10 @@
       "type": "capi_emq",
       "phone": "+998901234567",
       "email": "lead@brand.uz",
+      "first_name": "Ali",
+      "city": "tashkent",
+      "fbp": "fb.1.1729200000.123456789",
+      "fbc": "fb.1.1729200000.IwAR0xyz",
       "min_emq": 8.0
     },
     {

@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 _TOOLS_DIR = Path(__file__).resolve().parent
@@ -45,6 +46,12 @@ def calc_breakeven(
     currency: str = "USD",
 ) -> dict:
     """Break-even CPA, ROAS va sof marjani hisoblaydi."""
+    for label, val in (("price", price), ("cogs", cogs), ("shipping", shipping),
+                       ("processing_fee_pct", processing_fee_pct), ("target_profit_pct", target_profit_pct)):
+        if not math.isfinite(val):
+            raise ValueError(f"'{label}' chekli son bo'lishi shart (berildi: {val}).")
+        if val < 0:
+            raise ValueError(f"'{label}' manfiy bo'lishi mumkin emas (berildi: {val}).")
     if price <= 0:
         raise ValueError("Narx (price) 0 dan katta bo'lishi shart.")
 
@@ -55,6 +62,7 @@ def calc_breakeven(
 
     if gross_profit <= 0:
         return {
+            "loss_making": True,
             "error": "Zarardasiz! Mahsulot tannarxi va xarajatlari sotuv narxidan yuqori.",
             "gross_profit": gross_profit,
             "margin_ratio": margin_ratio,
@@ -321,6 +329,11 @@ def main() -> int:
 
     args = parser.parse_args()
 
+    bad = [k for k, v in vars(args).items() if isinstance(v, float) and not math.isfinite(v)]
+    if bad:
+        print(f"Xato: chekli son bo'lishi shart (nan/inf): {', '.join('--' + k.replace('_', '-') for k in bad)}", file=sys.stderr)
+        return 2
+
     try:
         if args.command == "breakeven":
             res = calc_breakeven(args.price, args.cogs, args.shipping, args.processing_fee_pct, args.target_profit_pct, args.currency)
@@ -336,9 +349,10 @@ def main() -> int:
         print(f"Xato: {exc}", file=sys.stderr)
         return 2
 
+    loss = bool(res.get("loss_making"))
     if getattr(args, "json", False):
         print(json.dumps(res, indent=2, ensure_ascii=False))
-        return 0
+        return 1 if loss else 0
 
     # Inson o'qiydigan chiroyli xulosa
     print(f"\n========================================================")
@@ -356,7 +370,9 @@ def main() -> int:
         else:
             print(f"  {k}: {v}")
     print()
-    return 0
+    if loss:
+        print(f"Xato: {res.get('error')}", file=sys.stderr)
+    return 1 if loss else 0
 
 
 if __name__ == "__main__":

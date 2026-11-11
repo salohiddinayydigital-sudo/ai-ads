@@ -15,6 +15,7 @@ import os
 import re
 import sys
 import time
+import urllib.parse
 from pathlib import Path
 
 _TOOLS_DIR = Path(__file__).resolve().parent
@@ -76,9 +77,11 @@ def build_utm_links(base_url: str, platform: str, campaign: str, bot_username: s
             "utm_content": "ch_seed_01",
         }
 
-    sep = "&" if "?" in base_url else "?"
+    # Fragment (#...) so'rov qismidan KEYIN turishi shart; makrolar ({campaignid}, {{ad.name}}) kodlanmaydi.
+    parts = urllib.parse.urlsplit(base_url)
     query_str = "&".join(f"{k}={v}" for k, v in params.items())
-    full_url = f"{base_url}{sep}{query_str}"
+    new_query = f"{parts.query}&{query_str}" if parts.query else query_str
+    full_url = urllib.parse.urlunsplit((parts.scheme, parts.netloc, parts.path, new_query, parts.fragment))
 
     tg_links = {}
     if bot_username:
@@ -100,42 +103,64 @@ def build_utm_links(base_url: str, platform: str, campaign: str, bot_username: s
     }
 
 
+_ACTION_SOURCES = ("website", "app", "email", "phone_call", "chat", "physical_store", "system_generated", "business_messaging", "other")
+
+
 def build_capi_payload(
     event_name: str,
     phone: str = "",
     email: str = "",
     first_name: str = "",
-    city: str = "tashkent",
-    country: str = "uz",
-    fbp: str = "fb.1.1729200000.123456789",
-    fbc: str = "fb.1.1729200000.IwAR0xyz",
-    value: float = 0.0,
-    currency: str = "USD",
-    order_id: str = "LEAD_001",
-    event_source_url: str = "https://brand.uz/",
+    city: str = "",
+    country: str = "",
+    fbp: str = "",
+    fbc: str = "",
+    value: float | None = None,
+    currency: str = "",
+    order_id: str = "",
+    event_source_url: str = "",
     market: str = "",
     consent_granted: bool = True,
     ldu_enabled: bool | None = None,
     ldu_state: int = 0,
     special_ad_category: str = "NONE",
+    user_agent: str = "",
+    ip: str = "",
+    action_source: str = "website",
+    event_id: str = "",
+    event_time: int | None = None,
 ) -> dict:
+    """CAPI payload quradi. Payload'ga FAQAT foydalanuvchi bergan qiymatlar tushadi.
+
+    Yagona avtomatik maydon — ``event_time`` (berilmasa joriy vaqt; ``system_generated_fields`` da ko'rsatiladi).
+    Yo'q maydonlar o'ylab topilmaydi — ``missing_fields`` / ``warnings`` da ogohlantirish chiqadi.
+    """
+    if action_source not in _ACTION_SOURCES:
+        raise ValueError(f"action_source {action_source!r} noto'g'ri; ruxsat etilgan: {', '.join(_ACTION_SOURCES)}")
     api_info = mloc.get_configured_api_version("META_GRAPH_API_VERSION", DEFAULT_GRAPH_API_VERSION)
     api_version = api_info["version"]
 
-    det_market = mloc.detect_market(explicit_market=market, geo=country, currency=currency)
+    det_market = mloc.detect_market(explicit_market=market, geo=country or None, currency=currency or None)
     m_id = det_market["market_id"]
-    curr = (currency or det_market["currency"] or "USD").strip().upper()
+    has_value = value is not None
+    if has_value and not (currency or "").strip():
+        raise ValueError("--value berilsa --currency ham majburiy (valyuta taxmin qilinmaydi).")
+    curr = (currency or "").strip().upper()
 
-    user_data: dict[str, object] = {
-        "country": [sha256_norm(country)],
-    }
-    emq_points = 1.5
+    warnings: list[str] = []
+    missing: list[str] = []
+    user_data: dict[str, object] = {}
+    if country:
+        user_data["country"] = [sha256_norm(country)]
+    emq_points = 0.0
 
     if not consent_granted:
-        # Strict Consent Gate: never hash or transmit PII (phone, email, name, city, fbp/fbc) without user consent
+        # Strict Consent Gate: PII (phone, email, name, city, fbp/fbc, UA, IP) roziliksiz yuborilmaydi
         consent_gate_status = "BLOCKED_PII_NO_CONSENT"
         pii_stripped = True
-        emq_score = 1.5
+        emq_score = 0.0
+        if any((phone, email, first_name, city, fbp, fbc, user_agent, ip)):
+            warnings.append("Rozilik yo'q: berilgan PII maydonlari payload'dan olib tashlandi.")
     else:
         consent_gate_status = "CONSENT_GRANTED_PII_HASHED"
         pii_stripped = False
@@ -158,9 +183,27 @@ def build_capi_payload(
         if fbc:
             user_data["fbc"] = fbc
             emq_points += 1.1
+        if user_agent:
+            user_data["client_user_agent"] = user_agent
+        if ip:
+            user_data["client_ip_address"] = ip
         emq_score = round(min(10.0, emq_points), 1)
 
-    event_id = f"evt_{event_name.lower()}_{re.sub(r'[^a-zA-Z0-9]+', '', order_id)}"
+    if action_source == "website":
+        if not event_source_url:
+            missing.append("event_source_url")
+            warnings.append("action_source=website uchun event_source_url majburiy — --event-source-url bering.")
+        if consent_granted and not user_agent:
+            missing.append("client_user_agent")
+            warnings.append("action_source=website uchun client_user_agent majburiy — --user-agent bering.")
+    if consent_granted and not any(k in user_data for k in ("ph", "em", "fbp", "fbc", "client_ip_address")):
+        warnings.append("Moslashtirish uchun identifikator yo'q (phone/email/fbp/fbc/ip) — Meta hodisani bog'lay olmaydi.")
+
+    if not event_id and order_id:
+        event_id = f"evt_{event_name.lower()}_{re.sub(r'[^a-zA-Z0-9]+', '', order_id)}"
+    if not event_id:
+        missing.append("event_id")
+        warnings.append("event_id yo'q: Pixel+CAPI deduplikatsiyasi ishlamaydi — --event-id yoki --order-id bering.")
 
     # Meta Limited Data Use (LDU) for US states (CCPA/CPRA, VA, CO, CT, TX)
     use_ldu = ldu_enabled if ldu_enabled is not None else (m_id == "us" or not consent_granted)
@@ -178,24 +221,38 @@ def build_capi_payload(
         "required_in_market": m_id in ("eu", "uk"),
     }
 
-    rounded_val = mloc.round_currency(tcore.safe_float(value, default=0.0, min_val=0.0, field_name="value"), curr)
+    rounded_val = (
+        mloc.round_currency(tcore.safe_float(value, default=0.0, min_val=0.0, field_name="value"), curr) if has_value else None
+    )
+    custom_data: dict[str, object] = {}
+    if has_value:
+        custom_data["currency"] = curr
+        custom_data["value"] = rounded_val
+    if order_id:
+        custom_data["order_id"] = order_id
+
+    generated: list[str] = []
+    if event_time is None:
+        event_time = int(time.time())
+        generated.append("event_time")
 
     event_obj: dict[str, object] = {
         "event_name": event_name,
-        "event_time": int(time.time()),
-        "action_source": "website",
-        "event_id": event_id,
-        "event_source_url": event_source_url,
+        "event_time": int(event_time),
+        "action_source": action_source,
         "user_data": user_data,
-        "custom_data": {
-            "currency": curr,
-            "value": rounded_val,
-            "order_id": order_id,
-        },
-        "data_processing_options": data_processing_options,
-        "data_processing_options_country": data_processing_options_country,
-        "data_processing_options_state": data_processing_options_state,
     }
+    if use_ldu:  # LDU maydonlari faqat LDU yoqilganda (foydalanuvchi/bozor qarori) qo'shiladi
+        event_obj["data_processing_options"] = data_processing_options
+        event_obj["data_processing_options_country"] = data_processing_options_country
+        event_obj["data_processing_options_state"] = data_processing_options_state
+
+    if event_id:
+        event_obj["event_id"] = event_id
+    if event_source_url:
+        event_obj["event_source_url"] = event_source_url
+    if custom_data:
+        event_obj["custom_data"] = custom_data
 
     payload = {"data": [event_obj]}
 
@@ -226,18 +283,29 @@ def build_capi_payload(
         "graph_api_version": api_version,
         "capi_endpoint_template": f"POST https://graph.facebook.com/{api_version}/<PIXEL_ID>/events",
         "market": m_id,
-        "currency": curr,
-        "formatted_value": mloc.format_currency(rounded_val, curr),
+        "currency": curr or None,
+        "formatted_value": mloc.format_currency(rounded_val, curr) if has_value else None,
         "consent_gate_status": consent_gate_status,
         "pii_stripped_due_to_no_consent": pii_stripped,
         "regulatory_compliance": regulatory_checks,
         "estimated_emq_score_10": emq_score,
+        "emq_basis": "HEURISTIC_PRIOR_MODEL",
+        "emq_note": (
+            "Taxminiy evristika (maydonlar og'irligi), Meta'ning haqiqiy EMQ si emas. "
+            "Haqiqiy ballni Events Manager yoki Dataset Quality API dan oling."
+        ),
+        "missing_fields": missing,
+        "warnings": warnings,
+        "system_generated_fields": generated,
         "emq_status": (
             "CONSENT_DENIED_ANONYMOUS"
             if pii_stripped
-            else ("EXCELLENT (>=8.0)" if emq_score >= 8.0 else ("GOOD (6.5-7.9)" if emq_score >= 6.5 else "WEAK (<6.5 — add phone and fbc/fbp!)"))
+            else ("EXCELLENT (>=8.0)" if emq_score >= 8.0 else ("GOOD (6.5-7.9)" if emq_score >= 6.5 else "WEAK (<6.5 — add phone/email and fbc/fbp if available)"))
         ),
-        "deduplication_instruction": f"Browser Pixel MUST call `fbq('track', '{event_name}', {{...}}, {{eventID: '{event_id}'}})` for 100% deduplication.",
+        "deduplication_instruction": (
+            f"Browser Pixel MUST call `fbq('track', '{event_name}', {{...}}, {{eventID: '{event_id}'}})` for 100% deduplication."
+            if event_id else "event_id berilmagan — deduplikatsiya ko'rsatmasi yo'q."
+        ),
         "capi_payload": payload,
         "capi_v22_payload": payload,
     }
@@ -262,12 +330,20 @@ def main(argv: list[str] | None = None) -> int:
     p_capi.add_argument("--phone", default="")
     p_capi.add_argument("--email", default="")
     p_capi.add_argument("--first-name", default="")
-    p_capi.add_argument("--city", default="tashkent")
-    p_capi.add_argument("--country", default="uz")
+    p_capi.add_argument("--city", default="")
+    p_capi.add_argument("--country", default="", help="ISO-2 mamlakat kodi (ixtiyoriy; berilmasa payload'ga qo'shilmaydi)")
     p_capi.add_argument("--market", default="", help="Market pack (global, uz, us, eu, uk, mena, latam, sea, in)")
-    p_capi.add_argument("--value", type=float, default=0.0)
-    p_capi.add_argument("--currency", default="USD")
-    p_capi.add_argument("--order-id", default="CRM_1001")
+    p_capi.add_argument("--value", type=float, default=None, help="Hodisa qiymati (berilsa --currency majburiy)")
+    p_capi.add_argument("--currency", default="")
+    p_capi.add_argument("--order-id", default="")
+    p_capi.add_argument("--event-id", default="", help="Pixel bilan bir xil event_id (berilmasa --order-id dan hosil qilinadi)")
+    p_capi.add_argument("--event-time", type=int, default=None, help="UNIX vaqt (berilmasa joriy vaqt)")
+    p_capi.add_argument("--event-source-url", default="")
+    p_capi.add_argument("--fbp", default="")
+    p_capi.add_argument("--fbc", default="")
+    p_capi.add_argument("--user-agent", default="")
+    p_capi.add_argument("--ip", default="")
+    p_capi.add_argument("--action-source", default="website", choices=list(_ACTION_SOURCES))
     p_capi.add_argument("--consent-granted", dest="consent_granted", action="store_true", default=True, help="User granted tracking/PII consent (default: True)")
     p_capi.add_argument("--no-consent", dest="consent_granted", action="store_false", help="User denied consent -> strip all PII from CAPI payload")
     p_capi.add_argument("--ldu", action="store_true", help="Enable Meta Limited Data Use (data_processing_options=['LDU'])")
@@ -276,18 +352,12 @@ def main(argv: list[str] | None = None) -> int:
     p_capi.add_argument("--json", action="store_true")
 
     args = parser.parse_args(argv)
-    if args.command == "utm":
-        res = build_utm_links(args.url, args.platform, args.campaign, args.bot)
-    elif args.command == "capi-payload":
-        res = build_capi_payload(
-            event_name=args.event, phone=args.phone, email=args.email,
-            first_name=args.first_name, city=args.city, country=args.country,
-            value=args.value, currency=args.currency, order_id=args.order_id,
-            market=args.market, consent_granted=args.consent_granted,
-            ldu_enabled=(True if args.ldu else None), ldu_state=args.ldu_state,
-            special_ad_category=args.special_ad_category,
-        )
-    else:
+    try:
+        res = _run(args)
+    except ValueError as exc:
+        print(f"Xato: {exc}", file=sys.stderr)
+        return 2
+    if res is None:
         return 2
 
     if getattr(args, "json", False):
@@ -300,6 +370,24 @@ def main(argv: list[str] | None = None) -> int:
     print(json.dumps(res, ensure_ascii=False, indent=2))
     print("=" * 68)
     return 0
+
+
+def _run(args: argparse.Namespace) -> dict | None:
+    if args.command == "utm":
+        return build_utm_links(args.url, args.platform, args.campaign, args.bot)
+    if args.command == "capi-payload":
+        return build_capi_payload(
+            event_name=args.event, phone=args.phone, email=args.email,
+            first_name=args.first_name, city=args.city, country=args.country,
+            value=args.value, currency=args.currency, order_id=args.order_id,
+            fbp=args.fbp, fbc=args.fbc, user_agent=args.user_agent, ip=args.ip,
+            action_source=args.action_source, event_id=args.event_id,
+            event_time=args.event_time, event_source_url=args.event_source_url,
+            market=args.market, consent_granted=args.consent_granted,
+            ldu_enabled=(True if args.ldu else None), ldu_state=args.ldu_state,
+            special_ad_category=args.special_ad_category,
+        )
+    return None
 
 
 if __name__ == "__main__":

@@ -56,7 +56,7 @@ jobs:
       - name: Behavioral Eval Suite (24/24 Scenarios)
         run: python tools/skill-eval.py
 
-      - name: Full Unit Test Suite (196 Tests including External-CWD Hook & MCP Verification)
+      - name: Full Unit Test Suite (242 Tests including External-CWD Hook & MCP Verification)
         run: python -m unittest discover -s tests -t . -v
 
       - name: Doctor System Health Check

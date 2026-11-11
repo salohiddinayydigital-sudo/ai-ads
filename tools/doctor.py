@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -225,6 +226,65 @@ def check_memory(report: Report) -> None:
         report.add("Xotira (MEMORY.md)", OK, f"{lines}/{MEMORY_LIMIT} qator")
 
 
+_VAR_RE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)(?::-([^}]*))?\}")
+
+
+def _expand_env(text: str, env: dict[str, str]) -> str:
+    """`${VAR}` va `${VAR:-default}` ni .mcp.json kabi yoyadi; aniqlanmagan `${VAR}` o'zgarishsiz qoladi (xato ko'rinsin)."""
+    def repl(m: "re.Match[str]") -> str:
+        val = env.get(m.group(1))
+        if val:
+            return val
+        return m.group(2) if m.group(2) is not None else m.group(0)
+    return _VAR_RE.sub(repl, text)
+
+
+def probe_mcp_server(cfg_path: Path, cwd: Path, timeout: float = 20.0, server: str = "tyrion-core") -> dict:
+    """`.mcp.json` dagi buyruqni CLAUDE_PLUGIN_ROOT O'RNATILMAGAN holda haqiqatda ishga tushirib,
+    `initialize` va `tools/list` javoblarini tekshiradi. ``{"ok", "detail", "tools"}`` qaytaradi."""
+    try:
+        cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+        spec = cfg["mcpServers"][server]
+        command = spec["command"]
+        args = list(spec.get("args", []))
+    except (OSError, ValueError, KeyError) as exc:
+        return {"ok": False, "detail": f".mcp.json o'qilmadi: {exc}", "tools": 0}
+    env = {k: v for k, v in os.environ.items() if k != "CLAUDE_PLUGIN_ROOT"}
+    command = _expand_env(command, env)
+    args = [_expand_env(a, env) for a in args]
+    if shutil.which(command) is None:
+        return {"ok": False, "detail": f"buyruq topilmadi: {command!r} (PATH da yo'q)", "tools": 0}
+    msgs = [
+        {"jsonrpc": "2.0", "id": 1, "method": "initialize",
+         "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "tyrion-doctor", "version": "1"}}},
+        {"jsonrpc": "2.0", "method": "notifications/initialized"},
+        {"jsonrpc": "2.0", "id": 2, "method": "tools/list"},
+    ]
+    stdin = "".join(json.dumps(m) + "\n" for m in msgs)
+    try:
+        proc = subprocess.run([command, *args], input=stdin, capture_output=True, text=True, encoding="utf-8",
+                              errors="replace", timeout=timeout, cwd=str(cwd), env=env)
+    except subprocess.TimeoutExpired:
+        return {"ok": False, "detail": f"{timeout:.0f}s ichida javob bermadi", "tools": 0}
+    except OSError as exc:
+        return {"ok": False, "detail": f"ishga tushmadi: {exc}", "tools": 0}
+    replies: dict[int, dict] = {}
+    for line in proc.stdout.splitlines():
+        try:
+            obj = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(obj, dict) and isinstance(obj.get("id"), int):
+            replies[obj["id"]] = obj
+    if 1 not in replies or "result" not in replies[1]:
+        err = (proc.stderr.strip().splitlines() or ["initialize javobi yo'q"])[0][:200]
+        return {"ok": False, "detail": f"initialize muvaffaqiyatsiz (exit {proc.returncode}): {err}", "tools": 0}
+    tools = (replies.get(2) or {}).get("result", {}).get("tools")
+    if not isinstance(tools, list) or not tools:
+        return {"ok": False, "detail": "tools/list bo'sh yoki javobsiz", "tools": 0}
+    return {"ok": True, "detail": f"initialize + tools/list javob berdi ({len(tools)} tool, CLAUDE_PLUGIN_ROOT'siz)", "tools": len(tools)}
+
+
 def check_mcp_and_evals(report: Report) -> None:
     """MCP Server (.mcp.json + tyrion-mcp-server.py) va Behavioral Evals (skill-eval.py) tekshiruvi."""
     import importlib
@@ -233,12 +293,8 @@ def check_mcp_and_evals(report: Report) -> None:
     if not mcp_cfg.is_file() or not mcp_srv.is_file():
         report.add("MCP Server (.mcp.json)", FAIL, ".mcp.json yoki tyrion-mcp-server.py yo'q")
     else:
-        try:
-            mcp_mod = importlib.import_module("tyrion-mcp-server")
-            tcount = len(getattr(mcp_mod, "MCP_TOOLS", []))
-            report.add("MCP Server (.mcp.json)", OK, f"tyrion-core faol ({tcount} MCP tool)")
-        except Exception as exc:
-            report.add("MCP Server (.mcp.json)", WARN, f"tekshirib bo'lmadi: {exc}")
+        res = probe_mcp_server(mcp_cfg, VAULT)
+        report.add("MCP Server (.mcp.json)", OK if res["ok"] else FAIL, f"tyrion-core: {res['detail']}")
 
     eval_srv = TOOLS / "skill-eval.py"
     if not eval_srv.is_file():

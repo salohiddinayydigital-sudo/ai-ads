@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -38,10 +39,44 @@ def check_budget_change(
     proposed_daily: float,
     max_daily_cap: float = 500.0,
     target_cpa: float | None = None,
+    pause_approved: bool = False,
 ) -> dict:
-    """Byudjet o'zgarishini 40-qoida va platforma qonunlari bo'yicha tekshiradi."""
+    """Byudjet o'zgarishini 40-qoida va platforma qonunlari bo'yicha tekshiradi.
+
+    Bloklanadi: nan/inf, manfiy qiymat. ``proposed_daily == 0`` — pauza: alohida tasdiq
+    (``pause_approved=True`` / ``--approve-pause``) bo'lmasa bloklanadi.
+    """
     errors: list[str] = []
     warnings: list[str] = []
+
+    for label, val in (("Joriy", current_daily), ("Taklif qilingan", proposed_daily), ("Maksimal limit", max_daily_cap)):
+        if not isinstance(val, (int, float)) or isinstance(val, bool) or not math.isfinite(val):
+            errors.append(f"{label} byudjet chekli son bo'lishi shart (berildi: {val!r}); nan/inf qabul qilinmaydi.")
+        elif val < 0:
+            errors.append(f"{label} byudjet manfiy bo'lishi mumkin emas (berildi: {val}).")
+    if errors:
+        return {"passed": False, "action": "invalid", "errors": errors, "warnings": warnings}
+
+    if proposed_daily == 0 and current_daily > 0:
+        if not pause_approved:
+            errors.append(
+                "Taklif 0 = kampaniyani PAUZAGA qo'yish. Pauza ham hisob o'zgarishi: alohida tasdiq talab qilinadi "
+                "(operator tasdig'idan so'ng --approve-pause bilan qayta ishga tushiring)."
+            )
+        else:
+            warnings.append("Pauza operator tasdig'i bilan o'tkazildi; qayta yoqishda learning phase qayta boshlanishi mumkin.")
+        return {
+            "passed": not errors,
+            "action": "pause",
+            "requires_explicit_approval": True,
+            "pause_approved": pause_approved,
+            "current_daily": current_daily,
+            "proposed_daily": 0.0,
+            "percent_change": -100.0,
+            "max_daily_cap": max_daily_cap,
+            "errors": errors,
+            "warnings": warnings,
+        }
 
     if current_daily <= 0:
         errors.append("Joriy kunlik byudjet 0 dan katta bo'lishi shart.")
@@ -93,51 +128,103 @@ def check_budget_change(
     }
 
 
+_PACKET_SECTIONS: dict[str, tuple[str, str]] = {
+    "rollback_instructions": (
+        r"rollback|teskari qadam|qaytarish|ortga qaytish|favqulodda qaytish",
+        "Teskari qadam (Rollback) bo'limi",
+    ),
+    "stop_loss": (
+        r"stop[- ]?loss|stop[- ]?condition|to'xtatish mezoni|kill qoidasi",
+        "To'xtatish mezoni (Stop-loss / Stop-condition) bo'limi",
+    ),
+    "baseline_metrics": (
+        r"boshlang'ich|baseline|hozirgi (?:holat|ko'rsatkich)|joriy ko'rsatkich",
+        "Boshlang'ich ko'rsatkichlar (Baseline) bo'limi",
+    ),
+    "risk_assessment": (r"xavf|risk", "Xavf darajasi (Risk) bo'limi"),
+    "human_approval": (r"tasdiq|tasdig|approval|ruxsat", "Odam tasdig'i (Human approval) bo'limi"),
+}
+_HEADING_RE = re.compile(r"^\s{0,3}#{1,6}\s+(.*?)\s*#*\s*$")
+_FIELD_RE = re.compile(r"^\s*(?:[-*+]\s+|\d+[.)]\s+)?\**([^:\n*`]{2,80}?)\**\s*:\s*\**\s*(.*)$")
+
+
+def _clean_value(text: str) -> str:
+    return re.sub(r"[*_`]+", "", text).strip()
+
+
+def _is_placeholder(value: str) -> bool:
+    v = _clean_value(value).strip(" .-–—")
+    if not v:
+        return True
+    if re.fullmatch(r"\[[^\]]*\]", v) and not re.fullmatch(r"\[[xX]\]", v):
+        return True
+    if re.fullmatch(r"(?:tbd|todo|n/?a|yo'q|\.\.\.|…|\?+)", v.lower()):
+        return True
+    if re.fullmatch(r"[$€£]?\s*0+(?:[.,]0+)?\s*(?:/\s*kun)?", v):
+        return True
+    return False
+
+
+def _parse_packet_sections(content: str) -> list[tuple[str, str]]:
+    """Change Packet'dan (sarlavha/maydon nomi, qiymat) juftliklarini ajratadi."""
+    text = content.replace("\u2019", "'").replace("\u02bb", "'").replace("\u2018", "'")
+    pairs: list[tuple[str, str]] = []
+    heading: str | None = None
+    body: list[str] = []
+
+    def flush() -> None:
+        if heading is not None:
+            pairs.append((heading, " ".join(b for b in body if b.strip())))
+
+    in_fence = False
+    for line in text.splitlines():
+        if line.strip().startswith("```"):
+            in_fence = not in_fence
+            continue
+        h = _HEADING_RE.match(line)
+        if h and not in_fence:
+            flush()
+            heading, body = re.sub(r"^\d+[.)]\s*", "", _clean_value(h.group(1))), []
+            continue
+        f = _FIELD_RE.match(line)
+        if f and not in_fence:
+            pairs.append((_clean_value(f.group(1)), f.group(2)))
+            if heading is not None:  # sarlavha ostidagi maydon sarlavha qiymatiga ham kiradi
+                body.append(f.group(2).strip())
+            continue
+        if heading is not None and line.strip() and not re.fullmatch(r"\s*[-*_]{3,}\s*", line):
+            body.append(line.strip())
+    flush()
+    return pairs
+
+
 def check_change_packet(content: str) -> dict:
-    """Change Packet (O'zgarishlar paketi) ning 6 darvoza talablariga mosligini tekshiradi."""
+    """Change Packet tuzilmasini tekshiradi: har bir majburiy bo'lim sarlavha/maydon + bo'sh bo'lmagan qiymat.
+
+    Majburiy: Rollback, Stop-loss, Baseline, Xavf, Odam tasdig'i. Faqat kalit so'z eslatilishi yetarli emas.
+    """
     errors: list[str] = []
     warnings: list[str] = []
     checks: dict[str, bool] = {}
+    pairs = _parse_packet_sections(content)
 
-    lower = content.lower()
+    for key, (pattern, label) in _PACKET_SECTIONS.items():
+        label_re = re.compile(pattern, re.IGNORECASE)
+        matched = [(n, v) for n, v in pairs if label_re.search(n)]
+        filled = any(not _is_placeholder(v) for _, v in matched)
+        checks[key] = filled
+        if filled:
+            continue
+        if matched:
+            errors.append(f"{label} bor, lekin qiymati bo'sh yoki andoza (placeholder) holatida.")
+        else:
+            errors.append(f"{label} topilmadi (sarlavha yoki 'Nomi: qiymat' ko'rinishidagi maydon kerak).")
 
-    # 1. Rollback / Teskari qadam mavjudligi
-    has_rollback = bool(
-        re.search(r"(teskari\s+qadam|rollback|qaytarish|ortga\s+qaytish)", lower)
-    )
-    checks["rollback_instructions"] = has_rollback
-    if not has_rollback:
-        errors.append("Teskari qadam (Rollback) ko'rsatmasi topilmadi. Har qanday o'zgarish ortga qaytarilishi mumkin bo'lishi shart.")
-
-    # 2. Stop-loss / Stop-condition
-    has_stop_loss = bool(
-        re.search(r"(stop[- ]condition|stop[- ]loss|to'xtatish\s+mezoni|chegara|agar\s+cpa)", lower)
-    )
-    checks["stop_loss"] = has_stop_loss
-    if not has_stop_loss:
-        errors.append("To'xtatish mezoni (Stop-condition / Stop-loss) topilmadi. Masalan: 'Agar spend > $50 va 0 xarid bo'lsa to'xtatish'.")
-
-    # 3. Boshlang'ich ko'rsatkichlar (Baseline)
-    has_baseline = bool(
-        re.search(r"(boshlang'ich|baseline|oldin|hozirgi|joriy)", lower)
-    )
-    checks["baseline_metrics"] = has_baseline
-    if not has_baseline:
-        warnings.append("Boshlang'ich ko'rsatkichlar (Baseline metrics) aniq ko'rsatilmagan.")
-
-    # 4. Xavf darajasi (Risk level)
-    has_risk = bool(
-        re.search(r"(xavf|risk|past|o'rta|yuqori|high|medium|low)", lower)
-    )
-    checks["risk_assessment"] = has_risk
-    if not has_risk:
-        warnings.append("Xavf darajasi (Risk level) belgilanmagan.")
-
-    # 5. Odam tasdig'i (Human approval requirement)
-    has_approval_note = bool(
-        re.search(r"(tasdiq|ruxsat|tasdiqlansa|operator|foydalanuvchi|approval)", lower)
-    )
-    checks["human_approval_mention"] = has_approval_note
+    # Odam tasdig'i: belgilanmagan katak ("[ ]") tasdiq emas
+    approval_vals = [v for n, v in pairs if re.search(_PACKET_SECTIONS["human_approval"][0], n, re.IGNORECASE)]
+    if approval_vals and all(re.match(r"^\[\s\]", _clean_value(v).lstrip("-+ ")) for v in approval_vals if v.strip()):
+        checks["human_approval"] = False
+        errors.append("Odam tasdig'i belgilanmagan ('[ ]'). Operator tasdig'isiz o'zgarish kiritilmaydi.")
 
     passed = len(errors) == 0
     return {
@@ -261,6 +348,7 @@ def main() -> int:
     p_budget.add_argument("--proposed", type=float, required=True, help="Taklif qilingan kunlik byudjet")
     p_budget.add_argument("--max-cap", type=float, default=500.0, help="Maksimal ruxsat etilgan kunlik byudjet (default: 500)")
     p_budget.add_argument("--target-cpa", type=float, default=None, help="Maqsadli CPA (ixtiyoriy)")
+    p_budget.add_argument("--approve-pause", action="store_true", help="--proposed 0 (pauza) uchun operator tasdig'i")
     p_budget.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
     # Packet buyrug'i
@@ -289,7 +377,7 @@ def main() -> int:
 
     res: dict = {}
     if args.command == "budget":
-        res = check_budget_change(args.current, args.proposed, args.max_cap, args.target_cpa)
+        res = check_budget_change(args.current, args.proposed, args.max_cap, args.target_cpa, pause_approved=args.approve_pause)
     elif args.command == "packet":
         if not args.file.is_file():
             print(f"Xato: fayl topilmadi: {args.file}", file=sys.stderr)
@@ -316,7 +404,7 @@ def main() -> int:
     status_icon = "✓ PASSED" if passed else "✗ BLOCKED"
     print(f"\n[Spend-Guard] {status_icon} — {args.command.upper()}")
 
-    if "percent_change" in res:
+    if "percent_change" in res and "current_daily" in res:
         print(f"  O'zgarish: {res['percent_change']:+g}% ({res['current_daily']} -> {res['proposed_daily']})")
 
     if res.get("errors"):
@@ -330,7 +418,7 @@ def main() -> int:
             print(f"    - ⚠ {warn}")
 
     if passed and not res.get("warnings"):
-        print("  Barcha 6 ta xavfsizlik darvozasi to'liq qanoatlantirildi.")
+        print(f"  {args.command}: tekshirilgan qoidalar bo'yicha to'siq topilmadi.")
 
     print()
     return 0 if passed else 1

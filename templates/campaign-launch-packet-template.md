@@ -51,3 +51,21 @@ Agar kampaniya kutilmagan yuqori CPA yoki xatolik bersa:
 1. Reklama kabinetiga kirish.
 2. `[Kampaniya nomi]` ni tanlash va statusini **PAUSED** ga o'tkazish.
 3. Hisob balansi va sarf limitini tekshirish.
+
+---
+
+## 5. Boshlang'ich Ko'rsatkichlar (Baseline)
+
+- **Boshlang'ich CPA / ROAS:** `[hozirgi o'lchangan qiymat va davr]`
+
+---
+
+## 6. Xavf Darajasi (Risk)
+
+- **Xavf:** `[past | o'rta | yuqori — sababi bilan]`
+
+---
+
+## 7. Odam Tasdig'i (Human Approval)
+
+- **Tasdiq:** `[ ]` Operator tasdiqladi — `[ism, sana]` (belgilanmasa `spend-guard.py packet` bloklaydi)
