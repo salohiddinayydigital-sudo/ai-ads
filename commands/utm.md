@@ -3,7 +3,7 @@ name: utm
 description: "Meta/Google dinamik UTM shablonlari, Telegram Bot <=64 belgi deep-link (?start=) va Meta CAPI v26.0 SHA-256 payload + EMQ ballini generatsiya qilish"
 ---
 
-# `/utm` — Meta CAPI v22 Payload, EMQ va Telegram Bot UTM Generator
+# `/utm` — Meta CAPI Payload, EMQ va Telegram Bot UTM Generator
 
 Foydalanuvchi `/utm [url yoki bot]` deb chaqirganda:
 

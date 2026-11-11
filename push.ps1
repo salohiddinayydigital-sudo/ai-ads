@@ -1,4 +1,4 @@
-# push.ps1 — Tyrion v5.0 Automated Pre-Flight Verification & GitHub Push Script (Windows PowerShell)
+# push.ps1 — Tyrion Automated Pre-Flight Verification & GitHub Push Script (Windows PowerShell)
 param(
     [string]$RemoteUrl = ""
 )
@@ -11,7 +11,7 @@ Set-Location $vaultRoot
 $pyCmd = if (Get-Command py -ErrorAction SilentlyContinue) { "py" } else { "python" }
 
 Write-Host "====================================================================" -ForegroundColor Cyan
-Write-Host "  🚀 TYRION v5.0 — GITHUB PRE-PUSH VERIFICATION & DEPLOY" -ForegroundColor Green
+Write-Host "  🚀 TYRION — GITHUB PRE-PUSH VERIFICATION & DEPLOY" -ForegroundColor Green
 Write-Host "====================================================================" -ForegroundColor Cyan
 
 Write-Host "[1/5] TyrionShield 6-qavatli xavfsizlik tekshiruvi..." -ForegroundColor White
@@ -43,4 +43,4 @@ Write-Host "[6/6] GitHub repozitoriyga yuklanmoqda ..." -ForegroundColor Yellow
 
 $targetBranch = (git branch --show-current).Trim()
 git push -u origin $targetBranch --tags
-Write-Host "✅ Tyrion v5.0 GitHub'ga muvaffaqiyatli yuklandi!" -ForegroundColor Green
+Write-Host "✅ Tyrion GitHub'ga muvaffaqiyatli yuklandi!" -ForegroundColor Green

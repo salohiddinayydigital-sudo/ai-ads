@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v5.1 Ad Export Analyzer & Breakdown Effect Engine (0 token).
+"""Tyrion Ad Export Analyzer & Breakdown Effect Engine (0 token).
 
 Yangi imkoniyatlar (v5.1 Audit #1 va #2 yechimi):
 1. `account_currency` va ko'p valyutali (`USD`, `UZS`, `EUR`, `KZT`) aniqlik — valyutani ko'r-ko'rona USD deb belgilamaydi.
@@ -105,6 +105,8 @@ _COLUMN_ALIASES: dict[str, tuple[str, ...]] = {
     "cpm": ("cpm", "cpm cost per 1000 impressions", "cpm (cost per 1,000 impressions)"),
     "roas": ("roas", "purchase roas return on ad spend", "purchase roas", "roas return on ad spend"),
     "conversion_action_type": ("result type", "optimization goal", "тип результата", "natija turi"),
+    "date_start": ("reporting starts", "day", "date", "начало отчетов", "начало отчёта", "hisobot boshlanishi"),
+    "date_end": ("reporting ends", "окончание отчетов", "окончание отчёта", "hisobot tugashi"),
     "currency": ("currency", "currency code", "account currency", "валюта", "valyuta"),
 }
 _CURRENCY_SYMBOLS = {"$": "USD", "€": "EUR", "£": "GBP", "₽": "RUB", "₸": "KZT"}
@@ -160,7 +162,7 @@ def _decode_export(raw: bytes) -> str:
     return raw.decode("utf-8-sig", errors="replace")
 
 
-def _read_csv_table(text: str) -> tuple[list[str], list[list[str]]]:
+def _read_csv_table(text: str) -> tuple[list[str], list[list[str]], list[str]]:
     """Sarlavhadan oldingi sarlavha-satrlarni (Google Ads: hisobot nomi, sana) o'tkazib, jadvalni o'qiydi."""
     lines = [ln for ln in text.splitlines() if ln.strip()]
     sample = "\n".join(lines[:20])
@@ -169,8 +171,34 @@ def _read_csv_table(text: str) -> tuple[list[str], list[list[str]]]:
     for i, row in enumerate(rows[:15]):
         cmap, _ = _build_colmap(row)
         if "spend" in cmap.values() or len(cmap) >= 3:
-            return row, rows[i + 1:]
-    return (rows[0] if rows else []), rows[1:]
+            return row, rows[i + 1:], [" ".join(r).strip() for r in rows[:i] if any(c.strip() for c in r)]
+    return (rows[0] if rows else []), rows[1:], []
+
+
+_TOTAL_NAME_RE = re.compile(r"^\s*(total|totals|results from|grand total|итого|всего|jami|umumiy)\b", re.IGNORECASE)
+
+
+def _split_total_rows(rows: list[dict]) -> tuple[list[dict], int]:
+    """Jami (Total) qatorlarni ajratadi: aks holda sarf ikki marta sanaladi.
+
+    1) nomi "Total…/Итого/Jami" bilan boshlanadigan qatorlar; 2) Meta: nomi bo'sh, lekin sarfi boshqa
+    qatorlar yig'indisiga (±1%) teng bo'lgan qator.
+    """
+    kept: list[dict] = []
+    skipped = 0
+    for r in rows:
+        if _TOTAL_NAME_RE.match(str(r.get("name", ""))):
+            skipped += 1
+        else:
+            kept.append(r)
+    named = [r for r in kept if str(r.get("name", "")).strip()]
+    blank = [r for r in kept if not str(r.get("name", "")).strip() and isinstance(r.get("spend"), float)]
+    if len(named) >= 2 and len(blank) == 1:
+        total = sum(r["spend"] for r in named if isinstance(r.get("spend"), float))
+        if total > 0 and abs(blank[0]["spend"] - total) <= 0.01 * total:
+            kept = [r for r in kept if r is not blank[0]]
+            skipped += 1
+    return kept, skipped
 
 
 def _canonicalize_csv(headers: list[str], body: list[list[str]]) -> tuple[list[dict], dict]:
@@ -207,7 +235,12 @@ def _canonicalize_csv(headers: list[str], body: list[list[str]]) -> tuple[list[d
         if "currency" not in row and "spend" in currencies:
             row["currency"] = currencies["spend"]
         out.append(row)
-    meta = {"column_map": {c: h for h, c in colmap.items()}, "number_format": locale, "number_format_basis": basis}
+    out, skipped_totals = _split_total_rows(out)
+    meta = {"column_map": {c: h for h, c in colmap.items()}, "number_format": locale, "number_format_basis": basis,
+            "skipped_total_rows": skipped_totals}
+    dates = sorted({str(r[k]) for r in out for k in ("date_start", "date_end") if r.get(k)})
+    if dates:
+        meta["period_in_file"] = {"from": dates[0], "to": dates[-1]}
     return out, meta
 
 
@@ -236,8 +269,11 @@ def load_table(path: Path) -> tuple[list[dict], dict]:
         if not any(isinstance(r, dict) and known_spend & set(r) for r in rows):
             raise ValueError("JSON qatorlarida sarf maydoni (spend/cost) topilmadi — tahlil to'xtatildi.")
         return rows, {"column_map": "json", "number_format": "json"}
-    headers, body = _read_csv_table(_decode_export(path.read_bytes()))
-    return _canonicalize_csv(headers, body)
+    headers, body, preamble = _read_csv_table(_decode_export(path.read_bytes()))
+    rows_out, meta = _canonicalize_csv(headers, body)
+    if preamble:
+        meta["preamble"] = preamble[:3]
+    return rows_out, meta
 
 
 def normalize_row(row: dict, idx: int, primary_conversion: str = "auto", default_currency: str = "USD") -> dict:
@@ -373,6 +409,10 @@ def analyze_export(
     return {
         "source_file": str(path),
         "input_format": table_meta,
+        "legacy_usd_keys_note": (
+            None if report_currency == "USD" else
+            f"`*_usd` kalitlari eski nom (alias): qiymatlar {report_currency} valyutasida, USD emas. Neytral kalitlardan foydalaning."
+        ),
         "total_items": len(items),
         "zero_spend_items": sum(1 for x in items if x["spend"] <= 0),
         "currency": report_currency,
@@ -432,8 +472,7 @@ def analyze_breakdown_effect(
     dominant = seg_a_name if share_a >= share_b else seg_b_name
     minor = seg_b_name if share_a >= share_b else seg_a_name
 
-    projected_cpa_if_paused = round(blended_cpa * 1.38, 2)
-
+    # Averages bilan marginal CPA ni hisoblab bo'lmaydi: raqamli prognoz berilmaydi (oldingi 1.38 manbasiz edi).
     return {
         "breakdown_effect_trap_detected": trap_detected,
         "blended_cpa_usd": blended_cpa,
@@ -441,12 +480,20 @@ def analyze_breakdown_effect(
             {"name": seg_a_name, "spend_usd": seg_a_spend, "spend_share_pct": share_a, "conversions": seg_a_conv, "average_cpa_usd": cpa_a},
             {"name": seg_b_name, "spend_usd": seg_b_spend, "spend_share_pct": share_b, "conversions": seg_b_conv, "average_cpa_usd": cpa_b},
         ],
-        "projected_cpa_if_dominant_paused_usd": projected_cpa_if_paused,
+        "projected_cpa_if_dominant_paused_usd": None,
+        "projection_basis": "NOT_COMPUTABLE_FROM_AVERAGES",
+        "evidence_label": "HEURISTIC_PRIOR_MODEL",
+        "heuristic_thresholds": {"dominant_spend_share_pct": 65.0, "dominant_conversion_ratio": 1.5},
+        "marginal_cpa_note": (
+            "Marginal CPA o'rtacha CPA dan yuqori bo'lishi ehtimoli katta, lekin miqdorini faqat o'rtachalardan "
+            "hisoblab bo'lmaydi. Aniq javob uchun placementni vaqtincha cheklab (A/B yoki Experiments) o'lchang."
+        ),
         "explanation": (
             f"DIQQAT — META BREAKDOWN EFFECT TUZOG'I! '{dominant}' byudjetning {max(share_a, share_b)}% qismini "
-            f"olib, asosiy konversiya hajmini bermoqda. '{minor}' da o'rtacha CPA pastroq ko'rinishining sababi — "
-            f"Meta algoritmi u yerdagi faqat eng arzon 10-20% auktsionni terib olgan va marginal narx oshishi bilan "
-            f"to'xtagan. '{dominant}' ni o'chirsangiz, umumiy CPA ${blended_cpa} dan ~${projected_cpa_if_paused} ga yomonlashadi!"
+            f"olib, asosiy konversiya hajmini bermoqda. '{minor}' da o'rtacha CPA pastroq ko'rinishining ehtimoliy sababi — "
+            f"Meta algoritmi u yerdagi arzonroq auktsionlarni oldin olgan va marginal narx oshgach to'xtagan. "
+            f"'{dominant}' ni o'chirsangiz, umumiy CPA ${blended_cpa} dan yomonlashishi EHTIMOL (miqdori noma'lum; "
+            f"HEURISTIC_PRIOR_MODEL) — o'chirishdan oldin marginal CPA ni o'lchang."
             if trap_detected
             else "Segmentlar taqsimoti mutanosib; Breakdown Effect anomaliyasi kuzatilmadi."
         ),
@@ -460,7 +507,7 @@ def analyze_breakdown_effect(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="ad-export-analyzer.py", description="Tyrion v5.1 CSV/JSON Ad Export & Breakdown Effect Analyzer")
+    parser = argparse.ArgumentParser(prog="ad-export-analyzer.py", description="Tyrion CSV/JSON Ad Export & Breakdown Effect Analyzer")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_an = sub.add_parser("analyze", help="Meta/Google/Telegram CSV yoki JSON eksportni tahlil qilish")
@@ -511,7 +558,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 68)
-    print(f"  📊 TYRION v5.1 AD EXPORT & BREAKDOWN ANALYZER — {args.command.upper()}")
+    print(f"  📊 TYRION AD EXPORT & BREAKDOWN ANALYZER — {args.command.upper()}")
     print("=" * 68)
     print(json.dumps(res, ensure_ascii=False, indent=2))
     print("=" * 68)

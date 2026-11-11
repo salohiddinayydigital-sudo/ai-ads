@@ -311,22 +311,135 @@ def check_mcp_and_evals(report: Report) -> None:
         report.add("Eval Suite (skill-eval)", WARN, f"tekshirib bo'lmadi: {exc}")
 
 
+def check_version(report: Report) -> None:
+    """Hamma manifest/server versiyasi repo ildizidagi `VERSION` fayliga tengmi (versiya drifti)."""
+    vf = VAULT / "VERSION"
+    if not vf.is_file():
+        report.add("Versiya", WARN, "VERSION fayli yo'q")
+        return
+    canon = vf.read_text(encoding="utf-8").strip()
+    found: dict[str, str] = {}
+    for rel in ("package.json", "plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json"):
+        p = VAULT / rel
+        if p.is_file():
+            try:
+                found[rel] = str(json.loads(p.read_text(encoding="utf-8")).get("version", ""))
+            except ValueError:
+                found[rel] = "<buzuq JSON>"
+    for rel in ("marketplace.json", ".claude-plugin/marketplace.json"):
+        p = VAULT / rel
+        if p.is_file():
+            try:
+                d = json.loads(p.read_text(encoding="utf-8"))
+                found[rel] = str(d.get("metadata", {}).get("version", ""))
+                found[rel + ":plugins[0]"] = str((d.get("plugins") or [{}])[0].get("version", ""))
+            except ValueError:
+                found[rel] = "<buzuq JSON>"
+    bad = {k: v for k, v in found.items() if v != canon}
+    if bad:
+        report.add("Versiya", FAIL, f"VERSION={canon}, lekin: " + ", ".join(f"{k}={v}" for k, v in bad.items()))
+    else:
+        report.add("Versiya", OK, f"{canon} — {len(found)} manifest mos")
+
+
+def _git_commit_time(paths: list[str]) -> float | None:
+    """Yo'llar bo'yicha oxirgi commit vaqti (UNIX). Git yo'q yoki tarix yo'q bo'lsa None."""
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%ct", "--", *paths], cwd=str(VAULT),
+                             capture_output=True, text=True, timeout=15).stdout.strip()
+        return float(out) if out else None
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return None
+
+
+_REFRESH_RE = re.compile(r"refresh[ _]due\**\s*:?\**\s*`?(\d{4}-\d{2}-\d{2})", re.IGNORECASE)
+
+
+def check_freshness(report: Report, today: "datetime | None" = None) -> None:
+    """Reference/bozor fayllaridagi `Refresh due: YYYY-MM-DD` (yoki `refresh_due:`) muddati o'tganini ko'rsatadi."""
+    now = (today or datetime.now(timezone.utc)).date()
+    overdue: list[str] = []
+    tracked = 0
+    for root in ("skills", "markets", "wiki", "playbooks", "rules"):
+        base = VAULT / root
+        if not base.is_dir():
+            continue
+        for path in base.rglob("*.md"):
+            try:
+                head = path.read_text(encoding="utf-8", errors="replace")[:2000]
+            except OSError:
+                continue
+            m = _REFRESH_RE.search(head)
+            if not m:
+                continue
+            tracked += 1
+            try:
+                due = datetime.strptime(m.group(1), "%Y-%m-%d").date()
+            except ValueError:
+                continue
+            if due < now:
+                overdue.append(f"{path.relative_to(VAULT).as_posix()} ({m.group(1)})")
+    if not tracked:
+        report.add("Yangilik (refresh_due)", SKIP, "`Refresh due:` belgili fayl yo'q")
+    elif overdue:
+        report.add("Yangilik (refresh_due)", WARN,
+                   f"{len(overdue)}/{tracked} faylda yangilash muddati o'tgan: " + ", ".join(overdue[:4]) + (" ..." if len(overdue) > 4 else ""))
+    else:
+        report.add("Yangilik (refresh_due)", OK, f"{tracked} faylning hammasi muddatida")
+
+
+def check_wiki_sources(report: Report, data: dict) -> None:
+    """Wiki `source:` maydoni repodagi mavjud faylga yoki URL ga ishora qiladimi (tasdiqlanmagan manbalarni sanaydi)."""
+    notes = [VAULT / i["path"] for i in data["items"].get("wiki", [])]
+    total = unresolved = urls = 0
+    for p in notes:
+        try:
+            text = p.read_text(encoding="utf-8", errors="replace")[:1500]
+        except OSError:
+            continue
+        m = re.search(r"^source:\s*(.+)$", text, re.M)
+        if not m:
+            continue
+        total += 1
+        raw = m.group(1).strip().strip("\"'")
+        if raw.lower().startswith(("http://", "https://")):
+            urls += 1
+            continue
+        path_part = re.split(r"\s+\(|#", raw)[0].strip()
+        if "/" in path_part and not (VAULT / path_part).exists():
+            unresolved += 1
+    if not total:
+        report.add("Wiki manbalari", SKIP, "`source:` maydoni topilmadi")
+    elif unresolved:
+        report.add("Wiki manbalari", WARN,
+                   f"{unresolved}/{total} qaydning `source:` yo'li repoda yo'q (URL: {urls}) — tiklang yoki 'tasdiqlanmagan' deb belgilang")
+    else:
+        report.add("Wiki manbalari", OK, f"{total} qaydning manbasi mavjud (URL: {urls})")
+
+
 def check_graph(report: Report, data: dict) -> None:
+    """Graf eskirganini commit tarixi bo'yicha aniqlaydi (yangi klonda mtime hammasi bir xil -> yolg'on ogohlantirish)."""
     graph = VAULT / "graphify-out" / "graph.json"
     if not graph.is_file():
         report.add("Bilim grafi", SKIP, "graf ixtiyoriy (graphify-out/graph.json yo'q)")
         return
-    graph_time = graph.stat().st_mtime
     notes = [VAULT / i["path"] for i in data["items"].get("wiki", [])]
-    newest = max((p.stat().st_mtime for p in notes if p.is_file()), default=0)
+    g_git = _git_commit_time(["graphify-out/graph.json"])
+    w_git = _git_commit_time(["wiki"])
+    if g_git is not None and w_git is not None:
+        graph_time, newest, basis = g_git, w_git, "commit"
+    else:
+        graph_time = graph.stat().st_mtime
+        newest = max((p.stat().st_mtime for p in notes if p.is_file()), default=0)
+        basis = "mtime"
     if newest > graph_time:
         days = (newest - graph_time) / 86400
-        hint = "" if llm_key_present() else " — LLM kaliti yo'q; lokal Ollama bilan: tools\\gy.cmd refresh"
+        hint = "" if llm_key_present() else " — LLM kaliti yo'q (lokal Ollama ishlatish mumkin)"
         report.add("Bilim grafi", WARN,
-                   f"eskirgan - qaydlar grafdan {days:.1f} kun yangi (gy.cmd refresh){hint}")
+                   f"eskirgan - qaydlar grafdan {days:.1f} kun yangi ({basis} bo'yicha); yangilash: python3 tools/brain-graph.py{hint}")
     else:
         size_kb = graph.stat().st_size / 1024
-        report.add("Bilim grafi", OK, f"yangilangan ({size_kb:.0f} KB)")
+        report.add("Bilim grafi", OK, f"yangilangan ({size_kb:.0f} KB, {basis} bo'yicha)")
 
 
 def check_secrets(report: Report) -> None:
@@ -537,7 +650,10 @@ def main(argv: list[str] | None = None) -> int:
     check_shield(report)
     check_memory(report)
     check_mcp_and_evals(report)
+    check_freshness(report)
+    check_version(report)
     check_graph(report, data)
+    check_wiki_sources(report, data)
     check_secrets(report)
     check_git(report)
     check_tests(report, args.quick)

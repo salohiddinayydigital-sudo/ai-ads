@@ -35,6 +35,37 @@ def redact_secrets(text: str) -> str:
     return SECRET_REDACT_RE.sub("[REDACTED_SECRET]", str(text))
 
 
+def project_version() -> str:
+    """Loyiha versiyasi — repo ildizidagi `VERSION` fayli (yagona manba)."""
+    try:
+        v = (Path(__file__).resolve().parent.parent / "VERSION").read_text(encoding="utf-8").strip()
+        if re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][\w.]+)?", v):
+            return v
+    except OSError:
+        pass
+    return "0.0.0"
+
+
+_API_REGISTRY_PATH = Path(__file__).resolve().parent.parent / "manifests" / "api-versions.json"
+_API_FALLBACK = {"default": "v26.0", "deprecated_below_major": 25}
+
+
+def api_registry(name: str = "meta_graph") -> dict:
+    """`manifests/api-versions.json` dagi bo'limni qaytaradi (fayl yo'q/buzuq bo'lsa xavfsiz fallback)."""
+    try:
+        data = json.loads(_API_REGISTRY_PATH.read_text(encoding="utf-8"))[name]
+        if isinstance(data, dict) and re.fullmatch(r"v\d+\.\d+", str(data.get("default", ""))):
+            return data
+    except (OSError, ValueError, KeyError):
+        pass
+    return dict(_API_FALLBACK)
+
+
+def graph_api_default() -> str:
+    """Barcha asboblar uchun yagona standart Graph API versiyasi."""
+    return str(api_registry()["default"])
+
+
 class AmbiguousNumberError(ValueError):
     """Son o'nlik yoki minglik ajratgich bilan noaniq yozilgan (masalan, "1,234")."""
 

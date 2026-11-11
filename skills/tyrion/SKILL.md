@@ -41,7 +41,7 @@ output_contract: Tyrion OS system status and autonomous orchestration routing pl
    - Audience architecture, overlap, saturation, LAL, retargeting: `python3 tools/meta-audience.py`
    - Ad Manager CSV/JSON export & Breakdown Effect: `python3 tools/ad-export-analyzer.py`
    - Andromeda 2 3x3 creative matrix & 3-language hooks: `python3 tools/creative-matrix.py`
-   - CAPI v22 SHA-256 payload, EMQ & Telegram Bot UTM: `python3 tools/capi-utm-builder.py`
+   - CAPI SHA-256 payload, EMQ & Telegram Bot UTM: `python3 tools/capi-utm-builder.py`
    - Unit economics & Spend-Guard: `python3 tools/calculator.py` and `python3 tools/spend-guard.py`
 
 ## Anti-Patterns
@@ -54,7 +54,7 @@ Before generating recommendations or mutating plans for `tyrion`, execute the re
 - **Unit Economics & Break-Even:** `python3 tools/calculator.py breakeven --price <AOV> --cogs <COGS>`
 - **Meta Audience & Funnel Diagnostics:** `python3 tools/meta-audience.py architect --niche <niche> --budget <daily_usd>`
 - **CSV/JSON Export & Breakdown Effect:** `python3 tools/ad-export-analyzer.py analyze --file <export.csv>`
-- **CAPI v22 SHA-256 & Telegram Bot UTM:** `python3 tools/capi-utm-builder.py utm --url <url> --platform meta`
+- **CAPI SHA-256 & Telegram Bot UTM:** `python3 tools/capi-utm-builder.py utm --url <url> --platform meta`
 - **Spend-Guard Gate:** `python3 tools/spend-guard.py budget --current <old> --proposed <new> --max-cap <cap>`
 
 ## Anti-Patterns (`WRONG` vs `CORRECT`)

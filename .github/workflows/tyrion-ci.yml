@@ -2,7 +2,7 @@ name: Tyrion v7.0 Global CI & Security Gate
 
 on:
   push:
-    branches: [ main, master, "feat/**", "sync/**" ]
+    branches: [ "**" ]
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
@@ -56,7 +56,7 @@ jobs:
       - name: Behavioral Eval Suite (24/24 Scenarios)
         run: python tools/skill-eval.py
 
-      - name: Full Unit Test Suite (242 Tests including External-CWD Hook & MCP Verification)
+      - name: Full Unit Test Suite (282 Tests including External-CWD Hook & MCP Verification)
         run: python -m unittest discover -s tests -t . -v
 
       - name: Doctor System Health Check

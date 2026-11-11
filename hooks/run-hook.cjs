@@ -15,7 +15,12 @@ const PLUGIN_ROOT = process.env.CLAUDE_PLUGIN_ROOT
   ? path.resolve(process.env.CLAUDE_PLUGIN_ROOT)
   : path.resolve(__dirname, "..");
 
-const PROFILE = (process.env.TYRION_HOOK_PROFILE || "standard").trim().toLowerCase();
+// plugin.json userConfig -> CLAUDE_PLUGIN_OPTION_* ; aniq TYRION_* o'zgaruvchisi ustun turadi.
+const PROFILE = (process.env.TYRION_HOOK_PROFILE || process.env.CLAUDE_PLUGIN_OPTION_HOOK_PROFILE || "standard").trim().toLowerCase();
+const HOOKS_ENABLED = !["false", "0", "no", "off"].includes(
+  String(process.env.CLAUDE_PLUGIN_OPTION_HOOKS_ENABLED ?? "true").trim().toLowerCase()
+);
+const IS_MINIMAL = PROFILE === "minimal";
 const IS_STRICT = PROFILE === "strict";
 const IS_DEV = process.env.TYRION_DEV === "1" || process.env.TYRION_DEV === "true";
 
@@ -84,6 +89,14 @@ if (args[0] === "--mcp") {
 
 // Mode 2: Lifecycle Hook launcher (brief | guard | ingest | dod)
 const hookMode = args[0] || "";
+
+// userConfig: hooks_enabled=false -> hech narsa qilmaydi; hook_profile=minimal -> faqat SessionStart (brief) va Stop (dod)
+if (!HOOKS_ENABLED) {
+  process.exit(0);
+}
+if (IS_MINIMAL && (hookMode === "guard" || hookMode === "ingest")) {
+  process.exit(0);
+}
 
 // Fast exit for maintainer-only hooks (ingest, dod) when not in TYRION_DEV=1 mode
 if ((hookMode === "ingest" || hookMode === "dod") && !IS_DEV) {

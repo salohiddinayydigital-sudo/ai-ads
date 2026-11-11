@@ -2,6 +2,34 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
+## [Unreleased] — v7.1 / v7.2 follow-ups (code-level only)
+
+Market facts that could not be confirmed against official sources (Meta API v27.0, 2026 attribution rules, Ads MCP, Uzbek ad-law changes, Telegram/Google reference updates, wiki refresh) are **not** written into rules; they are tracked as unverified (`manifests/api-versions.json`, `doctor` freshness/source checks).
+
+### Fixed
+- **B08** Uzbek Latin queries ("TikTok reklamani qanday boshlayman", "kampaniyam … oshib ketdi") are detected as `uz_latin` and therefore resolve to the `uz` market/UZS.
+- **B09** `plugin.json` `userConfig` is honoured: `hooks_enabled`, `hook_profile` (`minimal` skips guard/ingest) in `hooks/run-hook.cjs`; `default_market` as fallback in `market_locale.py` (`TYRION_*` env vars win).
+- **B10** Removed the unsourced `blended_cpa * 1.38` Breakdown-Effect projection; result is `null` + `HEURISTIC_PRIOR_MODEL` label and a "measure marginal CPA" note.
+- **B12** MCP server: `ping`, protocol-version negotiation, tool failures returned as `isError` results (JSON-RPC `-32602` only for unknown tools), input schemas now list every parameter `call_tool` reads; `tyrion_capi_utm` gained `mode: capi-payload`; `tyrion_spend_guard` accepts `target_cpa`/`approve_pause`.
+- **B13** Telegram copy check counts ⭐/flag emojis and Uzbek Cyrillic capitals (Ў Қ Ғ Ҳ); Meta banned phrases in RU/EN; wrong `tracking` docstring flags fixed.
+- **B15** `doctor` graph staleness uses git commit times (no false warning on fresh clones); stale `gy.cmd` hint removed.
+- **B16** Insights requests pin `action_attribution_windows` (`--attribution`, default `7d_click,1d_view`; `account_default` to skip) and the report states the attribution basis; non-USD exports flag legacy `*_usd` keys.
+- **B17** Phone normalisation to E.164 using `--country`/`--phone-country-code` (trunk `0` removed); unknown country code is warned, never guessed.
+- **B18/B19** `VERSION` is the single version source (`doctor` verifies all manifests; MCP server and `tyrion.py` read it); `CAPI v22`/stale `v5.x` banners removed; `manifests/api-versions.json` is the single Graph API version registry (default stays `v26.0`; `v27.0` listed as unverified candidate).
+- **B20** CI runs on pushes to every branch.
+
+### Added
+- Spend-Guard 24-hour window: `--entity`, `--ledger`, `--record --approved-by` (JSONL ledger under git-ignored `outputs/`); stacked ≤20% steps that exceed 20% within 24 h are blocked.
+- Export analyzer skips "Total" rows (no double counting) and reports the file's period/preamble.
+- `doctor`: `Yangilik (refresh_due)`, `Wiki manbalari` and `Versiya` checks.
+- Spend-Guard copy check warns on credit/instalment wording in Uzbek ads (labelled `UNVERIFIED_SECONDARY_SOURCE`).
+
+### Tests
+- `tests/test_v71_followups.py` (40 tests). Suite: 242 → 282.
+
+### Not done (needs official sources or a decision)
+B21 wiki sources (restore or mark), B22 splitting the 3 000-line test file, B01-B06 fixtures for real Google/Telegram files, Meta Ads MCP integration, attribution/Telegram/Google reference rewrites, Detailed Targeting repositioning, Uzbek SMS/call-hours checks.
+
 ## [7.0.1] — 2026-11-11 (Ishonch hotfix / Trust hotfix)
 
 Fixes the P0/P1 bugs from `docs/UPDATE-PLAN-v7.1.md` (B01–B07, B11, B14). Version fields in manifests are intentionally left at `7.0.0` until the version-drift cleanup (B18, v7.1).

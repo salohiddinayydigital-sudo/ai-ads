@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# install.sh — Tyrion v5.0 Single-Root ECC Installer (macOS / Linux / WSL)
+# install.sh — Tyrion Single-Root ECC Installer (macOS / Linux / WSL)
 set -euo pipefail
 
 VAULT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "===================================================================="
-echo "  🧠 TYRION v5.0 — AI PAID MEDIA & TARGETOLOGY OS INSTALLER"
+echo "  🧠 TYRION — AI PAID MEDIA & TARGETOLOGY OS INSTALLER"
 echo "===================================================================="
 
 if command -v python3 >/dev/null 2>&1; then
@@ -31,5 +31,5 @@ echo "[4/4] Running System Doctor..."
 "$PY_CMD" "$VAULT_ROOT/tools/doctor.py" --quick
 
 echo ""
-echo "✅ TYRION v5.0 INSTALLATION COMPLETE!"
+echo "✅ TYRION INSTALLATION COMPLETE!"
 echo "   Run: $PY_CMD tools/tyrion.py status"

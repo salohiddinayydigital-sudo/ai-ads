@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion Meta Ads Audience Engine v5.0 — Andromeda 2, O'zbekiston bozori va Detailed Targeting Accuracy integratsiyasi (0 token).
+"""Tyrion Meta Ads Audience Engine — Andromeda 2, O'zbekiston bozori va Detailed Targeting Accuracy integratsiyasi (0 token).
 
 Asosiy modullar:
   1. architect          : Unit-ekonomikaga tayangan 4-qatlamli auditoriya rejasi + Exclusion matritsasi
@@ -28,6 +28,7 @@ _TOOLS_DIR = Path(__file__).resolve().parent
 if str(_TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(_TOOLS_DIR))
 import market_locale as mloc  # noqa: E402
+import tyrion_core as tcore  # noqa: E402
 
 TOOLS = Path(__file__).resolve().parent
 if str(TOOLS) not in sys.path:
@@ -40,7 +41,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-DEFAULT_GRAPH_API_VERSION = "v26.0"
+DEFAULT_GRAPH_API_VERSION = tcore.graph_api_default()  # manifests/api-versions.json
 OVERLAP_WARNING_THRESHOLD_PCT = 20.0
 OVERLAP_CRITICAL_THRESHOLD_PCT = 30.0
 
@@ -1261,7 +1262,7 @@ def build_launch_blueprint(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="meta-audience.py",
-        description="Tyrion v5.0 Meta Ads Audience & Detailed Targeting Accuracy Engine",
+        description="Tyrion Meta Ads Audience & Detailed Targeting Accuracy Engine",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -1502,7 +1503,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 66)
-    print(f"  🎯 TYRION v5.0 META AUDIENCE ENGINE — {args.command.upper()}")
+    print(f"  🎯 TYRION META AUDIENCE ENGINE — {args.command.upper()}")
     print("=" * 66)
     for k, v in res.items():
         if isinstance(v, list):

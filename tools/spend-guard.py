@@ -13,7 +13,7 @@ Buyruqlar:
   python3 tools\\spend-guard.py budget --current 100 --proposed 115 --max-cap 200
   python3 tools\\spend-guard.py packet path/to/change-packet.md
   python3 tools\\spend-guard.py copy --platform telegram --text "Matn..."
-  python3 tools\\spend-guard.py tracking --event-id "evt_123" --has-pixel --has-capi
+  python3 tools\\spend-guard.py tracking --pixel --capi [--no-event-id] [--unhashed] [--emq 7.5]
 """
 
 from __future__ import annotations
@@ -23,6 +23,7 @@ import json
 import math
 import re
 import sys
+import time
 from pathlib import Path
 
 # Windows UTF-8
@@ -40,6 +41,8 @@ def check_budget_change(
     max_daily_cap: float = 500.0,
     target_cpa: float | None = None,
     pause_approved: bool = False,
+    history: list[dict] | None = None,
+    now: float | None = None,
 ) -> dict:
     """Byudjet o'zgarishini 40-qoida va platforma qonunlari bo'yicha tekshiradi.
 
@@ -85,6 +88,28 @@ def check_budget_change(
     ratio = proposed_daily / current_daily
     percent_change = (ratio - 1.0) * 100.0
 
+    # 24 soatlik oyna: shu obyekt uchun oxirgi 24 soatdagi o'zgarishlar jami (jurnal bo'lsa)
+    window_baseline: float | None = None
+    window_entries = 0
+    if history:
+        t_now = time.time() if now is None else now
+        recent = sorted(
+            (h for h in history if isinstance(h, dict) and t_now - float(h.get("ts", 0)) < 86400 and float(h.get("from", 0)) > 0),
+            key=lambda h: float(h["ts"]),
+        )
+        if recent:
+            window_baseline = float(recent[0]["from"])
+            window_entries = len(recent)
+            cum = (proposed_daily / window_baseline - 1.0) * 100.0
+            if cum > 20.0 and percent_change <= 20.0:
+                errors.append(
+                    f"Oxirgi 24 soatda {window_entries} ta o'zgarish bor; boshlang'ich {window_baseline:.2f} dan jami "
+                    f"+{cum:.1f}% (> 20%). Har bir qadam alohida ≤20% bo'lsa ham jami chegaradan oshmasligi shart."
+                )
+            percent_change_window = cum
+            if cum > percent_change:
+                percent_change = cum
+
     if percent_change > 20.0:
         max_allowed = current_daily * 1.20
         errors.append(
@@ -122,10 +147,38 @@ def check_budget_change(
         "current_daily": current_daily,
         "proposed_daily": proposed_daily,
         "percent_change": round(percent_change, 2),
+        "window_24h": {"changes": window_entries, "baseline": window_baseline} if window_entries else None,
         "max_daily_cap": max_daily_cap,
         "errors": errors,
         "warnings": warnings,
     }
+
+
+# ── Holatli jurnal: 24 soatlik oyna va o'zgarishlar tarixi ─────────────────────────────
+DEFAULT_LEDGER = Path(__file__).resolve().parent.parent / "outputs" / "spend-guard-ledger.jsonl"
+
+
+def load_ledger(path: Path, entity: str) -> list[dict]:
+    if not path.is_file():
+        return []
+    out: list[dict] = []
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        try:
+            obj = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(obj, dict) and obj.get("entity") == entity:
+            out.append(obj)
+    return out
+
+
+def record_change(path: Path, entity: str, current: float, proposed: float, approved_by: str, note: str = "") -> dict:
+    """Operator o'zgarishni qo'llagandan keyin jurnalga yozadi (Spend-Guard o'zi hisobni o'zgartirmaydi)."""
+    entry = {"ts": time.time(), "entity": entity, "from": current, "to": proposed, "approved_by": approved_by, "note": note}
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    return entry
 
 
 _PACKET_SECTIONS: dict[str, tuple[str, str]] = {
@@ -252,7 +305,8 @@ def check_ad_copy(platform: str, text: str, headline: str = "", destination_url:
         # Emoji siyosati (maksimal 1 ta kontekstga mos emoji)
         # Unicode emoji diapazoni
         emoji_pattern = re.compile(
-            r"[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF\U0001F680-\U0001F6FF\U0001F700-\U0001F77F\U0001F780-\U0001F7FF\U0001F800-\U0001F8FF\U0001F900-\U0001F9FF\U0001FA00-\U0001FA6F\U0001FA70-\U0001FAFF\u2600-\u26FF\u2700-\u27BF]"
+            r"[\U0001F1E6-\U0001F1FF]{2}|[\u2B50\u2B1B\u2B1C\u2B55\u231A-\u23FF\u2190-\u21FF\u2934\u2935\u00A9\u00AE\u203C\u2049\u2122\u2139\u24C2\u25AA-\u25FE\u3030\u303D\u3297\u3299]"
+            r"|[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF\U0001F680-\U0001F6FF\U0001F700-\U0001F77F\U0001F780-\U0001F7FF\U0001F800-\U0001F8FF\U0001F900-\U0001F9FF\U0001FA00-\U0001FA6F\U0001FA70-\U0001FAFF\u2600-\u26FF\u2700-\u27BF]"
         )
         emojis = emoji_pattern.findall(text)
         if len(emojis) > 1:
@@ -260,7 +314,7 @@ def check_ad_copy(platform: str, text: str, headline: str = "", destination_url:
 
         # ALL CAPS tekshiruvi (faqat qisqartmalar ruxsat etiladi)
         allowed_acronyms = {"CRM", "AI", "B2B", "B2C", "ROI", "ROAS", "CPA", "CPL", "CTR", "CPC", "CPM", "TON", "USD", "UZS", "EUR", "SEO", "PMAX", "CBO", "ABO", "ASC", "SMS", "API"}
-        words = re.findall(r"\b[A-ZА-ЯЁ]{2,}\b", text)
+        words = re.findall(r"\b[A-ZА-ЯЁЎҚҒҲ]{2,}\b", text)
         forbidden_caps = [w for w in words if w not in allowed_acronyms]
         if forbidden_caps:
             errors.append(f"Telegram Ads ALL CAPS so'zlarni taqiqlaydi: {', '.join(forbidden_caps)}. Kichik harflar bilan yozing.")
@@ -279,7 +333,11 @@ def check_ad_copy(platform: str, text: str, headline: str = "", destination_url:
             warnings.append("Birlamchi matn (Primary Text) 125 belgidan keyin 'See more' orqasiga yashirinadi. Eng kuchli hook birinchi 120 belgida bo'lsin.")
 
         # Taqiqlangan / Shubhali iboralar
-        banned_phrases = ["tezda boyib ketish", "100% kafolat", "oson daromad", "hech qanday xavfsiz"]
+        banned_phrases = [
+            "tezda boyib ketish", "100% kafolat", "oson daromad", "hech qanday xavfsiz",  # UZ
+            "быстро разбогатеть", "100% гарантия", "гарантированный доход", "легкие деньги", "лёгкие деньги",  # RU
+            "get rich quick", "100% guaranteed", "guaranteed income", "guaranteed results", "no risk",  # EN
+        ]
         for phrase in banned_phrases:
             if phrase in text.lower():
                 errors.append(f"Meta siyosatiga zid shubhali va'da: '{phrase}'. Meta hisobni cheklashi mumkin.")
@@ -291,12 +349,23 @@ def check_ad_copy(platform: str, text: str, headline: str = "", destination_url:
         if text and len(text) > 90:
             errors.append(f"Google Ads tavsifi (Description) 90 belgidan oshmasligi shart (hozirda: {len(text)}).")
 
+    # O'zbekiston: kredit/nasiya reklamasi (2026-11-10 qonun, IKKILAMCHI manba — rasmiy tasdiq kerak)
+    credit_re = re.compile(r"\b(nasiya|kredit|bo'lib to'lash|muddatli to'lov|rassrochka|installment)\b|рассрочк|кредит", re.IGNORECASE)
+    evidence: dict[str, str] = {}
+    if credit_re.search(text) or credit_re.search(headline or ""):
+        warnings.append(
+            "Kredit/nasiya eslatilgan: O'zbekistonda moliyaviy xatar haqidagi ogohlantirish (maydon/davomiylikning kamida 10%) "
+            "talab qilinishi mumkin. Manba ikkilamchi (yuz.uz) — yurist yoki lex.uz bilan tasdiqlang."
+        )
+        evidence["uz_credit_warning_rule"] = "UNVERIFIED_SECONDARY_SOURCE"
+
     passed = len(errors) == 0
     return {
         "passed": passed,
         "platform": platform,
         "errors": errors,
         "warnings": warnings,
+        "evidence": evidence,
     }
 
 
@@ -348,6 +417,10 @@ def main() -> int:
     p_budget.add_argument("--proposed", type=float, required=True, help="Taklif qilingan kunlik byudjet")
     p_budget.add_argument("--max-cap", type=float, default=500.0, help="Maksimal ruxsat etilgan kunlik byudjet (default: 500)")
     p_budget.add_argument("--target-cpa", type=float, default=None, help="Maqsadli CPA (ixtiyoriy)")
+    p_budget.add_argument("--entity", default="", help="Kampaniya/ad set identifikatori (24 soatlik jurnal oynasi uchun)")
+    p_budget.add_argument("--ledger", type=Path, default=DEFAULT_LEDGER, help="Jurnal fayli (JSONL)")
+    p_budget.add_argument("--record", action="store_true", help="O'tgan o'zgarishni jurnalga yozish (faqat --entity va --approved-by bilan)")
+    p_budget.add_argument("--approved-by", default="", help="Tasdiqlagan operator (jurnal yozuvi uchun majburiy)")
     p_budget.add_argument("--approve-pause", action="store_true", help="--proposed 0 (pauza) uchun operator tasdig'i")
     p_budget.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
@@ -377,7 +450,17 @@ def main() -> int:
 
     res: dict = {}
     if args.command == "budget":
-        res = check_budget_change(args.current, args.proposed, args.max_cap, args.target_cpa, pause_approved=args.approve_pause)
+        hist = load_ledger(args.ledger, args.entity) if args.entity else None
+        res = check_budget_change(args.current, args.proposed, args.max_cap, args.target_cpa,
+                                  pause_approved=args.approve_pause, history=hist)
+        if args.record:
+            if not (args.entity and args.approved_by.strip()):
+                print("Xato: --record uchun --entity va --approved-by majburiy.", file=sys.stderr)
+                return 2
+            if not res.get("passed"):
+                print("Xato: bloklangan o'zgarish jurnalga yozilmaydi.", file=sys.stderr)
+            else:
+                res["ledger_entry"] = record_change(args.ledger, args.entity, args.current, args.proposed, args.approved_by.strip())
     elif args.command == "packet":
         if not args.file.is_file():
             print(f"Xato: fayl topilmadi: {args.file}", file=sys.stderr)

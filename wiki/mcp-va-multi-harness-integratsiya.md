@@ -13,7 +13,7 @@ Tyrion v5.0 hech qanday tashqi kutubxonasiz (`stdlib` Python JSON-RPC 2.0) ishla
 - `tyrion_meta_audience` — 4-qatlamli Meta Ads auditoriya va Exclusion matritsasi.
 - `tyrion_breakdown_effect` — Marginal vs Average CPA tuzog'i tekshiruvi.
 - `tyrion_creative_matrix` — 3x3 Andromeda kreativ matritsa va 3 tilli Hooklar.
-- `tyrion_capi_utm` — Meta CAPI v22 SHA-256 payload, EMQ va Telegram Bot `<=64` belgi UTM.
+- `tyrion_capi_utm` — Meta CAPI SHA-256 payload, EMQ va Telegram Bot `<=64` belgi UTM.
 - `tyrion_media_calculator` — Break-even CPA/ROAS va marja hisoblagichi.
 - `tyrion_spend_guard` — 20% byudjet xavfsizlik darvozasi.
 - `tyrion_brain_search` — 100 ta atomik qayd va 8 ta playbook bo'yicha 0-token qidiruv.

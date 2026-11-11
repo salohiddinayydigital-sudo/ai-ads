@@ -20,6 +20,7 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent.parent / "tools"
 VAULT = TOOLS.parent
+VERSION = (VAULT / "VERSION").read_text(encoding="utf-8").strip()  # yagona manba
 sys.path.insert(0, str(TOOLS))
 
 import catalog  # noqa: E402
@@ -752,7 +753,7 @@ class TyrionV6GlobalReleaseTests(unittest.TestCase):
             )
             self.assertEqual(p_mcp.returncode, 0, p_mcp.stderr)
             resp = json.loads(p_mcp.stdout.strip().splitlines()[0])
-            self.assertEqual(resp["result"]["serverInfo"]["version"], "7.0.0")
+            self.assertEqual(resp["result"]["serverInfo"]["version"], VERSION)
 
     def test_v6_03_hook_fail_open_when_script_missing_unless_strict(self) -> None:
         with tempfile.TemporaryDirectory() as fake_root:
@@ -1517,8 +1518,8 @@ class CreativeMatrixAndWorkspaceTests(unittest.TestCase):
             capture_output=True, text=True, encoding="utf-8", errors="replace",
         )
         self.assertEqual(proc.returncode, 0)
-        self.assertIn("TYRION v7.0.0", proc.stdout)
-        self.assertIn("Single-Root ECC v7.0.0", proc.stdout)
+        self.assertIn(f"TYRION v{VERSION}", proc.stdout)
+        self.assertIn(f"Single-Root ECC v{VERSION}", proc.stdout)
 
 
 class TyrionV4EnginesTests(unittest.TestCase):
@@ -1529,7 +1530,8 @@ class TyrionV4EnginesTests(unittest.TestCase):
         ae = importlib.import_module("ad-export-analyzer")
         trap = ae.analyze_breakdown_effect("IG Reels", 750.0, 50, "FB Feed", 150.0, 12)
         self.assertTrue(trap["breakdown_effect_trap_detected"])
-        self.assertGreater(trap["projected_cpa_if_dominant_paused_usd"], trap["blended_cpa_usd"])
+        self.assertIsNone(trap["projected_cpa_if_dominant_paused_usd"])  # B10: manbasiz 1.38 prognozi olib tashlandi
+        self.assertEqual(trap["evidence_label"], "HEURISTIC_PRIOR_MODEL")
 
         balanced = ae.analyze_breakdown_effect("IG Reels", 400.0, 25, "FB Feed", 380.0, 24)
         self.assertFalse(balanced["breakdown_effect_trap_detected"])
@@ -1719,14 +1721,17 @@ class ProductionHardeningTests(unittest.TestCase):
         resp = self.mcp.handle_request({"jsonrpc": "2.0", "id": 99, "method": "unknown/method"})
         self.assertEqual(resp["error"]["code"], -32601)
 
-    def test_mcp_server_returns_32602_on_negative_budget(self) -> None:
+    def test_mcp_server_reports_invalid_arguments_as_tool_error(self) -> None:
         resp = self.mcp.handle_request({
             "jsonrpc": "2.0",
             "id": 100,
             "method": "tools/call",
             "params": {"name": "tyrion_meta_audience", "arguments": {"niche": "ecom", "daily_budget": -50}},
         })
-        self.assertEqual(resp["error"]["code"], -32602)
+        # MCP spec: argument/bajarilish xatosi — `isError` natija; JSON-RPC -32602 faqat noma'lum tool uchun
+        self.assertTrue(resp["result"]["isError"])
+        unknown = self.mcp.handle_request({"jsonrpc": "2.0", "id": 101, "method": "tools/call", "params": {"name": "nope", "arguments": {}}})
+        self.assertEqual(unknown["error"]["code"], -32602)
 
 
 class TyrionV5CalibratedAuditTests(unittest.TestCase):
@@ -1842,11 +1847,11 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
 
         for jpath in ("plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "package.json"):
             jdata = json.loads((VAULT / jpath).read_text(encoding="utf-8"))
-            self.assertEqual(jdata["version"], "7.0.0", f"Version drift in {jpath}")
+            self.assertEqual(jdata["version"], VERSION, f"Version drift in {jpath}")
 
         mp = json.loads((VAULT / "marketplace.json").read_text(encoding="utf-8"))
-        self.assertEqual(mp["metadata"]["version"], "7.0.0")
-        self.assertEqual(mp["plugins"][0]["version"], "7.0.0")
+        self.assertEqual(mp["metadata"]["version"], VERSION)
+        self.assertEqual(mp["plugins"][0]["version"], VERSION)
         self.assertIn("36 specialist agents", mp["metadata"]["description"])
 
         sec_txt = (VAULT / "SECURITY.md").read_text(encoding="utf-8")

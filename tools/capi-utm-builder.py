@@ -31,7 +31,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-DEFAULT_GRAPH_API_VERSION = "v26.0"
+DEFAULT_GRAPH_API_VERSION = tcore.graph_api_default()  # manifests/api-versions.json
 
 
 def get_graph_api_version() -> str:
@@ -43,11 +43,35 @@ def sha256_norm(val: str) -> str:
     return hashlib.sha256(val.strip().lower().encode("utf-8")).hexdigest()
 
 
+# ISO-2 -> telefon mamlakat kodi (E.164). Faqat Tyrion bozor paketlari qamragan asosiy davlatlar.
+DIAL_CODES = {
+    "uz": "998", "kz": "7", "ru": "7", "kg": "996", "tj": "992", "tr": "90", "ua": "380", "az": "994",
+    "us": "1", "ca": "1", "gb": "44", "uk": "44", "de": "49", "fr": "33", "es": "34", "it": "39", "nl": "31",
+    "pl": "48", "se": "46", "at": "43", "be": "32", "ie": "353", "pt": "351", "ch": "41",
+    "ae": "971", "sa": "966", "eg": "20", "qa": "974", "kw": "965", "ma": "212",
+    "br": "55", "mx": "52", "ar": "54", "cl": "56", "co": "57", "pe": "51",
+    "sg": "65", "id": "62", "my": "60", "th": "66", "vn": "84", "ph": "63", "in": "91",
+}
+
+
 def normalize_phone(phone: str, default_country_code: str = "998") -> str:
-    digits = re.sub(r"\D+", "", phone or "")
-    if len(digits) == 9 and digits.startswith(("9", "8", "7", "3", "5")) and default_country_code == "998":
-        digits = "998" + digits
-    return digits
+    """Telefonni E.164 raqamlariga (`+`siz) keltiradi.
+
+    `+`/`00` bilan boshlansa mamlakat kodi telefonning o'zida. Aks holda `default_country_code`
+    qo'shiladi va milliy "0" (trunk) prefiksi olib tashlanadi. Kod noma'lum bo'lsa raqam o'zgartirilmaydi.
+    """
+    raw = (phone or "").strip()
+    digits = re.sub(r"\D+", "", raw)
+    if raw.startswith("+"):
+        return digits
+    if digits.startswith("00"):
+        return digits[2:]
+    cc = re.sub(r"\D+", "", default_country_code or "")
+    if not cc:
+        return digits
+    if digits.startswith(cc) and len(digits) > len(cc) + 6:
+        return digits  # mamlakat kodi allaqachon bor
+    return cc + digits.lstrip("0")
 
 
 def build_utm_links(base_url: str, platform: str, campaign: str, bot_username: str = "") -> dict:
@@ -129,6 +153,7 @@ def build_capi_payload(
     action_source: str = "website",
     event_id: str = "",
     event_time: int | None = None,
+    phone_country_code: str = "",
 ) -> dict:
     """CAPI payload quradi. Payload'ga FAQAT foydalanuvchi bergan qiymatlar tushadi.
 
@@ -165,7 +190,10 @@ def build_capi_payload(
         consent_gate_status = "CONSENT_GRANTED_PII_HASHED"
         pii_stripped = False
         if phone:
-            norm_ph = normalize_phone(phone, default_country_code="998" if m_id == "uz" else "")
+            cc = phone_country_code or DIAL_CODES.get((country or "").strip().lower(), "") or ("998" if m_id == "uz" else "")
+            if not phone.strip().startswith(("+", "00")) and not cc:
+                warnings.append("Telefon mamlakat kodisiz berildi (+ yo'q, --country/--phone-country-code yo'q): xesh mos kelmasligi mumkin.")
+            norm_ph = normalize_phone(phone, default_country_code=cc)
             user_data["ph"] = [sha256_norm(norm_ph)]
             emq_points += 3.2
         if email:
@@ -307,7 +335,7 @@ def build_capi_payload(
             if event_id else "event_id berilmagan — deduplikatsiya ko'rsatmasi yo'q."
         ),
         "capi_payload": payload,
-        "capi_v22_payload": payload,
+        "capi_v22_payload": payload,  # DEPRECATED alias (nomida eski versiya); `capi_payload` dan foydalaning
     }
     if api_info.get("warning"):
         out["api_version_warning"] = api_info["warning"]
@@ -328,6 +356,7 @@ def main(argv: list[str] | None = None) -> int:
     p_capi = sub.add_parser("capi-payload", help="Meta CAPI SHA-256 payload builder with GDPR/CCPA/LGPD/DPDP Consent Gate")
     p_capi.add_argument("--event", default="Lead")
     p_capi.add_argument("--phone", default="")
+    p_capi.add_argument("--phone-country-code", default="", help="Telefon mamlakat kodi (masalan 49); berilmasa --country dan olinadi")
     p_capi.add_argument("--email", default="")
     p_capi.add_argument("--first-name", default="")
     p_capi.add_argument("--city", default="")
@@ -383,6 +412,7 @@ def _run(args: argparse.Namespace) -> dict | None:
             fbp=args.fbp, fbc=args.fbc, user_agent=args.user_agent, ip=args.ip,
             action_source=args.action_source, event_id=args.event_id,
             event_time=args.event_time, event_source_url=args.event_source_url,
+            phone_country_code=args.phone_country_code,
             market=args.market, consent_granted=args.consent_granted,
             ldu_enabled=(True if args.ldu else None), ldu_state=args.ldu_state,
             special_ad_category=args.special_ad_category,
