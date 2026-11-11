@@ -96,7 +96,7 @@ def export_claude(out_root: Path, dry_run: bool) -> list[str]:
 def export_codex(out_root: Path, dry_run: bool) -> list[str]:
     codex_dir = out_root / ".codex-plugin"
     dst = codex_dir / "plugin.json"
-    src_plugin = VAULT / "plugin.json"
+    src_plugin = VAULT / ".codex-plugin" / "plugin.json"
     if not dry_run:
         codex_dir.mkdir(parents=True, exist_ok=True)
         if src_plugin.is_file():

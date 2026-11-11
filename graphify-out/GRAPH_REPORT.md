@@ -1,8 +1,8 @@
 # GRAPH_REPORT — Tyrion bilim grafi (deterministik)
 
-> Qurilgan: 2026-10-29T15:19:59+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
+> Qurilgan: 2026-11-11T11:31:16+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
 
-**Tugunlar:** 193 · **Qirralar:** 865 · **Klasterlar:** 44
+**Tugunlar:** 184 · **Qirralar:** 865 · **Klasterlar:** 44
 
 ## Eng bog'langan tugunlar (hublar)
 
@@ -12,10 +12,10 @@
 | 2 | 40-xavfsizlik-va-hisob | 49 | `rules/40-xavfsizlik-va-hisob.md` |
 | 3 | 70-charter-baseline | 40 | `rules/70-charter-baseline.md` |
 | 4 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
-| 5 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
-| 6 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
-| 7 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
-| 8 | ad-iteration | 16 | `wiki/ad-iteration.md` |
+| 5 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
+| 6 | ad-iteration | 16 | `wiki/ad-iteration.md` |
+| 7 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
+| 8 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
 | 9 | meta-ads-sozlamalari | 15 | `wiki/meta-ads-sozlamalari.md` |
 | 10 | survey-funnel | 14 | `wiki/survey-funnel.md` |
 | 11 | 50-topshirish-dod | 13 | `rules/50-topshirish-dod.md` |
@@ -30,7 +30,7 @@
 |---------|----------|
 | agents | 36 |
 | meta-ads | 35 |
-| commands | 27 |
+| commands | 18 |
 | sop | 16 |
 | playbook | 9 |
 | rules | 9 |

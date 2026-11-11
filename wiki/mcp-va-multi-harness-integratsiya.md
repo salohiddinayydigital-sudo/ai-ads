@@ -1,6 +1,6 @@
 ---
 name: mcp-va-multi-harness-integratsiya
-description: "Tyrion v5.0 Native MCP Server (.mcp.json) va Multi-Harness Exporter (Claude Code, Cursor .mdc, Windsurf, Codex) arxitekturasi"
+description: "Tyrion Native MCP Server (.mcp.json) va Multi-Harness Exporter (Claude Code, Cursor .mdc, Windsurf, Codex) arxitekturasi"
 tags: [mcp, arxitektura, cursor, claude-code, ecc]
 source: "affaan-m/ECC install-targets + pipeboard-co/meta-ads-mcp + googleads/google-ads-mcp (2026-10-18)"
 updated: 2026-10-18
@@ -9,7 +9,7 @@ updated: 2026-10-18
 # 🔌 MCP SERVER VA MULTI-HARNESS INTEGRATSIYASI
 
 ## 1. Ichki STDIO MCP Server (`tools/tyrion-mcp-server.py`)
-Tyrion v5.0 hech qanday tashqi kutubxonasiz (`stdlib` Python JSON-RPC 2.0) ishlaydigan shaxsiy **Model Context Protocol (MCP)** serveriga ega (`.mcp.json` ichida `tyrion-core` sifatida faol). U 7 ta asosiy dvigatelni AI agentlarga to'g'ridan-to'g'ri tool sifatida ochib beradi:
+Tyrion hech qanday tashqi kutubxonasiz (`stdlib` Python JSON-RPC 2.0) ishlaydigan shaxsiy **Model Context Protocol (MCP)** serveriga ega (`.mcp.json` ichida `tyrion-core` sifatida faol). U 7 ta asosiy dvigatelni AI agentlarga to'g'ridan-to'g'ri tool sifatida ochib beradi:
 - `tyrion_meta_audience` — 4-qatlamli Meta Ads auditoriya va Exclusion matritsasi.
 - `tyrion_breakdown_effect` — Marginal vs Average CPA tuzog'i tekshiruvi.
 - `tyrion_creative_matrix` — 3x3 Andromeda kreativ matritsa va 3 tilli Hooklar.

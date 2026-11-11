@@ -138,22 +138,33 @@ HUMAN_CLAIMS: list[tuple[str, "re.Pattern[str]", str]] = [
     ("README.md",
      re.compile(r"(├── tools/\s+# )(\d+)( ta 0-Token Deterministik CLI Asbob)"),
      "tools"),
-    ("plugin.json",
-     re.compile(r"(\d+ slash commands, )(\d+)( deterministic CLI tools)"),
-     "tools"),
-    (".claude-plugin/plugin.json",
-     re.compile(r"(\d+ slash commands, )(\d+)( deterministic CLI tools)"),
-     "tools"),
-    (".codex-plugin/plugin.json",
-     re.compile(r"(\d+ slash commands, )(\d+)( deterministic CLI tools)"),
-     "tools"),
-    ("marketplace.json",
-     re.compile(r"(\d+ slash commands, )(\d+)( CLI tools)"),
-     "tools"),
-    ("package.json",
-     re.compile(r"(\d+ commands, )(\d+)( tools\))"),
-     "tools"),
 ]
+
+# Manifest tavsiflaridagi sonlar. Bir faylda bir xil son bir necha marta uchraydi
+# (description, shortDescription, ...), shuning uchun HAR uchrashuv tekshiriladi va tuzatiladi.
+MANIFEST_FILES = (
+    ".claude-plugin/plugin.json",
+    ".claude-plugin/marketplace.json",
+    ".codex-plugin/plugin.json",
+    "package.json",
+)
+MANIFEST_COUNT_PATTERNS: list[tuple["re.Pattern[str]", str]] = [
+    (re.compile(r"()(\d+)( (?:specialist |marketing )?agents)"), "agents"),
+    (re.compile(r"()(\d+)( (?:platform and marketing )?skills)"), "skills"),
+    (re.compile(r"()(\d+)( (?:atomic knowledge|wiki) notes)"), "wiki"),
+    (re.compile(r"()(\d+)( playbooks)"), "playbooks"),
+    (re.compile(r"()(\d+)( context modes)"), "contexts"),
+    (re.compile(r"()(\d+)( (?:slash )?commands)"), "commands"),
+    # "commands, " oldidan keladi — "MCP Server (10 tools)" bilan adashmaslik uchun.
+    (re.compile(r"(commands, )(\d+)( (?:deterministic )?(?:CLI )?tools)"), "tools"),
+]
+VERSION_FIELD_RE = re.compile(r'("version":\s*")(\d+\.\d+\.\d+)(")')
+# Matnda mahsulot nomi yonidagi versiya raqami eskiradi (8.0 gacha 109 joyda eski raqam qolgan edi). Versiya faqat
+# `.claude-plugin/plugin.json` da yoziladi; matnda uchrasa — joriy versiyaga teng bo'lishi shart.
+PROSE_VERSION_RE = re.compile(r"\b(?:Tyrion|TYRION|TyrionShield)(?: OS)? v(\d+\.\d+(?:\.\d+)?)\b")
+PROSE_SUFFIXES = {".md", ".json", ".py", ".sh", ".ps1", ".yml", ".cjs", ".html", ".example"}
+PROSE_SKIP_PARTS = {".git", "graphify-out", "tests", "__pycache__", "archive", "node_modules"}
+PROSE_SKIP_FILES = {"CHANGELOG.md", "LOG.md", "manifests/catalog.json"}
 
 FRONTMATTER_RE = re.compile(r"\A---\r?\n(.*?)\r?\n---", re.DOTALL)
 # YAML'da `\` dan keyin faqat shu belgilar kelishi mumkin. Boshqasi — xato
@@ -315,6 +326,58 @@ def human_claims(counts: dict) -> list[dict]:
         result.append({"file": rel, "key": key, "written": written,
                        "expected": counts.get(key), "ok": written == counts.get(key),
                        "reason": ""})
+    result.extend(manifest_claims(counts))
+    return result
+
+
+def manifest_claims(counts: dict) -> list[dict]:
+    """Manifest tavsiflaridagi har bir son (agent, skill, buyruq, ...) katalogga mosmi."""
+    result: list[dict] = []
+    for rel in MANIFEST_FILES:
+        path = VAULT / rel
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for pattern, key in MANIFEST_COUNT_PATTERNS:
+            for match in pattern.finditer(text):
+                written = int(match.group(2))
+                result.append({"file": rel, "key": key, "written": written,
+                               "expected": counts.get(key), "ok": written == counts.get(key),
+                               "reason": ""})
+    return result
+
+
+def version_claims() -> list[dict]:
+    """Versiya yagona manbaga (`.claude-plugin/plugin.json`) mosmi: manifest nusxalari va matn."""
+    current = tcore.plugin_version(VAULT)
+    result: list[dict] = []
+    for rel in MANIFEST_FILES:
+        path = VAULT / rel
+        if not path.is_file():
+            continue
+        for match in VERSION_FIELD_RE.finditer(path.read_text(encoding="utf-8", errors="replace")):
+            result.append({"file": rel, "written": match.group(2), "expected": current,
+                           "ok": match.group(2) == current, "kind": "field"})
+    for path in sorted(VAULT.rglob("*")):
+        if not path.is_file() or (path.suffix not in PROSE_SUFFIXES and path.name != ".env.example"):
+            continue
+        rel_parts = path.relative_to(VAULT).parts
+        rel = "/".join(rel_parts)
+        if PROSE_SKIP_PARTS & set(rel_parts) or rel in PROSE_SKIP_FILES:
+            continue
+        try:
+            lines = path.read_text(encoding="utf-8").splitlines()
+        except (UnicodeDecodeError, OSError):
+            continue
+        for line in lines:
+            if line.lstrip().startswith("source:"):  # qayd manbasi — tarixiy yozuv, tegilmaydi
+                continue
+            for match in PROSE_VERSION_RE.finditer(line):
+                written = match.group(1)
+                ok = written == current or current.startswith(written + ".")
+                if not ok:
+                    result.append({"file": rel, "written": written, "expected": current,
+                                   "ok": False, "kind": "prose"})
     return result
 
 
@@ -490,6 +553,21 @@ def cmd_sync_claims(args: argparse.Namespace) -> int:
                 encoding="utf-8",
             )
         changed.append(f"{rel}: {match.group(2)} → {payload}")
+
+    # Manifest tavsiflari: har bir uchrashuv
+    for rel in MANIFEST_FILES:
+        path = VAULT / rel
+        if not path.is_file():
+            continue
+        text = original = path.read_text(encoding="utf-8")
+        for pattern, key in MANIFEST_COUNT_PATTERNS:
+            text = pattern.sub(lambda m, k=key: f"{m.group(1)}{counts.get(k, 0)}{m.group(3)}", text)
+        current = tcore.plugin_version(VAULT)
+        text = VERSION_FIELD_RE.sub(lambda m: m.group(1) + current + m.group(3), text)
+        if text != original:
+            if not args.dry_run:
+                path.write_text(text, encoding="utf-8")
+            changed.append(f"{rel}: sonlar/versiya katalogga moslandi")
 
     if not changed:
         print("✓ hujjatlardagi raqamlar katalogga mos")

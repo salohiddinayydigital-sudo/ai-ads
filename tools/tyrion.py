@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v5.0 Master CLI — Butun tizim uchun yagona boshqaruv markazi (0 token).
+"""Tyrion Master CLI — Butun tizim uchun yagona boshqaruv markazi (0 token).
 
 Ishlatish:
   python3 tools/tyrion.py status
@@ -39,7 +39,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-VERSION = "7.0.0"
+VERSION = tcore.plugin_version(VAULT)
 
 ROUTES = {
     "route": ("skill-search.py", ["route"]),

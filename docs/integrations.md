@@ -1,6 +1,6 @@
 # Optional Live Ad-Platform MCP Integrations (`meta-ads`, `google-ads`)
 
-By default, `.mcp.json` enables **only** `tyrion-core` (`node "${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs" --mcp`) so that every session starts in `<100ms` across Windows, macOS, and Linux without external network or OAuth timeouts.
+By default only `tyrion-core` is enabled (`node <root>/hooks/run-hook.cjs --mcp`; declared in `.claude-plugin/plugin.json` for the installed plugin and in `.mcp.json` for the opened repository) so that every session starts in `<100ms` across Windows, macOS, and Linux without external network or OAuth timeouts.
 
 > **Why optional MCP servers are not in `.mcp.json` by default:** Claude Code attempts to launch all entries inside `mcpServers` even if `"disabled": true` is set, causing a 30-second startup timeout when credentials or `uvx`/`pipx` are not configured.
 
@@ -30,7 +30,7 @@ Add the following entry to your project or user `.mcp.json` (`~/.claude.json` or
 }
 ```
 
-> **Note:** Tyrion also includes a zero-dependency built-in live Meta Graph API client (`tools/meta-targeting-engine.py` and `tools/meta-live-sync.py`) that works directly with `META_ACCESS_TOKEN` without requiring `uvx`.
+> **Note:** Tyrion also includes a zero-dependency built-in live Meta Graph API client (`tools/meta-targeting-engine.py` and `tools/meta-insights-sync.py`) that works directly with `META_ACCESS_TOKEN` without requiring `uvx`.
 
 ---
 

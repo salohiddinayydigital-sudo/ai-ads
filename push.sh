@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# push.sh — Tyrion v5.0 Automated Pre-Flight Verification & GitHub Push Script
+# push.sh — Tyrion Automated Pre-Flight Verification & GitHub Push Script
 set -euo pipefail
 
 VAULT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -9,7 +9,7 @@ PY_CMD="python3"
 command -v python3 >/dev/null 2>&1 || PY_CMD="python"
 
 echo "===================================================================="
-echo "  🚀 TYRION v5.0 — GITHUB PRE-PUSH VERIFICATION & DEPLOY"
+echo "  🚀 TYRION — GITHUB PRE-PUSH VERIFICATION & DEPLOY"
 echo "===================================================================="
 
 echo "[1/5] Running TyrionShield Security Scan (Zero Secrets Gate)..."
@@ -35,4 +35,4 @@ fi
 
 echo "[6/6] Pushing branch 'main' and tags to $REMOTE_URL ..."
 git push -u origin main --tags
-echo "✅ Successfully pushed Tyrion v5.0 to GitHub!"
+echo "✅ Successfully pushed Tyrion to GitHub!"

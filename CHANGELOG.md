@@ -2,6 +2,29 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
+## [8.0.0] — 2026-11-11 (Breaking: Installable Plugin, One Command per Function, Single Version Source)
+
+### Fixed
+- **Plugin manifest failed official validation.** `agents: "./agents/"` is not accepted (only `.md` files are), so `claude plugin validate` returned *Validation failed*. Component keys that only restated the default locations are gone, as are `suggestedPrompts` and `interface`, which Claude Code strips (they remain in the Codex manifest).
+- **The MCP server never connected when the repository was opened directly.** `.mcp.json` referenced `${CLAUDE_PLUGIN_ROOT}`, which is unset in project mode. It now uses `${CLAUDE_PLUGIN_ROOT:-.}`; the installed plugin declares the same server in `plugin.json`.
+- **Tools were unreachable from an installed plugin.** Every documented call was `python3 tools/<tool>.py`, relative to a working directory that is the user's project. Commands, skills and agent charters now use `python3 "${CLAUDE_PLUGIN_ROOT}/tools/<tool>.py"` (236 calls in 87 files); `.claude/commands/` is generated in project-mode form and the router expands the token in the context it loads.
+- **State was written into the plugin directory**, which is replaced on every update. Operator memory and instincts now live in `~/.tyrion/` (`TYRION_HOME`) for an installed plugin; client workspaces and video runs are created in the user's project. `tyrion.py` no longer forces the working directory to its own root.
+- **32 agent charters asked shell-less agents to execute a command.** They now use their preloaded skills and report missing figures under `missing_inputs`.
+- **`userConfig` options were read by nothing.** `hooks_enabled`, `hook_profile` and `default_market` now reach the hooks and the MCP server.
+- **MCP server:** answers `ping`, negotiates the protocol revision, reports tool runtime failures as `isError` results, and resolves file arguments against the user's project.
+
+### Breaking Changes
+- **One command per function.** The English duplicates (`/audience`, `/creative`, `/ad-creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`) are removed; most were stubs that ran `--help`. Their useful parts were folded into `/auditoriya` and `/kreativ`. The `ad-creative` skill keeps its name.
+- **`default_market` defaults to `uz`** and is a fallback (`TYRION_DEFAULT_MARKET`), not an override: a task that names another country, city or currency still wins. `TYRION_MARKET` keeps forcing a market.
+- **Root `plugin.json` and `marketplace.json` are removed**; `.claude-plugin/` and `.codex-plugin/` hold the manifests.
+
+### Added
+- **`doctor.py`:** plugin-manifest lint (plus `claude plugin validate` when the CLI is present), tool-path lint, live MCP handshake, version check, and content-based graph freshness.
+- **Single version source:** `.claude-plugin/plugin.json`. Banners, the MCP handshake and manifest copies read it; `catalog.py sync-claims` syncs every count and version field, and stale version labels in prose are reported.
+- **Session brief** carries the plugin root, the memory path and the strict rules when the plugin runs outside the repository, where `CLAUDE.md` is not loaded.
+- **`tyrion.py paths`** prints where this copy lives and where it keeps state.
+- **CI:** runs on `claude/**` branches and validates the plugin with the official CLI.
+
 ## [7.0.0] — 2026-10-29 (Practitioner Targetology, `/ad-creative` Video Studio & Meta 2026 5-System AI Stack)
 
 ### Added

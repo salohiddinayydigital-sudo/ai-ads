@@ -211,6 +211,19 @@ def _check_human_claims(report: Report, data: dict) -> None:
         report.add("Raqamlar (hujjatlar)", OK, f"{len(claims)} hujjatdagi raqam mos")
 
 
+def check_version(report: Report) -> None:
+    """Versiya bitta joyda yoziladi; manifest nusxalari va matndagi eslatmalar unga mosmi."""
+    import tyrion_core as tcore
+    current = tcore.plugin_version(VAULT)
+    stale = [c for c in cat.version_claims() if not c["ok"]]
+    if stale:
+        sample = "; ".join(f"{c['file']}: {c['written']}" for c in stale[:4])
+        more = f" +{len(stale) - 4}" if len(stale) > 4 else ""
+        report.add("Versiya", WARN, f"joriy {current}, eskirgan yozuvlar: {sample}{more} (catalog.py sync-claims)")
+    else:
+        report.add("Versiya", OK, f"{current} — manifestlar va matn mos")
+
+
 def check_memory(report: Report) -> None:
     """Operator xotirasi (memory.md) o'zining ixchamlik chegarasiga sig'adimi."""
     path = VAULT / "MEMORY.md"
@@ -739,6 +752,7 @@ def main(argv: list[str] | None = None) -> int:
     check_catalog(report, data)
     check_drift(report, data)
     check_claims(report, data)
+    check_version(report)
     check_skills(report)
     check_instincts(report)
     check_shield(report)

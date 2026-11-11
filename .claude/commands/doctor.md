@@ -1,6 +1,6 @@
 ---
 name: doctor
-description: "Tyrion v5.0 tizimining 15 qatlamli sog'liq, katalog, MCP, xavfsizlik va unit-test diagnostikasi"
+description: "Tyrion tizimi sog'lig'i — katalog, plugin manifesti, asbob yo'llari, jonli MCP ulanishi, versiya, xavfsizlik va unit-testlar"
 ---
 
 # `/doctor` — Tizim Sog'lig'i Diagnostikasi

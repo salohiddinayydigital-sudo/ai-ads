@@ -2,7 +2,7 @@
   <img src="./assets/tyrion-banner.svg" alt="Tyrion AI Paid Media OS Banner" width="100%" />
 </p>
 
-# 🧠 TYRION v5.0 — AI PAID MEDIA & TARGETOLOGY OPERATING SYSTEM
+# 🧠 TYRION — AI PAID MEDIA & TARGETOLOGY OPERATING SYSTEM
 
 [![Version](https://img.shields.io/badge/version-5.0.0--ecc-7C3AED.svg)](./CHANGELOG.md)
 [![Architecture](https://img.shields.io/badge/architecture-Single--Root%20ECC-blue.svg)](./AGENTS.md)
@@ -11,11 +11,11 @@
 
 <!-- tyrion:catalog agents=36 skills=62 wiki=100 playbooks=9 contexts=6 commands=26 rules=9 tools=29 -->
 
-**Tyrion v5.0 (Calibrated & Live-Telemetry Edition)** — `affaan-m/ECC` (*Everything Claude Code*) arxitekturasi asosida qurilgan **yagona ildizli (Single-Root)** raqamli reklama, targetologiya va growth-marketing operatsion tizimi.
+**Tyrion (Calibrated & Live-Telemetry Edition)** — `affaan-m/ECC` (*Everything Claude Code*) arxitekturasi asosida qurilgan **yagona ildizli (Single-Root)** raqamli reklama, targetologiya va growth-marketing operatsion tizimi.
 
 Barcha **36 ta ixtisoslashgan agent**, **62 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **26 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **29 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
 
-## ✨ Tyrion v5.0 Arxitekturasi (Nima o'zgardi?)
+## ✨ Tyrion Arxitekturasi (Nima o'zgardi?)
 
 ```text
 tyrion/
@@ -40,7 +40,7 @@ tyrion/
 
 ## 🚀 1. Yagona Master CLI (`tools/tyrion.py`)
 
-Tyrion v5.0 barcha hisob-kitob, auditoriya loyihalash, jonli Meta Ads telemetriya sinxronizatsiyasi, kreativ matritsa va xavfsizlik tekshiruvlarini **0 token** sarflab bajaradigan markaziy CLI dvigatelga ega:
+Tyrion barcha hisob-kitob, auditoriya loyihalash, jonli Meta Ads telemetriya sinxronizatsiyasi, kreativ matritsa va xavfsizlik tekshiruvlarini **0 token** sarflab bajaradigan markaziy CLI dvigatelga ega:
 
 ```bash
 # Tizimning umumiy holati va buyruqlar menyusi
@@ -52,7 +52,7 @@ python3 tools/tyrion.py route "Meta reklamamdan kelayotgan lidlar sifatsiz, saba
 # Butun tizim sog'lig'ini tekshirish (14 qatlam)
 python3 tools/tyrion.py doctor
 
-# TyrionShield v5.0 6-qavatli statik xavfsizlik, AST va governance skaneri
+# TyrionShield 6-qavatli statik xavfsizlik, AST va governance skaneri
 python3 tools/tyrion.py shield
 ```
 
@@ -126,8 +126,8 @@ python3 tools/client-workspace.py new --client "nur-residence" --niche real-esta
 | `/hisobot` | Haftalik/oylik ROI, ROAS, ROMI, CAC va MER mijoz hisoboti |
 | `/savol` | 100 ta wiki qayd va 9 ta playbook ichidan 0-token javob qidirish |
 | `/sop` | 16 ta qadamma-qadam marketing va targetologiya SOP'larini chaqirish |
-| `/learn` | Kampaniya saboqlarini `manifests/instincts.json` va `MEMORY.md` ga muhrlash |
-| `/shield` | TyrionShield v5.0 6-qavatli statik xavfsizlik va AST skaneri |
+| `/learn` | Kampaniya saboqlarini instinktlar reestri va operator xotirasiga muhrlash (o'rnatilgan pluginda `~/.tyrion/`) |
+| `/shield` | TyrionShield 6-qavatli statik xavfsizlik va AST skaneri |
 | `/doctor` | Butun tizimning 14-nuqtali diagnostikasi |
 
 ## 🛠️ O'rnatish (Claude Code / Cursor / Codex / Windsurf)

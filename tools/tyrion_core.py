@@ -41,6 +41,16 @@ STATE_FILES: dict[str, tuple[str, str]] = {
 }
 
 
+def plugin_version(vault: Path) -> str:
+    """The release version. `.claude-plugin/plugin.json` is the only place it is written;
+    every banner, manifest copy and MCP handshake reads it from there."""
+    try:
+        data = json.loads((Path(vault) / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        return str(data.get("version") or "0.0.0")
+    except (OSError, json.JSONDecodeError):
+        return "0.0.0"
+
+
 def expand_plugin_root(text: str, root: Path) -> str:
     """Replace `${CLAUDE_PLUGIN_ROOT}` with the real root.
 

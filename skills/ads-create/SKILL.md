@@ -88,7 +88,7 @@ claims. Human review remains required before production or launch.
 
 
 ## Deterministic CLI & Tooling Integration (`0 Token`)
-Before generating recommendations or mutating plans for `ads-create`, execute the relevant Tyrion v5.0 deterministic checks:
+Before generating recommendations or mutating plans for `ads-create`, execute the relevant Tyrion deterministic checks:
 - **Unit Economics & Break-Even:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/calculator.py" breakeven --price <AOV> --cogs <COGS>`
 - **Meta Audience & Funnel Diagnostics:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" architect --niche <niche> --budget <daily_usd>`
 - **CSV/JSON Export & Breakdown Effect:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/ad-export-analyzer.py" analyze --file <export.csv>`

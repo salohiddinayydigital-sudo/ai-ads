@@ -25,7 +25,7 @@ sys.path.insert(0, str(TOOLS))
 
 import tyrion_core as tcore  # noqa: E402
 
-SERVER_VERSION = "7.0.0"
+SERVER_VERSION = tcore.plugin_version(VAULT)
 
 # Newest first. The server only uses the tools capability over stdio, which is
 # identical across these revisions, so it can honour whichever the client asks for.
@@ -480,7 +480,7 @@ def process_raw_line(raw_line: str) -> dict[str, Any] | None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v7.0.0 Native STDIO MCP Server")
+    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion Native STDIO MCP Server")
     parser.add_argument("--list-tools", action="store_true", help="Mavjud MCP tool'lar ro'yxatini JSON formatda chiqarish")
     args = parser.parse_args(argv)
     if args.list_tools:

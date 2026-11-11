@@ -24,6 +24,10 @@ sys.path.insert(0, str(TOOLS))
 
 import catalog  # noqa: E402
 import doctor  # noqa: E402
+import tyrion_core  # noqa: E402
+
+# The release version lives only in .claude-plugin/plugin.json; nothing here hardcodes it.
+CURRENT_VERSION = tyrion_core.plugin_version(VAULT)
 
 import contextlib
 import io
@@ -753,7 +757,7 @@ class TyrionV6GlobalReleaseTests(unittest.TestCase):
             )
             self.assertEqual(p_mcp.returncode, 0, p_mcp.stderr)
             resp = json.loads(p_mcp.stdout.strip().splitlines()[0])
-            self.assertEqual(resp["result"]["serverInfo"]["version"], "7.0.0")
+            self.assertEqual(resp["result"]["serverInfo"]["version"], CURRENT_VERSION)
 
     def test_v6_03_hook_fail_open_when_script_missing_unless_strict(self) -> None:
         with tempfile.TemporaryDirectory() as fake_root:
@@ -862,21 +866,29 @@ class TyrionV6GlobalReleaseTests(unittest.TestCase):
             self.assertIn(lang_code, hooks["hooks_by_language"])
         self.assertIn("ar", hooks.get("rtl_formatting_notes", {}))
 
-    def test_v6_10_english_commands_and_uzbek_aliases_present_and_synced(self) -> None:
-        pairs = [
-            ("audience", "auditoriya"),
-            ("creative", "kreativ"),
-            ("funnel", "voronka"),
-            ("export", "eksport"),
-            ("report", "hisobot"),
-            ("client", "mijoz"),
-            ("competitors", "raqobatchi"),
-            ("ask", "savol"),
-        ]
-        for en_name, uz_name in pairs:
-            self.assertTrue((VAULT / "commands" / f"{en_name}.md").is_file(), f"Missing commands/{en_name}.md")
-            self.assertTrue((VAULT / "commands" / f"{uz_name}.md").is_file(), f"Missing alias commands/{uz_name}.md")
-            self.assertTrue((VAULT / ".claude" / "commands" / f"{en_name}.md").is_file())
+    def test_v6_10_one_command_per_function_uzbek_names_canonical(self) -> None:
+        """v8.0: har funksiya uchun bitta buyruq. Inglizcha nusxalar (ko'pi `--help` chaqiradigan
+        stub edi) olib tashlandi; foydali qismlari o'zbekcha buyruqlarga qo'shildi."""
+        removed_to_canonical = {
+            "audience": "auditoriya",
+            "creative": "kreativ",
+            "ad-creative": "kreativ",
+            "funnel": "voronka",
+            "export": "eksport",
+            "report": "hisobot",
+            "client": "mijoz",
+            "competitors": "raqobatchi",
+            "ask": "savol",
+        }
+        for removed, canonical in removed_to_canonical.items():
+            self.assertTrue((VAULT / "commands" / f"{canonical}.md").is_file(), f"Missing commands/{canonical}.md")
+            self.assertTrue((VAULT / ".claude" / "commands" / f"{canonical}.md").is_file())
+            self.assertFalse((VAULT / "commands" / f"{removed}.md").exists(), f"duplicate commands/{removed}.md is back")
+            self.assertFalse((VAULT / ".claude" / "commands" / f"{removed}.md").exists())
+        for cmd in sorted((VAULT / "commands").glob("*.md")):
+            text = cmd.read_text(encoding="utf-8")
+            self.assertNotIn("alias_of:", text, f"{cmd.name}: alias commands are not allowed")
+            self.assertNotRegex(text, r'\.py"? --help', f"{cmd.name}: a command must run a real subcommand, not --help")
 
     def test_v6_11_regional_platform_skills_and_verified_sources(self) -> None:
         expected_skills = [
@@ -1167,8 +1179,9 @@ class DetailedTargetingUpgradeTests(unittest.TestCase):
             self.assertGreaterEqual(len(tr["6_suggested_test_groups"]), 1)
             self.assertIn("anti_stacking_rule", tr["7_broad_targeting_alternatives"])
 
-            # 4. Verify commands/audience.md invokes meta-targeting-engine.py search rather than --help
-            cmd_txt = (VAULT / "commands" / "audience.md").read_text(encoding="utf-8")
+            # 4. Verify commands/auditoriya.md invokes meta-targeting-engine.py search rather than --help
+            cmd_txt = (VAULT / "commands" / "auditoriya.md").read_text(encoding="utf-8")
+            self.assertIn("8 Qismli Targetolog Hisoboti", cmd_txt)
             self.assertIn('tools/meta-targeting-engine.py" search', cmd_txt)
             self.assertNotIn("meta-audience.py --help", cmd_txt)
             self.assertNotIn('meta-audience.py" --help', cmd_txt)
@@ -1195,8 +1208,12 @@ class TyrionV7CreativeAndMetaStackTests(unittest.TestCase):
 
     def test_v7_01_ad_creative_skill_and_command_registered_and_routed(self) -> None:
         self.assertTrue((VAULT / "skills" / "ad-creative" / "SKILL.md").is_file())
-        self.assertTrue((VAULT / "commands" / "ad-creative.md").is_file())
-        self.assertTrue((VAULT / ".claude" / "commands" / "ad-creative.md").is_file())
+        # The skill keeps the name; the same-named command was folded into /kreativ so the
+        # two no longer collide in the listing.
+        self.assertFalse((VAULT / "commands" / "ad-creative.md").exists())
+        kreativ = (VAULT / "commands" / "kreativ.md").read_text(encoding="utf-8")
+        for sub in ("pda-matrix", "video-script", "ad-copy", "hooks", "fatigue"):
+            self.assertIn(f'tools/creative-matrix.py" {sub}', kreativ)
 
         for q in (
             "Video reklama va reels skript yozib ber (/ad-creative)",
@@ -1519,8 +1536,8 @@ class CreativeMatrixAndWorkspaceTests(unittest.TestCase):
             capture_output=True, text=True, encoding="utf-8", errors="replace",
         )
         self.assertEqual(proc.returncode, 0)
-        self.assertIn("TYRION v7.0.0", proc.stdout)
-        self.assertIn("Single-Root ECC v7.0.0", proc.stdout)
+        self.assertIn(f"TYRION v{CURRENT_VERSION}", proc.stdout)
+        self.assertIn(f"Single-Root ECC v{CURRENT_VERSION}", proc.stdout)
 
 
 class TyrionV4EnginesTests(unittest.TestCase):
@@ -1838,16 +1855,20 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
         counts = catalog.scan()["counts"]
         self.assertEqual(counts["agents"], 36)
         self.assertEqual(counts["skills"], 63)
-        self.assertEqual(counts["commands"], 27)
+        self.assertEqual(counts["commands"], 18)
         self.assertEqual(counts["wiki"], 100)
 
-        for jpath in ("plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "package.json"):
+        self.assertEqual(CURRENT_VERSION, "8.0.0")
+        for jpath in (".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "package.json"):
             jdata = json.loads((VAULT / jpath).read_text(encoding="utf-8"))
-            self.assertEqual(jdata["version"], "7.0.0", f"Version drift in {jpath}")
+            self.assertEqual(jdata["version"], CURRENT_VERSION, f"Version drift in {jpath}")
 
-        mp = json.loads((VAULT / "marketplace.json").read_text(encoding="utf-8"))
-        self.assertEqual(mp["metadata"]["version"], "7.0.0")
-        self.assertEqual(mp["plugins"][0]["version"], "7.0.0")
+        # The root-level copies of the manifests were pure duplicates and are gone.
+        self.assertFalse((VAULT / "plugin.json").exists())
+        self.assertFalse((VAULT / "marketplace.json").exists())
+        mp = json.loads((VAULT / ".claude-plugin" / "marketplace.json").read_text(encoding="utf-8"))
+        self.assertEqual(mp["metadata"]["version"], CURRENT_VERSION)
+        self.assertEqual(mp["plugins"][0]["version"], CURRENT_VERSION)
         self.assertIn("36 specialist agents", mp["metadata"]["description"])
 
         sec_txt = (VAULT / "SECURITY.md").read_text(encoding="utf-8")
@@ -3188,7 +3209,7 @@ class AiAdsSyncAndVaultAuditCITests(unittest.TestCase):
             self.assertEqual(proc_ok.returncode, 0, proc_ok.stdout)
 
     def test_ci_03_ai_ads_repo_urls_and_no_force_push_in_scripts(self) -> None:
-        for rel in ("package.json", "plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json"):
+        for rel in ("package.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json"):
             content = (VAULT / rel).read_text(encoding="utf-8")
             self.assertIn("salohiddinayydigital-sudo/ai-ads", content, f"{rel} missing ai-ads URL")
 
@@ -3514,3 +3535,35 @@ class TyrionV8InstalledModeTests(unittest.TestCase):
                 os.environ.pop("CLAUDE_PROJECT_DIR", None)
                 if saved is not None:
                     os.environ["CLAUDE_PROJECT_DIR"] = saved
+
+
+class TyrionV8SingleSourceTests(unittest.TestCase):
+    """v8.0 2-bosqich — versiya va sonlar bitta manbadan; takror va eskirgan matn yo'q."""
+
+    def test_v8_30_version_has_one_source_and_no_stale_mention_anywhere(self) -> None:
+        stale = [c for c in catalog.version_claims() if not c["ok"]]
+        self.assertEqual(stale, [], f"eskirgan versiya yozuvlari: {stale[:5]}")
+        self.assertEqual(importlib.import_module("tyrion-mcp-server").SERVER_VERSION, CURRENT_VERSION)
+        self.assertEqual(importlib.import_module("tyrion").VERSION, CURRENT_VERSION)
+
+    def test_v8_31_version_lint_catches_a_stale_label_but_ignores_note_provenance(self) -> None:
+        stale_file = VAULT / "docs" / "_temp_stale_version_test.md"
+        try:
+            stale_file.write_text('---\nsource: "Tyrion v5.0 Engine"\n---\nTyrion v5.0 router ishlaydi.\n', encoding="utf-8")
+            hits = [c for c in catalog.version_claims() if c["file"] == "docs/_temp_stale_version_test.md"]
+        finally:
+            stale_file.unlink()
+        self.assertEqual(len(hits), 1, "only the body mention counts; the `source:` line is provenance")
+        self.assertEqual((hits[0]["written"], hits[0]["ok"]), ("5.0", False))
+
+    def test_v8_32_every_count_in_every_manifest_matches_the_catalog(self) -> None:
+        counts = catalog.scan()["counts"]
+        claims = catalog.manifest_claims(counts)
+        files = {c["file"] for c in claims}
+        for rel in catalog.MANIFEST_FILES:
+            self.assertIn(rel, files, f"{rel} has no checked count")
+        self.assertEqual([c for c in claims if not c["ok"]], [])
+        keys = {c["key"] for c in claims}
+        self.assertTrue({"agents", "skills", "commands", "tools"} <= keys, keys)
+        # "MCP Server (10 tools)" is a different number and must not be rewritten to the tool count.
+        self.assertIn("(10 tools)", (VAULT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))

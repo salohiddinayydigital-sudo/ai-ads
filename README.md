@@ -1,6 +1,6 @@
-# Tyrion v7.0 — Global Paid-Media & Targetology Operating System (`ai-ads`)
+# Tyrion — Global Paid-Media & Targetology Operating System (`ai-ads`)
 
-<!-- tyrion:catalog agents=36 skills=63 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=36 skills=63 wiki=100 playbooks=9 contexts=6 commands=18 rules=9 tools=29 -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.13](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776AB.svg)](https://www.python.org/)
@@ -16,15 +16,19 @@
 
 ### Install via Claude Code Plugin Marketplace
 ```bash
-/plugin marketplace add salohiddinayydigital-sudo/ai-ads
-/plugin install tyrion
+/plugin install tyrion --marketplace salohiddinayydigital-sudo/ai-ads
 ```
+On Claude Code older than 2.1.275, add the marketplace first: `/plugin marketplace add salohiddinayydigital-sudo/ai-ads`, then `/plugin install tyrion`.
+
+Settings (`/plugin configure tyrion`): **Standart bozor** (default market, `uz` out of the box), **Hook qat'iyligi** (`minimal` · `standard` · `strict`) and a switch for the hooks.
 
 ### Requirements & OS Compatibility
 - **Python:** `3.10` – `3.13` (`python3`, `python`, or `py -3` on Windows — automatically detected by `hooks/run-hook.cjs`)
 - **Node.js:** `18+` (bundled with Claude Code / Codex / Cursor)
 - **Supported OS:** Windows 10/11, macOS 13+, Ubuntu/Debian/Fedora Linux
-- **Installed Plugin Isolation (`cwd != plugin_root`):** All hooks (`hooks/hooks.json`) and the built-in STDIO MCP server (`.mcp.json`) resolve paths via `${CLAUDE_PLUGIN_ROOT}` and fail open (`exit 0`) on non-strict environment warnings, so Tyrion never blocks file edits in your other projects.
+- **Works from any project (`cwd != plugin_root`):** commands, skills and agents call tools as `python3 "${CLAUDE_PLUGIN_ROOT}/tools/<tool>.py"`, which Claude Code resolves to the installed copy. Hooks and the built-in STDIO MCP server resolve their own root and fail open (`exit 0`) on non-strict environment warnings, so Tyrion never blocks file edits in your other projects.
+- **State survives updates:** operator memory and instincts live in `~/.tyrion/` (override with `TYRION_HOME`); client workspaces are created in the project you are working in (`clients/<name>/`). `python3 tools/tyrion.py paths` prints the exact locations.
+- **Two ways to run it:** installed as a plugin, or by opening this repository directly — `.claude/commands/` and `.mcp.json` carry the project-mode form of the same commands and server.
 
 ---
 
@@ -32,7 +36,7 @@
 
 - **36 specialist agents** (`agents/*.md`) — Meta, Google, TikTok, YouTube, LinkedIn, Telegram, CAPI tracking, creative strategy, unit economics, and regulatory compliance.
 - **63 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
-- **27 slash commands** (`commands/*.md`) — canonical English commands (`/audit`, `/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`, `/plan`, `/budget`, `/tracking`, `/learn`, `/shield`, `/doctor`) with full Uzbek aliases (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`).
+- **18 slash commands** (`commands/*.md`) — one command per function: `/start`, `/audit`, `/auditoriya` (audience), `/kreativ` (creative), `/voronka` (funnel), `/eksport` (export analysis), `/hisobot` (report), `/mijoz` (client workspace), `/raqobatchi` (competitors), `/savol` (ask), `/budget`, `/scale`, `/tracking`, `/utm`, `/sop`, `/learn`, `/shield`, `/doctor`. Installed as a plugin they are namespaced, e.g. `/tyrion:audit`.
 - **29 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
 - **Bilim: atomik qaydlar (100)** (`wiki/*.md`) — interlinked paid-media knowledge base with zero orphan notes.
 
@@ -43,7 +47,7 @@ ai-ads/
 ├── locales/                 # UI & CLI locale bundles (en, uz, ru)
 ├── agents/                  # 36 specialist agent charters
 ├── skills/                  # 63 canonical paid-media & CRO skills
-├── commands/                # 27 slash commands (English canonical + Uzbek aliases)
+├── commands/                # one slash command per function (no aliases)
 ├── hooks/                   # Cross-platform ${CLAUDE_PLUGIN_ROOT} hook launcher & guard
 ├── tools/                   # 29 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
 └── wiki/                    # 100 atomic wikilinked knowledge notes
