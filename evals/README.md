@@ -69,3 +69,9 @@ boshidagi qoidalarda.
 `WITH` — plugin bilan ball, `W/OUT` — pluginsiz, `Δ` — farq. `Δ` musbat bo'lsa plugin qiymat qo'shyapti.
 `Δ ≤ 0` chiqqan holatda avval graderni tekshiring (`--judge-model sonnet`), keyin tegishli skill yoki buyruq matnini.
 Yangi holat qo'shish: papka oching, `prompt.md` ga foydalanuvchi yozadigandek so'rov, `graders/` ga kamida bitta tekshiruv.
+
+## Holat (2026-11-11)
+
+To'liq eval (har holat 3 marta, pluginsiz bilan) bu bosqichda o'tkazilmadi: limit boshqa sinovlarga ketdi. Yuqoridagi o'lchov hali
+yagona va 1 martalik. Keyingi sessiyada buyruq: `claude plugin eval . --allow-real-servers --allow-tools "mcp__plugin_tyrion_tyrion-core__*"`
+(taxminan 3.5–4$).

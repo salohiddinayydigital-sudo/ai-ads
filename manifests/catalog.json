@@ -1,6 +1,6 @@
 {
   "schema": "tyrion-catalog/v1",
-  "generated": "2026-11-11T17:08:35+00:00",
+  "generated": "2026-11-11T17:13:45+00:00",
   "generator": "tools/catalog.py",
   "vault": ".",
   "counts": {
@@ -3699,9 +3699,9 @@
         "name": "toliq-audit",
         "layer": "workflows",
         "path": "workflows/toliq-audit.js",
-        "sha256": "d3ced90181ecb294",
-        "bytes": 16821,
-        "updated": "2026-11-11T17:08:18+00:00",
+        "sha256": "eb8adf309bfe4629",
+        "bytes": 17347,
+        "updated": "2026-11-11T17:13:33+00:00",
         "title": null,
         "description": null,
         "source": null,
