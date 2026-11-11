@@ -530,7 +530,8 @@ class HookTests(unittest.TestCase):
         """Buyruq nusxasi bayt-aniq bo'lishi va ikkinchi urinishda tegmasligi shart.
 
         Regressiya: `write_text` Windows'da satr oxirini o'zgartirib, nusxa
-        "drift" bo'lib ko'rinardi.
+        "drift" bo'lib ko'rinardi. Nusxa — kanonikning loyiha rejimi shakli
+        (`${CLAUDE_PLUGIN_ROOT}/tools/x.py` → `tools/x.py`), boshqa farq yo'q.
         """
         module = self._module()
         module.sync_commands(VAULT, dry_run=False)
@@ -538,7 +539,8 @@ class HookTests(unittest.TestCase):
         for path in sorted(source.glob("*.md")):
             mirror = VAULT / ".claude" / "commands" / path.name
             self.assertTrue(mirror.is_file(), f"nusxa yo'q: {path.name}")
-            self.assertEqual(path.read_bytes(), mirror.read_bytes(), f"baytlar farqli: {path.name}")
+            self.assertEqual(catalog.mirror_bytes(path), mirror.read_bytes().replace(b"\r\n", b"\n"),
+                             f"baytlar farqli: {path.name}")
         self.assertEqual(module.sync_commands(VAULT, dry_run=False), [],
                          "ikkinchi sinxronizatsiya keraksiz nusxa qildi")
 
@@ -1167,8 +1169,9 @@ class DetailedTargetingUpgradeTests(unittest.TestCase):
 
             # 4. Verify commands/audience.md invokes meta-targeting-engine.py search rather than --help
             cmd_txt = (VAULT / "commands" / "audience.md").read_text(encoding="utf-8")
-            self.assertIn("meta-targeting-engine.py search", cmd_txt)
+            self.assertIn('tools/meta-targeting-engine.py" search', cmd_txt)
             self.assertNotIn("meta-audience.py --help", cmd_txt)
+            self.assertNotIn('meta-audience.py" --help', cmd_txt)
         finally:
             srv.shutdown()
             srv.server_close()
@@ -2865,7 +2868,7 @@ class UniversalAutoRouterTests(unittest.TestCase):
             self.assertTrue(cmd_path.is_file(), f"Missing command: {cmd_path}")
             self.assertTrue(mirror_path.is_file(), f"Missing command mirror: {mirror_path}")
             self.assertEqual(
-                cmd_path.read_bytes().replace(b"\r\n", b"\n"),
+                catalog.mirror_bytes(cmd_path),
                 mirror_path.read_bytes().replace(b"\r\n", b"\n"),
             )
 
@@ -3310,3 +3313,204 @@ class TyrionV8PluginFoundationTests(unittest.TestCase):
             os.utime(graph, (stat.st_atime, stat.st_mtime))
         row = next(r for r in report.rows if r["check"] == "Bilim grafi")
         self.assertEqual(row["status"], doctor.OK, row["detail"])
+
+
+class TyrionV8InstalledModeTests(unittest.TestCase):
+    """v8.0 1-bosqich — plugin o'rnatilgan holatda (cwd != ildiz) hamma narsa ishlaydi."""
+
+    def setUp(self) -> None:
+        self.tcore = importlib.import_module("tyrion_core")
+        self.ss = importlib.import_module("skill-search")
+        self.mloc = importlib.import_module("market_locale")
+        self.mcp = importlib.import_module("tyrion-mcp-server")
+
+    # ---- yo'llar -------------------------------------------------------------
+
+    def test_v8_10_no_invocation_depends_on_cwd_and_lint_catches_regressions(self) -> None:
+        self.assertEqual(doctor.lint_tool_paths(VAULT), [])
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for sub in ("commands", "agents", "wiki"):
+                (root / sub).mkdir()
+            (root / "commands" / "x.md").write_text("Run `python3 tools/calculator.py breakeven`\n", encoding="utf-8")
+            (root / "agents" / "a.md").write_text(
+                '---\nname: a\ntools: Read, Glob, Grep\n---\nExecute `python3 "${CLAUDE_PLUGIN_ROOT}/tools/x.py"`\n',
+                encoding="utf-8")
+            (root / "wiki" / "n.md").write_text('`python3 "${CLAUDE_PLUGIN_ROOT}/tools/x.py"`\n', encoding="utf-8")
+            problems = " | ".join(doctor.lint_tool_paths(root))
+        self.assertIn("commands/x.md: 1 nisbiy chaqiruv", problems)
+        self.assertIn("agents/a.md: Bash'i yo'q agentga", problems)
+        self.assertIn("wiki/n.md:", problems)
+
+    def test_v8_11_plugin_root_token_expands_to_absolute_and_to_project_relative(self) -> None:
+        text = 'Run `python3 "${CLAUDE_PLUGIN_ROOT}/tools/calculator.py" breakeven` then read ${CLAUDE_PLUGIN_ROOT}/wiki/x.md'
+        expanded = self.tcore.expand_plugin_root(text, VAULT)
+        self.assertNotIn("${CLAUDE_PLUGIN_ROOT}", expanded)
+        self.assertIn(f'python3 "{VAULT.resolve().as_posix()}/tools/calculator.py" breakeven', expanded)
+        self.assertEqual(
+            self.tcore.to_project_relative(text),
+            "Run `python3 tools/calculator.py breakeven` then read wiki/x.md",
+        )
+        self.assertEqual(self.tcore.expand_plugin_root("no token here", VAULT), "no token here")
+
+    def test_v8_12_router_context_package_carries_no_unexpanded_token(self) -> None:
+        plan = self.ss.route_task("Meta auditoriya arxitekturasini qur", load=True, context_mode="full")
+        bundle = plan["loaded_context"]["compiled_context_package"]["full_markdown_bundle"]
+        self.assertNotIn("${CLAUDE_PLUGIN_ROOT}", bundle)
+        self.assertIn(f'python3 "{VAULT.resolve().as_posix()}/tools/meta-audience.py"', bundle)
+
+    def test_v8_13_project_mode_command_mirror_has_relative_paths_only(self) -> None:
+        for mirror in sorted((VAULT / ".claude" / "commands").glob("*.md")):
+            self.assertNotIn("${CLAUDE_PLUGIN_ROOT}", mirror.read_text(encoding="utf-8"), mirror.name)
+        canonical = (VAULT / "commands" / "auditoriya.md").read_text(encoding="utf-8")
+        self.assertIn('python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" architect', canonical)
+        mirrored = (VAULT / ".claude" / "commands" / "auditoriya.md").read_text(encoding="utf-8")
+        self.assertIn("python3 tools/meta-audience.py architect", mirrored)
+
+    # ---- holat (xotira) ------------------------------------------------------
+
+    def test_v8_14_state_dir_is_repo_for_checkout_and_home_for_installed_plugin(self) -> None:
+        saved = os.environ.pop("TYRION_HOME", None)
+        try:
+            self.assertFalse(self.tcore.is_installed_plugin(VAULT))
+            self.assertEqual(self.tcore.state_dir(VAULT), VAULT)
+            self.assertEqual(self.tcore.state_path(VAULT, "memory"), VAULT / "MEMORY.md")
+            cached = Path("/home/u/.claude/plugins/cache/tyrion/tyrion/8.0.0")
+            self.assertTrue(self.tcore.is_installed_plugin(cached))
+            self.assertEqual(self.tcore.state_dir(cached), Path.home() / ".tyrion")
+            os.environ["TYRION_HOME"] = "/custom/state"
+            self.assertEqual(self.tcore.state_dir(VAULT), Path("/custom/state"))
+        finally:
+            os.environ.pop("TYRION_HOME", None)
+            if saved is not None:
+                os.environ["TYRION_HOME"] = saved
+
+    def test_v8_15_installed_plugin_keeps_state_in_home_and_work_in_the_project(self) -> None:
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            home = Path(tmp) / "home"
+            plugin = home / ".claude" / "plugins" / "cache" / "tyrion" / "tyrion" / "8.0.0"
+            project = Path(tmp) / "project"
+            project.mkdir(parents=True)
+            shutil.copytree(TOOLS, plugin / "tools", ignore=shutil.ignore_patterns("__pycache__"))
+            (plugin / "manifests").mkdir()
+            shutil.copy2(VAULT / "manifests" / "instincts.json", plugin / "manifests" / "instincts.json")
+            shutil.copy2(VAULT / "MEMORY.md", plugin / "MEMORY.md")
+            def snapshot() -> list[str]:
+                # Bytecode caches are not state; everything else must stay untouched.
+                return sorted(p.relative_to(plugin).as_posix() for p in plugin.rglob("*")
+                              if p.is_file() and "__pycache__" not in p.parts)
+
+            before = snapshot()
+            env = {k: v for k, v in os.environ.items() if k not in ("TYRION_HOME", "CLAUDE_PLUGIN_ROOT")}
+            env.update(HOME=str(home), USERPROFILE=str(home), PYTHONIOENCODING="utf-8")
+
+            def run(*argv: str) -> subprocess.CompletedProcess:
+                return subprocess.run([sys.executable, "-B", *argv], cwd=str(project), env=env,
+                                      capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
+
+            added = run(str(plugin / "tools" / "instincts.py"), "add", "--id", "v8-installed-mode", "--domain", "meta",
+                        "--trigger", "t", "--action", "a", "--evidence", "wiki/learning-phase-qoidalari.md",
+                        "--confidence", "4")
+            self.assertEqual(added.returncode, 0, added.stdout + added.stderr)
+            state = json.loads((home / ".tyrion" / "instincts.json").read_text(encoding="utf-8"))
+            self.assertIn("v8-installed-mode", [i["id"] for i in state["instincts"]])
+            self.assertGreater(len(state["instincts"]), 1, "seed instincts were not carried over")
+            self.assertTrue((home / ".tyrion" / "MEMORY.md").is_file())
+
+            # Through the master CLI: it must keep the caller's cwd, not switch to the plugin root.
+            made = run(str(plugin / "tools" / "tyrion.py"), "client", "new", "--client", "Demo Brand")
+            self.assertEqual(made.returncode, 0, made.stdout + made.stderr)
+            self.assertTrue((project / "clients" / "demo-brand" / "BRIEF.md").is_file())
+
+            self.assertEqual(before, snapshot(), "the plugin directory was written to; it is replaced on update")
+
+    # ---- sozlamalar ----------------------------------------------------------
+
+    def _hook(self, *argv: str, cwd: str, extra_env: dict | None = None) -> subprocess.CompletedProcess:
+        env = {k: v for k, v in os.environ.items()
+               if not k.startswith(("CLAUDE_PLUGIN_OPTION_", "TYRION_")) and k != "CLAUDE_ENV_FILE"}
+        env.update(extra_env or {})
+        return subprocess.run(["node", str(VAULT / "hooks" / "run-hook.cjs"), *argv], cwd=cwd, env=env,
+                              capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=20)
+
+    def test_v8_16_session_brief_delivers_root_memory_path_and_strict_rules_outside_the_repo(self) -> None:
+        with tempfile.TemporaryDirectory() as ext:
+            out = self._hook("brief", cwd=ext).stdout
+        self.assertIn("Tyrion:", out)
+        self.assertIn(f"Ildiz: {VAULT.resolve().as_posix()}", out)
+        self.assertIn("Xotira:", out)
+        self.assertIn("Qat'iy qoidalar:", out)
+        self.assertIn("MEASURED_ACCOUNT_DATA", out)
+        self.assertIn("spend-guard", out)
+        self.assertLess(len(out.encode("utf-8")), 2000, "session brief must stay small — it is injected every session")
+        # In the repository itself CLAUDE.md already carries the rules: one status line only.
+        inside = self._hook("brief", cwd=str(VAULT)).stdout
+        self.assertEqual(len(inside.strip().splitlines()), 1, inside)
+
+    def test_v8_17_plugin_settings_reach_hooks(self) -> None:
+        with tempfile.TemporaryDirectory() as ext:
+            env_file = Path(ext) / "session.env"
+            out = self._hook("brief", cwd=ext, extra_env={
+                "CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET": "uz", "CLAUDE_ENV_FILE": str(env_file)}).stdout
+            self.assertIn("bozor uz", out)
+            self.assertIn("--market uz", out)
+            self.assertEqual(env_file.read_text(encoding="utf-8").strip(), "export TYRION_DEFAULT_MARKET=uz")
+
+            off = self._hook("brief", cwd=ext, extra_env={"CLAUDE_PLUGIN_OPTION_HOOKS_ENABLED": "false"})
+            self.assertEqual((off.returncode, off.stdout), (0, ""))
+
+            payload = json.dumps({"tool_input": {"file_path": "manifests/catalog.json"}})
+            strict = subprocess.run(
+                [sys.executable, str(VAULT / "hooks" / "tyrion-hook.py"), "guard", "--target", "manifests/catalog.json"],
+                input=payload, capture_output=True, text=True, encoding="utf-8", errors="replace",
+                env=dict(os.environ, CLAUDE_PLUGIN_OPTION_HOOK_PROFILE="strict"),
+            )
+            self.assertEqual(strict.returncode, 2, strict.stdout)
+
+    def test_v8_18_default_market_is_a_fallback_not_an_override(self) -> None:
+        saved = {k: os.environ.pop(k, None) for k in ("TYRION_MARKET", "TYRION_DEFAULT_MARKET")}
+        try:
+            self.assertEqual(self.mloc.detect_market("low ROAS on my campaigns")["market_id"], "global")
+            os.environ["TYRION_DEFAULT_MARKET"] = "uz"
+            unnamed = self.mloc.detect_market("low ROAS on my campaigns")
+            self.assertEqual((unnamed["market_id"], unnamed["detection_source"]), ("uz", "default_configured"))
+            self.assertEqual(self.mloc.detect_market("My Shopify store in Germany")["market_id"], "eu")
+            self.assertEqual(self.mloc.load_market_pack()["market_id"], "uz")
+            os.environ["TYRION_DEFAULT_MARKET"] = "${user_config.default_market}"  # unsubstituted placeholder
+            self.assertEqual(self.mloc.detect_market("low ROAS on my campaigns")["market_id"], "global")
+        finally:
+            for key, value in saved.items():
+                os.environ.pop(key, None)
+                if value is not None:
+                    os.environ[key] = value
+
+    def test_v8_19_manifest_settings_use_pickers_and_feed_the_mcp_server(self) -> None:
+        data = json.loads((VAULT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        cfg = data["userConfig"]
+        self.assertEqual(cfg["hook_profile"]["options"], ["minimal", "standard", "strict"])
+        self.assertEqual(sorted(cfg["default_market"]["options"]), sorted(self.mloc.SUPPORTED_MARKETS))
+        self.assertEqual(cfg["default_market"]["default"], "uz")
+        self.assertEqual(data["mcpServers"]["tyrion-core"]["env"]["TYRION_DEFAULT_MARKET"],
+                         "${user_config.default_market}")
+
+    # ---- MCP fayl argumentlari ------------------------------------------------
+
+    def test_v8_20_mcp_file_arguments_resolve_in_the_project_then_plugin_and_never_outside(self) -> None:
+        saved = os.environ.get("CLAUDE_PROJECT_DIR")
+        with tempfile.TemporaryDirectory() as project, tempfile.TemporaryDirectory() as elsewhere:
+            (Path(project) / "export.json").write_text("{}", encoding="utf-8")
+            (Path(elsewhere) / "secret.json").write_text("{}", encoding="utf-8")
+            os.environ["CLAUDE_PROJECT_DIR"] = project
+            try:
+                self.assertEqual(self.mcp.resolve_input_file("export.json"), (Path(project) / "export.json").resolve())
+                bundled = self.mcp.resolve_input_file("examples/demo-brand/assets/meta_graph_insights_raw.json")
+                self.assertEqual(bundled, (VAULT / "examples/demo-brand/assets/meta_graph_insights_raw.json").resolve())
+                with self.assertRaises(PermissionError):
+                    self.mcp.resolve_input_file(str(Path(elsewhere) / "secret.json"))
+                with self.assertRaises(PermissionError):
+                    self.mcp.resolve_input_file("../../etc/passwd")
+            finally:
+                os.environ.pop("CLAUDE_PROJECT_DIR", None)
+                if saved is not None:
+                    os.environ["CLAUDE_PROJECT_DIR"] = saved

@@ -25,6 +25,9 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
 VAULT = TOOLS.parent
+sys.path.insert(0, str(TOOLS))
+import tyrion_core as tcore  # noqa: E402
+
 FRONTMATTER_RE = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n?", re.DOTALL)
 
 for _stream in (sys.stdout, sys.stderr):
@@ -60,7 +63,7 @@ def export_cursor(out_root: Path, dry_run: bool) -> list[str]:
 
 
 def export_windsurf(out_root: Path, dry_run: bool) -> list[str]:
-    parts = ["# TYRION v5.0 — WINDSURF PAID MEDIA & TARGETOLOGY RULES\n"]
+    parts = ["# TYRION — WINDSURF PAID MEDIA & TARGETOLOGY RULES\n"]
     for rule_md in sorted((VAULT / "rules").glob("[0-9]*.md")):
         _desc, body = strip_fm(rule_md.read_text(encoding="utf-8"))
         parts.append(body.strip() + "\n")
@@ -79,7 +82,14 @@ def export_claude(out_root: Path, dry_run: bool) -> list[str]:
         target = cmd_dst / cmd_md.name
         written.append(target.relative_to(out_root).as_posix())
         if not dry_run:
-            target.write_bytes(cmd_md.read_bytes().replace(b"\r\n", b"\n"))
+            text = cmd_md.read_bytes().replace(b"\r\n", b"\n").decode("utf-8", errors="replace")
+            # Project commands get no ${CLAUDE_PLUGIN_ROOT} substitution: relative paths inside
+            # the vault itself, the vault's absolute path when exported into another project.
+            if out_root.resolve() == VAULT.resolve():
+                text = tcore.to_project_relative(text)
+            else:
+                text = tcore.expand_plugin_root(text, VAULT)
+            target.write_bytes(text.encode("utf-8"))
     return written
 
 

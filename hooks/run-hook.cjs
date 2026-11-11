@@ -15,8 +15,13 @@ const PLUGIN_ROOT = process.env.CLAUDE_PLUGIN_ROOT
   ? path.resolve(process.env.CLAUDE_PLUGIN_ROOT)
   : path.resolve(__dirname, "..");
 
-const PROFILE = (process.env.TYRION_HOOK_PROFILE || "standard").trim().toLowerCase();
+// Plugin settings reach hook processes as CLAUDE_PLUGIN_OPTION_<KEY>; an explicit TYRION_* wins.
+const PROFILE = (process.env.TYRION_HOOK_PROFILE || process.env.CLAUDE_PLUGIN_OPTION_HOOK_PROFILE || "standard")
+  .trim().toLowerCase();
 const IS_STRICT = PROFILE === "strict";
+const HOOKS_OFF = ["false", "0", "no", "off"].includes(
+  (process.env.CLAUDE_PLUGIN_OPTION_HOOKS_ENABLED || "").trim().toLowerCase()
+);
 const IS_DEV = process.env.TYRION_DEV === "1" || process.env.TYRION_DEV === "true";
 
 function findPython() {
@@ -84,6 +89,11 @@ if (args[0] === "--mcp") {
 
 // Mode 2: Lifecycle Hook launcher (brief | guard | ingest | dod)
 const hookMode = args[0] || "";
+
+// `hooks_enabled: false` in the plugin settings turns every lifecycle hook into a no-op.
+if (HOOKS_OFF) {
+  process.exit(0);
+}
 
 // Fast exit for maintainer-only hooks (ingest, dod) when not in TYRION_DEV=1 mode
 if ((hookMode === "ingest" || hookMode === "dod") && !IS_DEV) {

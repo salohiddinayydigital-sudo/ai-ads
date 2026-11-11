@@ -100,6 +100,20 @@ def merge(settings: dict, canonical: dict) -> tuple[dict, list[str]]:
     return settings, added
 
 
+def command_payload(path: Path, target_root: Path) -> bytes:
+    """Buyruqning `<target>/.claude/commands/` uchun baytlari.
+
+    Kanonik fayl `${CLAUDE_PLUGIN_ROOT}/tools/...` shaklida (plugin uchun). Loyiha buyrug'ida
+    almashtirish bo'lmaydi: vaultning o'zida yo'llar nisbiy (cwd — ildiz), boshqa loyihada
+    esa Tyrion ildizining to'liq yo'li yoziladi.
+    """
+    import tyrion_core as tcore
+    text = path.read_bytes().replace(b"\r\n", b"\n").decode("utf-8", errors="replace")
+    if target_root.resolve() == VAULT.resolve():
+        return tcore.to_project_relative(text).encode("utf-8")
+    return tcore.expand_plugin_root(text, VAULT).encode("utf-8")
+
+
 def sync_commands(target_root: Path, dry_run: bool) -> list[str]:
     """`commands/*.md` ni `<target>/.claude/commands/` ga ko'chiradi (kanonik → nusxa).
 
@@ -112,14 +126,15 @@ def sync_commands(target_root: Path, dry_run: bool) -> list[str]:
     changed: list[str] = []
     for path in sorted(source.glob("*.md")):
         target = destination / path.name
+        payload = command_payload(path, target_root)
         # Bayt-aniq taqqoslash: `write_text` Windows'da \n ni \r\n ga aylantirib,
         # nusxani "farqli" qilib ko'rsatardi (drift noto'g'ri signali).
-        if target.is_file() and target.read_bytes().replace(b'\r\n', b'\n') == path.read_bytes().replace(b'\r\n', b'\n'):
+        if target.is_file() and target.read_bytes().replace(b'\r\n', b'\n') == payload:
             continue
         changed.append(f"commands/{path.name}")
         if not dry_run:
             destination.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(path, target)
+            target.write_bytes(payload)
     return changed
 
 

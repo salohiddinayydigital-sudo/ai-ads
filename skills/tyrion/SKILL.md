@@ -38,24 +38,24 @@ output_contract: Tyrion OS system status and autonomous orchestration routing pl
    - Writing hooks/scripts $	o$ `contexts/creative-mode.md`
    - Uzbekistan B2C/B2B $	o$ `contexts/uzbekistan-market.md`
 3. **Run Deterministic CLI Tools Before LLM Generation:**
-   - Audience architecture, overlap, saturation, LAL, retargeting: `python3 tools/meta-audience.py`
-   - Ad Manager CSV/JSON export & Breakdown Effect: `python3 tools/ad-export-analyzer.py`
-   - Andromeda 2 3x3 creative matrix & 3-language hooks: `python3 tools/creative-matrix.py`
-   - CAPI v22 SHA-256 payload, EMQ & Telegram Bot UTM: `python3 tools/capi-utm-builder.py`
-   - Unit economics & Spend-Guard: `python3 tools/calculator.py` and `python3 tools/spend-guard.py`
+   - Audience architecture, overlap, saturation, LAL, retargeting: `python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py"`
+   - Ad Manager CSV/JSON export & Breakdown Effect: `python3 "${CLAUDE_PLUGIN_ROOT}/tools/ad-export-analyzer.py"`
+   - Andromeda 2 3x3 creative matrix & 3-language hooks: `python3 "${CLAUDE_PLUGIN_ROOT}/tools/creative-matrix.py"`
+   - CAPI v22 SHA-256 payload, EMQ & Telegram Bot UTM: `python3 "${CLAUDE_PLUGIN_ROOT}/tools/capi-utm-builder.py"`
+   - Unit economics & Spend-Guard: `python3 "${CLAUDE_PLUGIN_ROOT}/tools/calculator.py"` and `python3 "${CLAUDE_PLUGIN_ROOT}/tools/spend-guard.py"`
 
 ## Anti-Patterns
 - **WRONG:** Reading all 100 `wiki/` files into context at once or guessing benchmarks without running `calculator.py`.
-- **CORRECT:** Querying `python3 tools/brain-search.py search "<topic>"` (0 tokens) and reading only the top 1–2 matched notes or `playbooks/`.
+- **CORRECT:** Querying `python3 "${CLAUDE_PLUGIN_ROOT}/tools/brain-search.py" search "<topic>"` (0 tokens) and reading only the top 1–2 matched notes or `playbooks/`.
 
 
 ## Deterministic CLI & Tooling Integration (`0 Token`)
 Before generating recommendations or mutating plans for `tyrion`, execute the relevant Tyrion v5.0 deterministic checks:
-- **Unit Economics & Break-Even:** `python3 tools/calculator.py breakeven --price <AOV> --cogs <COGS>`
-- **Meta Audience & Funnel Diagnostics:** `python3 tools/meta-audience.py architect --niche <niche> --budget <daily_usd>`
-- **CSV/JSON Export & Breakdown Effect:** `python3 tools/ad-export-analyzer.py analyze --file <export.csv>`
-- **CAPI v22 SHA-256 & Telegram Bot UTM:** `python3 tools/capi-utm-builder.py utm --url <url> --platform meta`
-- **Spend-Guard Gate:** `python3 tools/spend-guard.py budget --current <old> --proposed <new> --max-cap <cap>`
+- **Unit Economics & Break-Even:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/calculator.py" breakeven --price <AOV> --cogs <COGS>`
+- **Meta Audience & Funnel Diagnostics:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" architect --niche <niche> --budget <daily_usd>`
+- **CSV/JSON Export & Breakdown Effect:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/ad-export-analyzer.py" analyze --file <export.csv>`
+- **CAPI v22 SHA-256 & Telegram Bot UTM:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/capi-utm-builder.py" utm --url <url> --platform meta`
+- **Spend-Guard Gate:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/spend-guard.py" budget --current <old> --proposed <new> --max-cap <cap>`
 
 ## Anti-Patterns (`WRONG` vs `CORRECT`)
 | Scenario | ❌ FAIL (`WRONG`) | ✅ PASS (`CORRECT`) |

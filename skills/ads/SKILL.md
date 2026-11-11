@@ -61,9 +61,9 @@ and make every completion claim traceable to evidence produced in the run.
 
 Operators never need to manually invoke `/skill-search`, `/agent`, or `/brief`. On every natural-language request (in Uzbek Latin, Uzbek Cyrillic, Russian, or English):
 
-1. **Automatic Intake & Routing:** Run `python3 tools/skill-search.py route "<user_request>" --load` (or MCP `tyrion_universal_router`) to resolve `primary_agent`, `supporting_agents` (only when genuinely multi-step), `required_skills`, `supporting_skills`, `references_to_load`, `rules_to_load`, and `tools_to_use`.
+1. **Automatic Intake & Routing:** Run `python3 "${CLAUDE_PLUGIN_ROOT}/tools/skill-search.py" route "<user_request>" --load` (or MCP `tyrion_universal_router`) to resolve `primary_agent`, `supporting_agents` (only when genuinely multi-step), `required_skills`, `supporting_skills`, `references_to_load`, `rules_to_load`, and `tools_to_use`.
 2. **Actual File Loading & Session Caching:** Read only the selected agent charter(s), `SKILL.md`, and task-specific `references_to_load`. Never load all 62 skills at once, and never claim to have read or applied a skill or reference that was not actually loaded.
-3. **Dynamic Mid-Task Re-Routing:** If execution uncovers a new domain requirement (e.g., CAPI debugging during a creative or funnel audit), invoke `python3 tools/skill-search.py route "<initial_task>" --reroute-with "<emergent_need>" --load` to attach the needed specialist without duplicating work.
+3. **Dynamic Mid-Task Re-Routing:** If execution uncovers a new domain requirement (e.g., CAPI debugging during a creative or funnel audit), invoke `python3 "${CLAUDE_PLUGIN_ROOT}/tools/skill-search.py" route "<initial_task>" --reroute-with "<emergent_need>" --load` to attach the needed specialist without duplicating work.
 4. **Universal Fallback & Spend-Guard Gate:** If no specialized skill matches, proceed via the safe general `ads` conductor workflow (`fallback_ready`) without asking the user to pick a skill or agent name. Block execution (`blocked_mutation_approval`) only when a live account mutation lacks explicit approval or critical business inputs are missing.
 
 ## Operating order

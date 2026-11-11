@@ -69,16 +69,16 @@ Build evidence-backed, non-cannibalizing Meta Ads audience structures powered by
 
 1. **Step 1 — Search & Validate Detailed Targeting Options:**
    ```bash
-   python3 tools/meta-targeting-engine.py search --product "<mahsulot>" --problem "<muammo>" --customer-profile "<mijoz_profili>" --intent "<xarid_niyati>" --complementary "<yondosh_kategoriyalar>" --niche <niche> --objective <SALES|LEADS> --country <UZ|US|DE> --account-id <act_id> --max-queries 12 --json
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-targeting-engine.py" search --product "<mahsulot>" --problem "<muammo>" --customer-profile "<mijoz_profili>" --intent "<xarid_niyati>" --complementary "<yondosh_kategoriyalar>" --niche <niche> --objective <SALES|LEADS> --country <UZ|US|DE> --account-id <act_id> --max-queries 12 --json
    ```
 2. **Step 2 — Generate 4-Layer Audience Blueprint (with Unit Economics):**
    ```bash
-   python3 tools/meta-audience.py architect --niche <ecom|edu|real-estate|medical|b2b|beauty|auto|local> --daily-budget <USD> --aov <USD> --margin-pct <PCT> --geo <tashkent|regions|uzbekistan|global> --has-pixel --has-crm
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" architect --niche <ecom|edu|real-estate|medical|b2b|beauty|auto|local> --daily-budget <USD> --aov <USD> --margin-pct <PCT> --geo <tashkent|regions|uzbekistan|global> --has-pixel --has-crm
    ```
 3. **Step 3 — Verify Overlap & Saturation Sensitivity Window:**
    ```bash
-   python3 tools/meta-audience.py overlap --size-a <N> --size-b <M> --shared <K>
-   python3 tools/meta-audience.py saturation --audience-size <N> --daily-budget <USD> --cpm <CPM>
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" overlap --size-a <N> --size-b <M> --shared <K>
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" saturation --audience-size <N> --daily-budget <USD> --cpm <CPM>
    ```
 
 ## Related Skills

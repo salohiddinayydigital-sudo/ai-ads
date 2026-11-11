@@ -38,6 +38,8 @@ Tyrion v5.0 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 4. **Spend-Guard Himoyasi:** Reklama hisobiga har qanday o'zgartirish (`budget >20%`, yangi kampaniya, pauza) `tools/spend-guard.py` tekshiruvi va foydalanuvchi tasdig'isiz bajarilmaydi ([[40-xavfsizlik-va-hisob]]).
 5. **Atomiklik va Yagona Manba:** 1 qayd = 1 tushuncha, YAML frontmatter (`name/description/tags/source/updated`, `\` o'rniga `/`), kamida 2 ta wikilink (`[[...]]`). Barcha raqamlar `manifests/catalog.json` dan avtomatik sinxronlanadi (`python3 tools/catalog.py sync-claims`).
 
+6. **Yo'llar va Ikki Rejim:** `commands/`, `skills/*/SKILL.md` va `agents/` matnida asboblar `python3 "${CLAUDE_PLUGIN_ROOT}/tools/<asbob>.py"` shaklida yozilgan — plugin o'rnatilganda Claude Code bu belgini ildiz yo'li bilan almashtiradi. Shu repo to'g'ridan-to'g'ri ochilganda `${CLAUDE_PLUGIN_ROOT}` = repo ildizi (`.`), ya'ni `python3 tools/<asbob>.py`. Operator xotirasi va instinktlar: repoda `MEMORY.md` + `manifests/instincts.json`, o'rnatilgan pluginda `~/.tyrion/` (`python3 tools/tyrion.py paths`).
+
 ## 3. Asosiy CLI Asboblar (`tools/`)
 
 | Buyruq | Vazifasi |

@@ -35,7 +35,11 @@ from datetime import datetime
 from pathlib import Path
 
 VAULT = Path(__file__).resolve().parent.parent
-DEFAULT_ROOT = VAULT / "outputs" / "video-runs"
+sys.path.insert(0, str(VAULT / "tools"))
+import tyrion_core as tcore  # noqa: E402
+
+# Installed plugin: the user's project (cwd). Checkout: the repository, as before.
+DEFAULT_ROOT = tcore.work_root(VAULT) / "outputs" / "video-runs"
 FORMATS = {"9x16": (1080, 1920), "1x1": (1080, 1080), "16x9": (1920, 1080), "4x5": (1080, 1350)}
 
 for _stream in (sys.stdout, sys.stderr):

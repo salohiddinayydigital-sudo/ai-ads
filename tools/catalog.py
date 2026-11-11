@@ -37,6 +37,9 @@ except Exception:  # pragma: no cover - muhitga bog'liq
 
 VAULT = Path(__file__).resolve().parent.parent
 MANIFEST = VAULT / "manifests" / "catalog.json"
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import tyrion_core as tcore  # noqa: E402
 SCHEMA = "tyrion-catalog/v1"
 
 # Windows: konsol yoki quvur (pipe) bo'lsa ham UTF-8 chiqarish.
@@ -188,6 +191,17 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(_normalized_bytes(path)).hexdigest()
 
 
+def mirror_bytes(path: Path) -> bytes:
+    """Kanonik buyruqning `.claude/commands/` nusxasida bo'lishi kerak bo'lgan baytlari.
+
+    Kanonik fayl plugin uchun yozilgan (`${CLAUDE_PLUGIN_ROOT}/tools/...`). Nusxa esa repo
+    to'g'ridan-to'g'ri ochilganda ishlaydi: u yerda almashtirish yo'q, cwd — ildiz, shuning
+    uchun yo'llar nisbiy (`tools/...`) bo'ladi. Farq faqat shu — qolgani bayt-aniq.
+    """
+    text = _normalized_bytes(path).decode("utf-8", errors="replace")
+    return tcore.to_project_relative(text).encode("utf-8")
+
+
 def _fallback_frontmatter(text: str) -> dict:
     """PyYAML bo'lmaganda: `key: value` qatorlarini o'qish (ichma-ich tuzilma yo'q)."""
     data = {}
@@ -315,7 +329,11 @@ def mirror_status(items: dict[str, list[dict]]) -> list[dict]:
         for name in sorted(set(canonical) | set(mirror)):
             left, right = canonical.get(name), mirror.get(name)
             if left and right:
-                status = "identical" if left["sha256"] == right["sha256"] else "drifted"
+                source = VAULT / left["path"]
+                # The mirror holds the project-mode form of the canonical file (see mirror_bytes).
+                expected = (hashlib.sha256(mirror_bytes(source)).hexdigest()[:16]
+                            if source.is_file() else left["sha256"])
+                status = "identical" if expected == right["sha256"] else "drifted"
             else:
                 status = "missing"
             result.append(
@@ -347,7 +365,6 @@ def warnings(items: dict[str, list[dict]]) -> list[str]:
 
 def cmd_build(_args: argparse.Namespace) -> int:
     data = scan()
-    import tyrion_core as tcore
     tcore.atomic_write_json(MANIFEST, data)
     print(f"✓ katalog yozildi: {MANIFEST.relative_to(VAULT).as_posix()}")
     print_summary(data)
@@ -484,7 +501,7 @@ def cmd_sync_claims(args: argparse.Namespace) -> int:
 
 
 def cmd_sync_mirrors(args: argparse.Namespace) -> int:
-    """Kanonik qatlamlardan nusxalarni qayta quradi (bayt-aniq).
+    """Kanonik qatlamlardan nusxalarni qayta quradi (`mirror_bytes` — loyiha rejimi shakli).
 
     Nusxa qo'lda tahrirlanmaydi: manba — `LAYERS` dagi kanonik qatlam. Eski nusxa
     **o'chirilmaydi** — `archive/mirror-sync-<sana>/` ga ko'chiriladi (vault qoidasi:
@@ -504,16 +521,16 @@ def cmd_sync_mirrors(args: argparse.Namespace) -> int:
 
         for name, item in sorted(canonical.items()):
             existing = mirror.get(name)
-            if existing and existing["sha256"] == item["sha256"]:
+            payload = mirror_bytes(VAULT / item["path"])
+            if existing and existing["sha256"] == hashlib.sha256(payload).hexdigest()[:16]:
                 continue
-            source = VAULT / item["path"]
             destination = mirror_root / f"{name}.md"
             copied.append(f"{canonical_layer} → {mirror_layer}: {name}")
             if args.dry_run:
                 continue
 
             destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.write_bytes(source.read_bytes())
+            destination.write_bytes(payload)
 
         orphans.extend(
             f"{mirror_layer}/{name} (kanonikda yo'q)" for name in sorted(set(mirror) - set(canonical))

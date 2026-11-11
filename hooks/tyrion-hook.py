@@ -3,6 +3,9 @@
 
 Qo'llab-quvvatlanadigan muhit o'zgaruvchilari (ECC 2.2 mos):
   TYRION_HOOK_PROFILE   : minimal | standard | strict (default: standard)
+  TYRION_MARKET         : bozorni majburlash (global | uz | us | eu | uk | mena | latam | sea | in)
+  TYRION_DEFAULT_MARKET : standart bozor — topshiriqda bozor aniqlanmaganda ishlatiladi
+  CLAUDE_PLUGIN_OPTION_*: plugin sozlamalari (hooks_enabled, hook_profile, default_market) — Claude Code beradi
   TYRION_DISABLED_HOOKS : vergul bilan ajratilgan hook ID ro'yxati (session:brief,pre:guard,post:ingest,stop:dod)
 
 Buyruqlar:
@@ -31,6 +34,7 @@ TOOLS = VAULT / "tools"
 
 sys.path.insert(0, str(TOOLS))
 import catalog as cat  # noqa: E402
+import tyrion_core as tcore  # noqa: E402
 
 for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):
@@ -51,8 +55,17 @@ def is_maintainer_mode() -> bool:
 
 
 def get_profile() -> str:
-    raw = os.environ.get("TYRION_HOOK_PROFILE", "standard").strip().lower()
-    return raw if raw in ("minimal", "standard", "strict") else "standard"
+    """TYRION_HOOK_PROFILE ustun; bo'lmasa plugin sozlamasi (hook_profile); bo'lmasa standard."""
+    for name in ("TYRION_HOOK_PROFILE", "CLAUDE_PLUGIN_OPTION_HOOK_PROFILE"):
+        raw = os.environ.get(name, "").strip().lower()
+        if raw in ("minimal", "standard", "strict"):
+            return raw
+    return "standard"
+
+
+def hooks_switched_off() -> bool:
+    """Plugin sozlamasida `hooks_enabled` o'chirilganmi."""
+    return os.environ.get("CLAUDE_PLUGIN_OPTION_HOOKS_ENABLED", "").strip().lower() in ("false", "0", "no", "off")
 
 
 def is_disabled(hook_id: str) -> bool:
@@ -61,7 +74,7 @@ def is_disabled(hook_id: str) -> bool:
         for x in os.environ.get("TYRION_DISABLED_HOOKS", "").split(",")
         if x.strip()
     }
-    if hook_id.lower() in disabled:
+    if hook_id.lower() in disabled or hooks_switched_off():
         return True
     profile = get_profile()
     if profile == "minimal" and hook_id in ("post:ingest", "pre:guard"):
@@ -78,13 +91,53 @@ def run(cmd: list[str], timeout: int = 120) -> subprocess.CompletedProcess:
 # brief — sessiya boshi (ID: session:brief)
 # --------------------------------------------------------------------------- #
 
+MARKETS = ("global", "uz", "us", "eu", "uk", "mena", "latam", "sea", "in")
+
+# Shown at session start when the plugin runs inside another project. There the repository's
+# CLAUDE.md is not loaded, so these rules would otherwise never reach the model.
+SESSION_RULES = (
+    "Qat'iy qoidalar: "
+    "(1) maqsad, byudjet yoki voronka noaniq bo'lsa — taxmin qilma, avval so'ra; "
+    "(2) har tavsiyada manba belgisi: MEASURED_ACCOUNT_DATA yoki HEURISTIC_PRIOR_MODEL, taxmin va ishonch darajasi bilan; "
+    "(3) reklama hisobidagi har qanday o'zgarish (byudjet >20%, yangi kampaniya, pauza) — "
+    "avval spend-guard tekshiruvi va foydalanuvchi tasdig'i; "
+    "(4) butun bilim bazasini o'qima — skill-search yoki brain-search orqali faqat keraklisini yukla."
+)
+
+
+def configured_market() -> str:
+    """Operator tanlagan standart bozor: TYRION_MARKET yoki plugin sozlamasi (default_market)."""
+    for name in ("TYRION_MARKET", "TYRION_DEFAULT_MARKET", "CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET"):
+        value = os.environ.get(name, "").strip().lower()
+        if value in MARKETS:
+            return value
+    return ""
+
+
+def persist_session_env(market: str) -> None:
+    """Bash orqali chaqiriladigan asboblarga standart bozorni yetkazadi.
+
+    Plugin sozlamalari faqat hook va MCP jarayonlariga beriladi. SessionStart hook
+    `CLAUDE_ENV_FILE` ga yozgan o'zgaruvchilar keyingi Bash buyruqlarida ko'rinadi.
+    """
+    env_file = os.environ.get("CLAUDE_ENV_FILE", "").strip()
+    if not env_file or not market or os.environ.get("TYRION_MARKET") or os.environ.get("TYRION_DEFAULT_MARKET"):
+        return
+    try:
+        with open(env_file, "a", encoding="utf-8") as fh:
+            # Default, not override: a task that names another market still wins.
+            fh.write(f"export TYRION_DEFAULT_MARKET={market}\n")
+    except OSError:
+        pass
+
+
 def cmd_brief(_args: argparse.Namespace) -> int:
     if is_disabled("session:brief"):
         return 0
     data = cat.scan()
     notes = [VAULT / i["path"] for i in data["items"]["wiki"]]
     total_skills = data["counts"].get("skills", 0) + data["counts"].get("skills.marketing", 0)
-    instincts_path = VAULT / "manifests" / "instincts.json"
+    instincts_path = tcore.state_path(VAULT, "instincts")
     instincts_count = 0
     if instincts_path.is_file():
         try:
@@ -92,23 +145,38 @@ def cmd_brief(_args: argparse.Namespace) -> int:
         except Exception:
             pass
 
-    bits: list[str] = [
-        f"Tyrion: wiki {data['counts']['wiki']} · agent {data['counts']['agents']} · "
-        f"skill {total_skills} · instinkt {instincts_count} · profil {get_profile()}"
-    ]
+    market = configured_market()
+    head = (f"Tyrion: wiki {data['counts']['wiki']} · agent {data['counts']['agents']} · "
+            f"skill {total_skills} · instinkt {instincts_count} · profil {get_profile()}")
+    if market:
+        head += f" · bozor {market}"
+    bits: list[str] = [head]
 
     graph = VAULT / "graphify-out" / "graph.json"
-    if graph.is_file():
+    if graph.is_file() and is_maintainer_mode():
         newest = max((p.stat().st_mtime for p in notes if p.is_file()), default=0)
-        if newest > graph.stat().st_mtime:
+        if newest - graph.stat().st_mtime > 300:
             days = (newest - graph.stat().st_mtime) / 86400
             bits.append(f"graf {days:.0f} kun eski → `python3 tools/brain-graph.py build`")
 
     drift = [m for m in data["mirrors"] if m["status"] != "identical"]
-    if drift:
+    if drift and is_maintainer_mode():
         bits.append(f"⚠ {len(drift)} nusxada drift → `catalog.py sync-mirrors`")
 
     print(" | ".join(bits))
+
+    if not is_maintainer_mode():
+        root = VAULT.resolve().as_posix()
+        memory = tcore.state_path(VAULT, "memory").as_posix()
+        print(f"Ildiz: {root} — hujjatlardagi `tools/…`, `wiki/…`, `rules/…`, `playbooks/…` "
+              f"yo'llari shu ildizga nisbatan (masalan `python3 \"{root}/tools/tyrion.py\" status`).")
+        print(f"Xotira: {memory} (operator xotirasi, yangilanishda saqlanadi). "
+              "Mijoz ishlari joriy loyihada: `clients/<mijoz>/`.")
+        if market:
+            print(f"Standart bozor: {market} — topshiriqda boshqa bozor (mamlakat, shahar, valyuta) aytilmagan bo'lsa, "
+                  f"asboblarga `--market {market}` bering.")
+        print(SESSION_RULES)
+    persist_session_env(market)
     return 0
 
 

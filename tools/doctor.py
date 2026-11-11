@@ -379,6 +379,53 @@ def check_plugin_manifest(report: Report, quick: bool = False) -> None:
         report.add(label, OK, "qoidalarga mos" + suffix)
 
 
+RELATIVE_TOOL_RE = re.compile(r"(?:python3?|py -3)\s+(?:tools|hooks)[\\/][A-Za-z0-9_\-]+\.py")
+SHELL_CALL_RE = re.compile(r"(?:python3?|py -3)\s+\"?\$\{CLAUDE_PLUGIN_ROOT\}")
+PLUGIN_ROOT_TOKEN = "${CLAUDE_PLUGIN_ROOT}"
+# Claude Code faqat o'zi yuklagan skill/buyruq/agent matnida `${CLAUDE_PLUGIN_ROOT}` ni almashtiradi.
+SUBSTITUTED_GLOBS = ("commands/*.md", "skills/*/SKILL.md", "agents/*.md")
+# Bularni model Read orqali o'qiydi yoki loyiha rejimida ishlatadi — almashtirish yo'q.
+PLAIN_GLOBS = ("rules/*.md", "wiki/*.md", "playbooks/*.md", "contexts/*.md", "templates/*.md",
+               "markets/**/*.md", "skills/*/references/**/*.md", ".claude/commands/*.md")
+
+
+def lint_tool_paths(vault: Path = VAULT) -> list[str]:
+    """Asbob chaqiruvlari plugin o'rnatilgan har qanday papkadan ishlaydimi.
+
+    Plugin o'rnatilganda cwd — foydalanuvchi loyihasi, shuning uchun `python3 tools/x.py`
+    topilmaydi. Qoidalar:
+      1. skill/buyruq/agent matnida chaqiruv `"${CLAUDE_PLUGIN_ROOT}/tools/x.py"` shaklida bo'ladi;
+      2. Bash'i yo'q agentga buyruq bajarish topshirilmaydi;
+      3. almashtirilmaydigan fayllarda `${CLAUDE_PLUGIN_ROOT}` uchramaydi (Bash'da u bo'sh).
+    """
+    problems: list[str] = []
+    for pattern in SUBSTITUTED_GLOBS:
+        for path in sorted(vault.glob(pattern)):
+            text = path.read_text(encoding="utf-8", errors="replace")
+            rel = path.relative_to(vault).as_posix()
+            hits = RELATIVE_TOOL_RE.findall(text)
+            if hits:
+                problems.append(f"{rel}: {len(hits)} nisbiy chaqiruv ({hits[0]}) — \"${{CLAUDE_PLUGIN_ROOT}}/...\" kerak")
+            if pattern.startswith("agents/"):
+                tools_line = re.search(r"^tools:\s*(.*)$", text, re.M)
+                has_shell = bool(tools_line) and "Bash" in [t.strip() for t in tools_line.group(1).split(",")]
+                if not has_shell and SHELL_CALL_RE.search(text):
+                    problems.append(f"{rel}: Bash'i yo'q agentga buyruq bajarish topshirilgan")
+    for pattern in PLAIN_GLOBS:
+        for path in sorted(vault.glob(pattern)):
+            if PLUGIN_ROOT_TOKEN in path.read_text(encoding="utf-8", errors="replace"):
+                problems.append(f"{path.relative_to(vault).as_posix()}: ${{CLAUDE_PLUGIN_ROOT}} bu faylda almashtirilmaydi")
+    return problems
+
+
+def check_tool_paths(report: Report) -> None:
+    problems = lint_tool_paths()
+    if problems:
+        report.add("Asbob yo'llari", FAIL, "; ".join(problems[:3]) + (f" +{len(problems) - 3}" if len(problems) > 3 else ""))
+    else:
+        report.add("Asbob yo'llari", OK, "barcha chaqiruvlar istalgan papkadan ishlaydi")
+
+
 def mcp_handshake(timeout: int = 20) -> dict:
     """tyrion-core ni `.mcp.json` dagidek ishga tushirib, initialize → ping → tools/list yuboradi.
 
@@ -697,6 +744,7 @@ def main(argv: list[str] | None = None) -> int:
     check_shield(report)
     check_memory(report)
     check_plugin_manifest(report, args.quick)
+    check_tool_paths(report)
     check_mcp_and_evals(report)
     check_graph(report, data)
     check_secrets(report)

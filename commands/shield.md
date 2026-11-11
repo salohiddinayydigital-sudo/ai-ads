@@ -10,7 +10,7 @@ Vazifa: **$ARGUMENTS**
 ## Ishga tushirish
 
 ```powershell
-python3 tools/tyrion-shield.py scan
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/tyrion-shield.py" scan
 ```
 
 ## Tekshiriladigan 5 qatlam

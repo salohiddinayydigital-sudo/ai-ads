@@ -83,8 +83,21 @@ GEO_TO_MARKET = {
 }
 
 
+DEFAULT_MARKET_ENV = "TYRION_DEFAULT_MARKET"
+
+
+def configured_default_market() -> str:
+    """Operator's default market (plugin setting `default_market`), or "" when unset/invalid.
+
+    Unlike TYRION_MARKET, which overrides detection, this only applies when the task itself
+    names no country, city, currency or language that points to a market.
+    """
+    value = os.environ.get(DEFAULT_MARKET_ENV, "").strip().lower()
+    return value if value in SUPPORTED_MARKETS else ""
+
+
 def load_market_pack(market_id: str | None = None) -> dict[str, Any]:
-    m_id = (market_id or os.environ.get("TYRION_MARKET") or "global").strip().lower()
+    m_id = (market_id or os.environ.get("TYRION_MARKET") or configured_default_market() or "global").strip().lower()
     if m_id not in SUPPORTED_MARKETS:
         m_id = "global"
     pack_path = MARKETS_DIR / m_id / "pack.json"
@@ -232,7 +245,14 @@ def detect_market(
         curr = (currency or "UZS").strip().upper()
         return _enrich_detection(pack, curr, detected_lang, "language_uz")
 
-    # 6. Default: global
+    # 6. Operator's configured default (plugin setting), when the task names no market
+    default_market = configured_default_market()
+    if default_market and default_market != "global":
+        pack = load_market_pack(default_market)
+        curr = (currency or pack["default_currency"]).strip().upper()
+        return _enrich_detection(pack, curr, detected_lang or "en", "default_configured")
+
+    # 7. Default: global
     pack = load_market_pack("global")
     curr = (currency or pack["default_currency"]).strip().upper()
     return _enrich_detection(pack, curr, detected_lang or "en", "default_global")

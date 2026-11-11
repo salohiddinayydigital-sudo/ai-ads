@@ -350,6 +350,15 @@ class SessionContextCache:
             except OSError:
                 pass
 
+    def _expand(self, text: str) -> str:
+        """`${CLAUDE_PLUGIN_ROOT}` ni haqiqiy ildiz bilan almashtiradi.
+
+        Claude Code bu belgini faqat o'zi yuklagan skill/buyruq/agent matnida almashtiradi.
+        Router paketi orqali kelgan matnda u qolib ketadi va Bash'da bo'sh o'zgaruvchi bo'ladi.
+        Keshda xom matn saqlanadi: plugin yangilanganda ildiz o'zgaradi, fayl esa o'zgarmasligi mumkin.
+        """
+        return tcore.expand_plugin_root(text, self.vault_root)
+
     def read_verified_with_error(self, rel_path: str) -> tuple[dict[str, Any] | None, dict[str, str] | None]:
         clean_rel = str(rel_path or "").strip().replace("\\", "/").lstrip("/")
         if not clean_rel:
@@ -421,9 +430,9 @@ class SessionContextCache:
                     "from_session_cache": True,
                     "cache_invalidated": False,
                     "full_instructions_loaded": True,
-                    "content": cached["content"],
-                    "body_markdown": cached.get("body_markdown", cached["content"]),
-                    "excerpt": cached["excerpt"],
+                    "content": self._expand(cached["content"]),
+                    "body_markdown": self._expand(cached.get("body_markdown", cached["content"])),
+                    "excerpt": self._expand(cached["excerpt"]),
                 }, None
             else:
                 self.invalidations += 1
@@ -452,9 +461,9 @@ class SessionContextCache:
             "from_session_cache": False,
             "cache_invalidated": was_invalidated,
             "full_instructions_loaded": True,
-            "content": text,
-            "body_markdown": body,
-            "excerpt": excerpt,
+            "content": self._expand(text),
+            "body_markdown": self._expand(body),
+            "excerpt": self._expand(excerpt),
         }, None
 
     def read_verified(self, rel_path: str) -> dict[str, Any] | None:

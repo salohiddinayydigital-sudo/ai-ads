@@ -9,7 +9,7 @@ Foydalanuvchi `/mijoz [nomi]` deb chaqirganda:
 
 1. **Avtomatik Scaffold (`0 token`):**
    ```bash
-   python3 tools/client-workspace.py new --client "<nom>" --niche <nisha> --budget <oylik_usd> --aov <ortacha_chek> --margin-pct <marja_foizi> --geo <tashkent|regions|uzbekistan>
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/client-workspace.py" new --client "<nom>" --niche <nisha> --budget <oylik_usd> --aov <ortacha_chek> --margin-pct <marja_foizi> --geo <tashkent|regions|uzbekistan>
    ```
 2. **Yaratiladigan Artefaktlar (`clients/<slug>/`):**
    - `BRIEF.md` — Break-even ROAS, Target CPA va 70/20/10 byudjet taqsimoti.

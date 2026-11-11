@@ -29,6 +29,8 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
 VAULT = TOOLS.parent
+sys.path.insert(0, str(TOOLS))
+import tyrion_core as tcore  # noqa: E402
 
 for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):
@@ -88,7 +90,22 @@ def show_status() -> int:
     print("  Tezkor CLI Buyruqlar:")
     for cmd, (script, def_args) in ROUTES.items():
         print(f"    python3 tools/tyrion.py {cmd:10} -> tools/{script} {' '.join(def_args)}")
+    print("    python3 tools/tyrion.py paths      -> ildiz, xotira va ish papkasi yo'llari")
     print("=" * 68)
+    return 0
+
+
+def show_paths() -> int:
+    """Where this copy lives and where it keeps state — the answer differs between a git
+    checkout and an installed plugin, so it is printed rather than assumed."""
+    print(json.dumps({
+        "root": VAULT.resolve().as_posix(),
+        "installed_plugin": tcore.is_installed_plugin(VAULT),
+        "state_dir": tcore.state_dir(VAULT).as_posix(),
+        "memory": tcore.state_path(VAULT, "memory").as_posix(),
+        "instincts": tcore.state_path(VAULT, "instincts").as_posix(),
+        "work_root": tcore.work_root(VAULT).as_posix(),
+    }, ensure_ascii=False, indent=2))
     return 0
 
 
@@ -96,9 +113,11 @@ def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
     if not args or args[0] in ("status", "--help", "-h"):
         return show_status()
+    if args[0] == "paths":
+        return show_paths()
     cmd, rest = args[0], args[1:]
     if cmd not in ROUTES:
-        print(f"✗ Noma'lum buyruq: {cmd}. Mavjud: status, {', '.join(ROUTES)}", file=sys.stderr)
+        print(f"✗ Noma'lum buyruq: {cmd}. Mavjud: status, paths, {', '.join(ROUTES)}", file=sys.stderr)
         return 2
     script, default_sub = ROUTES[cmd]
     if not rest:
@@ -107,7 +126,9 @@ def main(argv: list[str] | None = None) -> int:
         final_args = [*default_sub, *rest]
     else:
         final_args = rest
-    proc = subprocess.run([sys.executable, str(TOOLS / script), *final_args], cwd=str(VAULT))
+    # The caller's cwd is kept: file arguments (`--file export.csv`) and new client
+    # workspaces belong to the user's project, not to the directory Tyrion is installed in.
+    proc = subprocess.run([sys.executable, str(TOOLS / script), *final_args])
     return proc.returncode
 
 

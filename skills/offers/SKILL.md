@@ -218,4 +218,4 @@ Use specific numbers, named customers, concrete outcomes, real timelines. Specif
 - `local\wiki\b2b-xizmatlar-strategiyasi.md` — bepul audit lead magnet
 - `memory.md` — policy qoidasi (repo ildizi)
 
-- **Audience, Competitor & Segment-Matched Offer Engine (`0 Token`):** `python3 tools/tyrion.py intel --product "<Offer>" --niche <niche> --price <AOV>`
+- **Audience, Competitor & Segment-Matched Offer Engine (`0 Token`):** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/tyrion.py" intel --product "<Offer>" --niche <niche> --price <AOV>`

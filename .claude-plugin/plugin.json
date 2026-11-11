@@ -39,27 +39,46 @@
       "args": [
         "${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs",
         "--mcp"
-      ]
+      ],
+      "env": {
+        "TYRION_DEFAULT_MARKET": "${user_config.default_market}"
+      }
     }
   },
   "userConfig": {
     "hooks_enabled": {
       "type": "boolean",
-      "title": "Enable Tyrion hooks",
+      "title": "Tyrion hooklari",
       "default": true,
-      "description": "Enable Tyrion deterministic lifecycle hooks (SessionStart, PreToolUse, PostToolUse, Stop)"
+      "description": "Sessiya boshidagi qisqa holat va himoya hooklarini yoqadi. O'chirilsa, Tyrion hech qanday hook ishga tushirmaydi."
     },
     "hook_profile": {
       "type": "string",
-      "title": "Hook enforcement profile",
+      "title": "Hook qat'iyligi",
+      "options": [
+        "minimal",
+        "standard",
+        "strict"
+      ],
       "default": "standard",
-      "description": "Hook enforcement profile (minimal=SessionStart/Stop only, standard=warn on ingest/guard, strict=block on gate violations)"
+      "description": "minimal — faqat sessiya boshi; standard — ogohlantiradi; strict — qoida buzilsa to'xtatadi."
     },
     "default_market": {
       "type": "string",
-      "title": "Default market pack",
-      "default": "global",
-      "description": "Default market pack (global is market-agnostic; uz/us/eu/uk/mena/latam/sea/in load regional funnels, BNPL, currency, and regulations)"
+      "title": "Standart bozor",
+      "options": [
+        "global",
+        "uz",
+        "us",
+        "eu",
+        "uk",
+        "mena",
+        "latam",
+        "sea",
+        "in"
+      ],
+      "default": "uz",
+      "description": "Topshiriqda mamlakat, shahar yoki valyuta aytilmaganda ishlatiladigan bozor (valyuta, to'lov usullari, qoidalar)."
     }
   }
 }

@@ -24,8 +24,13 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
 VAULT = TOOLS.parent
-MANIFEST = VAULT / "manifests" / "instincts.json"
-MEMORY = VAULT / "MEMORY.md"
+sys.path.insert(0, str(TOOLS))
+import tyrion_core as tcore  # noqa: E402
+
+# Resolved once per process: the repository for a checkout, ~/.tyrion (or TYRION_HOME) for an
+# installed plugin, whose own directory is replaced on every update.
+MANIFEST = tcore.state_path(VAULT, "instincts")
+MEMORY = tcore.state_path(VAULT, "memory")
 SCHEMA = "tyrion-instincts/v1"
 VALID_DOMAINS = ("meta", "google", "telegram", "kreativ", "tracking", "tizim")
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -46,7 +51,6 @@ def load_data() -> dict:
 
 def save_data(data: dict) -> None:
     data["updated"] = date.today().isoformat()
-    import tyrion_core as tcore
     tcore.atomic_write_json(MANIFEST, data)
 
 
@@ -143,7 +147,7 @@ def cmd_promote(args: argparse.Namespace) -> int:
 def cmd_check(args: argparse.Namespace) -> int:
     errors: list[str] = []
     if not MANIFEST.is_file():
-        errors.append("manifests/instincts.json topilmadi")
+        errors.append(f"instinktlar reestri topilmadi: {MANIFEST}")
         data = {"instincts": []}
     else:
         try:

@@ -9,7 +9,9 @@ Vazifa: **$ARGUMENTS**
 
 ## Nima qiladi
 
-Kampaniya auditi, A/B sinov, kreativ sprint yoki texnik nosozlikdan olingan tasdiqlangan saboqni **atomik instinkt** sifatida `manifests/instincts.json` reestriga yozadi va ishonch balli ($\ge 4/5$) yetganda `MEMORY.md` §6 yoki `wiki/` ga ko'taradi ([[uzluksiz-organish-instinktlar]]).
+Kampaniya auditi, A/B sinov, kreativ sprint yoki texnik nosozlikdan olingan tasdiqlangan saboqni **atomik instinkt** sifatida instinktlar reestriga yozadi va ishonch balli ($\ge 4/5$) yetganda operator xotirasiga (`MEMORY.md` §6) yoki `wiki/` ga ko'taradi ([[uzluksiz-organish-instinktlar]]).
+
+Reestr va xotira qayerda turadi: repo ochilganda — `manifests/instincts.json` va `MEMORY.md`; plugin o'rnatilganda — `~/.tyrion/` (yangilanishda saqlanadi). Aniq yo'l: `python3 tools/tyrion.py paths`.
 
 ## Buyruqlar
 

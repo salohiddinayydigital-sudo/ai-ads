@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -29,6 +30,34 @@ SERVER_VERSION = "7.0.0"
 # Newest first. The server only uses the tools capability over stdio, which is
 # identical across these revisions, so it can honour whichever the client asks for.
 SUPPORTED_PROTOCOL_VERSIONS = ("2025-06-18", "2025-03-26", "2024-11-05")
+
+
+def project_root() -> Path:
+    """The user's project: Claude Code sets CLAUDE_PROJECT_DIR for MCP servers; otherwise cwd."""
+    env_root = os.environ.get("CLAUDE_PROJECT_DIR", "").strip()
+    return Path(env_root) if env_root else Path.cwd()
+
+
+def resolve_input_file(raw: str) -> Path:
+    """Resolve a file argument against the user's project first, then the plugin itself.
+
+    As an installed plugin the server's own directory holds no user data: exports live in
+    the project. Anything outside both roots is refused (path traversal guard).
+    """
+    roots = [project_root(), VAULT]
+    given = Path(raw).expanduser()
+    candidates = [given] if given.is_absolute() else [root / given for root in roots]
+    allowed: list[Path] = []
+    for candidate in candidates:
+        for root in roots:
+            try:
+                allowed.append(tcore.validate_safe_path(candidate, allowed_root=root))
+                break
+            except PermissionError:
+                continue
+    if not allowed:
+        raise PermissionError(f"'{raw}' loyiha papkasi va Tyrion ildizidan tashqarida — fayl o'qilmadi")
+    return next((path for path in allowed if path.is_file()), allowed[0])
 
 
 def negotiate_protocol_version(requested: Any) -> str:
@@ -302,10 +331,7 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
     if name == "tyrion_meta_live_insights":
         mis = importlib.import_module("meta-insights-sync")
         raw_json_arg = str(args.get("from_raw_json", "")).strip()
-        raw_path: Path | None = None
-        if raw_json_arg:
-            candidate = (VAULT / raw_json_arg) if not Path(raw_json_arg).is_absolute() else Path(raw_json_arg)
-            raw_path = tcore.validate_safe_path(candidate, allowed_root=VAULT)
+        raw_path: Path | None = resolve_input_file(raw_json_arg) if raw_json_arg else None
         return mis.sync_and_analyze(
             account_id=str(args.get("account_id", "")),
             level=str(args.get("level", "adset")),

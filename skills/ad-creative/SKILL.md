@@ -74,13 +74,13 @@ You are an elite performance creative strategist and short-form video ad directo
 2. **Run Tyrion's deterministic creative & video engine (`tools/creative-matrix.py`):**
    ```bash
    # 1. Generate 9:16 Video Ad Script + Scene-by-Scene Storyboard (UGC, Founder, iMessage Reveal, Greenscreen, Motion)
-   python3 tools/creative-matrix.py video-script --niche <niche> --product "<offer>" --format <ugc_reaction_demo|founder_authority|imessage_reveal|chatgpt_reveal|greenscreen_proof|no_yapping_split_screen|faceless_motion_explainer> --language <uz_latin|ru|en>
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/creative-matrix.py" video-script --niche <niche> --product "<offer>" --format <ugc_reaction_demo|founder_authority|imessage_reveal|chatgpt_reveal|greenscreen_proof|no_yapping_split_screen|faceless_motion_explainer> --language <uz_latin|ru|en>
 
    # 2. Generate Andromeda Entity-ID & Persona-Desire-Awareness (PDA) Diversity Plan
-   python3 tools/creative-matrix.py pda-matrix --niche <niche> --product "<offer>" --price <price> --market <uz|global|eu|us|mena>
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/creative-matrix.py" pda-matrix --niche <niche> --product "<offer>" --price <price> --market <uz|global|eu|us|mena>
 
    # 3. Generate Platform-Validated Ad Copy Pack with AI-Tell Linting
-   python3 tools/creative-matrix.py ad-copy --platform <meta|google_rsa|tiktok|linkedin|telegram> --product "<offer>" --problem "<pain_point>" --proof "<social_proof>" --language <uz_latin|ru|en>
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/creative-matrix.py" ad-copy --platform <meta|google_rsa|tiktok|linkedin|telegram> --product "<offer>" --problem "<pain_point>" --proof "<social_proof>" --language <uz_latin|ru|en>
    ```
 
 ---

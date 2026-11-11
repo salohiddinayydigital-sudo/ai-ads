@@ -28,6 +28,90 @@ SAFE_SLUG_RE = re.compile(r"[^a-z0-9]+")
 CONTROL_AND_TAG_RE = re.compile(r"[\x00-\x1f\x7f<>\"'`\\]")
 
 
+# --------------------------------------------------------------------------- #
+# Install layout: where the plugin lives, where operator state lives
+# --------------------------------------------------------------------------- #
+
+PLUGIN_ROOT_TOKEN = "${CLAUDE_PLUGIN_ROOT}"
+STATE_DIR_ENV = "TYRION_HOME"
+# kind -> (path inside a git checkout, path inside the personal state directory)
+STATE_FILES: dict[str, tuple[str, str]] = {
+    "memory": ("MEMORY.md", "MEMORY.md"),
+    "instincts": ("manifests/instincts.json", "instincts.json"),
+}
+
+
+def expand_plugin_root(text: str, root: Path) -> str:
+    """Replace `${CLAUDE_PLUGIN_ROOT}` with the real root.
+
+    Claude Code substitutes the token in skill, command and agent bodies it loads itself.
+    Text that reaches the model any other way (the router's context package, another
+    harness) still carries the token, and the Bash tool has no such variable.
+    """
+    if PLUGIN_ROOT_TOKEN not in text:
+        return text
+    return text.replace(PLUGIN_ROOT_TOKEN, Path(root).resolve().as_posix())
+
+
+_QUOTED_ROOT_RE = re.compile(r'"\$\{CLAUDE_PLUGIN_ROOT\}/([^"\n]*)"')
+
+
+def to_project_relative(text: str) -> str:
+    """`python3 "${CLAUDE_PLUGIN_ROOT}/tools/x.py"` -> `python3 tools/x.py`.
+
+    Used for the `.claude/commands/` mirror: when the repository itself is the open
+    project, cwd is the root and no substitution happens, so paths must be relative.
+    """
+    if PLUGIN_ROOT_TOKEN not in text:
+        return text
+    text = _QUOTED_ROOT_RE.sub(lambda m: m.group(1) if " " not in m.group(1) else f'"{m.group(1)}"', text)
+    return text.replace(PLUGIN_ROOT_TOKEN + "/", "").replace(PLUGIN_ROOT_TOKEN, ".")
+
+
+def is_installed_plugin(vault: Path) -> bool:
+    """True when this copy sits in Claude Code's plugin cache, which is replaced on every update."""
+    parts = Path(vault).resolve().parts
+    return any(a == "plugins" and b == "cache" for a, b in zip(parts, parts[1:]))
+
+
+def state_dir(vault: Path) -> Path:
+    """Directory that holds operator state (memory, instincts).
+
+    A git checkout keeps state in the repository, as before. An installed plugin must not:
+    its directory is swapped for a new one on update, so state goes to `~/.tyrion`
+    (override with TYRION_HOME). The answer never depends on variables that only some
+    processes receive, so hooks, the MCP server and Bash-run tools all agree.
+    """
+    override = os.environ.get(STATE_DIR_ENV, "").strip()
+    if override:
+        return Path(override).expanduser()
+    if is_installed_plugin(vault):
+        return Path.home() / ".tyrion"
+    return Path(vault)
+
+
+def state_path(vault: Path, kind: str) -> Path:
+    """Path of one state file, seeded from the shipped template on first use."""
+    in_repo, in_state = STATE_FILES[kind]
+    base = state_dir(vault)
+    template = Path(vault) / in_repo
+    if base.resolve() == Path(vault).resolve():
+        return template
+    target = base / in_state
+    if not target.exists() and template.is_file():
+        try:
+            atomic_write_bytes(target, template.read_bytes())
+        except OSError:
+            return template  # read-only home: fall back to the shipped copy rather than fail
+    return target
+
+
+def work_root(vault: Path) -> Path:
+    """Where client workspaces and outputs are created: the user's project for an installed
+    plugin (cwd), the repository itself for a checkout."""
+    return Path.cwd() if is_installed_plugin(vault) else Path(vault)
+
+
 def redact_secrets(text: str) -> str:
     """Har qanday xato xabari yoki log ichidan API tokenlarni to'liq yashiradi."""
     if not text:
@@ -172,7 +256,7 @@ def http_get_json_with_backoff(
     400/401/403/404 va noto'g'ri JSON xatolarida qayta urinmaydi. Maxfiy tokenlarni hech qachon oshkor qilmaydi.
     """
     clean_url = sanitize_url(url)
-    req_headers = {"Accept": "application/json", "User-Agent": "Tyrion-OS/5.0"}
+    req_headers = {"Accept": "application/json", "User-Agent": "Tyrion-OS"}
     if headers:
         req_headers.update(headers)
 

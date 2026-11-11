@@ -75,11 +75,11 @@ privacy. Do not bypass authentication or scrape private account surfaces.
 
 ## Deterministic CLI & Tooling Integration (`0 Token`)
 Before generating recommendations or mutating plans for `ads-competitor`, execute the relevant Tyrion v5.0 deterministic checks:
-- **Unit Economics & Break-Even:** `python3 tools/calculator.py breakeven --price <AOV> --cogs <COGS>`
-- **Meta Audience & Funnel Diagnostics:** `python3 tools/meta-audience.py architect --niche <niche> --budget <daily_usd>`
-- **CSV/JSON Export & Breakdown Effect:** `python3 tools/ad-export-analyzer.py analyze --file <export.csv>`
-- **CAPI v22 SHA-256 & Telegram Bot UTM:** `python3 tools/capi-utm-builder.py utm --url <url> --platform meta`
-- **Spend-Guard Gate:** `python3 tools/spend-guard.py budget --current <old> --proposed <new> --max-cap <cap>`
+- **Unit Economics & Break-Even:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/calculator.py" breakeven --price <AOV> --cogs <COGS>`
+- **Meta Audience & Funnel Diagnostics:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" architect --niche <niche> --budget <daily_usd>`
+- **CSV/JSON Export & Breakdown Effect:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/ad-export-analyzer.py" analyze --file <export.csv>`
+- **CAPI v22 SHA-256 & Telegram Bot UTM:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/capi-utm-builder.py" utm --url <url> --platform meta`
+- **Spend-Guard Gate:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/spend-guard.py" budget --current <old> --proposed <new> --max-cap <cap>`
 
 ## Anti-Patterns (`WRONG` vs `CORRECT`)
 | Scenario | ❌ FAIL (`WRONG`) | ✅ PASS (`CORRECT`) |
@@ -89,4 +89,4 @@ Before generating recommendations or mutating plans for `ads-competitor`, execut
 | **Audience Isolation** | Running cold prospecting (`TOF`) without excluding `Purchase 180d`, `Leads 30d`, and `Active DM 14d`. | Enforcing the 4-layer Exclusion Matrix via `tools/meta-audience.py architect` (`[[meta-auditoriya-arxitekturasi]]`). |
 | **Placement Pruning** | Pausing high-volume placements (e.g., Instagram Reels) solely due to higher average CPA (*Breakdown Effect*). | Running `tools/ad-export-analyzer.py breakdown-effect` to evaluate marginal CPA impact (`[[meta-breakdown-effekti]]`). |
 
-- **Audience, Competitor & Segment-Matched Offer Engine (`0 Token`):** `python3 tools/tyrion.py intel --product "<Offer>" --niche <niche> --price <AOV>`
+- **Audience, Competitor & Segment-Matched Offer Engine (`0 Token`):** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/tyrion.py" intel --product "<Offer>" --niche <niche> --price <AOV>`

@@ -11,7 +11,7 @@ Foydalanuvchi savoli: **$ARGUMENTS**
 
 1. Grafdan so'ra (arzon yo'l — [[20-token-gigiyena]]):
    ```powershell
-   python3 tools/brain-search.py query "$ARGUMENTS" --budget 1200
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/brain-search.py" query "$ARGUMENTS" --budget 1200
    ```
 2. Graf javob bermasa: `INDEX.md` dan mos qatorni topib, **faqat o'sha qayd(lar)ni** o'qi.
 3. Javobni ber: o'zbekcha, zich, har fakt yonida manba ([[00-manba]]).

@@ -13,14 +13,14 @@ Ishni boshlashdan oldin deterministik Meta Audience va Detailed Targeting Accura
 
 ```bash
 # 1. 4-qatlamli auditoriya rejasi va Exclusion matritsasi (unit-ekonomika bilan)
-python3 tools/meta-audience.py architect --niche <niche> --daily-budget <byudjet> --aov <chek> --margin-pct <marja> --geo <tashkent|regions|uzbekistan> --has-pixel --has-crm
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" architect --niche <niche> --daily-budget <byudjet> --aov <chek> --margin-pct <marja> --geo <tashkent|regions|uzbekistan> --has-pixel --has-crm
 
 # 2. Detailed Targeting (Interest/Behavior) variantlarini rasmiy Meta API orqali qidirish va tekshirish
-python3 tools/meta-targeting-engine.py search --product "<mahsulot>" --problem "<muammo>" --customer-profile "<mijoz>" --intent "<xarid_niyati>" --complementary "<yondosh_mahsulotlar>" --niche <niche> --account-id <act_id> --max-queries 12
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-targeting-engine.py" search --product "<mahsulot>" --problem "<muammo>" --customer-profile "<mijoz>" --intent "<xarid_niyati>" --complementary "<yondosh_mahsulotlar>" --niche <niche> --account-id <act_id> --max-queries 12
 
 # 3. Ustma-ust tushish (Static Pool Overlap < 20%) va Charchash oynasi (Saturation Sensitivity Window)
-python3 tools/meta-audience.py overlap --size-a <A> --size-b <B> --shared <S>
-python3 tools/meta-audience.py saturation --audience-size <hajm> --daily-budget <byudjet> --cpm 3.2
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" overlap --size-a <A> --size-b <B> --shared <S>
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" saturation --audience-size <hajm> --daily-budget <byudjet> --cpm 3.2
 ```
 
 ## 2. Qat'iy Qoidalar ([[meta-auditoriya-arxitekturasi]] · [[meta-ads-interest-api]])

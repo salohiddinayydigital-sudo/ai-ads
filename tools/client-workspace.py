@@ -19,7 +19,8 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
 VAULT = TOOLS.parent
-DEFAULT_CLIENTS_ROOT = VAULT / "clients"
+# Installed plugin: the user's project (cwd). Checkout: the repository, as before.
+DEFAULT_CLIENTS_ROOT = tcore.work_root(VAULT) / "clients"
 sys.path.insert(0, str(TOOLS))
 
 for _stream in (sys.stdout, sys.stderr):

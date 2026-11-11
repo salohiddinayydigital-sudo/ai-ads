@@ -14,7 +14,7 @@ Task: **$ARGUMENTS**
 1. **Step 1 — Discover, Verify & Rank Detailed Targeting Interests (`tools/meta-targeting-engine.py`):**
    Always execute the live Detailed Targeting engine first using the business context (product/service, problem solved, customer profile, purchase intent, complementary categories, market country, and campaign objective):
    ```bash
-   python3 tools/meta-targeting-engine.py search \
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-targeting-engine.py" search \
      --product "<product_or_service>" \
      --problem "<main_problem_solved>" \
      --customer-profile "<target_customer_and_needs>" \
@@ -31,7 +31,7 @@ Task: **$ARGUMENTS**
 
 2. **Step 2 — Build the 4-Layer Audience Architecture & Exclusion Matrix (`tools/meta-audience.py`):**
    ```bash
-   python3 tools/meta-audience.py architect \
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/meta-audience.py" architect \
      --niche <niche> \
      --daily-budget <daily_budget> \
      --geo <country_or_city> \

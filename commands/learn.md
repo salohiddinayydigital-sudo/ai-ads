@@ -9,19 +9,21 @@ Vazifa: **$ARGUMENTS**
 
 ## Nima qiladi
 
-Kampaniya auditi, A/B sinov, kreativ sprint yoki texnik nosozlikdan olingan tasdiqlangan saboqni **atomik instinkt** sifatida `manifests/instincts.json` reestriga yozadi va ishonch balli ($\ge 4/5$) yetganda `MEMORY.md` §6 yoki `wiki/` ga ko'taradi ([[uzluksiz-organish-instinktlar]]).
+Kampaniya auditi, A/B sinov, kreativ sprint yoki texnik nosozlikdan olingan tasdiqlangan saboqni **atomik instinkt** sifatida instinktlar reestriga yozadi va ishonch balli ($\ge 4/5$) yetganda operator xotirasiga (`MEMORY.md` §6) yoki `wiki/` ga ko'taradi ([[uzluksiz-organish-instinktlar]]).
+
+Reestr va xotira qayerda turadi: repo ochilganda — `manifests/instincts.json` va `MEMORY.md`; plugin o'rnatilganda — `~/.tyrion/` (yangilanishda saqlanadi). Aniq yo'l: `python3 "${CLAUDE_PLUGIN_ROOT}/tools/tyrion.py" paths`.
 
 ## Buyruqlar
 
 ```powershell
 # Mavjud instinktlarni ko'rish
-python3 tools/instincts.py list
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/instincts.py" list
 
 # Yangi instinkt qo'shish (confidence 1..5)
-python3 tools/instincts.py add --id <slug> --domain <meta|google|telegram|kreativ|tracking|tizim> --trigger "<qachon>" --action "<nima qilinadi>" --evidence "<manba>" --confidence 4
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/instincts.py" add --id <slug> --domain <meta|google|telegram|kreativ|tracking|tizim> --trigger "<qachon>" --action "<nima qilinadi>" --evidence "<manba>" --confidence 4
 
 # Yuqori ishonchli (>=4) instinktni memory.md §6 ga ko'tarish
-python3 tools/instincts.py promote <id>
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/instincts.py" promote <id>
 ```
 
 ## Qoidalar

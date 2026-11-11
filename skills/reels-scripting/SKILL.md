@@ -51,7 +51,7 @@ Generate ready-to-shoot, high-retention `9:16` vertical video scripts for **paid
 Always run the built-in zero-token video script generator first to scaffold the time-coded storyboard, 3-second hook variants, `720x1200` safe-zone overlays, and BNPL/offer anchors:
 
 ```bash
-python3 tools/creative-matrix.py video-script \
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/creative-matrix.py" video-script \
   --niche <ecom|edu|real-estate|medical|b2b|beauty|auto|local> \
   --product "<product_or_offer>" \
   --problem "<main_customer_pain>" \

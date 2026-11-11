@@ -8,7 +8,7 @@ description: "Meta/Telegram/Google Ads dan Telegram Bot, ManyChat va AmoCRM gach
 Foydalanuvchi `/voronka [nisha yoki mahsulot]` deb chaqirganda quyidagi ketma-ketlikni bajaring:
 
 1. **Kontekst va Playbook yuklash:** `contexts/launch-mode.md`, `contexts/uzbekistan-market.md` va `playbooks/telegram-bot-amocrm-voronka.md` (hamda nishaga mos `playbooks/nisha-*.md`) fayllarini o'qing.
-2. **Unit-Iqtisodiyot va Break-Even:** `python3 tools/calculator.py breakeven` va `telegram-funnel` orqali har bir voronka bosqichining (`Click -> Bot /start -> Share Contact -> Qualified Lead -> Sale`) minimal konversiya normativlarini hisoblang.
+2. **Unit-Iqtisodiyot va Break-Even:** `python3 "${CLAUDE_PLUGIN_ROOT}/tools/calculator.py" breakeven` va `telegram-funnel` orqali har bir voronka bosqichining (`Click -> Bot /start -> Share Contact -> Qualified Lead -> Sale`) minimal konversiya normativlarini hisoblang.
 3. **4 Bosqichli Voronka Chizmasi:**
    - **Trafik (TOF/BOF):** Meta Reels Ads / Telegram Ads (`<=160` belgi) / Google Search Coliseum.
    - **Ushlab olish (Capture):** Instagram izohda kalit so'z (`ManyChat`) yoki to'g'ridan-to'g'ri `t.me/bot?start=utm_payload` + 2 ta saralovchi savol (Solventnost filtri).

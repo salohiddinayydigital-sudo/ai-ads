@@ -12,6 +12,6 @@ CSV/JSON ad account export analyzer — wasted spend detection, marginal CPA bre
 1. Detect user language and active market pack (`markets/<market>/pack.json`, default `global`).
 2. Run the deterministic CLI tool:
    ```bash
-   python3 tools/ad-export-analyzer.py --help
+   python3 "${CLAUDE_PLUGIN_ROOT}/tools/ad-export-analyzer.py" --help
    ```
 3. Synthesize findings in the user's language with currency-accurate metrics and source citations.
