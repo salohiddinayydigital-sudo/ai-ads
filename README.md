@@ -37,6 +37,7 @@ Settings (`/plugin configure tyrion`): **Standart bozor** (default market, `uz` 
 - **36 specialist agents** (`agents/*.md`) — Meta, Google, TikTok, YouTube, LinkedIn, Telegram, CAPI tracking, creative strategy, unit economics, and regulatory compliance.
 - **63 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
 - **18 slash commands** (`commands/*.md`) — one command per function: `/start`, `/audit`, `/auditoriya` (audience), `/kreativ` (creative), `/voronka` (funnel), `/eksport` (export analysis), `/hisobot` (report), `/mijoz` (client workspace), `/raqobatchi` (competitors), `/savol` (ask), `/budget`, `/scale`, `/tracking`, `/utm`, `/sop`, `/learn`, `/shield`, `/doctor`. Installed as a plugin they are namespaced, e.g. `/tyrion:audit`.
+- **2 workflows** (`workflows/*.js`, plugin mode) — `/tyrion:toliq-audit` (multi-platform audit: evidence inventory, one auditor per platform, every finding checked against its evidence file, delivery gate) and `/tyrion:haftalik-tahlil` (weekly review).
 - **29 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
 - **Bilim: atomik qaydlar (100)** (`wiki/*.md`) — interlinked paid-media knowledge base with zero orphan notes.
 

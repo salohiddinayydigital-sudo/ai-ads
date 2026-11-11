@@ -24,6 +24,7 @@ All notable changes to **Tyrion (`ai-ads`)** are documented in this file followi
 - **Session brief** carries the plugin root, the memory path and the strict rules when the plugin runs outside the repository, where `CLAUDE.md` is not loaded.
 - **`tyrion.py paths`** prints where this copy lives and where it keeps state.
 - **Meta access token as a secure plugin setting** (`/plugin configure tyrion`), passed only to Tyrion's MCP server. Tools told operators to put the token in `.env` but never read that file; one loader now resolves settings as environment → plugin setting → `.env` (project, `~/.tyrion`, checkout), reads only Tyrion's own keys from `.env`, and treats template or unsubstituted values as missing instead of sending them to the API.
+- **Workflows** (`workflows/`): `/tyrion:toliq-audit` and `/tyrion:haftalik-tahlil` encode the audit and weekly-review fan-out that `orch-audit` and `orch-weekly-review` described in prose. Findings are adversarially checked against their evidence files; a dead auditor or verifier is reported as incomplete or unverified rather than as a clean result. The orchestration is unit-tested at zero cost with stubbed agents (`tests/workflow_harness.cjs`).
 - **`claude plugin eval` suite** (`evals/`): eight cases that grade the model's answer against the plugin's rules, with a no-plugin baseline.
 - **CI:** runs on `claude/**` branches and validates the plugin with the official CLI.
 

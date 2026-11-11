@@ -3738,3 +3738,189 @@ class TyrionV8SettingsTests(unittest.TestCase):
             }), encoding="utf-8")
             errors, _ = doctor.lint_plugin_manifest(root)
         self.assertTrue(any("missing_option" in e for e in errors), errors)
+
+
+@unittest.skipUnless(__import__("shutil").which("node"), "node is required to run workflow scripts")
+class TyrionV8WorkflowTests(unittest.TestCase):
+    """v8.0 4-bosqich — workflow skriptlari: zanjir mantiqi 0 tokenda, soxta agentlar bilan tekshiriladi."""
+
+    HARNESS = VAULT / "tests" / "workflow_harness.cjs"
+    WORKFLOWS = sorted((VAULT / "workflows").glob("*.js"))
+
+    def _run(self, name: str, scenario: dict) -> dict:
+        with tempfile.TemporaryDirectory() as tmp:
+            scenario_file = Path(tmp) / "scenario.json"
+            scenario_file.write_text(json.dumps(scenario, ensure_ascii=False), encoding="utf-8")
+            proc = subprocess.run(
+                ["node", str(self.HARNESS), str(VAULT / "workflows" / f"{name}.js"), str(scenario_file)],
+                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30,
+            )
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        out = json.loads(proc.stdout)
+        self.assertIsNone(out.get("error"), out.get("error"))
+        return out
+
+    EVIDENCE = {
+        "client": "demo-brand", "market": "uz", "currency": "USD", "date_window": "last_7d",
+        "platforms": [
+            {"platform": "meta", "evidence_files": ["a/meta.json"], "tool_output": "CPA 12.4"},
+            {"platform": "google", "evidence_files": ["a/google.json"]},
+            {"platform": "tiktok", "evidence_files": []},
+        ],
+        "tracking_evidence": ["a/tracking.json"], "missing_inputs": ["tiktok export"],
+    }
+    M01 = {"control_id": "M01", "result": "fail", "severity": "HIGH", "evidence": "meta.json CPA 12.4",
+           "recommendation": "r", "rollback": "b"}
+    M02 = {"control_id": "M02", "result": "fail", "severity": "LOW", "evidence": "invented", "recommendation": "r",
+           "rollback": "no account change"}
+    T01 = {"control_id": "T01", "result": "fail", "severity": "CRITICAL", "evidence": "tracking.json dedup 62%",
+           "recommendation": "r", "rollback": "b"}
+    T02 = {"control_id": "T02", "result": "fail", "severity": "MEDIUM", "evidence": "target CPA 15 (tool default)",
+           "recommendation": "r", "rollback": "b"}
+
+    def test_v8_60_every_workflow_is_loadable_and_names_real_agents(self) -> None:
+        self.assertGreaterEqual(len(self.WORKFLOWS), 2)
+        agents = {p.stem for p in (VAULT / "agents").glob("*.md")}
+        command_names = {p.stem for p in (VAULT / "commands").glob("*.md")}
+        for script in self.WORKFLOWS:
+            source = script.read_text(encoding="utf-8")
+            out = self._run(script.stem, {"args": None, "default": None})
+            meta = out["meta"]
+            self.assertEqual(meta["name"], script.stem)
+            self.assertTrue(meta["description"])
+            # /tyrion:<name> must not collide with a command of the same name.
+            self.assertNotIn(meta["name"], command_names)
+            declared = [p["title"] for p in meta["phases"]]
+            used = set(re.findall(r"""phase\((['"])(.+?)\1\)""", source)) | set(re.findall(r"""phase: (['"])(.+?)\1""", source))
+            self.assertEqual({title for _q, title in used}, set(declared), f"{script.name}: phase titles differ from meta.phases")
+            for agent_type in re.findall(r"'tyrion:([a-z0-9-]+)'", source):
+                self.assertIn(agent_type, agents, f"{script.name}: agent tyrion:{agent_type} does not exist")
+            for banned in ("Date.now", "Math.random", "new Date()", "import(", "require("):
+                self.assertNotIn(banned, source, f"{script.name}: {banned} is not available in a workflow")
+
+    def test_v8_61_audit_fans_out_per_platform_and_drops_unsupported_findings(self) -> None:
+        out = self._run("toliq-audit", {
+            "args": {"client": "demo-brand", "platforms": ["meta", "google"]},
+            "answers": {
+                "dalil inventari": self.EVIDENCE,
+                "audit meta": {"status": "ok", "platform": "meta", "findings": [self.M01, self.M02]},
+                "tekshiruv meta": {"supported": [self.M01], "rejected": [{"control_id": "M02", "reason": "figure not in file"}]},
+                "audit google": {"status": "ok", "platform": "google", "findings": []},
+                "tracking": {"status": "ok", "findings": [self.T01, self.T02]},
+                "tekshiruv tracking": {"supported": [self.T01], "rejected": [{"control_id": "T02", "reason": "tool default"}]},
+                "budget": {"status": "ok", "findings": []},
+                "hisobot": "# Audit",
+                "topshirish darvozasi": {"verdict": "pass", "issues": []},
+            },
+        })
+        calls = {c["label"]: c for c in out["calls"]}
+        self.assertEqual(calls["audit meta"]["agentType"], "tyrion:audit-meta")
+        self.assertEqual(calls["audit google"]["agentType"], "tyrion:audit-google")
+        self.assertNotIn("audit tiktok", calls, "a platform without evidence must not be audited")
+        self.assertNotIn("tekshiruv google", calls, "nothing to verify when an audit returns no findings")
+        self.assertEqual(calls["tracking"]["agentType"], "tyrion:audit-tracking")
+        self.assertEqual(calls["topshirish darvozasi"]["agentType"], "tyrion:release-verifier")
+        self.assertNotIn("creative", calls, "creative and policy checks run only with deep: true")
+        # Cross-check findings go through the same adversarial pass as platform findings.
+        self.assertEqual(calls["tekshiruv tracking"]["phase"], "Kesishgan tekshiruvlar")
+        self.assertNotIn("tekshiruv budget", calls, "nothing to verify when a check returns no findings")
+        # A cross-check is told which claims were already rejected, so it cannot build on them.
+        self.assertIn('"control_id":"M02"', calls["tracking"]["prompt"])
+        # Rejected findings reach the report only as rejected ones.
+        verified_part = calls["hisobot"]["prompt"].split("Findings rejected")[0]
+        for kept in ("M01", "T01"):
+            self.assertIn(f'"control_id":"{kept}"', verified_part)
+        for dropped in ("M02", "T02"):
+            self.assertNotIn(f'"control_id":"{dropped}"', verified_part)
+        # The delivery gate checks the report against every verified finding, cross-checks included.
+        self.assertIn('["M01","T01"]', calls["topshirish darvozasi"]["prompt"])
+        result = out["result"]
+        self.assertEqual(result["status"], "ready")
+        self.assertEqual(result["counts"], {"verified": 2, "rejected": 2, "unverified": 0, "cross_checks": 2})
+        self.assertEqual(result["platforms"], ["meta", "google"])
+        self.assertEqual({r["control_id"] for r in result["rejected"]}, {"M02", "T02"})
+
+    def test_v8_62_audit_stops_without_evidence_instead_of_guessing(self) -> None:
+        out = self._run("toliq-audit", {
+            "args": "Meta akkauntni audit qil",
+            "answers": {"dalil inventari": {"client": "x", "platforms": [], "missing_inputs": ["meta export"]}},
+        })
+        self.assertEqual([c["label"] for c in out["calls"]], ["dalil inventari"])
+        self.assertEqual(out["result"]["status"], "needs_input")
+        self.assertEqual(out["result"]["missing_inputs"], ["meta export"])
+
+    def test_v8_63_audit_reports_a_dead_auditor_as_incomplete_and_deep_adds_checks(self) -> None:
+        out = self._run("toliq-audit", {
+            "args": {"client": "demo-brand", "deep": True},
+            "answers": {
+                "dalil inventari": self.EVIDENCE,
+                "audit meta": None,
+                "audit google": {"status": "ok", "platform": "google", "findings": []},
+                "tracking": None,
+                "budget": {"status": "ok", "findings": []},
+                "creative": {"status": "ok", "findings": []},
+                "policy": {"status": "ok", "findings": []},
+                "hisobot": "# Audit",
+                "topshirish darvozasi": {"verdict": "pass", "issues": []},
+            },
+        })
+        labels = [c["label"] for c in out["calls"]]
+        self.assertIn("creative", labels)
+        self.assertIn("policy", labels)
+        result = out["result"]
+        self.assertEqual(result["incomplete_platforms"], ["meta"])
+        self.assertEqual(result["platforms"], ["google"])
+        self.assertEqual(result["status"], "needs_review", "a passing gate must not hide an audit that never ran")
+        self.assertEqual(result["counts"]["cross_checks"], 3)
+
+    def test_v8_65_findings_survive_a_dead_verifier_as_unverified_not_as_nothing(self) -> None:
+        out = self._run("toliq-audit", {
+            "args": {"client": "demo-brand", "platforms": ["meta"]},
+            "answers": {
+                "dalil inventari": {**self.EVIDENCE, "platforms": self.EVIDENCE["platforms"][:1]},
+                "audit meta": {"status": "ok", "platform": "meta", "findings": [self.M01]},
+                "tekshiruv meta": None,
+                "tracking": {"status": "ok", "findings": []},
+                "budget": {"status": "ok", "findings": []},
+                "hisobot": "# Audit",
+                "topshirish darvozasi": {"verdict": "pass", "issues": []},
+            },
+        })
+        result = out["result"]
+        self.assertEqual(result["counts"]["verified"], 0)
+        self.assertEqual(result["counts"]["unverified"], 1)
+        self.assertEqual(result["status"], "needs_review")
+        report_prompt = next(c["prompt"] for c in out["calls"] if c["label"] == "hisobot")
+        self.assertIn('"control_id":"M01"', report_prompt.split("nobody could verify")[1])
+
+    def test_v8_66_every_finding_must_carry_a_rollback(self) -> None:
+        source = (VAULT / "workflows" / "toliq-audit.js").read_text(encoding="utf-8")
+        self.assertRegex(source, r"required: \[[^\]]*'recommendation', 'rollback'\]")
+        self.assertIn("A tool default", source)
+
+    def test_v8_64_weekly_review_runs_three_reads_and_flags_missing_backend_revenue(self) -> None:
+        out = self._run("haftalik-tahlil", {
+            "args": {"client": "demo", "period": "2026-W45"},
+            "answers": {
+                "ma'lumot yig'ish": {"client": "demo", "period": "2026-W45", "evidence_files": ["w/meta.csv"],
+                                     "backend_revenue_known": False, "open_bets": [{"hypothesis": "h1"}],
+                                     "missing_inputs": ["CRM revenue"]},
+                "atributsiya": {"summary": "s", "findings": []},
+                "byudjet": {"summary": "s", "findings": []},
+                "kreativ": {"summary": "s", "findings": []},
+                "hisobot": "# Haftalik",
+                "topshirish darvozasi": {"verdict": "fail", "issues": ["blended ROAS stated without backend revenue"]},
+            },
+        })
+        calls = {c["label"]: c for c in out["calls"]}
+        self.assertEqual({calls[k]["agentType"] for k in ("atributsiya", "byudjet", "kreativ")},
+                         {"tyrion:tracking-specialist", "tyrion:audit-budget", "tyrion:audit-creative"})
+        self.assertIn("Backend revenue available: no", calls["topshirish darvozasi"]["prompt"])
+        result = out["result"]
+        self.assertEqual(result["status"], "needs_review")
+        self.assertEqual(result["bets_settled"], 1)
+        self.assertEqual(result["incomplete_sections"], [])
+
+        empty = self._run("haftalik-tahlil", {"args": "haftalik", "answers": {"ma'lumot yig'ish": {"client": "demo", "evidence_files": [], "missing_inputs": []}}})
+        self.assertEqual(empty["result"]["status"], "needs_input")
+        self.assertEqual(len(empty["calls"]), 1)

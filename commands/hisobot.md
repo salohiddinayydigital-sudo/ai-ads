@@ -29,3 +29,5 @@ Vazifa: **$ARGUMENTS**
 
 `outputs/<mijoz>/<sana>-hisobot.md` + `journal/<mijoz>.md` ga qarorlar.
 Katta hisobotdan oldin `release-verifier` tekshiruvi ([[50-topshirish-dod]]).
+
+Haftalik ko'rib chiqish uchun (plugin o'rnatilganda) `/tyrion:haftalik-tahlil` workflow'i bor: atributsiya, byudjet sur'ati va kreativ charchoq parallel tahlil qilinadi, o'tgan hafta gipotezalari yopiladi, hisobot `release-verifier` darvozasidan o'tadi.

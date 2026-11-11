@@ -1,6 +1,6 @@
 # GRAPH_REPORT — Tyrion bilim grafi (deterministik)
 
-> Qurilgan: 2026-11-11T11:31:16+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
+> Qurilgan: 2026-11-11T16:35:34+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
 
 **Tugunlar:** 184 · **Qirralar:** 865 · **Klasterlar:** 44
 
@@ -12,16 +12,16 @@
 | 2 | 40-xavfsizlik-va-hisob | 49 | `rules/40-xavfsizlik-va-hisob.md` |
 | 3 | 70-charter-baseline | 40 | `rules/70-charter-baseline.md` |
 | 4 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
-| 5 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
+| 5 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
 | 6 | ad-iteration | 16 | `wiki/ad-iteration.md` |
-| 7 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
-| 8 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
+| 7 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
+| 8 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
 | 9 | meta-ads-sozlamalari | 15 | `wiki/meta-ads-sozlamalari.md` |
 | 10 | survey-funnel | 14 | `wiki/survey-funnel.md` |
 | 11 | 50-topshirish-dod | 13 | `rules/50-topshirish-dod.md` |
 | 12 | token-gigiyenasi | 13 | `wiki/token-gigiyenasi.md` |
-| 13 | etiroz-javob-patternlari | 13 | `wiki/etiroz-javob-patternlari.md` |
-| 14 | more-better-new | 13 | `wiki/more-better-new.md` |
+| 13 | more-better-new | 13 | `wiki/more-better-new.md` |
+| 14 | etiroz-javob-patternlari | 13 | `wiki/etiroz-javob-patternlari.md` |
 | 15 | 30-ozbekiston-konteksti | 12 | `rules/30-ozbekiston-konteksti.md` |
 
 ## Klasterlar

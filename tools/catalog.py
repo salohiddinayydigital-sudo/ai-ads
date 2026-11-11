@@ -67,6 +67,7 @@ LAYERS: dict[str, tuple[Path, str, str]] = {
     "tests": (VAULT / "tests", "test_*.py", "test"),
     "templates": (VAULT / "templates", "*.md", "template"),
     "evals": (VAULT / "evals", "*.json", "eval"),
+    "workflows": (VAULT / "workflows", "*.js", "workflow"),
 }
 
 # Drift tekshiriladigan juftliklar: (kanonik qatlam, nusxa qatlam)

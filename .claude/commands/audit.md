@@ -37,3 +37,16 @@ Maqsad: <X> · Jamoa: <N bot: nomlari>
 - Hisob o'zgarishi kerak bo'lsa — **draft + tasdiq**, o'zing o'zgartirmaysan.
 
 Oxirida: `journal/<mijoz>.md` ga qaror va sababi, `LOG.md` ga 1 qator.
+
+## Bir nechta platforma — workflow (plugin o'rnatilganda)
+
+Yuqoridagi zanjir `/tyrion:toliq-audit` workflow'ida kod bilan belgilangan: dalil inventari → har platformaga alohida auditor → har topilma dalil fayliga qarshi tekshiriladi (tasdiqlanmagani rad etiladi) → tracking va byudjet tekshiruvi → hisobot → `release-verifier` darvozasi.
+
+```text
+/tyrion:toliq-audit mijoz: demo-brand, platformalar: meta va google, dalil: clients/demo-brand/assets
+```
+
+- Dalil fayli bo'lmasa workflow to'xtaydi va nima yetishmasligini aytadi — taxmin bilan audit qilmaydi.
+- `deep: true` berilsa kreativ va policy tekshiruvi ham qo'shiladi.
+- Natijada `status: ready` faqat darvoza o'tsa, barcha auditorlar tugasa va tekshirilmagan topilma qolmasa chiqadi; aks holda `needs_review`.
+- Bir platformali oddiy audit uchun workflow shart emas — u bir necha agent ishga tushiradi va ko'proq token sarflaydi.
