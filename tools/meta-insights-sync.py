@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v5.1 Live Meta Ads Insights Connector — Real reklama akkauntlaridan (act_<id>/insights)
+"""Tyrion Live Meta Ads Insights Connector — Real reklama akkauntlaridan (act_<id>/insights)
 kampaniya, ad set va kreativ ko'rsatkichlarini sahifalab (cursor pagination `paging.next`) tortish,
 akkaunt valyutasini (`account_currency`) aniqlash, konversiya turlarini (`PURCHASE`, `LEAD`, `MESSAGING`)
 ajratish va auditdan o'tkazish (0 token).
@@ -26,6 +26,7 @@ import argparse
 import importlib
 import json
 import os
+import re
 import sys
 import urllib.parse
 from datetime import datetime, timezone
@@ -45,7 +46,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-DEFAULT_GRAPH_API_VERSION = "v26.0"
+DEFAULT_GRAPH_API_VERSION = tcore.graph_api_default()  # manifests/api-versions.json
 
 CONVERSION_FAMILIES: dict[str, tuple[str, ...]] = {
     "PURCHASE": (
@@ -69,6 +70,24 @@ REVENUE_ACTION_PRIORITY = (
     "offsite_conversion.fb_pixel_purchase",
     "omni_purchase",
 )
+
+
+# Atributsiya oynasi aniq so'raladi: aks holda natija akkaunt standartiga bog'liq va davrlararo solishtirib bo'lmaydi.
+# Eslatma: Meta 2026 da view-oynalarni o'zgartirgan; qiymatlar rasmiy hujjatda tasdiqlanmagan (UPDATE-PLAN §5).
+DEFAULT_ATTRIBUTION_WINDOWS: tuple[str, ...] = ("7d_click", "1d_view")
+
+
+def parse_attribution_windows(raw: str | None) -> tuple[str, ...] | None:
+    """`"7d_click,1d_view"` -> tuple; `"account_default"`/`"none"` -> None (oyna yuborilmaydi)."""
+    if raw is None or not str(raw).strip():
+        return DEFAULT_ATTRIBUTION_WINDOWS
+    if str(raw).strip().lower() in ("none", "account_default"):
+        return None
+    wins = tuple(w.strip() for w in str(raw).split(",") if w.strip())
+    for w in wins:
+        if not re.fullmatch(r"\d+d_(click|view)|(1d|7d|28d)_ev|skan_click|skan_view", w):
+            raise ValueError(f"Noto'g'ri atributsiya oynasi: {w!r} (masalan: 7d_click, 1d_view)")
+    return wins
 
 
 def get_graph_api_version() -> str:
@@ -222,8 +241,9 @@ def fetch_live_meta_insights(
     date_preset: str = "last_7d",
     limit: int = 100,
     max_pages: int = 20,
+    attribution_windows: tuple[str, ...] | None = DEFAULT_ATTRIBUTION_WINDOWS,
 ) -> dict[str, Any]:
-    """Meta Graph API v26.0 `/act_<id>/insights` endpointidan barcha sahifalarni (`paging.next`) aylanib tortadi."""
+    """Meta Graph API `/act_<id>/insights` endpointidan barcha sahifalarni (`paging.next`) aylanib tortadi."""
     acct = normalize_account_id(account_id)
     token = os.environ.get("META_ACCESS_TOKEN", "").strip()
     if not token or token == "your_meta_access_token_here":
@@ -242,12 +262,15 @@ def fetch_live_meta_insights(
         "account_currency", "spend", "impressions", "reach", "frequency", "cpm", "ctr", "cpc",
         "inline_link_clicks", "actions", "action_values", "date_start", "date_stop",
     ])
-    params = urllib.parse.urlencode({
+    query = {
         "level": level,
         "date_preset": date_preset,
         "fields": fields,
         "limit": str(safe_limit),
-    })
+    }
+    if attribution_windows:
+        query["action_attribution_windows"] = json.dumps(list(attribution_windows))
+    params = urllib.parse.urlencode(query)
     current_url: str | None = f"{base}/{api_version}/{acct}/insights?{params}"
     headers = {"Authorization": f"Bearer {token}"}
 
@@ -287,6 +310,7 @@ def fetch_live_meta_insights(
         "is_truncated": is_truncated,
         "account_currency": detected_currencies[0] if len(detected_currencies) == 1 else (detected_currencies[0] if detected_currencies else None),
         "raw_rows": all_rows,
+        "attribution_windows": list(attribution_windows) if attribution_windows else None,
         "data_source_type": "LIVE_META_GRAPH_API",
     }
 
@@ -328,6 +352,7 @@ def sync_and_analyze(
     max_pages: int = 20,
     from_raw_json: Path | None = None,
     save_out: Path | None = None,
+    attribution_windows: tuple[str, ...] | None = DEFAULT_ATTRIBUTION_WINDOWS,
 ) -> dict[str, Any]:
     """Jonli Graph API (sahifalash bilan) yoki xom Graph API JSON faylidan ma'lumot olib, valyuta va konversiya turlarini ajratib tahlil qiladi."""
     api_version = get_graph_api_version()
@@ -343,6 +368,7 @@ def sync_and_analyze(
         pages_fetched = 1
         is_truncated = bool(raw_payload.get("paging", {}).get("next")) if isinstance(raw_payload, dict) and isinstance(raw_payload.get("paging"), dict) else False
         source_type = "IMPORTED_GRAPH_API_JSON"
+        used_windows = None
     else:
         fetched = fetch_live_meta_insights(
             account_id=account_id,
@@ -350,7 +376,9 @@ def sync_and_analyze(
             date_preset=date_preset,
             limit=limit,
             max_pages=max_pages,
+            attribution_windows=attribution_windows,
         )
+        used_windows = fetched.get("attribution_windows")
         raw_rows = fetched["raw_rows"]
         acct = fetched["account_id"]
         payload_currency = str(fetched.get("account_currency") or "").strip().upper()
@@ -410,6 +438,16 @@ def sync_and_analyze(
         "currency_source": currency_source,
         "graph_api_version": api_version,
         "data_source_type": source_type,
+        "attribution": {
+            "windows_requested": used_windows,
+            "basis": "EXPLICIT_REQUEST" if used_windows else "ACCOUNT_DEFAULT_OR_IMPORTED_FILE",
+            "warning": (
+                "Atributsiya oynasi so'rovda aniqlanmagan: natija akkaunt sozlamasiga bog'liq. 2026 da Meta atributsiya "
+                "qoidalarini o'zgartirgan — 2025 va undan oldingi davrlar bilan to'g'ridan-to'g'ri solishtirmang."
+                if not used_windows else
+                "2026 atributsiya o'zgarishlari tufayli 2025 va undan oldingi davrlar bilan to'g'ridan-to'g'ri solishtirmang."
+            ),
+        },
         "level": level,
         "date_preset": date_preset,
         "primary_conversion_filter": primary_conversion,
@@ -430,7 +468,7 @@ def sync_and_analyze(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="meta-insights-sync.py",
-        description="Tyrion v5.1 Live Meta Ads Graph API v26.0 Insights Connector (Cursor Pagination + Currency + Conversion Separation)",
+        description="Tyrion Live Meta Ads Graph API v26.0 Insights Connector (Cursor Pagination + Currency + Conversion Separation)",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -446,6 +484,7 @@ def main(argv: list[str] | None = None) -> int:
         choices=["auto", "purchase", "lead", "messaging"],
         help="Qaysi konversiya oilasi bo'yicha CPA hisoblansin (auto|purchase|lead|messaging)",
     )
+    p_pull.add_argument("--attribution", default="", help="Atributsiya oynalari, vergul bilan (default: 7d_click,1d_view); 'account_default' — yubormaslik")
     p_pull.add_argument("--currency", default="", help="Valyuta kodini majburiy belgilash (masalan: UZS, USD, KZT)")
     p_pull.add_argument("--limit", type=int, default=100, help="Har bir Graph API sahifasidagi satrlar soni (1..500)")
     p_pull.add_argument("--max-pages", type=int, default=20, help="Maksimal cursor pagination sahifalar soni")
@@ -481,6 +520,7 @@ def main(argv: list[str] | None = None) -> int:
             max_pages=args.max_pages,
             from_raw_json=raw_path,
             save_out=out_path,
+            attribution_windows=parse_attribution_windows(args.attribution),
         )
     except Exception as exc:
         print(f"Xato: {tcore.redact_secrets(str(exc))}", file=sys.stderr)
@@ -494,7 +534,7 @@ def main(argv: list[str] | None = None) -> int:
     s = rep["summary"]
     curr = res["account_currency"]
     print("=" * 76)
-    print(f"  🔄 TYRION v5.1 META INSIGHTS SYNC — {res['account_id']} ({res['data_source_type']})")
+    print(f"  🔄 TYRION META INSIGHTS SYNC — {res['account_id']} ({res['data_source_type']})")
     print("=" * 76)
     print(f"  Graph API Versiyasi : {res['graph_api_version']} | Daraja: {res['level']} | Davr: {res['date_preset']} | Sahifalar: {res['pagination']['pages_fetched']}")
     print(f"  Akkaunt Valyutasi   : {curr} ({res['currency_source']}) | Konversiya filtri: {res['primary_conversion_filter']}")

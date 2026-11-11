@@ -30,3 +30,10 @@ output/
 .claude/settings.json
 .claude/settings.json.bak
 dev/
+
+# Mijoz ma'lumotlari va hisobotlar (shablon va demo repoda qoladi)
+clients/*
+!clients/README.md
+outputs/
+!examples/demo-brand/outputs/
+!examples/demo-brand/outputs/**

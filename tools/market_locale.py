@@ -19,6 +19,9 @@ VAULT = TOOLS.parent
 MARKETS_DIR = VAULT / "markets"
 LOCALES_DIR = VAULT / "locales"
 
+# Qaror (2026-11-11): asosiy auditoriya — O'zbekiston operatori. Boshqa bozor: --market / TYRION_MARKET / default_market.
+DEFAULT_MARKET_FALLBACK = "uz"
+
 SUPPORTED_MARKETS = ("global", "uz", "us", "eu", "uk", "mena", "latam", "sea", "in")
 
 ZERO_DECIMAL_CURRENCIES = {
@@ -84,7 +87,7 @@ GEO_TO_MARKET = {
 
 
 def load_market_pack(market_id: str | None = None) -> dict[str, Any]:
-    m_id = (market_id or os.environ.get("TYRION_MARKET") or "global").strip().lower()
+    m_id = (market_id or configured_default_market()).strip().lower()
     if m_id not in SUPPORTED_MARKETS:
         m_id = "global"
     pack_path = MARKETS_DIR / m_id / "pack.json"
@@ -173,6 +176,15 @@ def normalize_bcp47_language(lang: str) -> dict[str, Any]:
     }
 
 
+def configured_default_market() -> str:
+    """Standart bozor: TYRION_MARKET > plugin userConfig (CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET) > DEFAULT_MARKET_FALLBACK (uz)."""
+    for key in ("TYRION_MARKET", "CLAUDE_PLUGIN_OPTION_DEFAULT_MARKET"):
+        val = (os.environ.get(key) or "").strip().lower()
+        if val in SUPPORTED_MARKETS:
+            return val
+    return DEFAULT_MARKET_FALLBACK
+
+
 def detect_market(
     text: str = "",
     explicit_market: str | None = None,
@@ -232,8 +244,8 @@ def detect_market(
         curr = (currency or "UZS").strip().upper()
         return _enrich_detection(pack, curr, detected_lang, "language_uz")
 
-    # 6. Default: global
-    pack = load_market_pack("global")
+    # 6. Default: foydalanuvchi sozlamasi (default_market) yoki global
+    pack = load_market_pack(configured_default_market())
     curr = (currency or pack["default_currency"]).strip().upper()
     return _enrich_detection(pack, curr, detected_lang or "en", "default_global")
 
@@ -285,7 +297,10 @@ def round_currency(amount: float | int, currency: str = "USD") -> float | int:
     return round(float(amount), 2)
 
 
-def get_configured_api_version(env_key: str = "META_GRAPH_API_VERSION", default: str = "v26.0") -> dict[str, Any]:
+def get_configured_api_version(env_key: str = "META_GRAPH_API_VERSION", default: str = "") -> dict[str, Any]:
+    import tyrion_core as _tcore  # kech import: yagona versiya reyestri (manifests/api-versions.json)
+    reg = _tcore.api_registry()
+    default = default or str(reg["default"])
     raw = os.environ.get(env_key, "").strip()
     if not raw:
         env_file = VAULT / ".env"
@@ -297,9 +312,10 @@ def get_configured_api_version(env_key: str = "META_GRAPH_API_VERSION", default:
     ver = raw if raw else default
     m = re.match(r"^v?(\d+)(?:\.(\d+))?$", ver.strip(), re.I)
     major = int(m.group(1)) if m else 26
-    is_deprecated = major < 25
+    floor = int(reg.get("deprecated_below_major", 25))
+    is_deprecated = major < floor
     warning = (
-        f"Configured {env_key}={ver} is older than v25.0 and may be deprecated or sunset by Meta Graph API; upgrade to {default}."
+        f"Configured {env_key}={ver} is older than v{floor}.0 and may be deprecated or sunset by Meta Graph API; upgrade to {default}."
         if is_deprecated else None
     )
     return {

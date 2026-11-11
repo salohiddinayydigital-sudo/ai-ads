@@ -1,0 +1,7 @@
+﻿Campaign report
+"November 1, 2026 - November 10, 2026"
+Campaign,Campaign status,Currency code,Cost,Impr.,Clicks,Conversions,Conv. value
+Search_Brand,Enabled,USD,"1,150.25","40,200","3,100",90.00,"7,400.00"
+PMax_All,Enabled,USD,860.00,"120,000","2,400",12.00,"600.00"
+DSA_Old,Paused,USD,310.00,"9,000",150,0.00,0.00
+Total: Account,--,--,"2,320.25","169,200","5,650",102.00,"8,000.00"

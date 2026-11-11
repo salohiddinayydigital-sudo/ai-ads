@@ -85,7 +85,10 @@ def run_evals() -> dict[str, Any]:
             passed = res["passed"] is sc["expected_pass"]
             detail = f"passed={res['passed']}"
         elif stype == "capi_emq":
-            res = cu.build_capi_payload("Lead", phone=sc["phone"], email=sc["email"])
+            res = cu.build_capi_payload(
+                "Lead", phone=sc["phone"], email=sc["email"], first_name=sc.get("first_name", ""),
+                city=sc.get("city", ""), fbp=sc.get("fbp", ""), fbc=sc.get("fbc", ""),
+            )
             passed = res["estimated_emq_score_10"] >= sc["min_emq"]
             detail = f"EMQ={res['estimated_emq_score_10']}/10"
         elif stype == "tg_utm":

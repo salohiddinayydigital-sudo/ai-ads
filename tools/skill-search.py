@@ -624,6 +624,16 @@ def load_agents(force_reload: bool = False) -> dict[str, dict]:
 # Qidiruv va Ko'p Tilli Normalizatsiya
 # --------------------------------------------------------------------------- #
 
+_UZ_LATIN_WORDS = re.compile(
+    r"\b(qanday|qanaqa|nima|nega|nimaga|qaysi|kerak|bilan|mening|meni|bizning|sizning|bor|yo'q|emas|ham|"
+    r"oshib|ketdi|ketyapti|tushib|pasayib|ishlamayapti|ishlamaydi|boshlayman|boshlash|qilaman|qilamiz|qilish|"
+    r"kampaniyam|reklamam|reklamani|reklamalarni|byudjetim|mahsulotim|mahsulotni|do'konim|biznesim|"
+    r"narxi|narxini|sotuv|sotuvlar|sotish|mijozlar|mijozlarni|oshirish|kamaytirish|tushunmayapman|"
+    r"yordam|iltimos|menga|bizga|kerakmi|qancha|qachon|qayerda|yaxshi|yomon|juda|lekin|chunki|agar)\b"
+)
+_UZ_LATIN_SUFFIX = re.compile(r"\b[a-z']{3,}(?:yapman|yapti|yapmiz|yapsiz|laymiz|layman|laysiz|moqchiman|moqchimiz|ganman|ganmiz)\b")
+
+
 def detect_language(text: str) -> str:
     s = str(text or "")
     low = s.lower()
@@ -631,6 +641,8 @@ def detect_language(text: str) -> str:
         return "uz_cyrillic"
     if re.search(r"[а-яА-ЯёЁ]", s):
         return "ru"
+    if _UZ_LATIN_WORDS.search(low) or _UZ_LATIN_SUFFIX.search(low):
+        return "uz_latin"
     if re.search(r"\b(uchun|bo'yicha|reklama|kampaniyamda|byudjetni|oshir|o'chir|mijoz|strategiya|lidlar|sifatsiz|kontent|tayyorla|tekshir|saytimni|o'rganib|montaj|yasab|qilish|taklif|berish|berishchi|auditoriya|audioturiya|audioturiyaga|auditoriyaga|raqobatchi|raqobatchilar|rabotchilar|tahlil)\b", low):
         return "uz_latin"
     return "en"

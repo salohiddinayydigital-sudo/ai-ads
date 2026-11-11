@@ -1,6 +1,6 @@
-# push.ps1 — Tyrion v5.0 Automated Pre-Flight Verification & GitHub Push Script (Windows PowerShell)
+# push.ps1 — Tyrion Automated Pre-Flight Verification & GitHub Push Script (Windows PowerShell)
 param(
-    [string]$RemoteUrl = "git@github.com:salohiddinayydigital-sudo/ai-ads.git"
+    [string]$RemoteUrl = ""
 )
 $ErrorActionPreference = 'Stop'
 
@@ -11,7 +11,7 @@ Set-Location $vaultRoot
 $pyCmd = if (Get-Command py -ErrorAction SilentlyContinue) { "py" } else { "python" }
 
 Write-Host "====================================================================" -ForegroundColor Cyan
-Write-Host "  🚀 TYRION v5.0 — GITHUB PRE-PUSH VERIFICATION & DEPLOY" -ForegroundColor Green
+Write-Host "  🚀 TYRION — GITHUB PRE-PUSH VERIFICATION & DEPLOY" -ForegroundColor Green
 Write-Host "====================================================================" -ForegroundColor Cyan
 
 Write-Host "[1/5] TyrionShield 6-qavatli xavfsizlik tekshiruvi..." -ForegroundColor White
@@ -29,10 +29,18 @@ Write-Host "[3/5] Eval Suite (24/24 stsenariy) tekshiruvi..." -ForegroundColor W
 Write-Host "[4/5] Doctor salomatlik tekshiruvi..." -ForegroundColor White
 & $pyCmd tools\doctor.py --quick
 
-Write-Host "[6/6] GitHub repozitoriyga yuklanmoqda: $RemoteUrl ..." -ForegroundColor Yellow
-git remote set-url origin $RemoteUrl 2>$null
-if ($LASTEXITCODE -ne 0) { git remote add origin $RemoteUrl }
+Write-Host "[5/6] Unit testlar..." -ForegroundColor White
+& $pyCmd -m unittest discover -s tests -q
+if ($LASTEXITCODE -ne 0) { throw "Unit testlar o'tmadi!" }
+
+# Mavjud remote'ga tegilmaydi; faqat remote yo'q bo'lsa va URL berilgan bo'lsa qo'shiladi.
+git remote get-url origin 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    if (-not $RemoteUrl) { throw "'origin' remote yo'q. Ishlatish: .\push.ps1 -RemoteUrl <url>" }
+    git remote add origin $RemoteUrl
+}
+Write-Host "[6/6] GitHub repozitoriyga yuklanmoqda ..." -ForegroundColor Yellow
 
 $targetBranch = (git branch --show-current).Trim()
 git push -u origin $targetBranch --tags
-Write-Host "✅ Tyrion v5.0 GitHub'ga muvaffaqiyatli yuklandi!" -ForegroundColor Green
+Write-Host "✅ Tyrion GitHub'ga muvaffaqiyatli yuklandi!" -ForegroundColor Green

@@ -164,7 +164,7 @@ function calcBreakdown() {
 • Placement A: Sarf $${sa} (${shareA}%), Konversiya ${ca} ta -> O'rtacha CPA: $${cpaA}
 • Placement B: Sarf $${sb} (${(100-shareA).toFixed(1)}%), Konversiya ${cb} ta -> O'rtacha CPA: $${cpaB}
 
-XULOSA: ${trap ? "⚠️ DIQQAT — META BREAKDOWN EFFECT TUZOG'I ANIQLANDI! Placement A byudjetning " + shareA + "% qismini tortib asosiy hajmni beryapti. Placement B da o'rtacha CPA pastroq ko'rinishining sababi — u yerdagi arzon inventar tugagan. Placement A ni o'chirsangiz, umumiy CPA $" + blended + " dan ~$" + (blended*1.38).toFixed(2) + " ga yomonlashadi!" : "✅ Segmentlar muvozanatda."}`;
+XULOSA: ${trap ? "⚠️ DIQQAT — META BREAKDOWN EFFECT TUZOG'I ANIQLANDI! Placement A byudjetning " + shareA + "% qismini tortib asosiy hajmni beryapti. Placement B da o'rtacha CPA pastroq ko'rinishining sababi — u yerdagi arzon inventar tugagan. Placement A ni o'chirsangiz, umumiy CPA $" + blended + " dan yomonlashishi EHTIMOL (miqdori noma'lum, evristika) — o'chirishdan oldin marginal CPA ni o'lchang." : "✅ Segmentlar muvozanatda."}`;
 }
 function calcEcon() {
   const p = parseFloat(document.getElementById('e_price').value || 100);

@@ -20,6 +20,7 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent.parent / "tools"
 VAULT = TOOLS.parent
+VERSION = (VAULT / "VERSION").read_text(encoding="utf-8").strip()  # yagona manba
 sys.path.insert(0, str(TOOLS))
 
 import catalog  # noqa: E402
@@ -613,7 +614,8 @@ class SpendGuardTests(unittest.TestCase):
         self.assertTrue(any("event_id" in e for e in res["errors"]))
 
     def test_change_packet_validation(self) -> None:
-        valid_packet = "## Reja\nBoshlang'ich holat: CPA $15.\nXavf: past.\nTeskari qadam: qaytarish mumkin.\nStop-loss: CPA > $20 bo'lsa to'xtatish."
+        valid_packet = ("## Reja\nBoshlang'ich holat: CPA $15.\nXavf: past.\nTeskari qadam: qaytarish mumkin.\n"
+                        "Stop-loss: CPA > $20 bo'lsa to'xtatish.\nOperator tasdig'i: Ali, 2026-11-11")
         res_valid = self.sg.check_change_packet(valid_packet)
         self.assertTrue(res_valid["passed"])
 
@@ -751,7 +753,7 @@ class TyrionV6GlobalReleaseTests(unittest.TestCase):
             )
             self.assertEqual(p_mcp.returncode, 0, p_mcp.stderr)
             resp = json.loads(p_mcp.stdout.strip().splitlines()[0])
-            self.assertEqual(resp["result"]["serverInfo"]["version"], "7.0.0")
+            self.assertEqual(resp["result"]["serverInfo"]["version"], VERSION)
 
     def test_v6_03_hook_fail_open_when_script_missing_unless_strict(self) -> None:
         with tempfile.TemporaryDirectory() as fake_root:
@@ -1516,8 +1518,8 @@ class CreativeMatrixAndWorkspaceTests(unittest.TestCase):
             capture_output=True, text=True, encoding="utf-8", errors="replace",
         )
         self.assertEqual(proc.returncode, 0)
-        self.assertIn("TYRION v7.0.0", proc.stdout)
-        self.assertIn("Single-Root ECC v7.0.0", proc.stdout)
+        self.assertIn(f"TYRION v{VERSION}", proc.stdout)
+        self.assertIn(f"Single-Root ECC v{VERSION}", proc.stdout)
 
 
 class TyrionV4EnginesTests(unittest.TestCase):
@@ -1528,7 +1530,8 @@ class TyrionV4EnginesTests(unittest.TestCase):
         ae = importlib.import_module("ad-export-analyzer")
         trap = ae.analyze_breakdown_effect("IG Reels", 750.0, 50, "FB Feed", 150.0, 12)
         self.assertTrue(trap["breakdown_effect_trap_detected"])
-        self.assertGreater(trap["projected_cpa_if_dominant_paused_usd"], trap["blended_cpa_usd"])
+        self.assertIsNone(trap["projected_cpa_if_dominant_paused_usd"])  # B10: manbasiz 1.38 prognozi olib tashlandi
+        self.assertEqual(trap["evidence_label"], "HEURISTIC_PRIOR_MODEL")
 
         balanced = ae.analyze_breakdown_effect("IG Reels", 400.0, 25, "FB Feed", 380.0, 24)
         self.assertFalse(balanced["breakdown_effect_trap_detected"])
@@ -1545,8 +1548,9 @@ class TyrionV4EnginesTests(unittest.TestCase):
     def test_capi_v22_payload_hashes_pii_and_scores_emq(self) -> None:
         import importlib
         cu = importlib.import_module("capi-utm-builder")
-        res = cu.build_capi_payload("Lead", phone="+998 (90) 123-45-67", email="Test@Brand.uz", city="Tashkent", value=200.0, order_id="ORD_55")
-        self.assertGreaterEqual(res["estimated_emq_score_10"], 8.0)
+        res = cu.build_capi_payload("Lead", phone="+998 (90) 123-45-67", email="Test@Brand.uz", city="Tashkent", value=200.0, currency="USD", order_id="ORD_55",
+                                    fbp="fb.1.1729200000.123456789", fbc="fb.1.1729200000.IwAR0xyz")
+        self.assertGreaterEqual(res["estimated_emq_score_10"], 7.5)
         ud = res["capi_v22_payload"]["data"][0]["user_data"]
         # SHA-256 hex digest is 64 chars, never plaintext phone/email
         self.assertEqual(len(ud["ph"][0]), 64)
@@ -1717,14 +1721,17 @@ class ProductionHardeningTests(unittest.TestCase):
         resp = self.mcp.handle_request({"jsonrpc": "2.0", "id": 99, "method": "unknown/method"})
         self.assertEqual(resp["error"]["code"], -32601)
 
-    def test_mcp_server_returns_32602_on_negative_budget(self) -> None:
+    def test_mcp_server_reports_invalid_arguments_as_tool_error(self) -> None:
         resp = self.mcp.handle_request({
             "jsonrpc": "2.0",
             "id": 100,
             "method": "tools/call",
             "params": {"name": "tyrion_meta_audience", "arguments": {"niche": "ecom", "daily_budget": -50}},
         })
-        self.assertEqual(resp["error"]["code"], -32602)
+        # MCP spec: argument/bajarilish xatosi — `isError` natija; JSON-RPC -32602 faqat noma'lum tool uchun
+        self.assertTrue(resp["result"]["isError"])
+        unknown = self.mcp.handle_request({"jsonrpc": "2.0", "id": 101, "method": "tools/call", "params": {"name": "nope", "arguments": {}}})
+        self.assertEqual(unknown["error"]["code"], -32602)
 
 
 class TyrionV5CalibratedAuditTests(unittest.TestCase):
@@ -1840,11 +1847,11 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
 
         for jpath in ("plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "package.json"):
             jdata = json.loads((VAULT / jpath).read_text(encoding="utf-8"))
-            self.assertEqual(jdata["version"], "7.0.0", f"Version drift in {jpath}")
+            self.assertEqual(jdata["version"], VERSION, f"Version drift in {jpath}")
 
         mp = json.loads((VAULT / "marketplace.json").read_text(encoding="utf-8"))
-        self.assertEqual(mp["metadata"]["version"], "7.0.0")
-        self.assertEqual(mp["plugins"][0]["version"], "7.0.0")
+        self.assertEqual(mp["metadata"]["version"], VERSION)
+        self.assertEqual(mp["plugins"][0]["version"], VERSION)
         self.assertIn("36 specialist agents", mp["metadata"]["description"])
 
         sec_txt = (VAULT / "SECURITY.md").read_text(encoding="utf-8")
@@ -3191,6 +3198,8 @@ class AiAdsSyncAndVaultAuditCITests(unittest.TestCase):
 
         for script_rel in ("push.sh", "push.ps1"):
             script_txt = (VAULT / script_rel).read_text(encoding="utf-8")
-            self.assertIn("salohiddinayydigital-sudo/ai-ads.git", script_txt)
             self.assertNotIn("--force", script_txt, f"{script_rel} must not use git push --force")
+            self.assertNotIn("remote set-url", script_txt, f"{script_rel} must not overwrite the existing origin")
+            self.assertNotIn("push -u origin main", script_txt, f"{script_rel} must push the current branch")
+            self.assertIn("unittest", script_txt, f"{script_rel} must run unit tests before pushing")
 

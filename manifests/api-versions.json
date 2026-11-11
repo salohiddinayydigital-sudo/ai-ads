@@ -1,0 +1,14 @@
+{
+  "_comment": "Graph/Marketing API versiyalari uchun YAGONA manba. `default` ni o'zgartirish barcha asboblarga ta'sir qiladi. `verified: false` — rasmiy manbada tasdiqlanmagan (00-manba talabi).",
+  "meta_graph": {
+    "default": "v26.0",
+    "deprecated_below_major": 25,
+    "candidate": "v27.0",
+    "versions": [
+      {"version": "v26.0", "status": "current", "verified": true, "source": "repo: tools/*, wiki — v7.0.0 da ishlatilgan", "verified_on": "2026-10-29"},
+      {"version": "v27.0", "status": "candidate", "verified": false, "source": "ikkilamchi: ppc.land, relevantaudience.com (2026-11)", "note": "Rasmiy changelog'da tasdiqlanmaguncha default qilinmaydi", "refresh_due": "2026-12-01"},
+      {"version": "v22.0", "status": "sunset_announced", "sunset": "2027-05-20", "verified": false, "source": "ikkilamchi (UPDATE-PLAN-v7.1.md)", "refresh_due": "2026-12-01"},
+      {"version": "v21.0", "status": "sunset_announced", "sunset": "2027-01-21", "verified": false, "source": "ikkilamchi (UPDATE-PLAN-v7.1.md)", "refresh_due": "2026-12-01"}
+    ]
+  }
+}

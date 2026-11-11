@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened v7.0.0).
+"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened).
 
 Guards against oversized payloads (>1 MB), malformed JSON (-32700), unknown methods (-32601),
 invalid/NaN parameters (-32602), and subprocess hangs (15s timeout).
@@ -24,7 +24,8 @@ sys.path.insert(0, str(TOOLS))
 
 import tyrion_core as tcore  # noqa: E402
 
-SERVER_VERSION = "7.0.0"
+SERVER_VERSION = tcore.project_version()
+SUPPORTED_PROTOCOL_VERSIONS = ("2024-11-05", "2025-03-26", "2025-06-18")  # oxirgisi: kelishuv bo'lmasa taklif
 
 MCP_TOOLS = [
     {
@@ -63,6 +64,13 @@ MCP_TOOLS = [
                 "special_ad_category": {"type": "string", "default": "NONE"},
                 "include_suggestions": {"type": "boolean", "default": False},
                 "validate_results": {"type": "boolean", "default": True},
+                "max_queries": {"type": "integer", "default": 12},
+                "min_relevance_score": {"type": "number", "default": 35.0},
+                "locale": {"type": "string", "default": "en_US"},
+                "customer_needs": {"type": "string", "default": ""},
+                "problem_solved": {"type": "string", "default": ""},
+                "purchase_intent": {"type": "string", "default": ""},
+                "complementary_products": {"type": "string", "default": ""},
             },
         },
     },
@@ -102,6 +110,7 @@ MCP_TOOLS = [
                 "currency": {"type": "string", "default": ""},
                 "max_pages": {"type": "integer", "default": 20},
                 "from_raw_json": {"type": "string", "default": ""},
+                "attribution": {"type": "string", "default": "", "description": "Atributsiya oynalari, vergul bilan (default 7d_click,1d_view); 'account_default' — yubormaslik"},
             },
         },
     },
@@ -130,6 +139,14 @@ MCP_TOOLS = [
                 "niche": {"type": "string", "default": "ecom"},
                 "product": {"type": "string"},
                 "price": {"type": "number", "default": 100.0},
+                "mode": {"type": "string", "enum": ["matrix", "video-script", "pda-matrix", "ad-copy"], "default": "matrix"},
+                "market": {"type": "string", "default": "global"},
+                "currency": {"type": "string", "default": ""},
+                "language": {"type": "string", "default": "uz_latin"},
+                "problem": {"type": "string", "default": ""},
+                "proof": {"type": "string", "default": ""},
+                "format": {"type": "string", "default": "ugc_reaction_demo"},
+                "platform": {"type": "string", "default": "meta"},
             },
             "required": ["product"],
         },
@@ -144,6 +161,25 @@ MCP_TOOLS = [
                 "platform": {"type": "string", "default": "meta"},
                 "campaign": {"type": "string", "default": "launch"},
                 "bot": {"type": "string", "default": ""},
+                "mode": {"type": "string", "enum": ["utm", "capi-payload"], "default": "utm"},
+                "event": {"type": "string", "default": "Lead"},
+                "phone": {"type": "string", "default": ""},
+                "email": {"type": "string", "default": ""},
+                "first_name": {"type": "string", "default": ""},
+                "city": {"type": "string", "default": ""},
+                "country": {"type": "string", "default": ""},
+                "market": {"type": "string", "default": ""},
+                "value": {"type": "number"},
+                "currency": {"type": "string", "default": ""},
+                "order_id": {"type": "string", "default": ""},
+                "event_id": {"type": "string", "default": ""},
+                "event_source_url": {"type": "string", "default": ""},
+                "fbp": {"type": "string", "default": ""},
+                "fbc": {"type": "string", "default": ""},
+                "user_agent": {"type": "string", "default": ""},
+                "ip": {"type": "string", "default": ""},
+                "action_source": {"type": "string", "default": "website"},
+                "consent_granted": {"type": "boolean", "default": True},
             },
         },
     },
@@ -169,6 +205,8 @@ MCP_TOOLS = [
                 "current_daily": {"type": "number"},
                 "proposed_daily": {"type": "number"},
                 "max_daily_cap": {"type": "number", "default": 500.0},
+                "target_cpa": {"type": "number"},
+                "approve_pause": {"type": "boolean", "default": False},
             },
             "required": ["current_daily", "proposed_daily"],
         },
@@ -305,6 +343,7 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
             currency_override=str(args.get("currency", "")),
             max_pages=tcore.safe_int(args.get("max_pages", 20), default=20, min_val=1, max_val=100, field_name="max_pages"),
             from_raw_json=raw_path,
+            attribution_windows=mis.parse_attribution_windows(args.get("attribution")),
         )
     if name == "tyrion_breakdown_effect":
         ae = importlib.import_module("ad-export-analyzer")
@@ -344,6 +383,19 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
         return cm.build_matrix(niche, product, price, market=market, currency=currency)
     if name == "tyrion_capi_utm":
         cu = importlib.import_module("capi-utm-builder")
+        if str(args.get("mode", "utm")).strip().lower() == "capi-payload":
+            val = args.get("value")
+            return cu.build_capi_payload(
+                event_name=str(args.get("event", "Lead")), phone=str(args.get("phone", "")), email=str(args.get("email", "")),
+                first_name=str(args.get("first_name", "")), city=str(args.get("city", "")), country=str(args.get("country", "")),
+                fbp=str(args.get("fbp", "")), fbc=str(args.get("fbc", "")),
+                value=None if val is None else tcore.safe_float(val, min_val=0.0, field_name="value"),
+                currency=str(args.get("currency", "")), order_id=str(args.get("order_id", "")),
+                event_source_url=str(args.get("event_source_url", "")), market=str(args.get("market", "")),
+                consent_granted=bool(args.get("consent_granted", True)), user_agent=str(args.get("user_agent", "")),
+                ip=str(args.get("ip", "")), action_source=str(args.get("action_source", "website")),
+                event_id=str(args.get("event_id", "")),
+            )
         return cu.build_utm_links(
             str(args.get("url", "https://brand.uz")),
             str(args.get("platform", "meta")),
@@ -359,9 +411,10 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
     if name == "tyrion_spend_guard":
         sg = importlib.import_module("spend-guard")
         curr = tcore.safe_float(args.get("current_daily"), min_val=0.01, field_name="current_daily")
-        prop = tcore.safe_float(args.get("proposed_daily"), min_val=0.01, field_name="proposed_daily")
+        prop = tcore.safe_float(args.get("proposed_daily"), min_val=0.0, field_name="proposed_daily")
         cap = tcore.safe_float(args.get("max_daily_cap", 500.0), min_val=0.01, field_name="max_daily_cap")
-        return sg.check_budget_change(curr, prop, cap)
+        tcpa = tcore.safe_float(args["target_cpa"], min_val=0.01, field_name="target_cpa") if args.get("target_cpa") is not None else None
+        return sg.check_budget_change(curr, prop, cap, tcpa, pause_approved=bool(args.get("approve_pause", False)))
     if name == "tyrion_brain_search":
         q = str(args.get("query", "")).strip()[:200]
         if not q:
@@ -379,12 +432,17 @@ def handle_request(req: Any) -> dict[str, Any] | None:
         return {"jsonrpc": "2.0", "id": None, "error": {"code": -32600, "message": "Invalid Request"}}
     method = req.get("method", "")
     req_id = req.get("id")
+    if method == "ping":
+        return {"jsonrpc": "2.0", "id": req_id, "result": {}}
     if method == "initialize":
+        params = req.get("params") if isinstance(req.get("params"), dict) else {}
+        asked = params.get("protocolVersion")
+        negotiated = asked if asked in SUPPORTED_PROTOCOL_VERSIONS else SUPPORTED_PROTOCOL_VERSIONS[-1]
         return {
             "jsonrpc": "2.0",
             "id": req_id,
             "result": {
-                "protocolVersion": "2024-11-05",
+                "protocolVersion": negotiated,
                 "capabilities": {"tools": {}},
                 "serverInfo": {"name": "tyrion-mcp-server", "version": SERVER_VERSION},
             },
@@ -399,6 +457,13 @@ def handle_request(req: Any) -> dict[str, Any] | None:
             return {"jsonrpc": "2.0", "id": req_id, "error": {"code": -32602, "message": "Invalid params"}}
         tname = str(params.get("name", ""))
         targs = params.get("arguments") or {}
+        if tname not in {t["name"] for t in MCP_TOOLS}:
+            return {"jsonrpc": "2.0", "id": req_id, "error": {"code": -32602, "message": f"Unknown tool: {tcore.redact_secrets(tname)[:80]}"}}
+
+        def _tool_error(msg: str) -> dict[str, Any]:
+            # MCP spec: asbob bajarilish xatolari JSON-RPC xato emas, `isError` natija.
+            return {"jsonrpc": "2.0", "id": req_id,
+                    "result": {"content": [{"type": "text", "text": tcore.redact_secrets(msg)}], "isError": True}}
         try:
             payload = call_tool(tname, targs)
             return {
@@ -406,18 +471,12 @@ def handle_request(req: Any) -> dict[str, Any] | None:
                 "id": req_id,
                 "result": {"content": [{"type": "text", "text": json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False)}]},
             }
-        except (ValueError, KeyError, TypeError) as exc:
-            return {
-                "jsonrpc": "2.0",
-                "id": req_id,
-                "error": {"code": -32602, "message": tcore.redact_secrets(str(exc))},
-            }
+        except KeyError as exc:
+            return _tool_error(f"Majburiy argument yo'q: {exc}")
+        except (ValueError, TypeError) as exc:
+            return _tool_error(str(exc))
         except Exception as exc:
-            return {
-                "jsonrpc": "2.0",
-                "id": req_id,
-                "error": {"code": -32000, "message": tcore.redact_secrets(str(exc))},
-            }
+            return _tool_error(f"Ichki xato: {exc}")
     if req_id is not None:
         return {"jsonrpc": "2.0", "id": req_id, "error": {"code": -32601, "message": f"Method not found: {method}"}}
     return None
@@ -434,7 +493,7 @@ def process_raw_line(raw_line: str) -> dict[str, Any] | None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v7.0.0 Native STDIO MCP Server")
+    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description=f"Tyrion v{SERVER_VERSION} Native STDIO MCP Server")
     parser.add_argument("--list-tools", action="store_true", help="Mavjud MCP tool'lar ro'yxatini JSON formatda chiqarish")
     args = parser.parse_args(argv)
     if args.list_tools:
