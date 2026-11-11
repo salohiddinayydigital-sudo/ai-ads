@@ -3595,3 +3595,60 @@ class TyrionV8SingleSourceTests(unittest.TestCase):
             for ref in refs:
                 self.assertTrue((VAULT / "skills" / skill / "references" / ref).is_file(), f"{skill}/{ref}")
                 self.assertIn(f"references/{ref}", body, f"{skill} does not point to {ref}")
+
+
+class TyrionV8EvalSuiteTests(unittest.TestCase):
+    """v8.0 3-bosqich — `claude plugin eval` to'plami yuklanadigan holatda turadi (0 token tekshiruv)."""
+
+    GRADER_TYPES = {"regex", "tool_used", "tool_order", "file_exists", "llm", "baseline"}
+    PROMPT_KEYS = {"schema_version", "name", "description", "tags", "plugins", "runs", "expected_outcome",
+                   "model", "max_turns", "timeout_seconds", "allowed_tools", "append_system_prompt", "env"}
+    FM_RE = re.compile(r"\A---\n(.*?)\n---\n(.*)\Z", re.S)
+
+    def _frontmatter(self, path: Path) -> tuple[dict, str]:
+        import yaml
+        match = self.FM_RE.match(path.read_text(encoding="utf-8"))
+        self.assertIsNotNone(match, f"{path}: frontmatter yo'q")
+        data = yaml.safe_load(match.group(1)) or {}
+        self.assertIsInstance(data, dict, f"{path}: frontmatter obyekt emas")
+        return data, match.group(2)
+
+    def test_v8_40_every_case_loads_with_a_prompt_and_at_least_one_valid_grader(self) -> None:
+        cases = sorted(p.parent for p in (VAULT / "evals").glob("*/prompt.md"))
+        self.assertGreaterEqual(len(cases), 8)
+        for case in cases:
+            fm, body = self._frontmatter(case / "prompt.md")
+            self.assertEqual(set(fm) - self.PROMPT_KEYS, set(), f"{case.name}: prompt.md da noma'lum kalit")
+            self.assertTrue(body.strip(), f"{case.name}: prompt bo'sh")
+            graders = sorted((case / "graders").glob("*.md"))
+            self.assertTrue(graders, f"{case.name}: grader yo'q — holat yuklanmaydi")
+            for grader in graders:
+                gfm, gbody = self._frontmatter(grader)
+                self.assertIn(gfm.get("type"), self.GRADER_TYPES, f"{grader}: noto'g'ri type")
+                if gfm["type"] == "llm":
+                    self.assertIn("PASS if", gbody, f"{grader}: rubrika aniq PASS sharti bilan yozilsin")
+                    self.assertIn("FAIL if", gbody, f"{grader}: rubrika aniq FAIL sharti bilan yozilsin")
+                if gfm["type"] == "regex":
+                    self.assertTrue(gfm.get("pattern"), f"{grader}: pattern yo'q")
+                    self.assertNotIn("(?i)", gfm["pattern"], f"{grader}: inline (?i) ishlamaydi — flags: i")
+                if gfm["type"] == "tool_used":
+                    self.assertTrue(gfm.get("tool"), f"{grader}: tool yo'q")
+
+    def test_v8_41_tool_graders_name_tools_the_mcp_server_really_exposes(self) -> None:
+        exposed = {t["name"] for t in importlib.import_module("tyrion-mcp-server").MCP_TOOLS}
+        prefix = "mcp__plugin_tyrion_tyrion-core__"
+        checked = 0
+        for grader in sorted((VAULT / "evals").glob("*/graders/*.md")):
+            gfm, _ = self._frontmatter(grader)
+            tool = str(gfm.get("tool", ""))
+            if tool.startswith(prefix):
+                self.assertIn(tool[len(prefix):], exposed, f"{grader}: MCP server bunday asbob bermaydi")
+                checked += 1
+        self.assertGreaterEqual(checked, 3)
+
+    def test_v8_42_breakeven_case_expects_what_the_calculator_returns(self) -> None:
+        calc = importlib.import_module("calculator").calc_breakeven(price=120, cogs=45, shipping=5)
+        cpa_fm, _ = self._frontmatter(VAULT / "evals" / "breakeven-hisob" / "graders" / "cpa.md")
+        roas_fm, _ = self._frontmatter(VAULT / "evals" / "breakeven-hisob" / "graders" / "roas.md")
+        self.assertRegex(f"{calc['breakeven_cpa']:.2f}", cpa_fm["pattern"])
+        self.assertRegex(f"{calc['breakeven_roas']:.2f}", roas_fm["pattern"])

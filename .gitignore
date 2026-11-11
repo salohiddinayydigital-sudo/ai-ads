@@ -30,3 +30,6 @@ output/
 .claude/settings.json
 .claude/settings.json.bak
 dev/
+
+# claude plugin eval run output
+evals/results/

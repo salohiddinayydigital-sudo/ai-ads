@@ -1,6 +1,6 @@
 {
   "schema": "tyrion-catalog/v1",
-  "generated": "2026-11-11T11:34:15+00:00",
+  "generated": "2026-11-11T11:41:18+00:00",
   "generator": "tools/catalog.py",
   "vault": ".",
   "counts": {
@@ -3548,9 +3548,9 @@
         "name": "test_tyrion_tools",
         "layer": "tests",
         "path": "tests/test_tyrion_tools.py",
-        "sha256": "baf1133ea895ed83",
-        "bytes": 194492,
-        "updated": "2026-11-11T11:34:15+00:00",
+        "sha256": "0f5545be04063f8b",
+        "bytes": 198011,
+        "updated": "2026-11-11T11:41:05+00:00",
         "title": null,
         "description": null,
         "source": null,
