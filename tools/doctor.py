@@ -225,20 +225,226 @@ def check_memory(report: Report) -> None:
         report.add("Xotira (MEMORY.md)", OK, f"{lines}/{MEMORY_LIMIT} qator")
 
 
+# Claude Code plugin manifest rules (code.claude.com/docs/en/plugins-reference, checked 2026-11-11).
+MANIFEST_KEYS = {
+    "$schema", "name", "displayName", "version", "description", "author", "homepage",
+    "repository", "license", "keywords", "metadata", "icon", "documentationUrl", "supportUrl",
+    "privacyPolicyUrl", "termsOfServiceUrl", "defaultEnabled", "dependencies", "settings",
+    "userConfig", "types", "channels", "skills", "commands", "agents", "hooks", "mcpServers",
+    "lspServers", "outputStyles", "workflows", "experimental",
+}
+USERCONFIG_KEYS = {"type", "title", "description", "required", "default", "options",
+                   "multiple", "sensitive", "min", "max"}
+USERCONFIG_TYPES = {"string", "number", "boolean", "directory", "file"}
+BARE_PLUGIN_ROOT_RE = re.compile(r"\$\{CLAUDE_PLUGIN_ROOT\}")
+
+
+def _as_list(value: object) -> list:
+    return value if isinstance(value, list) else [value]
+
+
+def lint_plugin_manifest(vault: Path = VAULT) -> tuple[list[str], list[str]]:
+    """Plugin manifesti va loyiha `.mcp.json` ni rasmiy qoidalarga solishtiradi.
+
+    Qaytaradi: (xatolar, ogohlantirishlar). Xato — plugin yuklanmaydi yoki komponent
+    tushib qoladi; ogohlantirish — maydon jim tashlab yuboriladi.
+    """
+    errors: list[str] = []
+    notes: list[str] = []
+    manifest = vault / ".claude-plugin" / "plugin.json"
+    if not manifest.is_file():
+        return [".claude-plugin/plugin.json yo'q"], notes
+    try:
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"plugin.json buzilgan: {exc}"], notes
+    if not isinstance(data, dict):
+        return ["plugin.json obyekt emas"], notes
+
+    name = data.get("name")
+    if not isinstance(name, str) or not name or re.search(r"[\s@:/\\]", name):
+        errors.append("name: bo'sh yoki yaroqsiz belgi bor")
+    for key in sorted(set(data) - MANIFEST_KEYS):
+        notes.append(f"{key}: noma'lum maydon (yuklashda tashlab yuboriladi)")
+
+    # Komponent yo'llari: `./` bilan boshlanadi, plugin ichida va mavjud bo'lishi shart.
+    for key in ("skills", "commands", "agents", "outputStyles", "workflows"):
+        if key not in data or isinstance(data[key], dict):
+            continue
+        for entry in _as_list(data[key]):
+            if not isinstance(entry, str):
+                errors.append(f"{key}: yo'l satr bo'lishi kerak")
+                continue
+            if entry != "." and not entry.startswith("./"):
+                errors.append(f"{key}: '{entry}' — yo'l './' bilan boshlanishi shart")
+                continue
+            target = (vault / entry).resolve()
+            if vault.resolve() not in (target, *target.parents):
+                errors.append(f"{key}: '{entry}' plugin papkasidan tashqarida")
+            elif not target.exists():
+                errors.append(f"{key}: '{entry}' topilmadi")
+            elif key == "agents" and not entry.endswith(".md"):
+                errors.append(f"agents: '{entry}' — faqat .md fayllar qabul qilinadi (papka emas)")
+            elif key == "skills" and not target.is_dir():
+                errors.append(f"skills: '{entry}' papka bo'lishi shart")
+
+    options = data.get("userConfig", {})
+    if not isinstance(options, dict):
+        errors.append("userConfig: obyekt bo'lishi shart")
+        options = {}
+    for opt, spec in options.items():
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", str(opt)):
+            errors.append(f"userConfig.{opt}: kalit faqat harf, raqam va _ dan iborat bo'ladi")
+        if not isinstance(spec, dict):
+            errors.append(f"userConfig.{opt}: obyekt bo'lishi shart")
+            continue
+        for extra in sorted(set(spec) - USERCONFIG_KEYS):
+            errors.append(f"userConfig.{opt}.{extra}: noma'lum kalit (plugin yuklanmaydi)")
+        if spec.get("type") not in USERCONFIG_TYPES:
+            errors.append(f"userConfig.{opt}.type: {sorted(USERCONFIG_TYPES)} dan biri bo'lishi shart")
+        for required in ("title", "description"):
+            if not spec.get(required):
+                errors.append(f"userConfig.{opt}.{required}: majburiy")
+        choices = spec.get("options")
+        if choices is not None:
+            if spec.get("type") != "string" or spec.get("multiple") or spec.get("sensitive"):
+                errors.append(f"userConfig.{opt}.options: faqat oddiy string maydonda ishlaydi")
+            elif spec.get("default") not in choices and not spec.get("required"):
+                errors.append(f"userConfig.{opt}.default: options ro'yxatidan bo'lishi shart")
+
+    servers = data.get("mcpServers")
+    if isinstance(servers, dict):
+        for sname, cfg in servers.items():
+            if not isinstance(cfg, dict) or not (cfg.get("command") or cfg.get("url")):
+                errors.append(f"mcpServers.{sname}: command yoki url kerak")
+
+    # Loyiha rejimi: repo to'g'ridan-to'g'ri ochilganda `${CLAUDE_PLUGIN_ROOT}` bo'sh qoladi,
+    # shuning uchun `.mcp.json` da faqat `${CLAUDE_PLUGIN_ROOT:-.}` shakli ishlaydi.
+    project_mcp = vault / ".mcp.json"
+    if project_mcp.is_file():
+        try:
+            pcfg = json.loads(project_mcp.read_text(encoding="utf-8"))
+            for sname, cfg in (pcfg.get("mcpServers") or {}).items():
+                fields = [str(cfg.get("command", "")), *map(str, cfg.get("args") or [])]
+                if any(BARE_PLUGIN_ROOT_RE.search(field) for field in fields):
+                    errors.append(f".mcp.json {sname}: '${{CLAUDE_PLUGIN_ROOT}}' loyiha rejimida ochilmaydi "
+                                  "— '${CLAUDE_PLUGIN_ROOT:-.}' ishlating")
+                if isinstance(servers, dict) and sname not in servers:
+                    notes.append(f".mcp.json {sname}: plugin.json mcpServers da yo'q (plugin rejimida nisbiy yo'l)")
+        except json.JSONDecodeError as exc:
+            errors.append(f".mcp.json buzilgan: {exc}")
+
+    hooks_file = vault / "hooks" / "hooks.json"
+    if hooks_file.is_file():
+        try:
+            if "hooks" not in json.loads(hooks_file.read_text(encoding="utf-8")):
+                errors.append("hooks/hooks.json: yuqori darajadagi 'hooks' kaliti yo'q")
+        except json.JSONDecodeError as exc:
+            errors.append(f"hooks/hooks.json buzilgan: {exc}")
+    return errors, notes
+
+
+def official_plugin_validate(vault: Path = VAULT) -> tuple[str, str]:
+    """`claude plugin validate` natijasi: (holat, izoh). CLI yo'q bo'lsa — ('skip', ...)."""
+    import shutil
+    cli = shutil.which("claude")
+    if not cli:
+        return SKIP, "claude CLI yo'q"
+    try:
+        proc = run([cli, "plugin", "validate", str(vault)], timeout=90)
+    except Exception as exc:  # timeout, ishga tushmadi
+        return SKIP, f"validator ishlamadi: {exc}"
+    text = (proc.stdout or "") + (proc.stderr or "")
+    if "Validation failed" in text:
+        found = re.findall(r"^\s*>\s*(.+)$", text, re.M)
+        return FAIL, "; ".join(dict.fromkeys(found[:3])) or "Validation failed"
+    if "Validation passed" in text:
+        return OK, "rasmiy validator o'tdi"
+    return SKIP, "validator natijasi noaniq"
+
+
+def check_plugin_manifest(report: Report, quick: bool = False) -> None:
+    errors, notes = lint_plugin_manifest()
+    label = "Plugin manifesti"
+    if errors:
+        report.add(label, FAIL, "; ".join(errors[:4]) + (f" +{len(errors) - 4}" if len(errors) > 4 else ""))
+        return
+    status, detail = (SKIP, "tezkor rejim") if quick else official_plugin_validate()
+    if status == FAIL:
+        report.add(label, FAIL, f"claude plugin validate: {detail}")
+    elif notes:
+        report.add(label, WARN, "; ".join(notes[:3]))
+    else:
+        suffix = f" · {detail}" if status == OK else f" · {detail} (faqat lokal qoidalar)"
+        report.add(label, OK, "qoidalarga mos" + suffix)
+
+
+def mcp_handshake(timeout: int = 20) -> dict:
+    """tyrion-core ni `.mcp.json` dagidek ishga tushirib, initialize → ping → tools/list yuboradi.
+
+    Tashqi papkadan va `CLAUDE_PLUGIN_ROOT` siz ishlaydi — ya'ni server o'z ildizini o'zi
+    topa olishi tekshiriladi. Qaytaradi: {ok, tools, protocol, error}.
+    """
+    import os
+    import shutil
+    import tempfile
+
+    launcher = VAULT / "hooks" / "run-hook.cjs"
+    node = shutil.which("node")
+    if node and launcher.is_file():
+        cmd = [node, str(launcher), "--mcp"]
+    else:
+        cmd = [sys.executable, str(TOOLS / "tyrion-mcp-server.py")]
+    requests = [
+        {"jsonrpc": "2.0", "id": 1, "method": "initialize",
+         "params": {"protocolVersion": "2025-06-18", "capabilities": {},
+                    "clientInfo": {"name": "tyrion-doctor", "version": "1"}}},
+        {"jsonrpc": "2.0", "method": "notifications/initialized"},
+        {"jsonrpc": "2.0", "id": 2, "method": "ping"},
+        {"jsonrpc": "2.0", "id": 3, "method": "tools/list"},
+    ]
+    env = {k: v for k, v in os.environ.items() if k != "CLAUDE_PLUGIN_ROOT"}
+    env["PYTHONIOENCODING"] = "utf-8"
+    try:
+        with tempfile.TemporaryDirectory() as outside:
+            proc = subprocess.run(
+                cmd, input="".join(json.dumps(r) + "\n" for r in requests), cwd=outside, env=env,
+                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout,
+            )
+    except Exception as exc:
+        return {"ok": False, "error": f"ishga tushmadi: {exc}"}
+    replies: dict = {}
+    for line in (proc.stdout or "").splitlines():
+        try:
+            msg = json.loads(line)
+        except json.JSONDecodeError:
+            return {"ok": False, "error": "stdout da JSON bo'lmagan qator (protokol buziladi)"}
+        replies[msg.get("id")] = msg
+    init, ping, listing = replies.get(1, {}), replies.get(2, {}), replies.get(3, {})
+    if "result" not in init:
+        return {"ok": False, "error": f"initialize javobsiz (rc={proc.returncode}) {(proc.stderr or '')[:120]}".strip()}
+    if "result" not in ping:
+        return {"ok": False, "error": "ping javobsiz — klient serverni uzib qo'yadi"}
+    tools = (listing.get("result") or {}).get("tools") or []
+    if not tools:
+        return {"ok": False, "error": "tools/list bo'sh"}
+    return {"ok": True, "tools": len(tools), "protocol": init["result"].get("protocolVersion"), "error": ""}
+
+
 def check_mcp_and_evals(report: Report) -> None:
-    """MCP Server (.mcp.json + tyrion-mcp-server.py) va Behavioral Evals (skill-eval.py) tekshiruvi."""
+    """MCP Server (jonli handshake) va Behavioral Evals (skill-eval.py) tekshiruvi."""
     import importlib
     mcp_cfg = VAULT / ".mcp.json"
     mcp_srv = TOOLS / "tyrion-mcp-server.py"
     if not mcp_cfg.is_file() or not mcp_srv.is_file():
         report.add("MCP Server (.mcp.json)", FAIL, ".mcp.json yoki tyrion-mcp-server.py yo'q")
     else:
-        try:
-            mcp_mod = importlib.import_module("tyrion-mcp-server")
-            tcount = len(getattr(mcp_mod, "MCP_TOOLS", []))
-            report.add("MCP Server (.mcp.json)", OK, f"tyrion-core faol ({tcount} MCP tool)")
-        except Exception as exc:
-            report.add("MCP Server (.mcp.json)", WARN, f"tekshirib bo'lmadi: {exc}")
+        result = mcp_handshake()
+        if result["ok"]:
+            report.add("MCP Server (.mcp.json)", OK,
+                       f"tyrion-core javob berdi ({result['tools']} MCP tool, ping ✓, {result['protocol']})")
+        else:
+            report.add("MCP Server (.mcp.json)", FAIL, f"ulanmadi: {result['error']}")
 
     eval_srv = TOOLS / "skill-eval.py"
     if not eval_srv.is_file():
@@ -256,21 +462,31 @@ def check_mcp_and_evals(report: Report) -> None:
 
 
 def check_graph(report: Report, data: dict) -> None:
+    """Graf qaydlar to'plamiga mosmi. Tarkib bo'yicha solishtiriladi: yangi klonda barcha
+    fayllarning mtime'i deyarli bir xil bo'ladi, shuning uchun vaqt farqi yolg'on signal berardi."""
     graph = VAULT / "graphify-out" / "graph.json"
     if not graph.is_file():
         report.add("Bilim grafi", SKIP, "graf ixtiyoriy (graphify-out/graph.json yo'q)")
         return
-    graph_time = graph.stat().st_mtime
-    notes = [VAULT / i["path"] for i in data["items"].get("wiki", [])]
-    newest = max((p.stat().st_mtime for p in notes if p.is_file()), default=0)
-    if newest > graph_time:
-        days = (newest - graph_time) / 86400
-        hint = "" if llm_key_present() else " — LLM kaliti yo'q; lokal Ollama bilan: tools\\gy.cmd refresh"
-        report.add("Bilim grafi", WARN,
-                   f"eskirgan - qaydlar grafdan {days:.1f} kun yangi (gy.cmd refresh){hint}")
+    try:
+        nodes = json.loads(graph.read_text(encoding="utf-8")).get("nodes", [])
+    except (json.JSONDecodeError, OSError) as exc:
+        report.add("Bilim grafi", WARN, f"o'qib bo'lmadi: {exc} (python3 tools/brain-graph.py build)")
+        return
+    in_graph = {str(n.get("source_file", "")).replace("\\", "/") for n in nodes}
+    notes = {i["path"] for i in data["items"].get("wiki", [])}
+    missing = sorted(notes - in_graph)
+    gone = sorted(src for src in in_graph if src and not (VAULT / src).is_file())
+    if missing or gone:
+        parts = []
+        if missing:
+            parts.append(f"{len(missing)} qayd grafda yo'q")
+        if gone:
+            parts.append(f"{len(gone)} tugun manbasi o'chirilgan")
+        report.add("Bilim grafi", WARN, "eskirgan — " + ", ".join(parts) + " (python3 tools/brain-graph.py build)")
     else:
         size_kb = graph.stat().st_size / 1024
-        report.add("Bilim grafi", OK, f"yangilangan ({size_kb:.0f} KB)")
+        report.add("Bilim grafi", OK, f"qaydlarga mos ({len(nodes)} tugun, {size_kb:.0f} KB)")
 
 
 def check_secrets(report: Report) -> None:
@@ -480,6 +696,7 @@ def main(argv: list[str] | None = None) -> int:
     check_instincts(report)
     check_shield(report)
     check_memory(report)
+    check_plugin_manifest(report, args.quick)
     check_mcp_and_evals(report)
     check_graph(report, data)
     check_secrets(report)

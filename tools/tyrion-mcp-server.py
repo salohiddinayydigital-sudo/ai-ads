@@ -26,6 +26,17 @@ import tyrion_core as tcore  # noqa: E402
 
 SERVER_VERSION = "7.0.0"
 
+# Newest first. The server only uses the tools capability over stdio, which is
+# identical across these revisions, so it can honour whichever the client asks for.
+SUPPORTED_PROTOCOL_VERSIONS = ("2025-06-18", "2025-03-26", "2024-11-05")
+
+
+def negotiate_protocol_version(requested: Any) -> str:
+    """Echo the client's revision when supported, otherwise offer the newest one we speak."""
+    if isinstance(requested, str) and requested in SUPPORTED_PROTOCOL_VERSIONS:
+        return requested
+    return SUPPORTED_PROTOCOL_VERSIONS[0]
+
 MCP_TOOLS = [
     {
         "name": "tyrion_universal_router",
@@ -380,17 +391,21 @@ def handle_request(req: Any) -> dict[str, Any] | None:
     method = req.get("method", "")
     req_id = req.get("id")
     if method == "initialize":
+        params = req.get("params") if isinstance(req.get("params"), dict) else {}
         return {
             "jsonrpc": "2.0",
             "id": req_id,
             "result": {
-                "protocolVersion": "2024-11-05",
+                "protocolVersion": negotiate_protocol_version(params.get("protocolVersion")),
                 "capabilities": {"tools": {}},
                 "serverInfo": {"name": "tyrion-mcp-server", "version": SERVER_VERSION},
             },
         }
     if method in ("notifications/initialized", "initialized"):
         return None
+    if method == "ping":
+        # Liveness check: clients disconnect a server that does not answer it.
+        return {"jsonrpc": "2.0", "id": req_id, "result": {}} if req_id is not None else None
     if method == "tools/list":
         return {"jsonrpc": "2.0", "id": req_id, "result": {"tools": MCP_TOOLS}}
     if method == "tools/call":
@@ -413,10 +428,15 @@ def handle_request(req: Any) -> dict[str, Any] | None:
                 "error": {"code": -32602, "message": tcore.redact_secrets(str(exc))},
             }
         except Exception as exc:
+            # A tool that ran and failed is reported inside the result (isError) so the
+            # model can read the reason and recover; protocol errors stay JSON-RPC errors.
             return {
                 "jsonrpc": "2.0",
                 "id": req_id,
-                "error": {"code": -32000, "message": tcore.redact_secrets(str(exc))},
+                "result": {
+                    "content": [{"type": "text", "text": f"{type(exc).__name__}: {tcore.redact_secrets(str(exc))}"}],
+                    "isError": True,
+                },
             }
     if req_id is not None:
         return {"jsonrpc": "2.0", "id": req_id, "error": {"code": -32601, "message": f"Method not found: {method}"}}

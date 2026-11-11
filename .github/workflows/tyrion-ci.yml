@@ -2,7 +2,7 @@ name: Tyrion v7.0 Global CI & Security Gate
 
 on:
   push:
-    branches: [ main, master, "feat/**", "sync/**" ]
+    branches: [ main, master, "feat/**", "sync/**", "claude/**" ]
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
@@ -56,8 +56,29 @@ jobs:
       - name: Behavioral Eval Suite (24/24 Scenarios)
         run: python tools/skill-eval.py
 
-      - name: Full Unit Test Suite (196 Tests including External-CWD Hook & MCP Verification)
+      - name: Full Unit Test Suite (including External-CWD Hook & MCP Verification)
         run: python -m unittest discover -s tests -t . -v
 
       - name: Doctor System Health Check
         run: python tools/doctor.py --quick
+
+  plugin-validate:
+    # Official manifest check. Advisory (does not block the matrix): the same rules are
+    # enforced deterministically by `doctor.py` (lint_plugin_manifest) on every OS above.
+    name: Official Claude Code plugin validator (advisory)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: claude plugin validate
+        run: claude plugin validate .

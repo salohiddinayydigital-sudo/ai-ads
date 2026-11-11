@@ -3,10 +3,9 @@
     "tyrion-core": {
       "command": "node",
       "args": [
-        "${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs",
+        "${CLAUDE_PLUGIN_ROOT:-.}/hooks/run-hook.cjs",
         "--mcp"
-      ],
-      "description": "Tyrion built-in 0-token STDIO MCP server (10 deterministic paid-media & routing tools: Universal Auto-Router, Detailed Targeting Accuracy Engine, Meta Audience, Live Meta Insights, Breakdown Effect, Creative Matrix, CAPI/UTM, Spend-Guard, Calculator, Brain Search)"
+      ]
     }
   }
 }

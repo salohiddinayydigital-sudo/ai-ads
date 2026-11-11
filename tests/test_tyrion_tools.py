@@ -3194,3 +3194,119 @@ class AiAdsSyncAndVaultAuditCITests(unittest.TestCase):
             self.assertIn("salohiddinayydigital-sudo/ai-ads.git", script_txt)
             self.assertNotIn("--force", script_txt, f"{script_rel} must not use git push --force")
 
+
+
+class TyrionV8PluginFoundationTests(unittest.TestCase):
+    """v8.0 0-bosqich — plugin manifesti rasmiy qoidalarga mos, MCP ikkala rejimda ulanadi."""
+
+    def setUp(self) -> None:
+        self.mcp = importlib.import_module("tyrion-mcp-server")
+
+    def _vault_copy(self, tmp: str, manifest: dict, project_mcp: dict | None = None) -> Path:
+        root = Path(tmp)
+        (root / ".claude-plugin").mkdir()
+        (root / ".claude-plugin" / "plugin.json").write_text(json.dumps(manifest), encoding="utf-8")
+        if project_mcp is not None:
+            (root / ".mcp.json").write_text(json.dumps(project_mcp), encoding="utf-8")
+        return root
+
+    def test_v8_01_shipped_manifest_passes_lint_and_declares_no_redundant_component_keys(self) -> None:
+        errors, notes = doctor.lint_plugin_manifest(VAULT)
+        self.assertEqual(errors, [], f"manifest xatolari: {errors}")
+        self.assertEqual(notes, [], f"manifest ogohlantirishlari: {notes}")
+        data = json.loads((VAULT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        # skills/, agents/, commands/ and hooks/hooks.json are scanned by default; `agents`
+        # as a directory is the exact bug that made `claude plugin validate` fail in v7.
+        for key in ("skills", "agents", "commands", "hooks", "suggestedPrompts", "interface"):
+            self.assertNotIn(key, data, f"plugin.json must not declare '{key}'")
+
+    def test_v8_02_lint_rejects_agents_directory_unknown_userconfig_key_and_unknown_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._vault_copy(tmp, {
+                "name": "tyrion",
+                "agents": "./agents/",
+                "interface": {"x": 1},
+                "userConfig": {"profile": {"type": "string", "title": "t", "description": "d", "enum": ["a"]}},
+            })
+            (root / "agents").mkdir()
+            errors, notes = doctor.lint_plugin_manifest(root)
+        joined = " | ".join(errors)
+        self.assertIn("agents: './agents/'", joined)
+        self.assertIn("userConfig.profile.enum", joined)
+        self.assertTrue(any(n.startswith("interface:") for n in notes), notes)
+
+    def test_v8_03_lint_rejects_userconfig_options_without_matching_default(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._vault_copy(tmp, {
+                "name": "tyrion",
+                "userConfig": {"market": {"type": "string", "title": "t", "description": "d",
+                                          "options": ["uz", "global"], "default": "mars"}},
+            })
+            errors, _notes = doctor.lint_plugin_manifest(root)
+        self.assertTrue(any("userConfig.market.default" in e for e in errors), errors)
+
+    def test_v8_04_project_mcp_json_must_not_use_bare_plugin_root(self) -> None:
+        bare = {"mcpServers": {"tyrion-core": {"command": "node",
+                                               "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs", "--mcp"]}}}
+        with tempfile.TemporaryDirectory() as tmp:
+            errors, _ = doctor.lint_plugin_manifest(self._vault_copy(tmp, {"name": "tyrion"}, bare))
+        self.assertTrue(any(".mcp.json tyrion-core" in e for e in errors), errors)
+
+        shipped = json.loads((VAULT / ".mcp.json").read_text(encoding="utf-8"))["mcpServers"]["tyrion-core"]
+        self.assertEqual(shipped["args"][0], "${CLAUDE_PLUGIN_ROOT:-.}/hooks/run-hook.cjs")
+        # Plugin mode: the manifest entry replaces the project-mode one and uses the substituted root.
+        plugin = json.loads((VAULT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        self.assertEqual(plugin["mcpServers"]["tyrion-core"]["args"][0], "${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs")
+
+    def test_v8_05_mcp_answers_ping_and_negotiates_protocol_version(self) -> None:
+        ping = self.mcp.handle_request({"jsonrpc": "2.0", "id": 7, "method": "ping"})
+        self.assertEqual(ping, {"jsonrpc": "2.0", "id": 7, "result": {}})
+
+        def version(requested: object) -> str:
+            params = {} if requested is None else {"protocolVersion": requested}
+            resp = self.mcp.handle_request({"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": params})
+            return resp["result"]["protocolVersion"]
+
+        self.assertEqual(version("2024-11-05"), "2024-11-05")
+        self.assertEqual(version("2025-06-18"), "2025-06-18")
+        self.assertEqual(version("1999-01-01"), self.mcp.SUPPORTED_PROTOCOL_VERSIONS[0])
+        self.assertEqual(version(None), self.mcp.SUPPORTED_PROTOCOL_VERSIONS[0])
+
+    def test_v8_06_mcp_reports_tool_runtime_failure_as_is_error_result_with_redacted_secret(self) -> None:
+        fake_token = "EAA" + "B" * 24
+        original = self.mcp.call_tool
+
+        def boom(_name: str, _args: dict) -> dict:
+            raise RuntimeError(f"upstream failed for token {fake_token}")
+
+        self.mcp.call_tool = boom
+        try:
+            resp = self.mcp.handle_request({"jsonrpc": "2.0", "id": 3, "method": "tools/call",
+                                            "params": {"name": "tyrion_media_calculator", "arguments": {}}})
+        finally:
+            self.mcp.call_tool = original
+        self.assertNotIn("error", resp)
+        self.assertTrue(resp["result"]["isError"])
+        text = resp["result"]["content"][0]["text"]
+        self.assertIn("RuntimeError", text)
+        self.assertNotIn(fake_token, text)
+
+    def test_v8_07_doctor_mcp_check_is_a_live_handshake_from_an_external_cwd(self) -> None:
+        result = doctor.mcp_handshake()
+        self.assertTrue(result["ok"], result.get("error"))
+        self.assertEqual(result["tools"], len(self.mcp.MCP_TOOLS))
+        self.assertIn(result["protocol"], self.mcp.SUPPORTED_PROTOCOL_VERSIONS)
+
+    def test_v8_08_graph_freshness_is_content_based_not_mtime_based(self) -> None:
+        graph = VAULT / "graphify-out" / "graph.json"
+        if not graph.is_file():
+            self.skipTest("graph.json yo'q")
+        stat = graph.stat()
+        try:
+            os.utime(graph, (stat.st_atime, stat.st_mtime - 10 * 86400))  # graph looks 10 days older than notes
+            report = doctor.Report()
+            doctor.check_graph(report, catalog.scan())
+        finally:
+            os.utime(graph, (stat.st_atime, stat.st_mtime))
+        row = next(r for r in report.rows if r["check"] == "Bilim grafi")
+        self.assertEqual(row["status"], doctor.OK, row["detail"])
