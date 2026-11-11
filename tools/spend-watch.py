@@ -23,7 +23,7 @@ import os
 import sys
 import time
 import urllib.parse
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable
 from zoneinfo import ZoneInfo
@@ -98,14 +98,21 @@ def graph_fetcher() -> Callable[[str, dict[str, str]], dict[str, Any]]:
     return fetch
 
 
+def account_timezone(info: dict[str, Any]):
+    """Akkaunt vaqt mintaqasi. Windows'da `tzdata` bo'lmasligi mumkin, shunda Meta bergan UTC siljishiga o'tadi
+    (UTC ga jimgina o'tish kun ulushini noto'g'ri hisoblardi)."""
+    try:
+        return ZoneInfo(str(info.get("timezone_name") or ""))
+    except Exception:
+        hours = tcore.safe_float(info.get("timezone_offset_hours_utc"), default=0.0, min_val=-14.0, max_val=14.0)
+        return timezone(timedelta(hours=hours))
+
+
 def check_once(account: str, fetch: Callable[[str, dict[str, str]], dict[str, Any]], now: datetime | None = None,
                offset_override: int | None = None) -> dict[str, Any]:
-    info = fetch(account, {"fields": "name,currency,timezone_name"})
+    info = fetch(account, {"fields": "name,currency,timezone_name,timezone_offset_hours_utc"})
     currency = str(info.get("currency", "USD"))
-    try:
-        tz = ZoneInfo(str(info.get("timezone_name") or "UTC"))
-    except Exception:
-        tz = ZoneInfo("UTC")
+    tz = account_timezone(info)
     local_now = (now or datetime.now(tz)).astimezone(tz)
     active = json.dumps(["ACTIVE"])
     campaigns = fetch(f"{account}/campaigns", {"fields": "id,daily_budget", "effective_status": active, "limit": "200"}).get("data", [])

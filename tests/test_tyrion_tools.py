@@ -3968,7 +3968,7 @@ class TyrionV8SpendWatchTests(unittest.TestCase):
 
     def test_v8_73_check_once_reads_only_with_get_paths(self) -> None:
         from datetime import datetime
-        from zoneinfo import ZoneInfo
+        from datetime import timezone, timedelta
         seen: list[str] = []
 
         def fetch(path, params):
@@ -3979,13 +3979,15 @@ class TyrionV8SpendWatchTests(unittest.TestCase):
                 return {"data": []}
             if path.endswith("/adsets"):
                 return {"data": [{"campaign_id": "x", "daily_budget": "10000"}]}
-            return {"name": "Demo", "currency": "USD", "timezone_name": "Asia/Tashkent"}
+            return {"name": "Demo", "currency": "USD", "timezone_name": "No/Such_Zone", "timezone_offset_hours_utc": 5}
 
-        now = datetime(2026, 11, 11, 12, 0, tzinfo=ZoneInfo("Asia/Tashkent"))
+        now = datetime(2026, 11, 11, 12, 0, tzinfo=timezone(timedelta(hours=5)))
         res = self.m.check_once("act_1", fetch, now=now)
         self.assertEqual(res["state"], "OVERPACE")      # 90 > 50 * 1.2
         self.assertEqual(res["budget"], 100.0)
         self.assertEqual(len(seen), 4)
+        # nomaʼlum zona nomi bo'lsa, Meta bergan siljish ishlatiladi (UTC emas)
+        self.assertEqual(self.m.account_timezone({"timezone_name": "No/Such_Zone", "timezone_offset_hours_utc": 5}).utcoffset(None), timedelta(hours=5))
 
     def test_v8_74_silent_exit_without_token_and_monitor_is_declared(self) -> None:
         import io
@@ -4025,7 +4027,8 @@ class TyrionV8GoogleAdsConnectTests(unittest.TestCase):
         env = self.m.server_env(values, Path("/x/tools_config.yaml"))
         cmd = self.m.build_command(env)
         self.assertEqual(cmd[:6], ["claude", "mcp", "add", "--scope", "user", "google-ads"])
-        self.assertIn("GOOGLE_ADS_MCP_TOOLS_CONFIG=/x/tools_config.yaml", cmd)
+        cfg = Path("/x/tools_config.yaml")
+        self.assertIn(f"GOOGLE_ADS_MCP_TOOLS_CONFIG={cfg}", cmd)
         self.assertIn("GOOGLE_ADS_LOGIN_CUSTOMER_ID=1234567890", cmd)
         self.assertNotIn("tok", self.m.masked(cmd))
 
