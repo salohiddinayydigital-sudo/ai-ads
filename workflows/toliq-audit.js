@@ -113,7 +113,9 @@ const RULES = [
   '- Read-only. Never change an ad account. A proposed change is a draft with a rollback step, for the operator to approve.',
   '- When an input is missing, list it under missing_inputs. Do not estimate it.',
   '- A tool default (for example a target CPA the tool assumes when none is given) is not the client\'s figure. Never report it as their economics.',
-  '- Every recommendation carries a rollback: the concrete step and the trigger value that undoes it, or "no account change" when nothing in the account is touched.',
+  '- Every recommendation carries a rollback: the concrete step and the trigger value that undoes it, or "no account change" when nothing in the account is touched. A recommendation that changes the account (scale, pause, budget, targeting) with an empty rollback, or one that only says "n/a", is not allowed.',
+  '- result is pass or fail only when the field that decides it is present in the evidence. A missing field (pixel status, learning stage, deduplication flag, currency) makes the result unknown, never pass and never fail.',
+  '- Never cite an official document, benchmark or platform rule unless the evidence you were given contains it. Without a source, say "manba yo\'q" and mark the statement HEURISTIC_PRIOR_MODEL.',
 ].join('\n')
 
 const input = typeof args === 'string' ? { request: args } : (args || {})
@@ -176,6 +178,7 @@ const verify = (name, files, result, phaseTitle) => {
       'supported: findings whose evidence you confirmed, unchanged.',
       'rejected: findings whose figure is absent, misread, comes from a tool default, or does not support the claim, with the reason.',
       'A finding marked HEURISTIC_PRIOR_MODEL is supported only if it states its assumptions.',
+      'Also reject: a recommendation that changes the account while its rollback is empty or "n/a"; a pass or fail whose deciding field is not in the evidence (it must be unknown); a claim that cites an official document the evidence does not contain.',
     ].join('\n'),
     { schema: VERIFIED_SCHEMA, label: `tekshiruv ${name}`, phase: phaseTitle },
   ).then(v => ({
@@ -275,6 +278,8 @@ const report = await agent(
     '4. Keyingi qadamlar: one to three actions with owner and deadline. Any account change is a draft that needs Spend-Guard and operator approval.',
     '5. Cheklovlar: missing inputs and what each one blocks.',
     '6. Ilova: rejected findings with the reason, then unverified findings.',
+    '',
+    'Every figure, in prose and in tables, carries its own source tag (MEASURED_ACCOUNT_DATA or HEURISTIC_PRIOR_MODEL) right next to it; one label for the whole report is not enough. Where a verified finding has no source, write "manba yo\'q" instead of citing one.',
     '',
     'Use only the verified findings given here, with their control_id unchanged. Do not add findings, benchmarks or figures of your own, and do not say the audit is complete while Cheklovlar lists blockers.',
   ].join('\n'),
