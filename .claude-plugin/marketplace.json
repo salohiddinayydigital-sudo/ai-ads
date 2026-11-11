@@ -5,14 +5,14 @@
     "url": "https://github.com/salohiddinayydigital-sudo"
   },
   "metadata": {
-    "description": "Tyrion — The calibrated advertising & marketing operating system for AI coding agents: 36 specialist agents, 63 platform and marketing skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 18 slash commands, 29 CLI tools, Detailed Targeting Accuracy Engine, Live Meta Graph API v26.0 Insights sync, Spend-Guard, and TyrionShield.",
+    "description": "Tyrion — The calibrated advertising & marketing operating system for AI coding agents: 36 specialist agents, 63 platform and marketing skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 18 slash commands, 31 CLI tools, Detailed Targeting Accuracy Engine, Live Meta Graph API v26.0 Insights sync, Spend-Guard, and TyrionShield.",
     "version": "8.0.0"
   },
   "plugins": [
     {
       "name": "tyrion",
       "source": "./",
-      "description": "Tyrion — Single-Root ECC-Grade Paid Media & Targetology OS (36 agents, 63 skills, 100 wiki notes, 9 playbooks, 6 context modes, 18 slash commands, 29 tools).",
+      "description": "Tyrion — Single-Root ECC-Grade Paid Media & Targetology OS (36 agents, 63 skills, 100 wiki notes, 9 playbooks, 6 context modes, 18 slash commands, 31 tools).",
       "version": "8.0.0",
       "category": "marketing",
       "keywords": [

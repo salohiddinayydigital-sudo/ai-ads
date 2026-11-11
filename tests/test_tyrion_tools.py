@@ -3932,3 +3932,106 @@ class TyrionV8WorkflowTests(unittest.TestCase):
         empty = self._run("haftalik-tahlil", {"args": "haftalik", "answers": {"ma'lumot yig'ish": {"client": "demo", "evidence_files": [], "missing_inputs": []}}})
         self.assertEqual(empty["result"]["status"], "needs_input")
         self.assertEqual(len(empty["calls"]), 1)
+
+
+class TyrionV8SpendWatchTests(unittest.TestCase):
+    """v8.0 3-bosqich — sarf kuzatuvchisi: og'ishni aniqlaydi, spam qilmaydi, hisobga yozmaydi."""
+
+    def setUp(self) -> None:
+        self.m = importlib.import_module("spend-watch")
+
+    def test_v8_70_evaluate_flags_overpace_over_budget_and_underpace(self) -> None:
+        ev = self.m.evaluate
+        self.assertEqual(ev(70, 100, 0.5)[0], "OVERPACE")        # reja 50, 20% dan ko'p
+        self.assertEqual(ev(110, 100, 0.9)[0], "OVER_BUDGET")
+        self.assertEqual(ev(20, 100, 0.8)[0], "UNDERPACE")       # reja 80, yarmidan kam
+        self.assertEqual(ev(50, 100, 0.5)[0], "OK")
+        self.assertEqual(ev(5, 100, 0.05)[0], "OK")              # kun boshida baho berilmaydi
+        self.assertEqual(ev(5, 0, 0.5)[0], "NO_BUDGET")
+
+    def test_v8_71_cbo_budget_is_not_double_counted(self) -> None:
+        campaigns = [{"id": "c1", "daily_budget": "10000"}, {"id": "c2"}]
+        adsets = [{"campaign_id": "c1", "daily_budget": "99999"}, {"campaign_id": "c2", "daily_budget": "5000"},
+                  {"campaign_id": "c2", "lifetime_budget": "70000"}]
+        total, lifetime = self.m.total_daily_budget(campaigns, adsets, 100)
+        self.assertEqual(total, 150.0)
+        self.assertEqual(lifetime, 1)
+
+    def test_v8_72_emits_only_on_state_change(self) -> None:
+        r = lambda day, st: {"day": day, "state": st}
+        self.assertFalse(self.m.should_emit(None, r("d1", "OK")))
+        self.assertTrue(self.m.should_emit(None, r("d1", "OVERPACE")))
+        self.assertFalse(self.m.should_emit(("d1", "OVERPACE"), r("d1", "OVERPACE")))
+        self.assertTrue(self.m.should_emit(("d1", "OVERPACE"), r("d1", "OK")))       # tiklandi
+        self.assertFalse(self.m.should_emit(("d1", "OK"), r("d2", "OK")))
+        self.assertTrue(self.m.should_emit(("d1", "OK"), r("d2", "OVERPACE")))
+
+    def test_v8_73_check_once_reads_only_with_get_paths(self) -> None:
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        seen: list[str] = []
+
+        def fetch(path, params):
+            seen.append(path)
+            if path.endswith("/insights"):
+                return {"data": [{"spend": "90.00"}]}
+            if path.endswith("/campaigns"):
+                return {"data": []}
+            if path.endswith("/adsets"):
+                return {"data": [{"campaign_id": "x", "daily_budget": "10000"}]}
+            return {"name": "Demo", "currency": "USD", "timezone_name": "Asia/Tashkent"}
+
+        now = datetime(2026, 11, 11, 12, 0, tzinfo=ZoneInfo("Asia/Tashkent"))
+        res = self.m.check_once("act_1", fetch, now=now)
+        self.assertEqual(res["state"], "OVERPACE")      # 90 > 50 * 1.2
+        self.assertEqual(res["budget"], 100.0)
+        self.assertEqual(len(seen), 4)
+
+    def test_v8_74_silent_exit_without_token_and_monitor_is_declared(self) -> None:
+        import io
+        from contextlib import redirect_stdout
+        saved = {k: os.environ.pop(k, None) for k in ("META_ACCESS_TOKEN", "META_AD_ACCOUNT_ID", "TYRION_CFG_META_ACCESS_TOKEN")}
+        os.environ["TYRION_NO_DOTENV"] = "1"
+        try:
+            buf = io.StringIO()
+            with redirect_stdout(buf):
+                self.assertEqual(self.m.main(["--once"]), 0)
+            self.assertIn("o'chiq", buf.getvalue())
+        finally:
+            os.environ.pop("TYRION_NO_DOTENV", None)
+            for k, v in saved.items():
+                if v is not None:
+                    os.environ[k] = v
+        monitors = json.loads((TOOLS.parent / "monitors" / "monitors.json").read_text(encoding="utf-8"))
+        self.assertEqual(monitors[0]["name"], "tyrion-sarf")
+        self.assertIn("${CLAUDE_PLUGIN_ROOT}/tools/spend-watch.py", monitors[0]["command"])
+        source = (TOOLS / "spend-watch.py").read_text(encoding="utf-8")
+        self.assertNotIn('method="POST"', source)
+        self.assertNotIn("urlopen", source)
+
+
+class TyrionV8GoogleAdsConnectTests(unittest.TestCase):
+    """v8.0 2-bosqich — Google Ads bir qadamda ulanadi va doim faqat o'qish rejimida."""
+
+    def setUp(self) -> None:
+        self.m = importlib.import_module("connect-google-ads")
+
+    def test_v8_80_shipped_config_disables_every_write_namespace(self) -> None:
+        self.assertEqual(self.m.read_only_violations(self.m.READ_ONLY_CONFIG), [])
+        self.assertEqual(self.m.read_only_violations("namespaces:\n  labels: true\n"), ["labels", "assets"])
+
+    def test_v8_81_command_is_user_scoped_and_points_at_the_read_only_config(self) -> None:
+        values = {"developer_token": "tok", "credentials": "/c.json", "project": "p", "login_customer_id": "1234567890"}
+        env = self.m.server_env(values, Path("/x/tools_config.yaml"))
+        cmd = self.m.build_command(env)
+        self.assertEqual(cmd[:6], ["claude", "mcp", "add", "--scope", "user", "google-ads"])
+        self.assertIn("GOOGLE_ADS_MCP_TOOLS_CONFIG=/x/tools_config.yaml", cmd)
+        self.assertIn("GOOGLE_ADS_LOGIN_CUSTOMER_ID=1234567890", cmd)
+        self.assertNotIn("tok", self.m.masked(cmd))
+
+    def test_v8_82_missing_inputs_are_named_and_customer_id_is_validated(self) -> None:
+        empty = {"developer_token": "", "credentials": "", "project": "", "login_customer_id": ""}
+        steps = self.m.missing_steps(empty, have_pipx=False, have_claude=True)
+        self.assertEqual(len(steps), 4)
+        self.assertEqual(self.m.normalize_customer_id("123-456-7890"), "1234567890")
+        self.assertEqual(self.m.normalize_customer_id("12345"), "")

@@ -27,6 +27,8 @@ All notable changes to **Tyrion (`ai-ads`)** are documented in this file followi
 - **Workflows** (`workflows/`): `/tyrion:toliq-audit` and `/tyrion:haftalik-tahlil` encode the audit and weekly-review fan-out that `orch-audit` and `orch-weekly-review` described in prose. Findings are adversarially checked against their evidence files; a dead auditor or verifier is reported as incomplete or unverified rather than as a clean result. The orchestration is unit-tested at zero cost with stubbed agents (`tests/workflow_harness.cjs`).
 - **`claude plugin eval` suite** (`evals/`): eight cases that grade the model's answer against the plugin's rules, with a no-plugin baseline.
 - **CI:** runs on `claude/**` branches and validates the plugin with the official CLI.
+- **Google Ads (faqat o'qish) bir qadamda** (`tools/connect-google-ads.py`): yetishmayotgan qadamlarni aniq aytadi, `--apply` bilan `claude mcp add --scope user` ni bajaradi. Rasmiy server endi yozuvchi asboblarni (`assets_*`, `labels_*`) ham beradi, shuning uchun ulagich uni doim `labels: false`, `assets: false` bilan ishga tushiradi. Eski qo'llanmadagi `GOOGLE_ADS_CREDENTIALS` rasmiy README'da yo'q edi; o'rniga ADC (`GOOGLE_APPLICATION_CREDENTIALS`, `GOOGLE_PROJECT_ID`).
+- **Sarf kuzatuvchisi** (`monitors/monitors.json`, `tools/spend-watch.py`): kunlik byudjet og'ishini (`OVERPACE`, `OVER_BUDGET`, `UNDERPACE`) fonda, faqat holat o'zgarganda xabar qiladi. Faqat GET so'rovlari. Monitor plugin sozlamalarini olmaydi: token muhit yoki `.env` dan.
 
 ## [7.0.0] — 2026-10-29 (Practitioner Targetology, `/ad-creative` Video Studio & Meta 2026 5-System AI Stack)
 

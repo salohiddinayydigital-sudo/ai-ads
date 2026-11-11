@@ -1,0 +1,7 @@
+[
+  {
+    "name": "tyrion-sarf",
+    "description": "Meta kunlik byudjet og'ishi: reja bo'yicha tezlik, byudjetdan oshish, kam sarf (faqat o'qish)",
+    "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/tools/spend-watch.py\""
+  }
+]

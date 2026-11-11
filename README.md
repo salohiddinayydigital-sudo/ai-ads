@@ -1,6 +1,6 @@
 # Tyrion — Global Paid-Media & Targetology Operating System (`ai-ads`)
 
-<!-- tyrion:catalog agents=36 skills=63 wiki=100 playbooks=9 contexts=6 commands=18 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=36 skills=63 wiki=100 playbooks=9 contexts=6 commands=18 rules=9 tools=31 -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.13](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776AB.svg)](https://www.python.org/)
@@ -38,7 +38,7 @@ Settings (`/plugin configure tyrion`): **Standart bozor** (default market, `uz` 
 - **63 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
 - **18 slash commands** (`commands/*.md`) — one command per function: `/start`, `/audit`, `/auditoriya` (audience), `/kreativ` (creative), `/voronka` (funnel), `/eksport` (export analysis), `/hisobot` (report), `/mijoz` (client workspace), `/raqobatchi` (competitors), `/savol` (ask), `/budget`, `/scale`, `/tracking`, `/utm`, `/sop`, `/learn`, `/shield`, `/doctor`. Installed as a plugin they are namespaced, e.g. `/tyrion:audit`.
 - **2 workflows** (`workflows/*.js`, plugin mode) — `/tyrion:toliq-audit` (multi-platform audit: evidence inventory, one auditor per platform, every finding checked against its evidence file, delivery gate) and `/tyrion:haftalik-tahlil` (weekly review).
-- **29 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
+- **31 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
 - **Bilim: atomik qaydlar (100)** (`wiki/*.md`) — interlinked paid-media knowledge base with zero orphan notes.
 
 ```text
@@ -50,7 +50,7 @@ ai-ads/
 ├── skills/                  # 63 canonical paid-media & CRO skills
 ├── commands/                # one slash command per function (no aliases)
 ├── hooks/                   # Cross-platform ${CLAUDE_PLUGIN_ROOT} hook launcher & guard
-├── tools/                   # 29 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
+├── tools/                   # 31 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
 └── wiki/                    # 100 atomic wikilinked knowledge notes
 ```
 

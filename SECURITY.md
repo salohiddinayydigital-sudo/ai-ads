@@ -4,7 +4,7 @@
 
 | Version | Status | Architecture Inventory |
 |---|---|---|
-| **8.0.x** | Supported (Current Release) | **36 agents**, **63 skills**, **18 slash commands**, **29 CLI tools**, 100 wiki notes |
+| **8.0.x** | Supported (Current Release) | **36 agents**, **63 skills**, **18 slash commands**, **31 CLI tools**, 100 wiki notes |
 | **7.0.x** | Maintenance | Global release; plugin manifest failed official validation |
 | **5.0.x** | End of life | Single-Root ECC (Uzbekistan default) |
 

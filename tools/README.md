@@ -16,6 +16,8 @@ updated: 2026-09-16
 | Asbob | Buyruq | Nima qiladi |
 |-------|--------|-------------|
 | **doctor** | `python3 tools/doctor.py` | Butun tizim sog'lig'i: bilim, katalog, drift, botlar, graf, sirlar, testlar — bitta hisobot |
+| **connect-google-ads** | `python3 tools/connect-google-ads.py [--apply]` | Google Ads'ni **faqat o'qish** rejimida bir qadamda ulaydi (yozuvchi asboblar o'chirilgan) |
+| **spend-watch** | `python3 tools/spend-watch.py [--once]` | Kunlik byudjet og'ishini fonda xabar qiladi (`monitors/monitors.json`); faqat GET |
 | **meta-audience** | `python3 tools/meta-audience.py architect / interests / overlap / saturation` | **Meta Ads Audience Engine**: 4-qatlamli voronka, 8 nisha Interest/Solventnost filtri, Overlap va Saturation hisobi |
 | **catalog** | `python3 tools/catalog.py summary` | Tizimda nima bor (qayd, agent, skill, bot, asbob) — fayl tizimidan generatsiya |
 | **brain-search** | `python3 tools/brain-search.py search "so'z"` | **LLM'siz, 0 token** bilim qidiruvi — grafdan **oldin** shu |
