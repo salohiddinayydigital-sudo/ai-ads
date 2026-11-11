@@ -18,6 +18,10 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+# The Meta Graph API version every tool targets unless META_GRAPH_API_VERSION overrides it.
+# Defined once: bumping it is a one-line change, checked by the test suite.
+DEFAULT_GRAPH_API_VERSION: str = "v26.0"
+
 MAX_FILE_BYTES: int = 25 * 1024 * 1024  # 25 MB hard ceiling for CSV/JSON imports
 MAX_RPC_LINE_BYTES: int = 1 * 1024 * 1024  # 1 MB hard ceiling for STDIO JSON-RPC lines
 

@@ -45,7 +45,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-DEFAULT_GRAPH_API_VERSION = "v26.0"
+DEFAULT_GRAPH_API_VERSION = tcore.DEFAULT_GRAPH_API_VERSION
 
 CONVERSION_FAMILIES: dict[str, tuple[str, ...]] = {
     "PURCHASE": (

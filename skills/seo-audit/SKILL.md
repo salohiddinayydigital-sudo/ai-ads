@@ -30,6 +30,8 @@ related_skills:
 references:
 - skills/seo-audit/references/international-seo.md
 - skills/seo-audit/references/ai-writing-detection.md
+- skills/seo-audit/references/site-type-issues.md
+- skills/seo-audit/references/audit-tools.md
 risk_level: low
 output_contract: Technical & On-Page SEO Audit with prioritized fixes and keyword architecture
 ---
@@ -409,45 +411,7 @@ Three equivalent placement methods: HTML `<link>` in `<head>`, HTTP `Link` heade
 
 ## Common Issues by Site Type
 
-### SaaS/Product Sites
-- Product pages lack content depth
-- Blog not integrated with product pages
-- Missing comparison/alternative pages
-- Feature pages thin on content
-- No glossary/educational content
-
-### E-commerce
-- Thin category pages
-- Duplicate product descriptions
-- Missing product schema
-- Faceted navigation creating duplicates
-- Out-of-stock pages mishandled
-
-### Content/Blog Sites
-- Outdated content not refreshed
-- Keyword cannibalization
-- No topical clustering
-- Poor internal linking
-- Missing author pages
-
-### Multilingual / Multi-Regional Sites
-- Hreflang errors (missing return tags, invalid codes, no self-reference)
-- Canonical conflicting with hreflang (cross-locale canonical suppresses indexing)
-- Thin locale pages dragging down site-wide quality signal
-- Only boilerplate translated, main content identical across locales
-- No x-default fallback declared
-- Sitemap missing hreflang alternates or missing reciprocal entries
-- IP-based redirects hiding content from Googlebot
-- Framework locale mode hiding locale from URLs
-
-### Local Business
-- Inconsistent NAP
-- Missing local schema
-- No Google Business Profile optimization
-- Missing location pages
-- No local content
-
----
+The issues that recur for each kind of site (SaaS/product, e-commerce, content/blog, multilingual/multi-regional, local business) are listed in [Common Issues by Site Type](references/site-type-issues.md). Read it once you know the site type, before prioritising findings.
 
 ## Output Format
 
@@ -484,27 +448,9 @@ Same format as above
 
 - [AI Writing Detection](references/ai-writing-detection.md): Common AI writing patterns to avoid (em dashes, overused phrases, filler words)
 - [International SEO](references/international-seo.md): Evidence and sources for hreflang, canonical + i18n, sitemaps, URL structure, and content quality across locales
+- [Common Issues by Site Type](references/site-type-issues.md): Recurring problems for SaaS, e-commerce, content, multilingual and local sites
+- [SEO Audit Tools](references/audit-tools.md): Free and paid tools, and which ones render JavaScript and can therefore see injected schema
 - For AI search optimization (AEO, GEO, LLMO, AI Overviews), see the **ai-seo** skill
-
----
-
-## Tools Referenced
-
-**Free Tools**
-- Google Search Console (essential)
-- Google PageSpeed Insights
-- Bing Webmaster Tools
-- Rich Results Test (**use this for schema validation — it renders JavaScript**)
-- Mobile-Friendly Test
-- Schema Validator
-
-> **Note on schema detection:** `web_fetch` strips `<script>` tags (including JSON-LD) and cannot detect JS-injected schema. Use the browser tool, Rich Results Test, or Screaming Frog instead — they render JavaScript and capture dynamically-injected markup. See the Schema Markup Detection Limitation section above.
-
-**Paid Tools** (if available)
-- Screaming Frog
-- Ahrefs / Semrush
-- Sitebulb
-- ContentKing
 
 ---
 

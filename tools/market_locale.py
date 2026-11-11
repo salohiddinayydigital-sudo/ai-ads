@@ -11,11 +11,16 @@ from __future__ import annotations
 import json
 import os
 import re
+import sys
 from pathlib import Path
 from typing import Any
 
 TOOLS = Path(__file__).resolve().parent
 VAULT = TOOLS.parent
+if str(TOOLS) not in sys.path:
+    sys.path.insert(0, str(TOOLS))
+import tyrion_core as tcore  # noqa: E402
+
 MARKETS_DIR = VAULT / "markets"
 LOCALES_DIR = VAULT / "locales"
 
@@ -305,7 +310,8 @@ def round_currency(amount: float | int, currency: str = "USD") -> float | int:
     return round(float(amount), 2)
 
 
-def get_configured_api_version(env_key: str = "META_GRAPH_API_VERSION", default: str = "v26.0") -> dict[str, Any]:
+def get_configured_api_version(env_key: str = "META_GRAPH_API_VERSION",
+                               default: str = tcore.DEFAULT_GRAPH_API_VERSION) -> dict[str, Any]:
     raw = os.environ.get(env_key, "").strip()
     if not raw:
         env_file = VAULT / ".env"

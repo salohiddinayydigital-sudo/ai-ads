@@ -28,6 +28,7 @@ _TOOLS_DIR = Path(__file__).resolve().parent
 if str(_TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(_TOOLS_DIR))
 import market_locale as mloc  # noqa: E402
+import tyrion_core as tcore  # noqa: E402
 
 TOOLS = Path(__file__).resolve().parent
 if str(TOOLS) not in sys.path:
@@ -40,7 +41,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-DEFAULT_GRAPH_API_VERSION = "v26.0"
+DEFAULT_GRAPH_API_VERSION = tcore.DEFAULT_GRAPH_API_VERSION
 OVERLAP_WARNING_THRESHOLD_PCT = 20.0
 OVERLAP_CRITICAL_THRESHOLD_PCT = 30.0
 

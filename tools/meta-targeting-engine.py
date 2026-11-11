@@ -49,7 +49,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-DEFAULT_GRAPH_API_VERSION = "v26.0"
+DEFAULT_GRAPH_API_VERSION = tcore.DEFAULT_GRAPH_API_VERSION
 
 # 6 Canonical Statuses
 STATUS_VERIFIED_AVAILABLE = "VERIFIED_AVAILABLE"

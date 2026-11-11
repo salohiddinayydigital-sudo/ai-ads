@@ -3567,3 +3567,31 @@ class TyrionV8SingleSourceTests(unittest.TestCase):
         self.assertTrue({"agents", "skills", "commands", "tools"} <= keys, keys)
         # "MCP Server (10 tools)" is a different number and must not be rewritten to the tool count.
         self.assertIn("(10 tools)", (VAULT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+
+    def test_v8_33_graph_api_default_is_defined_once(self) -> None:
+        default = tyrion_core.DEFAULT_GRAPH_API_VERSION
+        self.assertRegex(default, r"^v\d+\.\d+$")
+        for name in ("capi-utm-builder", "meta-audience", "meta-insights-sync", "meta-targeting-engine"):
+            self.assertEqual(importlib.import_module(name).DEFAULT_GRAPH_API_VERSION, default, name)
+            source = (TOOLS / f"{name}.py").read_text(encoding="utf-8")
+            self.assertNotRegex(source, r'DEFAULT_GRAPH_API_VERSION\s*=\s*"', f"{name} hardcodes the API version")
+        saved = os.environ.pop("META_GRAPH_API_VERSION", None)
+        try:
+            configured = importlib.import_module("market_locale").get_configured_api_version()
+        finally:
+            if saved is not None:
+                os.environ["META_GRAPH_API_VERSION"] = saved
+        self.assertIn(default, json.dumps(configured))
+
+    def test_v8_34_skill_bodies_stay_under_500_lines_and_moved_sections_are_linked(self) -> None:
+        self.assertEqual(doctor.oversized_skills(), [])
+        moved = {
+            "seo-audit": ("site-type-issues.md", "audit-tools.md"),
+            "copy-editing": ("expert-panel-scoring.md",),
+            "marketing-psychology": ("growth-scaling-models.md",),
+        }
+        for skill, refs in moved.items():
+            body = (VAULT / "skills" / skill / "SKILL.md").read_text(encoding="utf-8")
+            for ref in refs:
+                self.assertTrue((VAULT / "skills" / skill / "references" / ref).is_file(), f"{skill}/{ref}")
+                self.assertIn(f"references/{ref}", body, f"{skill} does not point to {ref}")

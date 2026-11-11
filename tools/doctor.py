@@ -623,6 +623,20 @@ def check_tests(report: Report, quick: bool) -> None:
         report.add("Testlar", FAIL, f"{ran} test, xato: {fails.group(1) if fails else 'batafsil'}")
 
 
+SKILL_MAX_LINES = 500
+
+
+def oversized_skills(vault: Path = VAULT) -> list[tuple[str, int]]:
+    """SKILL.md yuklangach butun suhbat davomida kontekstda qoladi, shuning uchun u ixcham
+    bo'lishi kerak (rasmiy tavsiya: 500 qatordan kam; tafsilot `references/` da)."""
+    result = []
+    for path in sorted(vault.glob("skills/*/SKILL.md")):
+        lines = len(path.read_text(encoding="utf-8", errors="replace").splitlines())
+        if lines > SKILL_MAX_LINES:
+            result.append((path.parent.name, lines))
+    return result
+
+
 def check_skills(report: Report) -> None:
     """Skill reyestri va agent ulanishlari (skill-search.py check) butunmi.
 
@@ -649,7 +663,11 @@ def check_skills(report: Report) -> None:
     warn = re.search(r"ogohlantirish \((\d+)\)", out)
     detail = (f"{skills.group(1)} skill · {skills.group(3)} ulanish"
               + (f" · {warn.group(1)} ulanmagan" if warn else "")) if skills else "hisobotni o'qib bo'lmadi"
-    if proc.returncode == 0:
+    long_skills = oversized_skills()
+    if proc.returncode == 0 and long_skills:
+        names = ", ".join(f"{name} ({lines})" for name, lines in long_skills[:4])
+        report.add("Skill reyestri", WARN, f"{detail} · {SKILL_MAX_LINES} qatordan uzun: {names} — tafsilotni references/ ga ko'chiring")
+    elif proc.returncode == 0:
         report.add("Skill reyestri", OK, detail)
     else:
         broken = re.search(r"xato \((\d+)\)", out)
