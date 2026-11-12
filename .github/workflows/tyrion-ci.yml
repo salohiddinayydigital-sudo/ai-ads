@@ -1,4 +1,4 @@
-name: Tyrion v7.1 Global CI & Security Gate
+name: Tyrion v8.0 Global CI & Security Gate
 
 # Barcha branchlarda ishlaydi (claude/**, fix/**, feat/** ... hech biri chetda qolmaydi) va har bir PR da.
 on:

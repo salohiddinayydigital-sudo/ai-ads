@@ -1,4 +1,4 @@
-# Tyrion v7.1 — Paid-Media & Targetology AI Team for Uzbekistan/CIS (`ai-ads`)
+# Tyrion v8.0 — Paid-Media & Targetology AI Team for Uzbekistan/CIS (`ai-ads`)
 
 <!-- tyrion:catalog agents=31 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 

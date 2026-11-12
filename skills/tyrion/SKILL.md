@@ -1,6 +1,6 @@
 ---
 name: tyrion
-description: Tyrion v7.1 Master Operating System loader — operator xotirasi (MEMORY.md), O'zbekiston bozori konteksti, 8 nisha playbook, 5 kontekst rejimi va 0-token CLI dvigatellariga yagona kirish nuqtasi. Use when initializing a marketing session or routing complex multi-channel tasks.
+description: Tyrion v8.0 Master Operating System loader — operator xotirasi (MEMORY.md), O'zbekiston bozori konteksti, 8 nisha playbook, 5 kontekst rejimi va 0-token CLI dvigatellariga yagona kirish nuqtasi. Use when initializing a marketing session or routing complex multi-channel tasks.
 standalone: true
 triggers:
 - tyrion
@@ -23,7 +23,7 @@ risk_level: low
 output_contract: Tyrion OS system status and autonomous orchestration routing plan
 ---
 
-# Tyrion v7.1 — Paid Media & Targetology OS Loader
+# Tyrion v8.0 — Paid Media & Targetology OS Loader
 
 ## When to Activate
 - Session initialization (`/start`) or multi-channel campaign orchestration across Meta Ads, Google Ads, Telegram Ads, TikTok, and YouTube.
@@ -50,7 +50,7 @@ output_contract: Tyrion OS system status and autonomous orchestration routing pl
 
 
 ## Deterministic CLI & Tooling Integration (`0 Token`)
-Before generating recommendations or mutating plans for `tyrion`, execute the relevant Tyrion v7.1 deterministic checks:
+Before generating recommendations or mutating plans for `tyrion`, execute the relevant Tyrion v8.0 deterministic checks:
 - **Unit Economics & Break-Even:** `python3 tools/calculator.py breakeven --price <AOV> --cogs <COGS>`
 - **Meta Audience & Funnel Diagnostics:** `python3 tools/meta-audience.py architect --niche <niche> --budget <daily_usd>`
 - **CSV/JSON Export & Breakdown Effect:** `python3 tools/ad-export-analyzer.py analyze --file <export.csv>`

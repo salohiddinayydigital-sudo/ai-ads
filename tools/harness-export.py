@@ -60,7 +60,7 @@ def export_cursor(out_root: Path, dry_run: bool) -> list[str]:
 
 
 def export_windsurf(out_root: Path, dry_run: bool) -> list[str]:
-    parts = ["# TYRION v7.1 — WINDSURF PAID MEDIA & TARGETOLOGY RULES\n"]
+    parts = ["# TYRION v8.0 — WINDSURF PAID MEDIA & TARGETOLOGY RULES\n"]
     for rule_md in sorted((VAULT / "rules").glob("[0-9]*.md")):
         _desc, body = strip_fm(rule_md.read_text(encoding="utf-8"))
         parts.append(body.strip() + "\n")

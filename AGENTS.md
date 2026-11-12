@@ -1,16 +1,16 @@
 ---
 name: AGENTS
-description: "Tyrion v7.1 — kanonik agent shartnomasi. Har qanday AI harness (Claude Code, Cursor, Codex, Windsurf) uchun yagona qatlamlar, 31 agent va orkestratsiya tartibi"
+description: "Tyrion v8.0 — kanonik agent shartnomasi. Har qanday AI harness (Claude Code, Cursor, Codex, Windsurf) uchun yagona qatlamlar, 31 agent va orkestratsiya tartibi"
 tags: [router, agents, shartnoma, arxitektura, ecc]
 source: "ECC (affaan-m/ECC) naqshi asosida Tyrion uchun qurildi"
 updated: 2026-10-20
 ---
 
-# 🧠 TYRION v7.1 — KANONIK AGENT SHARTNOMASI
+# 🧠 TYRION v8.0 — KANONIK AGENT SHARTNOMASI
 
 > **Maqsad:** O'zbekiston/MDH targetologi va kichik agentligi uchun AI jamoa: Meta, Telegram va Google reklamasini brifdan hisobotgacha dalilga asoslanib olib boradi va reklama hisobiga ruxsatsiz tegmaydi.
 
-> **Bir qator:** Tyrion v7.1 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 31 ixtisoslashgan agent, 65 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 27 slash buyruq va 29 ta 0-token deterministik Python asbobi.
+> **Bir qator:** Tyrion v8.0 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 31 ixtisoslashgan agent, 65 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 27 slash buyruq va 29 ta 0-token deterministik Python asbobi.
 
 <!-- tyrion:catalog agents=31 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 

@@ -364,7 +364,7 @@ def http_get_json_with_backoff(
     400/401/403/404 va noto'g'ri JSON xatolarida qayta urinmaydi. Maxfiy tokenlarni hech qachon oshkor qilmaydi.
     """
     clean_url = sanitize_url(url)
-    req_headers = {"Accept": "application/json", "User-Agent": "Tyrion-OS/7.1.0"}
+    req_headers = {"Accept": "application/json", "User-Agent": "Tyrion-OS/8.0.0"}
     if headers:
         req_headers.update(headers)
 

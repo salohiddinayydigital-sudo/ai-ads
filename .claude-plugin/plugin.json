@@ -1,8 +1,8 @@
 {
   "name": "tyrion",
   "displayName": "Tyrion",
-  "version": "7.1.0",
-  "description": "Tyrion v7.1 — AI team for Uzbekistan/CIS targetologists and small agencies: runs Meta, Telegram and Google ads from brief to report, evidence-based, and never touches an ad account without approval. 31 specialist agents, 65 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 27 slash commands, 29 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
+  "version": "8.0.0",
+  "description": "Tyrion v8.0 — AI team for Uzbekistan/CIS targetologists and small agencies: runs Meta, Telegram and Google ads from brief to report, evidence-based, and never touches an ad account without approval. 31 specialist agents, 65 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 27 slash commands, 29 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
   "author": {
     "name": "Salohiddin",
     "url": "https://github.com/salohiddinayydigital-sudo"
@@ -64,12 +64,12 @@
     "Draft a 3-stage campaign launch plan (Sandbox -> Validation -> Scale) with Spend-Guard (/budget)",
     "Audit conversion tracking, CAPI v26.0 match quality, and event deduplication (/tracking)",
     "Extract reusable campaign lessons into Tyrion instincts (/learn)",
-    "Run a TyrionShield v7.1 static security & AST audit across the workspace (/shield)"
+    "Run a TyrionShield v8.0 static security & AST audit across the workspace (/shield)"
   ],
   "interface": {
     "displayName": "Tyrion",
     "shortDescription": "31 marketing agents, 65 skills, 100 wiki notes, 9 playbooks, 27 commands, 29 CLI tools & Meta Graph API v26.0 Studio.",
-    "longDescription": "Tyrion v7.1 — AI team for Uzbekistan/CIS targetologists and small agencies: runs Meta, Telegram and Google ads from brief to report, evidence-based, and never touches an ad account without approval. 31 specialist agents, 65 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 27 slash commands, 29 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
+    "longDescription": "Tyrion v8.0 — AI team for Uzbekistan/CIS targetologists and small agencies: runs Meta, Telegram and Google ads from brief to report, evidence-based, and never touches an ad account without approval. 31 specialist agents, 65 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 27 slash commands, 29 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
     "category": "Marketing",
     "capabilities": [
       "Interactive",

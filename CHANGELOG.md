@@ -2,6 +2,33 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
+## [8.0.0] — 2026-11-13 (Uzbekistan/CIS focus: quality evals, 31 agents, intent-first router)
+
+Sealed goal: **O'zbekiston/MDH targetologi va kichik agentligi uchun AI jamoa** — Meta, Telegram va Google reklamasini brifdan hisobotgacha dalilga asoslanib olib boradi va reklama hisobiga ruxsatsiz tegmaydi. Default market pack is now `uz`.
+
+### Added
+- **Quality eval suite (`evals/quality/`):** 12 scenarios across 5 core jobs (audit, budget, kreativ, hisobot, tracking) built on `examples/demo-brand`; 0–2 rubric × 4 judge criteria; 0-token deterministic runner (`run.py`) + judge-agent protocol. Baseline and post-v8 scores recorded side-by-side (below).
+- **2 new agents:** `media-buyer` (draft media plans + Change Packets, Spend-Guard-gated) and `performance-analyst` (blended/marginal metrics, breakdown-effect traps).
+- **Intent-before-platform routing:** 4 new intent concepts (`kanalga obunachi yig'ish`, `nimadan boshlaymiz/yangi mijoz`, `lid yig'ish`, RU tracking phrases), `extract_budget_from_query` in `tyrion_core` (wired into `intent_analysis.budget_hint`), richer Uzbek-Latin language markers.
+- **Doctor checks:** `Buzilgan havolalar` (markdown + wikilink links must resolve) and `Charter gigiyenasi` (harness-neutral conductor naming, verified `mcp__plugin_tyrion_tyrion-core__tyrion_*` naming, URL `?` separator hygiene) — 13 new tests.
+- **34 real-query routing regression set** (UZ Latin/Cyrillic, RU, EN) incl. the two plan-required queries; multilingual live-mutation gate coverage (`byudjetni 50% oshirish` now blocked, advisory phrasing stays ready).
+
+### Changed
+- **8 long-tail auditors → single `audit-platform` charter** (user-approved): `audit-{snapchat,reddit,pinterest,apple,amazon,microsoft,x,linkedin}.md` merged; platform skills kept standalone; 36 → **31 agents**.
+- **All 31 charters on one template** (40–49 lines each, `skills:` ≤ 2, verified MCP tool names, source-citation + priority + rollback required in deliverables). `agents/_generate_charters.py` + metadata snapshot keep them reproducible.
+- **Default market pack `global` → `uz`** (`plugin.json`, `MEMORY.md`, `market_locale.detect_market` default `default_uz`); global/us/eu/uk/mena/latam/sea/in remain selectable.
+- **Harness-neutral naming:** "Claude Ads conductor" → "Tyrion conductor" (18 charters); AGENTS.md documents the plugin MCP naming contract.
+- **Docs & numbers:** 41 broken navigation links fixed to 0 (37 markdown + 4 legacy wikilinks); `agents` claims 31 everywhere; VERSION 7.1.0 → 8.0.0 via `catalog.py sync-claims`.
+
+### Quality eval — baseline vs v8 (12 scenarios, same demo-brand inputs)
+
+| Ko'rsatkich | Baseline (2-qadam) | v8 (4-qadam) |
+|---|---|---|
+| Deterministik tekshiruvlar | 46/46 | **46/46** |
+| Hakam-agent ballari (4 mezon × 0–2) | 89/96 | **91/96** |
+| Pasaygan stsenariy | — | **yo'q** |
+| Eng og'ir oldindan yuklash | — | **14.2 KB** (chegara < 30 KB) |
+
 ## [7.1.0] — 2026-11-12 (VK Ads skill)
 
 ### Added
