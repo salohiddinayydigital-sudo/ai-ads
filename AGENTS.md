@@ -1,6 +1,6 @@
 ---
 name: AGENTS
-description: "Tyrion v7.1 — kanonik agent shartnomasi. Har qanday AI harness (Claude Code, Cursor, Codex, Windsurf) uchun yagona qatlamlar, 38 agent va orkestratsiya tartibi"
+description: "Tyrion v7.1 — kanonik agent shartnomasi. Har qanday AI harness (Claude Code, Cursor, Codex, Windsurf) uchun yagona qatlamlar, 31 agent va orkestratsiya tartibi"
 tags: [router, agents, shartnoma, arxitektura, ecc]
 source: "ECC (affaan-m/ECC) naqshi asosida Tyrion uchun qurildi"
 updated: 2026-10-20
@@ -10,13 +10,13 @@ updated: 2026-10-20
 
 > **Maqsad:** O'zbekiston/MDH targetologi va kichik agentligi uchun AI jamoa: Meta, Telegram va Google reklamasini brifdan hisobotgacha dalilga asoslanib olib boradi va reklama hisobiga ruxsatsiz tegmaydi.
 
-> **Bir qator:** Tyrion v7.1 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 38 ixtisoslashgan agent, 65 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 27 slash buyruq va 29 ta 0-token deterministik Python asbobi.
+> **Bir qator:** Tyrion v7.1 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 31 ixtisoslashgan agent, 65 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 27 slash buyruq va 29 ta 0-token deterministik Python asbobi.
 
-<!-- tyrion:catalog agents=38 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=31 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 
 ## 1. Boot Tartibi (Token Tejamkor)
 
-1. **Shu fayl (`AGENTS.md`)** — qatlamlar, 38 agent, orkestratsiya va xavfsizlik chegaralari.
+1. **Shu fayl (`AGENTS.md`)** — qatlamlar, 31 agent, orkestratsiya va xavfsizlik chegaralari.
 2. **`MEMORY.md`** — operator xotirasi (`<=90` qator: til qonuni, O'zbekiston bozori asoslari, aktiv Bet Ledger va saboqlar).
 3. **Vazifaga mos Kontekst va Qoida:** `contexts/` dan 1 ta ish rejimi (`audit-mode`, `launch-mode`, `scale-mode`, `creative-mode`, `uzbekistan-market`) va `rules/` dan 1–2 qoida.
 4. **Universal Auto-Router va 0-Token Kontekst Yuklash:** Foydalanuvchi oddiy tilda topshiriq berganda (`/skill-search` yoki `/agent` yozishi shart emas!), `python3 tools/skill-search.py route "<vazifa>" --load` avtomatik ravishda `primary_agent`, `supporting_agents`, `required_skills`, `references_to_load`, `rules_to_load` va `tools_to_use` ni aniqlaydi hamda faqat kerakli charter va `SKILL.md` fayllarini yuklaydi ([[20-token-gigiyena]], [[70-charter-baseline]]).
@@ -25,7 +25,7 @@ updated: 2026-10-20
 
 | Qatlam | Kanonik Manzil | Nima saqlanadi | Holat |
 |---|---|---|---|
-| **Agentlar** | `agents/` (38) | 38 ta ixtisoslashgan agent charteri (`Prompt Defense Baseline` + `skills:` ulangan) | kanonik |
+| **Agentlar** | `agents/` (31) | 31 ta ixtisoslashgan agent charteri (`Prompt Defense Baseline` + `skills:` ulangan) | kanonik |
 | **Skilllar** | `skills/` (65) | 38 platforma (`ads-*`, `ads/` + 39 `references/`) va 27 operator/marketing skill | kanonik |
 | **Buyruqlar** | `commands/` (27) | 27 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
 | **Kontekstlar** | `contexts/` (6) | 5 ta ECC Dynamic Context Mode (`audit`, `launch`, `scale`, `creative`, `uzbekistan`) + `README.md` | kanonik |
@@ -36,12 +36,12 @@ updated: 2026-10-20
 | **Xotira** | `MEMORY.md` · `manifests/instincts.json` | Operator xotirasi (`<=90` qator) va `/learn` instinktlar reestri | faol |
 | **Katalog & Graf** | `manifests/catalog.json` · `graphify-out/` | Mashina o'qiydigan yagona reestr va 0-token wikilink grafi (generatsiya) | generatsiya |
 
-## 3. Agentlar Jamoasi (38 Charter)
+## 3. Agentlar Jamoasi (31 Charter)
 
 | Guruh | Agentlar | Vazifa |
 |---|---|---|
 | **Meta Auditoriya & Voronka (1)** | `meta-audience-architect` | Meta Andromeda 2 4-qatlamli auditoriya, Exclusion matritsa, Solventnost, Overlap (<20%), Saturation va LAL/Retargeting loyihalash |
-| **Platforma Auditi (13)** | `audit-meta`, `audit-google`, `audit-telegram`, `audit-tiktok`, `audit-youtube`, `audit-linkedin`, `audit-x`, `audit-reddit`, `audit-pinterest`, `audit-snapchat`, `audit-microsoft`, `audit-amazon`, `audit-apple` | Platforma bo'yicha dalilga asoslangan chuqur texnik tekshiruv |
+| **Platforma Auditi (6)** | `audit-meta`, `audit-google`, `audit-telegram`, `audit-tiktok`, `audit-youtube`, `audit-platform` (uzun dum: Snapchat, Reddit, Pinterest, Apple, Amazon, Microsoft, X, LinkedIn) | Platforma bo'yicha dalilga asoslangan chuqur texnik tekshiruv |
 | **Ixtisoslashgan Audit (5)** | `audit-budget`, `audit-creative`, `audit-tracking`, `audit-policy-compliance`, `audit-regulatory-compliance` | Byudjet matematikasi, kreativ salomatligi, Pixel/CAPI o'lchovi, policy va qonunchilik |
 | **Strategiya va Kreativ (8)** | `creative-strategist`, `campaign-ideator`, `positioning-strategist`, `copy-writer`, `reels-scriptwriter`, `social-content-writer`, `visual-designer`, `format-adapter` | Angle/avatar, big idea, 3 tilli (UZ/RU) sotuv matni, Reels skript va format |
 | **Video Ijro (1)** | `video-editor` | Video montaj, ritm, rang grading, subtitr, eksport spec (`video-editing`, `video-motion-graphics`) |

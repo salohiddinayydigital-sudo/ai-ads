@@ -13,13 +13,14 @@ domains:
 - paid-media
 platforms:
 - reddit
-attached_agents: [audit-reddit]
+attached_agents: []
 related_skills:
 - ads-audit
 references:
 - skills/ads/references/reddit-audit.md
 risk_level: low
 output_contract: Schema-valid Reddit Ads audit findings JSON
+standalone: true
 ---
 
 # Reddit Ads Audit

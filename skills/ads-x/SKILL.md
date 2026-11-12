@@ -14,13 +14,14 @@ domains:
 - paid-media
 platforms:
 - x
-attached_agents: [audit-x]
+attached_agents: []
 related_skills:
 - ads-audit
 references:
 - skills/ads/references/x-audit.md
 risk_level: low
 output_contract: Schema-valid X (Twitter) Ads audit findings JSON
+standalone: true
 ---
 
 # X Ads Audit

@@ -38,7 +38,7 @@ class CharterBaselineAndGateTests(unittest.TestCase):
         import importlib
         ss = importlib.import_module("skill-search")
         agents = ss.load_agents()
-        self.assertEqual(len(agents), 38)
+        self.assertEqual(len(agents), 31)
         unattached = [name for name, a in agents.items() if not a["skills"]]
         self.assertEqual(unattached, [], f"Skillsiz qolgan agentlar: {unattached}")
 

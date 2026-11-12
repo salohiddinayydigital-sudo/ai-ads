@@ -20,7 +20,7 @@ domains:
 - ecommerce
 platforms:
 - amazon
-attached_agents: [audit-amazon]
+attached_agents: []
 related_skills:
 - ads-audit
 - ads-budget
@@ -28,6 +28,7 @@ references:
 - skills/ads/references/amazon-audit.md
 risk_level: low
 output_contract: Schema-valid Amazon Ads audit findings JSON with ACOS/TACOS and listing readiness controls
+standalone: true
 ---
 
 # Amazon Ads Audit

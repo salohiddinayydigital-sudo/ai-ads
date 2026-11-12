@@ -14,13 +14,14 @@ domains:
 - paid-media
 platforms:
 - snapchat
-attached_agents: [audit-snapchat]
+attached_agents: []
 related_skills:
 - ads-audit
 references:
 - skills/ads/references/snapchat-audit.md
 risk_level: low
 output_contract: Schema-valid Snapchat Ads audit findings JSON
+standalone: true
 ---
 
 # Snapchat Ads Audit

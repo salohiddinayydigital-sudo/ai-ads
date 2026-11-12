@@ -14,13 +14,14 @@ domains:
 - paid-media
 platforms:
 - pinterest
-attached_agents: [audit-pinterest]
+attached_agents: []
 related_skills:
 - ads-audit
 references:
 - skills/ads/references/pinterest-audit.md
 risk_level: low
 output_contract: Schema-valid Pinterest Ads audit findings JSON
+standalone: true
 ---
 
 # Pinterest Ads Audit

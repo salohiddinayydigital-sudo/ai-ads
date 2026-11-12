@@ -16,7 +16,7 @@ domains:
 - search
 platforms:
 - microsoft
-attached_agents: [audit-microsoft]
+attached_agents: []
 related_skills:
 - ads-google
 - ads-audit
@@ -25,6 +25,7 @@ references:
 - skills/ads/references/microsoft-creative-specs.md
 risk_level: low
 output_contract: Schema-valid Microsoft Advertising audit findings JSON
+standalone: true
 ---
 
 # Microsoft Advertising Audit

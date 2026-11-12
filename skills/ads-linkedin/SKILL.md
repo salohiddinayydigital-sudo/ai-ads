@@ -17,7 +17,7 @@ domains:
 - b2b
 platforms:
 - linkedin
-attached_agents: [audit-linkedin]
+attached_agents: []
 related_skills:
 - prospecting
 - ads-audit
@@ -26,6 +26,7 @@ references:
 - skills/ads/references/linkedin-creative-specs.md
 risk_level: low
 output_contract: Schema-valid LinkedIn Ads audit findings JSON covering B2B targeting, Insight Tag, and bid floors
+standalone: true
 ---
 
 # LinkedIn Ads Audit

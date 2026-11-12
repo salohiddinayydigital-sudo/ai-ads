@@ -2,6 +2,7 @@
 name: ads-audit
 description: Run a source-grounded paid-advertising audit for one or more of Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple, Amazon, Reddit, Pinterest, Snapchat, and X. Use for full ad checks, account health reviews, paid-media diagnostics, partial audits after authentication or worker failure, missing-platform weighting, beta-feature eligibility and scoring, spend audits, tracking audits, or prioritized opportunities and risks.
 standalone: true
+attached_agents: [audit-platform]
 triggers:
 - to'liq audit
 - full audit

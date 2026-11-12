@@ -20,7 +20,7 @@ domains:
 - validation
 platforms:
 - multi-platform
-attached_agents: [audit-policy-compliance, audit-regulatory-compliance, release-verifier, skill-reviewer]
+attached_agents: [audit-platform, audit-policy-compliance, audit-regulatory-compliance, release-verifier, skill-reviewer]
 related_skills:
 - ads-audit
 - ads-report

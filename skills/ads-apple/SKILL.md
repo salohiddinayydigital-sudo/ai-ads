@@ -20,7 +20,7 @@ domains:
 - mobile-app
 platforms:
 - apple
-attached_agents: [audit-apple]
+attached_agents: []
 related_skills:
 - ads-audit
 - ads-attribution
@@ -28,6 +28,7 @@ references:
 - skills/ads/references/apple-audit.md
 risk_level: low
 output_contract: Schema-valid Apple Search Ads audit findings JSON covering SKAdNetwork/AdAttributionKit and keyword match types
+standalone: true
 ---
 
 # Apple Ads Audit
