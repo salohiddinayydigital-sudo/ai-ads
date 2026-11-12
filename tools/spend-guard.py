@@ -9,6 +9,8 @@ Hech qanday jonli hisob o'zgarmaydi. Tavsiyalar qat'iy tekshiriladi:
   4. Nusxa / Copy siyosati: Telegram Ads 160 belgi, max 1 emoji, ALL CAPS taqiqi; Google Ads RSA
   5. Tracking: CAPI event_id deduplikatsiyasi, fbp/fbc, xeshlangan ma'lumotlar
 
+Chiqish kodlari: 0 = o'tdi · 1 = darvoza BLOKLANDI · 2 = validatsiya xatosi (nan/inf, manfiy, fayl yo'q).
+
 Buyruqlar:
   python3 tools\\spend-guard.py budget --current 100 --proposed 115 --max-cap 200
   python3 tools\\spend-guard.py packet path/to/change-packet.md
@@ -23,6 +25,13 @@ import json
 import re
 import sys
 from pathlib import Path
+
+_TOOLS_DIR = Path(__file__).resolve().parent
+if str(_TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(_TOOLS_DIR))
+import tyrion_core as tcore
+
+# Chiqish kodlari (tyrion_core): 0 = o'tdi, 1 = darvoza BLOKLANDI, 2 = validatsiya xatosi (nan/inf, manfiy, fayl yo'q).
 
 # Windows UTF-8
 for _stream in (sys.stdout, sys.stderr):
@@ -43,9 +52,15 @@ def check_budget_change(
     errors: list[str] = []
     warnings: list[str] = []
 
-    if current_daily <= 0:
-        errors.append("Joriy kunlik byudjet 0 dan katta bo'lishi shart.")
-        return {"passed": False, "errors": errors, "warnings": warnings}
+    # Barcha pul argumentlari yagona validatordan o'tadi (nan/inf/manfiy -> BLOCKED, exit 2)
+    try:
+        current_daily = tcore.require_number(current_daily, "joriy kunlik byudjet (--current)", positive=True)
+        proposed_daily = tcore.require_number(proposed_daily, "taklif qilingan byudjet (--proposed)", positive=True)
+        max_daily_cap = tcore.require_number(max_daily_cap, "maksimal limit (--max-cap)", positive=True)
+        if target_cpa is not None:
+            target_cpa = tcore.require_number(target_cpa, "maqsadli CPA (--target-cpa)", positive=True)
+    except tcore.NumberValidationError as exc:
+        return {"passed": False, "error": str(exc), "errors": [str(exc)], "warnings": warnings}
 
     ratio = proposed_daily / current_daily
     percent_change = (ratio - 1.0) * 100.0
@@ -224,6 +239,12 @@ def check_tracking_setup(
     errors: list[str] = []
     warnings: list[str] = []
 
+    if emq_score is not None:
+        try:
+            emq_score = tcore.require_number(emq_score, "EMQ ball (--emq)", min_val=0.0, max_val=10.0)
+        except tcore.NumberValidationError as exc:
+            return {"passed": False, "error": str(exc), "errors": [str(exc)], "warnings": warnings}
+
     if not has_browser_pixel and not has_server_capi:
         errors.append("Hech qanday kuzatuv vositasi (na Pixel, na Server CAPI) mavjud emas.")
 
@@ -257,10 +278,10 @@ def main() -> int:
 
     # Byudjet buyrug'i
     p_budget = subparsers.add_parser("budget", help="Byudjet o'zgarishini tekshirish")
-    p_budget.add_argument("--current", type=float, required=True, help="Joriy kunlik byudjet")
-    p_budget.add_argument("--proposed", type=float, required=True, help="Taklif qilingan kunlik byudjet")
-    p_budget.add_argument("--max-cap", type=float, default=500.0, help="Maksimal ruxsat etilgan kunlik byudjet (default: 500)")
-    p_budget.add_argument("--target-cpa", type=float, default=None, help="Maqsadli CPA (ixtiyoriy)")
+    p_budget.add_argument("--current", type=str, required=True, help="Joriy kunlik byudjet")
+    p_budget.add_argument("--proposed", type=str, required=True, help="Taklif qilingan kunlik byudjet")
+    p_budget.add_argument("--max-cap", type=str, default=500.0, help="Maksimal ruxsat etilgan kunlik byudjet (default: 500)")
+    p_budget.add_argument("--target-cpa", type=str, default=None, help="Maqsadli CPA (ixtiyoriy)")
     p_budget.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
     # Packet buyrug'i
@@ -282,7 +303,7 @@ def main() -> int:
     p_track.add_argument("--capi", action="store_true", help="Server CAPI mavjudligi")
     p_track.add_argument("--no-event-id", action="store_true", help="event_id yo'qligini bildiradi")
     p_track.add_argument("--unhashed", action="store_true", help="Foydalanuvchi ma'lumotlari xeshlanmagan")
-    p_track.add_argument("--emq", type=float, default=None, help="EMQ ball (0-10)")
+    p_track.add_argument("--emq", type=str, default=None, help="EMQ ball (0-10)")
     p_track.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
     args = parser.parse_args()
@@ -293,7 +314,7 @@ def main() -> int:
     elif args.command == "packet":
         if not args.file.is_file():
             print(f"Xato: fayl topilmadi: {args.file}", file=sys.stderr)
-            return 2
+            return tcore.EXIT_VALIDATION
         content = args.file.read_text(encoding="utf-8", errors="replace")
         res = check_change_packet(content)
     elif args.command == "copy":
@@ -309,7 +330,7 @@ def main() -> int:
 
     if getattr(args, "json", False):
         print(json.dumps(res, indent=2, ensure_ascii=False))
-        return 0 if res.get("passed", False) else 1
+        return tcore.exit_code_for_result(res, gate=True)
 
     # Inson o'qiydigan chiroyli xulosa
     passed = res.get("passed", False)
@@ -319,7 +340,9 @@ def main() -> int:
     if "percent_change" in res:
         print(f"  O'zgarish: {res['percent_change']:+g}% ({res['current_daily']} -> {res['proposed_daily']})")
 
-    if res.get("errors"):
+    if res.get("error"):
+        print(f"  VALIDATSIYA XATOSI: {res['error']}")
+    if res.get("errors") and not res.get("error"):
         print("  Xatolar (Taqiqlangan):")
         for err in res["errors"]:
             print(f"    - 🛑 {err}")
@@ -333,7 +356,7 @@ def main() -> int:
         print("  Barcha 6 ta xavfsizlik darvozasi to'liq qanoatlantirildi.")
 
     print()
-    return 0 if passed else 1
+    return tcore.exit_code_for_result(res, gate=True)
 
 
 if __name__ == "__main__":

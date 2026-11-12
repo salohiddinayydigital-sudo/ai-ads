@@ -225,20 +225,102 @@ def check_memory(report: Report) -> None:
         report.add("Xotira (MEMORY.md)", OK, f"{lines}/{MEMORY_LIMIT} qator")
 
 
-def check_mcp_and_evals(report: Report) -> None:
-    """MCP Server (.mcp.json + tyrion-mcp-server.py) va Behavioral Evals (skill-eval.py) tekshiruvi."""
-    import importlib
-    mcp_cfg = VAULT / ".mcp.json"
-    mcp_srv = TOOLS / "tyrion-mcp-server.py"
-    if not mcp_cfg.is_file() or not mcp_srv.is_file():
-        report.add("MCP Server (.mcp.json)", FAIL, ".mcp.json yoki tyrion-mcp-server.py yo'q")
-    else:
+_ENV_REF_RE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)(?::-([^}]*))?\}")
+
+
+def _expand_env(text: str, env: dict[str, str]) -> str:
+    """Claude Code'ning `${VAR}` / `${VAR:-default}` kengaytirishini taqlid qiladi (aniqlanmasa literal qoladi)."""
+    def repl(m: "re.Match[str]") -> str:
+        if m.group(1) in env:
+            return env[m.group(1)]
+        return m.group(2) if m.group(2) is not None else m.group(0)
+    return _ENV_REF_RE.sub(repl, text)
+
+
+def mcp_handshake(
+    cfg_path: Path,
+    server_name: str = "tyrion-core",
+    env: dict[str, str] | None = None,
+    cwd: Path | None = None,
+    timeout: float = 20.0,
+) -> dict:
+    """`.mcp.json` dagi AYNAN o'sha buyruqni ishga tushirib, stdio handshake (initialize + tools/list) qiladi.
+
+    `env` — Claude Code serverga beradigan qo'shimcha o'zgaruvchilar (masalan, faqat CLAUDE_PROJECT_DIR);
+    CLAUDE_PLUGIN_ROOT / CLAUDE_PROJECT_DIR meros olinmaydi, shuning uchun natija deterministik."""
+    result: dict = {"ok": False, "tool_count": 0, "tools": [], "detail": ""}
+    try:
+        cfg = json.loads(Path(cfg_path).read_text(encoding="utf-8"))
+        entry = cfg["mcpServers"][server_name]
+        command = str(entry["command"])
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        result["detail"] = f"{server_name} yozuvi o'qilmadi: {exc!r}"
+        return result
+    import os
+    child_env = {k: v for k, v in os.environ.items() if k not in ("CLAUDE_PLUGIN_ROOT", "CLAUDE_PROJECT_DIR")}
+    child_env.update(env or {})
+    for k, v in (entry.get("env") or {}).items():
+        child_env[k] = _expand_env(str(v), child_env)
+    argv = [_expand_env(command, child_env)] + [_expand_env(str(a), child_env) for a in entry.get("args", [])]
+    resolved = shutil.which(argv[0], path=child_env.get("PATH"))
+    if resolved is None:
+        result["detail"] = f"buyruq topilmadi: {argv[0]}"
+        return result
+    argv[0] = resolved
+    msgs = [
+        {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "tyrion-doctor", "version": "1"}}},
+        {"jsonrpc": "2.0", "method": "notifications/initialized"},
+        {"jsonrpc": "2.0", "id": 2, "method": "tools/list"},
+    ]
+    payload = "".join(json.dumps(m) + "\n" for m in msgs)
+    try:
+        proc = subprocess.run(
+            argv, input=payload, capture_output=True, text=True, encoding="utf-8", errors="replace",
+            timeout=timeout, cwd=str(cwd or VAULT), env=child_env,
+        )
+    except subprocess.TimeoutExpired:
+        result["detail"] = f"handshake {timeout:g}s ichida tugamadi"
+        return result
+    except OSError as exc:
+        result["detail"] = f"ishga tushmadi: {exc}"
+        return result
+    replies: dict = {}
+    for line in proc.stdout.splitlines():
         try:
-            mcp_mod = importlib.import_module("tyrion-mcp-server")
-            tcount = len(getattr(mcp_mod, "MCP_TOOLS", []))
-            report.add("MCP Server (.mcp.json)", OK, f"tyrion-core faol ({tcount} MCP tool)")
-        except Exception as exc:
-            report.add("MCP Server (.mcp.json)", WARN, f"tekshirib bo'lmadi: {exc}")
+            msg = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(msg, dict) and "id" in msg:
+            replies[msg["id"]] = msg
+    if 1 not in replies or "result" not in replies[1]:
+        result["detail"] = "initialize javobi yo'q: " + (proc.stderr.strip()[-160:] or f"exit {proc.returncode}")
+        return result
+    tools = (replies.get(2, {}).get("result") or {}).get("tools")
+    if not isinstance(tools, list):
+        result["detail"] = "tools/list javobi yo'q"
+        return result
+    result.update(ok=True, tool_count=len(tools), tools=[t.get("name") for t in tools if isinstance(t, dict)], detail="handshake OK")
+    return result
+
+
+def check_mcp(report: Report, cfg_path: Path | None = None, env: dict[str, str] | None = None, cwd: Path | None = None) -> None:
+    """MCP: .mcp.json buyrug'i CLAUDE_PLUGIN_ROOT'siz (ombor loyiha sifatida ochilgan holat) ham haqiqiy handshake qiladimi."""
+    cfg = cfg_path or (VAULT / ".mcp.json")
+    if not cfg.is_file():
+        report.add("MCP Server (.mcp.json)", FAIL, f"{cfg.name} yo'q")
+        return
+    project_env = env if env is not None else {"CLAUDE_PROJECT_DIR": str(VAULT)}
+    res = mcp_handshake(cfg, "tyrion-core", env=project_env, cwd=cwd or VAULT)
+    if res["ok"]:
+        report.add("MCP Server (.mcp.json)", OK, f"tyrion-core handshake OK ({res['tool_count']} MCP tool, CLAUDE_PLUGIN_ROOT'siz)")
+    else:
+        report.add("MCP Server (.mcp.json)", FAIL, res["detail"])
+
+
+def check_mcp_and_evals(report: Report) -> None:
+    """MCP Server (.mcp.json, haqiqiy stdio handshake) va Behavioral Evals (skill-eval.py) tekshiruvi."""
+    import importlib
+    check_mcp(report)
 
     eval_srv = TOOLS / "skill-eval.py"
     if not eval_srv.is_file():

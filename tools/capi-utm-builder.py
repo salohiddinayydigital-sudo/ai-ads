@@ -265,7 +265,7 @@ def main(argv: list[str] | None = None) -> int:
     p_capi.add_argument("--city", default="tashkent")
     p_capi.add_argument("--country", default="uz")
     p_capi.add_argument("--market", default="", help="Market pack (global, uz, us, eu, uk, mena, latam, sea, in)")
-    p_capi.add_argument("--value", type=float, default=0.0)
+    p_capi.add_argument("--value", type=tcore.non_negative_float, default=0.0)
     p_capi.add_argument("--currency", default="USD")
     p_capi.add_argument("--order-id", default="CRM_1001")
     p_capi.add_argument("--consent-granted", dest="consent_granted", action="store_true", default=True, help="User granted tracking/PII consent (default: True)")

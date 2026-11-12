@@ -2355,7 +2355,7 @@ def main(argv: list[str] | None = None) -> int:
     p_search.add_argument("--language", default="auto", help="Any BCP 47 language code (en, de, fr, es, ar, uz-Latn, uz_latin, uz_cyrillic, ru, auto)")
     p_search.add_argument("--query", action="append", default=[], help="Aniq qidiruv so'rovi (bir nechta berish mumkin — hech qachon tushirib qoldirilmaydi)")
     p_search.add_argument("--max-queries", type=int, default=12, help="Generatsiya qilinadigan maksimal qidiruv so'rovlari soni (default: 12)")
-    p_search.add_argument("--min-relevance", type=float, default=35.0, help="Asosiy tavsiyaga kiritish uchun minimal moslik balli (0..100, default: 35.0)")
+    p_search.add_argument("--min-relevance", type=tcore.finite_float, default=35.0, help="Asosiy tavsiyaga kiritish uchun minimal moslik balli (0..100, default: 35.0)")
     p_search.add_argument("--account-id", "--ad-account-id", dest="account_id", default="", help="Meta Ad Account ID (`act_...`) — targetingsearch va targetingvalidation uchun")
     p_search.add_argument("--special-ad-category", default="NONE", choices=list(SPECIAL_AD_CATEGORIES))
     p_search.add_argument("--suggestions", action="store_true", help="`/{act_id}/targetingsuggestions` endpointini ham chaqirish")

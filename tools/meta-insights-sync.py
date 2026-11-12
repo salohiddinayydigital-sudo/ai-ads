@@ -438,8 +438,8 @@ def main(argv: list[str] | None = None) -> int:
     p_pull.add_argument("--account-id", default="", help="Meta Ad Account ID (masalan: act_1234567890)")
     p_pull.add_argument("--level", default="adset", choices=["campaign", "adset", "ad"])
     p_pull.add_argument("--date-preset", default="last_7d", choices=["today", "yesterday", "last_7d", "last_14d", "last_30d", "maximum"])
-    p_pull.add_argument("--target-cpa", type=float, default=15.0)
-    p_pull.add_argument("--breakeven-roas", type=float, default=2.0)
+    p_pull.add_argument("--target-cpa", type=tcore.positive_float, default=15.0)
+    p_pull.add_argument("--breakeven-roas", type=tcore.finite_float, default=2.0)
     p_pull.add_argument(
         "--primary-conversion",
         default="auto",

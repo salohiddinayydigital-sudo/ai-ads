@@ -254,8 +254,8 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
         ma = importlib.import_module("meta-audience")
         mode = str(args.get("mode", "architect")).strip().lower()
         niche = str(args.get("niche", "ecom"))
-        budget = tcore.safe_float(args.get("daily_budget", 100.0), min_val=1.0, max_val=1_000_000.0, field_name="daily_budget")
-        aov = tcore.safe_float(args["aov"], min_val=0.01, field_name="aov") if args.get("aov") is not None else None
+        budget = tcore.require_number(args.get("daily_budget", 100.0), "daily_budget", min_val=1.0, max_val=1_000_000.0)
+        aov = tcore.require_number(args["aov"], "aov", min_val=0.01) if args.get("aov") is not None else None
         if mode == "market-intel":
             comp_raw = args.get("competitors")
             comp_list = [str(c) for c in comp_raw] if isinstance(comp_raw, list) else None
@@ -274,10 +274,10 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
                 aov=aov or 100.0,
                 country=str(args.get("geo", "UZ")),
             )
-        target_cpa = tcore.safe_float(args["target_cpa"], min_val=0.01, field_name="target_cpa") if args.get("target_cpa") is not None else None
-        measured_cpa = tcore.safe_float(args["measured_cpa"], min_val=0.01, field_name="measured_cpa") if args.get("measured_cpa") is not None else None
-        margin_pct = tcore.safe_float(args["margin_pct"], min_val=0.01, max_val=100.0, field_name="margin_pct") if args.get("margin_pct") is not None else None
-        cvr = tcore.safe_float(args["lead_to_sale_cvr"], min_val=0.01, max_val=100.0, field_name="lead_to_sale_cvr") if args.get("lead_to_sale_cvr") is not None else None
+        target_cpa = tcore.require_number(args["target_cpa"], "target_cpa", min_val=0.01) if args.get("target_cpa") is not None else None
+        measured_cpa = tcore.require_number(args["measured_cpa"], "measured_cpa", min_val=0.01) if args.get("measured_cpa") is not None else None
+        margin_pct = tcore.require_number(args["margin_pct"], "margin_pct", min_val=0.01, max_val=100.0) if args.get("margin_pct") is not None else None
+        cvr = tcore.require_number(args["lead_to_sale_cvr"], "lead_to_sale_cvr", min_val=0.01, max_val=100.0) if args.get("lead_to_sale_cvr") is not None else None
         return ma.build_architecture(
             niche=niche,
             daily_budget=budget,
@@ -299,8 +299,8 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
             account_id=str(args.get("account_id", "")),
             level=str(args.get("level", "adset")),
             date_preset=str(args.get("date_preset", "last_7d")),
-            target_cpa=tcore.safe_float(args.get("target_cpa", 15.0), min_val=0.01, field_name="target_cpa"),
-            breakeven_roas=tcore.safe_float(args.get("breakeven_roas", 2.0), min_val=0.01, field_name="breakeven_roas"),
+            target_cpa=tcore.require_number(args.get("target_cpa", 15.0), "target_cpa", min_val=0.01),
+            breakeven_roas=tcore.require_number(args.get("breakeven_roas", 2.0), "breakeven_roas", min_val=0.01),
             primary_conversion=str(args.get("primary_conversion", "auto")),
             currency_override=str(args.get("currency", "")),
             max_pages=tcore.safe_int(args.get("max_pages", 20), default=20, min_val=1, max_val=100, field_name="max_pages"),
@@ -310,10 +310,10 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
         ae = importlib.import_module("ad-export-analyzer")
         return ae.analyze_breakdown_effect(
             str(args["seg_a_name"]),
-            tcore.safe_float(args["seg_a_spend"], min_val=0.0, field_name="seg_a_spend"),
+            tcore.require_number(args["seg_a_spend"], "seg_a_spend", min_val=0.0),
             tcore.safe_int(args["seg_a_conv"], min_val=0, field_name="seg_a_conv"),
             str(args["seg_b_name"]),
-            tcore.safe_float(args["seg_b_spend"], min_val=0.0, field_name="seg_b_spend"),
+            tcore.require_number(args["seg_b_spend"], "seg_b_spend", min_val=0.0),
             tcore.safe_int(args["seg_b_conv"], min_val=0, field_name="seg_b_conv"),
         )
     if name == "tyrion_creative_matrix":
@@ -321,7 +321,7 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
         product = str(args.get("product", "")).strip()
         if not product:
             raise ValueError("'product' bo'sh bo'lishi mumkin emas")
-        price = tcore.safe_float(args.get("price", 100.0), min_val=0.0, field_name="price")
+        price = tcore.require_number(args.get("price", 100.0), "price", min_val=0.0)
         mode = str(args.get("mode", "matrix")).strip().lower()
         niche = str(args.get("niche", "ecom"))
         market = str(args.get("market", "global"))
@@ -352,15 +352,15 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
         )
     if name == "tyrion_media_calculator":
         calc = importlib.import_module("calculator")
-        price = tcore.safe_float(args.get("price"), min_val=0.01, field_name="price")
-        cogs = tcore.safe_float(args.get("cogs"), min_val=0.0, field_name="cogs")
-        shipping = tcore.safe_float(args.get("shipping", 0.0), min_val=0.0, field_name="shipping")
+        price = tcore.require_number(args.get("price"), "price", min_val=0.01)
+        cogs = tcore.require_number(args.get("cogs"), "cogs", min_val=0.0)
+        shipping = tcore.require_number(args.get("shipping", 0.0), "shipping", min_val=0.0)
         return calc.calc_breakeven(price, cogs, shipping)
     if name == "tyrion_spend_guard":
         sg = importlib.import_module("spend-guard")
-        curr = tcore.safe_float(args.get("current_daily"), min_val=0.01, field_name="current_daily")
-        prop = tcore.safe_float(args.get("proposed_daily"), min_val=0.01, field_name="proposed_daily")
-        cap = tcore.safe_float(args.get("max_daily_cap", 500.0), min_val=0.01, field_name="max_daily_cap")
+        curr = tcore.require_number(args.get("current_daily"), "current_daily", min_val=0.01)
+        prop = tcore.require_number(args.get("proposed_daily"), "proposed_daily", min_val=0.01)
+        cap = tcore.require_number(args.get("max_daily_cap", 500.0), "max_daily_cap", min_val=0.01)
         return sg.check_budget_change(curr, prop, cap)
     if name == "tyrion_brain_search":
         q = str(args.get("query", "")).strip()[:200]

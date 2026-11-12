@@ -23,6 +23,7 @@ _TOOLS_DIR = Path(__file__).resolve().parent
 if str(_TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(_TOOLS_DIR))
 import market_locale as mloc  # noqa: E402
+import tyrion_core as tcore  # noqa: E402
 
 for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):
@@ -823,7 +824,7 @@ def main(argv: list[str] | None = None) -> int:
     p_mat = sub.add_parser("matrix", help="3x3 Angle x Format creative testing matrix with market BNPL anchor & falsifiable hypotheses")
     p_mat.add_argument("--niche", default="ecom")
     p_mat.add_argument("--product", required=True)
-    p_mat.add_argument("--price", type=float, default=100.0)
+    p_mat.add_argument("--price", type=tcore.positive_float, default=100.0)
     p_mat.add_argument("--market", default="global", help="Market pack (global, uz, us, eu, uk, mena, latam, sea, in)")
     p_mat.add_argument("--currency", default="", help="ISO 4217 currency override (USD, EUR, GBP, JPY, UZS, etc.)")
     p_mat.add_argument("--json", action="store_true")
@@ -835,11 +836,11 @@ def main(argv: list[str] | None = None) -> int:
     p_hk.add_argument("--json", action="store_true")
 
     p_fat = sub.add_parser("fatigue", help="Creative fatigue diagnostics via Hook Rate, Hold Rate, FTIR & UTIS")
-    p_fat.add_argument("--hook-rate", type=float, required=True)
-    p_fat.add_argument("--hold-rate", type=float, required=True)
-    p_fat.add_argument("--ctr-drop-pct", type=float, default=0.0)
-    p_fat.add_argument("--frequency", type=float, default=1.5)
-    p_fat.add_argument("--ftir", type=float, default=70.0)
+    p_fat.add_argument("--hook-rate", type=tcore.finite_float, required=True)
+    p_fat.add_argument("--hold-rate", type=tcore.finite_float, required=True)
+    p_fat.add_argument("--ctr-drop-pct", type=tcore.finite_float, default=0.0)
+    p_fat.add_argument("--frequency", type=tcore.finite_float, default=1.5)
+    p_fat.add_argument("--ftir", type=tcore.finite_float, default=70.0)
     p_fat.add_argument("--json", action="store_true")
 
     p_vid = sub.add_parser("video-script", help="Ready-to-shoot 9:16 video ad script & scene-by-scene storyboard (720x1200 safe zone)")
@@ -848,7 +849,7 @@ def main(argv: list[str] | None = None) -> int:
     p_vid.add_argument("--problem", default="", help="Main customer problem or pain point")
     p_vid.add_argument("--format", dest="format_name", default="ugc_reaction_demo", choices=list(META_FORMAT_TAXONOMY.keys()))
     p_vid.add_argument("--duration", type=int, default=30, help="Target video duration in seconds (default: 30)")
-    p_vid.add_argument("--price", type=float, default=100.0)
+    p_vid.add_argument("--price", type=tcore.positive_float, default=100.0)
     p_vid.add_argument("--market", default="global")
     p_vid.add_argument("--currency", default="")
     p_vid.add_argument("--language", default="uz_latin")
@@ -857,7 +858,7 @@ def main(argv: list[str] | None = None) -> int:
     p_pda = sub.add_parser("pda-matrix", help="Andromeda Entity-ID & Persona-Desire-Awareness (PDA) Creative Diversity Plan")
     p_pda.add_argument("--niche", default="ecom")
     p_pda.add_argument("--product", required=True)
-    p_pda.add_argument("--price", type=float, default=100.0)
+    p_pda.add_argument("--price", type=tcore.positive_float, default=100.0)
     p_pda.add_argument("--market", default="global")
     p_pda.add_argument("--currency", default="")
     p_pda.add_argument("--json", action="store_true")
@@ -869,7 +870,7 @@ def main(argv: list[str] | None = None) -> int:
     p_copy.add_argument("--proof", default="")
     p_copy.add_argument("--language", default="uz_latin")
     p_copy.add_argument("--market", default="global")
-    p_copy.add_argument("--price", type=float, default=100.0)
+    p_copy.add_argument("--price", type=tcore.positive_float, default=100.0)
     p_copy.add_argument("--currency", default="")
     p_copy.add_argument("--json", action="store_true")
 
