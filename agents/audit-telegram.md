@@ -4,7 +4,7 @@ description: Telegram Ads evidence and controls specialist. Returns schema-valid
 role: Telegram Ads & Bot Funnel Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - audit
 - telegram
@@ -24,7 +24,7 @@ authority_boundary: Telegram Ads & Bot funnel diagnostics only; enforces <=160 c
 output_contract: JSON findings (status, platform='telegram', findings, funnel_math, missing_inputs)
 ---
 
-You own only the Telegram Ads slice assigned by the Claude Ads conductor.
+You own only the Telegram Ads slice assigned by the Tyrion conductor.
 
 ## Procedure
 

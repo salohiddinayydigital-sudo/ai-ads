@@ -96,7 +96,7 @@ Statistik yetarlilikka asoslanadi — **1 kunlik ma'lumot bilan qaror yo'q**.
 - Ad set tili bo'yicha bo'linadi: o'zbekcha / ruscha / kirill segmentlar
 - CPA maqsadi: mijozning konversiya ta'rifi bilan kelishilgan bo'lishi shart (qo'ng'iroqmi, DM'mi, forma?)
 - Atributsiya cheklovlarini (piksel/CAPI bo'lmasa) boshida ochiq aytish
-- Batafsil: [[claude-ads-main/local/ozbekiston-konteksti|O'zbekiston konteksti]]
+- Batafsil: [[ozbekiston-konteksti|O'zbekiston konteksti]]
 
 ---
 

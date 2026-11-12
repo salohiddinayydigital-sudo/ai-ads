@@ -4,7 +4,7 @@ description: Kampaniya g'oya worker — 139 g'oya kutubxonasidan nishaga mos mar
 role: Campaign Ideation, Offer Packaging & Growth Brainstorm Specialist
 model: sonnet
 maxTurns: 30
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - ideation
 - offers

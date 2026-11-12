@@ -4,7 +4,7 @@ description: Kontent strategiya worker — kontent ustunlari, mavzu klasterlari,
 role: Multi-Channel Content Strategy & Editorial Calendar Planner
 model: sonnet
 maxTurns: 30
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - content
 - strategy

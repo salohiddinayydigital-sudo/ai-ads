@@ -4,7 +4,7 @@ description: Apple Ads evidence and controls specialist. Returns schema-valid fi
 role: Apple Search Ads Evidence & Controls Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - audit
 - mobile-app
@@ -22,7 +22,7 @@ authority_boundary: Apple Search Ads audit only; no live account mutations or An
 output_contract: JSON findings (status, platform='apple', findings, contradictions, missing_inputs)
 ---
 
-You own only the Apple Ads slice assigned by the Claude Ads conductor.
+You own only the Apple Ads slice assigned by the Tyrion conductor.
 
 ## Procedure
 

@@ -72,5 +72,108 @@ class DoctorTests(unittest.TestCase):
         self.assertGreater(len(payload["checks"]), 5)
 
 
+class LinkCheckTests(unittest.TestCase):
+    """doctor.check_links — buzilgan markdown va wikilink havolalar."""
+
+    def _vault(self, tmp: str) -> Path:
+        root = Path(tmp)
+        (root / "docs").mkdir()
+        (root / "wiki").mkdir()
+        (root / "docs" / "target.md").write_text("ok", encoding="utf-8")
+        return root
+
+    def test_broken_md_link_detected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._vault(tmp)
+            (root / "docs" / "a.md").write_text("[x](missing-file.md)", encoding="utf-8")
+            self.assertEqual(doctor.find_broken_md_links(root), [("docs/a.md", "missing-file.md")])
+
+    def test_relative_md_link_resolves_from_own_dir(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._vault(tmp)
+            (root / "docs" / "a.md").write_text("[x](target.md)", encoding="utf-8")
+            self.assertEqual(doctor.find_broken_md_links(root), [])
+
+    def test_code_span_links_ignored(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._vault(tmp)
+            (root / "docs" / "a.md").write_text("Wikilink namunasi `[[...]]`", encoding="utf-8")
+            self.assertEqual(doctor.find_broken_wikilinks(root), [])
+
+    def test_broken_wikilink_detected_and_template_skipped(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._vault(tmp)
+            (root / "wiki" / "a.md").write_text("[[nomavjud-qayd]]", encoding="utf-8")
+            (root / "templates").mkdir()
+            (root / "templates" / "t.md").write_text("[[<% tp.file.cursor(1) %>]]", encoding="utf-8")
+            self.assertEqual(doctor.find_broken_wikilinks(root), [("wiki/a.md", "nomavjud-qayd")])
+
+    def test_current_vault_links_are_zero(self) -> None:
+        self.assertEqual(doctor.find_broken_md_links(VAULT), [])
+        self.assertEqual(doctor.find_broken_wikilinks(VAULT), [])
+
+    def test_doctor_links_row_ok(self) -> None:
+        report = doctor.Report()
+        doctor.check_links(report)
+        row = next(r for r in report.rows if r["check"] == "Buzilgan havolalar")
+        self.assertEqual(row["status"], doctor.OK, row["detail"])
+
+
+class CharterHygieneTests(unittest.TestCase):
+    """doctor.check_charter_hygiene — nom, MCP naqshi va URL ajratuvchilar."""
+
+    def test_current_vault_clean(self) -> None:
+        report = doctor.Report()
+        doctor.check_charter_hygiene(report)
+        row = next(r for r in report.rows if r["check"] == "Charter gigiyenasi")
+        self.assertEqual(row["status"], doctor.OK, row["detail"])
+
+    def test_detects_harness_specific_conductor_name(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "agents").mkdir()
+            (root / "agents" / "x.md").write_text(
+                "---\nname: x\ntools: Read\n---\n\nSlice assigned by the Claude Ads conductor.\n",
+                encoding="utf-8")
+            issues = doctor.charter_hygiene_issues(root)
+            self.assertTrue(any("Claude Ads conductor" in i for i in issues), issues)
+
+    def test_detects_invalid_mcp_tool_name(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "agents").mkdir()
+            (root / "agents" / "x.md").write_text(
+                "---\nname: x\ntools: Read, mcp__plugin_tyrion_tyrion-core__tyrion_not_real\n---\n\nbody\n",
+                encoding="utf-8")
+            issues = doctor.charter_hygiene_issues(root)
+            self.assertTrue(any("yaroqsiz MCP" in i for i in issues), issues)
+
+    def test_valid_mcp_tool_name_accepted(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "agents").mkdir()
+            (root / "agents" / "x.md").write_text(
+                "---\nname: x\ntools: Read, mcp__plugin_tyrion_tyrion-core__tyrion_media_calculator\n---\n\nbody\n",
+                encoding="utf-8")
+            self.assertEqual([i for i in doctor.charter_hygiene_issues(root) if "MCP" in i], [])
+
+    def test_detects_double_question_mark_url(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir()
+            (root / "docs" / "u.md").write_text(
+                "https://brand.uz/page?utm_source=meta?utm_medium=cpc\n", encoding="utf-8")
+            issues = doctor.charter_hygiene_issues(root)
+            self.assertTrue(any("'?' ajratuvchi" in i for i in issues), issues)
+
+    def test_ampersand_separator_accepted(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir()
+            (root / "docs" / "u.md").write_text(
+                "https://brand.uz/page?utm_source=meta&utm_medium=cpc\n", encoding="utf-8")
+            self.assertEqual(doctor.charter_hygiene_issues(root), [])
+
+
 if __name__ == "__main__":
     unittest.main()

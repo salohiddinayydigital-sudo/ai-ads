@@ -4,7 +4,7 @@ description: Amazon Ads evidence and controls specialist. Returns schema-valid f
 role: Amazon Ads Evidence & Controls Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - audit
 - ecommerce
@@ -22,7 +22,7 @@ authority_boundary: Amazon Ads audit only; no live bid/budget mutations or non-A
 output_contract: JSON findings (status, platform='amazon', findings, contradictions, missing_inputs)
 ---
 
-You own only the Amazon Ads slice assigned by the Claude Ads conductor.
+You own only the Amazon Ads slice assigned by the Tyrion conductor.
 
 ## Procedure
 

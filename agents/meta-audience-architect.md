@@ -4,7 +4,7 @@ description: Meta Ads (Facebook/Instagram) Andromeda 2 auditoriya arxitektori â€
 role: Meta Ads 4-Layer Audience & Detailed Targeting Accuracy Architect
 model: sonnet
 maxTurns: 24
-tools: Read, Grep, Glob, Bash
+tools: Read, Grep, Glob, Bash, mcp__plugin_tyrion_tyrion-core__tyrion_meta_audience, mcp__plugin_tyrion_tyrion-core__tyrion_meta_detailed_targeting, mcp__plugin_tyrion_tyrion-core__tyrion_meta_live_insights
 domains:
 - audience
 - targeting

@@ -4,7 +4,7 @@ description: Paid-media research worker for one bounded platform, policy, API, i
 role: Customer, Competitor & Market Intelligence Researcher
 model: sonnet
 maxTurns: 30
-tools: Read, Glob, Grep, WebSearch, WebFetch
+tools: Read, Glob, Grep, WebSearch, WebFetch, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - research
 - competitor

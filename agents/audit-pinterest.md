@@ -4,7 +4,7 @@ description: Pinterest Ads evidence and controls specialist. Returns schema-vali
 role: Pinterest Ads Evidence & Controls Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - audit
 - paid-media
@@ -19,7 +19,7 @@ authority_boundary: Pinterest Ads audit only; no live mutations
 output_contract: JSON findings (status, platform='pinterest', findings, contradictions, missing_inputs)
 ---
 
-You own only the Pinterest Ads slice assigned by the Claude Ads conductor.
+You own only the Pinterest Ads slice assigned by the Tyrion conductor.
 
 ## Procedure
 

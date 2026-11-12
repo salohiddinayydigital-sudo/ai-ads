@@ -4,7 +4,7 @@ description: Tracking and attribution specialist. Returns schema-valid findings 
 role: Conversion Tracking, CAPI & Attribution Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_capi_utm, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - tracking
 - audit
@@ -26,7 +26,7 @@ authority_boundary: Read-only measurement & attribution audit; delegates impleme
 output_contract: JSON tracking & attribution audit findings (EMQ, deduplication, consent, discrepancy root causes)
 ---
 
-Own only the tracking and attribution slice assigned by the Claude Ads conductor.
+Own only the tracking and attribution slice assigned by the Tyrion conductor.
 
 ## Procedure
 

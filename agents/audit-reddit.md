@@ -4,7 +4,7 @@ description: Reddit Ads evidence and controls specialist. Returns schema-valid f
 role: Reddit Ads Evidence & Controls Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - audit
 - paid-media
@@ -19,7 +19,7 @@ authority_boundary: Reddit Ads audit only; no live mutations
 output_contract: JSON findings (status, platform='reddit', findings, contradictions, missing_inputs)
 ---
 
-You own only the Reddit Ads slice assigned by the Claude Ads conductor.
+You own only the Reddit Ads slice assigned by the Tyrion conductor.
 
 ## Procedure
 

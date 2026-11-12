@@ -30,4 +30,4 @@ Byudjet oshirilsa-yu **yangi kreativlar hajmi oshirilmasa** — auditoriya bitta
 
 **Bog'liq:** bu sikl "Better" bosqichining ijrochisi → [[more-better-new]] · Qaysi parametrlarda → [[meta-ads-sozlamalari]] · Kreativ saralagan auditoriya voronkaga tushadi → [[survey-funnel]]
 
-**Yangilanish manbalari:** raqobatchi g'olib reklamalarni o'rganish → [[meta-ads-library-tadqiqot]] · O'z g'oliblaridan variatsiya ishlab chiqarish → [[ad-iteration]] · Sarlavha/hook formulalari (repo wiki) → [[claude-ads-main/local/wiki/kontent-formulalari|kontent formulalari]]
+**Yangilanish manbalari:** raqobatchi g'olib reklamalarni o'rganish → [[meta-ads-library-tadqiqot]] · O'z g'oliblaridan variatsiya ishlab chiqarish → [[ad-iteration]] · Sarlavha/hook formulalari (repo wiki) → [[kontent-formulalari|kontent formulalari]]

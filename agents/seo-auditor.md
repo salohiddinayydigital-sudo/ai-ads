@@ -4,7 +4,7 @@ description: SEO audit worker — mijoz sayti/landing uchun texnik + on-page SEO
 role: Technical SEO, On-Page SEO & Landing Page CRO Specialist
 model: sonnet
 maxTurns: 30
-tools: Read, Glob, Grep, WebFetch
+tools: Read, Glob, Grep, WebFetch, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - seo
 - cro

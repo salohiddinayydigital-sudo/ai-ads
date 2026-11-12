@@ -4,7 +4,7 @@ description: "Short-form video ad & Reels scriptwriter (Instagram Reels, TikTok,
 role: Short-Form Video Ad & Reels Scriptwriter
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep, Bash
+tools: Read, Glob, Grep, Bash, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - video
 - creative

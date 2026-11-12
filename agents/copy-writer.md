@@ -4,7 +4,7 @@ description: Bounded paid-media copy worker. Returns substantiated, current-spec
 role: Direct-Response Paid Media & Landing Page Copywriter
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_creative_matrix, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - copywriting
 - creative

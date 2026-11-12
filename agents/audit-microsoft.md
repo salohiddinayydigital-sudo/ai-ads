@@ -4,7 +4,7 @@ description: Microsoft Advertising evidence and controls specialist. Returns sch
 role: Microsoft / Bing Ads Evidence & Controls Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - audit
 - search
@@ -20,7 +20,7 @@ authority_boundary: Microsoft Advertising audit only; no live mutations
 output_contract: JSON findings (status, platform='microsoft', findings, contradictions, missing_inputs)
 ---
 
-You own only the Microsoft Advertising slice assigned by the Claude Ads conductor.
+You own only the Microsoft Advertising slice assigned by the Tyrion conductor.
 
 ## Procedure
 

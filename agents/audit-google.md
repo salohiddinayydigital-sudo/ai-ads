@@ -4,7 +4,7 @@ description: Google Ads evidence and controls specialist. Returns schema-valid f
 role: Google Ads Search, PMax & Shopping Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - audit
 - search
@@ -24,7 +24,7 @@ authority_boundary: Google Ads audit & Coliseum structure only; no live campaign
 output_contract: JSON findings (status, platform='google', findings, contradictions, missing_inputs)
 ---
 
-You own only the Google Ads slice assigned by the Claude Ads conductor.
+You own only the Google Ads slice assigned by the Tyrion conductor.
 
 ## Procedure
 

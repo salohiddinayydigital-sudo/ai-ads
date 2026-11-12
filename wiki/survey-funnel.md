@@ -20,4 +20,4 @@ updated: 2026-09-03
 
 Tushgan yangi lidga **dastlabki 5 daqiqa ichida** qo'ng'iroq qilish yoki avtomatlashtirilgan SMS yuborish **shart** — kechikish konversiyani ~80% ga qulataradi. Lidni mijozga aylantirish o'rtacha **8 marta aloqa** talab qiladi → [[sotuv-va-retention]]
 
-**Bog'liq:** bu voronka sotiladigan natija — [[shown-appointments]] · Landing'da o'lchanadigan hodisa (Lead/Schedule) — [[meta-ads-sozlamalari]] · Voronkaga olib kiruvchi kreativ — [[kreativ-sikl]] · Savol tuzish shablonlari (repo wiki) — [[claude-ads-main/local/wiki/custdev-shablonlar|CustDev shablonlari]]
+**Bog'liq:** bu voronka sotiladigan natija — [[shown-appointments]] · Landing'da o'lchanadigan hodisa (Lead/Schedule) — [[meta-ads-sozlamalari]] · Voronkaga olib kiruvchi kreativ — [[kreativ-sikl]] · Savol tuzish shablonlari (repo wiki) — [[custdev-shablonlar|CustDev shablonlari]]

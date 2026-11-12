@@ -4,7 +4,7 @@ description: Pozitsiyalash/ICP worker — mijozning bozordagi o'rni, messaji, ki
 role: Brand Positioning, ICP & Competitive Strategy Architect
 model: sonnet
 maxTurns: 30
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - positioning
 - strategy

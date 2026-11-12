@@ -4,7 +4,7 @@ description: Platform policy specialist. Returns schema-valid findings covering 
 role: Ad Platform Policy & Moderation Compliance Specialist
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - compliance
 - policy
@@ -23,7 +23,7 @@ authority_boundary: Platform advertising policy evaluation only; does not provid
 output_contract: Policy compliance scorecard, violation root causes, and compliant copy/targeting adjustments
 ---
 
-Own only the platform policy slice assigned by the Claude Ads conductor.
+Own only the platform policy slice assigned by the Tyrion conductor.
 
 ## Procedure
 

@@ -4,7 +4,7 @@ description: 'Launch worker — mijoz taklifi/xizmatini bozorga chiqarish rejasi
 role: Full-Funnel Marketing Strategy & Campaign Launch Architect
 model: sonnet
 maxTurns: 30
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - strategy
 - launch

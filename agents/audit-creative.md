@@ -4,7 +4,7 @@ description: Cross-platform creative specialist. Returns schema-valid findings c
 role: Cross-Platform Creative Health & Fatigue Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_creative_matrix, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - creative
 - audit
@@ -27,7 +27,7 @@ authority_boundary: Creative performance & fatigue diagnostics only; does not mu
 output_contract: JSON creative audit findings (hook/hold/FTIR diagnostics, format gaps, test queue)
 ---
 
-Own only the cross-platform creative slice assigned by the Claude Ads conductor.
+Own only the cross-platform creative slice assigned by the Tyrion conductor.
 
 ## Procedure
 

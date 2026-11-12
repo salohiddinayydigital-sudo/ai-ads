@@ -4,7 +4,7 @@ description: Snapchat Ads evidence and controls specialist. Returns schema-valid
 role: Snapchat Ads Evidence & Controls Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - audit
 - paid-media
@@ -19,7 +19,7 @@ authority_boundary: Snapchat Ads audit only; no live mutations
 output_contract: JSON findings (status, platform='snapchat', findings, contradictions, missing_inputs)
 ---
 
-You own only the Snapchat Ads slice assigned by the Claude Ads conductor.
+You own only the Snapchat Ads slice assigned by the Tyrion conductor.
 
 ## Procedure
 

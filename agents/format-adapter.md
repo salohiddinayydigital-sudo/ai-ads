@@ -4,7 +4,7 @@ description: Bounded creative-format verification worker. Inspects run-scoped ca
 role: Cross-Placement Creative Format & Aspect-Ratio Adapter
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - creative
 - design

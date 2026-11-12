@@ -4,7 +4,7 @@ description: Analitika/tracking worker — pixel, event, UTM, GA4, konversiya o'
 role: Meta CAPI v26.0, Pixel, sGTM, GA4 & UTM Implementation Specialist
 model: sonnet
 maxTurns: 30
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_capi_utm, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - tracking
 - analytics

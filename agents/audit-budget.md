@@ -4,7 +4,7 @@ description: Budget and finance specialist. Returns schema-valid findings coveri
 role: Paid Media Budget, Unit Economics & Pacing Specialist
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_media_calculator, mcp__plugin_tyrion_tyrion-core__tyrion_breakdown_effect, mcp__plugin_tyrion_tyrion-core__tyrion_spend_guard
 domains:
 - budget
 - finance
@@ -27,7 +27,7 @@ authority_boundary: Financial modeling, pacing, and Spend-Guard checks only; no 
 output_contract: Unit economics & budget allocation table with Spend-Guard gate status and rollback thresholds
 ---
 
-Own only the budget and finance slice assigned by the Claude Ads conductor.
+Own only the budget and finance slice assigned by the Tyrion conductor.
 
 ## Procedure
 

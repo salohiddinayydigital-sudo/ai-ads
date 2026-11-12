@@ -4,7 +4,7 @@ description: Adversarial source and claim verifier for paid-media facts, thresho
 role: Adversarial Fact, Benchmark & Claim Verifier
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep, WebSearch, WebFetch
+tools: Read, Glob, Grep, WebSearch, WebFetch, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - verification
 - research

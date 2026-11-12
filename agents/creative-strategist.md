@@ -4,7 +4,7 @@ description: Bounded paid-media concept worker. Returns source-labelled campaign
 role: Andromeda 2 Creative Matrix, Hook & Angle Strategist
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_creative_matrix, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - creative
 - strategy

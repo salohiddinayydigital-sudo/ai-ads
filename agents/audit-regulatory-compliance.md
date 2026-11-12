@@ -4,7 +4,7 @@ description: Regulatory and privacy specialist. Returns schema-valid findings co
 role: Privacy, Consent & Regulatory Compliance Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - compliance
 - privacy
@@ -23,7 +23,7 @@ authority_boundary: Privacy & regulatory control checks only; not formal legal r
 output_contract: Regulatory & consent compliance audit findings JSON
 ---
 
-Own only the regulatory and privacy slice assigned by the Claude Ads conductor.
+Own only the regulatory and privacy slice assigned by the Tyrion conductor.
 
 ## Procedure
 

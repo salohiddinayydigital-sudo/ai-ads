@@ -4,7 +4,7 @@ description: Bounded provider-neutral visual candidate worker. Uses only declare
 role: Ad Visuals, Product Photoshoot & Web UI/UX Designer
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_creative_matrix
 domains:
 - design
 - creative

@@ -4,7 +4,7 @@ description: Sotsial kontent worker — IG/Telegram/FB uchun post, hook, skript 
 role: Instagram, Telegram & Social Media Content Specialist
 model: sonnet
 maxTurns: 30
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - social
 - content

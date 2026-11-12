@@ -554,6 +554,131 @@ def check_shield(report: Report) -> None:
     except Exception as exc:
         report.add("TyrionShield (/shield)", WARN, f"tekshirib bo'lmadi: {exc}")
 
+# Charter `tools:` maydonida ruxsat etilgan yagona MCP naqsh (code.claude.com/docs/en/mcp
+# bo'yicha plugin-provided server: `mcp__plugin_<plugin>_<server>__<tool>`).
+MCP_TOOL_RE = re.compile(
+    r"^mcp__plugin_tyrion_tyrion-core__tyrion_"
+    r"(brain_search|breakdown_effect|capi_utm|creative_matrix|media_calculator|"
+    r"meta_audience|meta_detailed_targeting|meta_live_insights|spend_guard|universal_router)$"
+)
+
+URL_RE = re.compile(r"https?://[^\s\"'`<>)\]]+")
+
+TEXT_SUFFIXES = {".md", ".py", ".json", ".html", ".sh", ".ps1"}
+
+
+def _iter_repo_text_files(root: Path) -> list[Path]:
+    skip_parts = {".git", "node_modules", "graphify-out", "__pycache__"}
+    return [
+        p for p in root.rglob("*")
+        if p.is_file() and p.suffix in TEXT_SUFFIXES and not (skip_parts & set(p.parts))
+    ]
+
+
+def find_broken_md_links(root: Path) -> list[tuple[str, str]]:
+    """Nisbiy markdown havolalar ([matn](yo'l)) bo'lmagan faylga ko'rsatsa — qaytaradi."""
+    files = [p for p in root.rglob("*.md") if not ({"__pycache__", "graphify-out"} & set(p.parts))]
+    md_link_re = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
+    broken: list[tuple[str, str]] = []
+    for p in files:
+        text = p.read_text(encoding="utf-8", errors="replace")
+        for line in text.splitlines():
+            # inline kod namunalari tekshirilmaydi (masalan CLAUDE.md dagi `[[...]]`)
+            for m in md_link_re.finditer(re.sub(r"`[^`]*`", "", line)):
+                target = m.group(1).strip()
+                if target.startswith(("http://", "https://", "mailto:", "#")):
+                    continue
+                path_part = target.replace("\\", "/").split("#")[0]
+                if not path_part:
+                    continue
+                if not any((base / path_part).is_file() or (base / path_part).is_dir()
+                           for base in (p.parent, root)):
+                    broken.append((str(p.relative_to(root)).replace("\\", "/"), target))
+    return broken
+
+
+def find_broken_wikilinks(root: Path) -> list[tuple[str, str]]:
+    """Wikilink ([[nishon]]) nomi vault ichida mavjud .md faylga mos kelmasa — qaytaradi.
+
+    `templates/` (Obsidian Templater placeholderlari) tekshiruvdan tashqarida.
+    """
+    files = [p for p in root.rglob("*.md") if not ({"__pycache__", "graphify-out"} & set(p.parts))]
+    names = {p.name.lower() for p in files}
+    wikilink_re = re.compile(r"\[\[([^\]#|]+)")
+    broken: list[tuple[str, str]] = []
+    for p in files:
+        if "templates" in p.parts:
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        for line in text.splitlines():
+            for m in wikilink_re.finditer(re.sub(r"`[^`]*`", "", line)):
+                target = m.group(1).strip()
+                if not target or target == "..." or target.startswith("<%"):
+                    continue
+                base = target.split("/")[-1]
+                cand = base if base.endswith(".md") else base + ".md"
+                if cand.lower() not in names:
+                    broken.append((str(p.relative_to(root)).replace("\\", "/"), target))
+    return broken
+
+
+def check_links(report: Report) -> None:
+    """3B: buzilgan navigatsiya havolalari (markdown + wikilink) nol bo'lishi shart."""
+    broken_md = find_broken_md_links(VAULT)
+    broken_wl = find_broken_wikilinks(VAULT)
+    total = len(broken_md) + len(broken_wl)
+    if total == 0:
+        report.add("Buzilgan havolalar", OK, "markdown + wikilink havolalari joyida")
+        return
+    sample = (broken_md + broken_wl)[:2]
+    detail = f"{total} ta buzilgan (md={len(broken_md)}, wikilink={len(broken_wl)}): " + "; ".join(
+        f"{f} -> {t}" for f, t in sample)
+    report.add("Buzilgan havolalar", FAIL, detail)
+
+
+def charter_hygiene_issues(root: Path) -> list[str]:
+    """3A/3C: charter nomi, MCP nomlanishi va URL ajratuvchi gigiyenasi muammolari."""
+    issues: list[str] = []
+    fm_re = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
+    for p in sorted((root / "agents").glob("*.md")):
+        text = p.read_text(encoding="utf-8")
+        if "Claude Ads conductor" in text:
+            issues.append(f"{p.name}: harness-ga bog'liq 'Claude Ads conductor' nomi")
+        fm = fm_re.match(text)
+        if not fm:
+            continue
+        tools = re.search(r"^tools:\s*(.+)$", fm.group(1), re.M)
+        if not tools:
+            continue
+        for token in (t.strip() for t in tools.group(1).split(",")):
+            if token.startswith("mcp__") and not MCP_TOOL_RE.fullmatch(token):
+                issues.append(f"{p.name}: yaroqsiz MCP nom: {token}")
+    for p in _iter_repo_text_files(root):
+        if "agents" in p.parts:
+            continue  # charterlar yuqorida tekshirildi
+        if "tests" in p.parts:
+            continue  # testlar atayin buzilgan namunalarni olib yuradi
+        try:
+            text = p.read_text(encoding="utf-8", errors="replace")
+        except Exception:  # pragma: no cover
+            continue
+        for m in URL_RE.finditer(text):
+            url = m.group(0)
+            if url.count("?") > 1 or "&?" in url:
+                issues.append(f"{p.name}: noto'g'ri '?' ajratuvchi: {url[:80]}")
+                break
+    return issues
+
+
+def check_charter_hygiene(report: Report) -> None:
+    """3A/3C: charter nomi, MCP nomlanishi va URL '?' ajratuvchi gigiyenasi."""
+    issues = charter_hygiene_issues(VAULT)
+    if not issues:
+        report.add("Charter gigiyenasi", OK, "harness-neytral nom, MCP naqshi va URL ajratuvchilar toza")
+    else:
+        report.add("Charter gigiyenasi", FAIL, f"{len(issues)} muammo: " + "; ".join(issues[:2]))
+
+
 # --------------------------------------------------------------------------- #
 # Hisobot
 # --------------------------------------------------------------------------- #
@@ -610,6 +735,8 @@ def main(argv: list[str] | None = None) -> int:
     check_skills(report)
     check_instincts(report)
     check_shield(report)
+    check_links(report)
+    check_charter_hygiene(report)
     check_memory(report)
     check_mcp_and_evals(report)
     check_graph(report, data)

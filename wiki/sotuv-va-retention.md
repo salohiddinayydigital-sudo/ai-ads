@@ -27,4 +27,4 @@ Lidni to'liq mijozga aylantirish uchun o'rtacha **8 marta aloqaga chiqish** kera
 
 Dastlabki **30 ta sotuv uchrashuvi** o'tkazilmaguncha o'z konversiya foizingizni hisoblab bo'lmaydi — kichik namunadagi statistika aldamchi.
 
-**Bog'liq:** lid kelish nuqtasi → [[survey-funnel]] · 30 uchrashuv metrikasi natija modeliga bog'liq → [[shown-appointments]] · mijoz hisoboti tartibi (repo): [[claude-ads-main/local/wiki/log|jurnal]]
+**Bog'liq:** lid kelish nuqtasi → [[survey-funnel]] · 30 uchrashuv metrikasi natija modeliga bog'liq → [[shown-appointments]] · mijoz hisoboti tartibi (repo): [[mijoz-ishga-tushirish|mijoz ishga tushirish jurnali]]

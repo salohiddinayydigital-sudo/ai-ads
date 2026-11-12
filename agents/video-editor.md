@@ -4,7 +4,7 @@ description: 'Video montaj worker — skript/referensdan reklama videosini yig''
 role: Video Editing, Montage & Motion Graphics Specialist
 model: sonnet
 maxTurns: 60
-tools: Read, Glob, Grep, WebFetch, WebSearch, Bash, Write, Edit
+tools: Read, Glob, Grep, WebFetch, WebSearch, Bash, Write, Edit, mcp__plugin_tyrion_tyrion-core__tyrion_brain_search
 domains:
 - video
 - animation

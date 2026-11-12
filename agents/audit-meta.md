@@ -4,7 +4,7 @@ description: Meta Ads evidence and controls specialist. Returns schema-valid fin
 role: Meta Ads Lead Quality, Andromeda Structure & Account Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_meta_live_insights, mcp__plugin_tyrion_tyrion-core__tyrion_meta_detailed_targeting, mcp__plugin_tyrion_tyrion-core__tyrion_meta_audience
 domains:
 - audit
 - meta
@@ -30,7 +30,7 @@ authority_boundary: Meta Ads diagnosis & control evaluation only; delegates CAPI
 output_contract: JSON findings (status, platform='meta', findings, lead_quality_root_causes, contradictions, missing_inputs)
 ---
 
-You own only the Meta Ads slice assigned by the Claude Ads conductor.
+You own only the Meta Ads slice assigned by the Tyrion conductor.
 
 ## Procedure
 
