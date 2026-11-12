@@ -53,8 +53,8 @@
     "default_market": {
       "type": "string",
       "title": "Default market pack",
-      "default": "global",
-      "description": "Default market pack (global is market-agnostic; uz/us/eu/uk/mena/latam/sea/in load regional funnels, BNPL, currency, and regulations)"
+      "default": "uz",
+      "description": "Default market pack (v8 default is uz — Uzbekistan/CIS focus; global/us/eu/uk/mena/latam/sea/in remain selectable)"
     }
   },
   "suggestedPrompts": [

@@ -167,11 +167,11 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         },
     ),
     (
-        ("capi ishlashini tekshir", "capi tekshir", "conversions api", "event_id", "emq", "server-side tracking", "pixel va capi", "проверить работу capi", "настройка capi", "пиксель и capi", "capi ишлашини текшир"),
+        ("capi ishlashini tekshir", "capi tekshir", "conversions api", "event_id", "emq", "server-side tracking", "pixel va capi", "проверить работу capi", "настройка capi", "пиксель и capi", "capi ишлашини текшир", "конверсия не работает", "событие не работает", "трекинг не работает", "пиксель не работает", "pixel ishlamayapti", "event olchanmayapti"),
         {
             "domains": ["tracking", "technical", "analytics"],
             "platforms": ["meta", "web"],
-            "boost_skills": {"ads-server-side-tracking": 32.0, "ads-attribution": 16.0, "analytics": 14.0},
+            "boost_skills": {"ads-server-side-tracking": 85.0, "ads-attribution": 16.0, "analytics": 14.0},
             "boost_agents": {"tracking-specialist": 32.0, "audit-tracking": 22.0},
             "refs": ["skills/ads/references/conversion-tracking.md"],
             "tools": ["tools/capi-utm-builder.py", "tools/spend-guard.py"],
@@ -257,6 +257,17 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         },
     ),
     (
+        ("lid yig'ish", "lid yigish", "lidlar yig'ish", "lead generation", "generate leads", "лиды", "привлечение лидов", "lid olish", "more leads"),
+        {
+            "domains": ["audience", "lead-generation", "planning"],
+            "platforms": ["meta", "google"],
+            "boost_skills": {"ads-meta": 28.0, "ads-plan": 24.0, "ads-meta-audience": 18.0},
+            "boost_agents": {"meta-audience-architect": 26.0, "launch-planner": 20.0},
+            "refs": ["skills/ads/references/thinking-framework.md"],
+            "tools": ["tools/meta-audience.py"],
+        },
+    ),
+    (
         ("haftalik hisobot", "oylik hisobot", "mijoz hisoboti", "еженедельный отчет", "отчет для клиента", "weekly report"),
         {
             "domains": ["reporting", "analytics"],
@@ -265,6 +276,29 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
             "boost_agents": {"release-verifier": 30.0},
             "refs": ["skills/ads/references/scoring-system.md", "skills/ads/references/status-contract.md"],
             "tools": ["tools/ad-export-analyzer.py", "tools/calculator.py"],
+        },
+    ),
+    (
+        ("obunachi yig'ish", "obunachi yigish", "kanalga obunachi", "obunachilar", "kanal o'sishi", "kanal osishi", "подписчики канала", "подписчиков в канал", "grow channel subscribers", "channel subscribers"),
+        {
+            "domains": ["audience-growth", "telegram", "launch"],
+            "platforms": ["telegram"],
+            "boost_skills": {"ads-telegram": 60.0, "ads-plan": 30.0, "ads-audience": 20.0},
+            "boost_agents": {"launch-planner": 32.0, "audit-telegram": 18.0},
+            "refs": ["skills/ads/references/budget-allocation.md"],
+            "tools": ["tools/calculator.py", "tools/spend-guard.py"],
+        },
+    ),
+    (
+        ("nimadan boshlaymiz", "nimadan boshlash", "qayerdan boshlash", "nima qilishni bilmayman", "yangi mijoz", "yangi loyiha", "с чего начать", "с нуля", "новый клиент", "where to start", "start from scratch", "new client"),
+        {
+            "domains": ["strategy", "launch", "planning"],
+            "platforms": ["multi-platform"],
+            "boost_skills": {"ads-plan": 62.0, "ads-launch": 34.0, "product-marketing": 20.0},
+            "boost_agents": {"launch-planner": 38.0, "positioning-strategist": 22.0, "creative-strategist": 16.0},
+            "refs": ["skills/ads/references/thinking-framework.md"],
+            "tools": ["tools/calculator.py", "tools/client-workspace.py"],
+            "multi_step": True,
         },
     ),
 ]
@@ -276,8 +310,9 @@ MUTATION_PATTERNS = re.compile(
     r"(?:increase|raise|boost|double|triple)\s+(?:my\s+|the\s+|our\s+)?(?:[\w+\-]+\s+){0,3}budget\s+(?:by\s+)?\d+|"
     r"(?:delete|remove|pause|stop|turn\s+off)\s+(?:all\s+|the\s+|my\s+|our\s+)?(?:old\s+)?(?:(?:meta|google|tiktok|facebook|instagram)\s+)?(?:campaigns?|ads|ad\s+sets?)\b|"
     r"удалить\s+кампанию|остановить\s+рекламу\s+сейчас|увеличить\s+бюджет\s+на\s+\d+|"
-    r"бюджетни\s+ошир|кампанияни\s+ўчир"
-    r")\b",
+    r"бюджетни\s+ошир|кампанияни\s+ўчир|"
+    r"byudjetni?\s+(?:[\w.,%]+\s+){0,3}oshir|бюджет\s+(?:на\s+\d+\s*%?|увеличить|поднять)|поднять\s+бюджет"
+    r")",
     re.IGNORECASE,
 )
 
@@ -632,6 +667,8 @@ _UZ_STRONG_WORDS = re.compile(
     r"sizning|lekin|hamda|yo'q|yoq|kelmayapti|ishlamayapti|ishlamayabdi|sotuv|sotuvlar|narx|qimmat|arzon|oshib|ketdi|tushdi|kamaydi|"
     r"ko'paydi|reklama|reklamam|reklamamda|kampaniyamda|byudjetni|oshir|o'chir|mijoz|strategiya|lidlar|sifatsiz|kontent|tayyorla|tekshir|"
     r"saytimni|o'rganib|montaj|yasab|taklif|berish|berishchi|auditoriya|audioturiya|audioturiyaga|auditoriyaga|raqobatchi|raqobatchilar|"
+    r"obunachi|obunachilar|kanalga|kanalim|yig'ish|yigish|byudjet|byudjetim|boshlaymiz|boshlash|o'quv|oquv|markaz|markazi|"
+    r"o'sish|osish|oshirish|hisobla|hisobot|olchanmayapti|ishlayapti|ochish|ochkazish|qurish|qur|joylashtir|"
     r"rabotchilar|tahlil|salom|assalomu|alaykum|rahmat|yaxshimisiz|qalaysiz|bugungi|ob-havo|xato|xatolik|muammo|yordam|ber|qil)\b"
 )
 _UZ_STRONG_SUFFIX = re.compile(r"\b\w*(mayapti|yapti|yotgan|yotir|moqda|maydi|mabdi|yabdi|ingiz|imiz)\b")
@@ -998,6 +1035,7 @@ def _terminal_plan(
             "risk_level": "low",
             "is_mutation_request": is_mutation,
             "mutation_approved": mutation_approved,
+            "budget_hint": tcore.extract_budget_from_query(clean_query),
         },
         "market_context": market_info,
         "primary_agent": "",
@@ -1546,6 +1584,19 @@ def route_task(
             for sk_n in ag_skills
             if sk_n in skills_loaded_by_name and skills_loaded_by_name[sk_n].get("full_instructions_loaded")
         } if should_load_files else {}
+        if should_load_files and not full_skills_map and ag_attached:
+            # Yordamchi ishchining o'z skilli rejada tanlanmagan bo'lsa ham, har spawned worker
+            # o'z charter skillining to'liq ko'rsatmasini olishi shart (sodqlik: 0 belgi = yo'q).
+            for sk_n in ag_info.get("skills", []):
+                if sk_n in skills_by_name:
+                    sk_path = VAULT / "skills" / sk_n / "SKILL.md"
+                    try:
+                        sk_text = sk_path.read_text(encoding="utf-8", errors="replace")
+                    except OSError:
+                        continue
+                    if sk_text.strip():
+                        full_skills_map[sk_n] = sk_text
+                        break
         full_refs_map = {
             rf_p: refs_loaded_by_path[rf_p]["content"]
             for rf_p in ag_refs
@@ -1643,6 +1694,7 @@ def route_task(
             "risk_level": risk_level,
             "is_mutation_request": is_mutation,
             "mutation_approved": mutation_approved,
+            "budget_hint": tcore.extract_budget_from_query(clean_query),
         },
         "market_context": market_info,
         "primary_agent": primary_agent,

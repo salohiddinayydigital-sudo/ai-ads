@@ -3,7 +3,7 @@
 > **Rule:** Keep this file concise (`<= 90` lines). Store reusable cross-client patterns in `manifests/instincts.json` (`/learn`) and client-specific data in `clients/<slug>/`.
 
 ## 1. Active Workspace Configuration
-- **Default Market Pack:** `global` (override per client via `--market uz|us|eu|uk|mena|latam|sea|in` or `TYRION_MARKET`).
+- **Default Market Pack:** `uz` (v8 — O'zbekiston/MDH maqsadi; override per client via `--market global|us|eu|uk|mena|latam|sea|in` or `TYRION_MARKET`).
 - **Default Currency:** Account-native ISO 4217 (`USD`, `EUR`, `GBP`, `JPY`, `BRL`, `INR`, `AED`, `UZS`).
 - **Hook Profile:** `standard` (`TYRION_HOOK_PROFILE=minimal|standard|strict`).
 

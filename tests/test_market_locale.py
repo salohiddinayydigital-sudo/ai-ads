@@ -49,7 +49,7 @@ class DetectMarketTests(unittest.TestCase):
             self.assertEqual(ml.detect_market(currency="uzs")["market_id"], "uz")
             self.assertEqual(ml.detect_market(detected_lang="uz_latin")["market_id"], "uz")
             res = ml.detect_market(text="plain english request")
-        self.assertEqual((res["market_id"], res["detection_source"]), ("global", "default_global"))
+        self.assertEqual((res["market_id"], res["detection_source"]), ("uz", "default_uz"))
 
     def test_rtl_language_flag(self) -> None:
         with _clean_env():

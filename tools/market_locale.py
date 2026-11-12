@@ -232,10 +232,10 @@ def detect_market(
         curr = (currency or "UZS").strip().upper()
         return _enrich_detection(pack, curr, detected_lang, "language_uz")
 
-    # 6. Default: global
-    pack = load_market_pack("global")
-    curr = (currency or pack["default_currency"]).strip().upper()
-    return _enrich_detection(pack, curr, detected_lang or "en", "default_global")
+    # 6. Default: uz (v8 — maqsad O'zbekiston/MDH; boshqa bozorlar --market bilan tanlanadi)
+    pack = load_market_pack("uz")
+    curr = (currency or "USD").strip().upper()
+    return _enrich_detection(pack, curr, detected_lang or "en", "default_uz")
 
 
 def _enrich_detection(pack: dict[str, Any], currency: str, lang: str, source: str) -> dict[str, Any]:

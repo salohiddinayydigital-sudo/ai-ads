@@ -114,6 +114,99 @@ class RegionalPlatformTests(unittest.TestCase):
         self.assertEqual(problems, [])
 
 
+class RealQueryRegressionTests(unittest.TestCase):
+    """5-qadam: 34 real operator so'rovi — UZ lotin/kirill, RU, EN. Niyat -> platforma routingi.
+
+    Har satr (so'rov, kutgan primary_agent, kutgan birinchi skill) — joriy ishlaydigan
+    xulq qayd etilgan; regressiya buzilishi darhol ko'rinadi."""
+
+    EXPECTED = [
+        ("Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top", "audit-meta", "ads-meta"),
+        ("Telegram Ads kanalga obunachi yig'ish 500 dollar byudjet", "audit-telegram", "ads-telegram"),
+        ("yangi mijoz o'quv markazi, oyiga 1000$ byudjet, nimadan boshlaymiz", "launch-planner", "ads-plan"),
+        ("Таргет для стоматологии в Ташкенте, бюджет 300 долларов", "audit-budget", "ads-budget"),
+        ("Audit my Google Ads Performance Max and search terms", "audit-google", "ads-google"),
+        ("meta ads 4 qatlamli auditoriya overlap va exclusion qur", "meta-audience-architect", "ads-meta-audience"),
+        ("кинстик типография аниматсион рилс", "video-editor", "video-motion-graphics"),
+        ("креатив хохлашга", "audit-creative", "ads-creative"),
+        ("CPA qimmatlab ketdi, qayerda pul ketmoqda", "performance-analyst", "ads-math"),
+        ("weekly performance report for my meta campaigns", "performance-analyst", "orch-weekly-review"),
+        (".pixel va CAPI event_id deduplikatsiya tekshir", "tracking-specialist", "ads-server-side-tracking"),
+        ("Instagram reels skript yozib ber kiyim do'koni uchun", "reels-scriptwriter", "reels-scripting"),
+        ("некачественные лиды мета", "audit-meta", "ads-meta"),
+        ("YouTube kanal uchun reklama videosi montaj qil", "video-editor", "video-editing"),
+        ("Snapchat Ads kampaniyam tekshir", "audit-platform", "ads-snapchat"),
+        ("LinkedIn B2B lidlar kampaniya qurish", "audit-platform", "ads-linkedin"),
+        ("Amazon PPC sponsored products audit", "audit-platform", "ads-amazon"),
+        ("Google qidiruv so'rovlarida salbiy kalit so'zlar kerak", "audit-google", "ads-google"),
+        ("продвижение нового магазина одежды с нуля", "launch-planner", "ads-plan"),
+        ("online store uchun to'liq marketing strategiya", "launch-planner", "ads-plan"),
+        ("конверсия трекинг событие не работает", "audit-tracking", "ads-server-side-tracking"),
+        ("Telegram bot voronka kechikish muammosi", "audit-telegram", "ads-telegram"),
+        ("ROAS past, kampaniyani qanday optimizatsiya qilamiz", "audit-budget", "ads-optimize"),
+        ("mijoz uchun haftalik hisobot tayyorla", "release-verifier", "ads-report"),
+        ("AUD my tiktok campaign creative fatigue", "audit-creative", "ads-creative"),
+        ("landing sahifa konversiya past, CRO tekshiruv", "seo-auditor", "ads-landing"),
+        ("boshlang'ich byudjet bilan kampaniya ochkazish rejasi", "media-buyer", "ads-plan"),
+        ("Instagram'da brend xabardorligi kampaniyasi", "creative-strategist", "ads-dna"),
+        ("недвижимость в Ташкенте лиды", "meta-audience-architect", "ads-meta"),
+        ("IELTS kurslari uchun lidlar yig'ish", "meta-audience-architect", "ads-meta"),
+        ("куда уходит бюджет в гугл рекламе", "audit-budget", "ads-budget"),
+        ("EMQ oshirish uchun maydonlarni hashla", "tracking-specialist", "ads-server-side-tracking"),
+        ("повышение конверсии лендинга", "launch-planner", "cro"),
+        ("Meta reklamamdan kelayotgan lidlar sifatsiz, CPA 20 dollarga chiqdi, sababi nima", "audit-meta", "ads-meta"),
+    ]
+
+    def test_real_queries_route_to_expected_primary_agent(self) -> None:
+        self.assertGreaterEqual(len(self.EXPECTED), 30)
+        for q, agent, skill in self.EXPECTED:
+            plan = ss.route_task(q, load=False)
+            self.assertEqual(plan["status"], "ready", f"{q} -> {plan['status']}")
+            self.assertEqual(plan["primary_agent"], agent, q)
+            self.assertTrue(plan["required_skills"], q)
+            self.assertIn(skill, plan["required_skills"], q)
+
+    def test_intent_before_platform_for_start_from_scratch(self) -> None:
+        """'nimadan boshlaymiz' niyati byudjet skillidan ustun turadi (niyat -> platforma)."""
+        plan = ss.route_task("yangi mijoz o'quv markazi, oyiga 1000$ byudjet, nimadan boshlaymiz", load=False)
+        self.assertEqual(plan["primary_agent"], "launch-planner")
+        self.assertIn("ads-plan", plan["required_skills"])
+        self.assertEqual(plan["intent_analysis"]["niche"], "edu")
+
+    def test_channel_growth_intent_routes_with_platform(self) -> None:
+        plan = ss.route_task("Telegram Ads kanalga obunachi yig'ish 500 dollar byudjet", load=False)
+        self.assertIn("telegram", plan["intent_analysis"]["domains"])
+        self.assertIn("ads-telegram", plan["required_skills"])
+
+    def test_budget_intent_extracted_from_required_queries(self) -> None:
+        import tyrion_core as tcore
+        b1 = tcore.extract_budget_from_query("Telegram Ads kanalga obunachi yig'ish 500 dollar byudjet")
+        self.assertEqual((b1["amount"], b1["currency"]), (500.0, "USD"))
+        b2 = tcore.extract_budget_from_query("yangi mijoz o'quv markazi, oyiga 1000$ byudjet, nimadan boshlaymiz")
+        self.assertEqual((b2["amount"], b2["period"]), (1000.0, "monthly"))
+
+    def test_mutation_requests_are_gated_multilingual(self) -> None:
+        for q in ("byudjetni 50% oshirish kerak",
+                  "oylik byudjetni oshirish kerak 500 dollar",
+                  "budget +40% and pause campaigns",
+                  "увеличить бюджет на 60%"):
+            self.assertEqual(ss.route_task(q, load=False)["status"], "blocked_mutation_approval", q)
+
+    def test_advisory_budget_requests_are_not_blocked(self) -> None:
+        for q in ("byudjet oshirish rejasi tuz", "budget increase advice please", "byudjet taqsimlash qanday qilinadi"):
+            self.assertEqual(ss.route_task(q, load=False)["status"], "ready", q)
+
+    def test_default_market_is_uz(self) -> None:
+        """v8: standart bozor uz (O'zbekiston/MDH maqsadi)."""
+        plan = ss.route_task("new campaign for a coffee shop in my city", load=False)
+        self.assertEqual(plan["market_context"]["market_id"], "uz")
+
+    def test_language_detection_on_required_queries(self) -> None:
+        self.assertEqual(ss.route_task("Telegram Ads kanalga obunachi yig'ish 500 dollar byudjet", load=False)["intent_analysis"]["detected_language"], "uz_latin")
+        self.assertEqual(ss.route_task("Таргет для стоматологии в Ташкенте", load=False)["intent_analysis"]["detected_language"], "ru")
+        self.assertEqual(ss.route_task("Audit my Google Ads campaign", load=False)["intent_analysis"]["detected_language"], "en")
+
+
 if __name__ == "__main__":
     unittest.main()
 

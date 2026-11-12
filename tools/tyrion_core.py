@@ -201,6 +201,83 @@ def safe_slug(value: str, fallback: str = "unnamed-project", max_len: int = 48) 
     return raw if raw else fallback
 
 
+_BUDGET_NUM_RE = re.compile(r"\d[\d ,.\u00a0\u202f\u2009']*(?:\s*(?:mln|million|ming|k)\b)?")
+_BUDGET_PERIOD_MAP = (
+    ("oyiga", "monthly"),
+    ("har oy", "monthly"),
+    ("monthly", "monthly"),
+    ("per month", "monthly"),
+    ("haftasiga", "weekly"),
+    ("har hafta", "weekly"),
+    ("weekly", "weekly"),
+    ("per week", "weekly"),
+    ("kuniga", "daily"),
+    ("har kun", "daily"),
+    ("daily", "daily"),
+    ("per day", "daily"),
+)
+_BUDGET_CURRENCY_TOKENS = (
+    ("so\u02BBm", "UZS"),  # soʻm (U+02BB)
+    ("so\u2019m", "UZS"),  # so'm (U+2019)
+    ("so'm", "UZS"),      # so'm (ASCII apostrof)
+    ("uzs", "UZS"),
+    ("sum", "UZS"),
+    ("dollar", "USD"),
+    ("usd", "USD"),
+    ("$", "USD"),
+    ("euro", "EUR"),
+    ("evro", "EUR"),
+    ("eur", "EUR"),
+    ("rubl", "RUB"),
+    ("руб", "RUB"),
+)
+_BUDGET_CONTEXT_TOKENS = ("byudjet", "budget", "бюджет", "$", "dollar", "so\u02BBm", "so\u2019m", "so'm", "usd", "uzs", "euro", "evro", "rubl", "руб", "sum")
+
+
+def extract_budget_from_query(text: str) -> dict[str, Any] | None:
+    """Tabiiy tildagi byudjet NIYATINI ajratadi (niyat -> platforma tartibi).
+
+    "oyiga 1000$ byudjet" -> {"amount": 1000.0, "currency": "USD", "period": "monthly", "raw": "1000"}
+    "500 dollar", "5 mln so'm", "300 USD per week" kabi iboralarni tanib oladi.
+    Miqdor topilmasa `None` qaytaradi — taxmin qilmaydi (95% Ishonch Qonuni).
+    """
+    s = str(text or "").lower()
+    if not s:
+        return None
+    num_match = None
+    for m in _BUDGET_NUM_RE.finditer(s):
+        window = s[max(0, m.start() - 18):m.end() + 18]
+        if any(tok in window for tok in _BUDGET_CONTEXT_TOKENS):
+            num_match = m
+            break
+    if num_match is None:
+        return None
+    raw_num = num_match.group(0).strip()
+    multiplier = 1.0
+    if re.search(r"(?:mln|million)$", raw_num):
+        multiplier = 1_000_000.0
+        raw_num = re.sub(r"\s*(?:mln|million)$", "", raw_num)
+    elif re.search(r"(?:ming|k)$", raw_num):
+        multiplier = 1_000.0
+        raw_num = re.sub(r"\s*(?:ming|k)$", "", raw_num)
+    amount = parse_localized_number(raw_num)
+    if amount is None or amount <= 0:
+        return None
+    amount *= multiplier
+
+    currency = "USD"
+    for token, code in _BUDGET_CURRENCY_TOKENS:
+        if token in s:
+            currency = code
+            break
+    period = "one_time"
+    for token, p in _BUDGET_PERIOD_MAP:
+        if token in s:
+            period = p
+            break
+    return {"amount": amount, "currency": currency, "period": period, "raw": num_match.group(0).strip()}
+
+
 def sanitize_url(url: str) -> str:
     """XSS (`javascript:`, `data:`) va CRLF injection'dan himoyalangan URL tekshiruvi."""
     cleaned = re.sub(r"[\r\n\t\x00-\x1f]", "", str(url or "").strip())
