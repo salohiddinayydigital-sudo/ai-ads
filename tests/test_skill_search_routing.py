@@ -97,6 +97,18 @@ class RegionalPlatformTests(unittest.TestCase):
         self.assertEqual(plan["required_skills"][0], "ads-yandex")
         self.assertEqual(plan["primary_agent"], "audit-google")
 
+    def test_vk_ads_russian_queries_route_to_own_skill(self) -> None:
+        for q in ("Нужна стратегия для VK Ads, стоматология в Ташкенте",
+                  "Проверь аудит рекламы ВКонтакте: VK Реклама и ретаргетинг",
+                  "Настрой таргет во ВК для интернет-магазина"):
+            plan = ss.route_task(q, load=True)
+            self.assertEqual(plan["required_skills"][0], "ads-vk", q)
+            self.assertEqual(plan["intent_analysis"]["detected_language"], "ru", q)
+
+    def test_vk_does_not_hijack_other_platforms(self) -> None:
+        plan = ss.route_task("Audit my Google Ads Performance Max and search terms negative keywords", load=True)
+        self.assertNotIn("ads-vk", plan["required_skills"] + plan["supporting_skills"])
+
     def test_registry_valid_with_new_skill(self) -> None:
         problems, _ = ss.validate_registry()
         self.assertEqual(problems, [])

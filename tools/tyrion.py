@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v7.0 Master CLI — Butun tizim uchun yagona boshqaruv markazi (0 token).
+"""Tyrion v7.1 Master CLI — Butun tizim uchun yagona boshqaruv markazi (0 token).
 
 Ishlatish:
   python3 tools/tyrion.py status

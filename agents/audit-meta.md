@@ -25,7 +25,7 @@ triggers:
 - некачественные лиды мета
 - аудит таргета
 - мета реклама муаммо
-skills: [ads-meta, ads-meta-audience, uzbekistan-market-intel]
+skills: [ads-meta, ads-meta-audience, uzbekistan-market-intel, ads-vk]
 authority_boundary: Meta Ads diagnosis & control evaluation only; delegates CAPI payload building to tracking-specialist and live mutations require Spend-Guard approval
 output_contract: JSON findings (status, platform='meta', findings, lead_quality_root_causes, contradictions, missing_inputs)
 ---

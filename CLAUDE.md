@@ -1,16 +1,16 @@
 ---
 name: CLAUDE
-description: "Tyrion v7.0 — AI Paid Media & Targetology Operating System routeri (ECC-grade yagona ildizli arxitektura)"
+description: "Tyrion v7.1 — AI Paid Media & Targetology Operating System routeri (ECC-grade yagona ildizli arxitektura)"
 tags: [router, tyrion, ecc, v5]
 source: "affaan-m/ECC arxitekturasi asosida Tyrion uchun"
 updated: 2026-10-20
 ---
 
-# 🧠 TYRION v7.0 — AI PAID MEDIA & TARGETOLOGY OS
+# 🧠 TYRION v7.1 — AI PAID MEDIA & TARGETOLOGY OS
 
 > **Kanonik shartnoma:** [[AGENTS.md]] · **Operator xotirasi:** [[MEMORY.md]] · **Bilim xaritasi:** [[INDEX.md]] · **Kirish:** [[README.md]]
 
-Tyrion v7.0 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan **yagona ildizli (Single Source of Truth)** reklama, targetologiya va marketing operatsion tizimi. Hech qanday ichki dublikat papka (`claude-ads-main/`) yo'q — barcha agentlar, skilllar, playbooklar, kontekst rejimlari va 0-token CLI asboblar to'g'ridan-to'g'ri loyiha ildizida joylashgan.
+Tyrion v7.1 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan **yagona ildizli (Single Source of Truth)** reklama, targetologiya va marketing operatsion tizimi. Hech qanday ichki dublikat papka (`claude-ads-main/`) yo'q — barcha agentlar, skilllar, playbooklar, kontekst rejimlari va 0-token CLI asboblar to'g'ridan-to'g'ri loyiha ildizida joylashgan.
 
 ## 1. Yagona Ildizli Tuzilma (Single-Root Architecture)
 
@@ -20,7 +20,7 @@ Tyrion v7.0 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 | `MEMORY.md` | **Operator xotirasi va Bet Ledger** (`<=90` qator) — til, bozor, aktiv gipotezalar, saboqlar | Sessiya boshida (boot) |
 | `INDEX.md` | **Yagona Bilim Xaritasi (MOC)** — barcha `wiki/` va `playbooks/` jadvali | Bilim qidirish / yozishdan oldin |
 | `agents/` | **36 ta kanonik agent charteri** (13 platforma auditi, 5 ixtisos audit, 18 strategiya/kreativ/auditoriya) | Worker ishga tushganda |
-| `skills/` | **64 ta kanonik skill** (`ads-*` platforma, `ads/` konduktor + 39 `references/`, operator skilllar) | Vazifa boshida (`skill-search.py`) |
+| `skills/` | **65 ta kanonik skill** (`ads-*` platforma, `ads/` konduktor + 39 `references/`, operator skilllar) | Vazifa boshida (`skill-search.py`) |
 | `commands/` | **27 ta slash buyruq** (`/start`, `/audit`, `/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/utm`, `/budget`, `/scale`, `/raqobatchi`, `/mijoz`, `/tracking`, `/hisobot`, `/savol`, `/sop`, `/learn`, `/shield`, `/doctor`) | Foydalanuvchi chaqirganda |
 | `contexts/` | **6 ta kontekst fayli** (5 ta ECC Dynamic Context Mode + `contexts/README.md`) | Vazifa rejimiga qarab ([[contexts/README]]) |
 | `playbooks/` | **9 ta playbook fayli** (8 ta amaliy nisha/platforma playbooki + `playbooks/README.md`) | Kampaniya / nisha strategiyasida ([[playbooks/README]]) |
@@ -45,7 +45,7 @@ Tyrion v7.0 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 | `python3 tools/tyrion.py status` | **Yagona Master CLI** — tizim holati va barcha buyruqlar menyusi |
 | `python3 tools/tyrion.py route "<vazifa>"` | **Universal Auto-Router** — oddiy tildagi topshiriqdan agent, skill, reference va workflow'ni avtomatik tanlash va yuklash |
 | `python3 tools/doctor.py` | **Tizim sog'lig'i** — ko'p qatlamli tekshiruv (bilim, katalog, skill, sirlar, testlar) |
-| `python3 tools/tyrion-shield.py scan` | **TyrionShield v7.0 (/shield)** — 6 qavatli statik xavfsizlik, AST va governance skaneri |
+| `python3 tools/tyrion-shield.py scan` | **TyrionShield v7.1 (/shield)** — 6 qavatli statik xavfsizlik, AST va governance skaneri |
 | `python3 tools/meta-targeting-engine.py search` | **Detailed Targeting Accuracy Engine (/auditoriya)** — 6-statusli rasmiy Graph API v26.0 interest qidiruv va validation dvigateli |
 | `python3 tools/meta-audience.py <cmd>` | **Meta Ads Audience Studio (/auditoriya)** — `architect`, `interests`, `overlap` (<20%), `saturation`, `retargeting`, `lookalike`, `diagnose` |
 | `python3 tools/meta-insights-sync.py pull` | **Live Meta Ads Insights (/eksport)** — Graph API v26.0 `/act_<id>/insights` sinxronizatsiyasi va auditi |
