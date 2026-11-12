@@ -24,7 +24,7 @@ domains:
 - analytics
 platforms:
 - multi-platform
-attached_agents: [audit-budget]
+attached_agents: [audit-budget, performance-analyst]
 related_skills:
 - ads-budget
 - ads-optimize

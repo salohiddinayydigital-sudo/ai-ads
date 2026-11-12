@@ -1,0 +1,512 @@
+{
+  "schema": "tyrion-quality-eval/v1",
+  "runs_dir": "evals\\quality\\runs\\v8-step4",
+  "scenarios_count": 12,
+  "totals": {
+    "deterministic_score": 46,
+    "deterministic_max": 46,
+    "judge_score": 91,
+    "judge_max": 96
+  },
+  "judge": {
+    "file": "evals/quality/judge-scores-v8-final.json",
+    "model": "judge-agent (v8-step4, 3 pass: main+retry+creative)",
+    "date": "2026-11-12"
+  },
+  "scenarios": [
+    {
+      "id": "Q01_audit_meta",
+      "job": "audit",
+      "worker_agent": "audit-meta",
+      "deterministic": {
+        "passed": 6,
+        "total": 6,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(meta_performance.json, act_88291048201)"
+          },
+          {
+            "id": "fragmentation",
+            "passed": true,
+            "detail": "any(learning_limited, learning limited, 8 ta)"
+          },
+          {
+            "id": "capi_dedup",
+            "passed": true,
+            "detail": "all; missing=[]"
+          },
+          {
+            "id": "double_counting",
+            "passed": true,
+            "detail": "any(15%, ikki marta, double counting)"
+          },
+          {
+            "id": "fatigue",
+            "passed": true,
+            "detail": "any(54.2, 3.12, charchash)"
+          },
+          {
+            "id": "recommendation_split",
+            "passed": true,
+            "detail": "any(tavsiya, recommendation)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 2,
+          "language_clarity": 2
+        },
+        "score": 8,
+        "notes": "Har topilma manba fayl + MEASURED/HISOB/HEURISTIC belgisi bilan berilgan; barcha raqamlar meta_performance.json va tracking_health.json bilan mos (245=178+67, CPA 14.21≈14.20, ROAS 1.95, FTIR 54.2%, Freq 3.12, 18s, 35%). P1-P7 prioritetsiz tartiblangan, har mutatsiya taklifida rollback+stop-loss yozilgan va P6'da byudjet o'zgarishi Spend-Guard 20% gate + operator tasdig'isiga bog'langan."
+      }
+    },
+    {
+      "id": "Q02_audit_google",
+      "job": "audit",
+      "worker_agent": "audit-google",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(google_search_terms.json, google_ads_482_910_3301)"
+          },
+          {
+            "id": "waste_amount",
+            "passed": true,
+            "detail": "regex(478\\.80, 24\\.18, 24\\.2)"
+          },
+          {
+            "id": "negative_keywords",
+            "passed": true,
+            "detail": "any(salbiy kalit, negative, add_negative)"
+          },
+          {
+            "id": "broad_match",
+            "passed": true,
+            "detail": "any(broad, keng qidiruv)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 2,
+          "language_clarity": 2
+        },
+        "score": 8,
+        "notes": "Bekorchi sarf 478.80/24.18%, high-intent 963.00 (48.6%), 88 konv (79.3%), CPA 10.94 va qoldiq 438.20/23 hisoblari eksport bilan aynan mos; '45 vs 4 salbiy' ziddiyati oshkor. Severity bilan prioritashlangan topilmalar, mutation-gate bo'limi, rollback yo'li va 30 kunlik o'lchash oynasi bor."
+      }
+    },
+    {
+      "id": "Q03_audit_telegram",
+      "job": "audit",
+      "worker_agent": "audit-telegram",
+      "deterministic": {
+        "passed": 5,
+        "total": 5,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(telegram_campaigns.json, tg_ads_fragment_8819)"
+          },
+          {
+            "id": "kill_channel",
+            "passed": true,
+            "detail": "any(kulgu_va_memlar)"
+          },
+          {
+            "id": "dropoff",
+            "passed": true,
+            "detail": "any(85%, drop-off, drop_off)"
+          },
+          {
+            "id": "scale_channel",
+            "passed": true,
+            "detail": "any(toshkent_bozori, winner)"
+          },
+          {
+            "id": "bot_delay",
+            "passed": true,
+            "detail": "any(18 soniya, 18s, kechikish)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 2,
+          "language_clarity": 2
+        },
+        "score": 8,
+        "notes": "Voronka matematikasi (CPL 1.45, CAC 12.12, ROAS 2.65, AOV 32.12) va kanal CPL/CTR qiymatlari manbaga aynan mos; 716-vs-825 lid ziddiyati o'zi topib oshkor qilgan. Prioritetlangan 6-bandli tavsiyalar jadvali, reversibl pauza, +15%/hafta Spend-Guard mosligi va muvaffaqiyat o'lchovi mavjud."
+      }
+    },
+    {
+      "id": "Q04_budget_realloc",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 5,
+        "total": 5,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "breakeven_cpa",
+            "passed": true,
+            "detail": "regex(15\\.8, 198[ .,]?000)"
+          },
+          {
+            "id": "google_above_be",
+            "passed": true,
+            "detail": "any(17.8, 17,8)"
+          },
+          {
+            "id": "platforms",
+            "passed": true,
+            "detail": "all; missing=[]"
+          },
+          {
+            "id": "spend_guard",
+            "passed": true,
+            "detail": "any(spend-guard, spend guard)"
+          },
+          {
+            "id": "rollback",
+            "passed": true,
+            "detail": "any(rollback, teskari qadam, stop-loss)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 2,
+          "language_clarity": 2
+        },
+        "score": 8,
+        "notes": "Unit ekonomika va barcha sarf/CPA/ROAS/CPL raqamlari BRIEF.md va 3 ta export bilan mos; vosita natijalari ham tekshirildi — media_calculator (198,000 UZS, BE ROAS 1.77x, marja 56.6%) va breakdown_effect (blended $14.21, ABO pauzada ~$19.61) artifactdagi qiymatlar bilan aynan keladi. P1-P3 prioritetsiz, har o'zgarishda o'lchangan Spend-Guard gate natijalari (bosqichli +16.57%/+11.47% PASS, bir martda FAIL) va rollback triggerlari bor."
+      }
+    },
+    {
+      "id": "Q05_budget_scale",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "spend_guard",
+            "passed": true,
+            "detail": "any(spend-guard, spend guard)"
+          },
+          {
+            "id": "threshold",
+            "passed": true,
+            "detail": "any(20%)"
+          },
+          {
+            "id": "approval",
+            "passed": true,
+            "detail": "any(tasdiq, approval, ruxsat)"
+          },
+          {
+            "id": "rollback",
+            "passed": true,
+            "detail": "any(rollback, teskari qadam, stop-loss)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 2,
+          "language_clarity": 2
+        },
+        "score": 8,
+        "notes": "$15.00->$19.50 (+30%), CPL 1.25, CTR 1.45, monitoring chegarasi $1.56 — raqamlar manbaga mos; Spend-Guard FAILED (+30% > 20%, limit $18.00) halol qayd etilgan va manba '+15%' tavsiyasiga zid e'tiborga olingan. Bosqichli Variant A, tasdiq talabi, rollback triggeri va idempotentlik to'liq."
+      }
+    },
+    {
+      "id": "Q06_budget_breakeven",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "result_uzs",
+            "passed": true,
+            "detail": "regex(198[ .,]?000)"
+          },
+          {
+            "id": "result_usd",
+            "passed": true,
+            "detail": "regex(15\\.8, 15,8)"
+          },
+          {
+            "id": "components",
+            "passed": true,
+            "detail": "all; missing=[]"
+          },
+          {
+            "id": "commission",
+            "passed": true,
+            "detail": "any(7, 2.0%, 2%)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 1,
+          "language_clarity": 2
+        },
+        "score": 7,
+        "notes": "Bosqichli hisob (350k-120k-25k-7k=198k UZS/$15.84; ROAS 1.77x; kurs 12,500 DERIVED) brif bilan aynan mos, platforma solishtiruvi ($14.20/$17.80/$10.50) ham to'g'ri. Hisob-kitob va stop-loss chegarasi bor, lekin prioritashlangan keyingi qadamlar yo'q — actionability 1."
+      }
+    },
+    {
+      "id": "Q07_kreativ_reels",
+      "job": "kreativ",
+      "worker_agent": "copy-writer",
+      "deterministic": {
+        "passed": 2,
+        "total": 2,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "hook_lines",
+            "passed": true,
+            "detail": "lines=3/3, over_limit=0"
+          },
+          {
+            "id": "latin_script",
+            "passed": true,
+            "detail": "cyrillic_chars=0"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 2,
+          "language_clarity": 2
+        },
+        "score": 8,
+        "notes": "3 ta hook HOOK1/2/3 prefiksida, har biri 125 belgi ichida (119/109/114), lotin alifboda. Variantlar faqat brif faktlaridan (kiyim-aksessuarlar, O'zbekiston, Toshkent, brend nomi) — ixtiro qilingan statistika/tashkilot yo'q, manba fayl ko'rsatilgan. Angle'lar farqli (vaqt og'rig'i, assortiment, geo+CTA) va to'g'ridan-to'g'ri ishlatiladigan."
+      }
+    },
+    {
+      "id": "Q08_kreativ_telegram",
+      "job": "kreativ",
+      "worker_agent": "copy-writer",
+      "deterministic": {
+        "passed": 2,
+        "total": 2,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "tg_lines",
+            "passed": true,
+            "detail": "lines=2/2, over_limit=0"
+          },
+          {
+            "id": "latin_script",
+            "passed": true,
+            "detail": "cyrillic_chars=0"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 2,
+          "language_clarity": 2
+        },
+        "score": 8,
+        "notes": "2 ta TGAD matni prefiks formatida, 160 belgi chegarasida (156/146), lotin alifboda. Payme/Click, Telegram bot, yetkazib berish, Toshkent — barchasi brif faktlari, ixtiro yo'q, manba ko'rsatilgan (rubrika kreativ evidence talabi promptdagi 'faqat matn' talabidan ustuvor). Angle'lar farqli (bot buyurtma oqimi vs geo+assortiment) va platforma limitlariga mos."
+      }
+    },
+    {
+      "id": "Q09_hisobot_blended",
+      "job": "hisobot",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "total_spend",
+            "passed": true,
+            "detail": "regex(6660\\.50, 6[ .,]?660)"
+          },
+          {
+            "id": "blended_roas",
+            "passed": true,
+            "detail": "regex(1\\.9[4-9], 1,9[4-9])"
+          },
+          {
+            "id": "total_revenue",
+            "passed": true,
+            "detail": "regex(13075, 13[ .,]?075, 3108)"
+          },
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(meta_performance.json, google_search_terms.json, telegram_campaigns.json)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 1,
+          "language_clarity": 2
+        },
+        "score": 7,
+        "notes": "6660.50 sarf, 13075.60 daromad, blended ROAS 1.9632 — hisoblar to'g'ri; Google daromadi (3108.60) hisoblangani alohida belgilangan, har raqam maydon darajasida manbaga bog'langan. Hisobot aniq lekin keyingi qadamlar/tavsiyalar yo'q — actionability 1."
+      }
+    },
+    {
+      "id": "Q10_hisobot_sources",
+      "job": "hisobot",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 3,
+        "total": 3,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "measured_label",
+            "passed": true,
+            "detail": "any(MEASURED_ACCOUNT_DATA, MEASURED)"
+          },
+          {
+            "id": "heuristic_label",
+            "passed": true,
+            "detail": "any(HEURISTIC_PRIOR_MODEL, HEURISTIC)"
+          },
+          {
+            "id": "source_word",
+            "passed": true,
+            "detail": "any(manba, source)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 1,
+          "language_clarity": 2
+        },
+        "score": 7,
+        "notes": "Har raqam oldida MEASURED_ACCOUNT_DATA/HEURISTIC_PRIOR_MODEL belgisi turadi; Meta raqamlari (3480.50/245/14.20/1.95, cmp_01-cmp_02) eksportga aynan mos, model prognozi ($19.61) 'o'lchangan raqam emas' deb aniq belgilangan. Konsolidatsiya tavsiyasida Spend-Guard va tasdiq bor, lekin rollback yo'q — actionability 1."
+      }
+    },
+    {
+      "id": "Q11_tracking_capi_dedup",
+      "job": "tracking",
+      "worker_agent": "tracking-specialist",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "event_id",
+            "passed": true,
+            "detail": "any(event_id)"
+          },
+          {
+            "id": "dedup_word",
+            "passed": true,
+            "detail": "any(dedup, deduplikatsiya)"
+          },
+          {
+            "id": "impact_15pct",
+            "passed": true,
+            "detail": "any(15%, ikki marta, double)"
+          },
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(tracking_health.json)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 1,
+          "language_clarity": 2
+        },
+        "score": 7,
+        "notes": "Tashxis manbaga to'g'ri (event_id_deduplication: false, ~15% double counting, EMQ 6.2, hashing_compliance: true); yo'q ma'lumotlar ochiq ajratilgan, absolyut raqam ixtiro qilinmagan. 7 qadamli tuzatish ro'yxati ketma-ket va tekshiruv mezonli, lekin rollback yo'li yozilmagan — actionability 1."
+      }
+    },
+    {
+      "id": "Q12_tracking_emq",
+      "job": "tracking",
+      "worker_agent": "tracking-specialist",
+      "deterministic": {
+        "passed": 3,
+        "total": 3,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "emq_score",
+            "passed": true,
+            "detail": "regex(6\\.2, 6,2)"
+          },
+          {
+            "id": "hashing",
+            "passed": true,
+            "detail": "any(sha-256, sha256, hash)"
+          },
+          {
+            "id": "fields",
+            "passed": true,
+            "detail": "any(telefon, phone, email)"
+          }
+        ]
+      },
+      "judge": {
+        "scores": {
+          "evidence": 2,
+          "accuracy": 2,
+          "actionability": 1,
+          "language_clarity": 2
+        },
+        "score": 7,
+        "notes": "EMQ 6.2, pixel/CAPI holati manbaga mos; maydon coverage'si manbada yo'qligi halol aytilgan, 'EMQ ta'siri' ustuni HEURISTIC deb shaffof belgilangan. Bajarish tartibi aniq (o'lchov->normalizatsiya->SHA-256->test, 7-14 kun solishtirish), lekin mutation-gate/tasdiq eslatmasi va rollback yo'q — actionability 1."
+      }
+    }
+  ]
+}

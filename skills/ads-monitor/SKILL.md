@@ -19,7 +19,7 @@ domains:
 - budget
 platforms:
 - multi-platform
-attached_agents: [audit-budget, audit-creative]
+attached_agents: []
 related_skills:
 - ads-optimize
 - ads-budget

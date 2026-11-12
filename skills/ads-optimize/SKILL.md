@@ -25,7 +25,7 @@ platforms:
 - telegram
 - tiktok
 - multi-platform
-attached_agents: [audit-budget, audit-creative]
+attached_agents: []
 related_skills:
 - ads-budget
 - ads-math

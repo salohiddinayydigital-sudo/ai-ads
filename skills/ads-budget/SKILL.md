@@ -21,7 +21,7 @@ domains:
 - strategy
 platforms:
 - multi-platform
-attached_agents: [audit-budget, launch-planner]
+attached_agents: [audit-budget, media-buyer]
 related_skills:
 - ads-math
 - ads-plan

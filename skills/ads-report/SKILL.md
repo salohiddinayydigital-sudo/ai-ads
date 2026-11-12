@@ -19,7 +19,7 @@ domains:
 - analytics
 platforms:
 - multi-platform
-attached_agents: [release-verifier]
+attached_agents: [performance-analyst, release-verifier]
 related_skills:
 - ads-math
 - analytics

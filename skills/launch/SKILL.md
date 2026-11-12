@@ -20,7 +20,7 @@ domains:
 - strategy
 platforms:
 - multi-platform
-attached_agents: [launch-planner]
+attached_agents: []
 related_skills:
 - ads-launch
 - ads-plan
@@ -28,6 +28,7 @@ related_skills:
 references: []
 risk_level: medium
 output_contract: Phased Go-To-Market & Warmup Launch Timeline with channel milestones and KPI gates
+standalone: true
 ---
 
 # Launch Strategy

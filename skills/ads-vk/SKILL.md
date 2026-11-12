@@ -24,7 +24,7 @@ domains:
 - social
 platforms:
 - vk
-attached_agents: [audit-meta]
+attached_agents: []
 related_skills:
 - ads-plan
 - uzbekistan-market-intel

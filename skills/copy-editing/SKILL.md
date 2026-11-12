@@ -19,7 +19,7 @@ domains:
 - editing
 platforms:
 - multi-platform
-attached_agents: [copy-writer]
+attached_agents: []
 related_skills:
 - copywriting
 - writing-guidelines
@@ -29,6 +29,7 @@ references:
 - skills/copy-editing/references/content-refresh.md
 risk_level: low
 output_contract: Before/After edited copy with clarity, specificity, and proof-to-promise improvements
+standalone: true
 ---
 
 # Copy Editing

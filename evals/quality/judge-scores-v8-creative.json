@@ -1,0 +1,17 @@
+{
+  "schema": "tyrion-quality-judge/v1",
+  "model": "GLM-5.3-Flash",
+  "date": "2026-11-12",
+  "scenarios": [
+    {
+      "id": "Q07_kreativ_reels",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "3 ta hook HOOK1/2/3 prefiksida, har biri 125 belgi ichida (119/109/114), lotin alifboda. Variantlar faqat brif faktlaridan (kiyim-aksessuarlar, O'zbekiston, Toshkent, brend nomi) — ixtiro qilingan statistika/tashkilot yo'q, manba fayl ko'rsatilgan. Angle'lar farqli (vaqt og'rig'i, assortiment, geo+CTA) va to'g'ridan-to'g'ri ishlatiladigan."
+    },
+    {
+      "id": "Q08_kreativ_telegram",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "2 ta TGAD matni prefiks formatida, 160 belgi chegarasida (156/146), lotin alifboda. Payme/Click, Telegram bot, yetkazib berish, Toshkent — barchasi brif faktlari, ixtiro yo'q, manba ko'rsatilgan (rubrika kreativ evidence talabi promptdagi 'faqat matn' talabidan ustuvor). Angle'lar farqli (bot buyurtma oqimi vs geo+assortiment) va platforma limitlariga mos."
+    }
+  ]
+}

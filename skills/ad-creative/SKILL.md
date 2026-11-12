@@ -48,7 +48,7 @@ platforms:
 - google
 - linkedin
 - telegram
-attached_agents: [creative-strategist, reels-scriptwriter, copy-writer, audit-creative]
+attached_agents: [audit-creative, copy-writer, creative-strategist, reels-scriptwriter]
 related_skills:
 - ads-creative
 - reels-scripting

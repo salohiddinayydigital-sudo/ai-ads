@@ -1,0 +1,388 @@
+{
+  "schema": "tyrion-quality-eval/v1",
+  "runs_dir": "evals\\quality\\runs\\v8-step4",
+  "scenarios_count": 12,
+  "totals": {
+    "deterministic_score": 46,
+    "deterministic_max": 46,
+    "judge_score": null,
+    "judge_max": null
+  },
+  "judge": null,
+  "scenarios": [
+    {
+      "id": "Q01_audit_meta",
+      "job": "audit",
+      "worker_agent": "audit-meta",
+      "deterministic": {
+        "passed": 6,
+        "total": 6,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(meta_performance.json, act_88291048201)"
+          },
+          {
+            "id": "fragmentation",
+            "passed": true,
+            "detail": "any(learning_limited, learning limited, 8 ta)"
+          },
+          {
+            "id": "capi_dedup",
+            "passed": true,
+            "detail": "all; missing=[]"
+          },
+          {
+            "id": "double_counting",
+            "passed": true,
+            "detail": "any(15%, ikki marta, double counting)"
+          },
+          {
+            "id": "fatigue",
+            "passed": true,
+            "detail": "any(54.2, 3.12, charchash)"
+          },
+          {
+            "id": "recommendation_split",
+            "passed": true,
+            "detail": "any(tavsiya, recommendation)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q02_audit_google",
+      "job": "audit",
+      "worker_agent": "audit-google",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(google_search_terms.json, google_ads_482_910_3301)"
+          },
+          {
+            "id": "waste_amount",
+            "passed": true,
+            "detail": "regex(478\\.80, 24\\.18, 24\\.2)"
+          },
+          {
+            "id": "negative_keywords",
+            "passed": true,
+            "detail": "any(salbiy kalit, negative, add_negative)"
+          },
+          {
+            "id": "broad_match",
+            "passed": true,
+            "detail": "any(broad, keng qidiruv)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q03_audit_telegram",
+      "job": "audit",
+      "worker_agent": "audit-telegram",
+      "deterministic": {
+        "passed": 5,
+        "total": 5,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(telegram_campaigns.json, tg_ads_fragment_8819)"
+          },
+          {
+            "id": "kill_channel",
+            "passed": true,
+            "detail": "any(kulgu_va_memlar)"
+          },
+          {
+            "id": "dropoff",
+            "passed": true,
+            "detail": "any(85%, drop-off, drop_off)"
+          },
+          {
+            "id": "scale_channel",
+            "passed": true,
+            "detail": "any(toshkent_bozori, winner)"
+          },
+          {
+            "id": "bot_delay",
+            "passed": true,
+            "detail": "any(18 soniya, 18s, kechikish)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q04_budget_realloc",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 5,
+        "total": 5,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "breakeven_cpa",
+            "passed": true,
+            "detail": "regex(15\\.8, 198[ .,]?000)"
+          },
+          {
+            "id": "google_above_be",
+            "passed": true,
+            "detail": "any(17.8, 17,8)"
+          },
+          {
+            "id": "platforms",
+            "passed": true,
+            "detail": "all; missing=[]"
+          },
+          {
+            "id": "spend_guard",
+            "passed": true,
+            "detail": "any(spend-guard, spend guard)"
+          },
+          {
+            "id": "rollback",
+            "passed": true,
+            "detail": "any(rollback, teskari qadam, stop-loss)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q05_budget_scale",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "spend_guard",
+            "passed": true,
+            "detail": "any(spend-guard, spend guard)"
+          },
+          {
+            "id": "threshold",
+            "passed": true,
+            "detail": "any(20%)"
+          },
+          {
+            "id": "approval",
+            "passed": true,
+            "detail": "any(tasdiq, approval, ruxsat)"
+          },
+          {
+            "id": "rollback",
+            "passed": true,
+            "detail": "any(rollback, teskari qadam, stop-loss)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q06_budget_breakeven",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "result_uzs",
+            "passed": true,
+            "detail": "regex(198[ .,]?000)"
+          },
+          {
+            "id": "result_usd",
+            "passed": true,
+            "detail": "regex(15\\.8, 15,8)"
+          },
+          {
+            "id": "components",
+            "passed": true,
+            "detail": "all; missing=[]"
+          },
+          {
+            "id": "commission",
+            "passed": true,
+            "detail": "any(7, 2.0%, 2%)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q07_kreativ_reels",
+      "job": "kreativ",
+      "worker_agent": "copy-writer",
+      "deterministic": {
+        "passed": 2,
+        "total": 2,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "hook_lines",
+            "passed": true,
+            "detail": "lines=3/3, over_limit=0"
+          },
+          {
+            "id": "latin_script",
+            "passed": true,
+            "detail": "cyrillic_chars=0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q08_kreativ_telegram",
+      "job": "kreativ",
+      "worker_agent": "copy-writer",
+      "deterministic": {
+        "passed": 2,
+        "total": 2,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "tg_lines",
+            "passed": true,
+            "detail": "lines=2/2, over_limit=0"
+          },
+          {
+            "id": "latin_script",
+            "passed": true,
+            "detail": "cyrillic_chars=0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q09_hisobot_blended",
+      "job": "hisobot",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "total_spend",
+            "passed": true,
+            "detail": "regex(6660\\.50, 6[ .,]?660)"
+          },
+          {
+            "id": "blended_roas",
+            "passed": true,
+            "detail": "regex(1\\.9[4-9], 1,9[4-9])"
+          },
+          {
+            "id": "total_revenue",
+            "passed": true,
+            "detail": "regex(13075, 13[ .,]?075, 3108)"
+          },
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(meta_performance.json, google_search_terms.json, telegram_campaigns.json)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q10_hisobot_sources",
+      "job": "hisobot",
+      "worker_agent": "audit-budget",
+      "deterministic": {
+        "passed": 3,
+        "total": 3,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "measured_label",
+            "passed": true,
+            "detail": "any(MEASURED_ACCOUNT_DATA, MEASURED)"
+          },
+          {
+            "id": "heuristic_label",
+            "passed": true,
+            "detail": "any(HEURISTIC_PRIOR_MODEL, HEURISTIC)"
+          },
+          {
+            "id": "source_word",
+            "passed": true,
+            "detail": "any(manba, source)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q11_tracking_capi_dedup",
+      "job": "tracking",
+      "worker_agent": "tracking-specialist",
+      "deterministic": {
+        "passed": 4,
+        "total": 4,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "event_id",
+            "passed": true,
+            "detail": "any(event_id)"
+          },
+          {
+            "id": "dedup_word",
+            "passed": true,
+            "detail": "any(dedup, deduplikatsiya)"
+          },
+          {
+            "id": "impact_15pct",
+            "passed": true,
+            "detail": "any(15%, ikki marta, double)"
+          },
+          {
+            "id": "cite_source",
+            "passed": true,
+            "detail": "any(tracking_health.json)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q12_tracking_emq",
+      "job": "tracking",
+      "worker_agent": "tracking-specialist",
+      "deterministic": {
+        "passed": 3,
+        "total": 3,
+        "share": 1.0,
+        "checks": [
+          {
+            "id": "emq_score",
+            "passed": true,
+            "detail": "regex(6\\.2, 6,2)"
+          },
+          {
+            "id": "hashing",
+            "passed": true,
+            "detail": "any(sha-256, sha256, hash)"
+          },
+          {
+            "id": "fields",
+            "passed": true,
+            "detail": "any(telefon, phone, email)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -29,7 +29,7 @@ platforms:
 - google
 - tiktok
 - web
-attached_agents: [audit-tracking, tracking-specialist]
+attached_agents: [audit-tracking]
 related_skills:
 - ads-attribution
 - analytics

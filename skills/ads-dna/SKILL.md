@@ -21,7 +21,7 @@ domains:
 - branding
 platforms:
 - multi-platform
-attached_agents: [creative-strategist, positioning-strategist]
+attached_agents: [creative-strategist]
 related_skills:
 - product-marketing
 - offers

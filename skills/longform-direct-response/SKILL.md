@@ -20,7 +20,7 @@ platforms:
 - web
 - telegram
 - meta
-attached_agents: [copy-writer]
+attached_agents: []
 related_skills:
 - copywriting
 - offers
@@ -28,6 +28,7 @@ related_skills:
 references: []
 risk_level: low
 output_contract: Complete long-form direct-response sales page / VSL script with objection handling
+standalone: true
 ---
 
 # Longform Direct Response Copy Skill

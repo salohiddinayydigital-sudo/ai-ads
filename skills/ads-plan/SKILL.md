@@ -20,7 +20,7 @@ domains:
 - funnel
 platforms:
 - multi-platform
-attached_agents: [campaign-ideator, content-planner, launch-planner]
+attached_agents: [campaign-ideator, content-planner, launch-planner, media-buyer]
 related_skills:
 - ads-budget
 - ads-meta-audience

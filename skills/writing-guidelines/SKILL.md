@@ -16,13 +16,14 @@ domains:
 - editing
 platforms:
 - multi-platform
-attached_agents: [copy-writer]
+attached_agents: []
 related_skills:
 - copy-editing
 - copywriting
 references: []
 risk_level: low
 output_contract: Style-checked, fluff-free professional marketing prose
+standalone: true
 ---
 
 # Writing Guidelines

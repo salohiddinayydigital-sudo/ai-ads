@@ -5,14 +5,14 @@
     "url": "https://github.com/salohiddinayydigital-sudo"
   },
   "metadata": {
-    "description": "Tyrion v7.1 — AI team for Uzbekistan/CIS targetologists and small agencies: runs Meta, Telegram and Google ads from brief to report, evidence-based, and never touches an ad account without approval. 36 specialist agents, 65 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 27 slash commands, 29 CLI tools, Detailed Targeting Accuracy Engine, Live Meta Graph API v26.0 Insights sync, Spend-Guard, and TyrionShield.",
+    "description": "Tyrion v7.1 — AI team for Uzbekistan/CIS targetologists and small agencies: runs Meta, Telegram and Google ads from brief to report, evidence-based, and never touches an ad account without approval. 38 specialist agents, 65 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 27 slash commands, 29 CLI tools, Detailed Targeting Accuracy Engine, Live Meta Graph API v26.0 Insights sync, Spend-Guard, and TyrionShield.",
     "version": "7.1.0"
   },
   "plugins": [
     {
       "name": "tyrion",
       "source": "./",
-      "description": "Tyrion v7.1 — Uzbekistan/CIS paid-media AI team: Meta, Telegram, Google (36 agents, 65 skills, 100 wiki notes, 9 playbooks, 6 context modes, 27 slash commands, 29 tools).",
+      "description": "Tyrion v7.1 — Uzbekistan/CIS paid-media AI team: Meta, Telegram, Google (38 agents, 65 skills, 100 wiki notes, 9 playbooks, 6 context modes, 27 slash commands, 29 tools).",
       "version": "7.1.0",
       "category": "marketing",
       "keywords": [

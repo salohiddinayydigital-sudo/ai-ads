@@ -28,7 +28,7 @@ platforms:
 - telegram
 - google
 - instagram
-attached_agents: [audit-meta, audit-telegram, campaign-ideator, copy-writer, meta-audience-architect]
+attached_agents: [audit-telegram]
 related_skills:
 - ads-meta-audience
 - ads-telegram

@@ -15,7 +15,7 @@
 
 **Tyrion v7.1 (Calibrated & Live-Telemetry Edition)** — `affaan-m/ECC` (*Everything Claude Code*) arxitekturasi asosida qurilgan **yagona ildizli (Single-Root)** raqamli reklama, targetologiya va growth-marketing operatsion tizimi.
 
-Barcha **36 ta ixtisoslashgan agent**, **65 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **27 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **29 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
+Barcha **38 ta ixtisoslashgan agent**, **65 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **27 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **29 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
 
 ## ✨ Tyrion v7.1 Arxitekturasi (Nima o'zgardi?)
 
@@ -25,7 +25,7 @@ tyrion/
 ├── CLAUDE.md                 # Tezkor Router (<=100 qator, 0-token boot)
 ├── MEMORY.md                 # Operator Xotirasi, O'zbekiston Konteksti va Aktiv Bet Ledger (<=90 qator)
 ├── INDEX.md                  # Yagona Bilim Xaritasi (MOC)
-├── agents/                   # 36 ta Kanonik Agent Charteri (100% skill ulangan + Prompt Defense)
+├── agents/                   # 38 ta Kanonik Agent Charteri (100% skill ulangan + Prompt Defense)
 ├── skills/                   # 65 ta Kanonik Skill (38 platforma + 27 operator + 39 reference fayl)
 ├── commands/                 # 27 ta Slash Buyruq (/audit, /auditoriya, /kreativ, /voronka, /eksport, /utm...)
 ├── contexts/                 # 6 ta ECC Dynamic Context Mode (audit, launch, scale, creative, uzbekistan + README)

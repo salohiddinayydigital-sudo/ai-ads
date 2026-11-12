@@ -1,0 +1,27 @@
+{
+  "schema": "tyrion-quality-judge/v1",
+  "model": "GLM-5.3-Flash",
+  "date": "2026-11-12",
+  "scenarios": [
+    {
+      "id": "Q01_audit_meta",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "Har topilma manba fayl + MEASURED/HISOB/HEURISTIC belgisi bilan berilgan; barcha raqamlar meta_performance.json va tracking_health.json bilan mos (245=178+67, CPA 14.21≈14.20, ROAS 1.95, FTIR 54.2%, Freq 3.12, 18s, 35%). P1-P7 prioritetsiz tartiblangan, har mutatsiya taklifida rollback+stop-loss yozilgan va P6'da byudjet o'zgarishi Spend-Guard 20% gate + operator tasdig'isiga bog'langan."
+    },
+    {
+      "id": "Q04_budget_realloc",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "Unit ekonomika va barcha sarf/CPA/ROAS/CPL raqamlari BRIEF.md va 3 ta export bilan mos; vosita natijalari ham tekshirildi — media_calculator (198,000 UZS, BE ROAS 1.77x, marja 56.6%) va breakdown_effect (blended $14.21, ABO pauzada ~$19.61) artifactdagi qiymatlar bilan aynan keladi. P1-P3 prioritetsiz, har o'zgarishda o'lchangan Spend-Guard gate natijalari (bosqichli +16.57%/+11.47% PASS, bir martda FAIL) va rollback triggerlari bor."
+    },
+    {
+      "id": "Q07_kreativ_reels",
+      "scores": { "evidence": 1, "accuracy": 2, "actionability": 0, "language_clarity": 2 },
+      "notes": "Hook faktlari (brend, kategoriyalar, Toshkent) BRIEF'ga zid emas, lekin ixtiro qilingan ijodiy nusxalar yalpi 'Manba: BRIEF.md' ostida keltirilgan — MEASURED vs HEURISTIC ajratish umuman yo'q (evidence 1). Artifact faqat 3 ta hook: test rejasi, prioritet, keyingi qadam yoki rollback/stop-loss yo'q (actionability 0)."
+    },
+    {
+      "id": "Q08_kreativ_telegram",
+      "scores": { "evidence": 1, "accuracy": 2, "actionability": 0, "language_clarity": 2 },
+      "notes": "Payme/Click, yetkazib berish va brend faktlari manbaga mos, raqamli ziddiyat yo'q, lekin hooklar ham manba ham MEASURED/HEURISTIC ajratmasdan bitta 'BRIEF.md' yorlig'i ostida. BRIEF DoD #3'dagi 3 ta 160-belgili burchak o'rniga 2 ta ad berilgan, deep linking (?start=c_utm) eslatmasi yo'q; test/prioritet va rollback umuman ko'rsatilmagan (actionability 0)."
+    }
+  ]
+}

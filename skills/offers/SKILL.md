@@ -21,7 +21,7 @@ domains:
 - copywriting
 platforms:
 - multi-platform
-attached_agents: [campaign-ideator]
+attached_agents: []
 related_skills:
 - product-marketing
 - ads-plan
@@ -37,6 +37,7 @@ references:
 - skills/offers/references/saas-offers.md
 risk_level: low
 output_contract: Value-Equation Offer Architecture (Core Promise, Bonus Stack, Risk Reversal, Price Anchor)
+standalone: true
 ---
 
 # Offer Design

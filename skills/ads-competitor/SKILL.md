@@ -27,7 +27,7 @@ platforms:
 - tiktok
 - telegram
 - multi-platform
-attached_agents: [positioning-strategist, research-worker, source-verifier]
+attached_agents: [positioning-strategist, source-verifier]
 related_skills:
 - product-marketing
 - customer-research

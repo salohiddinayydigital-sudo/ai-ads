@@ -20,7 +20,7 @@ domains:
 - web
 platforms:
 - web
-attached_agents: [seo-auditor]
+attached_agents: []
 related_skills:
 - seo-audit
 - ads-landing
@@ -30,6 +30,7 @@ references:
 - skills/cro/references/form.md
 risk_level: low
 output_contract: Prioritized CRO friction audit & A/B experiment backlog (ICE/PIE scored)
+standalone: true
 ---
 
 # Conversion Rate Optimization (CRO)

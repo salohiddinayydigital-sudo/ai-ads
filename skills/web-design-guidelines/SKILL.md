@@ -19,7 +19,7 @@ domains:
 - cro
 platforms:
 - web
-attached_agents: [visual-designer]
+attached_agents: []
 related_skills:
 - cro
 - ads-landing
@@ -27,6 +27,7 @@ related_skills:
 references: []
 risk_level: low
 output_contract: UI/UX visual hierarchy, accessibility, and mobile conversion layout critique
+standalone: true
 ---
 
 # Web Interface Guidelines

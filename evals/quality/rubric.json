@@ -27,5 +27,11 @@
       "2": "Operator tilida (uz), qisqa, aniq strukturaga ega"
     }
   },
-  "judge_instructions": "Har stsenariy uchun 4 mezonning har biri 0-2 ball. Hakam faqat artifact matni va scenarios.json dagi manba fayllar asosida baho beradi. Suvraylik: jami 0-8 har stsenariyda."
+  "per_job_clarifications": {
+    "kreativ": {
+      "evidence": "Kreativ ishida dalil = variantlar faqat brifdagi faktlardan (ixtiro qilingan statistika/tashkilot YO'Q) va manba fayl ko'rsatilgan. Brifda raqam bo'lmasa MEASURED/HEURISTIC ajratish shart emas.",
+      "actionability": "Kreativ ishida harakat = variantlar to'g'ridan-to'g'ri ishlatilishi mumkin (talab qilingan prefiks formatida, platforma belgi chegarasi ichida) va har bir variant angle/hook maqsadiga mos. Rollback/test-plan kreativ matn uchun talab qilinmaydi."
+    }
+  },
+  "judge_instructions": "Har stsenariy uchun 4 mezonning har biri 0-2 ball. Hakam faqat artifact matni va scenarios.json dagi manba fayllar asosida baho beradi. per_job_clarifications bo'limi mos ish uchun umumiy mezon ta'rifini aniqlashtiradi (ular ustuvor). Suvraylik: jami 0-8 har stsenariyda."
 }

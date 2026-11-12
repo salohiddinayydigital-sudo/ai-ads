@@ -13,7 +13,7 @@ tavsiya yozmaslik, artifact o'zgartirmaslik — faqat baho.
 ## Baho berish tartibi
 1. Har stsenariy uchun artifact matnini o'qiy.
 2. Manba fayllardagi haqiqiy raqamlar bilan artifactdagi raqamlarni solishtir.
-3. 4 mezon bo'yicha 0-2 ball qo'y (rubrica ta'riflari aynan qo'llanadi):
+3. 4 mezon bo'yicha 0-2 ball qo'y (rubrica ta'riflari aynan qo'llanadi; `per_job_clarifications` mos ish turi uchun ustuvor aniqlashtirish):
    - `evidence` — dalil va manba (MEASURED vs HEURISTIC shaffofligi)
    - `accuracy` — aniqlik (raqamlar manbaga mosligi)
    - `actionability` — harakatga yo'naltirilganlik (prioritet, rollback/stop-loss)

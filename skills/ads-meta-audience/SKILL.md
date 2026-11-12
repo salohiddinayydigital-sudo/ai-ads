@@ -26,7 +26,7 @@ domains:
 - meta
 platforms:
 - meta
-attached_agents: [audit-meta, campaign-ideator, creative-strategist, meta-audience-architect]
+attached_agents: [audit-meta, meta-audience-architect]
 related_skills:
 - ads-meta
 - uzbekistan-market-intel

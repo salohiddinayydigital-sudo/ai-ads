@@ -16,10 +16,10 @@ Tyrion v7.1 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 
 | Qatlam / Joy | Nima saqlanadi | Qachon o'qiladi |
 |---|---|---|
-| `AGENTS.md` | **Kanonik agent shartnomasi** — 36 agent, orkestratsiya, tamoyillar | Sessiya boshida (boot) |
+| `AGENTS.md` | **Kanonik agent shartnomasi** — 38 agent, orkestratsiya, tamoyillar | Sessiya boshida (boot) |
 | `MEMORY.md` | **Operator xotirasi va Bet Ledger** (`<=90` qator) — til, bozor, aktiv gipotezalar, saboqlar | Sessiya boshida (boot) |
 | `INDEX.md` | **Yagona Bilim Xaritasi (MOC)** — barcha `wiki/` va `playbooks/` jadvali | Bilim qidirish / yozishdan oldin |
-| `agents/` | **36 ta kanonik agent charteri** (13 platforma auditi, 5 ixtisos audit, 18 strategiya/kreativ/auditoriya) | Worker ishga tushganda |
+| `agents/` | **38 ta kanonik agent charteri** (13 platforma auditi, 5 ixtisos audit, 18 strategiya/kreativ/auditoriya) | Worker ishga tushganda |
 | `skills/` | **65 ta kanonik skill** (`ads-*` platforma, `ads/` konduktor + 39 `references/`, operator skilllar) | Vazifa boshida (`skill-search.py`) |
 | `commands/` | **27 ta slash buyruq** (`/start`, `/audit`, `/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/utm`, `/budget`, `/scale`, `/raqobatchi`, `/mijoz`, `/tracking`, `/hisobot`, `/savol`, `/sop`, `/learn`, `/shield`, `/doctor`) | Foydalanuvchi chaqirganda |
 | `contexts/` | **6 ta kontekst fayli** (5 ta ECC Dynamic Context Mode + `contexts/README.md`) | Vazifa rejimiga qarab ([[contexts/README]]) |

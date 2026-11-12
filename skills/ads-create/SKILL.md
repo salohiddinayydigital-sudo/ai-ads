@@ -24,7 +24,7 @@ platforms:
 - tiktok
 - telegram
 - multi-platform
-attached_agents: [campaign-ideator, copy-writer, format-adapter]
+attached_agents: []
 related_skills:
 - copywriting
 - ads-creative
@@ -34,6 +34,7 @@ references:
 - skills/ads/references/platform-specs.md
 risk_level: low
 output_contract: Spec-validated ad copy variants (Primary Text, Headline, Description, CTA) with character counts
+standalone: true
 ---
 
 # Campaign Concepts and Copy

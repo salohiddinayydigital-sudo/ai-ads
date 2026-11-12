@@ -121,7 +121,7 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
 
     def test_audit_7_version_and_inventory_parity_across_all_manifests_and_docs(self) -> None:
         counts = catalog.scan()["counts"]
-        self.assertEqual(counts["agents"], 36)
+        self.assertEqual(counts["agents"], 38)
         self.assertEqual(counts["skills"], 65)
         self.assertEqual(counts["commands"], 27)
         self.assertEqual(counts["wiki"], 100)
@@ -133,10 +133,10 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
         mp = json.loads((VAULT / "marketplace.json").read_text(encoding="utf-8"))
         self.assertEqual(mp["metadata"]["version"], catalog.read_version())
         self.assertEqual(mp["plugins"][0]["version"], catalog.read_version())
-        self.assertIn("36 specialist agents", mp["metadata"]["description"])
+        self.assertIn("38 specialist agents", mp["metadata"]["description"])
 
         sec_txt = (VAULT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn("36 agents", sec_txt)
+        self.assertIn("38 agents", sec_txt)
         self.assertIn("65 skills", sec_txt)
 
     def test_audit_8_graph_api_defaults_to_v26_and_interpolates_dynamically(self) -> None:

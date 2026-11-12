@@ -25,7 +25,7 @@ platforms:
 - google
 - web
 - multi-platform
-attached_agents: [copy-writer]
+attached_agents: [copy-writer, social-content-writer]
 related_skills:
 - ads-create
 - copy-editing

@@ -1,0 +1,67 @@
+{
+  "schema": "tyrion-quality-judge/v1",
+  "model": "zai-start-plan/GLM-5.3-Flash",
+  "date": "2026-11-12",
+  "scenarios": [
+    {
+      "id": "Q01_audit_meta",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Barcha raqamlar manba bilan mos (sarf 3480.50, CPA 14.20, ROAS 1.95; ulushlar 74.99%/25.0% hisoban to'g'ri; EMQ 6.2, 18s, 35% tracking_health'ga mos); MEASURED vs HEURISTIC shaffof, ASC/CBO atama ziddiyati ochiq ko'rsatilgan. Tavsiyalar aniq (T1-T8) lekin prioritetsiz va rollback/stop-loss yo'q — actionability 1."
+    },
+    {
+      "id": "Q02_audit_google",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "Bekorchi sarf 478.80/24.18%, high-intent 963.00 (48.6%), 88 konv (79.3%), CPA 10.94 va qoldiq 438.20/23 hisoblari eksport bilan aynan mos; '45 vs 4 salbiy' ziddiyati oshkor. Severity bilan prioritashlangan topilmalar, mutation-gate bo'limi, rollback yo'li va 30 kunlik o'lchash oynasi bor."
+    },
+    {
+      "id": "Q03_audit_telegram",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "Voronka matematikasi (CPL 1.45, CAC 12.12, ROAS 2.65, AOV 32.12) va kanal CPL/CTR qiymatlari manbaga aynan mos; 716-vs-825 lid ziddiyati o'zi topib oshkor qilgan. Prioritetlangan 6-bandli tavsiyalar jadvali, reversibl pauza, +15%/hafta Spend-Guard mosligi va muvaffaqiyat o'lchovi mavjud."
+    },
+    {
+      "id": "Q04_budget_realloc",
+      "scores": { "evidence": 2, "accuracy": 1, "actionability": 2, "language_clarity": 2 },
+      "notes": "Unit ekonomika (198,000 UZS/$15.84, 1.77x, $11.20) va barcha o'lchangan kanal raqamlari manbaga mos, jami $6,700 o'zgarmagan. Kichik xato: proyeksiyada '$478.80/$10.94-$11.20' bo'linuvchisi 43-44 xarid beradi, matnda '~43-48' deyilgan (jami +60-63 ham shu sababli noaniq) — accuracy 1. Spend-Guard gate jadvali (PASS/FAIL), bosqichlash va rollback triggerlari kuchli."
+    },
+    {
+      "id": "Q05_budget_scale",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "$15.00->$19.50 (+30%), CPL 1.25, CTR 1.45, monitoring chegarasi $1.56 — raqamlar manbaga mos; Spend-Guard FAILED (+30% > 20%, limit $18.00) halol qayd etilgan va manba '+15%' tavsiyasiga zid e'tiborga olingan. Bosqichli Variant A, tasdiq talabi, rollback triggeri va idempotentlik to'liq."
+    },
+    {
+      "id": "Q06_budget_breakeven",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Bosqichli hisob (350k-120k-25k-7k=198k UZS/$15.84; ROAS 1.77x; kurs 12,500 DERIVED) brif bilan aynan mos, platforma solishtiruvi ($14.20/$17.80/$10.50) ham to'g'ri. Hisob-kitob va stop-loss chegarasi bor, lekin prioritashlangan keyingi qadamlar yo'q — actionability 1."
+    },
+    {
+      "id": "Q07_kreativ_reels",
+      "scores": { "evidence": 1, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "3 ta hook lotin alifbosida, 109-113 belgi (<=125), brend faktlari (Apex, kiyim-kechak va aksessuarlar, Toshkent, Payme/Click) brifga mos — ixtiro qilingan fakt yo'q. Lekin artifactda manba havolasi va dalil belgilari umuman yo'q — evidence 1."
+    },
+    {
+      "id": "Q08_kreativ_telegram",
+      "scores": { "evidence": 1, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "2 ta TG matn 150 belgi (<=160), lotin alifboda, izohsiz, Telegram bot va Payme/Click faktlari brifga mos — tayyor ishlatishga qulay. Manba havolasi va MEASURED/HEURISTIC shaffofligi yo'q — evidence 1."
+    },
+    {
+      "id": "Q09_hisobot_blended",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "6660.50 sarf, 13075.60 daromad, blended ROAS 1.9632 — hisoblar to'g'ri; Google daromadi (3108.60) hisoblangani alohida belgilangan, har raqam maydon darajasida manbaga bog'langan. Hisobot aniq lekin keyingi qadamlar/tavsiyalar yo'q — actionability 1."
+    },
+    {
+      "id": "Q10_hisobot_sources",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Har raqam oldida MEASURED_ACCOUNT_DATA/HEURISTIC_PRIOR_MODEL belgisi turadi; Meta raqamlari (3480.50/245/14.20/1.95, cmp_01-cmp_02) eksportga aynan mos, model prognozi ($19.61) 'o'lchangan raqam emas' deb aniq belgilangan. Konsolidatsiya tavsiyasida Spend-Guard va tasdiq bor, lekin rollback yo'q — actionability 1."
+    },
+    {
+      "id": "Q11_tracking_capi_dedup",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Tashxis manbaga to'g'ri (event_id_deduplication: false, ~15% double counting, EMQ 6.2, hashing_compliance: true); yo'q ma'lumotlar ochiq ajratilgan, absolyut raqam ixtiro qilinmagan. 7 qadamli tuzatish ro'yxati ketma-ket va tekshiruv mezonli, lekin rollback yo'li yozilmagan — actionability 1."
+    },
+    {
+      "id": "Q12_tracking_emq",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "EMQ 6.2, pixel/CAPI holati manbaga mos; maydon coverage'si manbada yo'qligi halol aytilgan, 'EMQ ta'siri' ustuni HEURISTIC deb shaffof belgilangan. Bajarish tartibi aniq (o'lchov->normalizatsiya->SHA-256->test, 7-14 kun solishtirish), lekin mutation-gate/tasdiq eslatmasi va rollback yo'q — actionability 1."
+    }
+  ]
+}

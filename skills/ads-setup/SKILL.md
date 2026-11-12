@@ -19,7 +19,7 @@ domains:
 - launch
 platforms:
 - multi-platform
-attached_agents: [launch-planner, tracking-specialist]
+attached_agents: []
 related_skills:
 - ads-server-side-tracking
 - ads-launch

@@ -19,7 +19,7 @@ domains:
 - copywriting
 platforms:
 - multi-platform
-attached_agents: [creative-strategist]
+attached_agents: []
 related_skills:
 - ads-creative
 - offers
@@ -27,6 +27,7 @@ related_skills:
 references: []
 risk_level: low
 output_contract: Ethical behavioral psychology & persuasion trigger map applied to offer and creative angles
+standalone: true
 ---
 
 # Marketing Psychology & Mental Models

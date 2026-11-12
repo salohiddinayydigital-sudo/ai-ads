@@ -23,7 +23,7 @@ platforms:
 - google
 - tiktok
 - multi-platform
-attached_agents: [audit-creative, creative-strategist]
+attached_agents: []
 related_skills:
 - ads-creative
 - ads-math
@@ -32,6 +32,7 @@ references:
 - skills/ads/references/scoring-system.md
 risk_level: low
 output_contract: Falsifiable A/B test protocol (Hypothesis, Primary Metric, Minimum Sample Size, Duration, Kill Rule)
+standalone: true
 ---
 
 # Paid Media Experiment

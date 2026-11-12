@@ -25,7 +25,7 @@ platforms:
 - tiktok
 - youtube
 - multi-platform
-attached_agents: [audit-creative, creative-strategist, format-adapter]
+attached_agents: [audit-creative, format-adapter]
 related_skills:
 - ads-test
 - marketing-psychology

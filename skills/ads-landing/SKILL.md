@@ -22,7 +22,7 @@ domains:
 platforms:
 - web
 - multi-platform
-attached_agents: [copy-writer, seo-auditor]
+attached_agents: [seo-auditor]
 related_skills:
 - cro
 - seo-audit

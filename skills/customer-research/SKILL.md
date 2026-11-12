@@ -22,7 +22,7 @@ domains:
 - audience
 platforms:
 - multi-platform
-attached_agents: [research-worker]
+attached_agents: []
 related_skills:
 - product-marketing
 - ads-competitor
@@ -32,6 +32,7 @@ references:
 - skills/customer-research/references/source-guides.md
 risk_level: low
 output_contract: JTBD & Customer Pain/Trigger/Objection Matrix with verbatim language patterns
+standalone: true
 ---
 
 # Customer Research
