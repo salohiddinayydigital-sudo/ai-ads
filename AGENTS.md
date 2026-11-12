@@ -8,7 +8,9 @@ updated: 2026-10-20
 
 # 🧠 TYRION v7.1 — KANONIK AGENT SHARTNOMASI
 
-> **Bir qator:** Tyrion v7.1 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 36 ixtisoslashgan agent, 64 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 18 slash buyruq va 29 ta 0-token deterministik Python asbobi.
+> **Maqsad:** O'zbekiston/MDH targetologi va kichik agentligi uchun AI jamoa: Meta, Telegram va Google reklamasini brifdan hisobotgacha dalilga asoslanib olib boradi va reklama hisobiga ruxsatsiz tegmaydi.
+
+> **Bir qator:** Tyrion v7.1 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 36 ixtisoslashgan agent, 65 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 27 slash buyruq va 29 ta 0-token deterministik Python asbobi.
 
 <!-- tyrion:catalog agents=36 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 
@@ -25,7 +27,7 @@ updated: 2026-10-20
 |---|---|---|---|
 | **Agentlar** | `agents/` (36) | 36 ta ixtisoslashgan agent charteri (`Prompt Defense Baseline` + `skills:` ulangan) | kanonik |
 | **Skilllar** | `skills/` (65) | 38 platforma (`ads-*`, `ads/` + 39 `references/`) va 27 operator/marketing skill | kanonik |
-| **Buyruqlar** | `commands/` (18) | 18 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
+| **Buyruqlar** | `commands/` (27) | 27 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
 | **Kontekstlar** | `contexts/` (6) | 5 ta ECC Dynamic Context Mode (`audit`, `launch`, `scale`, `creative`, `uzbekistan`) + `README.md` | kanonik |
 | **Playbooklar** | `playbooks/` (9) | 8 ta to'liq nisha va platforma playbooki + `README.md` | kanonik |
 | **Bilim (Wiki)** | `wiki/` (100) | 100 ta atomik, wikilink bilan bog'langan bilim qaydi va 16 ta SOP | kanonik |
@@ -46,11 +48,19 @@ updated: 2026-10-20
 | **Rejalash (3)** | `content-planner`, `launch-planner`, `seo-auditor` | Kontent tizimi, kampaniya launch rejasi, SEO va landing audit |
 | **Tadqiqot va Nazorat (5)** | `research-worker`, `source-verifier`, `release-verifier`, `skill-reviewer`, `tracking-specialist` | Manbali tadqiqot, GTM/CAPI arxitekturasi va topshirish darvozasi |
 
+### Platforma darajalari
+
+| Daraja | Platformalar | Ustuvorlik |
+|---|---|---|
+| **Yadro** | Meta, Telegram, Google, tracking, byudjet, kreativ | To'liq chuqurlik, eng ko'p sinov (sifat evali shularga qurilgan) |
+| **Kengaytma** | TikTok, YouTube, Yandex, VK | Kerak bo'lganda yuklanadi |
+| **Uzun dum** | Snapchat, Reddit, Pinterest, Apple, Amazon, Microsoft, X, LinkedIn | Faqat so'ralganda |
+
 ## 4. Kanonik 6-Bosqichli Avtonom Marshrutlash va Orkestratsiya Oqimi
 
 Barcha muhitlarda (Claude Code, Codex, Cursor, Windsurf, CLI/MCP) bitta kanonik oqim amal qiladi:
 
-1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 18 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
+1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 27 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
 2. **Avtomatik tanlash (`route_task`):** `primary_agent`, `supporting_agents` (faqat haqiqatan mustaqil ko'p bosqichli vazifalarda), `required_skills`, `supporting_skills`, `rules_to_load` va `references_to_load` avtomatik aniqlanadi.
 3. **To'liq ko'rsatmalarni yuklash (`full` vs `manifest`):** Standart `full` rejimda tanlangan agent charterlari, `SKILL.md`, qoidalar va reference fayllarning **to'liq matni** (`compiled_context_package`) kontekst byudjeti (`max_context_bytes=180,000`) nazorati ostida yuklanadi. To'liq o'qilmagan skill hech qachon "qo'llanildi" deb ko'rsatilmaydi.
 4. **Amaliy ijro (`execute_task`) va Multi-Harness halolligi:**

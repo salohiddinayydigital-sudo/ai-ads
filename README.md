@@ -1,4 +1,4 @@
-# Tyrion v7.1 — Global Paid-Media & Targetology Operating System (`ai-ads`)
+# Tyrion v7.1 — Paid-Media & Targetology AI Team for Uzbekistan/CIS (`ai-ads`)
 
 <!-- tyrion:catalog agents=36 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 
@@ -7,6 +7,8 @@
 [![OS: Windows | macOS | Linux](https://img.shields.io/badge/OS-Windows%20%7C%20macOS%20%7C%20Linux-success.svg)](#1-minute-quickstart)
 
 > 🇺🇿 **O'zbek tilidagi hujjat:** [README.uz.md](README.uz.md)
+
+> **Goal:** AI team for Uzbekistan/CIS targetologists and small agencies: runs Meta, Telegram and Google ads from brief to report, evidence-based, and never touches an ad account without approval.
 
 **Tyrion (`ai-ads`)** is an open-source, deterministic paid-media, performance marketing, and targetology plugin for **Claude Code**, **OpenAI Codex CLI**, **Cursor**, and **Windsurf**. It works out-of-the-box on **Windows, macOS, and Linux**, responds automatically in the **user's language**, supports **any ISO 4217 currency**, and ships with modular **Market Packs** (`global`, `us`, `eu`, `uk`, `mena`, `latam`, `sea`, `in`, `uz`).
 

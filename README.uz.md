@@ -9,7 +9,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Security: TyrionShield](https://img.shields.io/badge/TyrionShield-6%2F6%20Passing-brightgreen.svg)](./SECURITY.md)
 
-<!-- tyrion:catalog agents=36 skills=62 wiki=100 playbooks=9 contexts=6 commands=26 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=36 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
+
+> **Maqsad:** O'zbekiston/MDH targetologi va kichik agentligi uchun AI jamoa: Meta, Telegram va Google reklamasini brifdan hisobotgacha dalilga asoslanib olib boradi va reklama hisobiga ruxsatsiz tegmaydi.
 
 **Tyrion v7.1 (Calibrated & Live-Telemetry Edition)** — `affaan-m/ECC` (*Everything Claude Code*) arxitekturasi asosida qurilgan **yagona ildizli (Single-Root)** raqamli reklama, targetologiya va growth-marketing operatsion tizimi.
 
