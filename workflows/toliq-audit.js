@@ -115,6 +115,8 @@ const RULES = [
   '- A tool default (for example a target CPA the tool assumes when none is given) is not the client\'s figure. Never report it as their economics.',
   '- Every recommendation carries a rollback: the concrete step and the trigger value that undoes it, or "no account change" when nothing in the account is touched. A recommendation that changes the account (scale, pause, budget, targeting) with an empty rollback, or one that only says "n/a", is not allowed.',
   '- result is pass or fail only when the field that decides it is present in the evidence. A missing field (pixel status, learning stage, deduplication flag, currency) makes the result unknown, never pass and never fail.',
+  '- One finding carries exactly one source_type. A finding that mixes a measured figure with an assumed or heuristic one must be split into two findings, one per source type.',
+  '- When unit economics (target CPA, break-even ROAS, margin) are not stated by the client, do not issue a SCALE, KEEP or KILL verdict, a "winner" label or a pass/fail that depends on a target CPA or ROAS: the result is unknown. Do not recommend a scale-up. Measured spend, revenue and ratios may still be reported as MEASURED_ACCOUNT_DATA.',
   '- Never cite an official document, benchmark or platform rule unless the evidence you were given contains it. Without a source, say "manba yo\'q" and mark the statement HEURISTIC_PRIOR_MODEL.',
 ].join('\n')
 
@@ -134,6 +136,7 @@ const evidence = await agent(
     '1. Find the evidence the request points to (client folder, exports, screenshots). Look only there.',
     '2. Group the files by ad platform. Use lowercase platform names: meta, google, tiktok, youtube, linkedin, telegram, x, snapchat, pinterest, reddit, amazon, apple, microsoft.',
     '3. For each platform run the deterministic Tyrion tools on its exports and keep their output verbatim in tool_output. Load them with ToolSearch (query "tyrion"): tyrion_meta_live_insights with from_raw_json for a Meta insights export, tyrion_breakdown_effect for placement or segment comparisons, tyrion_media_calculator when price and cost are known. Pass the client\'s own target CPA and break-even ROAS to a tool that takes them; when the client has not stated them, write "unit economics unknown" and add them to missing_inputs rather than letting the tool\'s default stand in. If a tool cannot be reached, say so in missing_inputs instead of computing by hand.',
+    '3b. Before you write tool_output, remove everything the tool derived from its own defaults: assumed target CPA, assumed break-even ROAS, fallback currency labels, assumed date-window labels, and any SCALE/KEEP/KILL/winner verdict that depends on them. Keep only figures computed from the export itself, and add one line "tool defaults removed: unit economics unknown" when you removed anything.',
     '4. Record what is known about the client: market, currency, date window, unit economics (price, margin, target CPA or ROAS).',
     '5. List tracking evidence separately (pixel or CAPI health exports, UTM samples).',
     '6. Every file you list must be one you opened. Give paths exactly as they exist on disk.',
@@ -178,18 +181,26 @@ const verify = (name, files, result, phaseTitle) => {
       'supported: findings whose evidence you confirmed, unchanged.',
       'rejected: findings whose figure is absent, misread, comes from a tool default, or does not support the claim, with the reason.',
       'A finding marked HEURISTIC_PRIOR_MODEL is supported only if it states its assumptions.',
-      'Also reject: a recommendation that changes the account while its rollback is empty or "n/a"; a pass or fail whose deciding field is not in the evidence (it must be unknown); a claim that cites an official document the evidence does not contain.',
+      'Also reject: a finding that depends on a tool default (assumed target CPA or break-even ROAS, fallback currency, assumed window label) or on a SCALE/KEEP/KILL/winner verdict derived from one; a finding that mixes measured and heuristic figures under one source_type; that changes the account while its rollback is empty or "n/a"; a pass or fail whose deciding field is not in the evidence (it must be unknown); a claim that cites an official document the evidence does not contain.',
     ].join('\n'),
     { schema: VERIFIED_SCHEMA, label: `tekshiruv ${name}`, phase: phaseTitle },
-  ).then(v => ({
+  ).then(v => {
+    // Deterministic backstop: a "supported" finding with no real rollback is not deliverable,
+    // whatever the verifier said.
+    const empty = r => !r || /^\s*(n\/?a|none|-|—|–|yo['’]?q)?\s*\.?$/i.test(String(r))
+    const kept = ((v && v.supported) || []).filter(f => !empty(f.rollback))
+    const noRollback = ((v && v.supported) || []).filter(f => empty(f.rollback))
+      .map(f => ({ control_id: f.control_id, reason: "rollback yo'q: o'zgartirish bo'lmasa \"account o'zgarmaydi\" deb yozilishi kerak" }))
+    return {
     name,
     audit: result,
-    supported: (v && v.supported) || [],
-    rejected: (v && v.rejected) || [],
+    supported: kept,
+    rejected: (((v && v.rejected) || []).concat(noRollback)),
     // A verifier that died checked nothing. Its findings are neither confirmed nor refuted,
     // and they must not vanish: they are reported as unverified.
     unverified: v ? [] : result.findings,
-  }))
+    }
+  })
 }
 
 // ---------------------------------------------------------------- 2. platform audits, each finding checked against its evidence
@@ -255,6 +266,8 @@ const cross = crossAudited.filter(Boolean)
 // ---------------------------------------------------------------- 4. report and delivery gate
 phase('Hisobot')
 const supported = platformResults.concat(cross).flatMap(r => r.supported.map(f => ({ source: r.name, ...f })))
+  // Sorted in code, not left to the report writer: the report says "sorted by severity".
+  .sort((x, y) => ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'].indexOf(x.severity) - ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'].indexOf(y.severity))
 const rejected = platformRejected.concat(cross.flatMap(r => r.rejected.map(f => ({ source: r.name, ...f }))))
 const unverified = platformResults.concat(cross).flatMap(r => r.unverified.map(f => ({ source: r.name, ...f })))
 const missing = []
@@ -283,6 +296,16 @@ const report = await agent(
     '',
     'Arithmetic: a sensitivity or scenario figure is either computed with a Tyrion tool (tyrion_media_calculator) or shown with its formula and inputs; compute it from the stated assumption, not by memory. Two findings about the same field (for example EMQ) must agree; if they do not, report the conflict under Ziddiyatlar instead of choosing one.',
     '',
+    'Consistency: when the appendix rejects an input (a tool default, target CPA, break-even ROAS, fallback currency, a SCALE/KEEP/KILL verdict), no reported finding may rest on it. A verified finding that does rest on it is reported with result unknown and no recommendation to scale, pause or reallocate. Never present a tool\'s default as the client\'s figure.',
+    'Source tags: tag each figure inline with its own source type. A finding row has one source_type; do not label a row with one type if its figures are of the other type, split the row instead.',
+    'Rollback: every row that recommends an account change shows its rollback from the finding; a row with no account change says "account o\'zgarmaydi" in the rollback column. Never leave a dash.',
+    '',
+    'Names: a role read only from a campaign or ad set name (retargeting, cold, TOF/MOF/BOF, geo) is not a fact. Either leave it out or write "nomdan taxmin, tasdiqlanmagan" every time it appears; never build a caveat or a recommendation on it.',
+    'Where a figure is missing, the next step is a request for data from the operator ("operator ... beradi"), not a future scale, pause or reallocation. Do not recommend an account change at all unless a verified finding carries a concrete rollback for it.',
+    'Audience is the client and the operator: do not mention the verification process, verifier, internal tools or "tekshirilmagan" mechanics in the body. The appendix lists rejected controls by control_id and plain reason only.',
+    'Do not cite any control_id that is not in the verified list; rejected and unverified ones appear only in the appendix. Do not claim a field works (for example the pixel) when another finding says its status is unknown. Section 5 must not contradict itself about which platforms were audited.',
+    'Tag every number, including the export age, the window length and every repeated figure, at each occurrence.',
+    '',
     'Use only the verified findings given here, with their control_id unchanged. Do not add findings, benchmarks or figures of your own, and do not say the audit is complete while Cheklovlar lists blockers.',
   ].join('\n'),
   { label: 'hisobot' },
@@ -294,6 +317,7 @@ const verdict = await agent(
     `Report:\n${report}`,
     `Verified findings it must be built from: ${JSON.stringify(supported.map(f => f.control_id))}`,
     '',
+    'Conventions of this workflow that are NOT defects: deadlines written relative to approval ("approval + N kun") or "operator belgilaydi"; a source tag placed next to each figure; an appendix that lists rejected controls; a rollback of "account o\'zgarmaydi" on a row that asks the operator for data and changes nothing; a report that is partial and says so.',
     'Fail the report if any of these holds: a figure has no evidence or source type; a finding is not in the verified list; a recommendation changes an account without a rollback step; a missing input is presented as known.',
   ].join('\n'),
   { agentType: 'tyrion:release-verifier', schema: VERDICT_SCHEMA, label: 'topshirish darvozasi' },

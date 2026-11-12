@@ -64,14 +64,35 @@ oddiy arifmetika va aniq jadvalli qarorda esa model pluginsiz ham to'g'ri javob 
 yuklamasdan, to'g'ridan-to'g'ri MCP asbobini chaqirib javob berdi — ya'ni bu oqimlarda asosiy yuk MCP server va sessiya
 boshidagi qoidalarda.
 
+## To'liq o'lchov (2026-11-12, v8.0.0)
+
+Har holat har tomonda 3 martadan (6 ta run), pluginsiz tomon bilan solishtirilgan. MCP granti bor, sandbox yo'q.
+Jami xarajat: 3.36$ (birinchi urinish 2.71$ + yetishmagan holat 0.65$). Birinchi urinishni o'zimning `timeout 595` buyrug'im to'xtatdi:
+7 holat tugadi, `uydirma-interest-yoq` alohida, to'liq 3 martadan qayta o'tkazildi. `noaniq-brif-savol` ning pluginsiz tomonida
+3-run uzilgan (0.00, "interrupted"), shuning uchun u holatda 5 ta to'liq run bor, pluginsiz ball 0.22 shu uzilgan runni ham o'z ichiga oladi
+(uzilmasa ~0.33).
+
+| Holat | Plugin bilan | Pluginsiz | Δ |
+|---|---|---|---|
+| `aloqasiz-sorov` | 1.00 | 1.00 | 0.00 |
+| `breakdown-effekti` | 1.00 | 0.44 | +0.56 |
+| `breakeven-hisob` | 1.00 | 1.00 | 0.00 |
+| `byudjet-20-foiz` | 1.00 | 1.00 | 0.00 |
+| `kill-keep-scale` | 1.00 | 1.00 | 0.00 |
+| `manba-belgisi` | 1.00 | 0.67 | +0.33 |
+| `noaniq-brif-savol` | 1.00 | 0.22 | +0.78 |
+| `uydirma-interest-yoq` | 1.00 | 0.67 | +0.33 |
+| **O'rtacha** | **1.00** | **0.75** | **+0.25** |
+
+Birinchi (1 martalik) o'lchovdan farqlar: `byudjet-20-foiz` da pluginsiz tomon bu safar 3 martaning hammasida o'tdi (0.67 → 1.00), ya'ni
+u holatda plugin qiymati o'lchanmadi. `breakdown-effekti` da farq kattalashdi (+0.33 → +0.56). O'rtacha Δ o'zgarmadi (+0.25).
+
+`asbob-ishlatildi` (ballga kirmaydi): `breakdown-effekti` da `tyrion_breakdown_effect` va `byudjet-20-foiz` da `tyrion_spend_guard`
+**0 marta** chaqirilgan, model javobni yoddan berdi (javob to'g'ri, asbob esa ishlatilmadi). Bu skill/buyruq ko'rsatmasi modelni
+asbobga yo'naltirmayotganini bildiradi: keyingi ish.
+
 ## Natijani o'qish
 
 `WITH` — plugin bilan ball, `W/OUT` — pluginsiz, `Δ` — farq. `Δ` musbat bo'lsa plugin qiymat qo'shyapti.
 `Δ ≤ 0` chiqqan holatda avval graderni tekshiring (`--judge-model sonnet`), keyin tegishli skill yoki buyruq matnini.
 Yangi holat qo'shish: papka oching, `prompt.md` ga foydalanuvchi yozadigandek so'rov, `graders/` ga kamida bitta tekshiruv.
-
-## Holat (2026-11-11)
-
-To'liq eval (har holat 3 marta, pluginsiz bilan) bu bosqichda o'tkazilmadi: limit boshqa sinovlarga ketdi. Yuqoridagi o'lchov hali
-yagona va 1 martalik. Keyingi sessiyada buyruq: `claude plugin eval . --allow-real-servers --allow-tools "mcp__plugin_tyrion_tyrion-core__*"`
-(taxminan 3.5–4$).

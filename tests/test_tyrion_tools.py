@@ -3841,7 +3841,7 @@ class TyrionV8WorkflowTests(unittest.TestCase):
         for dropped in ("M02", "T02"):
             self.assertNotIn(f'"control_id":"{dropped}"', verified_part)
         # The delivery gate checks the report against every verified finding, cross-checks included.
-        self.assertIn('["M01","T01"]', calls["topshirish darvozasi"]["prompt"])
+        self.assertIn('["T01","M01"]', calls["topshirish darvozasi"]["prompt"])
         result = out["result"]
         self.assertEqual(result["status"], "ready")
         self.assertEqual(result["counts"], {"verified": 2, "rejected": 2, "unverified": 0, "cross_checks": 2})
