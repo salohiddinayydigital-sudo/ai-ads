@@ -3,6 +3,7 @@ name: <% tp.file.title %>
 description: "<% tp.file.cursor(1) %>"
 tags: [<% tp.file.cursor(2) %>]
 source: <% tp.file.cursor(3) %>
+source_status: <% tp.file.cursor(6) %>  # verified | url_cited | unverified
 updated: <% tp.date.now("YYYY-MM-DD") %>
 ---
 

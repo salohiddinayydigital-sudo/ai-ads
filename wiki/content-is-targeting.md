@@ -2,7 +2,8 @@
 name: content-is-targeting
 description: "Andromeda erasida kreativ o'zi targeting qiladi — avatar + angle = concept, concept auditoriyaga avtomatik mos tushadi"
 tags: [meta-ads, kreativ]
-source: "vedio bilimlar/youtubedagilar/Alex Hormozi's Facebook Ads Strategy for 2026.md (https://www.youtube.com/watch?v=D-jpozVTfxQ)"
+source: "YouTube: Alex Hormozi's Facebook Ads Strategy for 2026 (https://www.youtube.com/watch?v=D-jpozVTfxQ)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

@@ -2,7 +2,8 @@
 name: akkaunt-audit-xatolari
 description: "Meta akkaunt auditida eng ko'p uchraydigan xatolar — single ad set qamoqi, haddan tashqari tweak, over-segmentatsiya, test bilimlarini yo'qotish"
 tags: [meta-ads, audit]
-source: "vedio bilimlar/youtubedagilar/Do THIS and the Meta Andromeda Algorithm Will LOVE You!.md (https://www.youtube.com/watch?v=f1PGNuLWQHE)"
+source: "YouTube: Do THIS and the Meta Andromeda Algorithm Will LOVE You! (https://www.youtube.com/watch?v=f1PGNuLWQHE)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

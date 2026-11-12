@@ -2,7 +2,8 @@
 name: learning-phase-qoidalari
 description: "Learning phase qoidalalari — ad setga ~50 konversiya/hafta, barqaror shartlar, hisobga qo'l tegmasligi, signal fragmentatsiyasi"
 tags: [meta-ads, learning-phase]
-source: "vedio bilimlar/youtubedagilar/Every Meta Ads Campaign Structure Explained in 10 minutes.md (https://www.youtube.com/watch?v=qmcAZdCaI9A)"
+source: "YouTube: Every Meta Ads Campaign Structure Explained in 10 minutes (https://www.youtube.com/watch?v=qmcAZdCaI9A)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

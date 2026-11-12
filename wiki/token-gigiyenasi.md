@@ -3,6 +3,7 @@ name: token-gigiyenasi
 description: Token va kontekst gigiyenasi — 18 amaliy xak (sessiya, MCP, batching, plan, /context, handoff)
 tags: [token, kontekst, gigiyena]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Token va kontekst gigiyenasi)
+source_status: unverified
 updated: 2026-09-03
 ---
 

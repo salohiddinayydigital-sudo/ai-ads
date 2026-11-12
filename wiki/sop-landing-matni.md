@@ -3,6 +3,7 @@ name: sop-landing-matni
 description: "SOP: landing page matnini noldan yozish — 9 kirish savoli, 10 qadam, chiqish artefakti va muvaffaqiyat mezonlari"
 tags: [sop, matn, landing, kopirayter]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/PLAYBOOKS.md (PB-1)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

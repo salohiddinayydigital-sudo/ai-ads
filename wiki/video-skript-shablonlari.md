@@ -3,6 +3,7 @@ name: video-skript-shablonlari
 description: "9 uchadigan format uchun to'ldiriladigan video skript shablonlari — hook/tana/proof/CTA o'zgaruvchilari bilan"
 tags: [kreativ, video, shablon, skript]
 source: "wiki/video-kreativ-tizimi.md + kanal-bilim/03_9_ta_uchadigan_format.txt + reels-scriptwriter charter"
+source_status: unverified
 updated: 2026-09-20
 ---
 

@@ -3,13 +3,18 @@ name: tools-readme
 description: Tyrion asboblari — har biri nima qiladi, qachon ishlatiladi (yagona jadval)
 tags: [tools, asboblar, index]
 source: "2026-09-16 ECC naqshi asosida qurilgan qatlam"
-updated: 2026-09-16
+updated: 2026-11-12
 ---
 
 # 🛠 TYRION ASBOBLARI
 
 > Hammasi Python 3 + stdlib (faqat `PyYAML` ixtiyoriy — bor bo'lsa YAML qat'iy tekshiriladi).
 > Har skript `--help` beradi; xato bo'lsa chiqish kodi 0 emas (avtomatlashtirishga yaroqli).
+>
+> **Chiqish kodi siyosati (barcha asboblar, `tyrion_core.EXIT_*`):** `0` — muvaffaqiyat · `1` — darvoza BLOKLANDI
+> (spend-guard `passed:false`, doctor FAIL) · `2` — validatsiya xatosi (nan/inf, manfiy/nol pul qiymati, fayl topilmadi,
+> noto'g'ri eksport sarlavhasi, argparse xatosi) yoki natijada `error` maydoni bor. Pul/byudjet argumentlari
+> `tyrion_core.require_number` / `positive_float` dan o'tadi.
 
 ## Kundalik
 
@@ -33,7 +38,7 @@ updated: 2026-09-16
 | Asbob | Buyruq | Nima qiladi |
 |-------|--------|-------------|
 | **vault-audit** | `python3 tools/vault-audit.py [--gate\|--write]` | Bilim qatlami: frontmatter, YAML, wikilink, orphan, Delivery Gate (`--gate`) va INDEX auto-fix (`--write`) |
-| **tyrion-shield** | `python3 tools/tyrion-shield.py scan` | **ECC AgentShield analogi**: sirlar (.env), hook/MCP, 36 agent Prompt Defense va 62 skill tekshiruvi |
+| **tyrion-shield** | `python3 tools/tyrion-shield.py scan` | **ECC AgentShield analogi**: sirlar (.env), hook/MCP, barcha agent Prompt Defense va skill tekshiruvi |
 | **instincts** | `python3 tools/instincts.py list / add / promote / check` | **ECC Continuous Learning (`/learn`)**: tasdiqlangan marketing instinktlari reestri |
 | **catalog check** | `python3 tools/catalog.py check` | Katalog haqiqatga mos keladimi (farq bo'lsa xato kodi) |
 | **catalog drift** | `python3 tools/catalog.py drift` | Nusxalar kanonikdan farq qiladimi (agent/buyruq) |

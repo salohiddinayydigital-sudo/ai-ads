@@ -199,8 +199,8 @@ def detect_market(
     # 3. Query text inspection for countries, cities, payment methods, currencies, or regulations
     q_low = (text or "").lower()
     keyword_rules = [
-        ("uz", (r"\btoshkent\b", r"\btashkent\b", r"\bo'zbekiston\b", r"\bozbekiston\b", r"\buzbekistan\b",
-                r"\bsamarqand\b", r"\bbuxoro\b", r"\bpayme\b", r"\buzum\b", r"\balif nasiya\b", r"\bso'm\b", r"\buzs\b",
+        ("uz", (r"\btoshkent\w*", r"\btashkent\b", r"\bo'zbekiston\w*", r"\bozbekiston\w*", r"\buzbekistan\b",
+                r"\bsamarqand\w*", r"\bbuxoro\w*", r"\bpayme\b", r"\buzum\b", r"\balif nasiya\b", r"\bso'm\b", r"\buzs\b",
                 r"ташкент", r"узбекист", r"самарканд", r"бухар")),
         ("eu", (r"\bgermany\b", r"\bdeutschland\b", r"\bberlin\b", r"\bfrance\b", r"\bparis\b", r"\bspain\b",
                 r"\bitaly\b", r"\bnetherlands\b", r"\bpoland\b", r"\bsweden\b", r"\beuropean union\b",

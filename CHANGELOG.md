@@ -2,6 +2,17 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
+## [7.0.1] — 2026-11-12 (Hardening, no new features)
+
+### Fixed
+- **`ad-export-analyzer.py`:** header normalisation (case, whitespace, currency suffix; Meta/Google/Telegram/Russian headers), delimiter/BOM/locale-number detection (`1,234.50`, `1 234,50`), explicit errors (exit 2) for missing spend column / empty file, `unmapped_columns` in the result.
+- **Numeric validation:** `tyrion_core.require_number` + argparse converters; `spend-guard`, `calculator`, MCP tools and all money CLI args reject `nan`/`inf`/negative values. Exit-code policy: `0` ok · `1` gate blocked · `2` validation/`error` field.
+- **MCP:** `.mcp.json` resolves the root via `CLAUDE_PLUGIN_ROOT` → `CLAUDE_PROJECT_DIR` → cwd; `doctor` performs a real stdio handshake of the exact `.mcp.json` command.
+- **Router:** `out_of_scope` / `needs_clarification` statuses (+ clarifying questions), stronger Uzbek-Latin detection, English live-mutation patterns, new `ads-yandex` skill for Yandex Direct, 22 extra negative/edge eval scenarios.
+- **Hooks:** `pre:guard` blocks secret-file writes in `strict`, warns in `standard`; `hooks/README.md` states honestly what is and is not enforced (Spend-Guard is policy-level only).
+- **Consistency:** single version source (`VERSION`), `catalog.py sync-claims` + `doctor` cover versions and inventory numbers; wiki `source_status` (`verified` / `url_cited` / `unverified`) enforced by `vault-audit.py`; platform notes older than 180 days warn in `doctor`.
+- **Tests/CI:** `test_tyrion_tools.py` split per tool, direct tests for `spend-guard`, `market_locale`, `install-hooks`, hooks; CI runs on all branches with a stdlib coverage gate (`tests/coverage_gate.py`, min 70%).
+
 ## [7.0.0] — 2026-10-29 (Practitioner Targetology, `/ad-creative` Video Studio & Meta 2026 5-System AI Stack)
 
 ### Added

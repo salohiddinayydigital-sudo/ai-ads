@@ -3,6 +3,7 @@ name: kopirayter-frameworklar
 description: "Sotuv matni frameworklari — PAS, AIDA, BAB, 4P, FAB, PASTOR: qachon qaysi biri ishlatiladi va 5 ta asosiy qarshilik qanday yopiladi"
 tags: [matn, kopirayter, framework]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/KNOWLEDGE.md (§1-2)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

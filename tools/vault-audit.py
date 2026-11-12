@@ -55,6 +55,34 @@ INVALID_ESCAPE = re.compile(r'\\(?![0abtnvfre "\\/N_LPuxU])')
 CONTROL_CHARS = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]|\t")
 
 
+SOURCE_STATUSES = ("verified", "url_cited", "unverified")
+_LOCAL_PREFIXES = ("raw/", "kanal-bilim/", "claude-ads-main/", "vedio bilimlar/", "claudes/", "tools/", "wiki/", "rules/", "skills/",
+                   "agents/", "commands/", "playbooks/", "contexts/", "ads/", "marketolog/", "kopirayter/", "templates/", "hooks/", "docs/")
+_KNOWN_EXT = r"\.(?:md|txt|py|json|xlsx|pdf|csv|html)"
+
+
+def classify_source(source: str, root: Path) -> dict:
+    """`source:` maydonidagi lokal yo'llar (bor/yo'q) va URL'larni ajratadi. Hech narsa uydirilmaydi."""
+    raw = str(source or "").strip().strip('"').strip("'")
+    urls = re.findall(r"https?://[^\s)\"']+", raw)
+    existing: list[str] = []
+    missing: list[str] = []
+    for part in re.split(r"\s\+\s|;\s*", raw):
+        part = part.strip().strip('"').strip("'")
+        part = re.split(r"\s\(", part, maxsplit=1)[0].strip()
+        if not part or part.startswith(("http://", "https://")):
+            continue
+        m = re.match(r"^(.*?" + _KNOWN_EXT + r")\b", part)
+        cand = (m.group(1) if m else part).split(" §")[0].strip()
+        if not (m or cand.startswith(_LOCAL_PREFIXES)):
+            continue
+        if "/" not in cand and not m:
+            continue
+        ok = any((base / cand).exists() for base in (root, root / "skills", root / "wiki"))
+        (existing if ok else missing).append(cand)
+    return {"urls": urls, "existing": existing, "missing": missing, "local": existing + missing}
+
+
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
@@ -219,6 +247,8 @@ def main(argv: list[str] | None = None) -> int:
     fm_bad: list[str] = []
     yaml_bad: list[str] = []
     few_links: list[str] = []
+    source_bad: list[str] = []
+    status_counts: Counter[str] = Counter()
     for p in notes:
         text = read(p)
         fm = frontmatter(text)
@@ -233,6 +263,14 @@ def main(argv: list[str] | None = None) -> int:
             missing = [k for k in REQUIRED_FM if k not in fm or fm[k] in ("", '""')]
             if missing:
                 fm_missing.append(f"{p.name} -> {', '.join(missing)}")
+            status = fm.get("source_status", "").strip().strip('"').strip("'")
+            miss = classify_source(fm.get("source", ""), root)["missing"]
+            if status and status not in SOURCE_STATUSES:
+                source_bad.append(f"{p.name} -> MANBA HOLATI noto'g'ri: source_status={status} (ruxsat: {', '.join(SOURCE_STATUSES)})")
+            elif miss and status != "unverified":
+                source_bad.append(f"{p.name} -> MANBA YO'Q (lokal yo'l mavjud emas): {', '.join(miss)} — tekshiriladigan manba bering yoki `source_status: unverified` qo'ying")
+            else:
+                status_counts[status or "belgilanmagan"] += 1
             declared = fm.get("name", "").strip().strip('"')
             if declared:
                 name_counter[declared] += 1
@@ -324,6 +362,7 @@ def main(argv: list[str] | None = None) -> int:
     dump("YAML XATO (Obsidian/Dataview ko'rmaydi)", yaml_bad)
     dump("FRONTMATTER MAYDON YETISHMAYDI", fm_missing)
     dump("WIKILINK < 2", few_links)
+    dump("MANBA (source/source_status)", source_bad)
     dump("BUZILGAN WIKILINK (bilim qatlami)", [f"{f}: {', '.join(sorted(t))}" for f, t in sorted(broken.items())])
     dump("BUZILGAN WIKILINK (xom manba/andoza — axborot)", [
         f"{f}: {', '.join(sorted(t))}" for f, t in sorted(broken_src.items())
@@ -334,9 +373,10 @@ def main(argv: list[str] | None = None) -> int:
     dump("BOSHQA", issues)
 
     total = (
-        len(fm_bad) + len(yaml_bad) + len(fm_missing) + len(few_links) + len(broken)
+        len(fm_bad) + len(yaml_bad) + len(fm_missing) + len(few_links) + len(source_bad) + len(broken)
         + len(orphans) + len(not_indexed) + len(dupes) + len(issues)
     )
+    print("\nMANBA HOLATI SANOG'I: " + " · ".join(f"{k}={status_counts.get(k, 0)}" for k in SOURCE_STATUSES + ("belgilanmagan",)))
     print(f"\nJAMI MUAMMO (bilim qatlami): {total}"
           f" | xom manbadagi dangling havola: {sum(len(v) for v in broken_src.values())}")
     if args.gate and total > 0:

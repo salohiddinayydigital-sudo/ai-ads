@@ -3,6 +3,7 @@ name: kreativ-sikl
 description: Statik kreativ + narx langari + avtonom weekly creative refresh (MetaMCP + Higgsfield MCP)
 tags: [meta-ads, kreativ, avtomatlashtirish, mcp]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Meta Ads mashinasi — 5, 6)
+source_status: unverified
 updated: 2026-09-03
 ---
 

@@ -3,6 +3,7 @@ name: topshirish-cheklist-matn
 description: "Matn ishi topshirishdan oldingi tekshiruv (A-I bo'limlar, ~50 band) — bitta 'yo'q' bo'lsa ish tugallanmagan"
 tags: [checklist, matn, topshirish, sifat]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/CHECKLIST.md"
+source_status: unverified
 updated: 2026-09-20
 ---
 

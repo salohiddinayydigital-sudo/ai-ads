@@ -2,7 +2,8 @@
 name: bozor-trend-kreativi
 description: "Winning creative uchun 3-manbali AI pipeline: raqobatchi ad'lari, bozor trendlari (rising vs fatiguing) va o'z g'oliblari — Facebook Ads MCP bilan kunlik winner ro'yxati"
 tags: [meta-ads, kreativ]
-source: "vedio bilimlar/youtubedagilar/Claude + Meta Ads Library = Unlimited Winning Ad Creatives.md (https://www.youtube.com/watch?v=B7z0vcKS67k)"
+source: "YouTube: Claude + Meta Ads Library = Unlimited Winning Ad Creatives (https://www.youtube.com/watch?v=B7z0vcKS67k)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

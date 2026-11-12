@@ -3,6 +3,7 @@ name: verification-loop-6-bosqich
 description: "Marketing auditi, kreativ va kampaniya o'zgarishlarini topshirishdan oldin 6 bosqichli deterministik tekshiruv zanjiri (ECC verification-loop adaptatsiyasi)"
 tags: [verification, sifat, dod, audit, ecc, xavfsizlik]
 source: "raw/2026-09-16-ecc-naqshlar-tahlili.md §6 + rules/50-topshirish-dod.md (2026-10-17)"
+source_status: unverified
 updated: 2026-10-17
 ---
 

@@ -2,7 +2,7 @@
 name: context-uzbekistan-market
 description: "O'zbekiston raqamli bozori konteksti — Telegram Bot/DM voronka, Payme/Click/Nasiya va to'lov qobiliyati filtrlari"
 tags: [context, uzbekistan, telegram, meta]
-source: "Tyrion v5.0 ECC Contexts"
+source: "Tyrion ECC Contexts"
 updated: 2026-10-17
 ---
 

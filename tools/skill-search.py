@@ -273,6 +273,8 @@ MUTATION_PATTERNS = re.compile(
     r"\b("
     r"byudjetni\s+\d+.*oshir|kampaniyani\s+o'chir|reklamani\s+to'xtat|hoziroq\s+yoq|"
     r"delete\s+campaign|pause\s+all\s+ads|increase\s+budget\s+now|apply\s+changes\s+live|"
+    r"(?:increase|raise|boost|double|triple)\s+(?:my\s+|the\s+|our\s+)?(?:[\w+\-]+\s+){0,3}budget\s+(?:by\s+)?\d+|"
+    r"(?:delete|remove|pause|stop|turn\s+off)\s+(?:all\s+|the\s+|my\s+|our\s+)?(?:old\s+)?(?:(?:meta|google|tiktok|facebook|instagram)\s+)?(?:campaigns?|ads|ad\s+sets?)\b|"
     r"удалить\s+кампанию|остановить\s+рекламу\s+сейчас|увеличить\s+бюджет\s+на\s+\d+|"
     r"бюджетни\s+ошир|кампанияни\s+ўчир"
     r")\b",
@@ -624,6 +626,18 @@ def load_agents(force_reload: bool = False) -> dict[str, dict]:
 # Qidiruv va Ko'p Tilli Normalizatsiya
 # --------------------------------------------------------------------------- #
 
+# O'zbek lotin tili markerlari: inglizcha brend so'zlari (pixel, purchase, instagram...) aralashsa ham aniqlanadi.
+_UZ_STRONG_WORDS = re.compile(
+    r"\b(uchun|bo'yicha|bo`yicha|boyicha|bilan|haqida|kerak|nima|qanday|nega|qachon|qancha|qilish|qilib|qilsam|bering|menga|bizning|mening|"
+    r"sizning|lekin|hamda|yo'q|yoq|kelmayapti|ishlamayapti|ishlamayabdi|sotuv|sotuvlar|narx|qimmat|arzon|oshib|ketdi|tushdi|kamaydi|"
+    r"ko'paydi|reklama|reklamam|reklamamda|kampaniyamda|byudjetni|oshir|o'chir|mijoz|strategiya|lidlar|sifatsiz|kontent|tayyorla|tekshir|"
+    r"saytimni|o'rganib|montaj|yasab|taklif|berish|berishchi|auditoriya|audioturiya|audioturiyaga|auditoriyaga|raqobatchi|raqobatchilar|"
+    r"rabotchilar|tahlil|salom|assalomu|alaykum|rahmat|yaxshimisiz|qalaysiz|bugungi|ob-havo|xato|xatolik|muammo|yordam|ber|qil)\b"
+)
+_UZ_STRONG_SUFFIX = re.compile(r"\b\w*(mayapti|yapti|yotgan|yotir|moqda|maydi|mabdi|yabdi|ingiz|imiz)\b")
+_UZ_WEAK_WORDS = re.compile(r"\b(da|ga|dan|ni|ning|va|bor|ham|endi|lar)\b")
+
+
 def detect_language(text: str) -> str:
     s = str(text or "")
     low = s.lower()
@@ -631,9 +645,91 @@ def detect_language(text: str) -> str:
         return "uz_cyrillic"
     if re.search(r"[а-яА-ЯёЁ]", s):
         return "ru"
-    if re.search(r"\b(uchun|bo'yicha|reklama|kampaniyamda|byudjetni|oshir|o'chir|mijoz|strategiya|lidlar|sifatsiz|kontent|tayyorla|tekshir|saytimni|o'rganib|montaj|yasab|qilish|taklif|berish|berishchi|auditoriya|audioturiya|audioturiyaga|auditoriyaga|raqobatchi|raqobatchilar|rabotchilar|tahlil)\b", low):
+    low_n = low.replace("\u2018", "'").replace("\u2019", "'").replace("\u02bb", "'").replace("\u02bc", "'")
+    strong = len(_UZ_STRONG_WORDS.findall(low_n)) + len(_UZ_STRONG_SUFFIX.findall(low_n))
+    weak = len(_UZ_WEAK_WORDS.findall(low_n))
+    if strong >= 1 or weak >= 2:
         return "uz_latin"
     return "en"
+
+
+# --- Scope-darvoza: marketingga aloqasiz / juda umumiy so'rovlar uchun agent tanlamaslik ---
+_GREETING_WORDS = {
+    "salom", "assalomu", "alaykum", "aleykum", "assalom", "hello", "hi", "hey", "yo", "привет", "здравствуйте", "здравствуй",
+    "добрый", "день", "вечер", "утро", "qalaysiz", "yaxshimisiz", "yaxshi", "rahmat", "thanks", "thank", "you", "спасибо",
+    "good", "morning", "evening", "afternoon", "hayrli", "kun", "tong", "xayr", "bye", "salam", "ok", "okay", "ha", "yoq",
+}
+_FILLER_WORDS = {
+    "kerak", "menga", "mening", "bizga", "please", "pls", "help", "yordam", "need", "want", "нужна", "нужно", "нужен", "помоги",
+    "помощь", "хочу", "istayman", "bering", "ber", "iltimos", "bir", "i", "me", "my", "some", "a", "an", "the", "about", "haqida",
+}
+_GENERIC_MARKETING_WORDS = {
+    "reklama", "reklamalar", "reklamam", "reklamani", "реклама", "рекламу", "рекламы", "рекламе", "ads", "ad", "advertising", "advert",
+    "adverts", "marketing", "маркетинг", "kampaniya", "kampaniyalar", "campaign", "campaigns", "кампания", "кампании", "targeting",
+    "таргет", "таргетинг", "targetolog", "promo", "reklamalarim",
+}
+_HARD_MARKETING_RE = re.compile(
+    r"\b(ads?|advert\w*|reklam\w*|реклам\w*|таргет\w*|target\w*|auditor\w*|аудитор\w*|audience\w*|kampan\w*|кампан\w*|campaign\w*|"
+    r"meta|facebook|instagram|insta|tiktok|google|youtube|telegram|телеграм\w*|linkedin|pinterest|snapchat|reddit|amazon|yandex|яндекс\w*|"
+    r"vk|вк|pixel|пиксел\w*|capi|cpa|cpm|cpc|ctr|roas|mer|leads?|lid\w*|лид\w*|sotuv\w*|sales|sell\w*|funnel\w*|voronk\w*|воронк\w*|"
+    r"kreativ\w*|creativ\w*|креатив\w*|brand\w*|brend\w*|бренд\w*|marketing\w*|маркетинг\w*|smm|seo|сео|landing\w*|лендинг\w*|"
+    r"konversiya\w*|conversion\w*|конверси\w*|byudjet\w*|budget\w*|бюджет\w*|retarget\w*|remarket\w*|lookalike|utm|crm|mijoz\w*|"
+    r"klient\w*|client\w*|customer\w*|клиент\w*|offer\w*|taklif\w*|hooks?|reels\w*|banner\w*|billboard\w*|influencer\w*|blogger\w*|"
+    r"bloger\w*|pmax|ppc|sem|tracking|attribut\w*|atribut\w*|nisha\w*|niche\w*|ниша|biznes\w*|business\w*|бизнес\w*|"
+    r"strategiya\w*|strategy|стратег\w*|raqobat\w*|competitor\w*|конкурент\w*|launch\w*|запуск\w*|interest\w*|qiziqish\w*|интерес\w*|"
+    r"e-commerce|ecommerce|do'kon\w*|магазин\w*|kontent\w*|content|контент\w*|copywrit\w*|promo\w*|brief\w*|persona|avatar\w*|"
+    r"bid\w*|stavka\w*|ставк\w*|trafik\w*|traffic|reach|impression\w*|show\w*|click\w*|klik\w*|клик\w*|"
+    r"montaj\w*|video\w*|motion|subtitr\w*|tipografiya\w*|animatsion\w*|seo-\w+|geo)\b"
+)
+
+
+def scope_signals(query: str, q_tokens: list[str], has_concepts: bool = False) -> dict[str, Any]:
+    """So'rovning marketing doirasiga mosligini deterministik aniqlaydi (LLM chaqirmaydi)."""
+    norm = normalize_multilingual_text(query)
+    words = [w for w in re.findall(r"[\w'`\-]+", norm) if w]
+    non_greeting = [w for w in words if w.strip("'-`") not in _GREETING_WORDS]
+    greeting_only = bool(words) and not non_greeting
+    hard = bool(_HARD_MARKETING_RE.search(norm))
+    meaningful = [t for t in q_tokens if t not in _GREETING_WORDS and t not in _FILLER_WORDS]
+    generic_only = bool(meaningful) and all(t in _GENERIC_MARKETING_WORDS for t in meaningful)
+    return {
+        "empty": not words,
+        "greeting_only": greeting_only,
+        "has_marketing_vocab": hard or has_concepts,
+        "generic_only": generic_only and not has_concepts,
+        "meaningful_tokens": meaningful,
+    }
+
+
+_CLARIFY_QUESTIONS = {
+    "uz": [
+        "Qaysi platforma? (Meta, Google, TikTok, Telegram Ads, Yandex Direct, boshqa)",
+        "Maqsad nima? (lid, sotuv, kanalga obunachi, brend xabardorligi)",
+        "Mahsulot/xizmat va nishasi nima, qaysi bozor/shahar?",
+        "Oylik yoki kunlik byudjet va hozirgi natija (CPA/ROAS) qancha?",
+        "Yangi kampaniya kerakmi yoki mavjud kampaniyani audit qilamizmi?",
+    ],
+    "ru": [
+        "Какая платформа? (Meta, Google, TikTok, Telegram Ads, Яндекс Директ, другая)",
+        "Какая цель? (лиды, продажи, подписчики канала, узнаваемость)",
+        "Какой продукт/услуга, ниша и рынок/город?",
+        "Какой бюджет (в день или месяц) и текущие результаты (CPA/ROAS)?",
+        "Нужна новая кампания или аудит существующей?",
+    ],
+    "en": [
+        "Which platform? (Meta, Google, TikTok, Telegram Ads, Yandex Direct, other)",
+        "What is the goal? (leads, sales, channel subscribers, awareness)",
+        "What product/service, niche and market/city?",
+        "What budget (daily or monthly) and current results (CPA/ROAS)?",
+        "Is this a new campaign or an audit of an existing one?",
+    ],
+}
+
+
+def clarifying_questions_for(lang: str) -> list[str]:
+    if lang in ("uz_latin", "uz_cyrillic", "uz"):
+        return list(_CLARIFY_QUESTIONS["uz"])
+    return list(_CLARIFY_QUESTIONS["ru" if lang == "ru" else "en"])
 
 
 def normalize_multilingual_text(value: str) -> str:
@@ -863,6 +959,104 @@ def _select_relevant_references(
     return chosen[:max_refs]
 
 
+def _terminal_plan(
+    status: str,
+    clean_query: str,
+    lang: str,
+    market_info: dict[str, Any],
+    niche: str,
+    complexity: str,
+    effective_mode: str,
+    cache: "SessionContextCache",
+    mutation_approved: bool = False,
+    is_mutation: bool = False,
+) -> dict[str, Any]:
+    """`out_of_scope` / `needs_clarification`: agent, skill va kontekst tanlanmaydi — sxema kalitlari saqlanadi."""
+    questions = clarifying_questions_for(lang) if status == "needs_clarification" else []
+    if status == "out_of_scope":
+        explanation = "So'rov reklama/targetologiya/marketing doirasiga aloqador emas (yoki faqat salomlashuv); agent tanlanmadi va kontekst yuklanmadi."
+        confidence = {"score": 0.0, "level": "none", "explanation": explanation}
+    else:
+        explanation = "So'rov juda umumiy yoki ishonchlilik past: avval aniqlashtiruvchi savollarga javob kerak (95% Ishonch Qonuni)."
+        confidence = {"score": 0.15, "level": "low", "explanation": explanation}
+    return {
+        "schema": "tyrion.universal_router/v5",
+        "query": clean_query,
+        "status": status,
+        "context_mode": effective_mode,
+        "asks_user_for_skill_or_agent": False,
+        "clarifying_questions": questions,
+        "intent_analysis": {
+            "detected_language": lang,
+            "response_language": market_info["language"],
+            "detected_market": market_info["market_id"],
+            "detected_currency": market_info["currency"],
+            "domains": [],
+            "platforms": [],
+            "niche": niche,
+            "complexity": complexity,
+            "risk_level": "low",
+            "is_mutation_request": is_mutation,
+            "mutation_approved": mutation_approved,
+        },
+        "market_context": market_info,
+        "primary_agent": "",
+        "supporting_agents": [],
+        "required_skills": [],
+        "supporting_skills": [],
+        "global_registry_fallback_used": False,
+        "references_to_load": [],
+        "rules_to_load": [],
+        "tools_to_use": [],
+        "workflow": [
+            f"1. Natural-Language Intake: '{clean_query}' ({lang}) — {status}.",
+            "2. Hech qanday agent/skill tanlanmadi; kontekst yuklanmadi (0 token).",
+            "3. Foydalanuvchidan aniqlashtirish so'raladi." if questions else "3. Foydalanuvchiga doiradan tashqari ekani aytiladi; marketing savoli bo'lsa qayta yuboring.",
+        ],
+        "worker_packets": [],
+        "missing_inputs": list(questions),
+        "mutation_gate": {
+            "requires_approval": is_mutation,
+            "approved": mutation_approved,
+            "blocked": False,
+            "gate_tool": "tools/spend-guard.py",
+            "required_gates": [],
+            "reason": "Hech qanday jonli o'zgarish rejalashtirilmagan.",
+        },
+        "routing_confidence": confidence,
+        "fallback_plan": {"triggered": False, "mode": "NONE", "conductor": "", "fallback_agent": "", "explanation": explanation, "steps": []},
+        "loaded_context": {
+            "context_mode": effective_mode,
+            "actually_loaded": False,
+            "full_instructions_loaded": False,
+            "applied_skills_verified": [],
+            "loaded_agent_charters": [],
+            "loaded_skills": [],
+            "loaded_skill_names": [],
+            "loaded_rules": [],
+            "loaded_references": [],
+            "deferred_references": [],
+            "load_errors": [],
+            "context_budget": {"used_bytes": 0, "max_bytes": 0, "within_budget": True},
+            "token_telemetry": {
+                "estimated_loaded_tokens": 0,
+                "naive_full_vault_tokens": int(round(NAIVE_FULL_VAULT_BYTES / 3.5)),
+                "tokens_saved_vs_full_vault": int(round(NAIVE_FULL_VAULT_BYTES / 3.5)),
+                "token_savings_pct": 100.0,
+                "deterministic_cli_tools_token_cost": 0,
+                "recommended_mode_for_lowest_tokens": "n/a",
+            },
+            "compiled_context_package": {"total_bytes": 0, "sections_count": 0, "full_markdown_bundle": ""},
+            "session_cache_stats": {
+                "hits": cache.hits,
+                "misses": cache.misses,
+                "invalidations": cache.invalidations,
+                "persistent_cache_enabled": cache.persist_path is not None,
+            },
+        },
+    }
+
+
 def route_task(
     query: str,
     agent_hint: str = "",
@@ -951,6 +1145,25 @@ def route_task(
         return bool(set(q_tokens) & structured_vocab)
 
     strong_hits = [(sc, s) for sc, s in effective_hits if sc >= 10.0 and _has_structured_match(s)]
+
+    # Scope-darvoza: marketingga aloqasiz yoki juda umumiy so'rovga agent tanlamaymiz (hech narsa yuklanmaydi).
+    signals = scope_signals(clean_query, q_tokens, has_concepts=bool(matched_concepts))
+    scope_status = ""
+    if signals["greeting_only"]:
+        scope_status = "out_of_scope"
+    elif signals["empty"]:
+        scope_status = "needs_clarification"
+    elif not signals["has_marketing_vocab"] and signals["meaningful_tokens"]:
+        # mavzusi bor, lekin marketingga aloqasiz (python, ob-havo, retsept...). Mazmunsiz "yordam ber" so'rovi esa
+        # eski kelishuv bo'yicha universal conductor fallback'ga tushadi (UniversalAutoRouterTests.test_05).
+        scope_status = "out_of_scope"
+    elif signals["generic_only"] or (not strong_hits and 1 <= len(signals["meaningful_tokens"]) <= 2 and not matched_concepts):
+        scope_status = "needs_clarification"
+    if scope_status:
+        return _terminal_plan(
+            scope_status, clean_query, lang, market_info, niche, complexity, effective_mode, cache,
+            mutation_approved=mutation_approved, is_mutation=is_mutation,
+        )
 
     if not strong_hits:
         primary_agent = agent_hint if (agent_hint and agent_hint in agents) else "positioning-strategist"
@@ -1749,6 +1962,26 @@ def execute_task(
 
     harness_info = detect_harness_capabilities(VAULT, harness_override=harness_override)
 
+    # Gate 0: doiradan tashqari / aniqlashtirish kerak — hech qanday worker yoki vosita ishga tushmaydi
+    if plan["status"] in ("out_of_scope", "needs_clarification"):
+        return {
+            "schema": "tyrion.auto_router_execution/v5",
+            "execution_status": plan["status"],
+            "execution_mode": "no_execution",
+            "subagents_actually_spawned": False,
+            "harness": harness_info,
+            "route_plan": plan,
+            "worker_executions": [],
+            "deterministic_tool_outputs": [],
+            "execution_errors": [],
+            "conductor_synthesis": {
+                "status": plan["status"],
+                "reason": plan["routing_confidence"]["explanation"],
+                "clarifying_questions": plan.get("clarifying_questions", []),
+                "deterministic_tools_ran": [],
+            },
+        }
+
     # Gate 1: If blocked by unapproved live account mutation, halt before any execution
     if plan["status"] == "blocked_mutation_approval":
         return {
@@ -2233,7 +2466,7 @@ def cmd_tokens(args: argparse.Namespace) -> int:
         print(json.dumps(prof, ensure_ascii=False, indent=2))
         return 0
     print("=" * 74)
-    print("  ⚡ TYRION v7.1 TOKEN CONSUMPTION & COST EFFICIENCY REPORT")
+    print("  ⚡ TYRION v7.0 TOKEN CONSUMPTION & COST EFFICIENCY REPORT")
     print("=" * 74)
     nv = prof["naive_full_vault"]
     print(f"  Butun baza hajmi (63 skill + 100 wiki + 36 agent): {nv['total_markdown_bytes']:,} bayt (~{nv['estimated_tokens']:,} token)")

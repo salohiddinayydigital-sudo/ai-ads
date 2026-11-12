@@ -2,7 +2,7 @@
 name: playbook-meta-ads-1k-10k-uz
 description: "Meta Ads $1,000 dan $10,000 gacha oylik byudjetni boshqarish playbooki — 30 kunlik yo'l xaritasi, 1-5-5 Sandbox, 4 qatlamli auditoriya va Kill/Keep/Scale"
 tags: [playbook, meta-ads, scaling, uzbekistan]
-source: "Tyrion v5.0 Meta Ads Engine"
+source: "Tyrion Meta Ads Engine"
 updated: 2026-10-17
 ---
 

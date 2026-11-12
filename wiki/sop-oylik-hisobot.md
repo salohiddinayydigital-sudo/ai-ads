@@ -3,6 +3,7 @@ name: sop-oylik-hisobot
 description: "SOP: oylik marketing hisoboti — kanallar bo'yicha raqam, voronka taqsimoti, uch savol, keyingi oyga 3 harakat, biznes tilida yozish"
 tags: [sop, hisobot, metrika, mijoz]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/PLAYBOOKS.md (PB-7)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

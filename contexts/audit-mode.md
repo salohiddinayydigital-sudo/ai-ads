@@ -2,7 +2,7 @@
 name: context-audit-mode
 description: "Audit va diagnostika rejimi — faqat o'qish, manbali dalil, Zero-Findings va M1-M24 tekshiruv"
 tags: [context, audit, diagnostic]
-source: "Tyrion v5.0 ECC Contexts"
+source: "Tyrion ECC Contexts"
 updated: 2026-10-17
 ---
 

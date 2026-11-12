@@ -2,7 +2,7 @@
 name: contexts-readme
 description: "ECC Dynamic Context Modes — vazifa turiga qarab agent xulq-atvori va ustuvorliklarini o'zgartiruvchi kontekst rejimlari"
 tags: [context, ecc, router, mode]
-source: "affaan-m/ECC contexts/ arxitekturasi asosida Tyrion v5.0 uchun"
+source: "affaan-m/ECC contexts/ arxitekturasi asosida Tyrion uchun"
 updated: 2026-10-17
 ---
 

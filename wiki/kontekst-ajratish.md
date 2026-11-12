@@ -3,6 +3,7 @@ name: kontekst-ajratish
 description: Expertise (doimiy) vs Situational (vaziyatli) kontekst — situational ma'lumot just-in-time yuklanadi, doimiy kontekstga tiqilmaydi
 tags: [kontekst, qoidalar, arxitektura]
 source: raw/2026-09-03-aios-xatoliklar-va-audit.md (§ Kontekstni ajratish)
+source_status: unverified
 updated: 2026-09-05
 ---
 

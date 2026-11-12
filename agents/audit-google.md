@@ -19,7 +19,7 @@ triggers:
 - rsa
 - гугл реклама
 - контекстная реклама
-skills: [ads-google]
+skills: [ads-google, ads-yandex]
 authority_boundary: Google Ads audit & Coliseum structure only; no live campaign mutations without approval
 output_contract: JSON findings (status, platform='google', findings, contradictions, missing_inputs)
 ---

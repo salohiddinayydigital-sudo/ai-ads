@@ -2,7 +2,7 @@
 name: "70-charter-baseline"
 description: Barcha 36 agent charterlari uchun umumiy xavfsizlik, Universal Auto-Router, avtonom skill yuklash, rol chegarasi va Zero-Findings shartnomasi (ECC Prompt Defense Baseline)
 tags: [rules, charter, xavfsizlik, agent, baseline, ecc, router]
-source: "raw/2026-09-16-ecc-naqshlar-tahlili.md §4 + affaan-m/ECC Prompt Defense Baseline + Tyrion v5.0 Universal Auto-Router"
+source: "raw/2026-09-16-ecc-naqshlar-tahlili.md §4 + affaan-m/ECC Prompt Defense Baseline + Tyrion Universal Auto-Router"
 updated: 2026-10-21
 ---
 
@@ -26,7 +26,7 @@ Har bir sub-agent (audit, kreativ, tadqiqot, video, analitika) tashqi ma'lumot b
 Foydalanuvchi `/skill-search`, `/agent` yoki `/brief` buyruqlarini qo'lda yozishga **majbur emas**. Har bir topshiriq avtomatik ravishda marshrutlanadi (`python3 tools/skill-search.py route "<vazifa>" --load`):
 
 1. **Avtomatik skill va agent tanlash:** Topshiriq maqsadi, tili (`uz_latin`, `uz_cyrillic`, `ru`, `en`), platformasi, murakkabligi va xavf darajasidan kelib chiqib `primary_agent`, `supporting_agents`, `required_skills`, `supporting_skills` va `references_to_load` avtomatik aniqlanadi.
-2. **Haqiqiy fayl yuklash (`actually_loaded`):** Agent faqat skill nomini aytib qolmasdan, tanlangan `SKILL.md` va faqat vazifaga zarur `references/*.md` fayllarini amalda o'qiydi hamda ko'rsatmalarini qo'llaydi. Butun 62 ta skill kutubxonasi yoppasiga yuklanmaydi.
+2. **Haqiqiy fayl yuklash (`actually_loaded`):** Agent faqat skill nomini aytib qolmasdan, tanlangan `SKILL.md` va faqat vazifaga zarur `references/*.md` fayllarini amalda o'qiydi hamda ko'rsatmalarini qo'llaydi. Butun skill kutubxonasi yoppasiga yuklanmaydi.
 3. **Yolg'on yuklash da'vosi taqiqi:** Haqiqatda diskda mavjud bo'lmagan yoki joriy sessiyada o'qilmagan skill yoxud reference faylini "o'qidim / qo'lladim" deb da'vo qilish qat'iyan taqiqlanadi.
 4. **Ko'p bosqichli (Multi-Skill) va Qayta Marshrutlash (Re-Routing):** Vazifa bir nechta bosqichdan iborat bo'lsa yoki ish davomida yangi ehtiyoj (masalan, kreativdan keyin CAPI tekshiruvi yoki CRO) paydo bo'lsa, router dinamik ravishda yangi skill va mutaxassis agentni (`--reroute-with`) qo'shadi.
 5. **Universal Fallback (To'xtab Qolmaslik):** Agar aniq maxsus skill topilmasa yoki agentning o'ziga biriktirilgan skilllar yetarli bo'lmasa, router avval global skill reyestrini tekshiradi, so'ngra `ads` konduktori va mos umumiy mutaxassis (`research-worker` / `positioning-strategist`) orqali xavfsiz umumiy workflow'ga o'tadi. Foydalanuvchidan hech qachon skill yoki agent nomini aytish so'ralmaydi!

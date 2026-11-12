@@ -2,6 +2,7 @@
 name: b2b-xizmatlar-strategiyasi
 description: B2B xizmatlar (agentlik, konsalting, IT, marketing) uchun reklama strategiyasi — video transkriptdan
 source: kanal-bilim/27 (Screen Recording transkript, sifat o'rtacha)
+source_status: unverified
 tags: [nisha, b2b, strategiya]
 updated: 2026-09-03
 ---

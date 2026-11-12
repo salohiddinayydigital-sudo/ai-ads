@@ -1,6 +1,6 @@
 # Tyrion v7.0 — Global Paid-Media & Targetology Operating System (`ai-ads`)
 
-<!-- tyrion:catalog agents=36 skills=63 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=36 skills=64 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.13](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776AB.svg)](https://www.python.org/)
@@ -31,7 +31,7 @@
 ## 2. Core Architecture & Inventory
 
 - **36 specialist agents** (`agents/*.md`) — Meta, Google, TikTok, YouTube, LinkedIn, Telegram, CAPI tracking, creative strategy, unit economics, and regulatory compliance.
-- **63 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
+- **64 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
 - **27 slash commands** (`commands/*.md`) — canonical English commands (`/audit`, `/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`, `/plan`, `/budget`, `/tracking`, `/learn`, `/shield`, `/doctor`) with full Uzbek aliases (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`).
 - **29 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
 - **Bilim: atomik qaydlar (100)** (`wiki/*.md`) — interlinked paid-media knowledge base with zero orphan notes.
@@ -42,7 +42,7 @@ ai-ads/
 ├── markets/                 # Modular regional Market Packs (global, us, eu, uk, mena, latam, sea, in, uz)
 ├── locales/                 # UI & CLI locale bundles (en, uz, ru)
 ├── agents/                  # 36 specialist agent charters
-├── skills/                  # 63 canonical paid-media & CRO skills
+├── skills/                  # 64 canonical paid-media & CRO skills
 ├── commands/                # 27 slash commands (English canonical + Uzbek aliases)
 ├── hooks/                   # Cross-platform ${CLAUDE_PLUGIN_ROOT} hook launcher & guard
 ├── tools/                   # 29 ta 0-Token Deterministik CLI Asbob & STDIO MCP server

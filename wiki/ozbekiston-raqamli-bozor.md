@@ -3,6 +3,7 @@ name: ozbekiston-raqamli-bozor
 description: "O'zbekiston raqamli bozori — internet penetratsiyasi, ijtimoiy tarmoq foydalanuvchilari (FB/IG), yosh va jins taqsimoti; sanali ma'lumot (2025-2026 manbalar)"
 tags: [ozbekiston, bozor, metrika, malumot]
 source: "DataReportal Digital 2026/2025: Uzbekistan · NapoleonCat (2025) · Milliy statistika qo'mitasi (2025)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

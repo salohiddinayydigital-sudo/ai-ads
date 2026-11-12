@@ -3,6 +3,7 @@ name: sop-mahsulot-tavsifi
 description: "SOP: mahsulot/xizmat tavsifi (katalog, marketplace, Instagram/Telegram do'kon) — 'demak nima?' testi, struktura, shablon"
 tags: [sop, matn, mahsulot, kopirayter]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/PLAYBOOKS.md (PB-6)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

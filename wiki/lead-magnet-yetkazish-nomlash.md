@@ -2,7 +2,8 @@
 name: lead-magnet-yetkazish-nomlash
 description: "Lead magnetni yetkazib berishning 4 usuli (software, information, services, physical) va nomlash — headline talabni 2-10x o'zgartiradi"
 tags: [meta-ads, leadgen, copywriting]
-source: "vedio bilimlar/youtubedagilar/Watch This To Generate 1000s of Leads (In Any Niche).md (https://www.youtube.com/watch?v=Mst4hreQYl0)"
+source: "YouTube: Watch This To Generate 1000s of Leads (In Any Niche) (https://www.youtube.com/watch?v=Mst4hreQYl0)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

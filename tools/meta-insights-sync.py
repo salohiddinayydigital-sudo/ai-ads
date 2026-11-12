@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Tyrion v5.1 Live Meta Ads Insights Connector — Real reklama akkauntlaridan (act_<id>/insights)
+"""Tyrion v7.0 Live Meta Ads Insights Connector — Real reklama akkauntlaridan (act_<id>/insights)
 kampaniya, ad set va kreativ ko'rsatkichlarini sahifalab (cursor pagination `paging.next`) tortish,
 akkaunt valyutasini (`account_currency`) aniqlash, konversiya turlarini (`PURCHASE`, `LEAD`, `MESSAGING`)
 ajratish va auditdan o'tkazish (0 token).
 
-Yangi imkoniyatlar (v5.1 Ikkinchi Audit Yechimlari):
+Yangi imkoniyatlar (Ikkinchi Audit Yechimlari):
   1. `paging.next` Cursor Pagination + SSRF Host Guard: 50 ta natija bilan cheklanib qolmasdan,
      barcha sahifalarni (`--max-pages`, standart 20 sahifa) avtomatik aylanib chiqadi.
   2. `account_currency` Aniqligi: Meta Insights javobidan `account_currency` (`USD`, `UZS`, `KZT`, `EUR` va b.)
@@ -430,7 +430,7 @@ def sync_and_analyze(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="meta-insights-sync.py",
-        description="Tyrion v5.1 Live Meta Ads Graph API v26.0 Insights Connector (Cursor Pagination + Currency + Conversion Separation)",
+        description="Tyrion v7.0 Live Meta Ads Graph API v26.0 Insights Connector (Cursor Pagination + Currency + Conversion Separation)",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -438,8 +438,8 @@ def main(argv: list[str] | None = None) -> int:
     p_pull.add_argument("--account-id", default="", help="Meta Ad Account ID (masalan: act_1234567890)")
     p_pull.add_argument("--level", default="adset", choices=["campaign", "adset", "ad"])
     p_pull.add_argument("--date-preset", default="last_7d", choices=["today", "yesterday", "last_7d", "last_14d", "last_30d", "maximum"])
-    p_pull.add_argument("--target-cpa", type=float, default=15.0)
-    p_pull.add_argument("--breakeven-roas", type=float, default=2.0)
+    p_pull.add_argument("--target-cpa", type=tcore.positive_float, default=15.0)
+    p_pull.add_argument("--breakeven-roas", type=tcore.finite_float, default=2.0)
     p_pull.add_argument(
         "--primary-conversion",
         default="auto",
@@ -494,7 +494,7 @@ def main(argv: list[str] | None = None) -> int:
     s = rep["summary"]
     curr = res["account_currency"]
     print("=" * 76)
-    print(f"  🔄 TYRION v5.1 META INSIGHTS SYNC — {res['account_id']} ({res['data_source_type']})")
+    print(f"  🔄 TYRION v7.0 META INSIGHTS SYNC — {res['account_id']} ({res['data_source_type']})")
     print("=" * 76)
     print(f"  Graph API Versiyasi : {res['graph_api_version']} | Daraja: {res['level']} | Davr: {res['date_preset']} | Sahifalar: {res['pagination']['pages_fetched']}")
     print(f"  Akkaunt Valyutasi   : {curr} ({res['currency_source']}) | Konversiya filtri: {res['primary_conversion_filter']}")

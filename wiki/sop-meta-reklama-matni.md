@@ -3,6 +3,7 @@ name: sop-meta-reklama-matni
 description: "SOP: Meta reklama matni — 5 variant 5 xil burchakdan, belgi chegaralari, test qoidasi va landing mosligi tekshiruvi"
 tags: [sop, matn, meta-ads, reklama]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/PLAYBOOKS.md (PB-3)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

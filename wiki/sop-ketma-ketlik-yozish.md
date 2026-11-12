@@ -3,6 +3,7 @@ name: sop-ketma-ketlik-yozish
 description: "SOP: email yoki Telegram ketma-ketligi (welcome/nurture/launch/win-back) — har xatga bitta maqsad, sotuv nisbati, texnik eslatmalar"
 tags: [sop, email, telegram, voronka]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/PLAYBOOKS.md (PB-4)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

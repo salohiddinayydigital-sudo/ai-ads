@@ -2,7 +2,7 @@
 name: context-launch-mode
 description: "Kampaniya ishga tushirish rejimi — 1-5-5 Sandbox, Spend-Guard darvozasi va Pixel/CAPI preflight"
 tags: [context, launch, sandbox]
-source: "Tyrion v5.0 ECC Contexts"
+source: "Tyrion ECC Contexts"
 updated: 2026-10-17
 ---
 

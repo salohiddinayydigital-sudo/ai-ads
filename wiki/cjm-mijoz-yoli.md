@@ -3,6 +3,7 @@ name: cjm-mijoz-yoli
 description: "CJM — mijoz yo'li xaritasi: 5 bosqich × 6 qator (harakat, fikr, his, qiyinchilik, aloqa nuqtasi, kerakli matn turi); qaysi bosqichda qaysi matn kerakligini aniqlaydi"
 tags: [cjm, auditoriya, voronka, matn]
 source: "claude-ads-main/local/raw/kanal-bilim/12_ORALIQ_1.txt (kurs nazorat ishi — CJM shabloni va baholash mezonlari)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

@@ -225,5 +225,5 @@ updated: 2026-09-16
 | [[metrikalar-formulalari]] | Marketing metrikalari formulalari (ROI, ROAS, ROMI, CPP, CAC, CR) + SMS case raqamlari | kanal-bilim/10, 15 (TXT konvert) |
 | [[nisha-playbooklar]] | Nishalar bo'yicha tayyor strategiyalar — atir, sport zal, avtoservis, mehmonxona, xususiy maktab | kanal-bilim/05, 16, 17, 18, 20, 23 (PDF/TXT konvert) |
 | [[optimitzaetsiya-va-case]] | Real tajriba cases — CPL 2x arzon, tezkor loyiha SOP, yuqori chek mijozlar, budget qoidalari, bloggerlar ro'yxati | kanal-bilim/08, 11, 13, 14, 19, 21 (TXT konvert) |
-| [[mcp-va-multi-harness-integratsiya]] | Tyrion v5.0 Native MCP Server (.mcp.json) va Multi-Harness Exporter (Claude Code, Cursor .mdc, Windsurf, Codex) arxitekturasi | affaan-m/ECC install-targets + pipeboard-co/meta-ads-mcp + googleads/google-ads-mcp (2026-10-18) |
+| [[mcp-va-multi-harness-integratsiya]] | Tyrion v7.0 Native MCP Server (.mcp.json) va Multi-Harness Exporter (Claude Code, Cursor .mdc, Windsurf, Codex) arxitekturasi | affaan-m/ECC install-targets + pipeboard-co/meta-ads-mcp + googleads/google-ads-mcp (2026-10-18) |
 | [[meta-breakdown-effekti]] | Meta Ads 'Breakdown Effect' (Marginal vs Average CPA) — nega o'rtacha CPA baland ko'ringan placement yoki segmentni o'chirish umumiy natijani buzadi | Meta Official Breakdown Effect Documentation + mathiaschu/meta-ads-analyzer tahlili (2026-10-18) |

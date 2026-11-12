@@ -2,7 +2,7 @@
 name: playbook-nisha-tibbiyot-klinika
 description: "Tibbiyot klinikalari, stomatologiya va estetik markazlar uchun Meta Policy-safe reklama va voronka playbooki"
 tags: [playbook, medical, dental, clinic, policy]
-source: "Tyrion v5.0 Niche Playbooks"
+source: "Tyrion Niche Playbooks"
 updated: 2026-10-17
 ---
 

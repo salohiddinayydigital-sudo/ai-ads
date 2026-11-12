@@ -2,7 +2,8 @@
 name: blended-roas-net-cash
 description: "Scaling'da kuzatiladigan metrika — ad account ROAS foizi emas, biznes darajasidagi blended ROAS va net free cash flow; break-even ROASgacha boqish"
 tags: [meta-ads, scaling, metrika]
-source: "vedio bilimlar/youtubedagilar/Learn 97% of Meta Ads in Under 19 minutes.md (https://www.youtube.com/watch?v=NTmWqnPIb2s)"
+source: "YouTube: Learn 97% of Meta Ads in Under 19 minutes (https://www.youtube.com/watch?v=NTmWqnPIb2s)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

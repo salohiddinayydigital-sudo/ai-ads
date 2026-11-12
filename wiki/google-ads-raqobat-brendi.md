@@ -2,7 +2,8 @@
 name: google-ads-raqobat-brendi
 description: "Google Ads'da raqobatchi brend nomlariga bidding: trademark cheklovi, har raqobatchiga alohida solishtirish landing page'i va 5-10% budget qoidasi"
 tags: [meta-ads, google-ads]
-source: "vedio bilimlar/youtubedagilar/Learn 97% of Google Ads in 24 Minutes.md (https://www.youtube.com/watch?v=7xtRHa7b96w)"
+source: "YouTube: Learn 97% of Google Ads in 24 Minutes (https://www.youtube.com/watch?v=7xtRHa7b96w)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

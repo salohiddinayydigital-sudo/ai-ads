@@ -3,6 +3,7 @@ name: sop-kampaniya-diagnostika
 description: "SOP: ishlamayotgan kampaniyani diagnostika qilish — avval iqtisod, voronkani bosqichma-bosqich kesish jadvali, bitta jumlali diagnoz"
 tags: [sop, diagnostika, kampaniya, optimizatsiya]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/PLAYBOOKS.md (PB-4)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

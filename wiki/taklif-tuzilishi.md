@@ -2,7 +2,8 @@
 name: taklif-tuzilishi
 description: "Offer = value exchange + timing + risk profile; chegirma o'rniga buy-2-get-1 tipidagi strukturada ikkala tomon yutadi"
 tags: [meta-ads, offer]
-source: "vedio bilimlar/youtubedagilar/How to Make Facebook Ads SO Good They Beg You to Buy.md (https://www.youtube.com/watch?v=p0k04LBkL4I)"
+source: "YouTube: How to Make Facebook Ads SO Good They Beg You to Buy (https://www.youtube.com/watch?v=p0k04LBkL4I)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

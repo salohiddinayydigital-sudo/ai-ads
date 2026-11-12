@@ -3,6 +3,7 @@ name: bozor-analizi-tizimi
 description: "Bozor va raqobat tahlili tizimi — Ads Library g'olib pattern oqimi, ochiq manbalar, 10 tamoyilli fikrlash intizomi va RAQOBAT.md artefakti"
 tags: [bozor, raqobat, tadqiqot, tahlil]
 source: "ads/references/thinking-framework.md + meta-ads-library-tadqiqot + sop-raqobat-tahlili + ads/references/meta-ai-stack.md"
+source_status: verified
 updated: 2026-09-20
 ---
 

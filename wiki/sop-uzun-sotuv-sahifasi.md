@@ -3,6 +3,7 @@ name: sop-uzun-sotuv-sahifasi
 description: "SOP: uzun sotuv sahifasi (PASTOR) — offerni oldin tekshirish, offer stacking, kafolat, 'kim uchun emas' bloki, 4-6 CTA"
 tags: [sop, matn, offer, sotuv]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/PLAYBOOKS.md (PB-5)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

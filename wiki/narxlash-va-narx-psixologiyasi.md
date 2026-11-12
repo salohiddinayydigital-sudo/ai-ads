@@ -3,6 +3,7 @@ name: narxlash-va-narx-psixologiyasi
 description: "Narxlash modellari (setup+performance, retainer, value-based, soatlik, paket), tier dizayni va narx psixologiyasi (anchoring, decoy, left-digit) mexanikasi bilan"
 tags: [narx, offer, strategiya, psixologiya]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md (§2-3)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

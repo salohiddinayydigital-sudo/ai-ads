@@ -118,6 +118,29 @@ def cmd_brief(_args: argparse.Namespace) -> int:
 
 PROTECTED_GENERATED = {"manifests/catalog.json", "graphify-out/graph.json"}
 
+# Sir (secret) fayllar: ularga yozish `strict` profilida bloklanadi (exit 2), `standard` da ogohlantiriladi.
+SECRET_BASENAME_RE = re.compile(
+    r"^(\.env(\..+)?|\.envrc|\.netrc|\.pgpass|\.npmrc|\.pypirc|id_(rsa|dsa|ecdsa|ed25519)|credentials(\.json)?|"
+    r"secrets?\.(json|ya?ml|toml)|service[-_]account.*\.json|token\.json|.*\.(pem|key|p12|pfx|jks|keystore))$",
+    re.IGNORECASE,
+)
+SECRET_SAFE_BASENAME_RE = re.compile(r"^\.env\.(example|sample|template|dist|defaults)$", re.IGNORECASE)
+
+
+def is_secret_path(target: str) -> bool:
+    """Fayl nomi bo'yicha (kontentni o'qimasdan) sir saqlashi ehtimoli yuqori fayllarni aniqlaydi."""
+    base = target.replace("\\", "/").rstrip("/").rsplit("/", 1)[-1]
+    if not base or SECRET_SAFE_BASENAME_RE.match(base):
+        return False
+    return bool(SECRET_BASENAME_RE.match(base))
+
+
+def _emit(msg: str, also_stdout: bool = False) -> None:
+    # Claude Code exit 2 da stderr'ni modelga qaytaradi; ogohlantirishlar ham shu kanalda.
+    print(msg, file=sys.stderr)
+    if also_stdout:
+        print(msg)  # eski iste'molchilar (testlar, qo'lda ishga tushirish) stdout'ni o'qiydi
+
 
 def cmd_guard(args: argparse.Namespace) -> int:
     if is_disabled("pre:guard"):
@@ -133,6 +156,18 @@ def cmd_guard(args: argparse.Namespace) -> int:
         except Exception:
             raw_target = ""
     target = raw_target.replace("\\", "/").strip()
+
+    # 1) Sir fayllar — loyiha ildizidan qat'i nazar (sir hamma joyda sir)
+    if target and is_secret_path(target):
+        if get_profile() == "strict":
+            _emit(f"✗ HIMOYA (pre:guard, strict): '{target}' sir (secret) fayli — unga yozish bloklandi. "
+                  "Kalitlarni muhit o'zgaruvchisi yoki sir menejeri orqali bering; `.env.example` ga faqat placeholder yozing.")
+            return 2
+        _emit(f"⚠ HIMOYA (pre:guard): '{target}' sir (secret) fayliga o'xshaydi — haqiqiy kalit/token yozmang "
+              "(`strict` profilida bu yozuv bloklanadi).")
+        return 0
+
+    # 2) Generatsiya fayllari — faqat ombor ichida
     # If target is an absolute path outside VAULT, never block user files in another project
     if target and Path(raw_target).is_absolute():
         try:
@@ -142,8 +177,7 @@ def cmd_guard(args: argparse.Namespace) -> int:
         except Exception:
             return 0
     if any(target.endswith(p) for p in PROTECTED_GENERATED):
-        msg = f"⚠ HIMOYA (pre:guard): '{target}' generatsiya fayli — qo'lda tahrirlamang (`catalog.py build` / `brain-graph.py build` ishlating)."
-        print(msg)
+        _emit(f"⚠ HIMOYA (pre:guard): '{target}' generatsiya fayli — qo'lda tahrirlamang (`catalog.py build` / `brain-graph.py build` ishlating).", also_stdout=True)
         if get_profile() == "strict":
             return 2
         return 0 if args.warn_only else 2

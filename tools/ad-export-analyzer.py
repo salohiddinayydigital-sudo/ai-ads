@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Tyrion v5.1 Ad Export Analyzer & Breakdown Effect Engine (0 token).
+"""Tyrion v7.0 Ad Export Analyzer & Breakdown Effect Engine (0 token).
 
-Yangi imkoniyatlar (v5.1 Audit #1 va #2 yechimi):
+Yangi imkoniyatlar (Audit #1 va #2 yechimi):
 1. `account_currency` va ko'p valyutali (`USD`, `UZS`, `EUR`, `KZT`) aniqlik — valyutani ko'r-ko'rona USD deb belgilamaydi.
 2. Konversiya oilalarini (`PURCHASE`, `LEAD`, `MESSAGING`, `UNSPECIFIED`) ajratish — turli maqsaddagi
    kampaniyalarni (masalan, Xarid va Lid) bitta "Blended CPA" qozoniga aralashtirib yuborishning oldini oladi (`summary_by_conversion_family`).
@@ -19,8 +19,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import json
+import re
 import sys
+import unicodedata
 from pathlib import Path
 from typing import Any
 import tyrion_core as tcore
@@ -34,12 +37,207 @@ for _stream in (sys.stdout, sys.stderr):
             pass
 
 
+class ExportFormatError(ValueError):
+    """Eksport fayli tahlil qilib bo'lmaydigan shaklda (spend ustuni yo'q, bo'sh fayl va h.k.). CLI exit kodi: 2."""
+
+
 def _num(val: object, default: float = 0.0) -> float:
-    return tcore.safe_float(val, default=default)
+    parsed = tcore.parse_localized_number(val)
+    return default if parsed is None else parsed
+
+
+# --- Sarlavha normallashtirish -------------------------------------------------------------------------------------
+# Kanonik maydon -> normallashtirilgan sarlavha taxalluslari (ro'yxat tartibi = ustuvorlik).
+# Normallashtirish: registr, bo'shliq, qavs ichidagi izoh va valyuta qo'shimchasi olib tashlanadi, `_`/`-` bo'shliqqa aylanadi.
+HEADER_ALIASES: dict[str, list[str]] = {
+    "name": [
+        "name", "campaign name", "campaign", "ad set name", "adset name", "ad group name", "ad group", "ad name",
+        "title", "ad title", "название кампании", "кампания", "название группы объявлений", "группа объявлений",
+        "название группы", "название объявления", "объявление", "название",
+    ],
+    "spend": [
+        "spend", "amount spent", "cost", "spent", "total spend", "budget spent", "расход", "расходы", "затраты",
+        "потрачено", "сумма расходов", "стоимость", "расход с ндс", "расход руб",
+    ],
+    "conversions": [
+        "conversions", "results", "conversion", "conv", "actions", "all conversions", "конверсии", "результаты",
+        "результат", "достижения целей", "количество конверсий",
+    ],
+    "purchases": ["purchases", "purchase", "website purchases", "покупки", "заказы"],
+    "leads": ["leads", "lead", "website leads", "лиды", "заявки"],
+    "revenue": [
+        "revenue", "purchase value", "purchases conversion value", "website purchases conversion value",
+        "conversion value", "conv value", "conversions value", "total conversion value", "доход", "выручка",
+        "ценность конверсий", "сумма конверсий", "доходы",
+    ],
+    "impressions": ["impressions", "impr", "views", "показы", "просмотры"],
+    "clicks": ["clicks", "link clicks", "inline link clicks", "clicks all", "клики", "переходы"],
+    "frequency": ["frequency", "avg frequency", "частота"],
+    "roas": ["roas", "purchase roas", "website purchase roas", "return on ad spend"],
+    "ctr": ["ctr", "link click through rate", "click through rate"],
+    "cpm": ["cpm", "avg cpm"],
+    "currency": ["currency", "account currency", "currency code", "валюта"],
+    "conversion_family": ["conversion family"],
+    "conversion_action_type": [
+        "conversion action type", "result type", "result indicator", "optimization goal", "conversion action",
+        "conversion action name", "тип результата", "цель оптимизации",
+    ],
+    "conversions_by_family": ["conversions by family"],
+    # Hosila ko'rsatkichlar: tanilgan, lekin qayta hisoblanadi (unmapped emas)
+    "cpa": ["cpa", "cost per result", "cost per conversion", "cost conv", "cost per purchase", "цена конверсии", "цена цели"],
+}
+_ALIAS_INDEX: dict[str, tuple[str, int]] = {
+    alias: (field, rank) for field, aliases in HEADER_ALIASES.items() for rank, alias in enumerate(aliases)
+}
+_CURRENCY_SYMBOLS = {"$": "USD", "€": "EUR", "₽": "RUB", "£": "GBP", "₸": "KZT", "₴": "UAH", "сум": "UZS", "so'm": "UZS", "руб": "RUB"}
+_CURRENCY_RE = re.compile(r"(?:[\(\[]\s*|[,\-–—/]\s*|\s)([A-Za-z]{3}|[$€₽£₸₴]|сум|руб)\s*[\)\]]?\s*$")
+_BRACKET_RE = re.compile(r"\([^)]*\)|\[[^\]]*\]")
+_KNOWN_CCY = {"USD", "EUR", "UZS", "RUB", "KZT", "GBP", "UAH", "TRY", "AED", "INR", "BRL", "JPY", "PLN", "CAD", "AUD", "TON", "KGS", "AZN", "GEL"}
+
+
+def normalize_header(header: object) -> tuple[str, str | None]:
+    """Sarlavhani (kalit, valyuta) ga ajratadi: "Amount spent (USD)" -> ("amount spent", "USD")."""
+    text = unicodedata.normalize("NFKC", str(header or "")).replace("\ufeff", "").strip()
+    currency: str | None = None
+    m = _CURRENCY_RE.search(text)
+    if m:
+        tok = m.group(1)
+        cand = _CURRENCY_SYMBOLS.get(tok.lower(), _CURRENCY_SYMBOLS.get(tok)) or tok.upper()
+        if cand in _KNOWN_CCY or tok in _CURRENCY_SYMBOLS or tok.lower() in _CURRENCY_SYMBOLS:
+            currency = cand
+    else:
+        for inner in re.findall(r"[\(\[]\s*([A-Za-z]{3})\s*[\)\]]", text):
+            if inner.upper() in _KNOWN_CCY:
+                currency = inner.upper()
+    # qavs ichidagi izohlar ("(cost per 1,000 impressions)", "(USD)") olib tashlanadi
+    base = _BRACKET_RE.sub(" ", text)
+    key = re.sub(r"[^\w]+", " ", base.lower().replace("_", " ")).strip()
+    key = re.sub(r"\s+", " ", key)
+    if currency and key.endswith(" " + currency.lower()):
+        key = key[: -(len(currency) + 1)].strip()
+    for suffix in (" руб", " usd", " uzs", " eur", " rub", " kzt"):
+        if key.endswith(suffix) and key[: -len(suffix)] in _ALIAS_INDEX:
+            if currency is None:
+                currency = suffix.strip().upper() if suffix.strip() != "руб" else "RUB"
+            key = key[: -len(suffix)]
+            break
+    return key, currency
+
+
+def map_headers(headers: list[str]) -> tuple[dict[str, str], dict[str, str | None], list[str]]:
+    """Asl sarlavhalarni kanonik maydonlarga moslaydi. (asl->kanonik, asl->valyuta, tanilmaganlar)."""
+    best: dict[str, tuple[int, str]] = {}
+    ccy: dict[str, str | None] = {}
+    for h in headers:
+        key, currency = normalize_header(h)
+        ccy[h] = currency
+        hit = _ALIAS_INDEX.get(key)
+        if hit and (hit[0] not in best or hit[1] < best[hit[0]][0]):
+            best[hit[0]] = (hit[1], h)
+    chosen = {orig: field for field, (_, orig) in best.items() for orig in [orig]}
+    unmapped = [h for h in headers if h not in chosen and str(h).strip()]
+    return chosen, ccy, unmapped
+
+
+def _decode_bytes(raw: bytes) -> str:
+    if raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+        return raw.decode("utf-16")
+    try:
+        return raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        return raw.decode("cp1251", errors="replace")
+
+
+def detect_delimiter(header_line: str) -> str:
+    best, best_n = ",", 1
+    for d in (",", ";", "\t", "|"):
+        try:
+            n = len(next(csv.reader([header_line], delimiter=d)))
+        except (csv.Error, StopIteration):
+            continue
+        if n > best_n:
+            best, best_n = d, n
+    return best
+
+
+_SPEND_KEYS = set(HEADER_ALIASES["spend"])
+_TOTAL_ROW_RE = re.compile(r"^(total|totals|grand total|итого|всего)\b", re.IGNORECASE)
+
+
+def _parse_csv_text(text: str) -> list[dict]:
+    text = text.replace("\ufeff", "")
+    lines = [ln for ln in text.splitlines()]
+    # Sarlavha qatori: birinchi 12 qator ichida spend taxallusi bor qator (Google Ads oldidan sarlavha/sana qatorlari qo'yadi)
+    start = None
+    nonblank = [(i, ln) for i, ln in enumerate(lines) if ln.strip()]
+    for i, ln in nonblank[:12]:
+        delim = detect_delimiter(ln)
+        cells = next(csv.reader([ln], delimiter=delim), [])
+        if any(normalize_header(c)[0] in _SPEND_KEYS for c in cells):
+            start = i
+            break
+    if start is None:
+        if not nonblank:
+            raise ExportFormatError("Eksport fayli bo'sh.")
+        start = nonblank[0][0]
+    delim = detect_delimiter(lines[start])
+    reader = csv.reader(io.StringIO("\n".join(lines[start:])), delimiter=delim)
+    try:
+        headers = [h.strip() for h in next(reader)]
+    except StopIteration:
+        raise ExportFormatError("Eksport fayli bo'sh.") from None
+    rows: list[dict] = []
+    for cells in reader:
+        if not any(c.strip() for c in cells):
+            continue
+        rows.append({h: (cells[i].strip() if i < len(cells) else "") for i, h in enumerate(headers)})
+    return rows
+
+
+def load_rows(path: Path) -> list[dict]:
+    if not path.is_file():
+        raise FileNotFoundError(f"Fayl topilmadi: {path}")
+    if path.stat().st_size > tcore.MAX_FILE_BYTES:
+        raise ValueError(f"Fayl hajmi ruxsat etilgan 25 MB chegaradan katta: {path.stat().st_size} bayt")
+    if path.stat().st_size == 0:
+        raise ExportFormatError("Eksport fayli bo'sh.")
+    text = _decode_bytes(path.read_bytes())
+    if path.suffix.lower() == ".json":
+        try:
+            raw = json.loads(text)
+        except json.JSONDecodeError as exc:
+            raise ExportFormatError(f"JSON o'qib bo'lmadi: {exc.msg} (qator {exc.lineno})") from None
+        if isinstance(raw, list):
+            return raw
+        if isinstance(raw, dict):
+            for k in ("campaigns", "ad_sets", "adsets", "ads", "rows", "data"):
+                if isinstance(raw.get(k), list):
+                    return raw[k]
+            return [raw]
+        raise ExportFormatError("JSON ildizi ro'yxat yoki obyekt bo'lishi shart.")
+    return _parse_csv_text(text)
+
+
+def _canonical_row(row: dict, mapping: dict[str, str] | None = None, ccy: dict[str, str | None] | None = None) -> dict:
+    """Asl satrni kanonik kalitli lug'atga aylantiradi (mapping berilmasa shu satr sarlavhalaridan tuziladi)."""
+    if mapping is None or ccy is None:
+        mapping, ccy, _ = map_headers([str(k) for k in row.keys()])
+    out: dict[str, Any] = {}
+    header_ccy: str | None = None
+    for orig, field in mapping.items():
+        if orig in row:
+            out[field] = row[orig]
+        if field == "spend" and ccy.get(orig):
+            header_ccy = ccy[orig]
+    if header_ccy and not str(out.get("currency") or "").strip():
+        out["currency"] = header_ccy
+    return out
 
 
 def _infer_conversion_family(row: dict[str, Any], primary_conversion: str = "auto") -> tuple[str, int, str]:
-    """Satrdagi konversiya oilasini (PURCHASE, LEAD, MESSAGING, UNSPECIFIED, NONE) va sonini aniqlaydi."""
+    """Satrdagi konversiya oilasini (PURCHASE, LEAD, MESSAGING, UNSPECIFIED, NONE) va sonini aniqlaydi.
+
+    `row` — kanonik kalitli satr (`_canonical_row` natijasi)."""
     req = str(primary_conversion or "auto").strip().lower()
     by_fam = row.get("conversions_by_family")
     if isinstance(by_fam, dict) and req in ("purchase", "lead", "messaging"):
@@ -48,7 +246,7 @@ def _infer_conversion_family(row: dict[str, Any], primary_conversion: str = "aut
         return (fam_key if c_val > 0 else "NONE"), c_val, f"filtered:{req}"
 
     explicit_fam = str(row.get("conversion_family") or "").strip().upper()
-    action_type = str(row.get("conversion_action_type") or row.get("Optimization Goal") or row.get("Result Type") or "").strip().lower()
+    action_type = str(row.get("conversion_action_type") or "").strip().lower()
 
     if not explicit_fam:
         if "purchase" in action_type or ("purchases" in row and "conversions" not in row):
@@ -64,49 +262,34 @@ def _infer_conversion_family(row: dict[str, Any], primary_conversion: str = "aut
             return "NONE", 0, f"excluded_non_{req}"
         explicit_fam = target_fam
 
-    conv = int(round(_num(row.get("conversions") or row.get("Conversions") or row.get("leads") or row.get("purchases") or row.get("Results"))))
+    conv = int(round(_num(row.get("conversions") or row.get("leads") or row.get("purchases"))))
     if conv <= 0:
         return "NONE", 0, action_type or "none"
     return (explicit_fam or "UNSPECIFIED"), conv, (action_type or "direct_field")
 
 
-def load_rows(path: Path) -> list[dict]:
-    if not path.is_file():
-        raise FileNotFoundError(f"Fayl topilmadi: {path}")
-    if path.stat().st_size > tcore.MAX_FILE_BYTES:
-        raise ValueError(f"Fayl hajmi ruxsat etilgan 25 MB chegaradan katta: {path.stat().st_size} bayt")
-    if path.suffix.lower() == ".json":
-        raw = json.loads(path.read_text(encoding="utf-8-sig"))
-        if isinstance(raw, list):
-            return raw
-        if isinstance(raw, dict):
-            for k in ("campaigns", "ad_sets", "adsets", "ads", "rows", "data"):
-                if isinstance(raw.get(k), list):
-                    return raw[k]
-            return [raw]
-    with path.open("r", encoding="utf-8-sig", errors="replace") as fh:
-        return list(csv.DictReader(fh))
+def normalize_row(
+    row: dict,
+    idx: int,
+    primary_conversion: str = "auto",
+    default_currency: str = "USD",
+    mapping: dict[str, str] | None = None,
+    ccy: dict[str, str | None] | None = None,
+) -> dict:
+    c = _canonical_row(row, mapping, ccy)
+    name = str(c.get("name") or "").strip() or f"Row_{idx}"
+    currency = str(c.get("currency") or default_currency or "USD").strip().upper() or "USD"
 
-
-def normalize_row(row: dict, idx: int, primary_conversion: str = "auto", default_currency: str = "USD") -> dict:
-    name = str(
-        row.get("name") or row.get("campaign_name") or row.get("adset_name")
-        or row.get("Ad Set Name") or row.get("Campaign Name") or f"Row_{idx}"
-    )
-    currency = str(
-        row.get("account_currency") or row.get("currency") or row.get("Currency") or default_currency or "USD"
-    ).strip().upper() or "USD"
-
-    spend = _num(row.get("spend") or row.get("Spend") or row.get("cost") or row.get("Amount Spent"))
-    conv_family, conv, conv_action_type = _infer_conversion_family(row, primary_conversion=primary_conversion)
-    rev = _num(row.get("revenue") or row.get("Revenue") or row.get("purchase_value") or row.get("Conversion Value"))
-    impr = _num(row.get("impressions") or row.get("Impressions"))
-    clicks = _num(row.get("clicks") or row.get("Clicks") or row.get("link_clicks") or row.get("inline_link_clicks"))
-    freq = _num(row.get("frequency") or row.get("Frequency"), default=1.0)
+    spend = _num(c.get("spend"))
+    conv_family, conv, conv_action_type = _infer_conversion_family(c, primary_conversion=primary_conversion)
+    rev = _num(c.get("revenue"))
+    impr = _num(c.get("impressions"))
+    clicks = _num(c.get("clicks"))
+    freq = _num(c.get("frequency"), default=1.0)
     cpa = round(spend / conv, 2) if conv > 0 else None
-    roas = round(rev / spend, 2) if spend > 0 and rev > 0 else _num(row.get("roas") or row.get("ROAS"))
-    ctr = round((clicks / impr) * 100.0, 2) if impr > 0 and clicks > 0 else _num(row.get("ctr") or row.get("CTR"))
-    cpm = round((spend / impr) * 1000.0, 2) if impr > 0 and spend > 0 else _num(row.get("cpm") or row.get("CPM"))
+    roas = round(rev / spend, 2) if spend > 0 and rev > 0 else _num(c.get("roas"))
+    ctr = round((clicks / impr) * 100.0, 2) if impr > 0 and clicks > 0 else _num(c.get("ctr"))
+    cpm = round((spend / impr) * 1000.0, 2) if impr > 0 and spend > 0 else _num(c.get("cpm"))
 
     out = {
         "name": name,
@@ -124,8 +307,8 @@ def normalize_row(row: dict, idx: int, primary_conversion: str = "auto", default
         "cpm": cpm,
         "frequency": round(freq, 2),
     }
-    if isinstance(row.get("conversions_by_family"), dict):
-        out["conversions_by_family"] = row["conversions_by_family"]
+    if isinstance(c.get("conversions_by_family"), dict):
+        out["conversions_by_family"] = c["conversions_by_family"]
     return out
 
 
@@ -136,11 +319,35 @@ def analyze_export(
     primary_conversion: str = "auto",
     default_currency: str = "USD",
 ) -> dict:
-    raw_rows = load_rows(path)
+    raw_rows = [r for r in load_rows(path) if isinstance(r, dict)]
+    all_headers: list[str] = []
+    for r in raw_rows:
+        for k in r.keys():
+            if k not in all_headers:
+                all_headers.append(str(k))
+    mapping, ccy, unmapped = map_headers(all_headers)
+    if "spend" not in mapping.values():
+        raise ExportFormatError(
+            "Spend (xarajat) ustuni topilmadi. Kutilgan sarlavhalar: "
+            + ", ".join(HEADER_ALIASES["spend"][:6])
+            + f". Faylda topilgan ustunlar: {', '.join(all_headers) or '(yo`q)'}"
+        )
+    spend_col = next(o for o, f in mapping.items() if f == "spend")
+    name_col = next((o for o, f in mapping.items() if f == "name"), None)
+    raw_rows = [
+        r for r in raw_rows
+        if not (name_col and _TOTAL_ROW_RE.match(str(r.get(name_col) or "").strip()))
+        and not (str(r.get(spend_col, "")).strip() == "" and not any(str(v).strip() for v in r.values()))
+    ]
+    if not raw_rows:
+        raise ExportFormatError("Eksport faylida ma'lumot qatorlari yo'q (faqat sarlavha yoki bo'sh).")
     items = [
-        normalize_row(r, i + 1, primary_conversion=primary_conversion, default_currency=default_currency)
+        normalize_row(r, i + 1, primary_conversion=primary_conversion, default_currency=default_currency, mapping=mapping, ccy=ccy)
         for i, r in enumerate(raw_rows)
     ]
+    unparseable_spend_rows = sum(
+        1 for r in raw_rows if str(r.get(spend_col, "")).strip() and tcore.parse_localized_number(r.get(spend_col)) is None
+    )
 
     currencies = sorted({x["currency"] for x in items if x.get("currency")})
     report_currency = currencies[0] if len(currencies) == 1 else ("MIXED" if len(currencies) > 1 else default_currency.upper())
@@ -214,6 +421,9 @@ def analyze_export(
     return {
         "source_file": str(path),
         "total_items": len(items),
+        "unmapped_columns": unmapped,
+        "recognized_columns": {orig: field for orig, field in mapping.items()},
+        "unparseable_spend_rows": unparseable_spend_rows,
         "currency": report_currency,
         "currencies_detected": currencies,
         "primary_conversion_filter": primary_conversion,
@@ -299,13 +509,13 @@ def analyze_breakdown_effect(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="ad-export-analyzer.py", description="Tyrion v5.1 CSV/JSON Ad Export & Breakdown Effect Analyzer")
+    parser = argparse.ArgumentParser(prog="ad-export-analyzer.py", description="Tyrion v7.0 CSV/JSON Ad Export & Breakdown Effect Analyzer")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_an = sub.add_parser("analyze", help="Meta/Google/Telegram CSV yoki JSON eksportni tahlil qilish")
     p_an.add_argument("--file", required=True, help="CSV yoki JSON fayl yo'li")
-    p_an.add_argument("--target-cpa", type=float, default=20.0)
-    p_an.add_argument("--breakeven-roas", type=float, default=2.0)
+    p_an.add_argument("--target-cpa", type=tcore.positive_float, default=20.0)
+    p_an.add_argument("--breakeven-roas", type=tcore.positive_float, default=2.0)
     p_an.add_argument(
         "--primary-conversion",
         default="auto",
@@ -317,22 +527,26 @@ def main(argv: list[str] | None = None) -> int:
 
     p_bd = sub.add_parser("breakdown-effect", help="Meta Ads 'Breakdown Effect' (Marginal vs Average CPA) tekshiruvi")
     p_bd.add_argument("--seg-a-name", required=True)
-    p_bd.add_argument("--seg-a-spend", type=float, required=True)
+    p_bd.add_argument("--seg-a-spend", type=tcore.non_negative_float, required=True)
     p_bd.add_argument("--seg-a-conv", type=int, required=True)
     p_bd.add_argument("--seg-b-name", required=True)
-    p_bd.add_argument("--seg-b-spend", type=float, required=True)
+    p_bd.add_argument("--seg-b-spend", type=tcore.non_negative_float, required=True)
     p_bd.add_argument("--seg-b-conv", type=int, required=True)
     p_bd.add_argument("--json", action="store_true")
 
     args = parser.parse_args(argv)
     if args.command == "analyze":
-        res = analyze_export(
-            Path(args.file),
-            target_cpa=args.target_cpa,
-            breakeven_roas=args.breakeven_roas,
-            primary_conversion=args.primary_conversion,
-            default_currency=args.currency,
-        )
+        try:
+            res = analyze_export(
+                Path(args.file),
+                target_cpa=args.target_cpa,
+                breakeven_roas=args.breakeven_roas,
+                primary_conversion=args.primary_conversion,
+                default_currency=args.currency,
+            )
+        except (FileNotFoundError, ExportFormatError, ValueError, OSError) as exc:
+            print(f"Xato: {exc}", file=sys.stderr)
+            return tcore.EXIT_VALIDATION
     elif args.command == "breakdown-effect":
         res = analyze_breakdown_effect(
             args.seg_a_name, args.seg_a_spend, args.seg_a_conv,
@@ -346,7 +560,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 68)
-    print(f"  📊 TYRION v5.1 AD EXPORT & BREAKDOWN ANALYZER — {args.command.upper()}")
+    print(f"  📊 TYRION v7.0 AD EXPORT & BREAKDOWN ANALYZER — {args.command.upper()}")
     print("=" * 68)
     print(json.dumps(res, ensure_ascii=False, indent=2))
     print("=" * 68)

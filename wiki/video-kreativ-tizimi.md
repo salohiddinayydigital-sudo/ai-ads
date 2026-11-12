@@ -3,6 +3,7 @@ name: video-kreativ-tizimi
 description: "Video kreativ tizimi — hook/tana/CTA arxitekturasi, 9 uchadigan format, test tartibi, spec darvozasi (joriy rasmiy manbadan), fatigue va AI ishlab chiqarish"
 tags: [kreativ, video, meta-ads, format]
 source: "kanal-bilim/03_9_ta_uchadigan_format.txt + ads/references/meta-creative-specs.md + marketolog/KNOWLEDGE.md §6 + bozor-trend-kreativi"
+source_status: unverified
 updated: 2026-09-20
 ---
 

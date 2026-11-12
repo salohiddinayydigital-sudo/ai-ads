@@ -3,6 +3,7 @@ name: meta-ads-interest-api
 description: "Meta/Facebook Ads Graph API v26.0 Detailed Targeting Accuracy Engine (`/search`, `targetingsearch`, `targetingsuggestions`, `targetingvalidation`) va 6-statusli aniqlik tizimi"
 tags: [meta-ads, api, interests, auditoriya, targeting, validation]
 source: "tools/meta-targeting-engine.py + tools/meta-audience.py + Meta Marketing API v26.0 (2026-10-20)"
+source_status: verified
 updated: 2026-10-20
 ---
 

@@ -80,6 +80,121 @@ def safe_int(
     return res
 
 
+# ---------------------------------------------------------------------------
+# Yagona son validatsiyasi va chiqish kodi siyosati (Tyrion v7)
+# ---------------------------------------------------------------------------
+# Chiqish kodi siyosati (barcha CLI asboblar uchun yagona):
+#   0 = muvaffaqiyat (natijada `error` maydoni yo'q, darvoza o'tdi)
+#   1 = darvoza BLOKLANDI (spend-guard `passed: false`, doctor FAIL va h.k.) — kirish to'g'ri, lekin qaror "yo'q"
+#   2 = VALIDATSIYA xatosi (nan/inf, manfiy/nol qiymat, topilmagan fayl, noto'g'ri sarlavha, argparse xatosi)
+EXIT_OK: int = 0
+EXIT_GATE_BLOCKED: int = 1
+EXIT_VALIDATION: int = 2
+
+
+class NumberValidationError(ValueError):
+    """Son argumenti chekli (nan/inf emas) yoki kerakli ishorada emasligi haqidagi xato."""
+
+
+def require_number(
+    value: Any,
+    field_name: str = "value",
+    *,
+    positive: bool = False,
+    non_negative: bool = False,
+    min_val: float | None = None,
+    max_val: float | None = None,
+) -> float:
+    """Pul/byudjet argumentini qat'iy tekshiradi: son bo'lishi, chekli (nan/inf emas) va kerak bo'lsa musbat.
+
+    `safe_float` dan farqi: buzilgan qiymatni jimgina `default` ga aylantirmaydi, balki `NumberValidationError` ko'taradi.
+    """
+    if value is None or isinstance(value, bool):
+        raise NumberValidationError(f"'{field_name}' son bo'lishi shart (berildi: {value!r}).")
+    try:
+        res = float(value) if isinstance(value, (int, float)) else float(str(value).strip())
+    except (TypeError, ValueError):
+        raise NumberValidationError(f"'{field_name}' son bo'lishi shart (berildi: {value!r}).") from None
+    if not math.isfinite(res):
+        raise NumberValidationError(f"'{field_name}' chekli son bo'lishi shart — nan/inf qabul qilinmaydi (berildi: {value!r}).")
+    if positive and res <= 0:
+        raise NumberValidationError(f"'{field_name}' 0 dan katta bo'lishi shart (berildi: {res:g}).")
+    if non_negative and res < 0:
+        raise NumberValidationError(f"'{field_name}' manfiy bo'lishi mumkin emas (berildi: {res:g}).")
+    if min_val is not None and res < min_val:
+        raise NumberValidationError(f"'{field_name}' kamida {min_val:g} bo'lishi shart (berildi: {res:g}).")
+    if max_val is not None and res > max_val:
+        raise NumberValidationError(f"'{field_name}' ko'pi bilan {max_val:g} bo'lishi shart (berildi: {res:g}).")
+    return res
+
+
+def _argparse_number(positive: bool, non_negative: bool):
+    import argparse
+
+    def _conv(text: str) -> float:
+        try:
+            return require_number(text, "qiymat", positive=positive, non_negative=non_negative)
+        except NumberValidationError as exc:
+            raise argparse.ArgumentTypeError(str(exc)) from None
+
+    return _conv
+
+
+# argparse `type=` uchun tayyor konvertorlar: xato bo'lsa argparse o'zi exit 2 beradi.
+finite_float = _argparse_number(False, False)
+positive_float = _argparse_number(True, False)
+non_negative_float = _argparse_number(False, True)
+
+
+def exit_code_for_result(result: Any, gate: bool = False) -> int:
+    """Natija lug'atidan chiqish kodini chiqaradi: `error` maydoni bor -> 2; `gate` rejimida `passed` false -> 1."""
+    if isinstance(result, dict):
+        if result.get("error"):
+            return EXIT_VALIDATION
+        if gate and not result.get("passed", False):
+            return EXIT_GATE_BLOCKED
+    return EXIT_OK
+
+
+def parse_localized_number(raw: Any) -> float | None:
+    """Eksport hujjatlaridagi sonlarni o'qiydi: "1,234.50", "1 234,50", "1.234,50", "12,5", "$1,234", "45%".
+
+    Qoidalar: bo'shliq/apostrof har doim ming ajratgich; ikkala `,` va `.` bo'lsa OXIRGISI o'nlik belgi;
+    bitta tur bir necha marta kelsa ming ajratgich; bitta marta kelsa — o'nlik, FAQAT `,` + aynan 3 raqam
+    (va boshi `0` emas) bo'lsa ming ajratgich ("1,234" -> 1234, lekin "1.234" -> 1.234).
+    Yaroqsiz yoki bo'sh qiymat uchun `None` qaytaradi (jimgina 0 emas)."""
+    if raw is None or isinstance(raw, bool):
+        return None
+    if isinstance(raw, (int, float)):
+        return float(raw) if math.isfinite(float(raw)) else None
+    s = str(raw).strip()
+    if not s:
+        return None
+    negative = s.startswith("-") or (s.startswith("(") and s.endswith(")"))
+    s = re.sub(r"[^\d,.]", "", re.sub(r"[ \u00a0\u202f\u2009']", "", s))
+    if not re.search(r"\d", s):
+        return None
+    if "," in s and "." in s:
+        if s.rfind(",") > s.rfind("."):
+            s = s.replace(".", "").replace(",", ".")
+        else:
+            s = s.replace(",", "")
+    elif s.count(",") > 1:
+        s = s.replace(",", "")
+    elif s.count(".") > 1:
+        s = s.replace(".", "")
+    elif "," in s:
+        head, tail = s.split(",")
+        s = head + tail if (len(tail) == 3 and head not in ("", "0")) else head + "." + tail
+    try:
+        val = float(s)
+    except ValueError:
+        return None
+    if not math.isfinite(val):
+        return None
+    return -val if negative else val
+
+
 def safe_slug(value: str, fallback: str = "unnamed-project", max_len: int = 48) -> str:
     """Path traversal (`../`) va bo'sh slug'lardan 100% himoyalangan identifikator."""
     raw = SAFE_SLUG_RE.sub("-", str(value or "").lower()).strip("-")[:max_len].strip("-")
@@ -172,7 +287,7 @@ def http_get_json_with_backoff(
     400/401/403/404 va noto'g'ri JSON xatolarida qayta urinmaydi. Maxfiy tokenlarni hech qachon oshkor qilmaydi.
     """
     clean_url = sanitize_url(url)
-    req_headers = {"Accept": "application/json", "User-Agent": "Tyrion-OS/5.0"}
+    req_headers = {"Accept": "application/json", "User-Agent": "Tyrion-OS/7.0.1"}
     if headers:
         req_headers.update(headers)
 

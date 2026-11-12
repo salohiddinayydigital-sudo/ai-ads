@@ -3,6 +3,7 @@ name: sub-agentlar
 description: Sub-agentlar infratuzilmasi — .claude/agents/ kichik ixtisoslashgan agentlar (researcher, code-reviewer andozalari)
 tags: [token, kontekst, infratuzilma, agentlar]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Sub-agentlar infratuzilmasi)
+source_status: unverified
 updated: 2026-09-05
 ---
 

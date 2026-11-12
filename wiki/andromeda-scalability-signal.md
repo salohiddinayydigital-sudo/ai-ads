@@ -2,7 +2,8 @@
 name: andromeda-scalability-signal
 description: "Andromeda algoritm reklamani ikki signal bo'yicha baholaydi — efficiency (ROAS/CPA) va scalability; scaling devori ikkinchi signal bilan bog'liq"
 tags: [meta-ads, algoritm, scaling]
-source: "vedio bilimlar/youtubedagilar/Do THIS and the Meta Andromeda Algorithm Will LOVE You!.md (https://www.youtube.com/watch?v=f1PGNuLWQHE)"
+source: "YouTube: Do THIS and the Meta Andromeda Algorithm Will LOVE You! (https://www.youtube.com/watch?v=f1PGNuLWQHE)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

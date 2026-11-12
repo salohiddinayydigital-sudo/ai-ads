@@ -2,6 +2,7 @@
 name: meta-playbook-uz
 description: Meta Ads (Facebook/Instagram) $1,000+ loyihalar uchun ish yuritish playbook — tuzilma, learning phase, byudjet, diagnostika, kill/keep/scale
 source: amaliyot (tyrion vault bilimlari asosida)
+source_status: unverified
 tags: [local, meta-ads, playbook, byudjet]
 updated: 2026-09-03
 ---

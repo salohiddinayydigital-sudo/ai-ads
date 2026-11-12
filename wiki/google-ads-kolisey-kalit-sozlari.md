@@ -2,7 +2,8 @@
 name: google-ads-kolisey-kalit-sozlari
 description: "Coliseum keywords — 80/20 fractal qoidasi: 4% kalit so'z 64% natija beradi; transactional intent, 80-85% impression share va 80/20 budget taqsimoti"
 tags: [meta-ads, google-ads]
-source: "vedio bilimlar/youtubedagilar/Learn 97% of Google Ads in 24 Minutes.md (https://www.youtube.com/watch?v=7xtRHa7b96w)"
+source: "YouTube: Learn 97% of Google Ads in 24 Minutes (https://www.youtube.com/watch?v=7xtRHa7b96w)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

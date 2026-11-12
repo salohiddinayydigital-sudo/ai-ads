@@ -3,6 +3,7 @@ name: sop-narxlash-paket-qurish
 description: "SOP: narxlash va paketlarni qurish — uch chegara (tannarx/qiymat/maydon), model tanlash, 3 paket + langar tartibi, risk yechimi"
 tags: [sop, narx, offer, paket]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/PLAYBOOKS.md (PB-5)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

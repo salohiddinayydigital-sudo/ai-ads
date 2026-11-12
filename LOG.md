@@ -1,5 +1,6 @@
 # LOG — O'zgarishlar tarixi
 
+| 2026-11-12 | **Mustahkamlash (v7.0.0, yangi funksiyasiz):** eksport analizatori sarlavha/ajratgich/son parseri, yagona son validatsiyasi va chiqish kodi siyosati, `.mcp.json` CLAUDE_PLUGIN_ROOT'siz, router out_of_scope/needs_clarification, `ads-yandex`, sir-fayl guard, VERSION yagona manba, wiki `source_status` (5 verified · 23 url_cited · 72 unverified) | OK |
 | 2026-10-29 | Tyrion v7.0.0 Release: `/ad-creative` Video Ad Studio, Andromeda Entity-ID/PDA Engine, Meta 2026 5-System Stack (GEM/Lattice/UTIS/Value Rules) & Practitioner Targetology | OK |
 | 2026-10-22 | Detailed Targeting Engine v6.1 Upgrade (Relevance Ranking + Business-Context Queries + 8-Part Targetologist Report) | OK |
 | Sana | Nima qilindi | Natija |

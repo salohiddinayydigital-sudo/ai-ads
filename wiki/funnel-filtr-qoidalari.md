@@ -2,7 +2,8 @@
 name: funnel-filtr-qoidalari
 description: "Sovuq traffic'da funnel leadni filtrlaydi: yaxshi filter qimmatroq lekin sifatli lead beradi; friction lead hajmi va sifatiga qarab sozlanadi"
 tags: [meta-ads, funnel, asoslar]
-source: "vedio bilimlar/youtubedagilar/Learn Paid Ads in 30 Minutes!.md (https://www.youtube.com/watch?v=fSbqaTlWaYI)"
+source: "YouTube: Learn Paid Ads in 30 Minutes! (https://www.youtube.com/watch?v=fSbqaTlWaYI)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

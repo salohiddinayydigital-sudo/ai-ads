@@ -2,6 +2,7 @@
 name: kontent-formulalari
 description: Hooklar, Reels formatlari, kontent rubrikalari — kontent yaratish formulalari
 source: kanal-bilim/01, 03, 04 (PDF konvert)
+source_status: unverified
 tags: [kontent, hook, reels, shablon]
 updated: 2026-09-03
 ---

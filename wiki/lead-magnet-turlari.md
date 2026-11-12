@@ -2,7 +2,8 @@
 name: lead-magnet-turlari
 description: "Lead magnet — tor muammoni hal qiluvchi mini offer; 3 turi: reveal a problem, free trial, one step of many"
 tags: [meta-ads, leadgen, funnel]
-source: "vedio bilimlar/youtubedagilar/Watch This To Generate 1000s of Leads (In Any Niche).md (https://www.youtube.com/watch?v=Mst4hreQYl0)"
+source: "YouTube: Watch This To Generate 1000s of Leads (In Any Niche) (https://www.youtube.com/watch?v=Mst4hreQYl0)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

@@ -2,7 +2,8 @@
 name: ajralib-turish-kobalt-ferrari
 description: "Kobalt bolib qolmaslik: bloggerlar top 5 foizi bozor ulushining 95 foizini oladi; xarizma va storytelling orqali esda qolish"
 tags: [meta-ads, positioning, shaxsiy-brend]
-source: "vedio bilimlar/youtubedagilar/Qolganlardan ajralib turish uchun nima qilish kerak.md (https://www.youtube.com/watch?v=FrAcuf7-RvE)"
+source: "YouTube: Qolganlardan ajralib turish uchun nima qilish kerak (https://www.youtube.com/watch?v=FrAcuf7-RvE)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

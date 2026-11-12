@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion Meta Ads Audience Engine v5.0 — Andromeda 2, O'zbekiston bozori va Detailed Targeting Accuracy integratsiyasi (0 token).
+"""Tyrion Meta Ads Audience Engine — Andromeda 2, O'zbekiston bozori va Detailed Targeting Accuracy integratsiyasi (0 token).
 
 Asosiy modullar:
   1. architect          : Unit-ekonomikaga tayangan 4-qatlamli auditoriya rejasi + Exclusion matritsasi
@@ -28,6 +28,7 @@ _TOOLS_DIR = Path(__file__).resolve().parent
 if str(_TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(_TOOLS_DIR))
 import market_locale as mloc  # noqa: E402
+import tyrion_core as tcore  # noqa: E402
 
 TOOLS = Path(__file__).resolve().parent
 if str(TOOLS) not in sys.path:
@@ -1261,21 +1262,21 @@ def build_launch_blueprint(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="meta-audience.py",
-        description="Tyrion v5.0 Meta Ads Audience & Detailed Targeting Accuracy Engine",
+        description="Tyrion v7.0 Meta Ads Audience & Detailed Targeting Accuracy Engine",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_arch = sub.add_parser("architect", help="4-qatlamli Meta Ads auditoriya arxitekturasi va Exclusion matritsasi")
     p_arch.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
-    p_arch.add_argument("--daily-budget", type=float, required=True)
+    p_arch.add_argument("--daily-budget", type=tcore.positive_float, required=True)
     p_arch.add_argument("--geo", default="global", help="Any ISO 3166 country/region/city (e.g. DE, US, GB, UZ, Berlin, Tashkent)")
     p_arch.add_argument("--currency", default="USD", help="ISO 4217 currency code (USD, EUR, GBP, JPY, UZS, etc.)")
     p_arch.add_argument("--market", default="", help="Market pack override")
-    p_arch.add_argument("--target-cpa", type=float, default=None, help="Foydalanuvchi maqsad qilgan CPA (goal)")
-    p_arch.add_argument("--measured-cpa", type=float, default=None, help="Akkauntda haqiqatda o'lchangan tarixiy CPA")
-    p_arch.add_argument("--aov", type=float, default=None, help="O'rtacha chek (>0) — unit-ekonomikadan CPA chiqarish uchun")
-    p_arch.add_argument("--margin-pct", type=float, default=None, help="Yalpi marja foizi (0 < margin <= 100)")
-    p_arch.add_argument("--lead-to-sale-cvr", type=float, default=None, help="Liddan sotuvga o'tish konversiyasi (0 < cvr <= 100)")
+    p_arch.add_argument("--target-cpa", type=tcore.positive_float, default=None, help="Foydalanuvchi maqsad qilgan CPA (goal)")
+    p_arch.add_argument("--measured-cpa", type=tcore.positive_float, default=None, help="Akkauntda haqiqatda o'lchangan tarixiy CPA")
+    p_arch.add_argument("--aov", type=tcore.positive_float, default=None, help="O'rtacha chek (>0) — unit-ekonomikadan CPA chiqarish uchun")
+    p_arch.add_argument("--margin-pct", type=tcore.non_negative_float, default=None, help="Yalpi marja foizi (0 < margin <= 100)")
+    p_arch.add_argument("--lead-to-sale-cvr", type=tcore.finite_float, default=None, help="Liddan sotuvga o'tish konversiyasi (0 < cvr <= 100)")
     p_arch.add_argument("--has-pixel", action="store_true")
     p_arch.add_argument("--has-crm", action="store_true")
     p_arch.add_argument("--ig-followers", type=int, default=5000)
@@ -1304,7 +1305,7 @@ def main(argv: list[str] | None = None) -> int:
     p_dt.add_argument("--language", default="auto", help="Any BCP 47 language code (en, de, fr, es, ar, uz-Latn, ru, auto)")
     p_dt.add_argument("--query", action="append", default=[])
     p_dt.add_argument("--max-queries", type=int, default=12)
-    p_dt.add_argument("--min-relevance", type=float, default=35.0)
+    p_dt.add_argument("--min-relevance", type=tcore.finite_float, default=35.0)
     p_dt.add_argument("--locale", default="en_US")
     p_dt.add_argument("--account-id", "--ad-account-id", dest="account_id", default="")
     p_dt.add_argument("--special-ad-category", default="NONE")
@@ -1320,15 +1321,15 @@ def main(argv: list[str] | None = None) -> int:
 
     p_sat = sub.add_parser("saturation", help="Auditoriya sig'imi, Frequency va ssenariy sezgirlik oralig'ini hisoblash")
     p_sat.add_argument("--audience-size", type=int, required=True)
-    p_sat.add_argument("--daily-budget", type=float, required=True)
-    p_sat.add_argument("--cpm", type=float, default=3.2)
+    p_sat.add_argument("--daily-budget", type=tcore.positive_float, required=True)
+    p_sat.add_argument("--cpm", type=tcore.positive_float, default=3.2)
     p_sat.add_argument("--days", type=int, default=14)
-    p_sat.add_argument("--active-reach-ratio", type=float, default=0.60, help="Auditoriyaning faol yetib boriladigan ulushi (0.05..1.0)")
-    p_sat.add_argument("--measured-freq-7d", type=float, default=None, help="Haqiqiy akkauntdan olingan 7 kunlik Frequency")
+    p_sat.add_argument("--active-reach-ratio", type=tcore.finite_float, default=0.60, help="Auditoriyaning faol yetib boriladigan ulushi (0.05..1.0)")
+    p_sat.add_argument("--measured-freq-7d", type=tcore.finite_float, default=None, help="Haqiqiy akkauntdan olingan 7 kunlik Frequency")
     p_sat.add_argument("--json", action="store_true")
 
     p_ret = sub.add_parser("retargeting", help="Dinamik Retargeting oynalari (3d/7d/14d/30d/180d) va byudjet hisobi")
-    p_ret.add_argument("--aov", type=float, default=100.0)
+    p_ret.add_argument("--aov", type=tcore.positive_float, default=100.0)
     p_ret.add_argument("--daily-visitors", type=int, default=300)
     p_ret.add_argument("--ig-engagers", type=int, default=5000)
     p_ret.add_argument("--video-viewers", type=int, default=8000)
@@ -1358,22 +1359,22 @@ def main(argv: list[str] | None = None) -> int:
     p_lal.add_argument("--json", action="store_true")
 
     p_diag = sub.add_parser("diagnose", help="Meta Ads metrikalar zanjiridan (CPM->CTR->CVR->Sale) tor joyni topish")
-    p_diag.add_argument("--cpm", type=float, required=True)
-    p_diag.add_argument("--ctr", type=float, required=True)
-    p_diag.add_argument("--cpc", type=float, default=0.35)
-    p_diag.add_argument("--lp-cvr", type=float, required=True)
-    p_diag.add_argument("--lead-to-sale", type=float, default=10.0)
-    p_diag.add_argument("--frequency", type=float, default=1.6)
-    p_diag.add_argument("--ftir", type=float, default=72.0)
+    p_diag.add_argument("--cpm", type=tcore.positive_float, required=True)
+    p_diag.add_argument("--ctr", type=tcore.finite_float, required=True)
+    p_diag.add_argument("--cpc", type=tcore.positive_float, default=0.35)
+    p_diag.add_argument("--lp-cvr", type=tcore.finite_float, required=True)
+    p_diag.add_argument("--lead-to-sale", type=tcore.finite_float, default=10.0)
+    p_diag.add_argument("--frequency", type=tcore.finite_float, default=1.6)
+    p_diag.add_argument("--ftir", type=tcore.finite_float, default=72.0)
     p_diag.add_argument("--json", action="store_true")
 
     p_bp = sub.add_parser("launch-blueprint", help="10-bandlik tayyor Result-Maximizer Launch Blueprint (Targeting + Video Script + Ad Copy + Lead Quality Gate + 7-Day Protocol)")
     p_bp.add_argument("--product", required=True, help="Mahsulot yoki xizmat nomi")
     p_bp.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
-    p_bp.add_argument("--daily-budget", type=float, default=50.0)
-    p_bp.add_argument("--aov", type=float, default=100.0)
-    p_bp.add_argument("--margin-pct", type=float, default=40.0)
-    p_bp.add_argument("--lead-to-sale-cvr", type=float, default=15.0)
+    p_bp.add_argument("--daily-budget", type=tcore.positive_float, default=50.0)
+    p_bp.add_argument("--aov", type=tcore.positive_float, default=100.0)
+    p_bp.add_argument("--margin-pct", type=tcore.non_negative_float, default=40.0)
+    p_bp.add_argument("--lead-to-sale-cvr", type=tcore.finite_float, default=15.0)
     p_bp.add_argument("--country", default="UZ")
     p_bp.add_argument("--language", default="uz")
     p_bp.add_argument("--currency", default="USD")
@@ -1387,7 +1388,7 @@ def main(argv: list[str] | None = None) -> int:
     p_mi.add_argument("--product", required=True, help="Mahsulot yoki xizmat nomi")
     p_mi.add_argument("--niche", choices=list(NICHE_TAXONOMY.keys()), default="ecom")
     p_mi.add_argument("--competitor", action="append", default=[], help="Raqobatchi nomi (bir nechta berish mumkin)")
-    p_mi.add_argument("--price", type=float, default=100.0, help="Mahsulot narxi / o'rtacha chek")
+    p_mi.add_argument("--price", type=tcore.positive_float, default=100.0, help="Mahsulot narxi / o'rtacha chek")
     p_mi.add_argument("--country", default="UZ")
     p_mi.add_argument("--language", default="uz_latin")
     p_mi.add_argument("--currency", default="USD")
@@ -1502,7 +1503,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 66)
-    print(f"  🎯 TYRION v5.0 META AUDIENCE ENGINE — {args.command.upper()}")
+    print(f"  🎯 TYRION v7.0 META AUDIENCE ENGINE — {args.command.upper()}")
     print("=" * 66)
     for k, v in res.items():
         if isinstance(v, list):

@@ -3,6 +3,7 @@ name: sop-matn-auditi
 description: "SOP: mavjud matnni konversiya uchun qayta yozish — diagnostika jadvali, P0/P1/P2 ustuvorlik, oldin→keyin formati"
 tags: [sop, matn, audit, kopirayter]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/PLAYBOOKS.md (PB-2)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

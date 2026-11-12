@@ -3,6 +3,7 @@ name: ad-iteration
 description: Ad iteration — o'z g'olib mezonlari (ROAS>2x, spend>$5k/30kun), g'olibdan 2-3 variatsiya, AI prompt formulasi
 tags: [meta-ads, kreativ, iteration, prompt]
 source: raw/2026-09-03-meta-ads-library-workflow.md ([M] Ad Trends & Iteration + [K] prompt shabloni)
+source_status: unverified
 updated: 2026-09-03
 ---
 

@@ -2,7 +2,7 @@
 name: context-scale-mode
 description: "Katta byudjet va scaling rejimi — 20% qoida, gorizontal klonlash, auditoriya to'yinishi va overlap himoyasi"
 tags: [context, scale, budget, roas]
-source: "Tyrion v5.0 ECC Contexts"
+source: "Tyrion ECC Contexts"
 updated: 2026-10-17
 ---
 

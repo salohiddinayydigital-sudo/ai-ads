@@ -3,6 +3,7 @@ name: mijoz-ishga-tushirish
 description: Mijoz kuni SOP — preflight, onboarding, offer, kampaniya, voronka, lead ishlov, hisobot (repo oqimi bilan)
 tags: [sop, mijoz, meta-ads, checklist]
 source: wiki qoidalar yig'indisi (meta mashinasi + repo memory.md §4) + mijoz shabloni
+source_status: unverified
 updated: 2026-09-03
 ---
 

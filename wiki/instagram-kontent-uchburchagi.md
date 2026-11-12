@@ -2,7 +2,8 @@
 name: instagram-kontent-uchburchagi
 description: "Instagram blog platosi va auditoriya zerikishi: kontent uchburchagi (20% shaxsiy, 70% mutaxassislik, 10% sotuv) bilan etibor va o'sishni saqlash"
 tags: [meta-ads, instagram]
-source: "vedio bilimlar/youtubedagilar/Instagramda avvalgidek natija bo'lmayaptimi (buni sababi ...).md (https://www.youtube.com/watch?v=ffsww1cHKVs)"
+source: "YouTube: Instagramda avvalgidek natija bo'lmayaptimi (buni sababi ...) (https://www.youtube.com/watch?v=ffsww1cHKVs)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

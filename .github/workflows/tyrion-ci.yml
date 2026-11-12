@@ -1,10 +1,10 @@
 name: Tyrion v7.0 Global CI & Security Gate
 
+# Barcha branchlarda ishlaydi (claude/**, fix/**, feat/** ... hech biri chetda qolmaydi) va har bir PR da.
 on:
   push:
-    branches: [ main, master, "feat/**", "sync/**" ]
+    branches: ['**']
   pull_request:
-    branches: [ main, master ]
   workflow_dispatch:
 
 permissions:
@@ -53,11 +53,42 @@ jobs:
       - name: TyrionShield Static Security Audit
         run: python tools/tyrion-shield.py scan
 
-      - name: Behavioral Eval Suite (24/24 Scenarios)
+      - name: Behavioral Eval Suite (all scenarios must pass)
         run: python tools/skill-eval.py
 
-      - name: Full Unit Test Suite (196 Tests including External-CWD Hook & MCP Verification)
+      - name: Full Unit Test Suite (unittest discover, incl. real MCP stdio handshake)
         run: python -m unittest discover -s tests -t . -v
 
       - name: Doctor System Health Check
         run: python tools/doctor.py --quick
+
+  coverage:
+    name: Coverage gate (stdlib line coverage, minimum 70%)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (MCP handshake test needs node)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PyYAML
+        run: python -m pip install --upgrade pip pyyaml
+
+      - name: Measure coverage of tools/ and hooks/ and enforce the minimum
+        run: python tests/coverage_gate.py --min 70 --json coverage-report.json
+
+      - name: Upload per-file coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage-report.json
+

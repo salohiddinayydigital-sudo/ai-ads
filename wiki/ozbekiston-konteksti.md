@@ -2,6 +2,7 @@
 name: ozbekiston-konteksti
 description: O'zbekiston bozori konteksti — kanallar, til strategiyasi, ishonch, to'lov, mavsumiylik (reklama uchun moslashtirilgan)
 source: "claudes/Agents/_shared/ozbekiston-konteksti.md (moslashtirildi)"
+source_status: unverified
 tags: [local, bozor, auditoriya]
 updated: 2026-09-03
 ---

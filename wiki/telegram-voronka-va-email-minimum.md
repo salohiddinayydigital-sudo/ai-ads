@@ -3,6 +3,7 @@ name: telegram-voronka-va-email-minimum
 description: "Mahalliy Telegram voronkasi strukturasi va email uchun texnik minimum (SPF/DKIM/DMARC, TLS, PTR, spam chegaralari, one-click unsubscribe)"
 tags: [voronka, telegram, email, ozbekiston, texnik]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md (§8)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

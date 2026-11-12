@@ -2,7 +2,8 @@
 name: google-ads-search-kampaniya-qollanma
 description: "Google Ads Search kampaniyasini noldan to'g'ri qurish: tuzilma, majburiy sozlamalar (networks/AI Max off, Presence), phrase match, 3 ta conversion action va negative keywords"
 tags: [meta-ads, google-ads]
-source: "vedio bilimlar/youtubedagilar/Google Ads Tutorial 2026 - How To Run Google Ads for Beginners.md (https://www.youtube.com/watch?v=QufRFAXJlOI)"
+source: "YouTube: Google Ads Tutorial 2026 - How To Run Google Ads for Beginners (https://www.youtube.com/watch?v=QufRFAXJlOI)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

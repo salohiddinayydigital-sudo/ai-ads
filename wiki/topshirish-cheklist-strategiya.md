@@ -3,6 +3,7 @@ name: topshirish-cheklist-strategiya
 description: "Strategiya ishi topshirishdan oldingi tekshiruv (A-H bo'limlar) — iqtisod, pozitsiyalash, voronka, reklama rejasi, diagnostika, narxlash, mahalliy kontekst"
 tags: [checklist, strategiya, topshirish, sifat]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/CHECKLIST.md"
+source_status: unverified
 updated: 2026-09-20
 ---
 

@@ -3,6 +3,7 @@ name: sop-kampaniya-rejalash
 description: "SOP: reklama kampaniyasini noldan rejalashtirish — iqtisodni oldin tekshirish, platforma tanlash, konversiya hodisasi, test va to'xtatish qoidalari"
 tags: [sop, kampaniya, meta-ads, google-ads]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/PLAYBOOKS.md (PB-3)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

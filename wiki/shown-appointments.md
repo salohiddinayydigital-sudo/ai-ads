@@ -3,6 +3,7 @@ name: shown-appointments
 description: Pay-per-result modeli — mahalliy pudratchilarga shown appointments sotish (Owen Rensland metodining 1-bo'limi)
 tags: [meta-ads, biznes-model, nisha]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Meta Ads mashinasi — 1)
+source_status: unverified
 updated: 2026-09-03
 ---
 
