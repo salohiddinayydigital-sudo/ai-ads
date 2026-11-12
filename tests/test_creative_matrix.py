@@ -12,6 +12,8 @@ from pathlib import Path
 
 from tests._helpers import TOOLS, VAULT
 
+import catalog  # noqa: E402
+
 
 
 class TyrionV7CreativeAndMetaStackTests(unittest.TestCase):
@@ -212,8 +214,8 @@ class CreativeMatrixAndWorkspaceTests(unittest.TestCase):
             capture_output=True, text=True, encoding="utf-8", errors="replace",
         )
         self.assertEqual(proc.returncode, 0)
-        self.assertIn("TYRION v7.0.0", proc.stdout)
-        self.assertIn("Single-Root ECC v7.0.0", proc.stdout)
+        self.assertIn(f"TYRION v{catalog.read_version()}", proc.stdout)
+        self.assertIn(f"Single-Root ECC v{catalog.read_version()}", proc.stdout)
 
 
 if __name__ == "__main__":

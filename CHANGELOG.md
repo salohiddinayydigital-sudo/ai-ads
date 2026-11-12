@@ -2,7 +2,7 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
-## [Unreleased] — Hardening (no new features)
+## [7.0.1] — 2026-11-12 (Hardening, no new features)
 
 ### Fixed
 - **`ad-export-analyzer.py`:** header normalisation (case, whitespace, currency suffix; Meta/Google/Telegram/Russian headers), delimiter/BOM/locale-number detection (`1,234.50`, `1 234,50`), explicit errors (exit 2) for missing spend column / empty file, `unmapped_columns` in the result.

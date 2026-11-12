@@ -4,7 +4,7 @@
 
 # 🧠 TYRION v7.0 — AI PAID MEDIA & TARGETOLOGY OPERATING SYSTEM
 
-[![Version](https://img.shields.io/badge/version-7.0.0--ecc-7C3AED.svg)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-7.0.1--ecc-7C3AED.svg)](./CHANGELOG.md)
 [![Architecture](https://img.shields.io/badge/architecture-Single--Root%20ECC-blue.svg)](./AGENTS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Security: TyrionShield](https://img.shields.io/badge/TyrionShield-6%2F6%20Passing-brightgreen.svg)](./SECURITY.md)

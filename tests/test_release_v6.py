@@ -88,7 +88,7 @@ class TyrionV6GlobalReleaseTests(unittest.TestCase):
             )
             self.assertEqual(p_mcp.returncode, 0, p_mcp.stderr)
             resp = json.loads(p_mcp.stdout.strip().splitlines()[0])
-            self.assertEqual(resp["result"]["serverInfo"]["version"], "7.0.0")
+            self.assertEqual(resp["result"]["serverInfo"]["version"], catalog.read_version())
 
     def test_v6_03_hook_fail_open_when_script_missing_unless_strict(self) -> None:
         with tempfile.TemporaryDirectory() as fake_root:

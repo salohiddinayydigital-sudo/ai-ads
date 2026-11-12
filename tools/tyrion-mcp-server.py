@@ -434,7 +434,7 @@ def process_raw_line(raw_line: str) -> dict[str, Any] | None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v7.0.0 Native STDIO MCP Server")
+    parser = argparse.ArgumentParser(prog="tyrion-mcp-server.py", description="Tyrion v7.0.1 Native STDIO MCP Server")
     parser.add_argument("--list-tools", action="store_true", help="Mavjud MCP tool'lar ro'yxatini JSON formatda chiqarish")
     args = parser.parse_args(argv)
     if args.list_tools:
