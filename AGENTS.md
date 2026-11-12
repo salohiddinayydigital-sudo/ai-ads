@@ -10,7 +10,7 @@ updated: 2026-10-20
 
 > **Bir qator:** Tyrion v7.0 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 36 ixtisoslashgan agent, 64 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 18 slash buyruq va 29 ta 0-token deterministik Python asbobi.
 
-<!-- tyrion:catalog agents=36 skills=64 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=36 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 
 ## 1. Boot Tartibi (Token Tejamkor)
 
@@ -24,7 +24,7 @@ updated: 2026-10-20
 | Qatlam | Kanonik Manzil | Nima saqlanadi | Holat |
 |---|---|---|---|
 | **Agentlar** | `agents/` (36) | 36 ta ixtisoslashgan agent charteri (`Prompt Defense Baseline` + `skills:` ulangan) | kanonik |
-| **Skilllar** | `skills/` (64) | 37 platforma (`ads-*`, `ads/` + 39 `references/`) va 27 operator/marketing skill | kanonik |
+| **Skilllar** | `skills/` (65) | 38 platforma (`ads-*`, `ads/` + 39 `references/`) va 27 operator/marketing skill | kanonik |
 | **Buyruqlar** | `commands/` (18) | 18 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
 | **Kontekstlar** | `contexts/` (6) | 5 ta ECC Dynamic Context Mode (`audit`, `launch`, `scale`, `creative`, `uzbekistan`) + `README.md` | kanonik |
 | **Playbooklar** | `playbooks/` (9) | 8 ta to'liq nisha va platforma playbooki + `README.md` | kanonik |

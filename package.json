@@ -1,7 +1,7 @@
 {
   "name": "tyrion-ai",
   "version": "7.0.1",
-  "description": "Tyrion v7.0 — The calibrated advertising & marketing operating system for AI coding agents (36 agents, 64 skills, 100 wiki notes, 27 commands, 29 tools)",
+  "description": "Tyrion v7.0 — The calibrated advertising & marketing operating system for AI coding agents (36 agents, 65 skills, 100 wiki notes, 27 commands, 29 tools)",
   "main": "plugin.json",
   "scripts": {
     "status": "python3 tools/tyrion.py status",
