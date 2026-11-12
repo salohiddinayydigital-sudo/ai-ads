@@ -1,0 +1,57 @@
+name: Release (tag + GitHub release)
+
+# Qo'lda ishga tushadi: `tag` (masalan v7.1.0) VERSION fayliga mos bo'lishi shart.
+# Teg va release shu workflow ichida GITHUB_TOKEN bilan yaratiladi; boshqa hech narsa o'zgarmaydi.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag, e.g. v7.1.0 (must equal v + VERSION)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create tag and release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify tag matches VERSION
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          expected="v$(tr -d '[:space:]' < VERSION)"
+          if [ "$TAG" != "$expected" ]; then
+            echo "Tag $TAG does not match VERSION ($expected)"; exit 1
+          fi
+
+      - name: Extract release notes from CHANGELOG.md
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          prev="$(git describe --tags --abbrev=0 2>/dev/null || true)"
+          PREV="${prev#v}" python3 - <<'PY'
+          import os, re
+          ver = os.environ["TAG"].lstrip("v")
+          prev = os.environ.get("PREV", "")
+          text = open("CHANGELOG.md", encoding="utf-8").read()
+          # Joriy versiya bo'limidan oldingi teglangan versiya bo'limigacha (teglanmay qolgan oraliq versiyalar ham kiradi)
+          stop = r"^## \[" + re.escape(prev) + r"\]" if prev else r"\Z"
+          m = re.search(r"^## \[" + re.escape(ver) + r"\].*?(?=" + stop + r"|\Z)", text, re.S | re.M)
+          notes = m.group(0).strip() if m else f"Release {ver}"
+          open("release-notes.md", "w", encoding="utf-8").write(notes + "\n")
+          PY
+
+      - name: Create tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "Tyrion ${TAG#v}" --notes-file release-notes.md
