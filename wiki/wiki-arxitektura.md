@@ -3,6 +3,7 @@ name: wiki-arxitektura
 description: Karpathy uslubi — nega RAG emas oddiy markdown + wikilinks; raw/wiki ikki papkali bilim arxitekturasi
 tags: [vault, karpathy, arxitektura, aios]
 source: "raw/2026-09-03-meta-qoidalar-va-protokol.md (§ 3-QISM: Obsidian va Karpathy LLM Wiki)"
+source_status: unverified
 updated: 2026-09-03
 ---
 

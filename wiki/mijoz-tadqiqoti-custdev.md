@@ -3,6 +3,7 @@ name: mijoz-tadqiqoti-custdev
 description: "CustDev — mijoz intervyusi: kim bilan, nechta, savol bloklari (xarid odati, tanlov sababi, ishonch, qiyinchilik), ballash va topilmalarni rejaга aylantirish"
 tags: [tadqiqot, mijoz, custdev, bozor]
 source: "claude-ads-main/local/raw/kanal-bilim/26_Custdev.txt (haqiqiy CustDev savolnomasi + natijalar) + sop-raqobat-tahlili"
+source_status: unverified
 updated: 2026-09-20
 ---
 

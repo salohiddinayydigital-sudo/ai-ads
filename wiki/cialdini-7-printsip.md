@@ -3,6 +3,7 @@ name: cialdini-7-printsip
 description: "Robert Cialdini'ning 7 ta ta'sir printsipi — mexanikasi, tajriba isboti va reklama matnida qo'llash"
 tags: [psixologiya, matn, sotuv, ta'sir]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md (§10) + kopirayter/KNOWLEDGE.md (§13)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

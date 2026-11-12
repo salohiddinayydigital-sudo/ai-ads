@@ -3,6 +3,7 @@ name: sop-raqobat-tahlili
 description: "SOP: raqobatchi tahlili va farqlanish — faqat ochiq manbalar, mijoz sharhlari eng qimmatli, bo'sh joyni topish, bitta farqlanish o'qi"
 tags: [sop, raqobat, tadqiqot, strategiya]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/PLAYBOOKS.md (PB-6)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

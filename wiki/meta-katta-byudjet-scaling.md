@@ -3,6 +3,7 @@ name: meta-katta-byudjet-scaling
 description: "Katta byudjetda Meta scaling intizomi — marginal matematika (marginal CPA/ROAS), 6 shartli scale darvozasi, vertikal/gorizontal qadamlar, pause intizomi va change packet"
 tags: [meta-ads, scaling, byudjet, qaror]
 source: "wiki/meta-playbook-uz.md + ads/references/budget-allocation.md (2026-07-11) + marketolog/KNOWLEDGE.md §6"
+source_status: unverified
 updated: 2026-09-20
 ---
 

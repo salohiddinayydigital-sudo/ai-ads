@@ -3,6 +3,7 @@ name: etiroz-javob-patternlari
 description: "6 ta asosiy e'tiroz ('qimmat', 'vaqtim yo'q', 'ishonmayman', 'to'g'ri kelmaydi', 'keyinroq', 'nega siz?') va har biriga matnli javob patternlari"
 tags: [matn, sotuv, etiroz, kopirayter]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/KNOWLEDGE.md (§7 E'tirozlar)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

@@ -2,7 +2,7 @@
 name: playbook-nisha-kochmas-mulk
 description: "Ko'chmas mulk (Novostroyka, xonadon va tijorat binolari) uchun yuqori sifatli lid generatsiya playbooki"
 tags: [playbook, real-estate, novostroyka, high-ticket]
-source: "Tyrion v5.0 Niche Playbooks"
+source: "Tyrion Niche Playbooks"
 updated: 2026-10-17
 ---
 

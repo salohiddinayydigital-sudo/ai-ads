@@ -2,6 +2,7 @@
 name: optimitzaetsiya-va-case
 description: Real tajriba cases — CPL 2x arzon, tezkor loyiha SOP, yuqori chek mijozlar, budget qoidalari, bloggerlar ro'yxati
 source: kanal-bilim/08, 11, 13, 14, 19, 21 (TXT konvert)
+source_status: unverified
 tags: [case, cpl, budget, influencer, tajriba]
 updated: 2026-09-03
 ---

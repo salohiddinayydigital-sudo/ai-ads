@@ -3,6 +3,7 @@ name: session-handoff
 description: Session Handoff — kontekst to'lganda 150 so'zlik xulosa + /clear + yangi sessiya (compact o'rniga)
 tags: [token, kontekst, protsedura]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Asosiy amaliy xaklar)
+source_status: unverified
 updated: 2026-09-05
 ---
 

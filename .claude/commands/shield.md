@@ -1,5 +1,5 @@
 ---
-description: TyrionShield xavfsizlik skaneri — sirlar (.env/tokenlar), hooklar, MCP, 36 agent va 62 skill himoyasini tekshirish
+description: TyrionShield xavfsizlik skaneri — sirlar (.env/tokenlar), hooklar, MCP, barcha agent va skill himoyasini tekshirish
 argument-hint: [scan | --json]
 ---
 

@@ -3,6 +3,7 @@ name: prompt-caching
 description: Prompt caching mexanizmi — 10x arzon cache read, TTL (1 soat / 5 daqiqa), cache breakers
 tags: [token, mexanizm, narx]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Prompt Caching)
+source_status: unverified
 updated: 2026-09-03
 ---
 

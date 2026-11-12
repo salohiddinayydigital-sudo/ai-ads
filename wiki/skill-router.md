@@ -3,6 +3,7 @@ name: skill-router
 description: "Skill router — agent ishni boshlashdan oldin 'skill talash so'rovi' chiqaradi va faqat o'ziga ulangan skill bo'yicha ishlaydi; ulanish frontmatter orqali, tekshiruv tools/skill-search.py bilan"
 tags: [skill, agent, router, protokol]
 source: "2026-09-21 Tyrion ishi (video-editor + 2 skill); tools/skill-search.py sinovlari"
+source_status: verified
 updated: 2026-09-21
 ---
 
@@ -92,7 +93,7 @@ faqat bittasiga xos so'z ("animatsion", "kinetik") ko'proq vazn beradi. Sabab: r
 - Misol: `agents/video-editor.md` → `.agents/skills/video-editing`, `.agents/skills/video-motion-graphics`
 
 
-## Universal Auto-Router v5.0 (To'liq Kontekst Yuklash va Amaliy Ijro)
+## Universal Auto-Router v7.0 (To'liq Kontekst Yuklash va Amaliy Ijro)
 
 - **6-Bosqichli Kanonik Oqim:** `python3 tools/skill-search.py execute "<vazifa>"` (yoki `route "<vazifa>" --load`) tabiiy tildagi so'rovdan `primary_agent`, `supporting_agents`, `required_skills` va `references_to_load` ni tanlaydi hamda ularning **to'liq matnini (`compiled_context_package`)** yuklaydi.
 - **Keshlash (`SessionContextCache`):** Odatiy holatda bitta Python/MCP jarayoni ichida xotirada (`in-memory`) ishlaydi; CLI chaqiruvlar oralig'ida saqlash uchun `--persist-session-cache` (`output/.cache/router_session_cache.json`) yoki `--session-cache-file` ishlatiladi va fayl SHA-256 o'zgarganda avtomatik yangilanadi ([[token-gigiyenasi]], [[bosh-agent-protokoli]]).

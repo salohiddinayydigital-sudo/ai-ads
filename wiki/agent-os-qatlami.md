@@ -3,6 +3,7 @@ name: agent-os-qatlami
 description: "Tyrion ildizidagi agent-OS qatlami (2026-09-16): AGENTS.md shartnomasi, rules/, commands/, hooks/, katalog, doctor, testlar — nima uchun qurildi va ECC'ning qaysi naqshlari olindi, qaysilari ataylab rad etildi"
 tags: [arxitektura, agent-os, sifat, tizim]
 source: "affaan-m/ECC (github, v2.2.1) tahlili — raw/2026-09-16-ecc-naqshlar-tahlili.md (2026-09-16)"
+source_status: unverified
 updated: 2026-09-16
 ---
 

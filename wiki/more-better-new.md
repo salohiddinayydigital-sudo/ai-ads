@@ -3,6 +3,7 @@ name: more-better-new
 description: "\"More, Better, New\" o'sish dastagi (Alex Hormozi) — qachon byudjet oshirish, kreativ yaxshilash yoki yangi nishaga o'tish"
 tags: [meta-ads, o'sish, qaror-qoidasi]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Meta Ads mashinasi — 2)
+source_status: unverified
 updated: 2026-09-05
 ---
 

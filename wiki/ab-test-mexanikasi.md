@@ -3,6 +3,7 @@ name: ab-test-mexanikasi
 description: "A/B test qachon statistik ma'noga ega — minimal namuna hajmi formulasi, kichik trafik alternativasi va testni buzadigan 5 xato"
 tags: [test, metrika, kreativ, statistika]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md (§9 A/B test)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

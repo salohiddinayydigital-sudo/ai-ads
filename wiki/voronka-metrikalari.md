@@ -3,6 +3,7 @@ name: voronka-metrikalari
 description: "Voronka bosqichlari va metrikalari — TOFU/MOFU/BOFU, AARRR (Pirate Metrics), diagnostika qoidasi va benchmarklarni ehtiyotkorlik bilan ishlatish"
 tags: [voronka, metrika, strategiya]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md (§5 Voronka)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

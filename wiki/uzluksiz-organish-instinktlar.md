@@ -3,6 +3,7 @@ name: uzluksiz-organish-instinktlar
 description: "ECC continuous-learning naqshi asosida Tyrion instinktlar tizimi — kampaniya saboqlarini yig'ish, ishonch balli (1-5) bilan baholash va wiki/memory qatlamiga ko'tarish"
 tags: [instinkt, organish, memory, ecc, tizim]
 source: "raw/2026-09-16-ecc-naqshlar-tahlili.md + affaan-m/ECC continuous-learning-v2 (2026-10-17)"
+source_status: unverified
 updated: 2026-10-17
 ---
 

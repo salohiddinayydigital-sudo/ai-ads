@@ -3,6 +3,7 @@ name: kontekst-xatolari
 description: AI noto'g'ri gapirishining 4 sababi — Poisoning, Bloat, Confusion, Clash (profilaktikasi bilan)
 tags: [audit, xatolik, kontekst, AIOS]
 source: raw/2026-09-03-aios-xatoliklar-va-audit.md (§ 4 sabab) + raw/2026-09-03-mybrain-vault-spec.md (§ 2.5)
+source_status: unverified
 updated: 2026-09-03
 ---
 

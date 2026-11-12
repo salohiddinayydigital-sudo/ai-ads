@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""TyrionShield v5.0 — Agent, Skill, Hook, MCP, AST va Sirlar Xavfsizlik Skaneri (0 token).
+"""TyrionShield v7.0 — Agent, Skill, Hook, MCP, AST va Sirlar Xavfsizlik Skaneri (0 token).
 
-ECC (affaan-m/ECC) AgentShield tizimi asosida Tyrion v5.0 uchun qurilgan.
+ECC (affaan-m/ECC) AgentShield tizimi asosida Tyrion v7.0 uchun qurilgan.
 6 ta statik xavfsizlik va sifat qatlamini deterministik tekshiradi (shu jumladan `tests/` papkasini ham!):
   1. secrets        : Butun ombor bo'ylab (tests/ bilan birga) .env, API kalitlar va Private Key sizishi
   2. hooks_mcp      : hooks.json, settings.json va .mcp.json da xavfli buyruqlar yoki qotirilgan yo'llar
   3. agents         : 36 agent charterida Prompt Defense Baseline / untrusted data chegarasi va skills: ulanishi
-  4. skills         : 62 skillda YAML control-char buzilishi, `|` block scalar xatosi va ikki tomonlama ulanish
+  4. skills         : barcha skillda YAML control-char buzilishi, `|` block scalar xatosi va ikki tomonlama ulanish
   5. mutation_gates : 40-xavfsizlik-va-hisob.md va spend-guard.py 6 ta himoya darvozasi butunligi
   6. code_hygiene   : tools/ va hooks/ dagi barcha Python fayllarda AST sintaksis va return/raise dan keyingi o'lik kod (dead code) tekshiruvi
 
@@ -63,7 +63,7 @@ SCOPE_AND_LIMITATIONS = {
         "Hardcoded API tokens, .env files, AWS keys, and private keys across all tracked files including tests/",
         "Hook and MCP configuration command-injection and portability hazards",
         "Prompt injection defense baseline and skill linkage across all 36 agent charters",
-        "YAML frontmatter integrity across all 62 skills",
+        "YAML frontmatter integrity across all skills",
         "Presence of Spend-Guard 6 financial mutation gates",
         "Python AST syntax and unreachable dead-code statements across tools/ and hooks/",
     ],
@@ -178,7 +178,7 @@ def scan_agents() -> tuple[str, str, list[str]]:
 
 
 def scan_skills() -> tuple[str, str, list[str]]:
-    """62 skillda frontmatter, literal block scalar (`|`) va ulanishni tekshiradi."""
+    """Barcha skillda frontmatter, literal block scalar (`|`) va ulanishni tekshiradi."""
     errors: list[str] = []
     warnings: list[str] = []
     roots = [VAULT / "skills"]
@@ -293,7 +293,7 @@ def run_all() -> dict:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tyrion-shield.py", description="TyrionShield v5.0 xavfsizlik va kod tozaligi skaneri")
+    parser = argparse.ArgumentParser(prog="tyrion-shield.py", description="TyrionShield v7.0 xavfsizlik va kod tozaligi skaneri")
     sub = parser.add_subparsers(dest="command")
     p_scan = sub.add_parser("scan", help="to'liq statik xavfsizlik tekshiruvi")
     p_scan.add_argument("--json", action="store_true")
@@ -307,7 +307,7 @@ def main(argv: list[str] | None = None) -> int:
 
     icon = {"ok": "✓", "warn": "⚠", "fail": "✗"}
     print("=" * 72)
-    print("  🛡️  TYRION SHIELD v5.0 — Statik Konfiguratsiya & Kod Gigiyenasi Auditi")
+    print("  🛡️  TYRION SHIELD — Statik Konfiguratsiya & Kod Gigiyenasi Auditi")
     print("=" * 72)
     for c in data["checks"]:
         print(f"  {icon[c['status']]} {c['check']:32} {c['detail']}")

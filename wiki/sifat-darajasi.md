@@ -3,6 +3,7 @@ name: sifat-darajasi
 description: "Topshirishdan oldingi chegara — 5-yillik mutaxassis sinovi, 8 ta qabul qilinmaydigan chiqish, yaxshi ishning 6 belgisi, hajm intizomi va universal 6 band checklist"
 tags: [sifat, metod, topshirish, dod]
 source: "claude-ads-main/local/raw/claudes-bilim/_shared/sifat-darajasi.md"
+source_status: unverified
 updated: 2026-09-20
 ---
 

@@ -3,6 +3,7 @@ name: meta-ads-library-tadqiqot
 description: Meta Ads Library competitive research — g'olib raqobatchi reklamani aniqlash (active ads, impressions, 30-60 kun) va watermarkni aylanib o'tish
 tags: [meta-ads, tadqiqot, kreativ, raqobatchi]
 source: raw/2026-09-03-meta-ads-library-workflow.md ([M] videodagi mohiyat)
+source_status: unverified
 updated: 2026-09-03
 ---
 

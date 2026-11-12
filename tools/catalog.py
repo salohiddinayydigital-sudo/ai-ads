@@ -152,6 +152,37 @@ HUMAN_CLAIMS: list[tuple[str, "re.Pattern[str]", str]] = [
      "tools"),
 ]
 
+# Plagin manifestlari, marketplace, package.json va ikki tilli README dagi e'lonlar (har uchrashuvi tekshiriladi;
+# fayl/naqsh bo'lmasa o'tkaziladi). Hosila kalitlar (`skills_platform` ...) scan() dan keladi.
+_CLAIM_FILES = ["plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "package.json",
+                "marketplace.json", ".claude-plugin/marketplace.json", "README.md", "README.uz.md"]
+_CLAIM_PHRASES = [
+    (r" (?:specialist |ixtisoslashgan |marketing )?agents?\b", "agents"),
+    (r" (?:platform & marketing |canonical paid-media & CRO )?skills\b", "skills"),
+    (r" wiki notes\b", "wiki"),
+    (r" (?:practical |amaliy )?playbooks?\b", "playbooks"),
+    (r" (?:slash )?commands\b", "commands"),
+    (r" (?:deterministic (?:0-token )?(?:Python )?)?CLI tools\b", "tools"),
+]
+OPTIONAL_CLAIMS: list[tuple[str, "re.Pattern[str]", str]] = [
+    (f, re.compile(r"()(\d+)(" + ph + ")"), key) for f in _CLAIM_FILES[:6] for ph, key in _CLAIM_PHRASES
+] + [
+    ("README.md", re.compile(r"(# )(\d+)( canonical paid-media & CRO skills)"), "skills"),
+    ("README.uz.md", re.compile(r"(\*\*)(\d+)( ta ixtisoslashgan agent\*\*)"), "agents"),
+    ("README.uz.md", re.compile(r"(\*\*)(\d+)( ta platforma va marketing skilli\*\*)"), "skills"),
+    ("README.uz.md", re.compile(r"(\*\*)(\d+)( ta slash buyruq\*\*)"), "commands"),
+    ("README.uz.md", re.compile(r"(\*\*)(\d+)( ta 0-token deterministik Python CLI asbob\*\*)"), "tools"),
+    ("README.uz.md", re.compile(r"(# )(\d+)( ta Kanonik Skill \()"), "skills"),
+    ("README.uz.md", re.compile(r"(Kanonik Skill \()(\d+)( platforma \+)"), "skills_platform"),
+    ("README.uz.md", re.compile(r"(platforma \+ )(\d+)( operator \+)"), "skills_operator"),
+    ("README.uz.md", re.compile(r"(operator \+ )(\d+)( reference fayl\))"), "skill_references"),
+    ("README.uz.md", re.compile(r"(# )(\d+)( ta Slash Buyruq)"), "commands"),
+    ("AGENTS.md", re.compile(r"(\| \*\*Skilllar\*\* \| `skills/` \()(\d+)(\) \| )"), "skills"),
+    ("AGENTS.md", re.compile(r"(\) \| )(\d+)( platforma \(`ads-\*`)"), "skills_platform"),
+    ("AGENTS.md", re.compile(r"(\+ )(\d+)( `references/`\) va )"), "skill_references"),
+    ("AGENTS.md", re.compile(r"(`references/`\) va )(\d+)( operator/marketing skill)"), "skills_operator"),
+]
+
 FRONTMATTER_RE = re.compile(r"\A---\r?\n(.*?)\r?\n---", re.DOTALL)
 # YAML'da `\` dan keyin faqat shu belgilar kelishi mumkin. Boshqasi — xato
 # (`\y` kabi), lekin PyYAML xatosini o'qish qiyin; o'zimiz aniqroq aytamiz.
@@ -268,6 +299,12 @@ def scan() -> dict:
         items[layer] = found
 
     counts = {layer: len(found) for layer, found in items.items()}
+    # Hosila sonlar (hujjatlardagi "37 platforma + 27 operator" kabi bo'linishlar qo'lda yozilmasin)
+    skill_names = [i["name"] for i in items.get("skills", [])]
+    counts["skills_platform"] = sum(1 for n in skill_names if n == "ads" or n.startswith("ads-"))
+    counts["skills_operator"] = len(skill_names) - counts["skills_platform"]
+    ref_dir = VAULT / "skills" / "ads" / "references"
+    counts["skill_references"] = len(list(ref_dir.glob("*.md"))) if ref_dir.is_dir() else 0
 
     return {
         "schema": SCHEMA,
@@ -281,26 +318,147 @@ def scan() -> dict:
     }
 
 
+# --------------------------------------------------------------------------- #
+# Versiya: yagona manba — ildizdagi `VERSION` fayli
+# --------------------------------------------------------------------------- #
+
+# (fayl, JSON yo'li) — hammasi VERSION ga teng bo'lishi shart
+VERSION_JSON_FIELDS: list[tuple[str, tuple]] = [
+    ("plugin.json", ("version",)),
+    (".claude-plugin/plugin.json", ("version",)),
+    (".codex-plugin/plugin.json", ("version",)),
+    ("package.json", ("version",)),
+    ("marketplace.json", ("metadata", "version")),
+    ("marketplace.json", ("plugins", 0, "version")),
+    (".claude-plugin/marketplace.json", ("metadata", "version")),
+    (".claude-plugin/marketplace.json", ("plugins", 0, "version")),
+]
+VERSION_EXEMPT_DIRS = {".git", "graphify-out", "archive", "tests", "__pycache__", "node_modules", ".pytest_cache"}
+VERSION_EXEMPT_FILES = {"CHANGELOG.md", "LOG.md", "catalog.json", "VERSION"}
+VERSION_TEXT_EXT = {".md", ".py", ".json", ".sh", ".ps1", ".html", ".svg", ".cjs", ".yml", ".yaml", ".txt", ".example", ".toml"}
+# (nom, 3 guruhli regex: prefiks, versiya, suffiks, "full" = 3 qismli versiya yozish)
+VERSION_TEXT_PATTERNS: list[tuple[str, "re.Pattern[str]", bool]] = [
+    ("product-name", re.compile(r"(?i)(\btyrion(?:shield)?[ ]v)(\d+\.\d+(?:\.\d+)?)()"), False),
+    ("user-agent", re.compile(r"(Tyrion-OS/)(\d+\.\d+(?:\.\d+)?)()"), True),
+    ("badge-url", re.compile(r"(badge/version-)(\d+\.\d+\.\d+)(--ecc)"), True),
+    ("badge-html", re.compile(r'(<span class="badge">v)(\d+\.\d+)( ECC Ultimate)'), False),
+    ("router-heading", re.compile(r"(?i)(universal auto-router v)(\d+\.\d+)()"), False),
+    ("banner", re.compile(r"(ECC v)(\d+\.\d+)( SINGLE-ROOT)"), False),
+    ("evals-schema", re.compile(r"(tyrion-evals/v)(\d+\.\d+)()"), False),
+    ("security-table", re.compile(r"(\| \*\*)(\d+\.\d+)(\.x\*\* \| Supported \(Current)"), False),
+]
+
+
+def read_version(root: Path | None = None) -> str:
+    return ((root or VAULT) / "VERSION").read_text(encoding="utf-8").strip()
+
+
+def _fmt_version(full: str, found: str, force_full: bool) -> str:
+    return full if (force_full or found.count(".") >= 2) else ".".join(full.split(".")[:2])
+
+
+def _json_get(data, path: tuple):
+    cur = data
+    for key in path:
+        cur = cur[key]
+    return cur
+
+
+def _iter_version_files(root: Path):
+    for p in sorted(root.rglob("*")):
+        if not p.is_file() or p.name in VERSION_EXEMPT_FILES:
+            continue
+        rel = p.relative_to(root)
+        if VERSION_EXEMPT_DIRS & set(rel.parts):
+            continue
+        if p.suffix.lower() in VERSION_TEXT_EXT or p.name == ".env.example":
+            yield p, rel.as_posix()
+
+
+def version_scan(root: Path | None = None) -> list[dict]:
+    """Eskirgan versiya satrlarini topadi (manifestlar + matn). Bo'sh ro'yxat = drift yo'q."""
+    root = root or VAULT
+    full = read_version(root)
+    found: list[dict] = []
+    for rel, path in VERSION_JSON_FIELDS:
+        f = root / rel
+        if not f.is_file():
+            continue
+        try:
+            cur = _json_get(json.loads(f.read_text(encoding="utf-8")), path)
+        except (ValueError, KeyError, IndexError, TypeError):
+            continue
+        if cur != full:
+            found.append({"file": rel, "line": 0, "kind": "json:" + ".".join(map(str, path)), "found": str(cur), "expected": full})
+    for p, rel in _iter_version_files(root):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        for name, pat, force_full in VERSION_TEXT_PATTERNS:
+            for m in pat.finditer(text):
+                want = _fmt_version(full, m.group(2), force_full)
+                if m.group(2) != want:
+                    line = text.count("\n", 0, m.start()) + 1
+                    found.append({"file": rel, "line": line, "kind": name, "found": m.group(2), "expected": want})
+    return found
+
+
+def version_sync(root: Path | None = None, dry_run: bool = False) -> list[str]:
+    """Versiya satrlarini VERSION ga moslaydi. Qaytaradi: o'zgarishlar tavsifi."""
+    root = root or VAULT
+    full = read_version(root)
+    changed: list[str] = []
+    for rel, path in VERSION_JSON_FIELDS:
+        f = root / rel
+        if not f.is_file():
+            continue
+        text = f.read_text(encoding="utf-8")
+        try:
+            cur = _json_get(json.loads(text), path)
+        except (ValueError, KeyError, IndexError, TypeError):
+            continue
+        if cur == full:
+            continue
+        new_text = re.sub(r'("version"\s*:\s*")' + re.escape(str(cur)) + '"', lambda m: m.group(1) + full + '"', text)
+        if not dry_run:
+            f.write_text(new_text, encoding="utf-8")
+        changed.append(f"{rel}: version {cur} → {full}")
+    for p, rel in _iter_version_files(root):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        new_text, n = text, 0
+        for _name, pat, force_full in VERSION_TEXT_PATTERNS:
+            def repl(m, force_full=force_full):
+                return m.group(1) + _fmt_version(full, m.group(2), force_full) + m.group(3)
+            new_text, k = pat.subn(repl, new_text)
+            n += k
+        if new_text != text:
+            if not dry_run:
+                p.write_text(new_text, encoding="utf-8")
+            changed.append(f"{rel}: versiya satrlari → {full}")
+    return changed
+
+
+def _all_claims() -> list[tuple[str, "re.Pattern[str]", str, bool]]:
+    """(fayl, regex, katalog kaliti, ixtiyoriy) — HUMAN_CLAIMS + manifest/tavsif qoplamasi."""
+    return [(r, p, k, False) for r, p, k in HUMAN_CLAIMS] + [(r, p, k, True) for r, p, k in OPTIONAL_CLAIMS]
+
+
 def human_claims(counts: dict) -> list[dict]:
-    """Hujjatlardagi oddiy matn raqamlari holati (mos / mos emas / topilmadi)."""
+    """Hujjatlardagi oddiy matn raqamlari holati (mos / mos emas / topilmadi). Bir naqshning barcha uchrashuvi tekshiriladi."""
     result: list[dict] = []
-    for rel, pattern, key in HUMAN_CLAIMS:
+    for rel, pattern, key, optional in _all_claims():
         path = VAULT / rel
         if not path.is_file():
-            result.append({"file": rel, "key": key, "written": None,
-                           "expected": counts.get(key), "ok": False,
-                           "reason": "fayl yo'q"})
+            if not optional:
+                result.append({"file": rel, "key": key, "written": None, "expected": counts.get(key), "ok": False, "reason": "fayl yo'q"})
             continue
-        match = pattern.search(path.read_text(encoding="utf-8", errors="replace"))
-        if not match:
-            result.append({"file": rel, "key": key, "written": None,
-                           "expected": counts.get(key), "ok": False,
-                           "reason": "naqsh topilmadi"})
+        matches = list(pattern.finditer(path.read_text(encoding="utf-8", errors="replace")))
+        if not matches:
+            if not optional:
+                result.append({"file": rel, "key": key, "written": None, "expected": counts.get(key), "ok": False, "reason": "naqsh topilmadi"})
             continue
-        written = int(match.group(2))
-        result.append({"file": rel, "key": key, "written": written,
-                       "expected": counts.get(key), "ok": written == counts.get(key),
-                       "reason": ""})
+        written_all = [int(m.group(2)) for m in matches]
+        bad = [w for w in written_all if w != counts.get(key)]
+        result.append({"file": rel, "key": key, "written": bad[0] if bad else written_all[0],
+                       "expected": counts.get(key), "ok": not bad, "reason": ""})
     return result
 
 
@@ -457,22 +615,23 @@ def cmd_sync_claims(args: argparse.Namespace) -> int:
                            encoding="utf-8")
         changed.append(f"{doc.name}: {match.group(2).strip()} → {payload}")
 
-    # Marker bo'lmagan oddiy matn raqamlari (INDEX.md, README.md, rules/...)
-    for rel, pattern, key in HUMAN_CLAIMS:
+    # Marker bo'lmagan oddiy matn raqamlari (INDEX.md, README.md, rules/..., plagin manifestlari)
+    for rel, pattern, key, _optional in _all_claims():
         path = VAULT / rel
         if not path.is_file():
             continue
         text = path.read_text(encoding="utf-8")
-        match = pattern.search(text)
-        if not match or int(match.group(2)) == counts.get(key):
+        wrong = [m.group(2) for m in pattern.finditer(text) if int(m.group(2)) != counts.get(key)]
+        if not wrong:
             continue
         payload = str(counts.get(key, 0))
         if not args.dry_run:
-            path.write_text(
-                pattern.sub(lambda m: m.group(1) + payload + m.group(3), text, count=1),
-                encoding="utf-8",
-            )
-        changed.append(f"{rel}: {match.group(2)} → {payload}")
+            path.write_text(pattern.sub(lambda m: m.group(1) + payload + m.group(3), text), encoding="utf-8")
+        changed.append(f"{rel}: {wrong[0]} → {payload}")
+
+    # Versiya satrlari (VERSION — yagona manba)
+    for line in version_sync(VAULT, dry_run=args.dry_run):
+        changed.append(line)
 
     if not changed:
         print("✓ hujjatlardagi raqamlar katalogga mos")

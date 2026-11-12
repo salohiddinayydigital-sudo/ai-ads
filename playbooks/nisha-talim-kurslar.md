@@ -2,7 +2,7 @@
 name: playbook-nisha-talim-kurslar
 description: "Xususiy maktablar, universitetlar va o'quv markazlari uchun 6 kanalli to'liq sotuv voronkasi"
 tags: [playbook, edtech, school, education]
-source: "Tyrion v5.0 Niche Playbooks"
+source: "Tyrion Niche Playbooks"
 updated: 2026-10-17
 ---
 

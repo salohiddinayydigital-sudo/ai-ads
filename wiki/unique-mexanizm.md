@@ -2,7 +2,8 @@
 name: unique-mexanizm
 description: "Reklama anatomiyasi: avatar → muammolar → solution × unique mechanism = money; har o'ldirilgan objection targetingni kengaytiradi"
 tags: [meta-ads, kreativ, copywriting]
-source: "vedio bilimlar/youtubedagilar/How to Make Facebook Ads SO Good They Beg You to Buy.md (https://www.youtube.com/watch?v=p0k04LBkL4I)"
+source: "YouTube: How to Make Facebook Ads SO Good They Beg You to Buy (https://www.youtube.com/watch?v=p0k04LBkL4I)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

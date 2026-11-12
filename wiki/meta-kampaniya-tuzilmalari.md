@@ -2,7 +2,8 @@
 name: meta-kampaniya-tuzilmalari
 description: "Meta kampaniya tuzilmalari katalogi — ABO, CBO, 1-1-1, 1-5-5, ASC, testing+scaling split, duplication, Omni; tuzilma operatsiyadan keyin keladi"
 tags: [meta-ads, kampaniya, scaling]
-source: "vedio bilimlar/youtubedagilar/Every Meta Ads Campaign Structure Explained in 10 minutes.md (https://www.youtube.com/watch?v=qmcAZdCaI9A)"
+source: "YouTube: Every Meta Ads Campaign Structure Explained in 10 minutes (https://www.youtube.com/watch?v=qmcAZdCaI9A)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

@@ -2,7 +2,8 @@
 name: scaling-cheklovlari
 description: "Scaling cheklovlari — TAM shiftni birinchi addan oldin belgilaydi; biznes fondi (cash flow, inventory, soliqlar) tayyor bo'lmasa scaling cracklarni tezlashtiradi"
 tags: [meta-ads, scaling, tam]
-source: "vedio bilimlar/youtubedagilar/900+ hours of Learning Facebook Ads in 9 minutes.md (https://www.youtube.com/watch?v=sWSCnUQlgnQ)"
+source: "YouTube: 900+ hours of Learning Facebook Ads in 9 minutes (https://www.youtube.com/watch?v=sWSCnUQlgnQ)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

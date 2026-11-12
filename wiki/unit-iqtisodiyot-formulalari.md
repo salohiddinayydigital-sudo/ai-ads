@@ -3,6 +3,7 @@ name: unit-iqtisodiyot-formulalari
 description: "Har bir reklama qarorining asosi — CAC/CPL/LTV/ROAS/POAS/MER formulalari, break-even va target ROAS, LTV:CAC chegaralari, byudjetni orqadan hisoblash"
 tags: [metrika, iqtisod, byudjet, formula]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md (§4 Unit iqtisodiyot)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

@@ -3,6 +3,7 @@ name: pozitsiyalash-dunford
 description: "Pozitsiyalash — slogan emas, kontekst: April Dunford metodikasi (5+1 komponent), ICP va persona farqi, negativ ICP va pozitsiyalash bayonoti"
 tags: [strategiya, pozitsiyalash, icp, offer]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md (§1 Pozitsiyalash)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

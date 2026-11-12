@@ -3,6 +3,7 @@ name: sop-voronka-loyihalash
 description: "SOP: voronka loyihalash va metrika o'rnatish — bosqichlar zanjiri, Telegram ustuvorligi, eng tor joyni topish, nazorat paneli"
 tags: [sop, voronka, metrika, tracking]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/PLAYBOOKS.md (PB-2)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

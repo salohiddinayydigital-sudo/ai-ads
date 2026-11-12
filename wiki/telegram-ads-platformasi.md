@@ -3,6 +3,7 @@ name: telegram-ads-platformasi
 description: "Telegram Ads rasmiy platformasi (ads.telegram.org / Fragment), kanallarni tanlash, 160 belgili matn andozalari, bot voronkasi va server-side konversiya o'lchash tizimi"
 tags: [telegram, ads, platforma, voronka, marketing]
 source: "Telegram Ads official documentation & local operator playbooks"
+source_status: unverified
 updated: 2026-10-17
 ---
 

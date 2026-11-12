@@ -3,6 +3,7 @@ name: video-manbalar
 description: "Video manbalar MOC — 16 ta YouTube transkripti, mualliflari va har biri qaysi atomik qaydlarga manba bo'lgani"
 tags: [moc, manba, video, router]
 source: "vedio bilimlar/youtubedagilar/ (16 transkript, 2026-09-11 ingest)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

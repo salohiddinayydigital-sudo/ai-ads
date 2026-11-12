@@ -2,7 +2,7 @@
 name: context-creative-mode
 description: "Andromeda 2 kreativ va kopirayting studiyasi — Content is Targeting, 3s Hook va 3 tilli (UZ/RU) sotuv matnlari"
 tags: [context, creative, copywriting, hooks]
-source: "Tyrion v5.0 ECC Contexts"
+source: "Tyrion ECC Contexts"
 updated: 2026-10-17
 ---
 

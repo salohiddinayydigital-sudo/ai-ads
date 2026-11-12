@@ -3,6 +3,7 @@ name: ijtimoiy-dalil-tartibi
 description: "Ijtimoiy dalilning kuch tartibi (1-10) — qaysi tur ishonch beradi, qaysi biri deyarli nolga teng va sharh yozdirish shabloni"
 tags: [matn, ishonch, dalil, sotuv]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/KNOWLEDGE.md (§10 Ijtimoiy dalil)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

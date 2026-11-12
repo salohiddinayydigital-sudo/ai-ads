@@ -2,7 +2,8 @@
 name: kreativ-hit-rate
 description: "Creative hit rate — g'olib reklama ulushini o'lchash formulasi; sifat hajmdan muhim va pixel salbiy event'lardan ham o'qitiladi"
 tags: [meta-ads, kreativ, metrika]
-source: "vedio bilimlar/youtubedagilar/The ONLY 2 Ad Creative Formats You Need to Scale Facebook Ads.md (https://www.youtube.com/watch?v=DVo5p9RQnIw)"
+source: "YouTube: The ONLY 2 Ad Creative Formats You Need to Scale Facebook Ads (https://www.youtube.com/watch?v=DVo5p9RQnIw)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

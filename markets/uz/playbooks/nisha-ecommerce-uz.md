@@ -2,7 +2,7 @@
 name: playbook-nisha-ecommerce-uz
 description: "E-Commerce, kiyim-kechak, texnika va online do'konlar uchun Meta + Telegram sotuv voronkasi"
 tags: [playbook, ecommerce, fashion, electronics]
-source: "Tyrion v5.0 Niche Playbooks"
+source: "Tyrion Niche Playbooks"
 updated: 2026-10-17
 ---
 

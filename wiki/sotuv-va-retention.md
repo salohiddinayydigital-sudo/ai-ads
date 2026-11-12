@@ -3,6 +3,7 @@ name: sotuv-va-retention
 description: Sales & Retention — speed to lead 5 daqiqa, 8 aloqa, 65-70% e'tiborsizlikdan ketadi, 30 uchrashuv qoidasi
 tags: [meta-ads, sotuv, retention, crm]
 source: raw/2026-09-03-meta-qoidalar-va-protokol.md (§ 5. Sotuv va Mijozni Ushlab Qolish)
+source_status: unverified
 updated: 2026-09-03
 ---
 

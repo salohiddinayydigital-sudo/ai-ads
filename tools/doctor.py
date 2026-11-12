@@ -211,6 +211,53 @@ def _check_human_claims(report: Report, data: dict) -> None:
         report.add("Raqamlar (hujjatlar)", OK, f"{len(claims)} hujjatdagi raqam mos")
 
 
+PLATFORM_TAG_WORDS = ("meta", "google", "telegram", "tiktok", "youtube", "linkedin", "instagram", "facebook", "andromeda", "pixel", "capi",
+                      "api", "ads", "reklama", "platforma", "yandex", "amazon", "snapchat", "pinterest", "reddit")
+
+
+def check_wiki_freshness(report: Report, root: Path | None = None, max_age_days: int = 180, today: "datetime | None" = None) -> None:
+    """Platformaga oid wiki qaydi (Meta/Google/Telegram... API va qoidalari tez eskiradi) `max_age_days` dan eski bo'lsa ogohlantiradi."""
+    root = root or VAULT
+    now = (today or datetime.now()).date()
+    stale: list[str] = []
+    platform_notes = 0
+    for p in sorted((root / "wiki").glob("*.md")):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        tags = re.search(r"(?m)^tags:\s*(.*)$", text)
+        if not any(w in (tags.group(1).lower() if tags else "") for w in PLATFORM_TAG_WORDS):
+            continue
+        platform_notes += 1
+        upd = re.search(r"(?m)^updated:\s*['\"]?(\d{4}-\d{2}-\d{2})", text)
+        if not upd:
+            stale.append(f"{p.name} (updated yo'q)")
+            continue
+        age = (now - datetime.strptime(upd.group(1), "%Y-%m-%d").date()).days
+        if age > max_age_days:
+            stale.append(f"{p.name} ({age} kun)")
+    if stale:
+        more = f" +{len(stale) - 5}" if len(stale) > 5 else ""
+        report.add("Platforma qaydlari yangiligi", WARN, f"{len(stale)}/{platform_notes} qayd >{max_age_days} kun eski: {', '.join(stale[:5])}{more}")
+    else:
+        report.add("Platforma qaydlari yangiligi", OK, f"{platform_notes} platforma qaydi ≤{max_age_days} kun ichida yangilangan")
+
+
+def check_version(report: Report, root: Path | None = None) -> None:
+    """Versiya: VERSION (yagona manba) ↔ plagin manifestlari ↔ hujjat/SKILL shablon/skript satrlari."""
+    root = root or VAULT
+    try:
+        expected = cat.read_version(root)
+    except OSError:
+        report.add("Versiya (VERSION)", FAIL, "ildizda VERSION fayli yo'q")
+        return
+    drift = cat.version_scan(root)
+    if drift:
+        sample = "; ".join(f"{d['file']}:{d['line']} {d['found']}→{d['expected']}" for d in drift[:4])
+        more = f" +{len(drift) - 4}" if len(drift) > 4 else ""
+        report.add("Versiya (VERSION)", FAIL, f"{len(drift)} eskirgan versiya satri: {sample}{more} — `catalog.py sync-claims`")
+    else:
+        report.add("Versiya (VERSION)", OK, f"{expected} — manifestlar va hujjatlar mos")
+
+
 def check_memory(report: Report) -> None:
     """Operator xotirasi (memory.md) o'zining ixchamlik chegarasiga sig'adimi."""
     path = VAULT / "MEMORY.md"
@@ -558,6 +605,8 @@ def main(argv: list[str] | None = None) -> int:
     check_catalog(report, data)
     check_drift(report, data)
     check_claims(report, data)
+    check_version(report)
+    check_wiki_freshness(report)
     check_skills(report)
     check_instincts(report)
     check_shield(report)

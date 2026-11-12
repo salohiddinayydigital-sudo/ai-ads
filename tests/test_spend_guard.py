@@ -104,5 +104,62 @@ class SpendGuardDirectGateTests(unittest.TestCase):
             self.assertEqual(run_tool_inproc("spend-guard.py", "packet", str(p)).returncode, 1)
 
 
+class SpendGuardTests(unittest.TestCase):
+    """Spend-Guard — Pullik media xavfsizlik nazorati va 6 ta darvoza."""
+
+    def setUp(self) -> None:
+        import importlib
+        self.sg = importlib.import_module("spend-guard")
+
+    def test_budget_hike_within_20_pct_passes(self) -> None:
+        res = self.sg.check_budget_change(current_daily=100.0, proposed_daily=118.0, max_daily_cap=500.0)
+        self.assertTrue(res["passed"])
+        self.assertEqual(len(res["errors"]), 0)
+
+    def test_budget_hike_over_20_pct_fails(self) -> None:
+        res = self.sg.check_budget_change(current_daily=100.0, proposed_daily=135.0, max_daily_cap=500.0)
+        self.assertFalse(res["passed"])
+        self.assertTrue(any("20%" in e for e in res["errors"]))
+
+    def test_budget_ceiling_exceeded_fails(self) -> None:
+        res = self.sg.check_budget_change(current_daily=100.0, proposed_daily=110.0, max_daily_cap=105.0)
+        self.assertFalse(res["passed"])
+        self.assertTrue(any("limitdan" in e for e in res["errors"]))
+
+    def test_telegram_copy_160_chars_and_emoji(self) -> None:
+        # 160 belgidan oshishi xato berishi kerak
+        long_text = "A" * 165
+        res = self.sg.check_ad_copy(platform="telegram", text=long_text)
+        self.assertFalse(res["passed"])
+        self.assertTrue(any("160 belgidan" in e for e in res["errors"]))
+
+        # 2 tadan ko'p emoji xato berishi kerak
+        emoji_text = "Kanalga kiring! 🚀 🎉"
+        res_emoji = self.sg.check_ad_copy(platform="telegram", text=emoji_text)
+        self.assertFalse(res_emoji["passed"])
+        self.assertTrue(any("ko'pi bilan 1 ta emoji" in e for e in res_emoji["errors"]))
+
+    def test_telegram_copy_all_caps(self) -> None:
+        caps_text = "TEZDA sotib oling va chegirma oling!"
+        res = self.sg.check_ad_copy(platform="telegram", text=caps_text)
+        self.assertFalse(res["passed"])
+        self.assertTrue(any("ALL CAPS" in e for e in res["errors"]))
+
+    def test_tracking_capi_without_event_id_fails(self) -> None:
+        res = self.sg.check_tracking_setup(has_browser_pixel=True, has_server_capi=True, event_id_present=False)
+        self.assertFalse(res["passed"])
+        self.assertTrue(any("event_id" in e for e in res["errors"]))
+
+    def test_change_packet_validation(self) -> None:
+        valid_packet = "## Reja\nBoshlang'ich holat: CPA $15.\nXavf: past.\nTeskari qadam: qaytarish mumkin.\nStop-loss: CPA > $20 bo'lsa to'xtatish."
+        res_valid = self.sg.check_change_packet(valid_packet)
+        self.assertTrue(res_valid["passed"])
+
+        invalid_packet = "## Reja\nByudjetni $500 ga oshiramiz."
+        res_invalid = self.sg.check_change_packet(invalid_packet)
+        self.assertFalse(res_invalid["passed"])
+        self.assertTrue(any("Teskari qadam" in e for e in res_invalid["errors"]))
+
+
 if __name__ == "__main__":
     unittest.main()

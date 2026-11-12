@@ -2,7 +2,7 @@
 name: playbooks-readme
 description: "Tyrion Playbooks — O'zbekiston va global bozor uchun tayyor nisha va platforma strategiyalari (TOF/MOF/BOF + Meta Auditoriya + Voronka + KPI)"
 tags: [playbook, router, nisha, strategiya]
-source: "Tyrion v5.0 Playbook Engine"
+source: "Tyrion Playbook Engine"
 updated: 2026-10-17
 ---
 

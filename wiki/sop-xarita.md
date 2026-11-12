@@ -3,6 +3,7 @@ name: sop-xarita
 description: "Vazifa → SOP yo'naltiruvchi xarita: qaysi ish qaysi ish protokoliga olib boradi (agentlar va sessiyalar uchun yagona kirish nuqtasi)"
 tags: [sop, router, index]
 source: "wiki SOP qatlami ustidagi router (2026-09-20)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

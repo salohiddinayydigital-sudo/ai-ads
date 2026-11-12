@@ -3,6 +3,7 @@ name: sop-pozitsiyalash-offer-qurish
 description: "SOP: pozitsiyalash va offer qurish (barcha marketing ishining poydevori) — muqobillar, farqlar, ICP, toifa, Value Equation, offer jumlasi"
 tags: [sop, strategiya, offer, pozitsiyalash]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/PLAYBOOKS.md (PB-1)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

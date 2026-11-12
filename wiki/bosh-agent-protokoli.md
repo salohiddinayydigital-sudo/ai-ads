@@ -3,6 +3,7 @@ name: bosh-agent-protokoli
 description: "\"Bosh agent yo'q\" muammosiga yechim — conductor kim, workerlar bilan chegara, plan approval, clean shutdown"
 tags: [orkestratsiya, conductor, agents, protokol]
 source: operator taqdim etgan CEO/orchestrator 4 tamoyili (2026-09-07) + ads/SKILL.md#Worker-orchestration tahlili
+source_status: verified
 updated: 2026-09-07
 ---
 

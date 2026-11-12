@@ -3,6 +3,7 @@ name: haftalik-audit
 description: Haftalik read-only avto-audit — INDEX havolalari, noto'g'ri fayllar, dublikatlar, qoida ziddiyatlari → audits/report
 tags: [audit, protsedura, sogliq]
 source: raw/2026-09-03-aios-xatoliklar-va-audit.md (§ Haftalik Avto-Audit)
+source_status: unverified
 updated: 2026-09-05
 ---
 

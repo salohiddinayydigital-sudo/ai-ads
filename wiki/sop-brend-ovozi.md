@@ -3,6 +3,7 @@ name: sop-brend-ovozi
 description: "SOP: brend ovozi qo'llanmasi — 3 o'q shkalasi, 'shunday/shunday emas' 12+ juftlik, kanal bo'yicha moslashtirish, taqiqlangan iboralar"
 tags: [sop, brend, matn, uslub]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/PLAYBOOKS.md (PB-7)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

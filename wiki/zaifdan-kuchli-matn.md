@@ -3,6 +3,7 @@ name: zaifdan-kuchli-matn
 description: "Zaif (bo'sh) iboralarni aniq raqamli iboralarga almashtirish jadvali va matn auditining amaliy usuli"
 tags: [matn, kopirayter, audit, sifat]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/KNOWLEDGE.md (§11 Zaif → kuchli)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

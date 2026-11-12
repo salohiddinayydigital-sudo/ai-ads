@@ -2,7 +2,8 @@
 name: birinchi-100k-yol-xaritasi
 description: "Hormozining birinchi 100K bankga yigishning 6 qadamli yol xaritasi: xarajat va vaqt kesish, pullik skill, 10000 iteratsiya, lifestyleni ushlab turish"
 tags: [meta-ads, strategiya, daromad]
-source: "vedio bilimlar/youtubedagilar/If I Wanted to Make My First $100K in 2026, I’d Do This.md (https://www.youtube.com/watch?v=jfW6gL6hKhk)"
+source: "YouTube: If I Wanted to Make My First $100K in 2026, I’d Do This (https://www.youtube.com/watch?v=jfW6gL6hKhk)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

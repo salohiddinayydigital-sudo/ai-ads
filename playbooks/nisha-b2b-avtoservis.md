@@ -2,7 +2,7 @@
 name: playbook-nisha-b2b-avtoservis
 description: "B2B xizmatlar (agentlik, IT, konsalting, ulgurji) va mahalliy xizmatlar (avtoservis) uchun mijoz oqimi playbooki"
 tags: [playbook, b2b, autoservice, leadgen]
-source: "Tyrion v5.0 Niche Playbooks"
+source: "Tyrion Niche Playbooks"
 updated: 2026-10-17
 ---
 

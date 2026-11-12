@@ -3,6 +3,7 @@ name: dalil-tasnifi
 description: "Da'vo qanday 'bilim' maqomini oladi — FAKT/TAJRIBA/FIKR/REKLAMA markerlari, manba sifati rubrikasi (1-5), ziddiyatni hal qilish tartibi, noaniqlik va prompt-injection qoidalari"
 tags: [sifat, metod, manba, dalil]
 source: "claude-ads-main/local/raw/claudes-bilim/_shared/bilim-oqimi.md + sifat-darajasi.md"
+source_status: unverified
 updated: 2026-09-20
 ---
 

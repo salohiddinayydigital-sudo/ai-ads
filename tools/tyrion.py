@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v5.0 Master CLI — Butun tizim uchun yagona boshqaruv markazi (0 token).
+"""Tyrion v7.0 Master CLI — Butun tizim uchun yagona boshqaruv markazi (0 token).
 
 Ishlatish:
   python3 tools/tyrion.py status
@@ -37,7 +37,7 @@ for _stream in (sys.stdout, sys.stderr):
         except Exception:  # pragma: no cover
             pass
 
-VERSION = "7.0.0"
+VERSION = (VAULT / "VERSION").read_text(encoding="utf-8").strip() if (VAULT / "VERSION").is_file() else "0.0.0"
 
 ROUTES = {
     "route": ("skill-search.py", ["route"]),
@@ -73,16 +73,20 @@ def show_status() -> int:
     counts = {}
     if cat_file.is_file():
         counts = json.loads(cat_file.read_text(encoding="utf-8")).get("counts", {})
+    if "skills_platform" not in counts:  # eski katalog: jonli skaner
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import catalog as _cat
+        counts = _cat.scan()["counts"]
     print("=" * 68)
     print(f"  🧠 TYRION v{VERSION} — AI PAID MEDIA & TARGETOLOGY OPERATING SYSTEM")
     print("=" * 68)
     print(f"  Arxitektura : Single-Root ECC v{VERSION} (Calibrated & Live-Telemetry Ready)")
     print(f"  Agentlar    : {counts.get('agents', 36)} ta (100% skill ulangan + Prompt Defense)")
-    print(f"  Skilllar    : {counts.get('skills', 62)} ta (36 platforma + 26 operator/marketing)")
+    print(f"  Skilllar    : {counts.get('skills', 0)} ta ({counts.get('skills_platform', 0)} platforma + {counts.get('skills_operator', 0)} operator/marketing)")
     print(f"  Playbooklar : {counts.get('playbooks', 9)} ta (Meta $1k-$10k, E-com, Ta'lim, Ko'chmas mulk, B2B...)")
     print(f"  Kontekstlar : {counts.get('contexts', 6)} ta (audit, launch, scale, creative, uzbekistan)")
     print(f"  Wiki Qaydlar: {counts.get('wiki', 100)} ta atomik qayd (0 orphan, 0 xato)")
-    print(f"  Buyruqlar   : {counts.get('commands', 18)} ta slash buyruq (/audit, /auditoriya, /kreativ, /voronka...)")
+    print(f"  Buyruqlar   : {counts.get('commands', 0)} ta slash buyruq (/audit, /auditoriya, /kreativ, /voronka...)")
     print(f"  Asboblar    : {counts.get('tools', 29)} ta deterministik CLI vosita (Meta Graph API v26.0)")
     print("-" * 68)
     print("  Tezkor CLI Buyruqlar:")

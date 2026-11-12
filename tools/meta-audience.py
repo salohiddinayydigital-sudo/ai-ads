@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion Meta Ads Audience Engine v5.0 — Andromeda 2, O'zbekiston bozori va Detailed Targeting Accuracy integratsiyasi (0 token).
+"""Tyrion Meta Ads Audience Engine — Andromeda 2, O'zbekiston bozori va Detailed Targeting Accuracy integratsiyasi (0 token).
 
 Asosiy modullar:
   1. architect          : Unit-ekonomikaga tayangan 4-qatlamli auditoriya rejasi + Exclusion matritsasi
@@ -1262,7 +1262,7 @@ def build_launch_blueprint(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="meta-audience.py",
-        description="Tyrion v5.0 Meta Ads Audience & Detailed Targeting Accuracy Engine",
+        description="Tyrion v7.0 Meta Ads Audience & Detailed Targeting Accuracy Engine",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -1503,7 +1503,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 66)
-    print(f"  🎯 TYRION v5.0 META AUDIENCE ENGINE — {args.command.upper()}")
+    print(f"  🎯 TYRION v7.0 META AUDIENCE ENGINE — {args.command.upper()}")
     print("=" * 66)
     for k, v in res.items():
         if isinstance(v, list):

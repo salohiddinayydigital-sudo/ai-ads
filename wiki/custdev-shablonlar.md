@@ -2,6 +2,7 @@
 name: custdev-shablonlar
 description: CustDev intervyu shablonlari — tayyorgarlik checklist, tovarlar/xizmatlar savolnomasi, hisobot namunasi
 source: kanal-bilim/26 (Custdev.xlsx konvert)
+source_status: unverified
 tags: [custdev, tadqiqot, auditoriya, shablon]
 updated: 2026-09-03
 ---

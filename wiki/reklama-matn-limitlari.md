@@ -3,6 +3,7 @@ name: reklama-matn-limitlari
 description: "Meta va Google reklama matni limitlari (Facebook/Instagram Feed, RSA, Performance Max) va ular bilan ishlashning amaliy qoidalari"
 tags: [matn, limit, meta-ads, google-ads]
 source: "claude-ads-main/local/raw/claudes-bilim/kopirayter/KNOWLEDGE.md (§9) + marketolog/KNOWLEDGE.md (§6-7)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

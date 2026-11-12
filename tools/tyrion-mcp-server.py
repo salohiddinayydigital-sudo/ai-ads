@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened v7.0.0).
+"""Tyrion Native MCP Server (JSON-RPC 2.0 over STDIO, Production-Hardened).
 
 Guards against oversized payloads (>1 MB), malformed JSON (-32700), unknown methods (-32601),
 invalid/NaN parameters (-32602), and subprocess hangs (15s timeout).
@@ -24,7 +24,7 @@ sys.path.insert(0, str(TOOLS))
 
 import tyrion_core as tcore  # noqa: E402
 
-SERVER_VERSION = "7.0.0"
+SERVER_VERSION = (VAULT / "VERSION").read_text(encoding="utf-8").strip() if (VAULT / "VERSION").is_file() else "0.0.0"
 
 MCP_TOOLS = [
     {

@@ -3,6 +3,7 @@ name: meta-breakdown-effekti
 description: "Meta Ads 'Breakdown Effect' (Marginal vs Average CPA) — nega o'rtacha CPA baland ko'ringan placement yoki segmentni o'chirish umumiy natijani buzadi"
 tags: [meta-ads, breakdown-effect, cpa, auktsion, algoritm]
 source: "Meta Official Breakdown Effect Documentation + mathiaschu/meta-ads-analyzer tahlili (2026-10-18)"
+source_status: unverified
 updated: 2026-10-18
 ---
 

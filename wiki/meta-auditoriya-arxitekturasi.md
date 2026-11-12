@@ -3,6 +3,7 @@ name: meta-auditoriya-arxitekturasi
 description: "Meta Ads Andromeda 2 auditoriya arxitekturasi — 4 qatlamli voronka (Broad, Interest Stack, 1P Custom Audience, Value LAL), Exclusion matritsasi, Overlap va Saturation matematikasi"
 tags: [meta-ads, auditoriya, retargeting, lookalike, exclusion, andromeda]
 source: "tools/meta-audience.py + wiki/meta-kampaniya-tuzilmalari.md + wiki/andromeda-scalability-signal.md (2026-10-18)"
+source_status: verified
 updated: 2026-10-18
 ---
 

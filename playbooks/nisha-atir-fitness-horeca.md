@@ -2,7 +2,7 @@
 name: playbook-nisha-atir-fitness-horeca
 description: "Premium atir do'konlari (dekant), sport zallari (fitness) va mehmonxona/dam olish maskanlari playbooki"
 tags: [playbook, perfume, fitness, hotel, horeca]
-source: "Tyrion v5.0 Niche Playbooks"
+source: "Tyrion Niche Playbooks"
 updated: 2026-10-17
 ---
 

@@ -2,6 +2,7 @@
 name: nisha-playbooklar
 description: Nishalar bo'yicha tayyor strategiyalar — atir, sport zal, avtoservis, mehmonxona, xususiy maktab
 source: kanal-bilim/05, 16, 17, 18, 20, 23 (PDF/TXT konvert)
+source_status: unverified
 tags: [nisha, strategiya, voronka, playbook]
 updated: 2026-09-03
 ---

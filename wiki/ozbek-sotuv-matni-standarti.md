@@ -3,6 +3,7 @@ name: ozbek-sotuv-matni-standarti
 description: "O'zbek tilida sotuv matni yozish standarti — murojaat, ruscha kalkalardan qochish, ritm, uch tilli bozor va mahalliy ishonch signallari"
 tags: [til, matn, ozbekiston, standart]
 source: "claude-ads-main/local/raw/claudes-bilim/_shared/uzbek-yozuv.md + kopirayter/KNOWLEDGE.md (§12)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

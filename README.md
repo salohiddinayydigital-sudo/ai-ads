@@ -42,7 +42,7 @@ ai-ads/
 ├── markets/                 # Modular regional Market Packs (global, us, eu, uk, mena, latam, sea, in, uz)
 ├── locales/                 # UI & CLI locale bundles (en, uz, ru)
 ├── agents/                  # 36 specialist agent charters
-├── skills/                  # 63 canonical paid-media & CRO skills
+├── skills/                  # 64 canonical paid-media & CRO skills
 ├── commands/                # 27 slash commands (English canonical + Uzbek aliases)
 ├── hooks/                   # Cross-platform ${CLAUDE_PLUGIN_ROOT} hook launcher & guard
 ├── tools/                   # 29 ta 0-Token Deterministik CLI Asbob & STDIO MCP server

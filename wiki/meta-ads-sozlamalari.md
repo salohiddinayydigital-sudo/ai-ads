@@ -3,6 +3,7 @@ name: meta-ads-sozlamalari
 description: Meta Ads kampaniya sozlamalari — Leads, broad targeting, faqat feed'lar, byudjet qoidalari, Pixel hodisalari
 tags: [meta-ads, sozlamalar, kampaniya]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Meta Ads mashinasi — 4)
+source_status: unverified
 updated: 2026-09-03
 ---
 

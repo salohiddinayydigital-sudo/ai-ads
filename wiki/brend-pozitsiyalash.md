@@ -2,6 +2,7 @@
 name: brend-pozitsiyalash
 description: Brend strategiya — brend vs marketing farqi, brend mohiyati, logo/rang sirlari (Sevara Asamova + brend tanilish)
 source: kanal-bilim/06, 07 (PDF/TXT konvert)
+source_status: unverified
 tags: [brend, pozitsiyalash, strategiya]
 updated: 2026-09-03
 ---

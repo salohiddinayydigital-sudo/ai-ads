@@ -2,7 +2,8 @@
 name: brend-kreativ-strategiyasi
 description: "Brend kreativ strategiyasi dizayndan oldin boshlanadi — 5 ta savol, discovery (stakeholder/customer interview, competitor review) va big idea topish"
 tags: [meta-ads, brending]
-source: "vedio bilimlar/youtubedagilar/How To Build a Creative Strategy That Defines a Brand.md (https://www.youtube.com/watch?v=kSw-kv2Hxek)"
+source: "YouTube: How To Build a Creative Strategy That Defines a Brand (https://www.youtube.com/watch?v=kSw-kv2Hxek)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 

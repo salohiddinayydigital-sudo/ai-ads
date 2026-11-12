@@ -3,6 +3,7 @@ name: survey-funnel
 description: Survey funnel — 3–4 saralash savoli → kontakt → HighLevel taqvimi; Speed to Lead 5 daqiqa
 tags: [meta-ads, voronka, lead]
 source: raw/2026-09-03-token-gigiyena-va-meta-mashinasi.md (§ Meta Ads mashinasi — 5)
+source_status: unverified
 updated: 2026-09-03
 ---
 

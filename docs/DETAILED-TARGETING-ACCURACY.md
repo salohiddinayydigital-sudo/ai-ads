@@ -1,12 +1,12 @@
 ---
 name: detailed-targeting-accuracy
-description: "Tyrion v5.0 Detailed Targeting Accuracy Engine — Architecture, official Meta Marketing API v26.0 endpoints, 6 verification statuses, caching, and testing guide"
+description: "Tyrion v7.0 Detailed Targeting Accuracy Engine — Architecture, official Meta Marketing API v26.0 endpoints, 6 verification statuses, caching, and testing guide"
 tags: [meta-ads, targeting, api, accuracy, validation]
 source: "tools/meta-targeting-engine.py + Meta Marketing API v26.0"
 updated: 2026-10-20
 ---
 
-# 🎯 Tyrion v5.0 — Detailed Targeting Accuracy Engine (`tools/meta-targeting-engine.py`)
+# 🎯 Tyrion v7.0 — Detailed Targeting Accuracy Engine (`tools/meta-targeting-engine.py`)
 
 ## 1. Overview & Core Design Principle
 
@@ -86,7 +86,7 @@ TYRION_RUN_LIVE_META_SMOKE=1 python3 -m unittest tests/test_tyrion_tools.py -k L
 **Related:** [[meta-ads-interest-api]] · [[meta-auditoriya-arxitekturasi]] · [[40-xavfsizlik-va-hisob]] · [[00-manba]]
 
 
-## 4. Business-Context Query Generation & 5-Factor Relevance Ranking (v6.0 Upgrade)
+## 4. Business-Context Query Generation & 5-Factor Relevance Ranking (Upgrade)
 
 ### 4.1 Prioritized Business-Context Query Expansion (`expand_search_queries`)
 Search queries are generated from the actual business context in strict priority order so explicit user queries are **never** crowded out by synonyms or generic niche seeds:

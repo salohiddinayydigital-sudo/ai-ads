@@ -3,6 +3,7 @@ name: google-ads-avtomatlashtirish
 description: "Google Ads avtomatlashtirish shartlari — kampaniya turi tanlash, tROAS minimal konversiya hajmi, enhanced conversions (SHA256) va Consent Mode v2"
 tags: [google-ads, avtomatlashtirish, konversiya, tracking]
 source: "claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md (§7)"
+source_status: unverified
 updated: 2026-09-20
 ---
 

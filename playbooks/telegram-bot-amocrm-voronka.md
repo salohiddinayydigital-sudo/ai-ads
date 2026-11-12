@@ -2,7 +2,7 @@
 name: playbook-telegram-bot-amocrm-voronka
 description: "O'zbekiston bozori uchun eng yuqori konversiyali Meta/Telegram Ads -> ManyChat -> Telegram Bot -> AmoCRM voronkasi"
 tags: [playbook, telegram, amocrm, manychat, funnel]
-source: "Tyrion v5.0 Funnel Engine"
+source: "Tyrion Funnel Engine"
 updated: 2026-10-17
 ---
 

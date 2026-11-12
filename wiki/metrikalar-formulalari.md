@@ -2,6 +2,7 @@
 name: metrikalar-formulalari
 description: Marketing metrikalari formulalari (ROI, ROAS, ROMI, CPP, CAC, CR) + SMS case raqamlari
 source: kanal-bilim/10, 15 (TXT konvert)
+source_status: unverified
 tags: [metrika, formula, roas, cac]
 updated: 2026-09-03
 ---

@@ -2,7 +2,8 @@
 name: proof-promise-qoidasi
 description: "Promiseingiz unikal emas, proofingiz unikal: bozorda hammada bir xil vada, farqni isbot yaratadi — proof kontinuumi bo'yicha tanlanadi"
 tags: [meta-ads, positioning, proof]
-source: "vedio bilimlar/youtubedagilar/Learn Paid Ads in 30 Minutes!.md (https://www.youtube.com/watch?v=fSbqaTlWaYI)"
+source: "YouTube: Learn Paid Ads in 30 Minutes! (https://www.youtube.com/watch?v=fSbqaTlWaYI)"
+source_status: url_cited
 updated: 2026-09-11
 ---
 
