@@ -122,6 +122,19 @@ def run_evals() -> dict[str, Any]:
             names = [t["name"] for t in (resp or {}).get("result", {}).get("tools", [])]
             passed = sc["tool_name"] in names
             detail = f"present={passed}"
+        elif stype == "route_status":
+            plan = ss_mod.route_task(sc["query"], load=True)
+            checks = [plan["status"] == sc["expected_status"]]
+            if "expected_language" in sc:
+                checks.append(plan["intent_analysis"]["detected_language"] == sc["expected_language"])
+            if "expected_skill" in sc:
+                checks.append(sc["expected_skill"] in plan["required_skills"] + plan["supporting_skills"])
+            if sc.get("expect_questions"):
+                checks.append(len(plan.get("clarifying_questions", [])) >= 3)
+            if sc["expected_status"] in ("out_of_scope", "needs_clarification"):
+                checks.append(plan["primary_agent"] == "" and not plan["loaded_context"]["actually_loaded"])
+            passed = all(checks)
+            detail = f"status={plan['status']}, lang={plan['intent_analysis']['detected_language']}, skills={plan['required_skills']}"
         elif stype == "universal_route":
             route_total += 1
             plan = ss_mod.route_task(sc["query"], load=True)
