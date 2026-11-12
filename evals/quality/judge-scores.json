@@ -1,0 +1,67 @@
+{
+  "schema": "tyrion-quality-judge/v1",
+  "model": "account:zai-start-plan/GLM-5.3-Flash",
+  "date": "2026-11-12",
+  "scenarios": [
+    {
+      "id": "Q01_audit_meta",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "Har topilma fayl+maydonga bog'langan, kuzatuv/hisoblangan/unknown ajratilgan; manbaning ichki ziddiyati (15 vs ~5 xarid/hafta/ad set) o'zi aniqlanib unknown qilingan. Tavsiyalarda qarama-qarshilik tartibi (dedup oldin), o'lchov oynasi va rollback bor."
+    },
+    {
+      "id": "Q02_audit_google",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Barcha raqamlar mos: $478.80, 266 klik, 24.18%, blended high-intent CPA $10.94 ($963/88) ham to'g'ri hisoblangan. Salbiy so'zlar ro'yxati va yo'naltirish bor, lekin rollback/stop-loss taklif etilmagan (faylda yo'qligi qayd etilgan, lekin o'zi qo'shilmagan) — actionability 1."
+    },
+    {
+      "id": "Q03_audit_telegram",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Kanal raqamlari, funnel matematikasi (4235→2750→825→99) va 18s kechikish manbaga to'liq mos; scale/kill sabablari dalil bilan. Scale/kill o'zgarish takliflarida Spend-Guard eslatmasi va umumiy prioritetas/rollback yo'q — actionability 1."
+    },
+    {
+      "id": "Q04_budget_realloc",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "Jami sarf $0 o'zgaradi ($6,660.50), R1-R4 break-even CPA ($15.84) va ROAS 1.77 ga bog'langan; R3 lead hisobi (200/3.40≈59, 200/1.25=160) to'g'ri. Spend-Guard bo'limi majburiy qilingan va har o'zgarish uchun rollback jadvali stop-loss shartlari bilan bor."
+    },
+    {
+      "id": "Q05_budget_scale",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "+30% taklif to'g'ri Spend-Guard FAIL sifatida ko'rsatilgan (+20% chegara, $18.00/kun), manbaning +15% cheklovi ham qo'shilgan. Tasdiq talabi, a/b/c variantlari va idempotent rollback trigggerlari bor; lead proyeksiyasi 'taxmin' deb belgilangan."
+    },
+    {
+      "id": "Q06_budget_breakeven",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Bosqichli hisob to'g'ri: 350,000−120,000−25,000−7,000 = 198,000 UZS (~$15.84); USD derivatsiya (~12,500 UZS/$) 'taxmin' deb belgilangan, BE ROAS 1.77 tekshirilgan. Hisob va qiyos aniq, lekin keyingi qadamlar/tavsiyalar yo'q — actionability 1."
+    },
+    {
+      "id": "Q07_kreativ_reels",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "3 ta hook prefiksli, belgi hisobi tekshirildi (113/86/111 — to'g'ri, ≤125), kirill yo'q; 350 ming so'm BRIEF AOViga mos, ixtiro qilingan statistika yo'q. Burchak yorliqlari va DoD checklist qo'shilgan — darhol sinovga tayyor."
+    },
+    {
+      "id": "Q08_kreativ_telegram",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 2, "language_clarity": 2 },
+      "notes": "TGAD1=144 va TGAD2=138 belgi — hisoblash tekshirildi, to'g'ri (≤160), lotin alifbosi saqlangan. Payme/Click va yetkazib berish da'volari brifga mos; 'izoh yozmang' talabiga rioya qilingan, matnlar darhol ishlatishga tayyor."
+    },
+    {
+      "id": "Q09_hisobot_blended",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Sarf 6660.50 va blended ROAS 1.96 (13075.60/6660.50) to'g'ri; Google daromadi 3108.60 = 1980×1.57 vazifa bo'yicha hisoblanib, 'hisoblangan' deb belgilangan, har raqam fayl+maydonga bog'langan. Xulosa bo'limidagi o'zgarish tavsiyalarida Spend-Guard/rollback yo'q — actionability 1."
+    },
+    {
+      "id": "Q10_hisobot_sources",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Har raqam oldida [MEASURED_ACCOUNT_DATA]/[HEURISTIC_PRIOR_MODEL] belgisi — talab aynan bajarilgan; barcha Meta raqamlari va 75% ulush hisobi mos. Bitta DRAFT tavsiyada Spend-Guard eslatmasi bor, lekin prioritetas va rollback yo'q — actionability 1."
+    },
+    {
+      "id": "Q11_tracking_capi_dedup",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "Sabab (event_name+event_id juftligi mos emas) va ~15% double counting manbaga mos; hashing buzilmaganligi to'g'ri ajratilgan. Tuzatish ro'yxati (order_id, ikki tomonda bir xil event_id, Events Manager tekshiruvi) aniq, lekin rollback/stop-loss yo'q — actionability 1."
+    },
+    {
+      "id": "Q12_tracking_emq",
+      "scores": { "evidence": 2, "accuracy": 2, "actionability": 1, "language_clarity": 2 },
+      "notes": "EMQ 6.2 manbaga mos; maydon→normallashtirish→SHA-256 jadvali Meta CAPI qoidalariga to'g'ri (fbp/fbc hashlanmaydi, db=YYYYMMDD), ball vaznlari 'ma'lumot yo'q' deb halol belgilangan. Prioritet guruh (em, ph, external_id) ko'rsatilgan, lekin tartiblangan qadamlar va o'lchov/rollback yo'q — actionability 1."
+    }
+  ]
+}

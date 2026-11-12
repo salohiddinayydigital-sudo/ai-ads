@@ -1,0 +1,168 @@
+{
+  "schema": "tyrion-quality-eval/v1",
+  "base": "examples/demo-brand",
+  "note": "5 asosiy ish (audit, budget, kreativ, hisobot, tracking) x 2-3 stsenariy. Har stsenariyda deterministik tekshiruvlar (run.py) va hakam-agent rubrikasi (rubric.json, 0-2 ball) bor.",
+  "jobs": {
+    "audit": "Dalilga asoslangan platforma auditi",
+    "budget": "Byudjet rejalash va Spend-Guard bo'ysunishi",
+    "kreativ": "Platforma limitlariga mos sotuv matni",
+    "hisobot": "Blended metrika va manba shaffofligi",
+    "tracking": "Pixel/CAPI diagnostika"
+  },
+  "scenarios": [
+    {
+      "id": "Q01_audit_meta",
+      "job": "audit",
+      "worker_agent": "audit-meta",
+      "assets": ["examples/demo-brand/assets/meta_performance.json", "examples/demo-brand/assets/tracking_health.json"],
+      "prompt": "Meta Ads (act_88291048201) 30 kunlik hisoboti asosida dalilga asoslangan audit topilmalarini yozing. Manbalar: examples/demo-brand/assets/meta_performance.json va tracking_health.json. Har bir topilma uchun: manba fayl, kuzatuv, tashxis, tavsiya ajratilgan bo'lsin. Hisobga o'zgartirish kiritmang.",
+      "checks": [
+        { "id": "cite_source", "type": "contains_any", "values": ["meta_performance.json", "act_88291048201"] },
+        { "id": "fragmentation", "type": "contains_any", "values": ["learning_limited", "learning limited", "8 ta", "ad set"] },
+        { "id": "capi_dedup", "type": "contains_all", "values": ["event_id"] },
+        { "id": "double_counting", "type": "contains_any", "values": ["15%", "ikki marta", "double counting", "double-counting"] },
+        { "id": "fatigue", "type": "contains_any", "values": ["54.2", "3.12", "charchash", "fatigue", "ftir"] },
+        { "id": "recommendation_split", "type": "contains_any", "values": ["tavsiya", "recommendation"] }
+      ]
+    },
+    {
+      "id": "Q02_audit_google",
+      "job": "audit",
+      "worker_agent": "audit-google",
+      "assets": ["examples/demo-brand/assets/google_search_terms.json"],
+      "prompt": "Google Ads (google_ads_482_910_3301) qidiruv so'rovlari hisoboti (examples/demo-brand/assets/google_search_terms.json) asosida dalilga asoslangan audit yozing: bekorchi sarf, salbiy kalit so'zlar ro'yxati va tejalgan mablag' yo'naltiriladigan guruhlar. Hisobga o'zgartirish kiritmang.",
+      "checks": [
+        { "id": "cite_source", "type": "contains_any", "values": ["google_search_terms.json", "google_ads_482_910_3301"] },
+        { "id": "waste_amount", "type": "regex_any", "values": ["478\\.80", "24\\.18", "24\\.2"] },
+        { "id": "negative_keywords", "type": "contains_any", "values": ["salbiy kalit", "negative", "add_negative"] },
+        { "id": "broad_match", "type": "contains_any", "values": ["broad", "keng qidiruv"] }
+      ]
+    },
+    {
+      "id": "Q03_audit_telegram",
+      "job": "audit",
+      "worker_agent": "audit-telegram",
+      "assets": ["examples/demo-brand/assets/telegram_campaigns.json", "examples/demo-brand/assets/tracking_health.json"],
+      "prompt": "Telegram Ads (tg_ads_fragment_8819) kanallar hisoboti (examples/demo-brand/assets/telegram_campaigns.json) va bot telemetriyasi (examples/demo-brand/assets/tracking_health.json) asosida dalilga asoslangan audit yozing: qaysi kanal scale qilinadi, qaysi kanal to'xtatiladi, bot voronkasidagi kechikish muammosi va negadir. Hisobga o'zgartirish kiritmang, faqat tavsiya bering.",
+      "checks": [
+        { "id": "cite_source", "type": "contains_any", "values": ["telegram_campaigns.json", "tg_ads_fragment_8819"] },
+        { "id": "kill_channel", "type": "contains_any", "values": ["kulgu_va_memlar"] },
+        { "id": "dropoff", "type": "contains_any", "values": ["85%", "drop-off", "drop_off"] },
+        { "id": "scale_channel", "type": "contains_any", "values": ["toshkent_bozori", "winner"] },
+        { "id": "bot_delay", "type": "contains_any", "values": ["18 soniya", "18s", "kechikish", "latency"] }
+      ]
+    },
+    {
+      "id": "Q04_budget_realloc",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "assets": ["examples/demo-brand/BRIEF.md", "examples/demo-brand/assets/meta_performance.json", "examples/demo-brand/assets/google_search_terms.json", "examples/demo-brand/assets/telegram_campaigns.json"],
+      "prompt": "Apex E-Commerce (examples/demo-brand/BRIEF.md) unit ekonomikasi asosida platformalar orasida byudjet qayta taqsimlash rejasi tuzing. Jami byudjetni oshirmang; faqat mavjud sarfni qayta yo'naltiring. Reja: qaysi kanaldan olindi, qaysi kanalga berildi, sababi break-even CPA ga bog'langan bo'lsin. Har qanday hisob o'zgarishi Spend-Guard talabini eslatib o'tsin va teskari qadam (rollback) yozilsin.",
+      "checks": [
+        { "id": "breakeven_cpa", "type": "regex_any", "values": ["15\\.8", "198[ .,]?000"] },
+        { "id": "google_above_be", "type": "contains_any", "values": ["17.8", "17,8"] },
+        { "id": "platforms", "type": "contains_all", "values": ["meta", "google", "telegram"] },
+        { "id": "spend_guard", "type": "contains_any", "values": ["spend-guard", "spend guard"] },
+        { "id": "rollback", "type": "contains_any", "values": ["rollback", "teskari qadam", "stop-loss"] }
+      ]
+    },
+    {
+      "id": "Q05_budget_scale",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "assets": ["examples/demo-brand/assets/telegram_campaigns.json"],
+      "prompt": "Telegram Adsda @toshkent_bozori kanali byudjetini haftasiga +30% oshirish taklifi yozing (examples/demo-brand/assets/telegram_campaigns.json). Bu +20% chegara yuqorida — reja matnida Spend-Guard tekshiruvi, foydalanuvchi tasdigi kerakligi va rollback ko'rsatmasi bo'lishi shart. Hisobga hozir o'zgartirish kiritmang — bu faqat taklif.",
+      "checks": [
+        { "id": "spend_guard", "type": "contains_any", "values": ["spend-guard", "spend guard"] },
+        { "id": "threshold", "type": "contains_any", "values": ["20%"] },
+        { "id": "approval", "type": "contains_any", "values": ["tasdiq", "approval", "ruxsat", "confirm"] },
+        { "id": "rollback", "type": "contains_any", "values": ["rollback", "teskari qadam", "stop-loss"] }
+      ]
+    },
+    {
+      "id": "Q06_budget_breakeven",
+      "job": "budget",
+      "worker_agent": "audit-budget",
+      "assets": ["examples/demo-brand/BRIEF.md"],
+      "prompt": "Apex E-Commerce brifi (examples/demo-brand/BRIEF.md) asosida break-even CPA ni hisoblang va hisoblangan bosqichlarni ko'rsating (AOV, tannarx, yetkazib berish, to'lov komissiyasi). Javob ham UZS, ham USD da bo'lsin.",
+      "checks": [
+        { "id": "result_uzs", "type": "regex_any", "values": ["198[ .,]?000"] },
+        { "id": "result_usd", "type": "regex_any", "values": ["15\\.8", "15,8"] },
+        { "id": "components", "type": "contains_all", "values": ["350", "120", "25"] },
+        { "id": "commission", "type": "contains_any", "values": ["7", "2.0%", "2%"] }
+      ]
+    },
+    {
+      "id": "Q07_kreativ_reels",
+      "job": "kreativ",
+      "worker_agent": "copy-writer",
+      "assets": ["examples/demo-brand/BRIEF.md"],
+      "prompt": "Apex E-Commerce (examples/demo-brand/BRIEF.md) uchun Meta Reels uchun 3 ta o'zbek lotin (uz_latin) hook yozing. Har bir variantni alohida qatorga, 'HOOK1:', 'HOOK2:', 'HOOK3:' prefiks bilan yozing. Har bir hook 125 belgidan oshmasin. Kirill alifbosidan foydalanmang.",
+      "checks": [
+        { "id": "hook_lines", "type": "line_limit", "prefix": "HOOK", "min_count": 3, "max_chars": 135 },
+        { "id": "latin_script", "type": "no_cyrillic" }
+      ]
+    },
+    {
+      "id": "Q08_kreativ_telegram",
+      "job": "kreativ",
+      "worker_agent": "copy-writer",
+      "assets": ["examples/demo-brand/BRIEF.md"],
+      "prompt": "Apex E-Commerce (examples/demo-brand/BRIEF.md) uchun Telegram Ads uchun 2 ta o'zbek lotin (uz_latin) reklama matni yozing. Har bir variantni alohida qatorga, 'TGAD1:', 'TGAD2:' prefiks bilan yozing. Har bir matn 160 belgidan oshmasin (Telegram Ads chegarasi). Izoh yozmang — faqat matn. Kirill alifbosidan foydalanmang.",
+      "checks": [
+        { "id": "tg_lines", "type": "line_limit", "prefix": "TGAD", "min_count": 2, "max_chars": 168 },
+        { "id": "latin_script", "type": "no_cyrillic" }
+      ]
+    },
+    {
+      "id": "Q09_hisobot_blended",
+      "job": "hisobot",
+      "worker_agent": "audit-budget",
+      "assets": ["examples/demo-brand/assets/meta_performance.json", "examples/demo-brand/assets/google_search_terms.json", "examples/demo-brand/assets/telegram_campaigns.json"],
+      "prompt": "3 ta manba fayldan (examples/demo-brand/assets/ meta_performance.json, google_search_terms.json, telegram_campaigns.json) Apex E-Commerce uchun jami oylik sarf va blended ROAS ni hisoblang va qisqacha hisobot yozing. Har bir raqam qaysi fayldan olinganini ko'rsatsin. Google daromadi roas (1.57) x sarf orqali hisoblanadi.",
+      "checks": [
+        { "id": "total_spend", "type": "regex_any", "values": ["6660\\.50", "6[ .,]?660"] },
+        { "id": "blended_roas", "type": "regex_any", "values": ["1\\.9[4-9]", "1,9[4-9]"] },
+        { "id": "total_revenue", "type": "regex_any", "values": ["13075", "13[ .,]?075", "3108"] },
+        { "id": "cite_source", "type": "contains_any", "values": ["meta_performance.json", "google_search_terms.json", "telegram_campaigns.json"] }
+      ]
+    },
+    {
+      "id": "Q10_hisobot_sources",
+      "job": "hisobot",
+      "worker_agent": "audit-budget",
+      "assets": ["examples/demo-brand/assets/meta_performance.json", "examples/demo-brand/BRIEF.md", "rules/00-manba.md"],
+      "prompt": "rules/00-manba.md qoidasiga muvofiq Apex E-Commerce uchun qisqacha hisobot seksiyasi yozing: har bir asosiy raqam oldida manba belgisi (MEASURED_ACCOUNT_DATA yoki HEURISTIC_PRIOR_MODEL) turadi. Meta raqamlari o'lchangan (MEASURED), break-even CPA hisob-kitobdan kelgan (HEURISTIC) deb belgilang.",
+      "checks": [
+        { "id": "measured_label", "type": "contains_any", "values": ["MEASURED_ACCOUNT_DATA", "MEASURED"] },
+        { "id": "heuristic_label", "type": "contains_any", "values": ["HEURISTIC_PRIOR_MODEL", "HEURISTIC"] },
+        { "id": "source_word", "type": "contains_any", "values": ["manba", "source"] }
+      ]
+    },
+    {
+      "id": "Q11_tracking_capi_dedup",
+      "job": "tracking",
+      "worker_agent": "tracking-specialist",
+      "assets": ["examples/demo-brand/assets/tracking_health.json"],
+      "prompt": "examples/demo-brand/assets/tracking_health.json asosida CAPI deduplikatsiya tashxisini yozing: muammoning aniq sababi, uning hisobotga ta'siri (qancha ko'pirtirilmoqda) va tuzatish ro'yxati (event_id qanday berilishi). Hisobga o'zgartirish kiritmang — faqat tashxis va tuzatish rejasi.",
+      "checks": [
+        { "id": "event_id", "type": "contains_any", "values": ["event_id"] },
+        { "id": "dedup_word", "type": "contains_any", "values": ["dedup", "deduplikatsiya"] },
+        { "id": "impact_15pct", "type": "contains_any", "values": ["15%", "ikki marta", "double"] },
+        { "id": "cite_source", "type": "contains_any", "values": ["tracking_health.json"] }
+      ]
+    },
+    {
+      "id": "Q12_tracking_emq",
+      "job": "tracking",
+      "worker_agent": "tracking-specialist",
+      "assets": ["examples/demo-brand/assets/tracking_health.json"],
+      "prompt": "examples/demo-brand/assets/tracking_health.json dagi Meta Pixel EMQ 6.2/10 uchun oshirish rejasi yozing: qaysi maydonlar (telefon, email, ism, shahar va b.) SHA-256 bilan normallashtirilib hashlanishi va o'sha maydon EMQ ga qanday ta'sir qilishi. Hisobga o'zgartirish kiritmang.",
+      "checks": [
+        { "id": "emq_score", "type": "regex_any", "values": ["6\\.2", "6,2"] },
+        { "id": "hashing", "type": "contains_any", "values": ["sha-256", "sha256", "hash", "xesh"] },
+        { "id": "fields", "type": "contains_any", "values": ["telefon", "phone", "email"] }
+      ]
+    }
+  ]
+}

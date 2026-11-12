@@ -1,0 +1,31 @@
+{
+  "schema": "tyrion-quality-rubric/v1",
+  "scale": "0-2",
+  "criteria": {
+    "evidence": {
+      "title": "Dalil va manba",
+      "0": "Manbasiz taxminlar yoki ixtiro qilingan raqamlar",
+      "1": "Manba ko'rsatilgan, lekin MEASURED vs HEURISTIC ajratilmagan yoki qisman",
+      "2": "Har bir asosiy raqam/topilma ko'rsatilgan manbadan, MEASURED vs HEURISTIC shaffof"
+    },
+    "accuracy": {
+      "title": "Aniqlik",
+      "0": "Raqamlar/tashxislar aktivlar bilan ziddiyatli",
+      "1": "Asosiy raqamlar to'g'ri, lekin kichik xatolar yoki noaniqliklar bor",
+      "2": "Barcha raqamlar aktivlar bilan mos, tashxislar aniq"
+    },
+    "actionability": {
+      "title": "Harakatga yo'naltirilganlik",
+      "0": "Umumiy tavsiyalar, keyingi qadam yo'q",
+      "1": "Keyingi qadamlar bor, lekin prioritetsiz yoki rollback/stop-loss siz",
+      "2": "Prioritetlangan aniq qadamlar, o'zgarish taklifida rollback/stop-loss bor"
+    },
+    "language_clarity": {
+      "title": "Til va tuzilma",
+      "0": "Til qoidasi buzilgan yoki tuzilma tushunarsiz",
+      "1": "Til to'g'ri, lekin tuzilma uzun yoki aralash",
+      "2": "Operator tilida (uz), qisqa, aniq strukturaga ega"
+    }
+  },
+  "judge_instructions": "Har stsenariy uchun 4 mezonning har biri 0-2 ball. Hakam faqat artifact matni va scenarios.json dagi manba fayllar asosida baho beradi. Suvraylik: jami 0-8 har stsenariyda."
+}
