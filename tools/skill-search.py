@@ -2466,7 +2466,7 @@ def cmd_tokens(args: argparse.Namespace) -> int:
         print(json.dumps(prof, ensure_ascii=False, indent=2))
         return 0
     print("=" * 74)
-    print("  ⚡ TYRION v7.0 TOKEN CONSUMPTION & COST EFFICIENCY REPORT")
+    print("  ⚡ TYRION v7.1 TOKEN CONSUMPTION & COST EFFICIENCY REPORT")
     print("=" * 74)
     nv = prof["naive_full_vault"]
     print(f"  Butun baza hajmi (63 skill + 100 wiki + 36 agent): {nv['total_markdown_bytes']:,} bayt (~{nv['estimated_tokens']:,} token)")

@@ -75,7 +75,7 @@ percentage scaling are optional heuristics, never universal authorization.
 
 
 ## Deterministic CLI & Tooling Integration (`0 Token`)
-Before generating recommendations or mutating plans for `ads-budget`, execute the relevant Tyrion v7.0 deterministic checks:
+Before generating recommendations or mutating plans for `ads-budget`, execute the relevant Tyrion v7.1 deterministic checks:
 - **Unit Economics & Break-Even:** `python3 tools/calculator.py breakeven --price <AOV> --cogs <COGS>`
 - **Meta Audience & Funnel Diagnostics:** `python3 tools/meta-audience.py architect --niche <niche> --budget <daily_usd>`
 - **CSV/JSON Export & Breakdown Effect:** `python3 tools/ad-export-analyzer.py analyze --file <export.csv>`

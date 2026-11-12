@@ -1,4 +1,4 @@
-# Tyrion v7.0 — Global Paid-Media & Targetology Operating System (`ai-ads`)
+# Tyrion v7.1 — Global Paid-Media & Targetology Operating System (`ai-ads`)
 
 <!-- tyrion:catalog agents=36 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
 

@@ -2,7 +2,7 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [7.1.0] — 2026-11-12 (VK Ads skill)
 
 ### Added
 - **`ads-vk` skill** (VK Ads / VK Реклама / ВКонтакте), attached to `audit-meta`; Russian VK requests now route to it. +1 eval scenario, +2 router tests. No benchmark numbers; availability and policy rules are marked unverified.

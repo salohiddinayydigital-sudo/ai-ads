@@ -1,5 +1,5 @@
 {
-  "schema": "tyrion-evals/v7.0",
+  "schema": "tyrion-evals/v7.1",
   "scenarios": [
     {
       "id": "E01_skill_route_motion",

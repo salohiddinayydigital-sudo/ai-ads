@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v7.0 Ad Export Analyzer & Breakdown Effect Engine (0 token).
+"""Tyrion v7.1 Ad Export Analyzer & Breakdown Effect Engine (0 token).
 
 Yangi imkoniyatlar (Audit #1 va #2 yechimi):
 1. `account_currency` va ko'p valyutali (`USD`, `UZS`, `EUR`, `KZT`) aniqlik — valyutani ko'r-ko'rona USD deb belgilamaydi.
@@ -509,7 +509,7 @@ def analyze_breakdown_effect(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="ad-export-analyzer.py", description="Tyrion v7.0 CSV/JSON Ad Export & Breakdown Effect Analyzer")
+    parser = argparse.ArgumentParser(prog="ad-export-analyzer.py", description="Tyrion v7.1 CSV/JSON Ad Export & Breakdown Effect Analyzer")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_an = sub.add_parser("analyze", help="Meta/Google/Telegram CSV yoki JSON eksportni tahlil qilish")
@@ -560,7 +560,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 68)
-    print(f"  📊 TYRION v7.0 AD EXPORT & BREAKDOWN ANALYZER — {args.command.upper()}")
+    print(f"  📊 TYRION v7.1 AD EXPORT & BREAKDOWN ANALYZER — {args.command.upper()}")
     print("=" * 68)
     print(json.dumps(res, ensure_ascii=False, indent=2))
     print("=" * 68)
