@@ -123,13 +123,88 @@ def sync_commands(target_root: Path, dry_run: bool) -> list[str]:
     return changed
 
 
+# 1-bosqich (pilot): faqat shu charterlar `.claude/agents/` ga mirror qilinadi. 2-bosqichda
+# qolgan charterlar tasdiqlangach `None` (hammasi) ga o'tkaziladi.
+MIRRORED_AGENTS: frozenset[str] | None = frozenset({"audit-meta", "meta-audience-architect", "copy-writer"})
+_ALL = object()
+
+
+def _plugin_name() -> str:
+    try:
+        return str(json.loads((VAULT / "plugin.json").read_text(encoding="utf-8"))["name"])
+    except (OSError, ValueError, KeyError):
+        return "tyrion"
+
+
+def render_project_agent(text: str, plugin_name: str, source_name: str) -> str:
+    """Kanonik (plugin rejimi) charterni loyiha rejimi sub-agentiga aylantiradi.
+
+    1. MCP asbob nomi: `mcp__plugin_<plugin>_<server>__<tool>` -> `mcp__<server>__<tool>`
+       (`.mcp.json` loyiha serveri sifatida ulanganda prefiks shunday).
+    2. `skills:` olib tashlanadi: kanonik skill nomlari loyiha rejimida Claude Code skilli
+       sifatida ro'yxatdan o'tmagan; kontekst `tyrion_universal_router` orqali yuklanadi
+       (preload butun skill matnini kiritib, token gigiyenasini buzardi).
+    """
+    out = text.replace(f"mcp__plugin_{plugin_name}_", "mcp__")
+    lines = out.split("\n")
+    if lines and lines[0].strip() == "---":
+        end = next((i for i in range(1, len(lines)) if lines[i].strip() == "---"), None)
+        if end is not None:
+            kept: list[str] = []
+            skipping = False
+            for line in lines[1:end]:
+                if line.startswith("skills:"):
+                    skipping = True
+                    continue
+                if skipping and (line.startswith("- ") or line.startswith(" ")):
+                    continue
+                skipping = False
+                kept.append(line)
+            note = f"<!-- GENERATED from agents/{source_name} by tools/install-hooks.py - qo'lda tahrirlanmaydi -->"
+            lines = [lines[0], *kept, lines[end], note, *lines[end + 1:]]
+    return "\n".join(lines)
+
+
+def sync_agents(target_root: Path, dry_run: bool, names: object = _ALL) -> list[str]:
+    """`agents/*.md` -> `<target>/.claude/agents/` (generatsiya; qo'lda nusxalanmaydi).
+
+    Idempotent. `names` berilmasa `MIRRORED_AGENTS` ishlatiladi (None = hammasi).
+    """
+    source = VAULT / "agents"
+    if not source.is_dir():
+        return []
+    allowed = MIRRORED_AGENTS if names is _ALL else names
+    plugin = _plugin_name()
+    destination = target_root / ".claude" / "agents"
+    changed: list[str] = []
+    for path in sorted(source.glob("*.md")):
+        if allowed is not None and path.stem not in allowed:
+            continue
+        rendered = render_project_agent(path.read_bytes().decode("utf-8").replace("\r\n", "\n"), plugin, path.name)
+        target = destination / path.name
+        if target.is_file() and target.read_bytes().decode("utf-8").replace("\r\n", "\n") == rendered:
+            continue
+        changed.append(f"agents/{path.name}")
+        if not dry_run:
+            destination.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(rendered.encode("utf-8"))
+    return changed
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="install-hooks.py", description="Tyrion hook'larini o'rnatish")
     parser.add_argument("--target", default=str(VAULT), help="loyiha ildizi (default: vault)")
     parser.add_argument("--dry-run", action="store_true", help="yozmasdan ko'rsatadi")
     parser.add_argument("--vault", default=str(VAULT), help="Tyrion ildizi (hook yo'llari uchun)")
     parser.add_argument("--no-commands", action="store_true", help="commands/ ni ko'chirmaslik")
+    parser.add_argument("--no-agents", action="store_true", help="agents/ dan .claude/agents/ generatsiya qilmaslik")
+    parser.add_argument("--agents-only", action="store_true", help="faqat .claude/agents/ ni generatsiya qiladi (settings.json va buyruqlarga tegmaydi)")
     args = parser.parse_args(argv)
+
+    if args.agents_only:
+        changed_agents = sync_agents(Path(args.target).resolve(), args.dry_run)
+        print(("· --dry-run: " if args.dry_run else "✓ ") + (f"agentlar ({len(changed_agents)}): " + ", ".join(changed_agents) if changed_agents else "agentlar allaqachon joyida"))
+        return 0
 
     if not HOOKS_JSON.is_file():
         print(f"✗ {HOOKS_JSON} topilmadi")
@@ -150,6 +225,7 @@ def main(argv: list[str] | None = None) -> int:
     canonical = build_config(target_root, Path(args.vault).resolve())
     updated, added = merge(settings, canonical)
     commands = [] if args.no_commands else sync_commands(target_root, args.dry_run)
+    commands = commands + ([] if args.no_agents else sync_agents(target_root, args.dry_run))
 
     if not added and not commands:
         print(f"✓ hook va buyruqlar allaqachon joyida: {target_root}")
