@@ -18,13 +18,12 @@ AGENTS = VAULT / "agents"
 PLUGIN_SERVER = "mcp__plugin_tyrion_tyrion-core__"
 PROJECT_SERVER = "mcp__tyrion-core__"
 
-CONVERTED = frozenset({"audit-meta", "meta-audience-architect", "copy-writer"})
 ALL_AGENTS = sorted(p.stem for p in AGENTS.glob("*.md"))
-PENDING_STAGE2 = [n for n in ALL_AGENTS if n not in CONVERTED]
+CONVERTED = frozenset(ALL_AGENTS)  # 2-bosqich tugadi: hammasi tekshiriladi
+PENDING_STAGE2: list[str] = []
 
 # CLI qadami -> uni almashtiruvchi MCP asbobi (qoplanmagan qadam Bash talab qiladi).
 CLI_TO_MCP = {
-    "skill-search.py": "universal_router",
     "meta-targeting-engine.py": "meta_detailed_targeting",
     "spend-guard.py": "spend_guard",
     "calculator.py": "media_calculator",
@@ -33,9 +32,10 @@ CLI_TO_MCP = {
     "brain-search.py": "brain_search",
     "meta-insights-sync.py": "meta_live_insights",
 }
-MCP_COVERED_SUBCOMMANDS = {"meta-audience.py": {"architect"}}  # overlap/saturation/... uchun MCP yo'q
+MCP_COVERED_SUBCOMMANDS = {"meta-audience.py": {"architect"}, "skill-search.py": {"route", "execute"}, "creative-matrix.py": {"video-script", "matrix"}}  # overlap/saturation/... uchun MCP yo'q
 
-ROOTS = ("skills/", "wiki/", "rules/", "playbooks/", "contexts/", "templates/", "markets/", "manifests/")
+MCP_FOR_SCRIPT = {"meta-audience.py": "meta_audience", "skill-search.py": "universal_router", "creative-matrix.py": "creative_matrix"}
+ROOTS = ("skills/", "wiki/", "rules/", "playbooks/", "contexts/", "templates/", "markets/", "manifests/", "docs/")
 
 
 def read_agent(name: str) -> tuple[dict[str, str], str]:
@@ -61,7 +61,7 @@ def required_tools(body: str) -> set[str]:
         if script in CLI_TO_MCP:
             need.add("mcp:" + CLI_TO_MCP[script] + "|Bash")
         elif script in MCP_COVERED_SUBCOMMANDS and sub in MCP_COVERED_SUBCOMMANDS[script]:
-            need.add("mcp:meta_audience|Bash")
+            need.add("mcp:" + MCP_FOR_SCRIPT[script] + "|Bash")
         else:
             need.add("Bash")
     return need
@@ -69,7 +69,7 @@ def required_tools(body: str) -> set[str]:
 
 class AgentCharterTests(unittest.TestCase):
     def test_pending_list_is_explicit(self) -> None:
-        self.assertEqual(len(ALL_AGENTS), 36)
+        self.assertEqual(len(ALL_AGENTS), 36, "agent qo'shish/olib tashlash — avval so'rang")
         self.assertTrue(CONVERTED <= set(ALL_AGENTS))
 
     def test_converted_charters(self) -> None:
@@ -104,8 +104,9 @@ class AgentCharterTests(unittest.TestCase):
                 self.assertNotIn("Task", tools)
 
                 # 3. description "qachon chaqiriladi"ni aytadi
-                self.assertTrue(fm["description"].startswith("Use this agent"), f"{name}: description 'Use this agent ...' bilan boshlanmagan")
-                self.assertIn("Invoke on", fm["description"])
+                desc = fm["description"].strip('"')
+                self.assertTrue(desc.startswith("Use this agent"), f"{name}: description 'Use this agent ...' bilan boshlanmagan")
+                self.assertIn("Invoke on", desc)
 
                 # 4. Agent sikli va to'xtash holatlari
                 for needle in ("Agent sikli", "needs_input", "blocked_mutation_approval", "completed", "missing_inputs", "execution_evidence"):
@@ -117,13 +118,14 @@ class AgentCharterTests(unittest.TestCase):
                 _fm, body = read_agent(name)
                 self.assertNotIn("Claude Ads conductor", body)
                 self.assertNotIn("<plugin_root>", body)
+                self.assertNotIn(".agents/skills", body)
                 self.assertIsNone(re.search(r"(?<![\w/.])(?:\.\./wiki/|local/|ads/(?:SKILL|references))", body), f"{name}: eski yo'l qolgan")
-                for p in re.findall(r"`((?:" + "|".join(re.escape(r) for r in ROOTS) + r")[\w\-./]*\.(?:md|json|py))`", body):
+                for p in re.findall(r"(?<![\w/.\-])((?:" + "|".join(re.escape(r) for r in ROOTS) + r")[\w\-./]*\.(?:md|json|py))", body):
                     self.assertTrue((VAULT / p).is_file(), f"{name}: diskda yo'q: {p}")
 
     def test_pending_charters_are_tracked_not_hidden(self) -> None:
         # 2-bosqichgacha: kutilayotgan charterlar yuqoridagi tekshiruvlardan o'tmaydi; ro'yxat aniq.
-        self.assertEqual(len(PENDING_STAGE2), 33)
+        self.assertEqual(PENDING_STAGE2, [])
 
 
 class AgentMirrorTests(unittest.TestCase):

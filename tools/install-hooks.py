@@ -123,9 +123,8 @@ def sync_commands(target_root: Path, dry_run: bool) -> list[str]:
     return changed
 
 
-# 1-bosqich (pilot): faqat shu charterlar `.claude/agents/` ga mirror qilinadi. 2-bosqichda
-# qolgan charterlar tasdiqlangach `None` (hammasi) ga o'tkaziladi.
-MIRRORED_AGENTS: frozenset[str] | None = frozenset({"audit-meta", "meta-audience-architect", "copy-writer"})
+# `None` = barcha `agents/*.md` mirror qilinadi (2-bosqich tugadi). Filtr kerak bo'lsa nomlar to'plami.
+MIRRORED_AGENTS: frozenset[str] | None = None
 _ALL = object()
 
 
