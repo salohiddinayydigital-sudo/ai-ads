@@ -4,7 +4,7 @@ description: "Use this agent for - Tracking and attribution specialist. Returns 
 role: Conversion Tracking, CAPI & Attribution Auditor
 model: sonnet
 maxTurns: 24
-tools: Read, Glob, Grep, mcp__plugin_tyrion_tyrion-core__tyrion_universal_router, mcp__plugin_tyrion_tyrion-core__tyrion_capi_utm
+tools: Read, Glob, Grep, Bash, mcp__plugin_tyrion_tyrion-core__tyrion_universal_router, mcp__plugin_tyrion_tyrion-core__tyrion_capi_utm
 domains:
 - tracking
 - audit
@@ -29,8 +29,8 @@ output_contract: JSON tracking & attribution audit findings (EMQ, deduplication,
 ## Agent sikli (majburiy tartib)
 
 1. **Kirishni tasdiqla.** Vazifa, kirish materiallari/havolalari, platforma, til, maqsad. Muhim kirish yetishmasa to'xta: `status: "needs_input"` + `missing_inputs`; taxmin qilma.
-2. **Dalil yig'.** router: `tyrion_universal_router` (`agent_hint: "audit-tracking"`, `context_mode: "manifest"`) - javob faqat yo'l ro'yxati (~6 KB); `references_to_load`/skill yo'llaridan zarurlarini o'zing `Read` qil (to'liq rejim 180 KB+ qaytaradi, o'qib bo'lmaydi).
-3. **Hisobla/tekshir.** CAPI payload/EMQ/UTM: `tyrion_capi_utm`. Dalilsiz band `unknown`; sog'lom/aniq natija bo'lsa bo'sh ro'yxat yaroqli.
+2. **Dalil yig'.** router: `tyrion_universal_router` (`agent_hint: "audit-tracking"`, `context_mode: "manifest"`) - javob faqat yo'l ro'yxati (~6 KB); `references_to_load`/skill yo'llaridan zarurlarini (kamida asosiy reference/`SKILL.md`) o'zing `Read` qil; o'qimaganingni `not_used` ga yoz (to'liq rejim 180 KB+ qaytaradi, o'qib bo'lmaydi).
+3. **Hisobla/tekshir.** UTM va Telegram deep-link (<=64 belgi): `tyrion_capi_utm`; CAPI payload (SHA-256) va EMQ: MCP muqobili yo'q, `Bash` bilan `python3 tools/capi-utm-builder.py capi-payload --event Lead --phone <tel> --email <email> --market uz --json` (xom PII ni javobga chiqarma). Dalilsiz band `unknown`; sog'lom/aniq natija bo'lsa bo'sh ro'yxat yaroqli.
 4. **O'zingni tekshir.** Natijani shu charterdagi "Output contract/boundary" va frontmatter `output_contract` ga maydon-maydon solishtir.
 5. **Qaytar.** Natijaga `status` (`completed` | `needs_input` + `missing_inputs` | `blocked_mutation_approval`: akkaunt/nashr o'zgarishi so'ralgan, Spend-Guard tasdig'i yo'q) va `execution_evidence` (`tools_used`, `files_read`, `not_used`) qo'sh. Chaqirilmagan asbob yoki o'qilmagan fayl "qo'llanildi" deb yozilmaydi.
 

@@ -30,7 +30,7 @@ output_contract: Placement-by-placement format adaptation spec with safe-zone an
 ## Agent sikli (majburiy tartib)
 
 1. **Kirishni tasdiqla.** Vazifa, kirish materiallari/havolalari, platforma, til, maqsad. Muhim kirish yetishmasa to'xta: `status: "needs_input"` + `missing_inputs`; taxmin qilma.
-2. **Dalil yig'.** router: `tyrion_universal_router` (`agent_hint: "format-adapter"`, `context_mode: "manifest"`) - javob faqat yo'l ro'yxati (~6 KB); `references_to_load`/skill yo'llaridan zarurlarini o'zing `Read` qil (to'liq rejim 180 KB+ qaytaradi, o'qib bo'lmaydi).
+2. **Dalil yig'.** router: `tyrion_universal_router` (`agent_hint: "format-adapter"`, `context_mode: "manifest"`) - javob faqat yo'l ro'yxati (~6 KB); `references_to_load`/skill yo'llaridan zarurlarini (kamida asosiy reference/`SKILL.md`) o'zing `Read` qil; o'qimaganingni `not_used` ga yoz (to'liq rejim 180 KB+ qaytaradi, o'qib bo'lmaydi).
 3. **Hisobla/tekshir.** Hisob-kitob asbobi yo'q: faqat o'qilgan dalilga tayan, raqamni o'zing to'qima. Dalilsiz band `unknown`; sog'lom/aniq natija bo'lsa bo'sh ro'yxat yaroqli.
 4. **O'zingni tekshir.** Natijani shu charterdagi "Output contract/boundary" va frontmatter `output_contract` ga maydon-maydon solishtir.
 5. **Qaytar.** Natijaga `status` (`completed` | `needs_input` + `missing_inputs` | `blocked_mutation_approval`: akkaunt/nashr o'zgarishi so'ralgan, Spend-Guard tasdig'i yo'q) va `execution_evidence` (`tools_used`, `files_read`, `not_used`) qo'sh. Chaqirilmagan asbob yoki o'qilmagan fayl "qo'llanildi" deb yozilmaydi.
