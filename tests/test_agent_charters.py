@@ -31,7 +31,7 @@ CLI_TO_MCP = {
     "brain-search.py": "brain_search",
     "meta-insights-sync.py": "meta_live_insights",
 }
-MCP_COVERED_SUBCOMMANDS = {"meta-audience.py": {"architect"}, "skill-search.py": {"route", "execute"}, "creative-matrix.py": {"video-script", "matrix"}, "capi-utm-builder.py": {"utm"}}  # overlap/saturation/... uchun MCP yo'q
+MCP_COVERED_SUBCOMMANDS = {"meta-audience.py": {"architect"}, "skill-search.py": {"route", "execute"}, "creative-matrix.py": {"matrix"}, "capi-utm-builder.py": {"utm"}}  # overlap/saturation/... uchun MCP yo'q
 
 MCP_FOR_SCRIPT = {"meta-audience.py": "meta_audience", "skill-search.py": "universal_router", "creative-matrix.py": "creative_matrix", "capi-utm-builder.py": "capi_utm"}
 ROOTS = ("skills/", "wiki/", "rules/", "playbooks/", "contexts/", "templates/", "markets/", "manifests/", "docs/")
