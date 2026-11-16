@@ -2,6 +2,16 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
+## [Unreleased] — Agent charters as real sub-agents (all 36)
+
+### Added
+- `.claude/agents/` generated from `agents/` by `tools/install-hooks.py` (`--agents-only`, `sync_agents`, `render_project_agent`): rewrites plugin MCP names (`mcp__plugin_tyrion_tyrion-core__*`) to project names (`mcp__tyrion-core__*`) and drops `skills:`. Mirrors all 36 (`MIRRORED_AGENTS = None`).
+- `tests/test_agent_charters.py`: charter text vs `tools:` fit, MCP names exist on the server, paths exist on disk, mirror drift. 
+
+### Changed (all 36 charters)
+- `tools:` now covers every procedure step (`tyrion-core` MCP first; `Bash` only for `meta-audience.py overlap|saturation|retargeting|lookalike`, which has no MCP equivalent); no Write/Edit on audit agents.
+- Uniform `Agent sikli` (`completed` / `needs_input` / `blocked_mutation_approval`, `execution_evidence`), "when to invoke" descriptions, root-relative paths, "Tyrion Conductor". `commands/audit.md` now dispatches workers in parallel via the `Agent` tool and reports `execution_mode: native_subagent_dispatch | single_conductor_fallback`. Dangling `control-plane/` schema references replaced by explicit field lists. Router is called with `context_mode: "manifest"` (~6 KB instead of 180 KB+).
+
 ## [7.1.0] — 2026-11-12 (VK Ads skill)
 
 ### Added
