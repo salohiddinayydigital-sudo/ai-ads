@@ -137,7 +137,8 @@ def run_evals() -> dict[str, Any]:
             detail = f"status={plan['status']}, lang={plan['intent_analysis']['detected_language']}, skills={plan['required_skills']}"
         elif stype == "universal_route":
             route_total += 1
-            plan = ss_mod.route_task(sc["query"], load=True)
+            # `full` rejim: bu tekshiruv "to'liq ko'rsatma yuklandi" haqida (progressive rejim kesilgan bo'lakni halol `truncated` deb belgilaydi)
+            plan = ss_mod.route_task(sc["query"], load=True, context_mode="full")
             selected_skills = set(plan["required_skills"] + plan["supporting_skills"])
             all_agents_list = [plan["primary_agent"]] + list(plan["supporting_agents"])
             selected_agents = set(all_agents_list)

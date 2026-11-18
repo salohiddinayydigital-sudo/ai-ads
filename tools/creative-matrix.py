@@ -810,6 +810,98 @@ def generate_ad_copy_pack(
     }
 
 
+# Priors faqat baseline berilmaganda ishlatiladi va HEURISTIC_PRIOR_MODEL deb belgilanadi (akkaunt tarixi bilan almashtiring).
+_ITER_PRIORS = {"hook_rate": 25.0, "hold_rate": 12.0}
+_ITER_STAGES = [
+    # (metric, stage, hypothesis, change, keep)
+    ("hook_rate", "ATTENTION",
+     "Birinchi kadr/hook e'tiborni ushlamayapti (gipoteza).",
+     "Faqat ochilish 0-3s: birinchi kadr, ekrandagi matn, birinchi gap, kamera. 3 ta moddiy farqli hook.",
+     "Tana (mexanizm, isbot), taklif, CTA, davomiylik."),
+    ("hold_rate", "RETENTION",
+     "Hook ishlaydi, lekin tana va hikoya tomoshabinni ushlab turmayapti (gipoteza).",
+     "Tana: tempo (kesish chastotasi), mexanizm ko'rsatish tartibi, filler 4-10s, isbotni erta joylash.",
+     "Ishlayotgan hook, taklif, CTA."),
+    ("outbound_ctr", "CLICK",
+     "Ko'rishlar yaxshi, lekin klik yo'q: taklif, CTA yoki isbot yetarli emas (gipoteza).",
+     "CTA aniqligi, taklif ifodasi, isbot joylashuvi, primary text/headline.",
+     "Hook va tana strukturasi."),
+    ("lp_cvr", "LANDING",
+     "Klik bor, lekin sahifa/forma konvertatsiya qilmayapti: message match, taklif yoki tezlik (gipoteza).",
+     "Reklama va sahifa xabari mosligi, birinchi ekran, forma uzunligi, yuklanish tezligi. Kreativni EMAS, sahifani sinang.",
+     "Ishlayotgan kreativ."),
+    ("qualified_lead_rate", "LEAD_QUALITY",
+     "Lidlar arzon, lekin sifatsiz: kvalifikatsiya, auditoriya mosligi yoki savdo ishlovi (gipoteza).",
+     "Kreativda aniq filtr (narx/shart/kim uchun), forma savollari, auditoriya signali, CRM feedback (CAPI offline event). Savdo ishlovini tekshiring.",
+     "Hajm beruvchi hook."),
+]
+
+
+def diagnose_creative_iteration(
+    metrics: dict[str, float | None],
+    baselines: dict[str, float | None] | None = None,
+    cpa: float | None = None,
+    breakeven_cpa: float | None = None,
+    impressions: int | None = None,
+    min_impressions: int = 1000,
+) -> dict[str, Any]:
+    """Real ko'rsatkichlardan KETMA-KET (voronka bo'yicha) diagnostik GIPOTEZALAR. Avtomatik xulosa emas; baseline akkauntniki bo'lishi kerak."""
+    baselines = baselines or {}
+    findings: list[dict[str, Any]] = []
+    used_priors: list[str] = []
+    for metric, stage, hyp, change, keep in _ITER_STAGES:
+        val = metrics.get(metric)
+        if val is None:
+            continue
+        base = baselines.get(metric)
+        base_src = "ACCOUNT_BASELINE"
+        if base is None and metric in _ITER_PRIORS:
+            base, base_src = _ITER_PRIORS[metric], "HEURISTIC_PRIOR_MODEL"
+            used_priors.append(metric)
+        if base is None or base <= 0:
+            findings.append({"stage": stage, "metric": metric, "value": val, "status": "NO_BASELINE",
+                             "note": f"{metric} uchun akkaunt baseline yo'q: o'z kreativlaringiz o'rtachasi bilan solishtiring (--baseline-{metric.replace('_', '-')})."})
+            continue
+        ratio = val / base
+        status = "BELOW" if ratio < 0.85 else ("ABOVE" if ratio > 1.15 else "NEAR")
+        row: dict[str, Any] = {"stage": stage, "metric": metric, "value": val, "baseline": base, "baseline_source": base_src,
+                               "ratio_to_baseline": round(ratio, 2), "status": status}
+        if status == "BELOW":
+            row.update({"hypothesis": hyp, "change_next": change, "keep_constant": keep})
+        findings.append(row)
+
+    below = [f for f in findings if f["status"] == "BELOW"]
+    primary = below[0] if below else None  # eng yuqori (voronkada birinchi) yo'qotish: avval shuni tuzating
+    econ: dict[str, Any] = {}
+    if cpa is not None and breakeven_cpa is not None and breakeven_cpa > 0:
+        econ = {"cpa": cpa, "breakeven_cpa": breakeven_cpa, "above_breakeven": cpa > breakeven_cpa,
+                "note": "CPA break-even'dan yuqori bo'lsa ham, avval yo'qotish bosqichini toping; kreativ faqat bitta sabab."}
+    warnings = []
+    if impressions is not None and impressions < min_impressions:
+        warnings.append(f"Namuna kichik ({impressions} < {min_impressions} impression): xulosa ishonchsiz, ko'proq ma'lumot yig'ing.")
+    if used_priors:
+        warnings.append(f"{', '.join(used_priors)} uchun akkaunt baseline berilmadi: HEURISTIC_PRIOR_MODEL ishlatildi; o'z baseline'ingizni bering.")
+    if not findings:
+        warnings.append("Hech qanday ko'rsatkich berilmadi.")
+    return {
+        "schema": "tyrion.creative_iteration/v1",
+        "nature": "DIAGNOSTIC_HYPOTHESES (avtomatik xulosa emas)",
+        "findings": findings,
+        "priority_fix": None if not primary else {
+            "stage": primary["stage"], "hypothesis": primary["hypothesis"],
+            "change_next": primary["change_next"], "keep_constant": primary["keep_constant"],
+            "test_design": "Bitta o'zgaruvchi: faqat shu bosqich o'zgaradi; qolgani doimiy. Qaror mezonini oldindan yozing.",
+        },
+        "economics": econ,
+        "rules": [
+            "Kosmetik resize/qayta-sarlavha yangi konsept emas (Andromeda Entity ID bir xil).",
+            "Yangi konsept: avatar, muammo, angle yoki format materiel farq qilsin.",
+            "Qarorni CPA/ROAS va CRM lid sifati bilan tasdiqlang, faqat hook rate bilan emas.",
+        ],
+        "warnings": warnings,
+    }
+
+
 def analyze_fatigue(
     hook_rate: float,
     hold_rate: float,
@@ -877,6 +969,15 @@ def main(argv: list[str] | None = None) -> int:
     p_hk.add_argument("--languages", default="", help="Comma-separated BCP 47 language codes (e.g. en,de,fr,ar,uz_latin,ru)")
     p_hk.add_argument("--json", action="store_true")
 
+    p_it = sub.add_parser("iterate", help="Real ko'rsatkichlardan voronka bo'yicha diagnostik gipotezalar: nimani o'zgartirish, nimani saqlash")
+    for _m in ("hook-rate", "hold-rate", "outbound-ctr", "lp-cvr", "qualified-lead-rate"):
+        p_it.add_argument(f"--{_m}", type=tcore.finite_float, default=None, help="Foiz (%)")
+        p_it.add_argument(f"--baseline-{_m}", type=tcore.finite_float, default=None, help="Akkaunt o'rtachasi (%)")
+    p_it.add_argument("--cpa", type=tcore.finite_float, default=None)
+    p_it.add_argument("--breakeven-cpa", type=tcore.finite_float, default=None)
+    p_it.add_argument("--impressions", type=int, default=None)
+    p_it.add_argument("--json", action="store_true")
+
     p_fat = sub.add_parser("fatigue", help="Creative fatigue diagnostics via Hook Rate, Hold Rate, FTIR & UTIS")
     p_fat.add_argument("--hook-rate", type=tcore.finite_float, required=True)
     p_fat.add_argument("--hold-rate", type=tcore.finite_float, required=True)
@@ -924,6 +1025,13 @@ def main(argv: list[str] | None = None) -> int:
         res = generate_hooks(args.niche, args.offer, languages=langs)
     elif args.command == "fatigue":
         res = analyze_fatigue(args.hook_rate, args.hold_rate, args.ctr_drop_pct, args.frequency, args.ftir)
+    elif args.command == "iterate":
+        keys = ("hook_rate", "hold_rate", "outbound_ctr", "lp_cvr", "qualified_lead_rate")
+        res = diagnose_creative_iteration(
+            {k: getattr(args, k) for k in keys},
+            {k: getattr(args, f"baseline_{k}") for k in keys},
+            cpa=args.cpa, breakeven_cpa=args.breakeven_cpa, impressions=args.impressions,
+        )
     elif args.command == "video-script":
         res = generate_video_script(
             niche=args.niche, product=args.product, problem=args.problem,

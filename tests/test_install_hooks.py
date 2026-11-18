@@ -116,7 +116,7 @@ class InstallHooksDirectTests(unittest.TestCase):
             proc = self._run("--target", tmp, "--no-commands")
             self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
             settings = json.loads((Path(tmp) / ".claude" / "settings.json").read_text(encoding="utf-8"))
-            self.assertEqual(set(settings["hooks"]), {"SessionStart", "PreToolUse", "PostToolUse", "Stop"})
+            self.assertEqual(set(settings["hooks"]), {"SessionStart", "UserPromptSubmit", "PreToolUse", "PostToolUse", "Stop"})
             again = self._run("--target", tmp, "--no-commands")
             self.assertEqual(again.returncode, 0)
             self.assertIn("allaqachon joyida", again.stdout)

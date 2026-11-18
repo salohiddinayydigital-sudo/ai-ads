@@ -28,6 +28,7 @@ related_skills:
 - offers
 - uzbekistan-market-intel
 references:
+- skills/ads-plan/references/meta-strategy-deliverable.md
 - skills/ads/references/thinking-framework.md
 - skills/ads/references/budget-allocation.md
 risk_level: medium
@@ -35,6 +36,8 @@ output_contract: End-to-end Paid Media & Funnel Strategy Plan (Channel Mix, Audi
 ---
 
 # Paid Media Plan
+
+> **Meta Ads strategy requests** (Meta/Facebook/Instagram, any "strategiya tuz"): follow `skills/ads-plan/references/meta-strategy-deliverable.md` - evidence labels, funnel applicability decision, ABO/CBO and Advantage+ choices, 6-status targeting, `calculator.py funnel-economics`, tracking section, roadmap table and the 15-section client-ready deliverable. In a multi-specialist run the `tyrion-universal` conductor owns the order; this skill owns the planning rules.
 
 1. Read the setup profile, business economics, evidence, current account state, and
    relevant industry template as optional input.

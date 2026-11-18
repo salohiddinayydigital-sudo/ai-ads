@@ -1,0 +1,1750 @@
+{
+  "schema": "tyrion-workflows/v1",
+  "$comment": "Yagona routing manbasi (cross-agent oqimlar). tools/skill-search.py route_task bu faylni skill reytingidan OLDIN o'qiydi. Faqat bir nechta mutaxassis kerak bo'lgan yoki reyting xato yo'naltiradigan hollar shu yerda; oddiy 1-mutaxassis vazifalari odatdagi skill reytingiga tushadi. Validatsiya: python3 tools/tyrion_workflows.py check",
+  "guards": {
+    "orchestrator": "tyrion-universal",
+    "max_delegation_depth": 1,
+    "specialists_may_not_load": [
+      "tyrion-universal"
+    ],
+    "specialists_may_not_spawn_agents": true,
+    "dedupe_key": "agent+goal",
+    "note": "Mutaxassis (sub-agent) Universal Skillni qayta chaqirmaydi; u faqat o'z charter va skilllari bilan chegaralangan vazifani bajarib natija qaytaradi."
+  },
+  "platform_agents": {
+    "meta": {
+      "words": [
+        "meta ads",
+        "meta reklama",
+        "meta",
+        "facebook",
+        "instagram",
+        "insta ",
+        "fb ads",
+        "фейсбук",
+        "инстаграм",
+        "мета "
+      ],
+      "audit_agent": "audit-meta"
+    },
+    "vk": {
+      "words": [
+        "vk ads",
+        "vk reklama",
+        " vk ",
+        "vkontakte",
+        "вконтакте",
+        " вк ",
+        "во вк",
+        "vk реклам"
+      ],
+      "audit_agent": "audit-meta"
+    },
+    "google": {
+      "words": [
+        "google",
+        "gugl",
+        "pmax",
+        "performance max",
+        "гугл"
+      ],
+      "audit_agent": "audit-google"
+    },
+    "tiktok": {
+      "words": [
+        "tiktok",
+        "tik tok",
+        "тикток"
+      ],
+      "audit_agent": "audit-tiktok"
+    },
+    "telegram": {
+      "words": [
+        "telegram",
+        "telegramda",
+        "tg ads",
+        "телеграм"
+      ],
+      "audit_agent": "audit-telegram"
+    },
+    "youtube": {
+      "words": [
+        "youtube",
+        "yutub",
+        "ютуб"
+      ],
+      "audit_agent": "audit-youtube"
+    },
+    "linkedin": {
+      "words": [
+        "linkedin"
+      ],
+      "audit_agent": "audit-linkedin"
+    },
+    "yandex": {
+      "words": [
+        "yandex",
+        "yandeks",
+        "яндекс"
+      ],
+      "audit_agent": "audit-google"
+    }
+  },
+  "workflows": [
+    {
+      "id": "competitor_strategy",
+      "extends": "meta_strategy",
+      "title": "Raqobatchilarni o'rganib reklama strategiyasi tuzish",
+      "priority": 96,
+      "match": {
+        "all_of": [
+          [
+            "raqobatchi",
+            "raqib",
+            "konkurent",
+            "конкурент",
+            "competitor"
+          ],
+          [
+            "strategiya",
+            "strategy",
+            "стратег",
+            "reja",
+            "rejasi"
+          ],
+          [
+            "reklama",
+            "реклам",
+            "ads",
+            "meta",
+            "facebook",
+            "instagram",
+            "target",
+            "таргет"
+          ]
+        ],
+        "none_of": [
+          [
+            "vk ads",
+            " vk ",
+            "yandex",
+            "яндекс",
+            "google ads",
+            "tiktok ads"
+          ]
+        ]
+      },
+      "primary_agent": "positioning-strategist",
+      "stage_overrides": {
+        "research": {
+          "optional_when": ""
+        }
+      },
+      "meta_only": true
+    },
+    {
+      "id": "meta_strategy",
+      "title": "To'liq Meta Ads strategiya (biznes diagnostikasidan tasdiqlangan strategiyagacha)",
+      "priority": 95,
+      "match": {
+        "all_of": [
+          [
+            "meta",
+            "мета ",
+            "targetolog",
+            "таргет",
+            "reklama",
+            "реклам",
+            "ads",
+            "pullik trafik",
+            "paid social",
+            "facebook ads",
+            "instagram reklama",
+            "instagram ads",
+            "fb ads"
+          ],
+          [
+            "strategiya",
+            "strategy",
+            "стратег",
+            "reja",
+            "plan ",
+            "plani",
+            "rejasi",
+            "yo'l xarita",
+            "roadmap",
+            "tuz",
+            "tayyorla",
+            "build",
+            "create",
+            "составь",
+            "разработ"
+          ]
+        ],
+        "none_of": [
+          [
+            "google ads",
+            "pmax",
+            "tiktok ads",
+            "youtube ads",
+            "seo ",
+            "email",
+            "kontent",
+            "контент",
+            "content",
+            "marketing reja",
+            "marketing plan",
+            "маркетинг план"
+          ]
+        ]
+      },
+      "deliverable": "client_ready_meta_strategy",
+      "reference": "skills/ads-plan/references/meta-strategy-deliverable.md",
+      "primary_agent": "launch-planner",
+      "stages": [
+        {
+          "id": "intake",
+          "agent": "conductor",
+          "title": "Biznes va maqsadni aniqlash (verified vs taxmin)",
+          "skills": [
+            "ads-plan"
+          ],
+          "needs": [],
+          "output": "business_brief",
+          "ask_only_if_missing": [
+            "mahsulot/xizmat va taklif",
+            "narx va marja (yoki COGS)",
+            "maqsad (lid/sotuv) va oylik byudjet",
+            "mavjud Pixel/CAPI/CRM holati"
+          ]
+        },
+        {
+          "id": "research",
+          "agent": "research-worker",
+          "title": "Bozor va raqobatchi tadqiqoti (manbali)",
+          "skills": [
+            "ads-competitor",
+            "customer-research"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "optional_when": "foydalanuvchi allaqachon raqobatchi/bozor ma'lumotini bergan",
+          "output": "market_competitor_findings"
+        },
+        {
+          "id": "economics",
+          "agent": "audit-budget",
+          "title": "Unit-iqtisod: break-even/target CPA & ROAS, test byudjeti",
+          "skills": [
+            "ads-budget",
+            "ads-math"
+          ],
+          "tools": [
+            "tools/calculator.py"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "unit_economics"
+        },
+        {
+          "id": "positioning",
+          "agent": "positioning-strategist",
+          "title": "ICP, awareness bosqichi, USP/pozitsiya",
+          "skills": [
+            "ads-dna",
+            "product-marketing"
+          ],
+          "needs": [
+            "intake",
+            "research"
+          ],
+          "output": "icp_usp_positioning"
+        },
+        {
+          "id": "audience",
+          "agent": "meta-audience-architect",
+          "title": "Auditoriya arxitekturasi + Detailed Targeting (6-status) + exclusion",
+          "skills": [
+            "ads-meta-audience",
+            "ads-meta"
+          ],
+          "tools": [
+            "tools/meta-targeting-engine.py",
+            "tools/meta-audience.py"
+          ],
+          "needs": [
+            "positioning",
+            "economics"
+          ],
+          "output": "audience_architecture"
+        },
+        {
+          "id": "architecture",
+          "agent": "launch-planner",
+          "title": "Kampaniya arxitekturasi: maqsad, struktura, ABO/CBO, Advantage+, test va scale yo'l xaritasi",
+          "skills": [
+            "ads-plan",
+            "ads-launch",
+            "ads-budget"
+          ],
+          "needs": [
+            "positioning",
+            "economics"
+          ],
+          "output": "campaign_architecture"
+        },
+        {
+          "id": "creative",
+          "agent": "creative-strategist",
+          "title": "Kreativ strategiya: angle x avatar x format matritsa",
+          "skills": [
+            "ad-creative",
+            "marketing-psychology",
+            "ads-test"
+          ],
+          "tools": [
+            "tools/creative-matrix.py"
+          ],
+          "needs": [
+            "positioning"
+          ],
+          "output": "creative_strategy"
+        },
+        {
+          "id": "tracking",
+          "agent": "tracking-specialist",
+          "title": "Pixel/CAPI/UTM/CRM o'lchov rejasi",
+          "skills": [
+            "ads-server-side-tracking",
+            "ads-attribution"
+          ],
+          "tools": [
+            "tools/capi-utm-builder.py"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "measurement_plan"
+        },
+        {
+          "id": "video",
+          "agent": "reels-scriptwriter",
+          "title": "Eng ustuvor 1-2 konsept uchun video skript",
+          "skills": [
+            "reels-scripting",
+            "ad-creative"
+          ],
+          "tools": [
+            "tools/creative-matrix.py"
+          ],
+          "needs": [
+            "creative"
+          ],
+          "output": "video_scripts"
+        },
+        {
+          "id": "validate",
+          "agent": "source-verifier",
+          "title": "Faktlar, raqamlar va policy xavfini tekshirish",
+          "skills": [
+            "ads-research"
+          ],
+          "needs": [
+            "economics",
+            "architecture",
+            "audience",
+            "creative",
+            "tracking",
+            "video"
+          ],
+          "output": "claim_verification"
+        },
+        {
+          "id": "synthesize",
+          "agent": "conductor",
+          "title": "Yagona client-ready strategiya hujjatiga sintez",
+          "skills": [
+            "ads-plan"
+          ],
+          "needs": [
+            "validate"
+          ],
+          "output": "final_strategy"
+        }
+      ],
+      "meta_only": true
+    },
+    {
+      "id": "marketing_plan_full",
+      "title": "To'liq marketing reja (kanallar, kontent, launch, byudjet)",
+      "priority": 92,
+      "match": {
+        "all_of": [
+          [
+            "marketing",
+            "маркетинг"
+          ],
+          [
+            "reja",
+            "plan",
+            "strategiya",
+            "стратег",
+            "rejasi"
+          ]
+        ],
+        "none_of": [
+          [
+            "meta ads",
+            "google ads",
+            "tiktok ads",
+            "seo audit",
+            "reels"
+          ]
+        ]
+      },
+      "deliverable": "integrated_marketing_plan",
+      "primary_agent": "launch-planner",
+      "stages": [
+        {
+          "id": "intake",
+          "agent": "conductor",
+          "title": "Biznes, maqsad, byudjet va cheklovlar",
+          "skills": [
+            "ads-plan"
+          ],
+          "needs": [],
+          "output": "business_brief",
+          "ask_only_if_missing": [
+            "biznes va taklif",
+            "maqsad va muddat",
+            "byudjet",
+            "hozirgi kanallar"
+          ]
+        },
+        {
+          "id": "research",
+          "agent": "research-worker",
+          "title": "Bozor, mijoz va raqobatchi tadqiqoti",
+          "skills": [
+            "ads-research",
+            "customer-research"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "market_findings"
+        },
+        {
+          "id": "positioning",
+          "agent": "positioning-strategist",
+          "title": "ICP va pozitsiyalash",
+          "skills": [
+            "ads-dna",
+            "product-marketing"
+          ],
+          "needs": [
+            "research"
+          ],
+          "output": "positioning"
+        },
+        {
+          "id": "economics",
+          "agent": "audit-budget",
+          "title": "Byudjet va unit-iqtisod",
+          "skills": [
+            "ads-budget",
+            "ads-math"
+          ],
+          "tools": [
+            "tools/calculator.py"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "unit_economics"
+        },
+        {
+          "id": "launch",
+          "agent": "launch-planner",
+          "title": "Kanal tanlovi, launch ketma-ketligi, voronka",
+          "skills": [
+            "ads-plan",
+            "launch"
+          ],
+          "needs": [
+            "positioning",
+            "economics"
+          ],
+          "output": "channel_launch_plan"
+        },
+        {
+          "id": "content",
+          "agent": "content-planner",
+          "title": "Kontent ustunlari va kalendar",
+          "skills": [
+            "content-strategy"
+          ],
+          "needs": [
+            "positioning"
+          ],
+          "output": "content_system"
+        },
+        {
+          "id": "synthesize",
+          "agent": "conductor",
+          "title": "Yagona marketing reja hujjati",
+          "skills": [
+            "ads-plan"
+          ],
+          "needs": [
+            "launch",
+            "content"
+          ],
+          "output": "final_plan"
+        }
+      ]
+    },
+    {
+      "id": "campaign_diagnosis",
+      "title": "Reklama nima uchun yaxshi ishlamayapti: dalilga asoslangan diagnostika",
+      "priority": 90,
+      "match": {
+        "all_of": [
+          [
+            "meta",
+            "facebook",
+            "instagram",
+            "kampaniya",
+            "campaign",
+            "reklama",
+            "реклам",
+            "кампани",
+            "ads",
+            "lid",
+            "target",
+            "таргет"
+          ],
+          [
+            "ishlamayapti",
+            "yaxshi ishlam",
+            "nima sababdan",
+            "nega ",
+            "nimaga",
+            "qimmat",
+            "sifatsiz",
+            "tushib",
+            "tushdi",
+            "yomon",
+            "not working",
+            "underperform",
+            "why is",
+            "too expensive",
+            "не работает",
+            "почему",
+            "дорог",
+            "плох",
+            "диагност",
+            "tashxis",
+            "muammo"
+          ]
+        ]
+      },
+      "deliverable": "diagnosis_report",
+      "primary_agent": "audit-meta",
+      "primary_agent_by_platform": true,
+      "stages": [
+        {
+          "id": "evidence",
+          "agent": "conductor",
+          "title": "Dalil yig'ish: eksport/skrinshot/akkaunt ma'lumoti bormi?",
+          "skills": [],
+          "needs": [],
+          "output": "evidence_inventory",
+          "ask_only_if_missing": [
+            "eksport (CSV/JSON) yoki skrinshot",
+            "maqsad natija (lid/sotuv) va muddat"
+          ]
+        },
+        {
+          "id": "numbers",
+          "agent": "conductor",
+          "title": "Deterministik tahlil (eksport bo'lsa): wasted spend, Breakdown Effect",
+          "skills": [],
+          "tools": [
+            "tools/ad-export-analyzer.py"
+          ],
+          "needs": [
+            "evidence"
+          ],
+          "optional_when": "eksport berilmagan",
+          "output": "export_analysis"
+        },
+        {
+          "id": "platform_audit",
+          "agent": "audit-meta",
+          "title": "Platforma auditi (Pixel/CAPI, struktura, auditoriya, kreativ)",
+          "skills": [
+            "ads-meta",
+            "ads-meta-audience"
+          ],
+          "needs": [
+            "evidence"
+          ],
+          "output": "audit_findings"
+        },
+        {
+          "id": "tracking",
+          "agent": "audit-tracking",
+          "title": "O'lchov va atributsiya tekshiruvi",
+          "skills": [
+            "ads-attribution",
+            "ads-server-side-tracking"
+          ],
+          "needs": [
+            "evidence"
+          ],
+          "optional_when": "muammo faqat kreativ yoki byudjetda ekani aniq",
+          "output": "tracking_findings"
+        },
+        {
+          "id": "creative",
+          "agent": "audit-creative",
+          "title": "Kreativ charchoq va konsept xilma-xilligi",
+          "skills": [
+            "ads-creative",
+            "ads-test"
+          ],
+          "tools": [
+            "tools/creative-matrix.py"
+          ],
+          "needs": [
+            "evidence"
+          ],
+          "optional_when": "kreativ ma'lumoti yo'q",
+          "output": "creative_findings"
+        },
+        {
+          "id": "budget",
+          "agent": "audit-budget",
+          "title": "Byudjet yetarliligi va marginal CPA",
+          "skills": [
+            "ads-budget"
+          ],
+          "tools": [
+            "tools/calculator.py"
+          ],
+          "needs": [
+            "evidence"
+          ],
+          "optional_when": "unit-iqtisod ma'lumoti yo'q",
+          "output": "budget_findings"
+        },
+        {
+          "id": "synthesize",
+          "agent": "conductor",
+          "title": "Ildiz sabablarni ehtimollik va dalil bilan tartiblash; keyingi 3 harakat",
+          "skills": [
+            "ads-optimize"
+          ],
+          "needs": [
+            "numbers",
+            "platform_audit",
+            "tracking",
+            "creative",
+            "budget"
+          ],
+          "output": "diagnosis_report"
+        }
+      ]
+    },
+    {
+      "id": "results_analysis",
+      "title": "Reklama natijalarini tahlil qilish (eksport, hisobot, Kill/Keep/Scale)",
+      "priority": 85,
+      "match": {
+        "all_of": [
+          [
+            "natija",
+            "result",
+            "eksport",
+            "export",
+            "csv",
+            "performance",
+            "показател",
+            "результат",
+            "statistik",
+            "hisobot",
+            "metrik"
+          ],
+          [
+            "tahlil",
+            "analy",
+            "baholab",
+            "tekshir",
+            "разбер",
+            "анализ",
+            "ko'rib chiq",
+            "izohlab",
+            "review",
+            "interpret"
+          ]
+        ],
+        "none_of": [
+          [
+            "raqobatchi",
+            "competitor",
+            "конкурент"
+          ]
+        ]
+      },
+      "deliverable": "performance_analysis",
+      "primary_agent": "audit-meta",
+      "primary_agent_by_platform": true,
+      "stages": [
+        {
+          "id": "evidence",
+          "agent": "conductor",
+          "title": "Ma'lumot manbasi va davrni aniqlash",
+          "skills": [],
+          "needs": [],
+          "output": "evidence_inventory",
+          "ask_only_if_missing": [
+            "eksport fayli yoki raqamlar (spend, natija, impressions, CTR)",
+            "maqsad natija va break-even"
+          ]
+        },
+        {
+          "id": "numbers",
+          "agent": "conductor",
+          "title": "Deterministik hisob: eksport + Breakdown Effect + break-even",
+          "skills": [],
+          "tools": [
+            "tools/ad-export-analyzer.py",
+            "tools/calculator.py"
+          ],
+          "needs": [
+            "evidence"
+          ],
+          "output": "export_analysis"
+        },
+        {
+          "id": "audit",
+          "agent": "audit-meta",
+          "title": "Raqamlarni izohlash: struktura, kreativ, auditoriya, o'lchov",
+          "skills": [
+            "ads-meta"
+          ],
+          "needs": [
+            "numbers"
+          ],
+          "output": "audit_findings"
+        },
+        {
+          "id": "synthesize",
+          "agent": "conductor",
+          "title": "Kill/Keep/Scale qarorlari va keyingi sprint (Spend-Guard bilan)",
+          "skills": [
+            "ads-report"
+          ],
+          "tools": [
+            "tools/spend-guard.py"
+          ],
+          "needs": [
+            "audit"
+          ],
+          "output": "performance_analysis"
+        }
+      ]
+    },
+    {
+      "id": "creative_improve",
+      "title": "Kreativlarni yaxshilash: diagnostika -> yangi konsept -> skript -> test",
+      "priority": 88,
+      "match": {
+        "all_of": [
+          [
+            "kreativ",
+            "creative",
+            "креатив",
+            "reklama roligi",
+            "video reklama",
+            "ad creative",
+            "bannerlar"
+          ],
+          [
+            "yaxshila",
+            "kuchaytir",
+            "improve",
+            "optimi",
+            "charchoq",
+            "fatigue",
+            "kuchsiz",
+            "ishlamayapti",
+            "yangila",
+            "iterat",
+            "улучш",
+            "усил",
+            "обнов",
+            "boost",
+            "fix",
+            "yaxshiroq"
+          ]
+        ]
+      },
+      "deliverable": "creative_iteration_plan",
+      "primary_agent": "creative-strategist",
+      "stages": [
+        {
+          "id": "evidence",
+          "agent": "conductor",
+          "title": "Mavjud kreativlar va ko'rsatkichlar (hook/hold rate, CTR, CPA, lid sifati)",
+          "skills": [],
+          "needs": [],
+          "output": "creative_evidence",
+          "ask_only_if_missing": [
+            "hozirgi kreativlar yoki ularning tavsifi",
+            "kamida: spend + natija; ideal: hook rate, hold rate, outbound CTR"
+          ]
+        },
+        {
+          "id": "diagnose",
+          "agent": "audit-creative",
+          "title": "Diagnostik gipotezalar: qaysi bosqichda yo'qotish bor",
+          "skills": [
+            "ads-creative",
+            "ads-test"
+          ],
+          "tools": [
+            "tools/creative-matrix.py"
+          ],
+          "needs": [
+            "evidence"
+          ],
+          "output": "creative_diagnosis"
+        },
+        {
+          "id": "concepts",
+          "agent": "creative-strategist",
+          "title": "Yangi konseptlar (haqiqiy farqli: avatar/muammo/angle/format) + nimani saqlash",
+          "skills": [
+            "ad-creative",
+            "marketing-psychology"
+          ],
+          "tools": [
+            "tools/creative-matrix.py"
+          ],
+          "needs": [
+            "diagnose"
+          ],
+          "output": "new_concepts"
+        },
+        {
+          "id": "scripts",
+          "agent": "reels-scriptwriter",
+          "title": "Eng ustuvor konseptlar uchun video skript + hooklar",
+          "skills": [
+            "reels-scripting",
+            "ad-creative"
+          ],
+          "tools": [
+            "tools/creative-matrix.py"
+          ],
+          "needs": [
+            "concepts"
+          ],
+          "output": "video_scripts"
+        },
+        {
+          "id": "copy",
+          "agent": "copy-writer",
+          "title": "Primary text/headline paketi (landing bilan mos)",
+          "skills": [
+            "copywriting",
+            "ad-creative"
+          ],
+          "needs": [
+            "concepts"
+          ],
+          "output": "copy_pack"
+        },
+        {
+          "id": "synthesize",
+          "agent": "conductor",
+          "title": "Test rejasi: nima o'zgaradi, nima doimiy, qaror mezonlari",
+          "skills": [
+            "ads-test"
+          ],
+          "needs": [
+            "scripts",
+            "copy"
+          ],
+          "output": "creative_iteration_plan"
+        }
+      ]
+    },
+    {
+      "id": "video_script",
+      "title": "Professional Reels / video reklama ssenariysi",
+      "priority": 86,
+      "match": {
+        "all_of": [
+          [
+            "reels",
+            "ssenari",
+            "skript",
+            "script",
+            "ugc",
+            "shorts",
+            "сценари",
+            "рилс",
+            "video reklama ssen",
+            "video ad",
+            "tiktok video",
+            "video yoz",
+            "video g'oya"
+          ]
+        ],
+        "none_of": [
+          [
+            "montaj",
+            "montage",
+            "монтаж",
+            "edit this",
+            "videoni edit"
+          ]
+        ]
+      },
+      "deliverable": "shoot_ready_video_script_package",
+      "reference": "skills/reels-scripting/references/performance-video-system.md",
+      "primary_agent": "reels-scriptwriter",
+      "stages": [
+        {
+          "id": "brief",
+          "agent": "conductor",
+          "title": "Strategik brief: avatar, awareness, angle, taklif (taxmin va fakt ajratiladi)",
+          "skills": [
+            "reels-scripting"
+          ],
+          "needs": [],
+          "output": "strategic_brief",
+          "ask_only_if_missing": [
+            "mahsulot/xizmat va taklif",
+            "kim uchun (avatar) va asosiy muammo",
+            "tasdiqlangan isbot (natija, sharh, litsenziya) - bo'lmasa placeholder"
+          ]
+        },
+        {
+          "id": "script",
+          "agent": "reels-scriptwriter",
+          "title": "3+ hook, vaqt-kodli storyboard, montaj ko'rsatmasi",
+          "skills": [
+            "reels-scripting",
+            "ad-creative"
+          ],
+          "tools": [
+            "tools/creative-matrix.py"
+          ],
+          "needs": [
+            "brief"
+          ],
+          "output": "video_script"
+        },
+        {
+          "id": "copy",
+          "agent": "copy-writer",
+          "title": "Reklama matni paketi (primary text, headline, CTA)",
+          "skills": [
+            "copywriting"
+          ],
+          "needs": [
+            "brief"
+          ],
+          "optional_when": "foydalanuvchi faqat skript so'ragan",
+          "output": "copy_pack"
+        },
+        {
+          "id": "synthesize",
+          "agent": "conductor",
+          "title": "Da'volar tekshiruvi (claim_safety) va yagona paket",
+          "skills": [
+            "ad-creative"
+          ],
+          "needs": [
+            "script",
+            "copy"
+          ],
+          "output": "final_package"
+        }
+      ]
+    },
+    {
+      "id": "video_edit",
+      "title": "Video montaj / motion grafika rejasi va bajarilishi",
+      "priority": 87,
+      "match": {
+        "all_of": [
+          [
+            "montaj",
+            "montage",
+            "монтаж",
+            "edit video",
+            "video edit",
+            "videoni edit",
+            "motion graphics",
+            "animatsion video",
+            "animation video"
+          ]
+        ]
+      },
+      "deliverable": "edit_spec_and_assets",
+      "primary_agent": "video-editor",
+      "stages": [
+        {
+          "id": "inputs",
+          "agent": "conductor",
+          "title": "Skript/xom material va eksport platformasi",
+          "skills": [],
+          "needs": [],
+          "output": "edit_inputs",
+          "ask_only_if_missing": [
+            "skript yoki xom video",
+            "platforma va davomiylik"
+          ]
+        },
+        {
+          "id": "edit",
+          "agent": "video-editor",
+          "title": "Montaj ko'rsatmasi/bajarilishi",
+          "skills": [
+            "video-editing",
+            "video-motion-graphics"
+          ],
+          "tools": [
+            "tools/video-run.py"
+          ],
+          "needs": [
+            "inputs"
+          ],
+          "output": "edit_package"
+        }
+      ]
+    },
+    {
+      "id": "competitor_research",
+      "title": "Raqobatchilar tahlili (manbali) va o'zimiz uchun xulosa",
+      "priority": 80,
+      "match": {
+        "all_of": [
+          [
+            "raqobatchi",
+            "raqib",
+            "konkurent",
+            "конкурент",
+            "competitor",
+            "ads library",
+            "reklama kutubxonasi"
+          ],
+          [
+            "tahlil",
+            "o'rgan",
+            "analy",
+            "research",
+            "teardown",
+            "анализ",
+            "изуч",
+            "ko'rib chiq",
+            "solishtir",
+            "compare"
+          ]
+        ]
+      },
+      "deliverable": "competitor_teardown",
+      "primary_agent": "research-worker",
+      "stages": [
+        {
+          "id": "scope",
+          "agent": "conductor",
+          "title": "Raqobatchilar ro'yxati va kirish imkoniyati (Ads Library/sayt)",
+          "skills": [],
+          "needs": [],
+          "output": "scope",
+          "ask_only_if_missing": [
+            "raqobatchi nomlari yoki nisha/shahar",
+            "o'zimizning taklif/narx"
+          ]
+        },
+        {
+          "id": "research",
+          "agent": "research-worker",
+          "title": "Reklama, taklif, angle va voronka teardown (faqat ko'rilgan narsa)",
+          "skills": [
+            "ads-competitor",
+            "ads-research"
+          ],
+          "needs": [
+            "scope"
+          ],
+          "output": "teardown"
+        },
+        {
+          "id": "positioning",
+          "agent": "positioning-strategist",
+          "title": "Pozitsiya bo'shliqlari va o'z angle'lar",
+          "skills": [
+            "ads-competitor",
+            "ads-dna"
+          ],
+          "needs": [
+            "research"
+          ],
+          "output": "positioning_gaps"
+        },
+        {
+          "id": "verify",
+          "agent": "source-verifier",
+          "title": "Da'volar va manbalar tekshiruvi",
+          "skills": [
+            "ads-research"
+          ],
+          "needs": [
+            "research"
+          ],
+          "output": "claim_verification"
+        },
+        {
+          "id": "synthesize",
+          "agent": "conductor",
+          "title": "Taqqoslash jadvali + original konsept yo'nalishlari (nusxalamasdan)",
+          "skills": [
+            "ads-competitor"
+          ],
+          "needs": [
+            "positioning",
+            "verify"
+          ],
+          "output": "competitor_teardown"
+        }
+      ]
+    },
+    {
+      "id": "audience_design",
+      "title": "Meta auditoriya arxitekturasi va Detailed Targeting tekshiruvi",
+      "priority": 78,
+      "match": {
+        "all_of": [
+          [
+            "auditoriya",
+            "audience",
+            "detailed targeting",
+            "interest",
+            "lookalike",
+            "retargeting",
+            "overlap",
+            "аудитор",
+            "интерес",
+            "ретаргет"
+          ]
+        ]
+      },
+      "deliverable": "audience_architecture",
+      "primary_agent": "meta-audience-architect",
+      "stages": [
+        {
+          "id": "brief",
+          "agent": "conductor",
+          "title": "Nisha, geografiya, maqsad va mavjud pixel/seed ma'lumotlari",
+          "skills": [
+            "ads-meta-audience"
+          ],
+          "needs": [],
+          "output": "audience_brief",
+          "ask_only_if_missing": [
+            "nisha/mahsulot",
+            "geografiya va til",
+            "mavjud mijozlar/lid bazasi hajmi"
+          ]
+        },
+        {
+          "id": "architect",
+          "agent": "meta-audience-architect",
+          "title": "4 qatlam + exclusion + 6-status targeting tekshiruvi",
+          "skills": [
+            "ads-meta-audience",
+            "ads-meta"
+          ],
+          "tools": [
+            "tools/meta-targeting-engine.py",
+            "tools/meta-audience.py"
+          ],
+          "needs": [
+            "brief"
+          ],
+          "output": "audience_architecture"
+        }
+      ],
+      "meta_only": true
+    },
+    {
+      "id": "budget_math",
+      "title": "Byudjet va unit-iqtisod hisobi",
+      "priority": 76,
+      "match": {
+        "all_of": [
+          [
+            "byudjet",
+            "budget",
+            "break-even",
+            "breakeven",
+            "roas",
+            "cpa",
+            "бюджет",
+            "окупаем",
+            "unit econom",
+            "unit-iqtisod",
+            "marja",
+            "margin"
+          ],
+          [
+            "hisobla",
+            "calculate",
+            "compute",
+            "qancha",
+            "how much",
+            "посчит",
+            "рассчит",
+            "kerak",
+            "tuz",
+            "plan"
+          ]
+        ],
+        "none_of": [
+          [
+            "strategiya",
+            "strategy",
+            "стратег"
+          ]
+        ]
+      },
+      "deliverable": "economics_table",
+      "primary_agent": "audit-budget",
+      "stages": [
+        {
+          "id": "inputs",
+          "agent": "conductor",
+          "title": "Narx, COGS, yetkazish/komissiya, lead-to-sale konversiya (taxminlar belgilanadi)",
+          "skills": [
+            "ads-math"
+          ],
+          "needs": [],
+          "output": "econ_inputs",
+          "ask_only_if_missing": [
+            "narx va tannarx (yoki marja)",
+            "maqsad foyda %"
+          ]
+        },
+        {
+          "id": "calc",
+          "agent": "audit-budget",
+          "title": "Deterministik hisob va stsenariylar",
+          "skills": [
+            "ads-budget",
+            "ads-math"
+          ],
+          "tools": [
+            "tools/calculator.py",
+            "tools/spend-guard.py"
+          ],
+          "needs": [
+            "inputs"
+          ],
+          "output": "economics_table"
+        }
+      ]
+    },
+    {
+      "id": "tracking_setup",
+      "title": "Pixel / CAPI / UTM / CRM o'lchovini tekshirish yoki loyihalash",
+      "priority": 77,
+      "match": {
+        "all_of": [
+          [
+            "pixel",
+            "capi",
+            "conversions api",
+            "utm",
+            "tracking",
+            "trekking",
+            "ga4",
+            "atribut",
+            "пиксел",
+            "отслежив",
+            "konversiya o'lchov",
+            "event_id"
+          ]
+        ]
+      },
+      "deliverable": "measurement_plan",
+      "primary_agent": "tracking-specialist",
+      "stages": [
+        {
+          "id": "inventory",
+          "agent": "conductor",
+          "title": "Mavjud o'lchov: sayt/bot/CRM, hodisalar, rozilik",
+          "skills": [
+            "ads-attribution"
+          ],
+          "needs": [],
+          "output": "tracking_inventory",
+          "ask_only_if_missing": [
+            "sayt/bot/CRM turi",
+            "qaysi hodisalar hozir yuboriladi"
+          ]
+        },
+        {
+          "id": "plan",
+          "agent": "tracking-specialist",
+          "title": "Hodisa taksonomiyasi, deduplikatsiya, UTM, offline feedback",
+          "skills": [
+            "ads-server-side-tracking",
+            "ads-attribution"
+          ],
+          "tools": [
+            "tools/capi-utm-builder.py"
+          ],
+          "needs": [
+            "inventory"
+          ],
+          "output": "measurement_plan"
+        }
+      ]
+    },
+    {
+      "id": "campaign_launch",
+      "title": "Kampaniyani nazoratli ishga tushirish (Sandbox -> Validation -> Scale + Change Packet)",
+      "priority": 83,
+      "match": {
+        "all_of": [
+          [
+            "launch",
+            "ishga tushir",
+            "запуск",
+            "chiqar",
+            "start campaign",
+            "ishga tush"
+          ],
+          [
+            "kampaniya",
+            "campaign",
+            "reklama",
+            "кампани",
+            "реклам"
+          ]
+        ]
+      },
+      "deliverable": "launch_change_packet",
+      "reference": "skills/tyrion-universal/references/workflow-recipes.md",
+      "primary_agent": "launch-planner",
+      "stages": [
+        {
+          "id": "intake",
+          "agent": "conductor",
+          "title": "Iqtisodiy chegaralar: break-even, kunlik cap, stop-loss",
+          "skills": [
+            "ads-budget"
+          ],
+          "tools": [
+            "tools/calculator.py"
+          ],
+          "needs": [],
+          "output": "launch_bounds",
+          "ask_only_if_missing": [
+            "kunlik byudjet chegarasi",
+            "break-even yoki marja",
+            "tasdiqlangan kreativ/landing"
+          ]
+        },
+        {
+          "id": "plan",
+          "agent": "launch-planner",
+          "title": "Struktura, nomlash, 3 bosqichli test zinapoyasi",
+          "skills": [
+            "ads-launch",
+            "ads-plan"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "launch_architecture"
+        },
+        {
+          "id": "tracking",
+          "agent": "audit-tracking",
+          "title": "Event/dedup/UTM oldindan tekshiruv",
+          "skills": [
+            "ads-attribution"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "tracking_precheck"
+        },
+        {
+          "id": "policy",
+          "agent": "audit-policy-compliance",
+          "title": "Policy xavfini baholash (muvofiqlik kafolati berilmaydi)",
+          "skills": [
+            "ads-validate"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "policy_risk"
+        },
+        {
+          "id": "packet",
+          "agent": "conductor",
+          "title": "Spend-Guard + 6 xavfsizlik darvozasi + Change Packet (rollback bilan)",
+          "skills": [
+            "ads-launch"
+          ],
+          "tools": [
+            "tools/spend-guard.py"
+          ],
+          "needs": [
+            "plan",
+            "tracking",
+            "policy"
+          ],
+          "output": "launch_change_packet"
+        }
+      ]
+    },
+    {
+      "id": "client_report",
+      "title": "Mijoz hisoboti (natija, qaror, keyingi qadam)",
+      "priority": 74,
+      "match": {
+        "all_of": [
+          [
+            "hisobot",
+            "report",
+            "отчёт",
+            "отчет"
+          ]
+        ],
+        "none_of": [
+          [
+            "tahlil qil",
+            "analy"
+          ]
+        ]
+      },
+      "deliverable": "client_report",
+      "primary_agent": "release-verifier",
+      "stages": [
+        {
+          "id": "inputs",
+          "agent": "conductor",
+          "title": "Davr va ma'lumotlar manbasi",
+          "skills": [
+            "ads-report"
+          ],
+          "needs": [],
+          "output": "report_inputs",
+          "ask_only_if_missing": [
+            "davr",
+            "raqamlar yoki eksport"
+          ]
+        },
+        {
+          "id": "numbers",
+          "agent": "conductor",
+          "title": "Deterministik hisob",
+          "skills": [],
+          "tools": [
+            "tools/ad-export-analyzer.py",
+            "tools/calculator.py"
+          ],
+          "needs": [
+            "inputs"
+          ],
+          "optional_when": "eksport berilmagan",
+          "output": "export_analysis"
+        },
+        {
+          "id": "draft",
+          "agent": "conductor",
+          "title": "Hisobot qoralamasi",
+          "skills": [
+            "ads-report"
+          ],
+          "needs": [
+            "numbers"
+          ],
+          "output": "report_draft"
+        },
+        {
+          "id": "verify",
+          "agent": "release-verifier",
+          "title": "Yangi kontekstda raqam va da'volarni tekshirish",
+          "skills": [
+            "ads-report",
+            "ads-validate"
+          ],
+          "needs": [
+            "draft"
+          ],
+          "output": "client_report"
+        }
+      ]
+    },
+    {
+      "id": "full_audit",
+      "title": "To'liq reklama auditi (platforma + o'lchov + kreativ + byudjet + policy)",
+      "priority": 89,
+      "match": {
+        "all_of": [
+          [
+            "audit",
+            "аудит",
+            "tekshiruv"
+          ],
+          [
+            "to'liq",
+            "full",
+            "complete",
+            "barcha",
+            "cross-platform",
+            "полный",
+            "комплексн",
+            "chuqur",
+            "deep"
+          ]
+        ]
+      },
+      "deliverable": "audit_report",
+      "reference": "skills/tyrion-universal/references/workflow-recipes.md",
+      "primary_agent": "audit-meta",
+      "primary_agent_by_platform": true,
+      "stages": [
+        {
+          "id": "intake",
+          "agent": "conductor",
+          "title": "Kirish: akkaunt, davr, valyuta, mavjud dalil",
+          "skills": [
+            "ads-audit"
+          ],
+          "needs": [],
+          "output": "audit_scope",
+          "ask_only_if_missing": [
+            "eksport/skrinshot/akkaunt ma'lumoti",
+            "davr va maqsad"
+          ]
+        },
+        {
+          "id": "platform",
+          "agent": "audit-meta",
+          "title": "Platforma auditi",
+          "skills": [
+            "ads-meta",
+            "ads-meta-audience"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "platform_findings"
+        },
+        {
+          "id": "tracking",
+          "agent": "audit-tracking",
+          "title": "O'lchov va atributsiya",
+          "skills": [
+            "ads-attribution",
+            "ads-server-side-tracking"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "tracking_findings"
+        },
+        {
+          "id": "creative",
+          "agent": "audit-creative",
+          "title": "Kreativ salomatligi",
+          "skills": [
+            "ads-creative",
+            "ads-test"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "optional_when": "kreativ ma'lumoti yo'q",
+          "output": "creative_findings"
+        },
+        {
+          "id": "budget",
+          "agent": "audit-budget",
+          "title": "Byudjet va unit-iqtisod",
+          "skills": [
+            "ads-budget",
+            "ads-math"
+          ],
+          "tools": [
+            "tools/calculator.py"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "optional_when": "unit-iqtisod ma'lumoti yo'q",
+          "output": "budget_findings"
+        },
+        {
+          "id": "policy",
+          "agent": "audit-policy-compliance",
+          "title": "Policy xavfi (muvofiqlik kafolati berilmaydi)",
+          "skills": [
+            "ads-validate"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "policy_risk"
+        },
+        {
+          "id": "gate",
+          "agent": "release-verifier",
+          "title": "Sintez va topshirish darvozasi (50-topshirish-dod)",
+          "skills": [
+            "ads-report",
+            "ads-validate"
+          ],
+          "needs": [
+            "platform",
+            "tracking",
+            "creative",
+            "budget",
+            "policy"
+          ],
+          "output": "audit_report"
+        }
+      ]
+    },
+    {
+      "id": "weekly_review",
+      "title": "Haftalik hisob-kitob: attribution, byudjet, kreativ charchoq, fikrlar (bets) yopish",
+      "priority": 84,
+      "match": {
+        "all_of": [
+          [
+            "haftalik",
+            "weekly",
+            "еженедел",
+            "hafta"
+          ],
+          [
+            "review",
+            "hisobot",
+            "tahlil",
+            "ko'rib",
+            "обзор",
+            "отчет",
+            "отчёт",
+            "report"
+          ]
+        ]
+      },
+      "deliverable": "weekly_report",
+      "reference": "skills/tyrion-universal/references/workflow-recipes.md",
+      "primary_agent": "audit-budget",
+      "stages": [
+        {
+          "id": "intake",
+          "agent": "conductor",
+          "title": "Joriy hafta raqamlari + MEMORY/journal",
+          "skills": [
+            "ads-report"
+          ],
+          "needs": [],
+          "output": "week_inputs",
+          "ask_only_if_missing": [
+            "hafta raqamlari (spend, natija, CRM daromadi)"
+          ]
+        },
+        {
+          "id": "attribution",
+          "agent": "tracking-specialist",
+          "title": "CRM va platforma natijalarini solishtirish (blended ROAS)",
+          "skills": [
+            "ads-attribution"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "attribution_check"
+        },
+        {
+          "id": "economics",
+          "agent": "audit-budget",
+          "title": "Pacing, CPA dinamikasi, sof pul oqimi",
+          "skills": [
+            "ads-budget",
+            "ads-monitor"
+          ],
+          "tools": [
+            "tools/calculator.py"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "economics"
+        },
+        {
+          "id": "creative",
+          "agent": "audit-creative",
+          "title": "Charchoq, frequency, g'olib angle'lar",
+          "skills": [
+            "ads-creative",
+            "ads-monitor"
+          ],
+          "tools": [
+            "tools/creative-matrix.py"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "optional_when": "kreativ ma'lumoti yo'q",
+          "output": "creative_health"
+        },
+        {
+          "id": "settle",
+          "agent": "conductor",
+          "title": "O'tgan hafta gipotezalarini yopish (Confirmed/Refuted/Inconclusive) va 1-3 yangi falsifikatsiya qilinadigan bet",
+          "skills": [
+            "ads-test"
+          ],
+          "needs": [
+            "attribution",
+            "economics",
+            "creative"
+          ],
+          "output": "bets_settled"
+        },
+        {
+          "id": "verify",
+          "agent": "release-verifier",
+          "title": "Hisobotni yangi kontekstda tekshirish",
+          "skills": [
+            "ads-report",
+            "ads-validate"
+          ],
+          "needs": [
+            "settle"
+          ],
+          "output": "weekly_report"
+        }
+      ]
+    }
+  ]
+}

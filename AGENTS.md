@@ -8,29 +8,30 @@ updated: 2026-10-20
 
 # 🧠 TYRION v7.1 — KANONIK AGENT SHARTNOMASI
 
-> **Bir qator:** Tyrion v7.1 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 36 ixtisoslashgan agent, 64 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 18 slash buyruq va 29 ta 0-token deterministik Python asbobi.
+> **Bir qator:** Tyrion v7.1 — pullik reklama (Meta Ads, Google Ads, Telegram Ads, TikTok, YouTube va b.) hamda targetologiya uchun **ECC darajasidagi operatsion tizim**: yagona ildizda 36 ixtisoslashgan agent, 61 skill, 100 atomik wiki qayd, 9 playbook fayli, 6 kontekst fayli, 27 slash buyruq va 30 ta 0-token deterministik Python asbobi.
 
-<!-- tyrion:catalog agents=36 skills=65 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=29 -->
+<!-- tyrion:catalog agents=36 skills=61 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=30 -->
 
 ## 1. Boot Tartibi (Token Tejamkor)
 
 1. **Shu fayl (`AGENTS.md`)** — qatlamlar, 36 agent, orkestratsiya va xavfsizlik chegaralari.
 2. **`MEMORY.md`** — operator xotirasi (`<=90` qator: til qonuni, O'zbekiston bozori asoslari, aktiv Bet Ledger va saboqlar).
 3. **Vazifaga mos Kontekst va Qoida:** `contexts/` dan 1 ta ish rejimi (`audit-mode`, `launch-mode`, `scale-mode`, `creative-mode`, `uzbekistan-market`) va `rules/` dan 1–2 qoida.
-4. **Universal Auto-Router va 0-Token Kontekst Yuklash:** Foydalanuvchi oddiy tilda topshiriq berganda (`/skill-search` yoki `/agent` yozishi shart emas!), `python3 tools/skill-search.py route "<vazifa>" --load` avtomatik ravishda `primary_agent`, `supporting_agents`, `required_skills`, `references_to_load`, `rules_to_load` va `tools_to_use` ni aniqlaydi hamda faqat kerakli charter va `SKILL.md` fayllarini yuklaydi ([[20-token-gigiyena]], [[70-charter-baseline]]).
+4. **Universal Skill (`tyrion-universal`) — standart kirish nuqtasi:** oddiy marketing so'rovlari uchun yagona dirijyor. U `skill-search.py route` (va `manifests/workflows.json` — yagona marshrut manbasi) orqali agent/skill/asbob/oqimni o'zi aniqlaydi, tanlangan `SKILL.md` va charterlarni haqiqatan o'qiydi, mutaxassislarga delegatsiya qiladi (yoki ochiq `single_conductor_fallback`), natijalarni tekshiradi va bitta hujjatga sintez qiladi. `UserPromptSubmit` hooki (`prompt:route`) har marketing xabarida marshrut maslahatini beradi, `SessionStart` esa kirish nuqtasini eslatadi. Mutaxassis (sub-agent) uni qayta chaqirmaydi (`caller: specialist`).
+5. **Universal Auto-Router va 0-Token Kontekst Yuklash:** Foydalanuvchi oddiy tilda topshiriq berganda (`/skill-search` yoki `/agent` yozishi shart emas!), `python3 tools/skill-search.py route "<vazifa>" --load` avtomatik ravishda `primary_agent`, `supporting_agents`, `required_skills`, `references_to_load`, `rules_to_load` va `tools_to_use` ni aniqlaydi hamda faqat kerakli charter va `SKILL.md` fayllarini yuklaydi ([[20-token-gigiyena]], [[70-charter-baseline]]).
 
 ## 2. Yagona Ildizli Qatlamlar (Single-Root Layers)
 
 | Qatlam | Kanonik Manzil | Nima saqlanadi | Holat |
 |---|---|---|---|
 | **Agentlar** | `agents/` (36) | 36 ta ixtisoslashgan agent charteri (`Prompt Defense Baseline` + `skills:` ulangan) | kanonik |
-| **Skilllar** | `skills/` (65) | 38 platforma (`ads-*`, `ads/` + 39 `references/`) va 27 operator/marketing skill | kanonik |
-| **Buyruqlar** | `commands/` (18) | 18 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
+| **Skilllar** | `skills/` (61) | 38 platforma (`ads-*`, `ads/` + 39 `references/`) va 23 operator/marketing skill | kanonik |
+| **Buyruqlar** | `commands/` (27) | 27 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
 | **Kontekstlar** | `contexts/` (6) | 5 ta ECC Dynamic Context Mode (`audit`, `launch`, `scale`, `creative`, `uzbekistan`) + `README.md` | kanonik |
 | **Playbooklar** | `playbooks/` (9) | 8 ta to'liq nisha va platforma playbooki + `README.md` | kanonik |
 | **Bilim (Wiki)** | `wiki/` (100) | 100 ta atomik, wikilink bilan bog'langan bilim qaydi va 16 ta SOP | kanonik |
 | **Qoidalar** | `rules/` (9) | 8 ta buzilmas qoida (`00-manba` .. `70-charter-baseline`) + `README.md` | kanonik |
-| **Asboblar** | `tools/` (29) | `tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py` | faol |
+| **Asboblar** | `tools/` (30) | `tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py` | faol |
 | **Xotira** | `MEMORY.md` · `manifests/instincts.json` | Operator xotirasi (`<=90` qator) va `/learn` instinktlar reestri | faol |
 | **Katalog & Graf** | `manifests/catalog.json` · `graphify-out/` | Mashina o'qiydigan yagona reestr va 0-token wikilink grafi (generatsiya) | generatsiya |
 
@@ -46,11 +47,15 @@ updated: 2026-10-20
 | **Rejalash (3)** | `content-planner`, `launch-planner`, `seo-auditor` | Kontent tizimi, kampaniya launch rejasi, SEO va landing audit |
 | **Tadqiqot va Nazorat (5)** | `research-worker`, `source-verifier`, `release-verifier`, `skill-reviewer`, `tracking-specialist` | Manbali tadqiqot, GTM/CAPI arxitekturasi va topshirish darvozasi |
 
+## 3a. Workflow qatlami va Universal Conductor
+
+`manifests/workflows.json` (validatsiya: `python3 tools/tyrion_workflows.py check`) — cross-agent oqimlar: `meta_strategy`, `competitor_strategy`, `marketing_plan_full`, `campaign_diagnosis`, `results_analysis`, `creative_improve`, `video_script`, `video_edit`, `competitor_research`, `audience_design`, `budget_math`, `tracking_setup`, `campaign_launch`, `full_audit`, `weekly_review`, `client_report`. Har oqim DAG: bosqichlar `needs` bilan bog'langan, bog'liq bo'lmaganlari parallel (`parallel_levels`), ixtiyoriy bosqichlar `optional_when` bilan o'tkazib yuboriladi, bitta bosqich = bitta agent = bitta output (dublikat ish yo'q). Router faqat birinchi 2 mutaxassis charteri va primary skilllarni yuklaydi, qolgan bosqich skilllari `stage_skills_deferred` ga tushadi va bosqich boshlanganda o'qiladi. Progressive rejimda kesilgan skill `truncated` deb belgilanadi va `applied_skills_verified` ga kirmaydi: dirijyor uni `Read` bilan to'liq o'qigandan keyingina "qo'llandi" deydi. Yagona oqimga tushmagan oddiy (1 mutaxassis) vazifalar eski skill reytingi bilan marshrutlanadi.
+
 ## 4. Kanonik 6-Bosqichli Avtonom Marshrutlash va Orkestratsiya Oqimi
 
 Barcha muhitlarda (Claude Code, Codex, Cursor, Windsurf, CLI/MCP) bitta kanonik oqim amal qiladi:
 
-1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 18 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
+1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 27 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
 2. **Avtomatik tanlash (`route_task`):** `primary_agent`, `supporting_agents` (faqat haqiqatan mustaqil ko'p bosqichli vazifalarda), `required_skills`, `supporting_skills`, `rules_to_load` va `references_to_load` avtomatik aniqlanadi.
 3. **To'liq ko'rsatmalarni yuklash (`full` vs `manifest`):** Standart `full` rejimda tanlangan agent charterlari, `SKILL.md`, qoidalar va reference fayllarning **to'liq matni** (`compiled_context_package`) kontekst byudjeti (`max_context_bytes=180,000`) nazorati ostida yuklanadi. To'liq o'qilmagan skill hech qachon "qo'llanildi" deb ko'rsatilmaydi.
 4. **Amaliy ijro (`execute_task`) va Multi-Harness halolligi:**

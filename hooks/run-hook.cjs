@@ -82,7 +82,7 @@ if (args[0] === "--mcp") {
   return;
 }
 
-// Mode 2: Lifecycle Hook launcher (brief | guard | ingest | dod)
+// Mode 2: Lifecycle Hook launcher (brief | route | guard | ingest | dod)
 const hookMode = args[0] || "";
 
 // Fast exit for maintainer-only hooks (ingest, dod) when not in TYRION_DEV=1 mode
@@ -120,10 +120,21 @@ if (hookMode === "guard" && !extraArgs.includes("--target")) {
   }
 }
 
+// UserPromptSubmit payload ({"prompt": ...}) must reach the Python hook via stdin.
+let stdinPayload;
+if (hookMode === "route") {
+  try {
+    if (!process.stdin.isTTY) stdinPayload = fs.readFileSync(0, "utf-8");
+  } catch (_) {
+    stdinPayload = undefined;
+  }
+}
+
 try {
   const timeoutMs = hookMode === "dod" ? 4500 : 15000;
   const res = spawnSync(py.cmd, [...py.prefixArgs, hookScript, ...extraArgs], {
     encoding: "utf-8",
+    ...(stdinPayload !== undefined ? { input: stdinPayload } : {}),
     timeout: timeoutMs,
     env: { ...process.env, CLAUDE_PLUGIN_ROOT: PLUGIN_ROOT, PYTHONIOENCODING: "utf-8" },
     windowsHide: true,

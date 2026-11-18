@@ -42,6 +42,7 @@ MCP_TOOLS = [
                 "harness": {"type": "string", "default": ""},
                 "mutation_approved": {"type": "boolean", "default": False},
                 "reroute_with": {"type": "string", "default": ""},
+                "caller": {"type": "string", "enum": ["user", "specialist"], "default": "user", "description": "Sub-agent (mutaxassis) 'specialist' yuboradi: workflow/delegatsiya qo'llanmaydi (rekursiv marshrutlash yo'q). agent_hint berilganda ham avtomatik specialist."},
             },
             "required": ["query"],
         },
@@ -123,15 +124,21 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_creative_matrix",
-        "description": "Generate Andromeda 2 3x3 Angle x Format creative matrix and 3-language (UZ Latin, UZ Cyrillic, RU) hooks.",
+        "description": "Creative engine. mode='matrix' (default): Andromeda 3x3 Angle x Format matrix; 'video-script': shoot-ready 9:16 script with hook variants and claim_safety flags; 'pda-matrix'; 'ad-copy'; 'iterate': diagnostic hypotheses from REAL funnel metrics (hook/hold/outbound CTR/landing CVR/qualified-lead rate vs account baselines) - what to change next and what to keep. Unknown price stays unknown (no invented price anchor).",
         "inputSchema": {
             "type": "object",
             "properties": {
+                "mode": {"type": "string", "enum": ["matrix", "video-script", "pda-matrix", "ad-copy", "iterate"], "default": "matrix"},
                 "niche": {"type": "string", "default": "ecom"},
-                "product": {"type": "string"},
-                "price": {"type": "number", "default": 100.0},
+                "product": {"type": "string", "description": "Required except for mode='iterate'"},
+                "problem": {"type": "string"},
+                "price": {"type": "number", "description": "Real price; omit if unknown"},
+                "duration": {"type": "integer", "default": 30},
+                "format": {"type": "string"},
+                "metrics": {"type": "object", "description": "iterate: hook_rate, hold_rate, outbound_ctr, lp_cvr, qualified_lead_rate (percent)"},
+                "baselines": {"type": "object", "description": "iterate: the account's own averages for the same metrics"},
+                "cpa": {"type": "number"}, "breakeven_cpa": {"type": "number"}, "impressions": {"type": "integer"},
             },
-            "required": ["product"],
         },
     },
     {
@@ -216,6 +223,7 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
             context_mode=cmode,
             max_context_bytes=max_b,
             mutation_approved=bool(args.get("mutation_approved", False)),
+            caller=("specialist" if str(args.get("caller", "")).strip().lower() == "specialist" else "user"),
         )
         reroute_q = str(args.get("reroute_with", "")).strip()
         if reroute_q:
@@ -318,30 +326,51 @@ def call_tool(name: str, args: dict[str, Any]) -> dict[str, Any]:
         )
     if name == "tyrion_creative_matrix":
         cm = importlib.import_module("creative-matrix")
+        mode = str(args.get("mode", "matrix")).strip().lower()
+        if mode == "iterate":
+            def _num(d: Any, k: str) -> float | None:
+                v = (d or {}).get(k) if isinstance(d, dict) else None
+                return None if v is None else tcore.require_number(v, k, min_val=0.0)
+            keys = ("hook_rate", "hold_rate", "outbound_ctr", "lp_cvr", "qualified_lead_rate")
+            cpa_v = args.get("cpa")
+            be_v = args.get("breakeven_cpa")
+            imp_v = args.get("impressions")
+            return cm.diagnose_creative_iteration(
+                {k: _num(args.get("metrics"), k) for k in keys},
+                {k: _num(args.get("baselines"), k) for k in keys},
+                cpa=None if cpa_v is None else tcore.require_number(cpa_v, "cpa", min_val=0.0),
+                breakeven_cpa=None if be_v is None else tcore.require_number(be_v, "breakeven_cpa", min_val=0.0),
+                impressions=None if imp_v is None else int(tcore.require_number(imp_v, "impressions", min_val=0.0)),
+            )
         product = str(args.get("product", "")).strip()
         if not product:
             raise ValueError("'product' bo'sh bo'lishi mumkin emas")
-        price = tcore.require_number(args.get("price", 100.0), "price", min_val=0.0)
-        mode = str(args.get("mode", "matrix")).strip().lower()
+        price_raw = args.get("price")
+        price = None if price_raw in (None, "", 0) else tcore.require_number(price_raw, "price", min_val=0.0)
         niche = str(args.get("niche", "ecom"))
         market = str(args.get("market", "global"))
         currency = str(args.get("currency", ""))
         language = str(args.get("language", "uz_latin"))
         if mode == "video-script":
-            return cm.generate_video_script(
+            res = cm.generate_video_script(
                 niche=niche, product=product, problem=str(args.get("problem", "")),
                 format_name=str(args.get("format", "ugc_reaction_demo")),
+                duration_sec=int(tcore.require_number(args.get("duration", 30), "duration", min_val=5.0, max_val=180.0)),
                 price=price, market=market, currency=currency, language=language,
             )
-        if mode == "pda-matrix":
-            return cm.build_pda_diversity_plan(niche=niche, product=product, price=price, market=market, currency=currency)
-        if mode == "ad-copy":
-            return cm.generate_ad_copy_pack(
+        elif mode == "pda-matrix":
+            res = cm.build_pda_diversity_plan(niche=niche, product=product, price=price, market=market, currency=currency)
+        elif mode == "ad-copy":
+            res = cm.generate_ad_copy_pack(
                 platform=str(args.get("platform", "meta")), product=product,
                 problem=str(args.get("problem", "")), proof=str(args.get("proof", "")),
                 language=language, market=market, price=price, currency=currency,
             )
-        return cm.build_matrix(niche, product, price, market=market, currency=currency)
+        else:
+            res = cm.build_matrix(niche, product, price, market=market, currency=currency)
+        if isinstance(res, dict):
+            res["claim_safety"] = cm.lint_unverified_claims(res)
+        return res
     if name == "tyrion_capi_utm":
         cu = importlib.import_module("capi-utm-builder")
         return cu.build_utm_links(
