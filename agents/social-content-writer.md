@@ -1,6 +1,6 @@
 ---
 name: social-content-writer
-description: "Use this agent for - Sotsial kontent worker — IG/Telegram/FB uchun post, hook, skript (Reels/Shorts), repurposing, carousel. 'post yoz', 'reels skript', 'hook yoz', 'sotsial kontent', 'social media post', 'video hook', 'what should I post' so'rovlarida chaqiriladi. Invoke on 'instagram uchun bir oylik kontent reja tayyorla', 'instagram kontent', 'telegram post yozish'."
+description: "Use this agent for - Sotsial kontent worker — IG/Telegram/FB uchun post, repurposing, carousel, organik kontent rejasi (reklama videolari va Reels reklama skriptlari uchun reels-scriptwriter). 'post yoz', 'sotsial kontent', 'social media post', 'what should I post' so'rovlarida chaqiriladi. Invoke on 'instagram uchun bir oylik kontent reja tayyorla', 'instagram kontent', 'telegram post yozish'."
 role: Instagram, Telegram & Social Media Content Specialist
 model: sonnet
 maxTurns: 30

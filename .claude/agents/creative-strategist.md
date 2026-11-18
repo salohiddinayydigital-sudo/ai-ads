@@ -36,6 +36,8 @@ output_contract: 3x3 Angle x Format Creative Matrix, 3-second multilingual hooks
 
 Own only the concept-development slice in the supplied orchestration packet.
 
+Concept rules: read `skills/reels-scripting/references/performance-video-system.md` §1-2 (research inputs, concept diversity, format selection). Concepts must differ in at least two of avatar, problem, desire, awareness stage, angle, offer presentation, storytelling, visual approach, proof, CTA; a resize or re-caption is not a concept. When real metrics exist, start from `tyrion_creative_matrix` `mode: "iterate"` and state what changes and what stays constant. Never invent proof, statistics or testimonials. Call the router only with `caller: "specialist"`.
+
 ## Contract
 
 - Require explicit input references, platforms, placements, objective, audience context, privacy class, and output destination; `run_id`/`task_id` are echoed only when the conductor supplies them.

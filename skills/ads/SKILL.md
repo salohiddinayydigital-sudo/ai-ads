@@ -40,7 +40,7 @@ related_skills:
 - ads-audit
 - ads-plan
 - ads-budget
-- tyrion
+- tyrion-universal
 references:
 - skills/ads/references/thinking-framework.md
 - skills/ads/references/status-contract.md

@@ -140,10 +140,45 @@ def lint_ai_tells(text: str) -> dict[str, Any]:
     }
 
 
+UNVERIFIED_CLAIM_PATTERNS = [
+    (re.compile(r"\b\d{1,3}\s?%"), "NUMERIC_PERCENT", "Foiz/statistika: faqat tasdiqlangan manba bo'lsa qoldiring."),
+    (re.compile(r"\b\d+\s?(kun|day|days|дн|дней)\b", re.I), "TIMEFRAME_PROMISE", "Muddat va'dasi: haqiqiy natija/shartnoma bo'lsa qoldiring."),
+    (re.compile(r"\b(\d+\s?tadan\s?\d+|\d+ out of \d+|\d+ из \d+)\b", re.I), "RATIO_STAT", "Nisbiy statistika: manbasiz ishlatmang."),
+    (re.compile(r"\b(kafolat|guarantee|гаранти)", re.I), "GUARANTEE_CLAIM", "Kafolat: faqat mijoz tasdiqlagan shartlar bilan."),
+    (re.compile(r"\b(#1|eng yaxshi|best|лучший|number one)\b", re.I), "SUPERLATIVE", "Superlativ: dalilsiz ishlatmang."),
+]
+
+
+def lint_unverified_claims(payload: Any) -> dict[str, Any]:
+    """Skriptdagi tasdiqlanmagan raqam/kafolat/superlativlarni topadi. [ ] ichidagi to'ldirish joylari (placeholder) hisobga olinmaydi."""
+    skip = {"falsifiable_hypothesis", "andromeda_rule", "production_specs", "andromeda_utis_note", "claim_safety", "test_thresholds_note"}
+
+    def _prune(o: Any) -> Any:
+        if isinstance(o, dict):
+            return {k: _prune(v) for k, v in o.items() if k not in skip}
+        if isinstance(o, list):
+            return [_prune(v) for v in o]
+        return o
+
+    text = json.dumps(_prune(payload), ensure_ascii=False)
+    text = re.sub(r"\[[^\]]{3,120}\]", " ", text)  # placeholderlar
+    findings: list[dict[str, str]] = []
+    for pat, code, advice in UNVERIFIED_CLAIM_PATTERNS:
+        hits = sorted({m.group(0) for m in pat.finditer(text)})
+        if hits:
+            findings.append({"code": code, "matches": hits[:6], "advice": advice})
+    return {
+        "rule": "00-manba: manbasiz fakt yo'q",
+        "needs_verification": bool(findings),
+        "findings": findings,
+        "placeholders_present": bool(re.search(r"\[(HAQIQIY|NARX|ADD VERIFIED|ТАСДИҚ|ВСТАВЬТЕ|INSERT|INSERIR|INSÉRER|INSERTAR|أدخل|VERIFIZIERT)", json.dumps(payload, ensure_ascii=False))),
+    }
+
+
 def build_matrix(
     niche: str,
     product: str,
-    price: float = 100.0,
+    price: float | None = None,
     market: str = "global",
     currency: str = "",
 ) -> dict:
@@ -154,7 +189,13 @@ def build_matrix(
     primary_bnpl = bnpl_list[0]
     template = pack.get("price_anchor_template") or "Or 4 interest-free payments of {installment} with {bnpl}"
 
-    if m_id == "uz" and curr in ("UZS", "USD"):
+    price_known = price is not None and price > 0
+    if not price_known:
+        inst_str = ""
+        bnpl_anchor = "[NARX KIRITILMAGAN: haqiqiy narxni --price bilan bering; taksit/BNPL anchor hisoblanmadi]"
+        cta_str = "Telegram Bot / Instagram DM yoki sayt formasi (kanalni mijoz bilan tasdiqlang)"
+        price = 0.0
+    elif m_id == "uz" and curr in ("UZS", "USD"):
         installment_uzs = int((price * 12800) / 12) if curr == "USD" else int(price / 12)
         inst_str = f"{installment_uzs:,} so'm"
         bnpl_anchor = f"Oyiga ~{inst_str}dan ({primary_bnpl} orqali 12 oy muddatli to'lov)" if price >= 50 else "Tezkor yetkazib berish"
@@ -193,9 +234,10 @@ def build_matrix(
         "product": product,
         "market": m_id,
         "currency": curr,
-        "price": rounded_price,
-        "price_usd": rounded_price,
-        "formatted_price": mloc.format_currency(price, curr),
+        "price": rounded_price if price_known else None,
+        "price_usd": rounded_price if price_known else None,
+        "price_known": price_known,
+        "formatted_price": mloc.format_currency(price, curr) if price_known else "[narx kiritilmagan]",
         "bnpl_providers": bnpl_list,
         "price_anchor": bnpl_anchor,
         "andromeda_rule": (
@@ -208,51 +250,51 @@ def build_matrix(
 
 NATIVE_HOOK_TEMPLATES: dict[str, list[str]] = {
     "en": [
-        "[Curiosity Gap] The 1 counter-intuitive truth about {offer} that 90% of buyers overlook...",
-        "[Pain / Costly Mistake] Stop wasting budget on the old way - here is how {offer} fixes it in 14 days:",
-        "[Quantified Proof] How we achieved measurable results in 14 days without extra overhead ({offer})",
+        "[Curiosity Gap] The one counter-intuitive thing most buyers of {offer} only learn after paying...",
+        "[Pain / Costly Mistake] Stop wasting budget on the old way - here is how {offer} fixes it:",
+        "[Quantified Proof] [ADD VERIFIED RESULT + TIMEFRAME] How {offer} delivered it without extra overhead",
         "[Qualifier Hook] Attention: this is only for teams serious about scaling {offer} profitably.",
     ],
     "de": [
-        "[Neugier / Fokus] Die 1 Wahrheit über {offer}, die 90% im DACH-Markt übersehen...",
+        "[Neugier / Fokus] Die eine Sache über {offer}, die viele Käufer erst nach dem Kauf erfahren...",
         "[Fehler vermeiden] Warum die klassische Methode unnötig Budget verbrennt - und wie {offer} das löst:",
-        "[Zahlen & Beweis] Messbare Ergebnisse in 14 Tagen mit klarer Garantie ({offer}).",
+        "[Zahlen & Beweis] [VERIFIZIERTES ERGEBNIS + ZEITRAUM EINSETZEN] ({offer})",
     ],
     "fr": [
-        "[Curiosité] La vérité sur {offer} que 90% des acheteurs ignorent encore...",
+        "[Curiosité] Ce que beaucoup d'acheteurs de {offer} découvrent trop tard...",
         "[Erreur coûteuse] Arrêtez de perdre du budget avec l'ancienne méthode : découvrez {offer}.",
-        "[Preuve chiffrée] Comment obtenir des résultats vérifiables en 14 jours ({offer}).",
+        "[Preuve chiffrée] [INSÉRER RÉSULTAT VÉRIFIÉ + DÉLAI] ({offer})",
     ],
     "es": [
-        "[Curiosidad] La verdad sobre {offer} que el 90% pasa por alto...",
+        "[Curiosidad] Lo que muchos compradores de {offer} descubren demasiado tarde...",
         "[Error Costoso] Deja de perder presupuesto con el método tradicional: así funciona {offer}.",
-        "[Prueba Real] Resultados medibles en 14 días con garantía transparente ({offer}).",
+        "[Prueba Real] [INSERTAR RESULTADO VERIFICADO + PLAZO] ({offer})",
     ],
     "pt-BR": [
-        "[Curiosidade] O segredo sobre {offer} que 90% do mercado ignora...",
+        "[Curiosidade] O que muitos compradores de {offer} só descobrem tarde demais...",
         "[Erro Caro] Pare de queimar verba do jeito antigo: veja como {offer} resolve isso.",
-        "[Prova Real] Como alcançar resultado validado em 14 dias ({offer}).",
+        "[Prova Real] [INSERIR RESULTADO VERIFICADO + PRAZO] ({offer})",
     ],
     "ar": [
-        "[فضول / فجوة معرفية] حقيقة واحدة عن {offer} يتجاهلها 90% من المشترين...",
+        "[فضول / فجوة معرفية] أمر واحد عن {offer} يكتشفه كثير من المشترين متأخراً...",
         "[خطأ مكلف] توقف عن إهدار الميزانية بالطريقة القديمة - إليك الحل مع {offer}:",
-        "[دليل رقمي] كيف تحقق نتائج ملموسة خلال 14 يوماً بضمان واضح ({offer}).",
+        "[دليل رقمي] [أدخل نتيجة موثقة + المدة] ({offer})",
     ],
     "uz_latin": [
-        "[Qiziqish/Bo'shliq] {offer} haqida 90% odam bilmaydigan 1 ta amaliy fakt...",
+        "[Qiziqish/Bo'shliq] {offer} xaridorlari ko'pincha to'lovdan keyingina bilib oladigan 1 ta amaliy holat...",
         "[Xato/Og'riq] Agar hali ham eski usulda harakat qilayotgan bo'lsangiz, vaqt va pul yo'qotyapsiz: {offer}",
-        "[Aniq Raqam/Isbot] Qanday qilib 14 kun ichida ortiqcha xarajatsiz natijaga chiqish mumkin? ({offer})",
-        "[Filtr-Hook] Diqqat: bu video faqat aniq natija va shartnoma kafolati izlayotganlar uchun ({offer})",
+        "[Aniq Raqam/Isbot] [HAQIQIY NATIJA + MUDDATNI KIRITING] {offer} ortiqcha xarajatsiz qanday natija berdi?",
+        "[Filtr-Hook] Diqqat: bu video faqat shartlari aniq, shaffof xizmat izlayotganlar uchun ({offer})",
     ],
     "uz_cyrillic": [
-        "[Қизиқиш] {offer} ҳақида 90% одам билмайдиган 1 та амалий факт...",
+        "[Қизиқиш] {offer} харидорлари кўпинча тўловдан кейингина билиб оладиган 1 та амалий ҳолат...",
         "[Хато/Оғриқ] Пулингизни бефойда тажрибаларга сарфлашни тўхтатинг: {offer}",
-        "[Исбот] Натижа бўлмаса, шартнома бўйича кафолат: {offer}",
+        "[Исбот] [ТАСДИҚЛАНГАН КАФОЛАТ ШАРТИНИ КИРИТИНГ] {offer}",
     ],
     "ru": [
         "[Проблема/Ошибка] 3 главные ошибки при выборе, из-за которых вы теряете время и бюджет ({offer})",
-        "[Цифры/Кейс] Как получить измеримый результат за 14 дней с гарантией по договору: {offer}",
-        "[Фильтр-Хук] Только для тех, кто ценит твердый результат и прозрачные условия: {offer}",
+        "[Цифры/Кейс] [ВСТАВЬТЕ ПРОВЕРЕННЫЙ РЕЗУЛЬТАТ И СРОК] {offer}",
+        "[Фильтр-Хук] Только для тех, кому важны прозрачные условия: {offer}",
     ],
 }
 
@@ -292,7 +334,7 @@ def generate_video_script(
     problem: str = "",
     format_name: str = "ugc_reaction_demo",
     duration_sec: int = 30,
-    price: float = 100.0,
+    price: float | None = None,
     market: str = "global",
     currency: str = "",
     language: str = "uz_latin",
@@ -384,7 +426,7 @@ def generate_video_script(
                 "hook_id": "H2_QUANTIFIED_PROOF",
                 "visual_action_0_3s": f"Split-Screen: top half shows live {clean_prod} demo from frame 1; bottom half shows before/after metric.",
                 "safe_zone_text_720x1200": f"Verified 14-Day Result: {clean_prod[:18]}",
-                "spoken_line_0_3s": f"Here is how {clean_prod} solves {clean_prob} in under 14 days with zero guesswork.",
+                "spoken_line_0_3s": f"Here is how {clean_prod} solves {clean_prob}. [ADD VERIFIED RESULT AND TIMEFRAME HERE]",
             },
             {
                 "hook_id": "H3_UI_OR_COMMENT_REVEAL",
@@ -439,14 +481,14 @@ def generate_video_script(
         hook_variants = [
             {
                 "hook_id": "H1_PROBLEM_MISTAKE",
-                "visual_action_0_3s": f"Kрупniy plan (Macro): '{clean_prob}' muammosini jonli ko'rsatish -> 1 soniyada {clean_prod} yechimiga keskin o'tish (hard cut).",
-                "safe_zone_text_720x1200": f"{clean_prod[:24]}: 90% odam qiladigan xato!",
-                "spoken_line_0_3s": f"{clean_prod} tanlashda 10 tadan 9 kishi aynan shu xato sababli pul va vaqt yo'qotadi.",
+                "visual_action_0_3s": f"Yaqin plan (Macro): '{clean_prob}' muammosini jonli ko'rsatish -> 1 soniyada {clean_prod} yechimiga keskin o'tish (hard cut).",
+                "safe_zone_text_720x1200": f"{clean_prod[:24]}: eng ko'p uchraydigan xato",
+                "spoken_line_0_3s": f"{clean_prod} tanlashda aynan shu xato ko'pchilikning pul va vaqtini oladi. Bu xatoni birinchi bo'lib ko'rsataman.",
             },
             {
                 "hook_id": "H2_QUANTIFIED_PROOF",
-                "visual_action_0_3s": f"Ikki ekran (Split-Screen): tepada {clean_prod} real jarayoni, pastda aniq raqamli natija va muddat.",
-                "safe_zone_text_720x1200": f"14 kunda aniq natija: {clean_prod[:20]}",
+                "visual_action_0_3s": f"Ikki ekran (Split-Screen): tepada {clean_prod} real jarayoni, pastda mijozning HAQIQIY raqamli natijasi (manba: o'zingizning ma'lumotingiz; yo'q bo'lsa bu hookni ishlatmang).",
+                "safe_zone_text_720x1200": f"[HAQIQIY NATIJA]: {clean_prod[:20]}",
                 "spoken_line_0_3s": f"Ortiqcha gaplarsiz: {clean_prod} yordamida '{clean_prob}' muammosini qanday hal qilganimizni ko'ring.",
             },
             {
@@ -478,7 +520,7 @@ def generate_video_script(
                 "scene_role": "3. NOYOB MEXANIZM VA JONLI DEMO (Mechanism & Proof)",
                 "visual_and_camera": f"3-Capture B-Roll: {clean_prod} ishlash jarayoni 3 xil rakursdan yaqin planda ko'rsatiladi.",
                 "on_screen_text_720x1200": f"{clean_prod[:26]} qanday ishlaydi?",
-                "spoken_audio_vo": f"{clean_prod} aynan sababni bartaraf etadi: jarayon oddiy, shaffof va birinchi kundan seziladi.",
+                "spoken_audio_vo": f"{clean_prod} aynan sababni bartaraf etadi: jarayonni qadam-baqadam ko'rsataman. [HAQIQIY MEXANIZMNI 1 JUMLADA YOZING]",
                 "cut_pacing": "Har 1.5–2.0 soniyada vizual dalil almashadi",
             },
             {
@@ -486,7 +528,7 @@ def generate_video_script(
                 "scene_role": "4. ISBOT VA NARX ANKORI (Social Proof & BNPL Anchor)",
                 "visual_and_camera": "Real mijozlar natijasi / sharhi + bo'lib to'lash va kafolat jadvali.",
                 "on_screen_text_720x1200": bnpl_anchor[:48],
-                "spoken_audio_vo": f"Yuzlab mijozlarimiz natijasini shartnoma va kafolat bilan tasdiqlaymiz. To'lov sharti: {bnpl_anchor}.",
+                "spoken_audio_vo": f"[MIJOZ TASDIQLAGAN ISBOTNI KIRITING: sharh, natija yoki shartnoma sharti]. To'lov sharti: {bnpl_anchor}.",
                 "cut_pacing": "720x1200 markaziy zonada narx/nasiya plankasi",
             },
             {
@@ -494,7 +536,7 @@ def generate_video_script(
                 "scene_role": "5. ANIQ HARAKATGA CHAQIRUV (Direct CTA)",
                 "visual_and_camera": "Spiker pastdagi tugmaga ishora qiladi + Telegram bot / forma ekrani ko'rinadi.",
                 "on_screen_text_720x1200": "Pastdagi tugmani bosing yoki '+' qoldiring",
-                "spoken_audio_vo": f"Hoziroq pastdagi tugmani bosing yoki izohda '+' qoldiring, sizga {clean_prod} bo'yicha bepul hisob-kitobni yuboramiz.",
+                "spoken_audio_vo": f"Hoziroq pastdagi tugmani bosing yoki izohda '+' qoldiring, [TAKLIF: faqat haqiqatan bor bo'lsa, masalan konsultatsiya yoki hisob-kitob] - {clean_prod} bo'yicha yozing.",
                 "cut_pacing": "2 soniya aniq yakuniy karta (End-Card)",
             },
         ]
@@ -535,7 +577,7 @@ def generate_video_script(
 def build_pda_diversity_plan(
     niche: str = "ecom",
     product: str = "",
-    price: float = 100.0,
+    price: float | None = None,
     market: str = "global",
     currency: str = "",
 ) -> dict[str, Any]:
@@ -552,7 +594,7 @@ def build_pda_diversity_plan(
             "assigned_format": "ugc_reaction_demo",
             "format_tier": "S",
             "visual_signature_for_unique_entity_id": "Handheld smartphone POV in home/office setting, split-screen cost calculator",
-            "core_hook": f"Why 90% of people overpay for {clean_prod} (and the 14-day math that fixes it)",
+            "core_hook": f"Why people overpay for {clean_prod} (show your real cost comparison)",
             "falsifiable_hypothesis": "Beats control static ad on 3s Hook Rate (>=30%) and lowers TOF CPC by >=15% in Broad audience.",
         },
         {
@@ -646,7 +688,7 @@ def generate_ad_copy_pack(
     proof: str = "",
     language: str = "uz_latin",
     market: str = "global",
-    price: float = 100.0,
+    price: float | None = None,
     currency: str = "",
 ) -> dict[str, Any]:
     """Generates character-validated ad copy variations across angles with automatic No-AI-Tells linting."""
@@ -708,14 +750,14 @@ def generate_ad_copy_pack(
         variations = [
             {
                 "angle": "Og'riq va Xato (Pain Point)",
-                "headline": f"{clean_prod[:22]}: 14 kunda natija"[: limits.get("headline", 40)],
+                "headline": f"{clean_prod[:22]}: aniq yechim"[: limits.get("headline", 40)],
                 "primary_text": f"'{clean_prob}' muammosi vaqtingizni olyaptimi? {clean_prod} orqali aniq yechimga chiqing ({clean_proof}). {mat['price_anchor']}.",
-                "description": f"Shartnoma asosida kafolat"[: limits.get("description", 30)],
+                "description": f"Shartlar oldindan aytiladi"[: limits.get("description", 30)],
             },
             {
                 "angle": "Aniq Isbot va Keys (Social Proof)",
                 "headline": f"{clean_prod[:20]} ({clean_proof[:14]})"[: limits.get("headline", 40)],
-                "primary_text": f"{clean_proof} tajribasida sinovdan o'tgan {clean_prod}. Yashirin to'lovlarsiz, aniq smeta va muddat.",
+                "primary_text": f"{clean_proof} tajribasida sinovdan o'tgan {clean_prod}. Narx va shartlar oldindan aniq aytiladi (tasdiqlangan shartlarni kiriting).",
                 "description": f"Bepul hisob-kitob oling"[: limits.get("description", 30)],
             },
             {
@@ -765,6 +807,98 @@ def generate_ad_copy_pack(
         "currency": mat["currency"],
         "price_anchor": mat["price_anchor"],
         "variations": validated_variations,
+    }
+
+
+# Priors faqat baseline berilmaganda ishlatiladi va HEURISTIC_PRIOR_MODEL deb belgilanadi (akkaunt tarixi bilan almashtiring).
+_ITER_PRIORS = {"hook_rate": 25.0, "hold_rate": 12.0}
+_ITER_STAGES = [
+    # (metric, stage, hypothesis, change, keep)
+    ("hook_rate", "ATTENTION",
+     "Birinchi kadr/hook e'tiborni ushlamayapti (gipoteza).",
+     "Faqat ochilish 0-3s: birinchi kadr, ekrandagi matn, birinchi gap, kamera. 3 ta moddiy farqli hook.",
+     "Tana (mexanizm, isbot), taklif, CTA, davomiylik."),
+    ("hold_rate", "RETENTION",
+     "Hook ishlaydi, lekin tana va hikoya tomoshabinni ushlab turmayapti (gipoteza).",
+     "Tana: tempo (kesish chastotasi), mexanizm ko'rsatish tartibi, filler 4-10s, isbotni erta joylash.",
+     "Ishlayotgan hook, taklif, CTA."),
+    ("outbound_ctr", "CLICK",
+     "Ko'rishlar yaxshi, lekin klik yo'q: taklif, CTA yoki isbot yetarli emas (gipoteza).",
+     "CTA aniqligi, taklif ifodasi, isbot joylashuvi, primary text/headline.",
+     "Hook va tana strukturasi."),
+    ("lp_cvr", "LANDING",
+     "Klik bor, lekin sahifa/forma konvertatsiya qilmayapti: message match, taklif yoki tezlik (gipoteza).",
+     "Reklama va sahifa xabari mosligi, birinchi ekran, forma uzunligi, yuklanish tezligi. Kreativni EMAS, sahifani sinang.",
+     "Ishlayotgan kreativ."),
+    ("qualified_lead_rate", "LEAD_QUALITY",
+     "Lidlar arzon, lekin sifatsiz: kvalifikatsiya, auditoriya mosligi yoki savdo ishlovi (gipoteza).",
+     "Kreativda aniq filtr (narx/shart/kim uchun), forma savollari, auditoriya signali, CRM feedback (CAPI offline event). Savdo ishlovini tekshiring.",
+     "Hajm beruvchi hook."),
+]
+
+
+def diagnose_creative_iteration(
+    metrics: dict[str, float | None],
+    baselines: dict[str, float | None] | None = None,
+    cpa: float | None = None,
+    breakeven_cpa: float | None = None,
+    impressions: int | None = None,
+    min_impressions: int = 1000,
+) -> dict[str, Any]:
+    """Real ko'rsatkichlardan KETMA-KET (voronka bo'yicha) diagnostik GIPOTEZALAR. Avtomatik xulosa emas; baseline akkauntniki bo'lishi kerak."""
+    baselines = baselines or {}
+    findings: list[dict[str, Any]] = []
+    used_priors: list[str] = []
+    for metric, stage, hyp, change, keep in _ITER_STAGES:
+        val = metrics.get(metric)
+        if val is None:
+            continue
+        base = baselines.get(metric)
+        base_src = "ACCOUNT_BASELINE"
+        if base is None and metric in _ITER_PRIORS:
+            base, base_src = _ITER_PRIORS[metric], "HEURISTIC_PRIOR_MODEL"
+            used_priors.append(metric)
+        if base is None or base <= 0:
+            findings.append({"stage": stage, "metric": metric, "value": val, "status": "NO_BASELINE",
+                             "note": f"{metric} uchun akkaunt baseline yo'q: o'z kreativlaringiz o'rtachasi bilan solishtiring (--baseline-{metric.replace('_', '-')})."})
+            continue
+        ratio = val / base
+        status = "BELOW" if ratio < 0.85 else ("ABOVE" if ratio > 1.15 else "NEAR")
+        row: dict[str, Any] = {"stage": stage, "metric": metric, "value": val, "baseline": base, "baseline_source": base_src,
+                               "ratio_to_baseline": round(ratio, 2), "status": status}
+        if status == "BELOW":
+            row.update({"hypothesis": hyp, "change_next": change, "keep_constant": keep})
+        findings.append(row)
+
+    below = [f for f in findings if f["status"] == "BELOW"]
+    primary = below[0] if below else None  # eng yuqori (voronkada birinchi) yo'qotish: avval shuni tuzating
+    econ: dict[str, Any] = {}
+    if cpa is not None and breakeven_cpa is not None and breakeven_cpa > 0:
+        econ = {"cpa": cpa, "breakeven_cpa": breakeven_cpa, "above_breakeven": cpa > breakeven_cpa,
+                "note": "CPA break-even'dan yuqori bo'lsa ham, avval yo'qotish bosqichini toping; kreativ faqat bitta sabab."}
+    warnings = []
+    if impressions is not None and impressions < min_impressions:
+        warnings.append(f"Namuna kichik ({impressions} < {min_impressions} impression): xulosa ishonchsiz, ko'proq ma'lumot yig'ing.")
+    if used_priors:
+        warnings.append(f"{', '.join(used_priors)} uchun akkaunt baseline berilmadi: HEURISTIC_PRIOR_MODEL ishlatildi; o'z baseline'ingizni bering.")
+    if not findings:
+        warnings.append("Hech qanday ko'rsatkich berilmadi.")
+    return {
+        "schema": "tyrion.creative_iteration/v1",
+        "nature": "DIAGNOSTIC_HYPOTHESES (avtomatik xulosa emas)",
+        "findings": findings,
+        "priority_fix": None if not primary else {
+            "stage": primary["stage"], "hypothesis": primary["hypothesis"],
+            "change_next": primary["change_next"], "keep_constant": primary["keep_constant"],
+            "test_design": "Bitta o'zgaruvchi: faqat shu bosqich o'zgaradi; qolgani doimiy. Qaror mezonini oldindan yozing.",
+        },
+        "economics": econ,
+        "rules": [
+            "Kosmetik resize/qayta-sarlavha yangi konsept emas (Andromeda Entity ID bir xil).",
+            "Yangi konsept: avatar, muammo, angle yoki format materiel farq qilsin.",
+            "Qarorni CPA/ROAS va CRM lid sifati bilan tasdiqlang, faqat hook rate bilan emas.",
+        ],
+        "warnings": warnings,
     }
 
 
@@ -824,7 +958,7 @@ def main(argv: list[str] | None = None) -> int:
     p_mat = sub.add_parser("matrix", help="3x3 Angle x Format creative testing matrix with market BNPL anchor & falsifiable hypotheses")
     p_mat.add_argument("--niche", default="ecom")
     p_mat.add_argument("--product", required=True)
-    p_mat.add_argument("--price", type=tcore.positive_float, default=100.0)
+    p_mat.add_argument("--price", type=tcore.positive_float, default=None, help="Haqiqiy narx (berilmasa narx-anchor hisoblanmaydi, taxminiy narx o'ylab topilmaydi)")
     p_mat.add_argument("--market", default="global", help="Market pack (global, uz, us, eu, uk, mena, latam, sea, in)")
     p_mat.add_argument("--currency", default="", help="ISO 4217 currency override (USD, EUR, GBP, JPY, UZS, etc.)")
     p_mat.add_argument("--json", action="store_true")
@@ -834,6 +968,15 @@ def main(argv: list[str] | None = None) -> int:
     p_hk.add_argument("--offer", required=True)
     p_hk.add_argument("--languages", default="", help="Comma-separated BCP 47 language codes (e.g. en,de,fr,ar,uz_latin,ru)")
     p_hk.add_argument("--json", action="store_true")
+
+    p_it = sub.add_parser("iterate", help="Real ko'rsatkichlardan voronka bo'yicha diagnostik gipotezalar: nimani o'zgartirish, nimani saqlash")
+    for _m in ("hook-rate", "hold-rate", "outbound-ctr", "lp-cvr", "qualified-lead-rate"):
+        p_it.add_argument(f"--{_m}", type=tcore.finite_float, default=None, help="Foiz (%)")
+        p_it.add_argument(f"--baseline-{_m}", type=tcore.finite_float, default=None, help="Akkaunt o'rtachasi (%)")
+    p_it.add_argument("--cpa", type=tcore.finite_float, default=None)
+    p_it.add_argument("--breakeven-cpa", type=tcore.finite_float, default=None)
+    p_it.add_argument("--impressions", type=int, default=None)
+    p_it.add_argument("--json", action="store_true")
 
     p_fat = sub.add_parser("fatigue", help="Creative fatigue diagnostics via Hook Rate, Hold Rate, FTIR & UTIS")
     p_fat.add_argument("--hook-rate", type=tcore.finite_float, required=True)
@@ -849,7 +992,7 @@ def main(argv: list[str] | None = None) -> int:
     p_vid.add_argument("--problem", default="", help="Main customer problem or pain point")
     p_vid.add_argument("--format", dest="format_name", default="ugc_reaction_demo", choices=list(META_FORMAT_TAXONOMY.keys()))
     p_vid.add_argument("--duration", type=int, default=30, help="Target video duration in seconds (default: 30)")
-    p_vid.add_argument("--price", type=tcore.positive_float, default=100.0)
+    p_vid.add_argument("--price", type=tcore.positive_float, default=None, help="Haqiqiy narx (berilmasa narx-anchor hisoblanmaydi, taxminiy narx o'ylab topilmaydi)")
     p_vid.add_argument("--market", default="global")
     p_vid.add_argument("--currency", default="")
     p_vid.add_argument("--language", default="uz_latin")
@@ -858,7 +1001,7 @@ def main(argv: list[str] | None = None) -> int:
     p_pda = sub.add_parser("pda-matrix", help="Andromeda Entity-ID & Persona-Desire-Awareness (PDA) Creative Diversity Plan")
     p_pda.add_argument("--niche", default="ecom")
     p_pda.add_argument("--product", required=True)
-    p_pda.add_argument("--price", type=tcore.positive_float, default=100.0)
+    p_pda.add_argument("--price", type=tcore.positive_float, default=None, help="Haqiqiy narx (berilmasa narx-anchor hisoblanmaydi, taxminiy narx o'ylab topilmaydi)")
     p_pda.add_argument("--market", default="global")
     p_pda.add_argument("--currency", default="")
     p_pda.add_argument("--json", action="store_true")
@@ -870,7 +1013,7 @@ def main(argv: list[str] | None = None) -> int:
     p_copy.add_argument("--proof", default="")
     p_copy.add_argument("--language", default="uz_latin")
     p_copy.add_argument("--market", default="global")
-    p_copy.add_argument("--price", type=tcore.positive_float, default=100.0)
+    p_copy.add_argument("--price", type=tcore.positive_float, default=None, help="Haqiqiy narx (berilmasa narx-anchor hisoblanmaydi, taxminiy narx o'ylab topilmaydi)")
     p_copy.add_argument("--currency", default="")
     p_copy.add_argument("--json", action="store_true")
 
@@ -882,6 +1025,13 @@ def main(argv: list[str] | None = None) -> int:
         res = generate_hooks(args.niche, args.offer, languages=langs)
     elif args.command == "fatigue":
         res = analyze_fatigue(args.hook_rate, args.hold_rate, args.ctr_drop_pct, args.frequency, args.ftir)
+    elif args.command == "iterate":
+        keys = ("hook_rate", "hold_rate", "outbound_ctr", "lp_cvr", "qualified_lead_rate")
+        res = diagnose_creative_iteration(
+            {k: getattr(args, k) for k in keys},
+            {k: getattr(args, f"baseline_{k}") for k in keys},
+            cpa=args.cpa, breakeven_cpa=args.breakeven_cpa, impressions=args.impressions,
+        )
     elif args.command == "video-script":
         res = generate_video_script(
             niche=args.niche, product=args.product, problem=args.problem,
@@ -899,6 +1049,9 @@ def main(argv: list[str] | None = None) -> int:
         )
     else:
         return 2
+
+    if isinstance(res, dict) and args.command in ("video-script", "hooks", "pda-matrix", "ad-copy", "matrix"):
+        res["claim_safety"] = lint_unverified_claims(res)
 
     if getattr(args, "json", False):
         print(json.dumps(res, ensure_ascii=False, indent=2))

@@ -1,5 +1,6 @@
 # LOG — O'zgarishlar tarixi
 
+| 2026-11-18 | **Universal conductor & Meta/creative upgrade:** `tyrion-universal` skill, `manifests/workflows.json` (16 workflow) + `tyrion_workflows.py`, `prompt:route` hook, `calculator.py funnel-economics`, `creative-matrix.py iterate` + `claim_safety`, Meta strategy va video system reference'lari; router halol `truncated` hisobi; `creative-matrix` uydirma statistika/narx tuzatildi; `tyrion` + 4 `orch-*` skill birlashtirildi (61 skill, 30 asbob) | 362 unit-test OK · eval 47/47 · `doctor.py` va `tyrion-shield.py` toza |
 | 2026-11-12 | **Mustahkamlash (v7.0.0, yangi funksiyasiz):** eksport analizatori sarlavha/ajratgich/son parseri, yagona son validatsiyasi va chiqish kodi siyosati, `.mcp.json` CLAUDE_PLUGIN_ROOT'siz, router out_of_scope/needs_clarification, `ads-yandex`, sir-fayl guard, VERSION yagona manba, wiki `source_status` (5 verified · 23 url_cited · 72 unverified) | OK |
 | 2026-10-29 | Tyrion v7.0.0 Release: `/ad-creative` Video Ad Studio, Andromeda Entity-ID/PDA Engine, Meta 2026 5-System Stack (GEM/Lattice/UTIS/Value Rules) & Practitioner Targetology | OK |
 | 2026-10-22 | Detailed Targeting Engine v6.1 Upgrade (Relevance Ranking + Business-Context Queries + 8-Part Targetologist Report) | OK |

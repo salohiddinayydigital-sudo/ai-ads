@@ -7,6 +7,7 @@ Meta Ads, Google Ads va Telegram Ads uchun aniq, deterministik hisob-kitoblar:
   3. google-sculpt   : Qidiruv va PMax taqsimoti, Max CPC va Negatives tejamkori
   4. telegram-funnel : CPM -> Ko'rishlar -> Bot start -> Lids -> ROAS voronkasi
   5. ladder          : 3 bosqichli sinov pillapoyasi (Sandbox -> Validation -> Scale)
+  6. funnel-economics: strategiya iqtisodi (break-even/target CPA-CPL-ROAS, test byudjeti, stsenariylar, scale cheklovi)
 
 Chiqish kodlari: 0 = muvaffaqiyat · 2 = validatsiya xatosi (nan/inf, manfiy/nol) yoki natijada `error` maydoni.
 
@@ -89,6 +90,121 @@ def calc_breakeven(
         "target_cpa": round(target_cpa, 2),
         "target_roas": round(target_roas, 2),
     }
+
+
+def calc_funnel_economics(
+    price: float,
+    cogs: float,
+    shipping: float = 0.0,
+    processing_fee_pct: float = 2.0,
+    target_profit_pct: float = 0.0,
+    lead_to_sale_cvr_pct: float | None = None,
+    repeat_orders: float = 1.0,
+    daily_budget: float | None = None,
+    assumed_cpl: float | None = None,
+    cpl_low: float | None = None,
+    cpl_high: float | None = None,
+    decision_conversions: int = 30,
+    currency: str = "USD",
+) -> dict:
+    """Strategiya uchun yagona iqtisod: break-even/target CPA, CPL, ROAS, test byudjeti, stsenariylar, scale cheklovlari.
+
+    Hech qanday universal CPA/CPL maqsadi yo'q: hammasi mijozning narx/marja/konversiyasidan chiqadi. Hajm prognozi FAQAT
+    foydalanuvchi `assumed_cpl` (yoki low/high) bersa hisoblanadi va `ASSUMPTION` deb belgilanadi.
+    """
+    price = tcore.require_number(price, "price", positive=True)
+    base = calc_breakeven(price, cogs, shipping, processing_fee_pct, target_profit_pct, currency)
+    if "error" in base:
+        return base
+    repeat_orders = tcore.require_number(repeat_orders, "repeat_orders", min_val=1.0, max_val=1000.0)
+    decision_conversions = int(tcore.require_number(decision_conversions, "decision_conversions", min_val=1.0, max_val=100000.0))
+    gp = base["gross_profit_per_unit"]
+    cvr = None
+    if lead_to_sale_cvr_pct is not None:
+        cvr = tcore.require_number(lead_to_sale_cvr_pct, "lead_to_sale_cvr_pct", min_val=0.01, max_val=100.0) / 100.0
+
+    res: dict = {
+        "currency": base["currency"],
+        "evidence_labels": {
+            "unit_economics": "USER_PROVIDED inputs -> deterministic math",
+            "volume_scenarios": "ASSUMPTION (faqat assumed_cpl berilganda)",
+            "decision_conversions": "HEURISTIC_PRIOR_MODEL (sinov qarori uchun minimal konversiya soni; akkaunt tarixi bilan almashtiring)",
+        },
+        "gross_profit_per_sale": gp,
+        "margin_percent": base["margin_percent"],
+        "breakeven_cpa": base["breakeven_cpa"],
+        "target_cpa": base["target_cpa"],
+        "breakeven_roas": base["breakeven_roas"],
+        "target_roas": base["target_roas"],
+        "target_profit_percent": base["target_profit_percent"],
+    }
+    if repeat_orders > 1.0:
+        res["ltv_adjusted_breakeven_cpa"] = round(gp * repeat_orders, 2)
+        res["ltv_note"] = f"ASSUMPTION: mijoz davr ichida o'rtacha {repeat_orders} buyurtma beradi. Birinchi buyurtma bo'yicha break-even yuqoridagi `breakeven_cpa`."
+    if cvr is not None:
+        res["lead_to_sale_cvr_pct"] = round(cvr * 100.0, 2)
+        res["breakeven_cpl"] = round(base["breakeven_cpa"] * cvr, 2)
+        res["target_cpl"] = round(base["target_cpa"] * cvr, 2)
+    test_cost_unit = base["target_cpa"] if cvr is None else base["target_cpa"] * cvr
+    unit_name = "sotuv" if cvr is None else "lid"
+    res["test_budget"] = {
+        "decision_unit": unit_name,
+        "decision_conversions": decision_conversions,
+        "min_test_budget_at_target": round(test_cost_unit * decision_conversions, 2),
+        "min_test_budget_at_breakeven": round((base["breakeven_cpa"] if cvr is None else base["breakeven_cpa"] * cvr) * decision_conversions, 2),
+        "note": "Bu qaror uchun yetarli ma'lumot yig'ish xarajati. Byudjet shundan kam bo'lsa, kamroq test (1-2 ad set) yoki yuqoriroq funnel hodisasi (lid o'rniga bot/start) bilan boshlang.",
+    }
+    if daily_budget is not None:
+        db = tcore.require_number(daily_budget, "daily_budget", positive=True)
+        res["daily_budget"] = db
+        res["days_to_reach_decision_at_target"] = round(res["test_budget"]["min_test_budget_at_target"] / db, 1)
+
+    def _scenario(name: str, cpl: float) -> dict:
+        cpl = tcore.require_number(cpl, f"{name}_cpl", positive=True)
+        out: dict = {"scenario": name, "assumed_cpl": round(cpl, 2), "label": "ASSUMPTION"}
+        if cvr is None:
+            out["implied_cpa"] = round(cpl, 2)  # CPL emas, to'g'ridan-to'g'ri sotuv narxi deb qabul qilindi
+            implied_cpa = cpl
+        else:
+            implied_cpa = cpl / cvr
+            out["implied_cpa"] = round(implied_cpa, 2)
+        out["cpa_headroom_vs_breakeven"] = round(base["breakeven_cpa"] - implied_cpa, 2)
+        out["profitable_at_breakeven"] = implied_cpa <= base["breakeven_cpa"]
+        out["meets_target_profit"] = implied_cpa <= base["target_cpa"]
+        if daily_budget is not None:
+            leads = db / cpl
+            sales = leads * cvr if cvr is not None else leads
+            out["daily_leads"] = round(leads, 2) if cvr is not None else None
+            out["daily_sales"] = round(sales, 2)
+            out["daily_gross_profit_after_ads"] = round(sales * gp - db, 2)
+            out["roas"] = round((sales * price) / db, 2)
+        return out
+
+    scenarios = []
+    if assumed_cpl is not None:
+        scenarios.append(_scenario("base", assumed_cpl))
+    if cpl_low is not None:
+        scenarios.append(_scenario("optimistic", cpl_low))
+    if cpl_high is not None:
+        scenarios.append(_scenario("pessimistic", cpl_high))
+    if scenarios:
+        res["scenarios"] = scenarios
+    else:
+        res["scenarios_note"] = "Hajm/foyda prognozi hisoblanmadi: `--assumed-cpl` (va ixtiyoriy `--cpl-low/--cpl-high`) berilmadi. CPL taxmini mijoz tarixidan yoki sinovdan olinishi kerak; universal benchmark ishlatilmaydi."
+
+    steps_to_double = 0
+    b = 1.0
+    while b < 2.0:
+        b *= 1.2
+        steps_to_double += 1
+    res["scaling_constraints"] = {
+        "max_step_per_change_pct": 20,
+        "steps_to_double_budget": steps_to_double,
+        "min_days_to_double": steps_to_double * 2,
+        "rule": "Spend-Guard: +20% dan oshiq byudjet o'zgarishi bloklanadi; qadamlar orasida kamida 48 soat (Learning phase himoyasi). Gorizontal masshtab: yangi angle/auditoriya klonlari.",
+        "stop_scale_when": "marginal CPA break-even'dan oshganda (Breakdown Effect tekshiruvi bilan: ad-export-analyzer.py breakdown-effect)",
+    }
+    return res
 
 
 def calc_meta_155(
@@ -297,6 +413,23 @@ def main() -> int:
     p_be.add_argument("--currency", type=str, default="USD", help="ISO 4217 Currency (USD, EUR, GBP, JPY, BRL, INR, UZS)")
     p_be.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
+    # Funnel economics
+    p_fe = subparsers.add_parser("funnel-economics", help="Strategiya iqtisodi: break-even/target CPA-CPL-ROAS, test byudjeti, stsenariylar, scale cheklovi")
+    p_fe.add_argument("--price", type=str, required=True)
+    p_fe.add_argument("--cogs", type=str, required=True)
+    p_fe.add_argument("--shipping", type=str, default=0.0)
+    p_fe.add_argument("--processing-fee-pct", type=str, default=2.0)
+    p_fe.add_argument("--target-profit-pct", type=str, default=0.0)
+    p_fe.add_argument("--lead-to-sale-cvr", type=str, default=None, help="Lid -> sotuv konversiyasi foizi (mijoz CRM'idan)")
+    p_fe.add_argument("--repeat-orders", type=str, default=1.0, help="Davr ichida o'rtacha buyurtmalar soni (taxmin bo'lsa ASSUMPTION)")
+    p_fe.add_argument("--daily-budget", type=str, default=None)
+    p_fe.add_argument("--assumed-cpl", type=str, default=None, help="Taxminiy CPL/CPA (ASSUMPTION; prognoz faqat shu berilsa)")
+    p_fe.add_argument("--cpl-low", type=str, default=None)
+    p_fe.add_argument("--cpl-high", type=str, default=None)
+    p_fe.add_argument("--decision-conversions", type=str, default=30, help="Test qarori uchun konversiya soni (HEURISTIC_PRIOR_MODEL; default 30)")
+    p_fe.add_argument("--currency", type=str, default="USD")
+    p_fe.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
+
     # Meta-155
     p_m155 = subparsers.add_parser("meta-155", help="Meta Andromeda 1-5-5 testing byudjeti va Learning phase")
     p_m155.add_argument("--daily-budget", type=str, required=True, help="Kunlik byudjet")
@@ -337,6 +470,13 @@ def main() -> int:
     try:
         if args.command == "breakeven":
             res = calc_breakeven(args.price, args.cogs, args.shipping, args.processing_fee_pct, args.target_profit_pct, args.currency)
+        elif args.command == "funnel-economics":
+            opt = lambda v: None if v is None else v
+            res = calc_funnel_economics(
+                args.price, args.cogs, args.shipping, args.processing_fee_pct, args.target_profit_pct,
+                opt(args.lead_to_sale_cvr), args.repeat_orders, opt(args.daily_budget), opt(args.assumed_cpl),
+                opt(args.cpl_low), opt(args.cpl_high), args.decision_conversions, args.currency,
+            )
         elif args.command == "meta-155":
             res = calc_meta_155(args.daily_budget, args.target_cpa, args.currency)
         elif args.command == "google-sculpt":

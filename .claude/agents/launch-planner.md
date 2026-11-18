@@ -49,6 +49,7 @@ Bitta bo'lakka egalik qil: yangi taklif/xizmat uchun launch rejasi — nima, qac
 3. `wiki/nisha-playbooklar.md` — tayyor nisha voronkalari (mas. maktab: ochiq eshiklar + trial + seminar)
 4. `wiki/ozbekiston-konteksti.md` — mavsum oynalari (Navro'z, Ramazon, sentabr, dekabr)
 5. Konteyner bergan mijoz taklifi
+6. Meta Ads strategiyasi bo'lsa: `skills/ads-plan/references/meta-strategy-deliverable.md` (funnel qo'llanilishi, ABO/CBO, Advantage+, roadmap jadvali) va `python3 tools/calculator.py funnel-economics` (iqtisod; taxminlar `ASSUMPTION`)
 
 ## Contract
 

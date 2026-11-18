@@ -2,7 +2,27 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
-## [Unreleased] — Agent charters as real sub-agents (all 36)
+## [Unreleased] — Universal conductor, Meta strategy and creative intelligence
+
+### Added
+- **`skills/tyrion-universal`**: single conductor and default entry point (route -> read -> delegate/fallback -> validate -> synthesize) with `references/orchestration-protocol.md` and `references/workflow-recipes.md`. Not routable as a specialist; specialists never load it.
+- **`manifests/workflows.json` + `tools/tyrion_workflows.py`**: single source of truth for cross-agent routing (16 workflows as validated DAGs with parallel levels, optional stages, platform-aware audit agent, anti-recursion guards). `route_task` now returns `execution_plan`, `stage_skills_deferred`, `caller_role`, `delegation_allowed`; `--as-specialist` / `caller: "specialist"` / `agent_hint` disable delegation.
+- `UserPromptSubmit` hook `prompt:route` (stdin forwarded by `run-hook.cjs`) and a SessionStart entry-point reminder.
+- `calculator.py funnel-economics` (break-even/target CPA, CPL, ROAS, test budget, labelled scenarios, +20% scaling steps; no forecast without a user-supplied CPL).
+- `creative-matrix.py iterate` / MCP `mode: "iterate"` (funnel-stage diagnostic hypotheses from real metrics vs account baselines; what to change / keep) and `claim_safety` linter on generated creative.
+- `skills/ads-plan/references/meta-strategy-deliverable.md` (evidence rules, funnel applicability, ABO/CBO/Advantage+ decisions, 15-section client deliverable, roadmap) and `skills/reels-scripting/references/performance-video-system.md` (research, concept diversity, script package, test/diagnose/iterate).
+- `tests/test_universal_orchestration.py` (46 tests).
+
+### Fixed
+- Router misrouted core requests ("Meta Ads strategiya tuz" -> read-only `audit-meta`; "Kreativlarimni yaxshilash" -> no route; "reklama natijalarini tahlil qil" -> `orch-weekly-review`).
+- Progressive router slices were reported as `full_instructions_loaded: True`; now `truncated` and excluded from `applied_skills_verified` (`read_in_full_before_claiming` lists what to read).
+- `creative-matrix.py` invented statistics ("90% of people", "14 kunda natija", "Yuzlab mijozlarimiz") and silently used a default price of 100 for the installment anchor; now placeholders + `claim_safety`, unknown price stays unknown. `meta-audience.py --help` crashed on unescaped `%`.
+- MCP `tyrion_creative_matrix` invented a price (default 100) and ignored `duration`.
+
+### Removed (merged into the conductor)
+- Skills `tyrion` (loader) and `orch-audit`, `orch-campaign-launch`, `orch-creative-sprint`, `orch-weekly-review`: their domain rules moved to `skills/tyrion-universal/references/workflow-recipes.md`, stage graphs to `manifests/workflows.json`. Inventory: 61 skills, 30 tools.
+
+## [Unreleased-prev] — Agent charters as real sub-agents (all 36)
 
 ### Added
 - `.claude/agents/` generated from `agents/` by `tools/install-hooks.py` (`--agents-only`, `sync_agents`, `render_project_agent`): rewrites plugin MCP names (`mcp__plugin_tyrion_tyrion-core__*`) to project names (`mcp__tyrion-core__*`) and drops `skills:`. Mirrors all 36 (`MIRRORED_AGENTS = None`).

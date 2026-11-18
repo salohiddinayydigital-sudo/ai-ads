@@ -39,6 +39,7 @@ _TOOLS_DIR = Path(__file__).resolve().parent
 if str(_TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(_TOOLS_DIR))
 import market_locale as mloc  # noqa: E402
+import tyrion_workflows as twf  # noqa: E402
 from typing import Any, Callable
 
 VAULT = Path(__file__).resolve().parent.parent
@@ -66,6 +67,8 @@ DEFAULT_MAX_CONTEXT_BYTES = 180_000
 COMPACT_CONTEXT_BUDGET = 4_500
 NAIVE_FULL_VAULT_BYTES = 1_120_000
 
+ORCHESTRATOR_SKILLS = {"tyrion-universal"}
+WORKFLOW_PROGRESSIVE_BUDGET = 36_000  # workflow rejasi: primary + 2 mutaxassis charteri va ularning skilllari
 PROGRESSIVE_SINGLE_STEP_BUDGET = 15_000  # <= 15 KB budget for simple queries (Progressive Disclosure)
 
 
@@ -811,6 +814,8 @@ def rank(skills: list[dict], query: str, idf_pool: list[dict] | None = None) -> 
     query_tokens = tokens(query)
     if not query_tokens:
         return []
+    # Orkestrator skill (tyrion-universal) mutaxassis sifatida reytingga kirmaydi: u marshrutlovchi, marshrutlanuvchi emas.
+    skills = [s for s in skills if s["name"] not in ORCHESTRATOR_SKILLS]
     idf = build_idf(idf_pool if idf_pool is not None else skills, query_tokens)
     ranked: list[tuple[float, dict]] = []
 
@@ -1069,6 +1074,7 @@ def route_task(
     market: str | None = None,
     currency: str | None = None,
     language: str | None = None,
+    caller: str = "user",
 ) -> dict[str, Any]:
     """Har qanday foydalanuvchi topshirig'i uchun Universal Auto-Router rejasini tuzadi va to'liq kontekstni yuklaydi."""
     cache = session_cache if session_cache is not None else SESSION_CACHE
@@ -1120,6 +1126,20 @@ def route_task(
     )
     complexity = "multi_step" if multi_step_signals else "single_step"
 
+    # Workflow qatlami (manifests/workflows.json): cross-agent oqimlar skill reytingidan OLDIN. Mutaxassis (sub-agent)
+    # chaqiruvchi bo'lsa, workflow qo'llanmaydi: u faqat o'z domenini oladi (rekursiv delegatsiya yo'q).
+    caller = "specialist" if (caller == "specialist" or os.environ.get("TYRION_SPECIALIST") == "1") else "user"
+    exec_plan = None
+    # agent_hint = chaqiruvchi allaqachon mutaxassisni tanlagan (sub-agent yoki `--agent`): workflow qayta tanlanmaydi.
+    if caller == "user" and not (agent_hint and agent_hint in agents):
+        _caps = detect_harness_capabilities()
+        exec_plan = twf.build_execution_plan(
+            clean_query,
+            harness_caps={**_caps["active_harness_capabilities"], "active_harness": _caps["active_harness"]},
+            agents=agents,
+            caller=caller,
+        )
+
     global_hits = rank(skills, clean_query, idf_pool=skills)
     global_registry_fallback_used = False
 
@@ -1159,7 +1179,7 @@ def route_task(
         scope_status = "out_of_scope"
     elif signals["generic_only"] or (not strong_hits and 1 <= len(signals["meaningful_tokens"]) <= 2 and not matched_concepts):
         scope_status = "needs_clarification"
-    if scope_status:
+    if scope_status and not (exec_plan and scope_status == "needs_clarification"):
         return _terminal_plan(
             scope_status, clean_query, lang, market_info, niche, complexity, effective_mode, cache,
             mutation_approved=mutation_approved, is_mutation=is_mutation,
@@ -1336,6 +1356,62 @@ def route_task(
             ],
         }
 
+    stage_skills_deferred: list[str] = []
+    _spec_stage_count = len({s["agent"] for s in exec_plan["stages"] if s["agent"] != "conductor"}) if exec_plan else 0
+    _ranker_agrees = bool(exec_plan) and (not strong_hits or primary_agent == exec_plan["primary_agent"]) and _spec_stage_count <= 1 and bool(strong_hits)
+    if exec_plan and not _ranker_agrees:
+        # Token gigiyenasi: marshrutlash vaqtida faqat primary + birinchi 2 mutaxassis charteri va primary skilllar yuklanadi;
+        # qolgan bosqich skilllari `stage_skills_deferred` ga tushadi va tegishli bosqich boshlanganda o'qiladi.
+        complexity = "multi_step" if len([s for s in exec_plan["stages"] if s["agent"] != "conductor"]) > 1 else complexity
+        primary_agent = exec_plan["primary_agent"]
+        spec_agents: list[str] = []
+        for st in exec_plan["stages"]:
+            if st["agent"] not in ("conductor", primary_agent) and st["agent"] not in spec_agents:
+                spec_agents.append(st["agent"])
+        supporting_agents = spec_agents[:2]
+        prim_skills: list[str] = []
+        for ag_now in [primary_agent, *supporting_agents]:  # avval primary agent skilllari, so'ng yordamchilar
+            for st in exec_plan["stages"]:
+                if st["agent"] == ag_now:
+                    for sk in st["skills"]:
+                        if sk in skills_by_name and sk not in prim_skills:
+                            prim_skills.append(sk)
+        required_skills = prim_skills[:5] or required_skills
+        all_stage_skills: list[str] = []
+        for st in exec_plan["stages"]:
+            for sk in st["skills"]:
+                if sk in skills_by_name and sk not in all_stage_skills:
+                    all_stage_skills.append(sk)
+        supporting_skills = []
+        stage_skills_deferred = [sk for sk in all_stage_skills if sk not in required_skills]
+        tools_to_use = []
+        for st in exec_plan["stages"]:
+            for tl in st["tools"]:
+                if tl not in tools_to_use:
+                    tools_to_use.append(tl)
+        selected_skill_objs = [skills_by_name[s] for s in required_skills if s in skills_by_name]
+        references_to_load = _select_relevant_references(selected_skill_objs, norm_q, [])
+        if exec_plan.get("deliverable_reference"):
+            references_to_load.insert(0, exec_plan["deliverable_reference"])
+            extra_references = list(extra_references or []) + [exec_plan["deliverable_reference"]]
+        if effective_mode == "compact":  # eng arzon rejim: faqat primary; qolgani reja ichida (keyinroq o'qiladi)
+            stage_skills_deferred = [s for s in required_skills[1:]] + stage_skills_deferred
+            required_skills = required_skills[:1]
+            supporting_agents = []
+        confidence_score, confidence_level = 0.92, "high"
+        confidence_explanation = (
+            f"Workflow `{exec_plan['workflow_id']}` iboralar bo'yicha aniq mos keldi ({', '.join(exec_plan['matched_phrases'][:4])}); "
+            f"agent/skill tanlovi manifests/workflows.json dan (skill reytingi ustidan)."
+        )
+        fallback_plan = {
+            "triggered": False,
+            "mode": "WORKFLOW_PLAN",
+            "conductor": "tyrion-universal",
+            "fallback_agent": primary_agent,
+            "explanation": "Bosqich uchun sub-agent mavjud bo'lmasa conductor bosqichni o'zi, tegishli charter va skillni to'liq o'qib bajaradi (single_conductor_fallback) va buni hisobotda ochiq aytadi.",
+            "steps": [f"{i + 1}. {st['id']}: {st['title']}" for i, st in enumerate(exec_plan["stages"])],
+        }
+
     if extra_references:
         for eref in extra_references:
             if eref and eref not in references_to_load:
@@ -1395,6 +1471,9 @@ def route_task(
             else (min(max_context_bytes, 28_000) if (effective_mode == "progressive" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES) else max_context_bytes)
         )
     )
+
+    if exec_plan and effective_mode == "progressive" and max_context_bytes == DEFAULT_MAX_CONTEXT_BYTES:
+        effective_budget = max(effective_budget, WORKFLOW_PROGRESSIVE_BUDGET)
 
     if should_load_files:
         # Priority 1: Agent Charters (Progressive frontmatter+core body in progressive mode, Full Text in full mode)
@@ -1458,7 +1537,10 @@ def route_task(
                     "bytes": s_bytes,
                     "from_session_cache": rec["from_session_cache"],
                     "cache_invalidated": rec.get("cache_invalidated", False),
-                    "full_instructions_loaded": True,
+                    "full_instructions_loaded": s_bytes >= rec["bytes"],
+                    "truncated": s_bytes < rec["bytes"],
+                    "total_bytes": rec["bytes"],
+                    "read_full_with": None if s_bytes >= rec["bytes"] else rec["path"],
                     "disclosure_mode": effective_mode,
                     "output_contract": sk_obj.get("output_contract", ""),
                     "content": s_text,
@@ -1653,6 +1735,10 @@ def route_task(
         "references_to_load": references_to_load,
         "rules_to_load": rules_to_load,
         "tools_to_use": tools_to_use,
+        "caller_role": caller,
+        "delegation_allowed": caller != "specialist",
+        "execution_plan": exec_plan,
+        "stage_skills_deferred": stage_skills_deferred,
         "workflow": workflow_steps,
         "worker_packets": worker_packets,
         "missing_inputs": missing_inputs,
@@ -1682,6 +1768,9 @@ def route_task(
             "actually_loaded": bool(should_load_files and (loaded_charters or loaded_skill_files)),
             "full_instructions_loaded": bool(should_load_files and bool(required_skills) and set(required_skills).issubset(set(applied_skills_verified))),
             "applied_skills_verified": applied_skills_verified,
+            "read_in_full_before_claiming": [
+                sk["path"] for sk in loaded_skill_files if sk.get("truncated")
+            ],
             "loaded_agent_charters": loaded_charters,
             "loaded_skills": loaded_skill_files,
             "loaded_skill_names": [x["name"] for x in loaded_skill_files],
@@ -2236,6 +2325,7 @@ def cmd_route(args: argparse.Namespace) -> int:
         market=getattr(args, "market", None),
         currency=getattr(args, "currency", None),
         language=getattr(args, "language", None),
+        caller="specialist" if getattr(args, "as_specialist", False) else "user",
     )
     if args.reroute_with:
         plan = reroute_task(
@@ -2275,9 +2365,21 @@ def cmd_route(args: argparse.Namespace) -> int:
     print(f"  Kontekst Yuklandi : {plan['loaded_context']['actually_loaded']} (applied_skills_verified={plan['loaded_context']['applied_skills_verified']})")
     if plan["mutation_gate"]["blocked"]:
         print(f"  🛑 MUTATION GATE  : {plan['mutation_gate']['reason']}")
-    print("  Kanonik 6-Bosqichli Ish Oqimi:")
-    for step in plan["workflow"]:
-        print(f"    • {step}")
+    ep = plan.get("execution_plan")
+    if ep:
+        print(f"  Workflow          : {ep['workflow_id']} -> {ep['deliverable']} (delegatsiya: {ep['delegation']['mode']}, harness={ep['delegation']['harness']})")
+        for lvl_idx, lvl in enumerate(ep["parallel_levels"], 1):
+            cells = []
+            for sid in lvl:
+                st = next(x for x in ep["stages"] if x["id"] == sid)
+                cells.append(f"{sid}[{st['agent']}{'?' if st['optional'] else ''}]")
+            print(f"    L{lvl_idx}: " + "  ||  ".join(cells))
+        if plan.get("stage_skills_deferred"):
+            print(f"  Keyinroq o'qiladi : {', '.join(plan['stage_skills_deferred'])} (bosqich boshlanganda)")
+    else:
+        print("  Kanonik 6-Bosqichli Ish Oqimi:")
+        for step in plan["workflow"]:
+            print(f"    • {step}")
     print("=" * 72)
     return 0
 
@@ -2503,6 +2605,7 @@ def main(argv: list[str] | None = None) -> int:
         p_r.add_argument("--context-mode", choices=["compact", "progressive", "full", "manifest"], default="progressive", help="Context loading mode: progressive (<=15KB frontmatter+core body), full (all references), or manifest")
         p_r.add_argument("--max-context-bytes", type=int, default=DEFAULT_MAX_CONTEXT_BYTES, help="Kontekst paketi maksimal hajmi (bayt)")
         p_r.add_argument("--reroute-with", default="", help="Ish davomida paydo bo'lgan qo'shimcha ehtiyojni dinamik qo'shish")
+        p_r.add_argument("--as-specialist", action="store_true", help="Chaqiruvchi sub-agent (mutaxassis): workflow/delegatsiya qo'llanmaydi, rekursiv marshrutlash yo'q")
         p_r.add_argument("--approved", action="store_true", help="Reklama hisobiga o'zgartirish (mutation) tasdiqlanganligi")
         p_r.add_argument("--execute", action="store_true", default=(sub_name == "execute"), help="Rejadan tashqari deterministik vositalar va conductor sintezini amalda bajarish")
         p_r.add_argument("--harness", default="", help="Harness imkoniyatini tekshirish (claude_code, codex, cursor, windsurf)")

@@ -3,7 +3,7 @@
 
 Qo'llab-quvvatlanadigan muhit o'zgaruvchilari (ECC 2.2 mos):
   TYRION_HOOK_PROFILE   : minimal | standard | strict (default: standard)
-  TYRION_DISABLED_HOOKS : vergul bilan ajratilgan hook ID ro'yxati (session:brief,pre:guard,post:ingest,stop:dod)
+  TYRION_DISABLED_HOOKS : vergul bilan ajratilgan hook ID ro'yxati (session:brief,prompt:route,pre:guard,post:ingest,stop:dod)
 
 Buyruqlar:
   python3 hooks/tyrion-hook.py brief     # sessiya boshi: holat + instinktlar (SessionStart, ID: session:brief)
@@ -108,7 +108,46 @@ def cmd_brief(_args: argparse.Namespace) -> int:
     if drift:
         bits.append(f"⚠ {len(drift)} nusxada drift → `catalog.py sync-mirrors`")
 
+    bits.append("Marketing vazifa -> `tyrion-universal` skili (route -> o'qi -> bajar -> tekshir); agent/skill tanlash shart emas")
     print(" | ".join(bits))
+    return 0
+
+
+# --------------------------------------------------------------------------- #
+# route — har foydalanuvchi xabarida deterministik marshrut maslahati (ID: prompt:route)
+# --------------------------------------------------------------------------- #
+
+def cmd_route(_args: argparse.Namespace) -> int:
+    """UserPromptSubmit: stdin JSON {"prompt": ...}. Marketing so'rovlari uchun 1 qatorli marshrut maslahati chiqaradi
+    (0 token tahlil; fayl yuklamaydi). Marketingga aloqasiz xabarda JIM turadi. Hech qachon bloklamaydi."""
+    if is_disabled("prompt:route") or get_profile() == "minimal":
+        return 0
+    prompt = ""
+    if not sys.stdin.isatty():
+        try:
+            raw = sys.stdin.read().strip()
+            prompt = (json.loads(raw).get("prompt", "") if raw.startswith("{") else raw)[:2000]
+        except Exception:
+            return 0
+    if len(prompt.strip()) < 8 or prompt.strip().startswith("/"):
+        return 0
+    try:
+        sys.path.insert(0, str(TOOLS))
+        import importlib
+        ss = importlib.import_module("skill-search")
+        plan = ss.route_task(prompt, load=False, context_mode="manifest")
+    except Exception:
+        return 0
+    if plan.get("status") not in ("ready", "fallback_ready", "blocked_mutation_approval"):
+        return 0
+    ep = plan.get("execution_plan")
+    if ep:
+        spec = [s["agent"] for s in ep["stages"] if s["agent"] != "conductor"]
+        flow = " > ".join("||".join(lvl) for lvl in ep["parallel_levels"])
+        print(f"[tyrion-route] workflow={ep['workflow_id']} primary={plan['primary_agent']} mutaxassislar={len(set(spec))} bosqichlar: {flow} -> `tyrion-universal` skilli bilan bajaring (mutaxassislar uni qayta chaqirmaydi)")
+    else:
+        sup = ",".join(plan.get("supporting_agents", [])) or "-"
+        print(f"[tyrion-route] primary={plan['primary_agent']} yordamchi={sup} skill={','.join(plan.get('required_skills', []))} -> `tyrion-universal` skilli bilan boshlang")
     return 0
 
 
@@ -297,6 +336,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="tyrion-hook.py", description="Tyrion deterministik hook'lari")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("brief", help="sessiya boshi holati (session:brief)").set_defaults(func=cmd_brief)
+
+    sub.add_parser("route", help="har xabarda marshrut maslahati (prompt:route)").set_defaults(func=cmd_route)
 
     guard = sub.add_parser("guard", help="generatsiya va config himoyasi (pre:guard)")
     guard.add_argument("--target", default="", help="tekshirilayotgan fayl yo'li")

@@ -6,7 +6,7 @@ Asosiy modullar:
   2. interests          : Nisha bo'yicha boshlang'ich qidiruv lug'ati (`RELATED_UNVERIFIED`) + Graph API v26.0 tekshiruvi
   3. detailed-targeting : To'liq 6-statusli (`VERIFIED_AVAILABLE`, `FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED`,
                           `RELATED_UNVERIFIED`, `NOT_FOUND`, `API_UNAVAILABLE`) Detailed Targeting Accuracy hisoboti
-  4. overlap            : Static Pool Overlap (<20% qoidasi) va Live Auction Overlap farqi
+  4. overlap            : Static Pool Overlap (<20%% qoidasi) va Live Auction Overlap farqi
   5. saturation         : Ssenariy sezgirlik oralig'i (`scenario_sensitivity_window_days`) va charchash prognozi
   6. retargeting        : Haqiqiy trafikka tayangan dinamik Retargeting oynalari (--no-telegram-bot qo'llab-quvvatlanadi)
   7. lookalike          : Heuristic Seed Readiness Score (0-100) va 1%–5% hajm pog'onasi
@@ -1313,7 +1313,7 @@ def main(argv: list[str] | None = None) -> int:
     p_dt.add_argument("--no-validate", action="store_true")
     p_dt.add_argument("--json", action="store_true")
 
-    p_ovl = sub.add_parser("overlap", help="Ikki ad set o'rtasidagi Static Pool Overlap (<20% qoidasi) ni hisoblash")
+    p_ovl = sub.add_parser("overlap", help="Ikki ad set o'rtasidagi Static Pool Overlap (<20%% qoidasi) ni hisoblash")
     p_ovl.add_argument("--size-a", type=int, required=True)
     p_ovl.add_argument("--size-b", type=int, required=True)
     p_ovl.add_argument("--shared", type=int, required=True)
@@ -1351,7 +1351,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     p_ret.add_argument("--json", action="store_true")
 
-    p_lal = sub.add_parser("lookalike", help="Lookalike (LAL) seed tayyorlik indeksi va 1%-5% pog'onali hajm hisoblagichi")
+    p_lal = sub.add_parser("lookalike", help="Lookalike (LAL) seed tayyorlik indeksi va 1%%-5%% pog'onali hajm hisoblagichi")
     p_lal.add_argument("--seed-size", type=int, required=True)
     p_lal.add_argument("--seed-type", default="purchase_ltv",
                        choices=["purchase_ltv", "purchase_all", "qualified_leads", "raw_leads", "ig_engagers"])

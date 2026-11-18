@@ -36,6 +36,7 @@ related_skills:
 - video-editing
 - social
 references:
+- skills/reels-scripting/references/performance-video-system.md
 - skills/ad-creative/references/video-ad-scripts-and-specs.md
 - skills/ad-creative/references/meta-creative-formats.md
 risk_level: low
@@ -43,6 +44,8 @@ output_contract: Complete Time-Coded 9:16 Video Script (3 Visual/Verbal Hook Opt
 ---
 
 # 🎬 Reels, TikTok & Meta Video Ad Scripting Engine (`reels-scripting`)
+
+> **Professional script package**: strategic brief, >= 3 materially different hooks (first frame, on-screen text, spoken line, camera, psychological purpose), time-coded storyboard table (15/30/45 s), editing instructions, ad copy package, `claim_safety` check, and the test -> diagnose -> iterate loop are specified in `skills/reels-scripting/references/performance-video-system.md`. Read it before writing. Never invent statistics, testimonials, prices or guarantees; use `[ADD VERIFIED ...]` placeholders.
 
 Generate ready-to-shoot, high-retention `9:16` vertical video scripts for **paid Meta/TikTok/YouTube video ads** and **organic Reels/Shorts** — immediately and with **zero mandatory external API keys** (`APIFY_API_TOKEN` is never required).
 
