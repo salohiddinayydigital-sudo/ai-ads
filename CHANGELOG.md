@@ -3,6 +3,18 @@
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
 
+## [8.0.1] — 2026-11-19
+
+Birinchi haqiqiy `claude plugin eval` run'idan keyingi tuzatishlar.
+
+### Tuzatildi
+- Eval graderlari: JS regex'da yaroqsiz `(?i)` (38 ta), `max: 0` li `tool_used` graderlarda `min: 0` yo'q edi; case'lar `Read` va `Bash` oladi.
+- Marshrutlash: route hooki, Cursor kirish qoidasi va dirijyor matni o'chirilgan `tyrion-universal` nomiga ishora qilardi; endi `tyrion`.
+- Windows: `crm-bridge` va boshqa yangi asboblarning `--help` chiqishi cp1252 konsolida yiqilardi (UTF-8 stdout); CI smoke qadami bash'da ishlaydi.
+
+### Hujjat
+- `docs/v8-eval-results.md`: o'lchangan natija — 5/28 case ≥ 0.8, o'rtacha ball 0.558, plaginsiz baseline'dan farq +0.183 (`--runs 1`, bitta run). Suite o'tmaydi; `tool-run` graderlari sandbox'siz mashinada baholanmaydi.
+
 ## [8.0.0] — 2026-11-19
 
 Yopiq siklli media-buyer miyasi. 7.x dan o'tish: [MIGRATION.md](MIGRATION.md).
