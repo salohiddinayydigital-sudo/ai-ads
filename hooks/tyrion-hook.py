@@ -108,7 +108,7 @@ def cmd_brief(_args: argparse.Namespace) -> int:
     if drift:
         bits.append(f"⚠ {len(drift)} nusxada drift → `catalog.py sync-mirrors`")
 
-    bits.append("Marketing vazifa -> `tyrion-universal` skili (route -> o'qi -> bajar -> tekshir); agent/skill tanlash shart emas")
+    bits.append("Marketing vazifa -> `tyrion` skili (route -> o'qi -> bajar -> tekshir); agent/skill tanlash shart emas")
     print(" | ".join(bits))
     return 0
 
@@ -144,10 +144,10 @@ def cmd_route(_args: argparse.Namespace) -> int:
     if ep:
         spec = [s["agent"] for s in ep["stages"] if s["agent"] != "conductor"]
         flow = " > ".join("||".join(lvl) for lvl in ep["parallel_levels"])
-        print(f"[tyrion-route] workflow={ep['workflow_id']} primary={plan['primary_agent']} mutaxassislar={len(set(spec))} bosqichlar: {flow}. BIRINCHI QADAM (majburiy): Skill tool bilan `tyrion-universal` skilini chaqiring va javobni shu skill protokoli bo'yicha tuzing; uni chaqirmasdan javob yozmang. Mutaxassislar uni qayta chaqirmaydi.")
+        print(f"[tyrion-route] workflow={ep['workflow_id']} primary={plan['primary_agent']} mutaxassislar={len(set(spec))} bosqichlar: {flow}. BIRINCHI QADAM (majburiy): Skill tool bilan `tyrion` skilini chaqiring va javobni shu skill protokoli bo'yicha tuzing; uni chaqirmasdan javob yozmang. Mutaxassislar uni qayta chaqirmaydi.")
     else:
         sup = ",".join(plan.get("supporting_agents", [])) or "-"
-        print(f"[tyrion-route] primary={plan['primary_agent']} yordamchi={sup} skill={','.join(plan.get('required_skills', []))} . BIRINCHI QADAM (majburiy): Skill tool bilan `tyrion-universal` skilini chaqiring va shu protokol bo'yicha javob bering.")
+        print(f"[tyrion-route] primary={plan['primary_agent']} yordamchi={sup} skill={','.join(plan.get('required_skills', []))} . BIRINCHI QADAM (majburiy): Skill tool bilan `tyrion` skilini chaqiring va shu protokol bo'yicha javob bering.")
     return 0
 
 

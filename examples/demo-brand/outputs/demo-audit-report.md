@@ -1,7 +1,7 @@
 # Multi-Channel Audit Hisoboti: Apex E-Commerce
 
 - **Sana:** 2026-10-17
-- **Conductor:** tyrion-universal, workflow full_audit (Tyrion Multi-Channel Operating System)
+- **Conductor:** tyrion, workflow full_audit (Tyrion Multi-Channel Operating System)
 - **Tekshirilgan kanallar:** Meta Ads · Google Ads · Telegram Ads · Tracking & CAPI
 - **Jami oylik media sarfi:** $6,680.50
 - **Jami daromad:** $13,154.00
