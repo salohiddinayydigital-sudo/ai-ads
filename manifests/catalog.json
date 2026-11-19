@@ -1,6 +1,6 @@
 {
   "schema": "tyrion-catalog/v1",
-  "generated": "2026-11-19T08:30:46+00:00",
+  "generated": "2026-11-19T08:32:22+00:00",
   "generator": "tools/catalog.py",
   "vault": ".",
   "counts": {
@@ -3875,9 +3875,9 @@
         "name": "test_engines_v4",
         "layer": "tests",
         "path": "tests/test_engines_v4.py",
-        "sha256": "c0dc8d1527eae7b7",
-        "bytes": 7776,
-        "updated": "2026-11-18T15:30:28+00:00",
+        "sha256": "078a2c143757bcd5",
+        "bytes": 7809,
+        "updated": "2026-11-19T08:31:18+00:00",
         "title": null,
         "description": null,
         "source": null,
