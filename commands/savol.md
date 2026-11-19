@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Bilim grafidan tez javob — eng arzon bilim yo'li (butun vaultni o'qimasdan)
 argument-hint: <savol>
 ---
@@ -9,7 +10,7 @@ Foydalanuvchi savoli: **$ARGUMENTS**
 
 ## Qadamlar
 
-0. Savol bilim emas, **ish** bo'lsa (strategiya, tahlil, skript, audit...) — `tyrion-universal` skilli bilan davom eting: `python3 tools/skill-search.py route "$ARGUMENTS" --context-mode manifest --json`, so'ng skilldagi protokol (o'qi → bajar → tekshir → sintez). Quyidagi graf yo'li faqat sof bilim savollari uchun.
+0. Savol bilim emas, **ish** bo'lsa (strategiya, tahlil, skript, audit...) — `tyrion` skilli bilan davom eting: `python3 tools/skill-search.py route "$ARGUMENTS" --context-mode manifest --json`, so'ng skilldagi protokol (o'qi → bajar → tekshir → sintez). Quyidagi graf yo'li faqat sof bilim savollari uchun.
 1. Grafdan so'ra (arzon yo'l — [[20-token-gigiyena]]):
    ```powershell
    python3 tools/brain-search.py query "$ARGUMENTS" --budget 1200

@@ -399,18 +399,52 @@ def calc_testing_ladder(
     }
 
 
+
+def _load_metrics_rows(path: str | Path) -> list[dict]:
+    """`--metrics`: tools/normalize.py (metrics.v1) orqali yuklaydi; xato bo'lsa ValueError."""
+    import importlib.util as _ilu
+    spec = _ilu.spec_from_file_location("_tyrion_normalize", Path(__file__).resolve().parent / "normalize.py")
+    mod = _ilu.module_from_spec(spec)  # type: ignore[arg-type]
+    sys.modules.setdefault("_tyrion_normalize", mod)
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    try:
+        return mod.load_metrics_file(path)
+    except Exception as exc:  # NormalizeError va fayl xatolari
+        raise ValueError(str(exc)) from exc
+
+
+def metrics_baselines(rows: list[dict]) -> dict:
+    """metrics.v1 dan median CPA va AOV (qator darajasida, konversiya > 0 bo'lganlar). Taklif, qo'lda argument ustun."""
+    import statistics
+    cpas, aovs = [], []
+    for r in rows:
+        n = sum((r.get("conversions") or {}).values())
+        if n > 0 and float(r.get("spend") or 0) > 0:
+            cpas.append(float(r["spend"]) / n)
+            if float(r.get("conversion_value") or 0) > 0:
+                aovs.append(float(r["conversion_value"]) / n)
+    return {
+        "median_cpa": round(statistics.median(cpas), 2) if cpas else None,
+        "median_aov": round(statistics.median(aovs), 2) if aovs else None,
+        "rows_used_cpa": len(cpas), "rows_used_aov": len(aovs),
+        "evidence_label": "MEASURED_ACCOUNT_DATA",
+        "note": "Taklif: kuzatilgan median; break-even emas. Qo'lda argument ustun.",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Tyrion Media Math Calculator — Pullik media va byudjet matematikasi")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     # Breakeven
     p_be = subparsers.add_parser("breakeven", help="Break-even CPA va ROAS hisobi")
-    p_be.add_argument("--price", type=str, required=True, help="Mahsulot sotuv narxi")
+    p_be.add_argument("--price", type=str, default=None, help="Mahsulot sotuv narxi (--from-metrics bilan median AOV ishlatiladi)")
     p_be.add_argument("--cogs", type=str, required=True, help="Tannarx (COGS)")
     p_be.add_argument("--shipping", type=str, default=0.0, help="Yetkazib berish xarajati")
     p_be.add_argument("--processing-fee-pct", type=str, default=2.0, help="To'lov tizimi komissiyasi foizi (default: 2.0)")
     p_be.add_argument("--target-profit-pct", type=str, default=0.0, help="Kutilayotgan sof foyda foizi")
     p_be.add_argument("--currency", type=str, default="USD", help="ISO 4217 Currency (USD, EUR, GBP, JPY, BRL, INR, UZS)")
+    p_be.add_argument("--from-metrics", default=None, help="metrics.v1 fayl: median CPA/AOV taklifi")
     p_be.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
     # Funnel economics
@@ -461,15 +495,24 @@ def main() -> int:
     # Ladder
     p_lad = subparsers.add_parser("ladder", help="3 bosqichli sinov pillapoyasi (Sandbox -> Validation -> Scale)")
     p_lad.add_argument("--total-budget", type=str, required=True, help="Umumiy sinov byudjeti")
-    p_lad.add_argument("--breakeven-cpa", type=str, required=True, help="Break-even CPA")
+    p_lad.add_argument("--breakeven-cpa", type=str, default=None, help="Break-even CPA (--from-metrics bilan median CPA taklif sifatida)")
     p_lad.add_argument("--currency", type=str, default="USD", help="Valyuta")
+    p_lad.add_argument("--from-metrics", default=None, help="metrics.v1 fayl: median CPA/AOV taklifi")
     p_lad.add_argument("--json", action="store_true", help="JSON formatida chiqarish")
 
     args = parser.parse_args()
 
+    suggestion = None
     try:
+        if getattr(args, "from_metrics", None):
+            suggestion = metrics_baselines(_load_metrics_rows(args.from_metrics))
         if args.command == "breakeven":
-            res = calc_breakeven(args.price, args.cogs, args.shipping, args.processing_fee_pct, args.target_profit_pct, args.currency)
+            price = args.price
+            if price is None:
+                if not suggestion or suggestion["median_aov"] is None:
+                    raise ValueError("--price kerak (yoki conversion_value bor --from-metrics)")
+                price = str(suggestion["median_aov"])
+            res = calc_breakeven(price, args.cogs, args.shipping, args.processing_fee_pct, args.target_profit_pct, args.currency)
         elif args.command == "funnel-economics":
             opt = lambda v: None if v is None else v
             res = calc_funnel_economics(
@@ -484,7 +527,14 @@ def main() -> int:
         elif args.command == "telegram-funnel":
             res = calc_telegram_funnel(args.budget, args.cpm, args.ctr, args.bot_start_pct, args.lead_pct, args.order_pct, args.aov, args.currency)
         elif args.command == "ladder":
-            res = calc_testing_ladder(args.total_budget, args.breakeven_cpa, args.currency)
+            be = args.breakeven_cpa
+            if be is None:
+                if not suggestion or suggestion["median_cpa"] is None:
+                    raise ValueError("--breakeven-cpa kerak (yoki konversiyali --from-metrics)")
+                be = str(suggestion["median_cpa"])
+            res = calc_testing_ladder(args.total_budget, be, args.currency)
+        if suggestion is not None and isinstance(res, dict):
+            res["from_metrics"] = suggestion
     except Exception as exc:
         print(f"Xato: {exc}", file=sys.stderr)
         return tcore.EXIT_VALIDATION

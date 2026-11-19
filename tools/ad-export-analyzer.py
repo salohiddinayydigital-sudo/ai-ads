@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v7.1 Ad Export Analyzer & Breakdown Effect Engine (0 token).
+"""Tyrion v8.0 Ad Export Analyzer & Breakdown Effect Engine (0 token).
 
 Yangi imkoniyatlar (Audit #1 va #2 yechimi):
 1. `account_currency` va ko'p valyutali (`USD`, `UZS`, `EUR`, `KZT`) aniqlik — valyutani ko'r-ko'rona USD deb belgilamaydi.
@@ -312,14 +312,76 @@ def normalize_row(
     return out
 
 
+
+def _load_metrics_rows(path: str | Path) -> list[dict]:
+    """`--metrics`: tools/normalize.py (metrics.v1) orqali yuklaydi; xato bo'lsa ValueError."""
+    import importlib.util as _ilu
+    spec = _ilu.spec_from_file_location("_tyrion_normalize", Path(__file__).resolve().parent / "normalize.py")
+    mod = _ilu.module_from_spec(spec)  # type: ignore[arg-type]
+    sys.modules.setdefault("_tyrion_normalize", mod)
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    try:
+        return mod.load_metrics_file(path)
+    except Exception as exc:  # NormalizeError va fayl xatolari
+        raise ValueError(str(exc)) from exc
+
+
+def metrics_to_raw_rows(rows: list[dict]) -> list[dict]:
+    """metrics.v1 qatorlarini (sana x entity) entity bo'yicha jamlab, eksport-ko'rinishidagi xom qatorlarga aylantiradi."""
+    agg: dict[tuple, dict] = {}
+    for r in rows:
+        key = (r.get("platform"), r.get("level"), r.get("entity_id"))
+        a = agg.setdefault(key, {
+            "Campaign name": r.get("entity_name") or r.get("entity_id"), "Currency": r.get("currency"),
+            "spend": 0.0, "Impressions": 0.0, "Clicks": 0.0, "revenue": 0.0, "purchases": 0.0, "leads": 0.0,
+            "conv_other": 0.0, "_fw": 0.0, "_f": 0.0,
+        })
+        a["spend"] += float(r.get("spend") or 0)
+        impr = float(r.get("impressions") or 0)
+        a["Impressions"] += impr
+        a["Clicks"] += float(r.get("link_clicks") or r.get("clicks") or 0)
+        a["revenue"] += float(r.get("conversion_value") or 0)
+        if r.get("frequency") is not None:
+            a["_fw"] += impr
+            a["_f"] += float(r["frequency"]) * impr
+        for ev, n in (r.get("conversions") or {}).items():
+            e = str(ev).lower()
+            if "purchase" in e:
+                a["purchases"] += float(n)
+            elif "lead" in e:
+                a["leads"] += float(n)
+            else:
+                a["conv_other"] += float(n)
+    out: list[dict] = []
+    for a in agg.values():
+        row = {"Campaign name": a["Campaign name"], "Amount spent": round(a["spend"], 2), "Currency": a["Currency"],
+               "Impressions": a["Impressions"], "Clicks": a["Clicks"]}
+        if a["revenue"]:
+            row["Purchase value"] = round(a["revenue"], 2)
+        if a["purchases"]:
+            row["Purchases"] = a["purchases"]
+        if a["leads"]:
+            row["Leads"] = a["leads"]
+        if a["conv_other"]:
+            row["Results"] = a["conv_other"]
+        if a["_fw"]:
+            row["Frequency"] = round(a["_f"] / a["_fw"], 2)
+        out.append(row)
+    return out
+
+
 def analyze_export(
-    path: Path,
+    path: Path | None,
     target_cpa: float = 20.0,
     breakeven_roas: float = 2.0,
     primary_conversion: str = "auto",
     default_currency: str = "USD",
+    raw_rows_override: list[dict] | None = None,
 ) -> dict:
-    raw_rows = [r for r in load_rows(path) if isinstance(r, dict)]
+    if raw_rows_override is not None:
+        raw_rows = [r for r in raw_rows_override if isinstance(r, dict)]
+    else:
+        raw_rows = [r for r in load_rows(path) if isinstance(r, dict)]
     all_headers: list[str] = []
     for r in raw_rows:
         for k in r.keys():
@@ -509,11 +571,12 @@ def analyze_breakdown_effect(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="ad-export-analyzer.py", description="Tyrion v7.1 CSV/JSON Ad Export & Breakdown Effect Analyzer")
+    parser = argparse.ArgumentParser(prog="ad-export-analyzer.py", description="Tyrion v8.0 CSV/JSON Ad Export & Breakdown Effect Analyzer")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_an = sub.add_parser("analyze", help="Meta/Google/Telegram CSV yoki JSON eksportni tahlil qilish")
-    p_an.add_argument("--file", required=True, help="CSV yoki JSON fayl yo'li")
+    p_an.add_argument("--file", default=None, help="CSV yoki JSON fayl yo'li")
+    p_an.add_argument("--metrics", default=None, help="metrics.v1 fayl (tools/normalize.py chiqishi); --file o'rniga")
     p_an.add_argument("--target-cpa", type=tcore.positive_float, default=20.0)
     p_an.add_argument("--breakeven-roas", type=tcore.positive_float, default=2.0)
     p_an.add_argument(
@@ -536,9 +599,14 @@ def main(argv: list[str] | None = None) -> int:
 
     args = parser.parse_args(argv)
     if args.command == "analyze":
+        if not args.file and not args.metrics:
+            print("Xato: --file yoki --metrics kerak", file=sys.stderr)
+            return tcore.EXIT_VALIDATION
         try:
+            override = metrics_to_raw_rows(_load_metrics_rows(args.metrics)) if args.metrics else None
             res = analyze_export(
-                Path(args.file),
+                Path(args.file) if args.file else None,
+                raw_rows_override=override,
                 target_cpa=args.target_cpa,
                 breakeven_roas=args.breakeven_roas,
                 primary_conversion=args.primary_conversion,
@@ -560,7 +628,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 68)
-    print(f"  📊 TYRION v7.1 AD EXPORT & BREAKDOWN ANALYZER — {args.command.upper()}")
+    print(f"  📊 TYRION v8.0 AD EXPORT & BREAKDOWN ANALYZER — {args.command.upper()}")
     print("=" * 68)
     print(json.dumps(res, ensure_ascii=False, indent=2))
     print("=" * 68)

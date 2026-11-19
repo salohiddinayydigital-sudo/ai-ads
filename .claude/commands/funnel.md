@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: funnel
 description: "End-to-end conversion funnel architecture & leak diagnostics across E-Commerce, B2B SaaS, WhatsApp/Telegram/LINE & CRM (Alias: /voronka)"
 alias_of: voronka

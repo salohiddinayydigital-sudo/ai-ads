@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: TyrionShield xavfsizlik skaneri — sirlar (.env/tokenlar), hooklar, MCP, barcha agent va skill himoyasini tekshirish
 argument-hint: [scan | --json]
 ---

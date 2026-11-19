@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "entities": [
+    {"id": "c10", "name": "SYN MCP Campaign", "level": "campaign", "account_id": "2000000002", "currency": "UZS",
+     "insights": {"data": [
+       {"date": "2026-11-03", "spend": 150000, "impressions": 12000, "clicks": 300, "conversions": 9, "some_new_field": 1},
+       {"date": "2026-11-04", "spend": 140000, "impressions": 11000, "clicks": 280, "conversions": 0}
+     ]}},
+    {"entity_id": "c11", "entity_name": "SYN Flat", "level": "campaign", "currency": "UZS", "date": "2026-11-03", "spend": 5000, "impressions": 400}
+  ]
+}

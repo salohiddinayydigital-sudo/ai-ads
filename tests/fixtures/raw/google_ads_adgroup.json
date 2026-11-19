@@ -1,0 +1,4 @@
+{"synthetic": true, "results": [
+  {"customer": {"id": "3000000003", "currency_code": "EUR"}, "campaign": {"id": "g1"}, "ad_group": {"id": "ag1", "name": "SYN AG"},
+   "segments": {"date": "2026-11-05"}, "metrics": {"cost_micros": 2500000, "impressions": 100, "clicks": 7}}
+]}

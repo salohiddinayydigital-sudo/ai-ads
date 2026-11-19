@@ -104,7 +104,7 @@ class RepoSourceTests(unittest.TestCase):
             src = re.search(r"(?m)^source:\s*(.*)$", text).group(1)
             if status.group(1) != "unverified":
                 self.assertEqual(va.classify_source(src, VAULT)["missing"], [], p.name)
-        self.assertEqual(sum(counts.values()), 100)
+        self.assertEqual(sum(counts.values()), 101)
 
     def test_no_invented_urls(self) -> None:
         """URL'lar faqat ilgari qaydda bo'lgan YouTube havolalari yoki tekshirilgan rasmiy manbalar bo'lishi mumkin."""

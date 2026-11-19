@@ -24,20 +24,20 @@ CLI_CAPS = {"supports_native_subagents": False, "active_harness": "cli_standalon
 
 NL_CASES = [
     # (query, workflow_id, primary_agent)
-    ("Shu biznes uchun Meta Ads strategiya tuz", "meta_strategy", "launch-planner"),
-    ("Build a complete Meta Ads strategy for this business", "meta_strategy", "launch-planner"),
-    ("Сделай стратегию Meta Ads для моего бизнеса", "meta_strategy", "launch-planner"),
-    ("Mijoz uchun reklama strategiyasini tayyorla", "meta_strategy", "launch-planner"),
-    ("Raqobatchilarimni o'rganib menga reklama strategiyasi tuz", "competitor_strategy", "positioning-strategist"),
-    ("Raqobatchilarimni tahlil qil", "competitor_research", "research-worker"),
-    ("Menga professional Reels ssenariysi yoz", "video_script", "reels-scriptwriter"),
-    ("Мне нужен сценарий рилс", "video_script", "reels-scriptwriter"),
-    ("Meta Ads kampaniyam nima sababdan yaxshi ishlamayapti?", "campaign_diagnosis", "audit-meta"),
-    ("Google Ads kampaniyam yaxshi ishlamayapti", "campaign_diagnosis", "audit-google"),
+    ("Shu biznes uchun Meta Ads strategiya tuz", "meta_strategy", "strategist"),
+    ("Build a complete Meta Ads strategy for this business", "meta_strategy", "strategist"),
+    ("Сделай стратегию Meta Ads для моего бизнеса", "meta_strategy", "strategist"),
+    ("Mijoz uchun reklama strategiyasini tayyorla", "meta_strategy", "strategist"),
+    ("Raqobatchilarimni o'rganib menga reklama strategiyasi tuz", "competitor_strategy", "strategist"),
+    ("Raqobatchilarimni tahlil qil", "competitor_research", "research-verifier"),
+    ("Menga professional Reels ssenariysi yoz", "video_script", "video-producer"),
+    ("Мне нужен сценарий рилс", "video_script", "video-producer"),
+    ("Meta Ads kampaniyam nima sababdan yaxshi ishlamayapti?", "campaign_diagnosis", "platform-auditor"),
+    ("Google Ads kampaniyam yaxshi ishlamayapti", "campaign_diagnosis", "platform-auditor"),
     ("Kreativlarimni yaxshilash kerak", "creative_improve", "creative-strategist"),
     ("Улучши мои креативы", "creative_improve", "creative-strategist"),
-    ("Ushbu reklama natijalarini tahlil qil", "results_analysis", "audit-meta"),
-    ("Menga to'liq marketing rejasi kerak", "marketing_plan_full", "launch-planner"),
+    ("Ushbu reklama natijalarini tahlil qil", "results_analysis", "platform-auditor"),
+    ("Menga to'liq marketing rejasi kerak", "marketing_plan_full", "strategist"),
 ]
 
 
@@ -57,7 +57,7 @@ class NaturalLanguageRoutingTests(unittest.TestCase):
 
     def test_content_plan_is_not_an_ad_strategy(self) -> None:
         plan = ss.route_task("Instagram uchun bir oylik kontent reja tayyorla", load=False, context_mode="manifest")
-        self.assertEqual(plan["primary_agent"], "social-content-writer")
+        self.assertEqual(plan["primary_agent"], "content-planner")
 
     def test_greeting_and_off_topic_stay_out_of_scope(self) -> None:
         for q in ("salom", "ob-havo qanday bo'ladi?"):
@@ -97,11 +97,11 @@ class WorkflowManifestTests(unittest.TestCase):
     def test_only_necessary_agents_are_activated(self) -> None:
         plan = twf.build_execution_plan("Meta Ads strategiya tuz", CLI_CAPS, ss.load_agents())
         agents = {s["agent"] for s in plan["stages"] if s["agent"] != "conductor"}
-        self.assertLessEqual(len(agents), 9)
-        self.assertLess(len(agents), len(ss.load_agents()) / 3)
-        self.assertNotIn("audit-tiktok", agents)
+        self.assertLessEqual(len(agents), 8)
+        self.assertLess(len(agents), len(ss.load_agents()) * 0.75)
+        self.assertNotIn("platform-auditor", agents)
         video = twf.build_execution_plan("Reelsga skript yoz", CLI_CAPS, ss.load_agents())
-        self.assertLessEqual({s["agent"] for s in video["stages"]}, {"conductor", "reels-scriptwriter", "copy-writer"})
+        self.assertLessEqual({s["agent"] for s in video["stages"]}, {"conductor", "video-producer", "creative-strategist"})
 
     def test_cycle_and_orchestrator_recursion_are_rejected(self) -> None:
         cfg = json.loads(json.dumps(twf.load_workflows()))
@@ -110,7 +110,7 @@ class WorkflowManifestTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             twf._levels(wf["stages"])
         bad = json.loads(json.dumps(twf.load_workflows()))
-        bad["workflows"][0]["stages"][1]["skills"] = ["tyrion-universal"]
+        bad["workflows"][0]["stages"][1]["skills"] = ["tyrion"]
         orig = twf.load_workflows
         twf.load_workflows = lambda force=False: bad  # type: ignore[assignment]
         try:
@@ -141,8 +141,8 @@ class DelegationHonestyTests(unittest.TestCase):
 
     def test_platform_swap_uses_matching_audit_agent(self) -> None:
         plan = twf.build_execution_plan("TikTok reklamam nega ishlamayapti", CLI_CAPS, ss.load_agents())
-        self.assertEqual(plan["primary_agent"], "audit-tiktok")
-        self.assertNotIn("audit-meta", {s["agent"] for s in plan["stages"]})
+        self.assertEqual(plan["primary_agent"], "platform-auditor")
+        self.assertIn("tiktok", json.dumps(plan, ensure_ascii=False).lower())  # v8: bitta platform-auditor, platforma delegatsiya paketida
 
 
 class AntiRecursionTests(unittest.TestCase):
@@ -152,9 +152,9 @@ class AntiRecursionTests(unittest.TestCase):
         self.assertFalse(plan["delegation_allowed"])
 
     def test_agent_hint_means_specialist_already_chosen(self) -> None:
-        plan = ss.route_task("Meta Ads strategiya tuz", agent_hint="audit-meta", load=False, context_mode="manifest")
+        plan = ss.route_task("Meta Ads strategiya tuz", agent_hint="platform-auditor", load=False, context_mode="manifest")
         self.assertIsNone(plan["execution_plan"])
-        self.assertEqual(plan["primary_agent"], "audit-meta")
+        self.assertEqual(plan["primary_agent"], "platform-auditor")
 
     def test_env_flag_marks_specialist(self) -> None:
         os.environ["TYRION_SPECIALIST"] = "1"
@@ -167,9 +167,9 @@ class AntiRecursionTests(unittest.TestCase):
     def test_universal_skill_is_not_routable_and_not_attached_to_agents(self) -> None:
         for q in ("tyrion universal", "orchestrate marketing tasks automatically", "Meta Ads strategiya tuz"):
             hits = [s["name"] for _sc, s in ss.rank(ss.load_skills(), q)]
-            self.assertNotIn("tyrion-universal", hits, q)
+            self.assertNotIn("tyrion", hits, q)
         for name, ag in ss.load_agents().items():
-            self.assertNotIn("tyrion-universal", ag.get("skills", []), name)
+            self.assertNotIn("tyrion", ag.get("skills", []), name)
             self.assertNotIn("tyrion-universal", (VAULT / "agents" / f"{name}.md").read_text(encoding="utf-8"), name)
 
     def test_duplicate_stage_work_flagged_in_plan(self) -> None:
@@ -213,10 +213,10 @@ class SkillReadingHonestyAndTokenTests(unittest.TestCase):
         self.assertLessEqual(plan["loaded_context"]["context_budget"]["used_bytes"], 4500)
 
     def test_universal_skill_is_an_orchestrator_not_a_copy_of_everything(self) -> None:
-        text = (VAULT / "skills/tyrion-universal/SKILL.md").read_text(encoding="utf-8")
+        text = (VAULT / "skills/tyrion/references/conductor-v7.md").read_text(encoding="utf-8")
         self.assertLess(len(text.splitlines()), 160)
         for ref in ("orchestration-protocol.md", "workflow-recipes.md"):
-            self.assertTrue((VAULT / "skills/tyrion-universal/references" / ref).is_file())
+            self.assertTrue((VAULT / "skills/tyrion/references" / ref).is_file())
         self.assertIn("## 3. Read before you claim", text)
         errs, _w = ss.validate_registry()
         self.assertEqual(errs, [])
@@ -232,7 +232,7 @@ class HookEntryPointTests(unittest.TestCase):
     def test_marketing_prompt_gets_route_hint_pointing_to_universal_skill(self) -> None:
         out = self._hook("Shu biznes uchun Meta Ads strategiya tuz")
         self.assertIn("workflow=meta_strategy", out)
-        self.assertIn("tyrion-universal", out)
+        self.assertIn("tyrion", out)
 
     def test_non_marketing_and_slash_prompts_stay_silent(self) -> None:
         self.assertEqual(self._hook("salom").strip(), "")
@@ -242,7 +242,7 @@ class HookEntryPointTests(unittest.TestCase):
         hooks = json.loads((VAULT / "hooks/hooks.json").read_text(encoding="utf-8"))["hooks"]
         self.assertIn("UserPromptSubmit", hooks)
         brief = subprocess.run([sys.executable, str(VAULT / "hooks/tyrion-hook.py"), "brief"], capture_output=True, text=True, timeout=30).stdout
-        self.assertIn("tyrion-universal", brief)
+        self.assertIn("tyrion", brief)
 
 
 class McpIntegrationTests(unittest.TestCase):
@@ -352,14 +352,14 @@ class CreativeIntelligenceTests(unittest.TestCase):
 
 class PluginSyncTests(unittest.TestCase):
     def test_workflow_references_and_legacy_orchestrators_are_gone_without_dangling_refs(self) -> None:
-        for gone in ("tyrion", "orch-audit", "orch-campaign-launch", "orch-creative-sprint", "orch-weekly-review"):
+        for gone in ("tyrion-universal", "orch-audit", "orch-campaign-launch", "orch-creative-sprint", "orch-weekly-review"):
             self.assertFalse((VAULT / "skills" / gone).exists(), gone)
-        gone = {"tyrion", "orch-audit", "orch-campaign-launch", "orch-creative-sprint", "orch-weekly-review"}
+        gone = {"tyrion-universal", "orch-audit", "orch-campaign-launch", "orch-creative-sprint", "orch-weekly-review"}
         for s in ss.load_skills():
             self.assertFalse(gone & set(s.get("related_skills", [])), s["name"])
         for p in list((VAULT / "agents").glob("*.md")) + list((VAULT / "skills").glob("*/SKILL.md")):
             txt = p.read_text(encoding="utf-8")
-            for g in gone - {"tyrion"}:
+            for g in gone - {"tyrion-universal"}:
                 self.assertNotIn(g, txt, f"{p}: {g}")
 
     def test_claude_agent_mirror_matches_canonical_after_edits(self) -> None:
@@ -382,7 +382,7 @@ class HarnessExportEntryTests(unittest.TestCase):
         self.assertIn(".cursor/rules/tyrion-00-entry.mdc", files)
         for txt in (entry, wind):
             self.assertIn("tyrion_universal_router", txt)
-            self.assertIn("skills/tyrion-universal/SKILL.md", txt)
+            self.assertIn("skills/tyrion/references/conductor-v7.md", txt)
             self.assertIn("single_conductor_fallback", txt)
             self.assertIn("Never claim an agent was spawned", txt)
 

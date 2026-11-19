@@ -121,10 +121,10 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
 
     def test_audit_7_version_and_inventory_parity_across_all_manifests_and_docs(self) -> None:
         counts = catalog.scan()["counts"]
-        self.assertEqual(counts["agents"], 36)
-        self.assertEqual(counts["skills"], 61)  # 65 - tyrion - 4 orch-* + tyrion-universal
-        self.assertEqual(counts["commands"], 27)
-        self.assertEqual(counts["wiki"], 100)
+        self.assertEqual(counts["agents"], 12)
+        self.assertEqual(counts["skills"], 19)  # v8 Lean Core
+        self.assertEqual(counts["commands"], 29)
+        self.assertEqual(counts["wiki"], 101)
 
         for jpath in ("plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "package.json"):
             jdata = json.loads((VAULT / jpath).read_text(encoding="utf-8"))
@@ -133,11 +133,11 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
         mp = json.loads((VAULT / "marketplace.json").read_text(encoding="utf-8"))
         self.assertEqual(mp["metadata"]["version"], catalog.read_version())
         self.assertEqual(mp["plugins"][0]["version"], catalog.read_version())
-        self.assertIn("36 specialist agents", mp["metadata"]["description"])
+        self.assertIn("12 specialist agents", mp["metadata"]["description"])
 
         sec_txt = (VAULT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn("36 agents", sec_txt)
-        self.assertIn("61 skills", sec_txt)
+        self.assertIn("12 agents", sec_txt)
+        self.assertIn("19 skills", sec_txt)
 
     def test_audit_8_graph_api_defaults_to_v26_and_interpolates_dynamically(self) -> None:
         info_default = self.ma.get_interests("ecom")

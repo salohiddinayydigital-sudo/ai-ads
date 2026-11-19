@@ -12,7 +12,7 @@ Vazifa: **$ARGUMENTS**
    - O'rtacha chek (AOV / LTV)
    - Yalpi marja (Gross Margin %)
    - Oylik byudjet va kalendar kuni
-2. **Hisob-kitoblar (`audit-budget`):**
+2. **Hisob-kitoblar (`budget-analyst`):**
    - **Break-even ROAS:** $1 / \text{Margin}$
    - **Target ROAS:** foyda marjasi bilan
    - **Break-even CPA:** $\text{AOV} \times \text{Margin}$

@@ -9,7 +9,7 @@ updated: 2026-09-03
 
 # 🎙 CUSTDEV SHABLONLARI (mijoz tadqiqoti)
 
-> 📖 **O'qish:** mijoz/auditoriya tadqiqoti, ICP tasdiqlash, kampaniyadan oldin "odamlar nima deydi?" savolida. To'liq so'rovnoma: `local/raw/kanal-bilim/26_Custdev.txt` (60KB — to'liq o'qilmaydi, kerakli sheet ochiladi). `.agents/skills/customer-research` bilan birga ishlatiladi.
+> 📖 **O'qish:** mijoz/auditoriya tadqiqoti, ICP tasdiqlash, kampaniyadan oldin "odamlar nima deydi?" savolida. To'liq so'rovnoma: `local/raw/kanal-bilim/26_Custdev.txt` (60KB — to'liq o'qilmaydi, kerakli sheet ochiladi). `.agents/skills/competitors/references/customer-research/` bilan birga ishlatiladi.
 
 ## 1. INTERVYU QOIDALARI (checklist)
 

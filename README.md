@@ -1,105 +1,72 @@
-# Tyrion v7.1 — Global Paid-Media & Targetology Operating System (`ai-ads`)
+# Tyrion v8.0 — closed-loop media-buyer brain for paid ads (`ai-ads`)
 
-<!-- tyrion:catalog agents=36 skills=61 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=30 -->
+<!-- tyrion:catalog agents=12 skills=19 wiki=101 playbooks=9 contexts=6 commands=29 rules=9 tools=40 -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.13](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776AB.svg)](https://www.python.org/)
-[![OS: Windows | macOS | Linux](https://img.shields.io/badge/OS-Windows%20%7C%20macOS%20%7C%20Linux-success.svg)](#1-minute-quickstart)
+[![OS: Windows | macOS | Linux](https://img.shields.io/badge/OS-Windows%20%7C%20macOS%20%7C%20Linux-success.svg)](#install)
 
-> 🇺🇿 **O'zbek tilidagi hujjat:** [README.uz.md](README.uz.md)
+> 🇺🇿 **O'zbek tilidagi hujjat:** [README.uz.md](README.uz.md) · Migrating from 7.x: [MIGRATION.md](MIGRATION.md)
 
-**Tyrion (`ai-ads`)** is an open-source, deterministic paid-media, performance marketing, and targetology plugin for **Claude Code**, **OpenAI Codex CLI**, **Cursor**, and **Windsurf**. It works out-of-the-box on **Windows, macOS, and Linux**, responds automatically in the **user's language**, supports **any ISO 4217 currency**, and ships with modular **Market Packs** (`global`, `us`, `eu`, `uk`, `mena`, `latam`, `sea`, `in`, `uz`).
-
----
-
-## 1. 1-Minute Quickstart
-
-### Install via Claude Code Plugin Marketplace
-```bash
-/plugin marketplace add salohiddinayydigital-sudo/ai-ads
-/plugin install tyrion
-```
-
-### Requirements & OS Compatibility
-- **Python:** `3.10` – `3.13` (`python3`, `python`, or `py -3` on Windows — automatically detected by `hooks/run-hook.cjs`)
-- **Node.js:** `18+` (bundled with Claude Code / Codex / Cursor)
-- **Supported OS:** Windows 10/11, macOS 13+, Ubuntu/Debian/Fedora Linux
-- **Installed Plugin Isolation (`cwd != plugin_root`):** All hooks (`hooks/hooks.json`) and the built-in STDIO MCP server (`.mcp.json`) resolve paths via `${CLAUDE_PLUGIN_ROOT}` and fail open (`exit 0`) on non-strict environment warnings, so Tyrion never blocks file edits in your other projects.
-
-### Just describe the result (default entry point)
-Tyrion routes ordinary requests itself; you never pick an agent, skill, command or tool. The `tyrion-universal` skill is the single conductor: it runs the deterministic router (`tools/skill-search.py route`, backed by `manifests/workflows.json`), reads the selected skills and charters in full, delegates bounded work to specialist agents (native sub-agents in Claude Code; an explicitly labelled single-conductor fallback in Codex/Cursor/Windsurf/CLI), picks deterministic tools, validates specialist outputs and returns one synthesized deliverable. A `UserPromptSubmit` hook (`prompt:route`) adds a one-line route hint to every marketing message and `SessionStart` reminds the entry point.
+Tyrion pulls ad-account data through official connectors, **computes every number in code** (never "in the model's head"), watches the account daily, learns from tests, sends CRM lead quality back to Meta — and loads about **5× fewer always-on description tokens than v7.1** (≈2K vs ≈10.4K, measured by `tools/token-budget.py`). It runs in Claude Code, Codex, Cursor and Windsurf; answers in Uzbek (Latin/Cyrillic), Russian or English.
 
 ```text
-"Shu biznes uchun Meta Ads strategiya tuz"        -> meta_strategy (15-section client-ready strategy)
-"Meta Ads kampaniyam nima sababdan ishlamayapti?"  -> campaign_diagnosis
-"Menga professional Reels ssenariysi yoz"          -> video_script (hooks, storyboard, editing, copy, claim check)
-"Kreativlarimni yaxshilash kerak"                  -> creative_improve (diagnose -> new concepts -> test plan)
-"Raqobatchilarimni tahlil qil"                     -> competitor_research
+connect (MCP / token / CSV) → snapshot → normalize (metrics.v1) → analyze / pulse → decide (change packet) → test → learn → CRM → CAPI
 ```
-Validate the routing table with `python3 tools/tyrion_workflows.py check`; inspect a plan with `python3 tools/skill-search.py route "<request>" --context-mode manifest`.
 
----
+## Install
 
-## 2. Core Architecture & Inventory
+```bash
+/plugin install tyrion --marketplace salohiddinayydigital-sudo/ai-ads
+```
 
-- **36 specialist agents** (`agents/*.md`) — Meta, Google, TikTok, YouTube, LinkedIn, Telegram, CAPI tracking, creative strategy, unit economics, and regulatory compliance.
-- **61 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
-- **27 slash commands** (`commands/*.md`) — canonical English commands (`/audit`, `/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`, `/plan`, `/budget`, `/tracking`, `/learn`, `/shield`, `/doctor`) with full Uzbek aliases (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`).
-- **30 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
-- **Bilim: atomik qaydlar (100)** (`wiki/*.md`) — interlinked paid-media knowledge base with zero orphan notes.
+Requires Python 3.10–3.13 (stdlib only) and Node 18+ (hook launcher). No account needed to try it:
+
+```bash
+python3 tools/tyrion.py demo        # synthetic demo brand → pulse alerts → standalone HTML report
+```
+
+## Three requests to try
+
+```text
+"Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top"      -> lead-quality + audit + tracking
+"Mana CSV eksport. Qaysi reklamani o'chirib, qaysini masshtablay?" -> analyze (code-computed Kill/Keep/Scale)
+"Мне нужен недельный отчёт по рекламе в Telegram и Meta"          -> pulse + report (HTML, RU)
+```
+
+You never pick an agent or tool: the `tyrion` skill is the single conductor (`tools/skill-search.py route`, `manifests/workflows.json`). Codex/Cursor/Windsurf run it in an explicitly labelled single-conductor fallback.
+
+## Connect your data (priority order)
+
+1. **Official Meta Ads MCP** (OAuth) — `https://mcp.facebook.com/ads` *(source_status: unverified — confirm on developers.facebook.com)*.
+2. **Google Ads MCP** — [googleads/google-ads-mcp](https://github.com/googleads/google-ads-mcp).
+3. Graph API token (`META_ACCESS_TOKEN`) → 4. CSV/JSON export → 5. screenshot.
+
+Details, tool names and the "MCP → snapshot → code" pattern: [docs/integrations.md](docs/integrations.md), `skills/connect/`.
+
+## Safety
+
+Account writes (`ads_create_*`, `ads_update_entity`, `ads_activate_entity`, …) are gated by a `PreToolUse` hook: an approved, fresh (<24 h) `change-packet.v1` with a rollback plan in `clients/<slug>/changes/` is required — `deny` in `strict`, `ask` in `standard` ([hooks/README.md](hooks/README.md) states the limits honestly). Evidence labels (`MEASURED_ACCOUNT_DATA`, `PLATFORM_BENCHMARK`, `HEURISTIC_PRIOR_MODEL`, …) mark every number.
+
+## What's inside
+
+- **12 specialist agents** — `platform-auditor` (platform passed in the delegation package), `tracking-specialist`, `audience-architect`, `creative-strategist`, `video-producer`, `budget-analyst`, `data-analyst`, `strategist`, `content-planner`, `compliance-reviewer`, `research-verifier`, `release-verifier`.
+- **19 platform & marketing skills** — `tyrion`, `strategy`, `audit`, `audience`, `creative`, `video`, `tracking`, `budget`, `analyze`, `competitors`, `funnel`, `content`, `report`, `client`, `system`, `connect`, `pulse`, `experiments`, `lead-quality` (the Uzbekistan market pack loads only when `market=uz`).
+- **29 slash commands** — 12 model-visible (`/start /audit /audience /creative /budget /export /report /client /competitors /tracking /pulse /connect`); Uzbek aliases (`/auditoriya /kreativ /voronka /eksport /hisobot /mijoz /raqobatchi /savol`) stay user-invocable but hidden from the model context.
+- **40 deterministic 0-token Python CLI tools** (stdlib only) — `normalize`, `pulse`, `experiments`, `crm-bridge`, `creative-analytics`, `adlib-mine`, `audit_scoring`, `report-html`, `calculator`, `spend-guard`, `meta-targeting-engine`, …; Bilim: atomik qaydlar (101), 9 playbooks, market packs `global us eu uk mena latam sea in uz`.
 
 ```text
 ai-ads/
-├── core/                    # Market-independent canonical English rules, playbooks & wiki index
-├── markets/                 # Modular regional Market Packs (global, us, eu, uk, mena, latam, sea, in, uz)
-├── locales/                 # UI & CLI locale bundles (en, uz, ru)
-├── agents/                  # 36 specialist agent charters
-├── skills/                  # 61 canonical paid-media & CRO skills
-├── commands/                # 27 slash commands (English canonical + Uzbek aliases)
-├── hooks/                   # Cross-platform ${CLAUDE_PLUGIN_ROOT} hook launcher & guard
-├── tools/                   # 30 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
-└── wiki/                    # 100 atomic wikilinked knowledge notes
+├── agents/                  # 12 specialist agent charters (old charters kept in skills/*/references/legacy-agents/)
+├── skills/                  # 19 skills; SKILL.md + references/
+├── commands/                # 29 slash commands (12 model-visible)
+├── hooks/                   # ${CLAUDE_PLUGIN_ROOT} hook launcher, guard, Spend-Guard gate
+├── tools/                   # 40 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
+├── schemas/                 # metrics.v1, client-state.v1
+├── markets/                 # Market Packs (global, us, eu, uk, mena, latam, sea, in, uz)
+└── wiki/                    # atomic wikilinked knowledge notes
 ```
 
----
+## License & attribution
 
-## 3. Global Market Packs & Usage Examples
-
-Tyrion defaults to `market=global` and auto-detects the market, currency, regulations, and response language from your prompt or CLI flags (`--market`, `--currency`, `--language`):
-
-### Example A — Germany / EU E-Commerce (`market=eu`, `EUR`, GDPR + Consent Mode v2)
-```bash
-python3 tools/skill-search.py route "My Shopify store in Germany has low ROAS on Meta" --json
-python3 tools/creative-matrix.py matrix --niche ecom --product "Espresso Machine" --price 300 --market eu --currency EUR
-python3 tools/capi-utm-builder.py capi-payload --event Purchase --country de --market eu --value 300 --currency EUR --no-consent
-```
-
-### Example B — Multilingual & RTL Ad Hooks (`de`, `fr`, `ar`, `en`)
-```bash
-python3 tools/creative-matrix.py hooks --niche ecom --offer "Free Express Shipping + 30-Day Trial" --languages en,de,fr,ar
-```
-
-### Example C — Live Meta Detailed Targeting Verification (6-Status Anti-Hallucination Engine)
-```bash
-python3 tools/meta-targeting-engine.py search --niche real-estate --query "interyer" --query "новостройки" --account-id act_123456789
-```
-
-### Example D — Uzbekistan Market Pack (`market=uz`, `UZS`, Telegram/AmoCRM, Payme/Uzum Nasiya)
-```bash
-python3 tools/tyrion.py route "Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top"
-```
-
----
-
-## 4. Optional Live API & MCP Integrations
-
-Copy `.env.example` to `.env` to configure live read-only API access:
-- `META_ACCESS_TOKEN`: Enables live Meta Graph API `targetingsearch`, `targetingvalidation`, and `meta-insights-sync.py`.
-- `META_GRAPH_API_VERSION`: Defaults to `v26.0` (dynamically read from `.env`; warns automatically if an outdated version `< v25.0` is configured).
-- For external `meta-ads-mcp` (`uvx meta-ads-mcp`) and official `google-ads-mcp` setup, see [docs/integrations.md](docs/integrations.md).
-
----
-
-## 5. License & Attribution
-
-Released under the [MIT License](LICENSE). Includes third-party open-source attributions in [NOTICE](NOTICE) and [THIRD_PARTY.md](THIRD_PARTY.md) for [AgriciDaniel/claude-ads](https://github.com/AgriciDaniel/claude-ads) and [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code).
+[MIT](LICENSE). Third-party attributions: [NOTICE](NOTICE), [THIRD_PARTY.md](THIRD_PARTY.md) ([AgriciDaniel/claude-ads](https://github.com/AgriciDaniel/claude-ads), [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code)).

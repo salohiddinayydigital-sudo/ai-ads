@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: utm
 description: "Meta/Google dinamik UTM shablonlari, Telegram Bot <=64 belgi deep-link (?start=) va Meta CAPI v26.0 SHA-256 payload + EMQ ballini generatsiya qilish"
 ---

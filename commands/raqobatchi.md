@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: raqobatchi
 description: "Raqobatchilarning Meta Ads Library, Telegram va Google reklamalari, offerlari va voronkasini chuqur tahlil qilish (Teardown)"
 ---
@@ -7,7 +8,7 @@ description: "Raqobatchilarning Meta Ads Library, Telegram va Google reklamalari
 
 Foydalanuvchi `/raqobatchi [brend yoki nisha]` deb chaqirganda:
 
-1. **Bilim va Skill:** `wiki/meta-ads-library-tadqiqot.md`, `wiki/sop-raqobat-tahlili.md` va `skills/ads-competitor/SKILL.md` asosida ishlang.
+1. **Bilim va Skill:** `wiki/meta-ads-library-tadqiqot.md`, `wiki/sop-raqobat-tahlili.md` va `skills/competitors/references/ads-competitor.md` asosida ishlang.
 2. **Tahlil Sxemasi (5 O'q):**
    - **Faol Kreativlar (Longevity):** Meta Ads Library'da `>= 14–30 kun` uzluksiz aylanayotgan reklamalar (faqat uzoq aylangan reklama pul keltiryapti!).
    - **Hook va Format Tahlili:** Birinchi 3 soniyada qaysi psixologik trigger ishlatilgan (`Og'riq`, `Raqam`, `Demo`, `Shaxsiy brend`).

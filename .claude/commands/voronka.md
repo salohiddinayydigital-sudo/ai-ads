@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: voronka
 description: "Meta/Telegram/Google Ads dan Telegram Bot, ManyChat va AmoCRM gacha to'liq sotuv voronkasini va Offer'ni loyihalash"
 ---

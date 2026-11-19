@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: eksport
 description: "Meta Ads, Google Ads yoki Telegram Ads CSV/JSON eksport fayllarini 0 tokenda tahlil qilish, Kill/Keep/Scale va Meta 'Breakdown Effect' tuzog'ini aniqlash"
 ---

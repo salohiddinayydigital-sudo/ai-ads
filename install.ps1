@@ -1,11 +1,11 @@
-# install.ps1 — Tyrion v7.1 Single-Root ECC Installer (Windows PowerShell)
+# install.ps1 — Tyrion v8.0 Single-Root ECC Installer (Windows PowerShell)
 $ErrorActionPreference = 'Stop'
 
 $vaultRoot = $PSScriptRoot
 if (-not $vaultRoot) { $vaultRoot = (Get-Location).Path }
 
 Write-Host "====================================================================" -ForegroundColor Cyan
-Write-Host "  🧠 TYRION v7.1 — AI PAID MEDIA & TARGETOLOGY OS INSTALLER" -ForegroundColor Magenta
+Write-Host "  🧠 TYRION v8.0 — AI PAID MEDIA & TARGETOLOGY OS INSTALLER" -ForegroundColor Magenta
 Write-Host "====================================================================" -ForegroundColor Cyan
 
 $pyCmd = if (Get-Command py -ErrorAction SilentlyContinue) { "py" } elseif (Get-Command python -ErrorAction SilentlyContinue) { "python" } else { $null }
@@ -28,5 +28,5 @@ Write-Host "[4/4] Tizim salomatligi (Doctor)..." -ForegroundColor White
 & $pyCmd (Join-Path $vaultRoot "tools\doctor.py") --quick
 
 Write-Host ""
-Write-Host "✅ TYRION v7.1 MUVAFFAQIYATLI O'RNATILDI!" -ForegroundColor Green
+Write-Host "✅ TYRION v8.0 MUVAFFAQIYATLI O'RNATILDI!" -ForegroundColor Green
 Write-Host "   Boshqaruv markazi: py -3 tools\tyrion.py status" -ForegroundColor Yellow

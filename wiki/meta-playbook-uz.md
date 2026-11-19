@@ -9,10 +9,10 @@ updated: 2026-09-03
 
 # 🎯 META ADS $1K PLAYBOOK (o'zbekcha)
 
-> 📖 **O'qish:** faqat Meta kampaniya qurish / diagnostika / kill-keep-scale qarorlarida. `ads/SKILL.md` routing'ida plan/meta vazifasida yuklanadi.
+> 📖 **O'qish:** faqat Meta kampaniya qurish / diagnostika / kill-keep-scale qarorlarida. `skills/audit/references/ads-conductor.md` routing'ida plan/meta vazifasida yuklanadi.
 
 > Ushbu fayl — Meta loyihalarini `/ads` bilan boshqarishda **lokal ish yuritish standarti**.
-> Platforma auditlari va tekshiruvlar `skills/ads-meta` + `ads/references/meta-audit.md` da — bu fayl ularni to'ldiradi.
+> Platforma auditlari va tekshiruvlar `skills/audit/references/ads-meta/` + `skills/audit/references/ads/meta-audit.md` da — bu fayl ularni to'ldiradi.
 
 ---
 

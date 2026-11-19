@@ -408,7 +408,7 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("new", help="yangi ish maydoni ochish")
     p.add_argument("--client", required=True)
     p.add_argument("--topic", required=True)
-    p.add_argument("--task", default="video-editor")
+    p.add_argument("--task", default="video-producer")
     p.add_argument("--format", default="9x16", choices=sorted(FORMATS))
     p.add_argument("--placement", default="reels")
     p.add_argument("--run-id", default="")

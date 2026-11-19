@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v7.1 Detailed Targeting Discovery, Verification & Relevance Ranking Engine (`tools/meta-targeting-engine.py`).
+"""Tyrion v8.0 Detailed Targeting Discovery, Verification & Relevance Ranking Engine (`tools/meta-targeting-engine.py`).
 
 Purpose:
   Discover, verify, rank, and explain Meta Ads Detailed Targeting options (Interests, Behaviors, Demographics)
@@ -2338,7 +2338,7 @@ def main(argv: list[str] | None = None) -> int:
 
     parser = argparse.ArgumentParser(
         prog="meta-targeting-engine.py",
-        description="Tyrion v7.1 Meta Ads Detailed Targeting Discovery, Verification & Relevance Ranking Engine",
+        description="Tyrion v8.0 Meta Ads Detailed Targeting Discovery, Verification & Relevance Ranking Engine",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 

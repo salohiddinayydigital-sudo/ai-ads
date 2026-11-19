@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tyrion://schemas/client-state.v1.json",
+  "title": "Tyrion client-state.v1 — clients/<slug>/state.json",
+  "type": "object",
+  "required": ["schema", "slug", "name", "language", "market", "goals", "updated"],
+  "properties": {
+    "schema": {"const": "client-state.v1"},
+    "slug": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "name": {"type": "string"},
+    "language": {"enum": ["uz", "ru", "en", "uz_cyrillic"]},
+    "market": {"type": "string"},
+    "business": {
+      "type": "object",
+      "properties": {
+        "type": {"type": "string"}, "niche": {"type": "string"}, "offer": {"type": "string"},
+        "price": {"type": "number", "minimum": 0}, "currency": {"type": "string"}
+      }
+    },
+    "economics": {
+      "type": "object",
+      "properties": {
+        "aov": {"type": "number", "minimum": 0}, "margin_pct": {"type": "number", "minimum": 0, "maximum": 100},
+        "breakeven_roas": {"type": "number", "minimum": 0}, "breakeven_cpa": {"type": "number", "minimum": 0}
+      }
+    },
+    "goals": {
+      "type": "object",
+      "properties": {
+        "primary_event": {"type": "string"}, "target_cpa": {"type": "number", "minimum": 0},
+        "target_roas": {"type": "number", "minimum": 0}, "monthly_budget": {"type": "number", "minimum": 0},
+        "currency": {"type": "string"}
+      }
+    },
+    "channels": {"type": "array", "items": {"type": "string"}},
+    "connectors": {"type": "object", "description": "Aniqlangan manbalar: {meta_mcp: true, csv: true, ...}"},
+    "pulse_config": {"type": "object", "description": "pulse.py chegaralari (HEURISTIC_PRIOR_MODEL standartlari)"},
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "window_days": {"type": "integer"}, "as_of": {"type": "string"}, "level": {"type": "string"},
+        "cpa": {"type": ["number", "null"]}, "ctr": {"type": ["number", "null"]}, "cvr": {"type": ["number", "null"]},
+        "cpm": {"type": ["number", "null"]}, "frequency": {"type": ["number", "null"]},
+        "days_used": {"type": "integer"}, "evidence_label": {"type": "string"}
+      }
+    },
+    "next_steps": {
+      "type": "array",
+      "items": {"type": "object", "required": ["action", "owner", "metric"],
+        "properties": {"action": {"type": "string"}, "owner": {"type": "string"}, "metric": {"type": "string"}, "due": {"type": "string"}}}
+    },
+    "synthetic": {"type": "boolean"},
+    "updated": {"type": "string"}
+  },
+  "additionalProperties": true
+}

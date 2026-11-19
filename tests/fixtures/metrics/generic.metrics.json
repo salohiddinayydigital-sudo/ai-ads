@@ -1,0 +1,50 @@
+{
+  "schema": "metrics.v1",
+  "rows": [
+    {
+      "date": "2026-11-01",
+      "platform": "generic",
+      "account_id": "unknown",
+      "level": "campaign",
+      "entity_id": "syn-generic",
+      "entity_name": "SYN Generic",
+      "spend": 1200000,
+      "currency": "UZS",
+      "source": "csv",
+      "evidence_label": "UNVERIFIED",
+      "synthetic": true,
+      "impressions": 50000,
+      "reach": 40000,
+      "link_clicks": 900,
+      "frequency": 1.25,
+      "conversions": {
+        "conversion": 30
+      }
+    },
+    {
+      "date": "2026-11-02",
+      "platform": "generic",
+      "account_id": "unknown",
+      "level": "campaign",
+      "entity_id": "syn-generic",
+      "entity_name": "SYN Generic",
+      "spend": 1100000,
+      "currency": "UZS",
+      "source": "csv",
+      "evidence_label": "UNVERIFIED",
+      "synthetic": true,
+      "impressions": 48000,
+      "reach": 39000,
+      "link_clicks": 850,
+      "frequency": 1.2308,
+      "conversions": {
+        "conversion": 25
+      }
+    }
+  ],
+  "synthetic": true,
+  "unmapped_columns": [
+    "Mystery Col"
+  ],
+  "skipped_rows": 1
+}

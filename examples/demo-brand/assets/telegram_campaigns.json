@@ -1,13 +1,14 @@
 {
+  "synthetic": true,
   "account_id": "tg_ads_fragment_8819",
   "currency": "USD",
   "window_days": 30,
   "summary": {
-    "total_spend": 1200.00,
-    "cpm": 3.40,
+    "total_spend": 1200.0,
+    "cpm": 3.4,
     "impressions": 352940,
     "clicks": 4235,
-    "avg_ctr": 1.20,
+    "avg_ctr": 1.2,
     "bot_starts": 2750,
     "bot_start_rate_pct": 64.9,
     "qualified_leads": 825,
@@ -15,14 +16,14 @@
     "cpl": 1.45,
     "orders": 99,
     "cac": 12.12,
-    "revenue": 3180.00,
+    "revenue": 3180.0,
     "roas": 2.65
   },
   "channels_performance": [
     {
       "channel": "@toshkent_bozori",
-      "spend": 450.00,
-      "cpm": 3.00,
+      "spend": 450.0,
+      "cpm": 3.0,
       "ctr": 1.45,
       "cpl": 1.25,
       "status": "WINNER_SCALE",
@@ -30,19 +31,19 @@
     },
     {
       "channel": "@uzb_biznes_yangiliklari",
-      "spend": 550.00,
-      "cpm": 4.20,
-      "ctr": 1.10,
+      "spend": 550.0,
+      "cpm": 4.2,
+      "ctr": 1.1,
       "cpl": 1.85,
       "status": "VALIDATED",
       "finding": "B2B va yuqori chekli premium kostyumlar xaridorlari."
     },
     {
       "channel": "@kulgu_va_memlar",
-      "spend": 200.00,
-      "cpm": 2.50,
+      "spend": 200.0,
+      "cpm": 2.5,
       "ctr": 0.85,
-      "cpl": 3.40,
+      "cpl": 3.4,
       "status": "KILL_CANDIDATE",
       "finding": "Auditoriya xaridga tayyor emas, botdan keyingi drop-off 85%. To'xtatish tavsiya etiladi."
     }

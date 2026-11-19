@@ -156,7 +156,7 @@ def build_execution_plan(
     if wf.get("primary_agent_by_platform") and platform and platform != "meta":
         target = cfg["platform_agents"][platform]["audit_agent"]
         for s in stages:
-            if s["agent"] == "audit-meta":
+            if s["agent"] == "platform-auditor":
                 s["agent"] = target
                 if agents and target in agents:
                     s["skills"] = list(agents[target].get("skills", []))[:2]

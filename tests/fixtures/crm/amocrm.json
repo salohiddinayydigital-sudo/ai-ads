@@ -1,0 +1,4 @@
+{"synthetic": true, "_embedded": {"leads": [
+ {"id": 101, "name": "Ali Test", "price": 0, "status_id": "qualified", "updated_at": 1700000100,
+  "custom_fields_values": [{"field_code": "PHONE", "values": [{"value": "+998901234567"}]},
+   {"field_code": "CONSENT", "values": [{"value": "yes"}]}, {"field_code": "UTM_CAMPAIGN", "values": [{"value": "C1"}]}]}]}}

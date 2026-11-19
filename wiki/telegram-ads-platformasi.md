@@ -4,7 +4,7 @@ description: "Telegram Ads rasmiy platformasi (ads.telegram.org / Fragment), kan
 tags: [telegram, ads, platforma, voronka, marketing]
 source: "Telegram Ads official documentation & local operator playbooks"
 source_status: unverified
-updated: 2026-10-17
+updated: 2026-11-19
 ---
 
 # Telegram Ads rasmiy platformasi va konversiya voronkasi
@@ -30,7 +30,7 @@ Telegram Ads'da ikkita asosiy targetlash usuli mavjud:
 
 1. **Aniq kanallar bo'yicha (Channel-Specific Targeting) — TAVSIYA ETILADI:**
    - Reklama faqat qo'lda tanlangan, tasdiqlangan kanallarda chiqadi.
-   - Tanlov mezoni: obunachilar $\ge 1,000$, Engagement Rate on Reach (ERR) $\ge 15\%$, auditoriya mavzusi mahsulotga to'g'ridan-to'g'ri mos.
+   - Tanlov mezoni: obunachilar $\ge 1,000$, Engagement Rate on Reach (ERR) $\ge 15\%$, auditoriya mavzusi mahsulotga to'g'ridan-to'g'ri mos. *(manba ko'rsatilmagan — `unverified`; ads.telegram.org dan tasdiqlang)*
    - Soxta (nakrutka) qilingan yoki nofaol kanallar darhol chiqarib tashlanadi (Negative Channels).
 2. **Keng mavzular bo'yicha (Topic/Category Targeting):**
    - Moliya, IT, Ko'chmas mulk, Ta'lim kabi sohalar bo'yicha.
@@ -75,6 +75,12 @@ Bot backendidan CRM tizimiga (AmoCRM, Bitrix24) har bir `/start`, lead magnit yu
 
 ---
 
+## 2026 yangilanishlari (tekshiruv: 2026-11-19, `unverified`)
+ads.telegram.org bu muhitda to'g'ridan-to'g'ri o'qilmadi; quyidagilar ikkilamchi manbalardan va **zid**:
+- Gram kabineti: ikkilamchi manbalar "TON kabineti" nomi o'zgargan va koin 2026-06-15 da Toncoin → Gram deb qayta nomlangan deydi; rasmiy e'lon topilmadi.
+- Minimal CPM: bir manba "0.1 Gram" ni e'lon qilingan eng past stavka deydi; boshqa manba (ppc.world) EUR kabinetida o'rtacha ~30% pasayish (€1 → €0.7) haqida yozadi; yana bir manba 2026-08-28 dan boshlab Rossiya hisoblari uchun €0.60/€0.30/€0.75 (targeting turiga qarab) deydi. Bu uch da'vo bir-biri bilan tasdiqlanmagan; hech biri rasmiy manbadan tekshirilmadi. Raqamlarni mijozga ko'rsatishdan oldin kabinetda tekshiring.
+- Foydalanuvchi o'z kabinetidagi stavkani `USER_PROVIDED` deb beradi; global CPM benchmarklari o'ylab topilmaydi.
+
 ## Manbalar
-- `ads/references/telegram-audit.md`
+- `skills/audit/references/ads/telegram-audit.md`
 - `claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md`

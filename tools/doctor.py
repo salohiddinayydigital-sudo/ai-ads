@@ -47,7 +47,7 @@ REQUIRED = [
     "AGENTS.md", "CLAUDE.md", "MEMORY.md", "INDEX.md", "LOG.md",
     "rules/README.md", "contexts/README.md", "playbooks/README.md",
     "tools/catalog.py", "tools/doctor.py", "tools/vault-audit.py",
-    "manifests/catalog.json", "skills/ads/SKILL.md",
+    "manifests/catalog.json", "skills/audit/references/ads-conductor.md",
 ]
 
 # Sir (secret) naqshlari — faqat yuqori ishonchli belgilar

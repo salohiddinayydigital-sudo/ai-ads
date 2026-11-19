@@ -1,37 +1,37 @@
 # GRAPH_REPORT — Tyrion bilim grafi (deterministik)
 
-> Qurilgan: 2026-10-29T15:19:59+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
+> Qurilgan: 2026-11-19T12:11:45+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
 
-**Tugunlar:** 193 · **Qirralar:** 865 · **Klasterlar:** 44
+**Tugunlar:** 172 · **Qirralar:** 799 · **Klasterlar:** 44
 
 ## Eng bog'langan tugunlar (hublar)
 
 | # | Tugun | Kiruvchi | Fayl |
 |---|-------|----------|------|
-| 1 | 00-manba | 51 | `rules/00-manba.md` |
-| 2 | 40-xavfsizlik-va-hisob | 49 | `rules/40-xavfsizlik-va-hisob.md` |
-| 3 | 70-charter-baseline | 40 | `rules/70-charter-baseline.md` |
-| 4 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
+| 1 | 00-manba | 29 | `rules/00-manba.md` |
+| 2 | 40-xavfsizlik-va-hisob | 27 | `rules/40-xavfsizlik-va-hisob.md` |
+| 3 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
+| 4 | 70-charter-baseline | 17 | `rules/70-charter-baseline.md` |
 | 5 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
 | 6 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
 | 7 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
 | 8 | ad-iteration | 16 | `wiki/ad-iteration.md` |
 | 9 | meta-ads-sozlamalari | 15 | `wiki/meta-ads-sozlamalari.md` |
 | 10 | survey-funnel | 14 | `wiki/survey-funnel.md` |
-| 11 | 50-topshirish-dod | 13 | `rules/50-topshirish-dod.md` |
-| 12 | token-gigiyenasi | 13 | `wiki/token-gigiyenasi.md` |
+| 11 | token-gigiyenasi | 13 | `wiki/token-gigiyenasi.md` |
+| 12 | more-better-new | 13 | `wiki/more-better-new.md` |
 | 13 | etiroz-javob-patternlari | 13 | `wiki/etiroz-javob-patternlari.md` |
-| 14 | more-better-new | 13 | `wiki/more-better-new.md` |
+| 14 | 50-topshirish-dod | 12 | `rules/50-topshirish-dod.md` |
 | 15 | 30-ozbekiston-konteksti | 12 | `rules/30-ozbekiston-konteksti.md` |
 
 ## Klasterlar
 
 | Klaster | Tugunlar |
 |---------|----------|
-| agents | 36 |
 | meta-ads | 35 |
-| commands | 27 |
+| commands | 29 |
 | sop | 16 |
+| agents | 12 |
 | playbook | 9 |
 | rules | 9 |
 | context | 6 |
@@ -42,6 +42,7 @@
 | nisha | 2 |
 | sifat | 2 |
 | audit | 2 |
+| mcp | 2 |
 | local | 2 |
 | metrika | 2 |
 | voronka | 2 |
@@ -59,7 +60,6 @@
 | google-ads | 1 |
 | kontekst | 1 |
 | kontent | 1 |
-| mcp | 1 |
 | tadqiqot | 1 |
 | narx | 1 |
 | case | 1 |

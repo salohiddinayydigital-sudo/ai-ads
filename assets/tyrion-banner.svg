@@ -13,7 +13,7 @@
   </defs>
   <rect width="1200" height="320" rx="18" fill="url(#bg)" stroke="#312e81" stroke-width="2"/>
   <rect x="40" y="36" width="160" height="32" rx="16" fill="#2e1065" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="120" y="57" fill="#ddd6fe" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">ECC v7.1 SINGLE-ROOT</text>
+  <text x="120" y="57" fill="#ddd6fe" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">ECC v8.0 SINGLE-ROOT</text>
   <text x="40" y="122" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="800">TYRION — AI PAID MEDIA OS</text>
   <text x="40" y="162" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="500">Meta Andromeda 2 · Google Coliseum · Telegram Ads · CAPI v22 · Native MCP Server</text>
   <rect x="40" y="188" width="1120" height="3" fill="url(#accent)" rx="1.5"/>

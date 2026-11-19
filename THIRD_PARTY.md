@@ -5,7 +5,7 @@ Tyrion (`ai-ads`) is released under the MIT License and incorporates adapted con
 1. **AgriciDaniel/claude-ads**
    - **Source:** https://github.com/AgriciDaniel/claude-ads
    - **License:** MIT License (Copyright (c) 2025-2026 AgriciDaniel)
-   - **Adapted Components:** Multi-platform paid advertising audit checklists, skill reference taxonomies (`skills/ads*`), format-adapter/release-verifier agent patterns, and evaluation structure.
+   - **Adapted Components:** Multi-platform paid advertising audit checklists, skill reference taxonomies (`skills/audit/references/ads/*`), creative-strategist/release-verifier agent patterns, and evaluation structure.
 
 2. **affaan-m/everything-claude-code (ECC)**
    - **Source:** https://github.com/affaan-m/everything-claude-code

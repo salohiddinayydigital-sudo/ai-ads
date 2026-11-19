@@ -1,0 +1,14 @@
+{
+ "schema": "client-state.v1",
+ "synthetic": true,
+ "client": "syn-demo",
+ "goals": {
+  "daily_budget": 100,
+  "target_cpa": 10,
+  "conversion_event": "Lead",
+  "currency": "USD"
+ },
+ "pulse_config": {
+  "window_days": 7
+ }
+}

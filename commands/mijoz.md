@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: mijoz
 description: "Yangi mijoz loyihasi uchun 1 buyruqda tayyor BRIEF, 4-qatlamli Meta Auditoriya xaritasi, 3x3 Kreativ Matritsa va Tracking cheklistini ochish"
 ---

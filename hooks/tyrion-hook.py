@@ -3,7 +3,7 @@
 
 Qo'llab-quvvatlanadigan muhit o'zgaruvchilari (ECC 2.2 mos):
   TYRION_HOOK_PROFILE   : minimal | standard | strict (default: standard)
-  TYRION_DISABLED_HOOKS : vergul bilan ajratilgan hook ID ro'yxati (session:brief,prompt:route,pre:guard,post:ingest,stop:dod)
+  TYRION_DISABLED_HOOKS : vergul bilan ajratilgan hook ID ro'yxati (session:brief,prompt:route,pre:guard,pre:spend,post:ingest,stop:dod)
 
 Buyruqlar:
   python3 hooks/tyrion-hook.py brief     # sessiya boshi: holat + instinktlar (SessionStart, ID: session:brief)
@@ -229,6 +229,24 @@ def cmd_guard(args: argparse.Namespace) -> int:
 # ingest — CLAUDE.md ingest protokoli nazorati (ID: post:ingest)
 # --------------------------------------------------------------------------- #
 
+def cmd_spend(args: argparse.Namespace) -> int:
+    """PreToolUse: MCP yozish asboblari uchun Spend-Guard darvozasi (ID: pre:spend). Mantiq: tools/spend_gate.py."""
+    if is_disabled("pre:spend"):
+        return 0
+    import spend_gate  # noqa: PLC0415 — sys.path'ga TOOLS yuqorida qo'shilgan
+    payload: dict = {}
+    if not sys.stdin.isatty():
+        try:
+            raw = sys.stdin.read().strip()
+            payload = json.loads(raw) if raw.startswith("{") else {}
+        except Exception:
+            payload = {}
+    out = spend_gate.hook_output(spend_gate.evaluate(payload, get_profile()))
+    if out:
+        print(json.dumps(out, ensure_ascii=False))
+    return 0
+
+
 def _today() -> str:
     return date.today().isoformat()
 
@@ -344,6 +362,8 @@ def main(argv: list[str] | None = None) -> int:
     guard.add_argument("--warn-only", action="store_true")
     guard.add_argument("--quiet", action="store_true")
     guard.set_defaults(func=cmd_guard)
+
+    sub.add_parser("spend", help="MCP yozish asboblari Spend-Guard darvozasi (pre:spend)").set_defaults(func=cmd_spend)
 
     ingest = sub.add_parser("ingest", help="ingest protokoli nazorati (post:ingest)")
     ingest.add_argument("--warn-only", action="store_true", help="xato kodisiz, faqat ogohlantirish")

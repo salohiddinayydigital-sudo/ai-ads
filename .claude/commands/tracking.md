@@ -8,7 +8,7 @@ argument-hint: <mijoz>
 Vazifa: **$ARGUMENTS**
 
 ## Ijro tartibi:
-1. **Meta Ads (`audit-tracking`):**
+1. **Meta Ads (`tracking-specialist`):**
    - Brauzer Pixel vs Server CAPI event deduplikatsiyasi (`event_id` tekshiruvi)
    - Event Match Quality (EMQ) ballari (maqsad: $\ge 7.0$)
 2. **Google Ads:**

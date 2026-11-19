@@ -14,9 +14,17 @@ alwaysApply: true
 |---|-------|-------|---------|
 | 1 | **Hisobning o'z ma'lumoti** | export, Ads Manager, API/MCP javobi, screenshot | eng yuqori |
 | 2 | **Tyrion wiki qaydi** | `wiki/meta-kampaniya-tuzilmalari.md` (frontmatter'ida manba bor) | yuqori |
-| 3 | **Dated reference** | `ads/references/meta-audit.md`, `local/meta-playbook-uz.md` | o'rta |
+| 3 | **Dated reference** | `skills/audit/references/ads/meta-audit.md`, `local/meta-playbook-uz.md` | o'rta |
 | 4 | **Tashqi manba** | video, maqola, raqobatchi sahifasi | past — **sana + havola shart** |
 | 5 | **Model taxmini** | "odatda shunday bo'ladi" | ❌ manba emas |
+
+## Dalil yorliqlari
+
+| Yorliq | Ma'no |
+|---|---|
+| `MEASURED_ACCOUNT_DATA` | hisobning o'z ma'lumoti (export, API/MCP, screenshot) |
+| `PLATFORM_BENCHMARK` | **faqat** rasmiy benchmark asbobidan (masalan `ads_insights_industry_benchmark`, `ads_insights_performance_vs_peers`) olingan raqam; asbob nomi va sana yoziladi, qo'lda yoki xotiradan yozilmaydi |
+| `HEURISTIC_PRIOR_MODEL` | model/evristik taxmin; qaror uchun yagona asos emas |
 
 ## Buzilmaydigan qoidalar
 

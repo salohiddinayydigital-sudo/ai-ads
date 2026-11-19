@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: scale
 description: "Meta, Google va Telegram kampaniyalarida Kill / Keep / Scale qarorini qabul qilish, Learning Phase himoyasi va 20% byudjet scaling"
 ---

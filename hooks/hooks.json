@@ -23,6 +23,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "mcp__.*__(ads_(create|update|activate|duplicate|delete|boost|finalize|creative|catalog|pixel|dataset|experiment|permission)|assets_(create|upload)|labels_manage).*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cjs\" spend",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PostToolUse": [

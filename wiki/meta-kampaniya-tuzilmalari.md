@@ -4,7 +4,7 @@ description: "Meta kampaniya tuzilmalari katalogi — ABO, CBO, 1-1-1, 1-5-5, AS
 tags: [meta-ads, kampaniya, scaling]
 source: "YouTube: Every Meta Ads Campaign Structure Explained in 10 minutes (https://www.youtube.com/watch?v=qmcAZdCaI9A)"
 source_status: url_cited
-updated: 2026-09-11
+updated: 2026-11-19
 ---
 
 # Meta kampaniya tuzilmalari (ABO → Omni)
@@ -26,3 +26,6 @@ updated: 2026-09-11
 ## Manba
 - vedio bilimlar/youtubedagilar/Every Meta Ads Campaign Structure Explained in 10 minutes.md — Eric | Ecom Explained, 2026-05-20, https://www.youtube.com/watch?v=qmcAZdCaI9A
 - vedio bilimlar/youtubedagilar/Learn 97% of Meta Ads in Under 19 minutes.md — Sabri Suby, 2026-06-13, https://www.youtube.com/watch?v=NTmWqnPIb2s (zombie campaign)
+
+## Advantage+ 2026 holati (tekshiruv: 2026-11-19, `unverified`)
+Rasmiy Meta sahifasi bu muhitda o'qilmadi; ikkilamchi manbalar (ppc.land, 2025-05 va 2026 sharhlar) bo'yicha: Advantage+ Shopping/App/Leads alohida kampaniya turlari o'rniga yagona yaratish oqimiga o'tgan (Sales, Leads, App); Advantage+ holati kampaniya sozlamalaridan keladi; Marketing API `ADVANTAGE_PLUS_SALES|APP|LEADS` holatlarini qaytaradi, eski `smart_promotion_type` bayrog'i eskirmoqda; ba'zi manbalar 2026-fevralda yangi Sales/Leads/App kampaniyalar uchun standart bo'lgan deydi. Aniq sanalar va "10% arzon sifatli lid" kabi natijalar Meta ichki testi sifatida ikkilamchi manbada keltirilgan — o'z hisobingizda tekshiring. Tegishli: [[mcp-rasmiy-konnektorlar]] · [[meta-playbook-uz]].
