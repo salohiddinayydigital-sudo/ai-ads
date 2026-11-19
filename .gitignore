@@ -30,3 +30,6 @@ output/
 .claude/settings.json
 .claude/settings.json.bak
 dev/
+
+# eval run hisobotlari (HTML) lokal; latest.json va docs/v8-eval-results.md commit qilinadi
+evals/results/20*/
