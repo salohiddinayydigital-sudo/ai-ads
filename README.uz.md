@@ -13,7 +13,7 @@
 
 **Tyrion v7.1 (Calibrated & Live-Telemetry Edition)** — `affaan-m/ECC` (*Everything Claude Code*) arxitekturasi asosida qurilgan **yagona ildizli (Single-Root)** raqamli reklama, targetologiya va growth-marketing operatsion tizimi.
 
-Barcha **36 ta ixtisoslashgan agent**, **61 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **27 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **30 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
+Barcha **36 ta ixtisoslashgan agent**, **61 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **27 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **31 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
 
 ## ✨ Tyrion v7.1 Arxitekturasi (Nima o'zgardi?)
 

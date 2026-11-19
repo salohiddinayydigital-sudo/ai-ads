@@ -1,6 +1,6 @@
 # Tyrion v7.1 — Global Paid-Media & Targetology Operating System (`ai-ads`)
 
-<!-- tyrion:catalog agents=36 skills=61 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=30 -->
+<!-- tyrion:catalog agents=36 skills=61 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=31 -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.13](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776AB.svg)](https://www.python.org/)
@@ -45,7 +45,7 @@ Validate the routing table with `python3 tools/tyrion_workflows.py check`; inspe
 - **36 specialist agents** (`agents/*.md`) — Meta, Google, TikTok, YouTube, LinkedIn, Telegram, CAPI tracking, creative strategy, unit economics, and regulatory compliance.
 - **61 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
 - **27 slash commands** (`commands/*.md`) — canonical English commands (`/audit`, `/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`, `/plan`, `/budget`, `/tracking`, `/learn`, `/shield`, `/doctor`) with full Uzbek aliases (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`).
-- **30 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
+- **31 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
 - **Bilim: atomik qaydlar (100)** (`wiki/*.md`) — interlinked paid-media knowledge base with zero orphan notes.
 
 ```text
@@ -57,7 +57,7 @@ ai-ads/
 ├── skills/                  # 61 canonical paid-media & CRO skills
 ├── commands/                # 27 slash commands (English canonical + Uzbek aliases)
 ├── hooks/                   # Cross-platform ${CLAUDE_PLUGIN_ROOT} hook launcher & guard
-├── tools/                   # 30 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
+├── tools/                   # 31 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
 └── wiki/                    # 100 atomic wikilinked knowledge notes
 ```
 
