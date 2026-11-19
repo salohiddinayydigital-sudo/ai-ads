@@ -2,7 +2,17 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
-## [Unreleased] — Universal conductor, Meta strategy and creative intelligence
+## [Unreleased] — Plugin readiness fixes
+
+### Fixed
+- `agents: "./agents/"` in all three plugin manifests made `claude plugin validate` fail ("must end with .md"), so agents could not load on install; field removed (the `agents/` directory is auto-discovered). Verified with a real `claude --plugin-dir` session: plugin loaded, `tyrion-core` MCP connected, 36 `tyrion:*` agents and `tyrion:tyrion-universal` registered.
+- The `prompt:route` hint was advisory and the model answered without the conductor; it is now an explicit mandatory first step. Verified in a real session: the `Skill` tool invoked `tyrion-universal`, the router and `creative-matrix.py` ran, the niche playbook was read.
+- Cursor and Windsurf exports had rules only; they now carry a generated entry rule (`tyrion-00-entry.mdc`, top of `.windsurfrules`: route via `tyrion_universal_router`, read before claiming, single-conductor fallback). The generated files are committed and a test fails if they go stale.
+
+### Added
+- `.claude-plugin/icon.png` (plugin directory icon requirement).
+
+## [Unreleased-2] — Universal conductor, Meta strategy and creative intelligence
 
 ### Added
 - **`skills/tyrion-universal`**: single conductor and default entry point (route -> read -> delegate/fallback -> validate -> synthesize) with `references/orchestration-protocol.md` and `references/workflow-recipes.md`. Not routable as a specialist; specialists never load it.
