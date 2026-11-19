@@ -14,10 +14,11 @@ O'qish asbobi → `clients/<slug>/data/raw/<YYYY-MM-DD>-<source>.json` → `pyth
 
 ## 3. Rasmiy Meta Ads MCP
 
-- Manzil: `https://mcp.facebook.com/ads` — **`source_status: unverified`**. Ikkilamchi manbadan (2026-11-19); rasmiy sahifa (`developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-get-started`) bu muhitdan ochilmadi. Ulashdan oldin o'sha sahifada URL va OAuth qadamlarini tasdiqlang.
-- Taxminiy ulash: `claude mcp add --transport http meta-ads https://mcp.facebook.com/ads`, so'ng OAuth.
+- Manzil: `https://mcp.facebook.com/ads` — **`source_status: verified`** ([rasmiy hujjat](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-get-started), 2026-11-19).
+- Ulash: `claude mcp add --transport http --client-id <META_APP_ID> meta-ads https://mcp.facebook.com/ads`. Autentifikatsiya: OAuth, user token yoki system user token (faqat Employee-rol). Ruxsatlar: `ads_mcp_management` + `ads_read`/`ads_management`. Batafsil: `skills/connect/references/meta-ads-mcp.md`.
+- Yozish asboblari entity'ni **paused** yaratadi; `ads_activate_entity` sarfni boshlaydi. Meta tomonida ham qoidalar (server-side Rules, cheklangan mavjudlik) bor.
 - O'qish asboblari: `ads_get_ad_accounts`, `ads_get_ad_entities`, `ads_insights_performance_trend`, `ads_insights_anomaly_signal`, `ads_insights_industry_benchmark`, `ads_insights_performance_vs_peers`, `ads_get_opportunity_score`, `ads_get_dataset_quality`, `ads_library_search`, `ads_account_get_activity_logs`.
-- Yozish asboblari: `ads_create_*`, `ads_update_entity`, `ads_activate_entity`, `ads_duplicate_entity`, `ads_delete_*`, `ads_creative_*`, `ads_experiment_*_create_test` — **Spend-Guard hook** bilan himoyalangan: tasdiqlangan change packet (`clients/<slug>/changes/<id>.json`, rollback rejasi bilan) kerak. Rasmiy Meta MCP'da undo yo'q.
+- Yozish asboblari: `ads_create_*`, `ads_update_entity`, `ads_activate_entity`, `ads_duplicate_entity`, `ads_delete_*`, `ads_creative_*`, `ads_experiment_*_create_test` — **Spend-Guard hook** bilan himoyalangan: tasdiqlangan change packet (`clients/<slug>/changes/<id>.json`, rollback rejasi bilan) kerak. Rasmiy hujjatdagi asboblar ro'yxatida undo asbobi ko'rsatilmagan.
 - Benchmark asboblari natijasi `PLATFORM_BENCHMARK` yorlig'i bilan (`rules/00-manba.md`).
 
 ## 4. Google Ads MCP (rasmiy)

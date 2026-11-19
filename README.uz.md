@@ -35,7 +35,7 @@ Agent yoki asbobni siz tanlamaysiz: `tyrion` skilli yagona dirijyor. Eski buyruq
 
 ## Konnektorlarni sozlash (ustuvorlik)
 
-1. **Rasmiy Meta Ads MCP** (OAuth) — `https://mcp.facebook.com/ads` *(source_status: unverified — developers.facebook.com da tasdiqlang)*.
+1. **Rasmiy Meta Ads MCP** (OAuth) — `https://mcp.facebook.com/ads` *(Meta rasmiy hujjatidan tasdiqlangan, 2026-11-19)*.
 2. **Google Ads MCP** — [googleads/google-ads-mcp](https://github.com/googleads/google-ads-mcp).
 3. Graph API token (`META_ACCESS_TOKEN`) → 4. CSV/JSON eksport → 5. screenshot.
 

@@ -72,6 +72,20 @@ class DecisionTests(Base):
                   "mcp__target__ads_experiment_abtest_create_test", "mcp__g__assets_create_asset", "mcp__g__labels_manage_labels"):
             self.assertTrue(sg.is_write_tool(t), t)
 
+    def test_official_meta_write_tools_all_gated_and_reads_pass(self) -> None:
+        """Meta rasmiy hujjatidagi (2026-11-19) yozish asboblari ushlanadi, o'qish asboblari o'tadi."""
+        writes = ("ads_create_campaign", "ads_create_ad_set", "ads_create_ad", "ads_update_entity", "ads_activate_entity",
+                  "ads_create_creative", "ads_boost_ig_post", "ads_create_custom_audience", "ads_update_custom_audience",
+                  "ads_update_custom_audience_users", "ads_delete_custom_audience")
+        reads = ("ads_get_ad_accounts", "ads_get_ad_account_pages", "ads_get_pages_for_business", "ads_get_user_pages", "ads_get_field_context",
+                 "ads_get_creatives", "ads_get_creative_ads", "ads_get_ad_images", "ads_get_ad_videos", "ads_get_ad_preview",
+                 "ads_get_ad_entities", "ads_library_search", "ads_get_ig_accounts", "ads_get_ig_media",
+                 "ads_get_ad_account_custom_audiences", "ads_get_custom_audience", "ads_get_custom_audience_adsets")
+        for n in writes:
+            self.assertTrue(sg.is_write_tool("mcp__plugin_tyrion_meta__" + n), n)
+        for n in reads:
+            self.assertFalse(sg.is_write_tool("mcp__plugin_tyrion_meta__" + n), n)
+
     def test_minimal_profile_disables_gate(self) -> None:
         self.assertEqual(self.ev(profile="minimal")["decision"], "allow")
 

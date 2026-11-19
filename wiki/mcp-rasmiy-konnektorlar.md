@@ -11,14 +11,15 @@ updated: 2026-11-19
 
 > Bog'lanishlar: [[mcp-va-multi-harness-integratsiya]] · [[40-xavfsizlik-va-hisob]] · [[00-manba]] · [[meta-kampaniya-tuzilmalari]]
 
-**Tekshiruv holati (2026-11-19):** rasmiy URL'lar qidiruvda topildi, lekin sahifa matni to'liq o'qilmadi; quyidagilar qidiruv xulosasi asosida (`url_cited`). Narx/limit yo'q.
+**Tekshiruv holati (2026-11-19):** Meta qismi rasmiy `developers.facebook.com` sahifalaridan to'g'ridan-to'g'ri o'qildi (`verified`); Google qismi repo README'si bo'yicha (`url_cited`). Narx/limit yo'q.
 
 ## Meta Ads MCP
 Manbalar: https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview · https://developers.facebook.com/blog/post/2026/07/16/meta-ads-mcp-server/
-- Rasmiy hujjat serverni `https://mcp.facebook.com/ads` deb ko'rsatadi (qidiruv natijasi, hujjat URL'i yuqorida). Ulash: Claude Code'da `claude mcp add --transport http ... meta-ads https://mcp.facebook.com/ads`; OAuth Facebook Login for Business orqali (Meta Managed Account ham mumkin). Meta ilova ID'si (client id) talabi hujjatda qanday ekani to'liq tasdiqlanmadi: `unverified`.
-- Holat: ikkilamchi manbalar open beta 2026-04-29 deydi; Meta dev blogi (2026-07-16) serverni dasturchilar uchun mavjud deb e'lon qiladi. `unverified` (aniq sana rasmiy sahifadan tasdiqlanmadi).
-- Asboblar: o'qish (hisobotlar, insights, benchmark), yozish (`ads_create_*`, `ads_update_entity`, `ads_activate_entity`, `ads_duplicate_entity`, `ads_delete_*`, `ads_creative_*`) va eksperiment asboblari (A/B, lift). Ikkilamchi manba ~29 asbob deydi; rasmiy hujjat 7 toifa deydi. `unverified`.
-- **Undo yo'q:** yozish asboblari o'zgartirishni qaytarmaydi. Tyrion qoidasi: yozish faqat tasdiqlangan change packet (rollback rejasi bilan) orqali, hook `PreToolUse` darvozasi bilan.
+- **Manzil (verified):** `https://mcp.facebook.com/ads`, Meta hosting qiladigan masofaviy server. Ulash: `claude mcp add --transport http --client-id <META_APP_ID> meta-ads https://mcp.facebook.com/ads`. Autentifikatsiya: OAuth (Facebook Login for Business), user token yoki system user token (faqat Employee-rol). Ruxsatlar: `ads_mcp_management` + `ads_read` yoki `ads_management`. Manba: [Get started](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-get-started).
+- **Asboblar (verified):** hujjat 7 toifani ko'rsatadi: hisobotlar, reklama yaratish/boshqarish, katalog, signal/datasetlar, yordam, A/B va lift testlar, faollik jurnali. Yozish asboblari entity'ni **paused** yaratadi, `ads_activate_entity` sarfni boshlaydi; AI klient faollashtirishdan oldin tasdiq so'raydi.
+- **Server-side Rules (verified, cheklangan mavjudlik):** biznes AI agent harakatlarini (budjet oshirish, status o'zgartirish va h.k.) hisob/katalog darajasida taqiqlay oladi. Batafsil: `skills/connect/references/meta-ads-mcp.md`.
+- Holat sanalari: ikkilamchi manbalar open beta 2026-04-29 deydi; Meta dev blogi 2026-07-16. Bu sanalar `unverified` (sahifa to'g'ridan-to'g'ri o'qilmadi).
+- **Undo:** o'qilgan rasmiy sahifalardagi asboblar ro'yxatida o'zgarishni qaytaruvchi asbob ko'rsatilmagan. Tyrion qoidasi: yozish faqat tasdiqlangan change packet (rollback rejasi bilan) orqali, `PreToolUse` hook darvozasi bilan.
 
 ## Google Ads MCP
 - Rasmiy loyiha: https://github.com/googleads/google-ads-mcp (mahalliy ishga tushirish, `gcloud auth application-default login`, adwords scope). Rasmiy hosted endpoint repoda ko'rsatilmagan.

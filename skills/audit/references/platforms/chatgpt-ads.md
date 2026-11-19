@@ -2,6 +2,7 @@
 
 source_status: url_cited (rasmiy post URL'i qidiruv natijasida; mazmun asosan savdo matbuoti xulosasi orqali ko'rildi, OpenAI sahifasi to'liq o'qilmadi)
 checked: 2026-11-19
+recheck: 2026-11-19 — `ads.openai.com` Cloudflare 403 ("Just a moment...") qaytardi, rasmiy Ads Manager sahifasi o'qilmadi; hammasi `unverified` qoladi
 official_url: https://openai.com/index/new-ways-to-buy-chatgpt-ads
 Qolgan manbalar (ikkilamchi, unverified): https://www.searchenginejournal.com/openai-launches-self-serve-ads-manager-for-chatgpt/ · https://ppc.land/openai-opens-chatgpt-ads-manager-to-all-us-businesses-with-cpc-bidding/
 
