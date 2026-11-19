@@ -2,6 +2,9 @@
 name: audit
 description: "Read-only platform audit (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads). Use for 'audit', 'akkaunt tekshir', 'cpa qimmat', аудит рекламы."
 triggers:
+- "chatgpt ads"
+- "openai reklama"
+- "реклама в chatgpt"
 - "reklama"
 - "paid media"
 - "kampaniya boshqaruvi"
@@ -221,6 +224,7 @@ platforms:
 attached_agents: [audience-architect, compliance-reviewer, platform-auditor]
 related_skills: []
 references:
+- "skills/audit/references/platforms/chatgpt-ads.md"
 - "skills/audit/references/ads-conductor.md"
 - "skills/audit/references/audit-process.md"
 - "skills/audit/references/platforms/amazon.md"
@@ -271,6 +275,7 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 | `ads-apple` | `skills/audit/references/platforms/apple.md` | Audit Apple Ads measurement, AdServices and AdAttributionKit, campaign and keyword structure, Search Match, App Store placements, custom product pages… |
 | `ads-telegram` | `skills/audit/references/platforms/telegram.md` | Audit, plan, draft, and optimize Telegram Ads campaigns across ads.telegram.org and Fragment. Covers channel targeting, 160-character copywriting form… |
 | `ads-vk` | `skills/audit/references/platforms/vk.md` | Plan and audit VK Ads (VK Реклама, ВКонтакте / VK ads.vk.com) campaigns - audience and retargeting setup, VK pixel and conversion tracking, community … |
+| `chatgpt-ads` (v8, yangi) | `skills/audit/references/platforms/chatgpt-ads.md` | ChatGPT Ads (OpenAI) auditi, CG01–CG09 |
 | `ads-yandex` | `skills/audit/references/platforms/yandex.md` | Plan and audit Yandex Direct campaigns (Search network and the Yandex Advertising Network / РСЯ) with Yandex Metrica conversion tracking, Wordstat dem… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

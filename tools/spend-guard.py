@@ -108,8 +108,32 @@ def check_budget_change(
     }
 
 
+def render_json_packet(content: str) -> str:
+    """`change-packet.v1` JSON bo'lsa, tekshiruvchi tushunadigan matnga aylantiradi; aks holda o'zgarishsiz qaytaradi."""
+    try:
+        doc = json.loads(content)
+    except ValueError:
+        return content
+    if not isinstance(doc, dict) or doc.get("schema") != "change-packet.v1":
+        return content
+    base = doc.get("baseline")
+    approved = "foydalanuvchi tasdiqi: ha" if doc.get("approved_by_user") is True else "foydalanuvchi tasdiqi: yo'q"
+    lines = []
+    if str(doc.get("rollback") or "").strip():
+        lines.append(f"Teskari qadam (rollback): {doc['rollback']}")
+    if str(doc.get("stop_loss") or "").strip():
+        lines.append(f"Stop-loss (to'xtatish mezoni): {doc['stop_loss']}")
+    if base:
+        lines.append(f"Boshlang'ich (baseline): {json.dumps(base, ensure_ascii=False)}")
+    if str(doc.get("risk") or "").strip():
+        lines.append(f"Xavf (risk): {doc['risk']}")
+    lines.append(approved)
+    return "\n".join(lines)
+
+
 def check_change_packet(content: str) -> dict:
     """Change Packet (O'zgarishlar paketi) ning 6 darvoza talablariga mosligini tekshiradi."""
+    content = render_json_packet(content)
     errors: list[str] = []
     warnings: list[str] = []
     checks: dict[str, bool] = {}

@@ -15,7 +15,7 @@ updated: 2026-09-16
 
 | Joy | Nima | Holat |
 |-----|------|-------|
-| `wiki/` | Atomik, wikilink bog'langan bilim qaydlari (100) | faol |
+| `wiki/` | Atomik, wikilink bog'langan bilim qaydlari (101) | faol |
 | `raw/` | Xom manbalar (verbatim arxiv) | faqat o'qish |
 | `vedio bilimlar/` | Video transkriptlar — xom manba: `vedio bilimlar/youtubedagilar/` (16 fayl, ingest manbasi) | faqat o'qish |
 | `AGENTS.md` | **Kanonik agent shartnomasi** — qatlamlar, agentlar, ish tartibi | boot |
@@ -227,3 +227,4 @@ updated: 2026-09-16
 | [[optimitzaetsiya-va-case]] | Real tajriba cases — CPL 2x arzon, tezkor loyiha SOP, yuqori chek mijozlar, budget qoidalari, bloggerlar ro'yxati | kanal-bilim/08, 11, 13, 14, 19, 21 (TXT konvert) |
 | [[mcp-va-multi-harness-integratsiya]] | Tyrion v7.1 Native MCP Server (.mcp.json) va Multi-Harness Exporter (Claude Code, Cursor .mdc, Windsurf, Codex) arxitekturasi | affaan-m/ECC install-targets + pipeboard-co/meta-ads-mcp + googleads/google-ads-mcp (2026-10-18) |
 | [[meta-breakdown-effekti]] | Meta Ads 'Breakdown Effect' (Marginal vs Average CPA) — nega o'rtacha CPA baland ko'ringan placement yoki segmentni o'chirish umumiy natijani buzadi | Meta Official Breakdown Effect Documentation + mathiaschu/meta-ads-analyzer tahlili (2026-10-18) |
+| [[mcp-rasmiy-konnektorlar]] | Rasmiy Meta Ads MCP (mcp.facebook.com/ads) va Google Ads MCP (googleads/google-ads-mcp): manzil, kirish usuli, yozish asboblari xavfi va Tyrion qoidasi | https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview ; https://developers.facebook.com/blog/post/2026/07/16/meta-ads-mcp-server/ ; https://github.com/googleads/google-ads-mcp |

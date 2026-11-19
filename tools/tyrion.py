@@ -96,8 +96,42 @@ def show_status() -> int:
     return 0
 
 
+def run_demo(argv: list[str]) -> int:
+    """`/start demo`: sintetik demo-brand → state → baseline → pulse → HTML hisobot (jonli hisobsiz, tarmoqsiz)."""
+    import argparse
+    ap = argparse.ArgumentParser(prog="tyrion.py demo", description="Sintetik demo: init → baseline → pulse → HTML hisobot")
+    ap.add_argument("--out", default=str(VAULT / "output" / "demo"), help="chiqish papkasi (clients/ va hisobot shu yerda)")
+    ap.add_argument("--lang", default="uz", choices=["uz", "ru", "en"])
+    a = ap.parse_args(argv)
+    out = Path(a.out)
+    clients = out / "clients"
+    metrics = clients / "demo-brand" / "data" / "metrics.v1.json"
+    steps = [
+        ("sintetik metrics.v1", [sys.executable, str(VAULT / "examples" / "demo-brand" / "generate_demo_metrics.py"), str(metrics)]),
+        ("client init", [sys.executable, str(TOOLS / "client-workspace.py"), "init", "--client", "demo-brand", "--synthetic", "--force", "--market", "uz",
+                         "--lang", a.lang, "--budget", "100", "--target-cpa", "8", "--aov", "60", "--margin-pct", "40", "--event", "Lead",
+                         "--currency", "USD", "--root", str(clients)]),
+        ("baseline", [sys.executable, str(TOOLS / "client-workspace.py"), "baseline", "--client", "demo-brand", "--metrics", str(metrics), "--event", "Lead",
+                      "--level", "ad", "--root", str(clients)]),
+        ("pulse", [sys.executable, str(TOOLS / "pulse.py"), "run", "--client", "demo-brand", "--clients-dir", str(clients), "--format", "both", "--write"]),
+        ("HTML hisobot", [sys.executable, str(TOOLS / "report-html.py"), "--client", "demo-brand", "--root", str(clients), "--lang", a.lang,
+                          "--out", str(out / "demo-brand-report.html"), "--md", str(out / "demo-brand-report.md")]),
+    ]
+    for i, (title, cmd) in enumerate(steps, 1):
+        proc = subprocess.run(cmd, cwd=str(VAULT), capture_output=True, text=True)
+        ok = proc.returncode in (0,)
+        print(f"{'✓' if ok else '✗'} {i}/{len(steps)} {title}")
+        if not ok:
+            print((proc.stderr or proc.stdout)[-600:], file=sys.stderr)
+            return 2
+    print(f"\nHisobot: {out / 'demo-brand-report.html'}\nMarkdown: {out / 'demo-brand-report.md'}\n(Hammasi SINTETIK; jonli hisobga tegilmadi.)")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
+    if args and args[0] == "demo":
+        return run_demo(args[1:])
     if not args or args[0] in ("status", "--help", "-h"):
         return show_status()
     cmd, rest = args[0], args[1:]

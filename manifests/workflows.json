@@ -88,6 +88,17 @@
         "яндекс"
       ],
       "audit_agent": "platform-auditor"
+    },
+    "chatgpt": {
+      "words": [
+        "chatgpt ads",
+        "chatgpt reklama",
+        "openai reklama",
+        "openai ads",
+        "реклама в chatgpt",
+        "chatgpt ads manager"
+      ],
+      "audit_agent": "platform-auditor"
     }
   },
   "workflows": [

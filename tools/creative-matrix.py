@@ -951,6 +951,60 @@ def analyze_fatigue(
     }
 
 
+
+def _load_metrics_rows(path: str | Path) -> list[dict]:
+    """`--metrics`: tools/normalize.py (metrics.v1) orqali yuklaydi; xato bo'lsa ValueError."""
+    import importlib.util as _ilu
+    spec = _ilu.spec_from_file_location("_tyrion_normalize", Path(__file__).resolve().parent / "normalize.py")
+    mod = _ilu.module_from_spec(spec)  # type: ignore[arg-type]
+    sys.modules.setdefault("_tyrion_normalize", mod)
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    try:
+        return mod.load_metrics_file(path)
+    except Exception as exc:  # NormalizeError va fayl xatolari
+        raise ValueError(str(exc)) from exc
+
+
+def metrics_creative_signals(rows: list[dict], entity_id: str | None = None) -> dict:
+    """metrics.v1 dan: hook/hold rate, outbound CTR, CPA, frequency va kunlik CTR trendidan ctr_drop_pct."""
+    sel = [r for r in rows if entity_id is None or str(r.get("entity_id")) == str(entity_id)]
+    if not sel:
+        raise ValueError("metrics.v1 da mos qator yo'q" + (f" (entity_id={entity_id})" if entity_id else ""))
+    impr = sum(float(r.get("impressions") or 0) for r in sel)
+    v3 = sum(float(r.get("video_3s") or 0) for r in sel)
+    tru = sum(float(r.get("thruplay") or 0) for r in sel)
+    clk = sum(float(r.get("link_clicks") or r.get("clicks") or 0) for r in sel)
+    spend = sum(float(r.get("spend") or 0) for r in sel)
+    conv = sum(sum((r.get("conversions") or {}).values()) for r in sel)
+    fw = sum(float(r.get("impressions") or 0) for r in sel if r.get("frequency") is not None)
+    freq = (sum(float(r["frequency"]) * float(r.get("impressions") or 0) for r in sel if r.get("frequency") is not None) / fw) if fw else None
+    by_day: dict[str, list[float]] = {}
+    for r in sel:
+        d = by_day.setdefault(str(r["date"]), [0.0, 0.0])
+        d[0] += float(r.get("impressions") or 0)
+        d[1] += float(r.get("link_clicks") or r.get("clicks") or 0)
+    days = sorted(by_day)
+    ctr_drop = None
+    if len(days) >= 4:
+        half = len(days) // 2
+        def _ctr(ds):
+            i = sum(by_day[x][0] for x in ds); c = sum(by_day[x][1] for x in ds)
+            return c / i if i else None
+        a, b = _ctr(days[:half]), _ctr(days[-half:])
+        if a and b is not None:
+            ctr_drop = max(0.0, round((a - b) / a * 100, 2))
+    return {
+        "hook_rate": round(v3 / impr * 100, 2) if impr and v3 else None,
+        "hold_rate": round(tru / v3 * 100, 2) if v3 and tru else None,
+        "outbound_ctr": round(clk / impr * 100, 2) if impr and clk else None,
+        "cpa": round(spend / conv, 2) if conv else None,
+        "impressions": int(impr) or None,
+        "frequency": round(freq, 2) if freq is not None else None,
+        "ctr_drop_pct": ctr_drop, "days": len(days),
+        "definitions": "hook=video_3s/impressions; hold=thruplay/video_3s; ctr_drop=(birinchi yarim - oxirgi yarim)/birinchi yarim (kunlik, >=4 kun)",
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="creative-matrix.py", description="Tyrion v7.1 Global Creative Matrix, Video Script & Ad Copy Engine")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -976,14 +1030,18 @@ def main(argv: list[str] | None = None) -> int:
     p_it.add_argument("--cpa", type=tcore.finite_float, default=None)
     p_it.add_argument("--breakeven-cpa", type=tcore.finite_float, default=None)
     p_it.add_argument("--impressions", type=int, default=None)
+    p_it.add_argument("--metrics", default=None, help="metrics.v1 fayl: hook/hold/CTR/CPA shu yerdan (qo'lda argument ustun)")
+    p_it.add_argument("--entity-id", default=None)
     p_it.add_argument("--json", action="store_true")
 
     p_fat = sub.add_parser("fatigue", help="Creative fatigue diagnostics via Hook Rate, Hold Rate, FTIR & UTIS")
-    p_fat.add_argument("--hook-rate", type=tcore.finite_float, required=True)
-    p_fat.add_argument("--hold-rate", type=tcore.finite_float, required=True)
-    p_fat.add_argument("--ctr-drop-pct", type=tcore.finite_float, default=0.0)
-    p_fat.add_argument("--frequency", type=tcore.finite_float, default=1.5)
+    p_fat.add_argument("--hook-rate", type=tcore.finite_float, default=None)
+    p_fat.add_argument("--hold-rate", type=tcore.finite_float, default=None)
+    p_fat.add_argument("--ctr-drop-pct", type=tcore.finite_float, default=None)
+    p_fat.add_argument("--frequency", type=tcore.finite_float, default=None)
     p_fat.add_argument("--ftir", type=tcore.finite_float, default=70.0)
+    p_fat.add_argument("--metrics", default=None, help="metrics.v1 fayl: hook/hold/frequency/CTR trendi shu yerdan (qo'lda argument ustun)")
+    p_fat.add_argument("--entity-id", default=None)
     p_fat.add_argument("--json", action="store_true")
 
     p_vid = sub.add_parser("video-script", help="Ready-to-shoot 9:16 video ad script & scene-by-scene storyboard (720x1200 safe zone)")
@@ -1024,14 +1082,39 @@ def main(argv: list[str] | None = None) -> int:
         langs = [x.strip() for x in args.languages.split(",") if x.strip()] if args.languages else None
         res = generate_hooks(args.niche, args.offer, languages=langs)
     elif args.command == "fatigue":
-        res = analyze_fatigue(args.hook_rate, args.hold_rate, args.ctr_drop_pct, args.frequency, args.ftir)
+        sig: dict = {}
+        if args.metrics:
+            try:
+                sig = metrics_creative_signals(_load_metrics_rows(args.metrics), args.entity_id)
+            except ValueError as exc:
+                print(f"Xato: {exc}", file=sys.stderr)
+                return tcore.EXIT_VALIDATION
+        pick = lambda cli, key, dflt: cli if cli is not None else (sig.get(key) if sig.get(key) is not None else dflt)
+        hook, hold = pick(args.hook_rate, "hook_rate", None), pick(args.hold_rate, "hold_rate", None)
+        if hook is None or hold is None:
+            print("Xato: --hook-rate va --hold-rate kerak (yoki video_3s/thruplay bor --metrics)", file=sys.stderr)
+            return tcore.EXIT_VALIDATION
+        res = analyze_fatigue(hook, hold, pick(args.ctr_drop_pct, "ctr_drop_pct", 0.0), pick(args.frequency, "frequency", 1.5), args.ftir)
+        if sig:
+            res["metrics_source"] = {"file": args.metrics, "evidence_label": "MEASURED_ACCOUNT_DATA", **sig}
     elif args.command == "iterate":
         keys = ("hook_rate", "hold_rate", "outbound_ctr", "lp_cvr", "qualified_lead_rate")
+        sig = {}
+        if args.metrics:
+            try:
+                sig = metrics_creative_signals(_load_metrics_rows(args.metrics), args.entity_id)
+            except ValueError as exc:
+                print(f"Xato: {exc}", file=sys.stderr)
+                return tcore.EXIT_VALIDATION
+        cur = {k: (getattr(args, k) if getattr(args, k) is not None else sig.get(k)) for k in keys}
         res = diagnose_creative_iteration(
-            {k: getattr(args, k) for k in keys},
+            cur,
             {k: getattr(args, f"baseline_{k}") for k in keys},
-            cpa=args.cpa, breakeven_cpa=args.breakeven_cpa, impressions=args.impressions,
+            cpa=args.cpa if args.cpa is not None else sig.get("cpa"), breakeven_cpa=args.breakeven_cpa,
+            impressions=args.impressions if args.impressions is not None else sig.get("impressions"),
         )
+        if sig and isinstance(res, dict):
+            res["metrics_source"] = {"file": args.metrics, "evidence_label": "MEASURED_ACCOUNT_DATA", **sig}
     elif args.command == "video-script":
         res = generate_video_script(
             niche=args.niche, product=args.product, problem=args.problem,

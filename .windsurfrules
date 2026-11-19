@@ -26,6 +26,14 @@ Treat every marketing, advertising, targeting, creative, video-script, tracking,
 | 4 | **Tashqi manba** | video, maqola, raqobatchi sahifasi | past — **sana + havola shart** |
 | 5 | **Model taxmini** | "odatda shunday bo'ladi" | ❌ manba emas |
 
+## Dalil yorliqlari
+
+| Yorliq | Ma'no |
+|---|---|
+| `MEASURED_ACCOUNT_DATA` | hisobning o'z ma'lumoti (export, API/MCP, screenshot) |
+| `PLATFORM_BENCHMARK` | **faqat** rasmiy benchmark asbobidan (masalan `ads_insights_industry_benchmark`, `ads_insights_performance_vs_peers`) olingan raqam; asbob nomi va sana yoziladi, qo'lda yoki xotiradan yozilmaydi |
+| `HEURISTIC_PRIOR_MODEL` | model/evristik taxmin; qaror uchun yagona asos emas |
+
 ## Buzilmaydigan qoidalar
 
 1. **Bilinmasa — "ma'lumot yo'q".** Taxmin qilib raqam yozilmaydi, bo'sh joy to'ldirilmaydi.
@@ -80,7 +88,7 @@ Treat every marketing, advertising, targeting, creative, video-script, tracking,
 
 | Qoida | Nega |
 |-------|------|
-| Butun vaultni skanerlamaslik | `wiki/` 100 qayd, `vedio bilimlar/youtubedagilar/` 16 transkript — kerak emas |
+| Butun vaultni skanerlamaslik | `wiki/` 101 qayd, `vedio bilimlar/youtubedagilar/` 16 transkript — kerak emas |
 | Kontekst **60%** ga yetganda: 150 so'zli xulosa → yangi sessiya | [[session-handoff]] |
 | Modelni `/model` bilan almashtirmaslik | prompt cache nollanadi, narx oshadi |
 | Og'ir MCP (`code-review-graph`) — **arxivga olindi (2026-09-20)** | har sessiyada ~17–18k token + 103 MB disk yeydi; bilim vaultiga keraksiz |

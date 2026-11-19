@@ -24,9 +24,9 @@ Tyrion v7.1 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 | `commands/` | **29 ta slash buyruq** (`/start`, `/audit`, `/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/utm`, `/budget`, `/scale`, `/raqobatchi`, `/mijoz`, `/tracking`, `/hisobot`, `/savol`, `/sop`, `/learn`, `/shield`, `/doctor`) | Foydalanuvchi chaqirganda |
 | `contexts/` | **6 ta kontekst fayli** (5 ta ECC Dynamic Context Mode + `contexts/README.md`) | Vazifa rejimiga qarab ([[contexts/README]]) |
 | `playbooks/` | **9 ta playbook fayli** (8 ta amaliy nisha/platforma playbooki + `playbooks/README.md`) | Kampaniya / nisha strategiyasida ([[playbooks/README]]) |
-| `wiki/` | **100 ta atomik bilim qaydi** (Andromeda 2, Meta Audience, Google Coliseum, Telegram Ads, CJM, 16 SOP) | Faqat kerakli qayd (`brain-search.py`) |
+| `wiki/` | **101 ta atomik bilim qaydi** (Andromeda 2, Meta Audience, Google Coliseum, Telegram Ads, CJM, 16 SOP) | Faqat kerakli qayd (`brain-search.py`) |
 | `rules/` | **9 ta qoida fayli** (`00-manba` .. `70-charter-baseline` + `rules/README.md`) | Vazifaga mos 1–2 qoida ([[rules/README]]) |
-| `tools/` | **39 ta 0-token deterministik CLI asbob** (`tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py`) | Har tahlil, hisob va tekshiruvda ([[tools/README]]) |
+| `tools/` | **40 ta 0-token deterministik CLI asbob** (`tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py`) | Har tahlil, hisob va tekshiruvda ([[tools/README]]) |
 | `hooks/` | **Deterministik lifecycle hooklar** (`SessionStart`, `PreToolUse`, `PostToolUse`, `Stop`) | Avtomatik ([[hooks/README]]) |
 | `manifests/` | `catalog.json` (generatsiya reestri) va `instincts.json` (`/learn` xotirasi) | `tools/catalog.py` va `tools/instincts.py` |
 

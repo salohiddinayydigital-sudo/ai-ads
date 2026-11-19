@@ -396,7 +396,8 @@ def _main_v2(args: argparse.Namespace) -> int:
             return 0
         if args.command == "baseline":
             st = load_state(args.client, root)
-            mp = Path(args.metrics) if args.metrics else client_dir(args.client, root) / "data" / "metrics.json"
+            _cd = client_dir(args.client, root) / "data"
+            mp = Path(args.metrics) if args.metrics else (_cd / "metrics.v1.json" if (_cd / "metrics.v1.json").is_file() else _cd / "metrics.json")
             base = compute_baseline(_load_metrics_rows(mp), event=args.event or (st.get("goals") or {}).get("primary_event") if args.event != "all" else None,
                                     level=args.level)
             if base.get("error"):

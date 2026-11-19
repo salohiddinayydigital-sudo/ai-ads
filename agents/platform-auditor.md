@@ -36,6 +36,9 @@ platforms:
 - "amazon"
 - "apple"
 triggers:
+- "chatgpt ads"
+- "openai reklama"
+- "реклама в chatgpt"
 - "meta ads audit"
 - "meta reklamamdan kelayotgan lidlar sifatsiz"
 - "lidlar sifatsiz"

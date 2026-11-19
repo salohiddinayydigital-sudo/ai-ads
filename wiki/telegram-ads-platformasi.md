@@ -4,7 +4,7 @@ description: "Telegram Ads rasmiy platformasi (ads.telegram.org / Fragment), kan
 tags: [telegram, ads, platforma, voronka, marketing]
 source: "Telegram Ads official documentation & local operator playbooks"
 source_status: unverified
-updated: 2026-10-17
+updated: 2026-11-19
 ---
 
 # Telegram Ads rasmiy platformasi va konversiya voronkasi
@@ -74,6 +74,12 @@ Menejer bilan shaxsiy muloqot (DM) $\to$ Sotuv
 Bot backendidan CRM tizimiga (AmoCRM, Bitrix24) har bir `/start`, lead magnit yuklash va kontakt qoldirish hodisasi **webhook** orqali uzatiladi. Natijada har bir Telegram kanalidan tushgan **sof tushum (Net Revenue)** aniq o'lchanadi.
 
 ---
+
+## 2026 yangilanishlari (tekshiruv: 2026-11-19, `unverified`)
+ads.telegram.org bu muhitda to'g'ridan-to'g'ri o'qilmadi; quyidagilar ikkilamchi manbalardan va **zid**:
+- Gram kabineti: ikkilamchi manbalar "TON kabineti" nomi o'zgargan va koin 2026-06-15 da Toncoin → Gram deb qayta nomlangan deydi; rasmiy e'lon topilmadi.
+- Minimal CPM: bir manba "0.1 Gram" ni e'lon qilingan eng past stavka deydi; boshqa manba (ppc.world) EUR kabinetida o'rtacha ~30% pasayish (€1 → €0.7) haqida yozadi; yana bir manba 2026-08-28 dan boshlab Rossiya hisoblari uchun €0.60/€0.30/€0.75 (targeting turiga qarab) deydi. Bu uch da'vo bir-biri bilan tasdiqlanmagan; hech biri rasmiy manbadan tekshirilmadi. Raqamlarni mijozga ko'rsatishdan oldin kabinetda tekshiring.
+- Foydalanuvchi o'z kabinetidagi stavkani `USER_PROVIDED` deb beradi; global CPM benchmarklari o'ylab topilmaydi.
 
 ## Manbalar
 - `skills/audit/references/ads/telegram-audit.md`

@@ -124,7 +124,7 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
         self.assertEqual(counts["agents"], 12)
         self.assertEqual(counts["skills"], 19)  # v8 Lean Core
         self.assertEqual(counts["commands"], 29)
-        self.assertEqual(counts["wiki"], 100)
+        self.assertEqual(counts["wiki"], 101)
 
         for jpath in ("plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "package.json"):
             jdata = json.loads((VAULT / jpath).read_text(encoding="utf-8"))

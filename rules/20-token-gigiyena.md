@@ -21,7 +21,7 @@ updated: 2026-09-16
 
 | Qoida | Nega |
 |-------|------|
-| Butun vaultni skanerlamaslik | `wiki/` 100 qayd, `vedio bilimlar/youtubedagilar/` 16 transkript — kerak emas |
+| Butun vaultni skanerlamaslik | `wiki/` 101 qayd, `vedio bilimlar/youtubedagilar/` 16 transkript — kerak emas |
 | Kontekst **60%** ga yetganda: 150 so'zli xulosa → yangi sessiya | [[session-handoff]] |
 | Modelni `/model` bilan almashtirmaslik | prompt cache nollanadi, narx oshadi |
 | Og'ir MCP (`code-review-graph`) — **arxivga olindi (2026-09-20)** | har sessiyada ~17–18k token + 103 MB disk yeydi; bilim vaultiga keraksiz |

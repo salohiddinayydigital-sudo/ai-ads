@@ -286,9 +286,19 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--md")
     args = ap.parse_args(argv)
     cdir = Path(args.root) / args.client if args.client else None
-    pick = lambda explicit, rel: explicit or (str(cdir / rel) if cdir else None)  # noqa: E731
+    def pick(explicit, rel):
+        """Aniq yo'l, aks holda mijoz papkasidagi kanonik joy (v8: data/metrics.v1.json, pulse/<sana>.json)."""
+        if explicit or not cdir:
+            return explicit
+        cands = {"data/metrics.json": ["data/metrics.v1.json", "data/metrics.json"],
+                 "outputs/pulse.json": ["pulse/*.json", "outputs/pulse.json"]}.get(rel, [rel])
+        for c in cands:
+            hits = sorted(cdir.glob(c))
+            if hits:
+                return str(hits[-1])
+        return str(cdir / rel)
     sp = pick(args.state, "state.json")
-    if not (sp and Path(sp).is_file()) and not args.metrics and not (cdir and (cdir / "data" / "metrics.json").is_file()):
+    if not (sp and Path(sp).is_file()) and not args.metrics and not (cdir and (cdir / "data").is_dir()):
         print("xato: state.json yoki metrics topilmadi", file=sys.stderr)
         return 2
     state = _read_json(sp, {})

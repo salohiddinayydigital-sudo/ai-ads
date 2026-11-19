@@ -18,6 +18,14 @@ alwaysApply: true
 | 4 | **Tashqi manba** | video, maqola, raqobatchi sahifasi | past — **sana + havola shart** |
 | 5 | **Model taxmini** | "odatda shunday bo'ladi" | ❌ manba emas |
 
+## Dalil yorliqlari
+
+| Yorliq | Ma'no |
+|---|---|
+| `MEASURED_ACCOUNT_DATA` | hisobning o'z ma'lumoti (export, API/MCP, screenshot) |
+| `PLATFORM_BENCHMARK` | **faqat** rasmiy benchmark asbobidan (masalan `ads_insights_industry_benchmark`, `ads_insights_performance_vs_peers`) olingan raqam; asbob nomi va sana yoziladi, qo'lda yoki xotiradan yozilmaydi |
+| `HEURISTIC_PRIOR_MODEL` | model/evristik taxmin; qaror uchun yagona asos emas |
+
 ## Buzilmaydigan qoidalar
 
 1. **Bilinmasa — "ma'lumot yo'q".** Taxmin qilib raqam yozilmaydi, bo'sh joy to'ldirilmaydi.

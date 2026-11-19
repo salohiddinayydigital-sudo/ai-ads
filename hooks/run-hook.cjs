@@ -82,7 +82,7 @@ if (args[0] === "--mcp") {
   return;
 }
 
-// Mode 2: Lifecycle Hook launcher (brief | route | guard | ingest | dod)
+// Mode 2: Lifecycle Hook launcher (brief | route | guard | spend | ingest | dod)
 const hookMode = args[0] || "";
 
 // Fast exit for maintainer-only hooks (ingest, dod) when not in TYRION_DEV=1 mode
@@ -122,7 +122,7 @@ if (hookMode === "guard" && !extraArgs.includes("--target")) {
 
 // UserPromptSubmit payload ({"prompt": ...}) must reach the Python hook via stdin.
 let stdinPayload;
-if (hookMode === "route") {
+if (hookMode === "route" || hookMode === "spend") {
   try {
     if (!process.stdin.isTTY) stdinPayload = fs.readFileSync(0, "utf-8");
   } catch (_) {

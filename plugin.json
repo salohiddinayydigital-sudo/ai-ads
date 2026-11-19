@@ -2,7 +2,7 @@
   "name": "tyrion",
   "displayName": "Tyrion",
   "version": "7.1.0",
-  "description": "Tyrion v7.1 — The Calibrated Single-Root ECC Paid Media & Targetology Operating System. 12 specialist agents, 19 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 29 slash commands, 39 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
+  "description": "Tyrion v7.1 — The Calibrated Single-Root ECC Paid Media & Targetology Operating System. 12 specialist agents, 19 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 29 slash commands, 40 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
   "author": {
     "name": "Salohiddin",
     "url": "https://github.com/salohiddinayydigital-sudo"
@@ -67,8 +67,8 @@
   ],
   "interface": {
     "displayName": "Tyrion",
-    "shortDescription": "12 marketing agents, 19 skills, 100 wiki notes, 9 playbooks, 29 commands, 39 CLI tools & Meta Graph API v26.0 Studio.",
-    "longDescription": "Tyrion v7.1 — The Calibrated Single-Root ECC Paid Media & Targetology Operating System. 12 specialist agents, 19 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 29 slash commands, 39 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
+    "shortDescription": "12 marketing agents, 19 skills, 101 wiki notes, 9 playbooks, 29 commands, 40 CLI tools & Meta Graph API v26.0 Studio.",
+    "longDescription": "Tyrion v7.1 — The Calibrated Single-Root ECC Paid Media & Targetology Operating System. 12 specialist agents, 19 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 29 slash commands, 40 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
     "category": "Marketing",
     "capabilities": [
       "Interactive",

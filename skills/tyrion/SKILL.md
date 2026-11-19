@@ -129,3 +129,6 @@ Read `MEMORY.md` at the start (language, market, active hypotheses). Record a le
 
 ## Qoida: MCP → snapshot → kod
 Model MCP o'qish asboblarini chaqiradi, xom javobni `clients/<slug>/data/raw/<YYYY-MM-DD>-<source>.json` ga saqlaydi, `python3 tools/normalize.py` dan o'tkazadi, so'ng tahlil asboblarini (`pulse`, `ad-export-analyzer`, `calculator`) ishga tushiradi. KPI hech qachon "xayolda" hisoblanmaydi. Jonli hisobga yozish asboblari faqat tasdiqlangan change packet bilan (Spend-Guard hook).
+
+## Qoida: client state
+Workflow boshida mijoz holati o'qiladi (`python3 tools/client-workspace.py state get --client <slug>`), oxirida yangilanadi (`state set`, `decision add`).
