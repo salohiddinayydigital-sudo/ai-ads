@@ -20,3 +20,4 @@ Darvoza: `pytest -q tests` · `doctor.py` · `catalog.py check` · `catalog.py d
 - 2026-11-19: `/start demo` qo'lda tekshirildi: `python3 tools/tyrion.py demo --out /tmp/demo_t/out` → 5/5 qadam ✓, `demo-brand-report.html` (inline SVG, CDN yo'q), pulse: cpa_drift(critical), tracking_break(critical), fatigue(warning). Avtomat test: tests/test_demo_flow.py.
 - Qoldi: Bosqich 7 (golden evals, coverage ≥75%, CI, VERSION 8.0.0, CHANGELOG, AGENTS/CLAUDE/INDEX, release-verifier).
 - 2026-11-19: eval ishga tushirildi: 4/28 case ≥0.8, o'rtacha ball 0.458, baseline farqi +0.064 (docs/v8-eval-results.md). v8.0.0 reliz tegi yaratildi (release.yml #2).
+- 2026-11-19: eval run 4 (eski nom tuzatilgach): 5/28, ball 0.558, delta +0.183.

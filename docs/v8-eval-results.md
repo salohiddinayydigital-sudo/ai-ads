@@ -1,6 +1,6 @@
 # Tyrion v8 — golden eval natijalari
 
-**Natija: 2026-11-19 ishga tushirildi (claude 2.1.328, `--runs 1`, with/without plugin); suite o'tmadi: 4/28 case ≥ 0.8.** Quyida o'lchangan raqamlar va ularning sabablari.
+**Natija: 2026-11-19 ishga tushirildi (claude 2.1.328, `--runs 1`, with/without plugin); suite o'tmadi: oxirgi run (4) da 5/28 case ≥ 0.8.** Quyida o'lchangan raqamlar va ularning sabablari.
 
 ## Ishga tushirish
 
@@ -92,3 +92,22 @@ Grader bo'yicha (run 3, plugin bilan / plaginsiz):
 - **Xulosa:** bu natija "plugin sifatli" degan da'voni qo'llab-quvvatlamaydi; faqat o'lchovning birinchi, nuqsonli-ammo-halol nuqtasi. Keyingi qadam: mock `tyrion-core`, skill ishga tushishini tekshirish, mazmunga qaratilgan graderlar va sandbox'li mashinada qayta ishga tushirish.
 
 Xom natija: `evals/results/latest.json` (run 3). Run 1 (grader xatolari tufayli noto'g'ri) va run 2 (sandbox xatosi, model ishlamagan) hisobga kiritilmagan.
+
+
+## Run 4 (eski skill nomi tuzatilgandan keyin, `a86513d`)
+
+Trace tahlili (`--keep-temp`, bitta case) ko'rsatdi: model marshrut hooki matni tufayli o'chirilgan `tyrion-universal` skill'ini chaqirgan; keyin `tyrion:strategy` ni to'g'ri chaqirgan. Hook, Cursor kirish qoidasi va dirijyor matnidagi eski nom `tyrion` ga almashtirildi. Shundan keyin to'liq qayta run: 28 case, 1566 s, $3.99, xatosiz (`error: 0` barcha 56 runda).
+
+| Ko'rsatkich | Run 3 | **Run 4** |
+|---|---|---|
+| O'tgan case (≥ 0.8) | 4 / 28 | **5 / 28** |
+| O'rtacha ball | 0.458 | **0.558** |
+| Baseline'ga nisbatan o'rtacha farq | +0.064 | **+0.183** |
+
+Grader bo'yicha (run 4, plugin bilan / plaginsiz): evidence-labels **12/24** / 1/24 · owner-metric **8/18** / 2/18 · language 28/28 / 28/28 · no-fabrication 3/9 / 4/9 · asks-approval 1/2 / 0/2 · declines-scope 0/2 / 0/2 · tool-run 2/12 / 4/12 · no-write-tools, no-send, no-tools hammasi o'tdi.
+
+Sharh:
+- Plugin farqi endi aniq ko'rinadi: dalil yorliqlari va "egasi + metrika" bandlari plaginsiz deyarli yo'q, plugin bilan taxminan yarmida bor. Bu — kuzatuv, `--runs 1` bilan dispersiya katta; ishonchli xulosa uchun `--runs 3` kerak.
+- **Hali o'tmaydi:** 23/28 case ≥ 0.8 emas. `no-fabrication` (LLM hakam) plugin bilan 3/9: hakam "taxmin" deb yorliqlangan raqamlarni ham to'qilgan deb baholayotgan bo'lishi mumkin (taxminlar ochiq yorliqlangan, lekin hakam rubrikasi buni farqlamaydi); rubrikani aniqlashtirish kerak, men tekshirmadim. `declines-scope` 0/2 — out-of-scope so'rovga plugin javobi yetarlicha rad etmaydi yoki hakam qattiq.
+- `tool-run` (12) bu mashinada baholanmaydi (sandbox yo'q), shuning uchun u va unga bog'liq natijalar ma'noga ega emas.
+- Xom natija: `evals/results/latest.json` (run 4). Run 1–3 yangilangan graderlar va tuzatishlardan oldin/oraliq edi.
