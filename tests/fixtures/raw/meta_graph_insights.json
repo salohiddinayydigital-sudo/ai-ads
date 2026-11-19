@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "data": [
+    {"account_id": "1000000001", "account_currency": "USD", "campaign_id": "c1", "campaign_name": "SYN Leads UZ", "adset_id": "s1", "adset_name": "SYN Adset A", "ad_id": "a1", "ad_name": "ANGLE1_HOOK1_REEL_MOM_v1",
+     "date_start": "2026-11-01", "date_stop": "2026-11-01", "spend": "20.50", "impressions": "2000", "reach": "1600", "frequency": "1.25", "clicks": "80", "inline_link_clicks": "60",
+     "actions": [{"action_type": "link_click", "value": "60"}, {"action_type": "lead", "value": "6"}, {"action_type": "video_view", "value": "900"}],
+     "video_thruplay_watched_actions": [{"action_type": "video_view", "value": "300"}], "quality_ranking": "AVERAGE"},
+    {"account_id": "1000000001", "account_currency": "USD", "campaign_id": "c1", "campaign_name": "SYN Leads UZ", "adset_id": "s1", "adset_name": "SYN Adset A", "ad_id": "a1", "ad_name": "ANGLE1_HOOK1_REEL_MOM_v1",
+     "date_start": "2026-11-02", "date_stop": "2026-11-02", "spend": "22.00", "impressions": "2100", "reach": "1650", "clicks": "70", "inline_link_clicks": "50",
+     "actions": [{"action_type": "lead", "value": "4"}]},
+    {"account_id": "1000000001", "account_currency": "USD", "campaign_id": "c2", "campaign_name": "SYN Shop", "adset_id": "s2", "ad_id": "a2", "ad_name": "SYN Purchase ad",
+     "date_start": "2026-11-01", "date_stop": "2026-11-01", "spend": "50", "impressions": "5000", "reach": "4000", "clicks": "150",
+     "actions": [{"action_type": "purchase", "value": "5"}], "action_values": [{"action_type": "purchase", "value": "400.00"}]}
+  ]
+}

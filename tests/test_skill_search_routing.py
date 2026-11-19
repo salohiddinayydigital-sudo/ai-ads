@@ -88,26 +88,26 @@ class LanguageDetectionTests(unittest.TestCase):
 class RegionalPlatformTests(unittest.TestCase):
     def test_yandex_direct_russian_query_routes_to_own_skill(self) -> None:
         plan = ss.route_task("Нужна стратегия для Яндекс Директ, стоматология в Ташкенте", load=True)
-        self.assertIn("ads-yandex", plan["required_skills"] + plan["supporting_skills"])
+        self.assertIn("audit", plan["required_skills"] + plan["supporting_skills"])
         self.assertEqual(plan["intent_analysis"]["detected_language"], "ru")
-        self.assertEqual(plan["required_skills"][0], "ads-yandex")
+        self.assertEqual(plan["required_skills"][0], "audit")
 
     def test_yandex_audit_routes_to_audit_agent(self) -> None:
         plan = ss.route_task("Проверь аудит Яндекс Директ: РСЯ и минус-слова", load=True)
-        self.assertEqual(plan["required_skills"][0], "ads-yandex")
-        self.assertEqual(plan["primary_agent"], "audit-google")
+        self.assertEqual(plan["required_skills"][0], "audit")
+        self.assertEqual(plan["primary_agent"], "platform-auditor")
 
     def test_vk_ads_russian_queries_route_to_own_skill(self) -> None:
         for q in ("Нужна стратегия для VK Ads, стоматология в Ташкенте",
                   "Проверь аудит рекламы ВКонтакте: VK Реклама и ретаргетинг",
                   "Настрой таргет во ВК для интернет-магазина"):
             plan = ss.route_task(q, load=True)
-            self.assertEqual(plan["required_skills"][0], "ads-vk", q)
+            self.assertEqual(plan["required_skills"][0], "audit", q)
             self.assertEqual(plan["intent_analysis"]["detected_language"], "ru", q)
 
     def test_vk_does_not_hijack_other_platforms(self) -> None:
         plan = ss.route_task("Audit my Google Ads Performance Max and search terms negative keywords", load=True)
-        self.assertNotIn("ads-vk", plan["required_skills"] + plan["supporting_skills"])
+        self.assertNotIn("skills/audit/references/platforms/vk.md", plan.get("references_to_load", []))
 
     def test_registry_valid_with_new_skill(self) -> None:
         problems, _ = ss.validate_registry()

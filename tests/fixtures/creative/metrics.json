@@ -1,0 +1,270 @@
+{
+ "schema": "metrics.v1",
+ "synthetic": true,
+ "rows": [
+  {
+   "date": "2026-10-01",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a1",
+   "entity_name": "PRICE_QUESTION_UGC_MOM_v1",
+   "spend": 150.0,
+   "currency": "USD",
+   "impressions": 10000,
+   "clicks": 300,
+   "link_clicks": 300,
+   "video_3s": 3000,
+   "thruplay": 1200,
+   "conversions": {
+    "Lead": 20.0
+   },
+   "conversion_value": 400.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-02",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a1",
+   "entity_name": "PRICE_QUESTION_UGC_MOM_v1",
+   "spend": 150.0,
+   "currency": "USD",
+   "impressions": 10000,
+   "clicks": 300,
+   "link_clicks": 300,
+   "video_3s": 3000,
+   "thruplay": 1200,
+   "conversions": {
+    "Lead": 20.0
+   },
+   "conversion_value": 400.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-01",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a2",
+   "entity_name": "PRICE_STATEMENT_UGC_MOM_v2",
+   "spend": 140.0,
+   "currency": "USD",
+   "impressions": 9000,
+   "clicks": 250,
+   "link_clicks": 250,
+   "video_3s": 2250,
+   "thruplay": 900,
+   "conversions": {
+    "Lead": 15.0
+   },
+   "conversion_value": 300.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-02",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a2",
+   "entity_name": "PRICE_STATEMENT_UGC_MOM_v2",
+   "spend": 140.0,
+   "currency": "USD",
+   "impressions": 9000,
+   "clicks": 250,
+   "link_clicks": 250,
+   "video_3s": 2250,
+   "thruplay": 900,
+   "conversions": {
+    "Lead": 15.0
+   },
+   "conversion_value": 300.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-01",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a3",
+   "entity_name": "TRUST_STORY_FOUNDER_DAD_v1",
+   "spend": 175.0,
+   "currency": "USD",
+   "impressions": 12500,
+   "clicks": 200,
+   "link_clicks": 200,
+   "video_3s": 2500,
+   "thruplay": 750,
+   "conversions": {
+    "Lead": 5.0
+   },
+   "conversion_value": 100.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-02",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a3",
+   "entity_name": "TRUST_STORY_FOUNDER_DAD_v1",
+   "spend": 175.0,
+   "currency": "USD",
+   "impressions": 12500,
+   "clicks": 200,
+   "link_clicks": 200,
+   "video_3s": 2500,
+   "thruplay": 750,
+   "conversions": {
+    "Lead": 5.0
+   },
+   "conversion_value": 100.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-01",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a4",
+   "entity_name": "SPEED_QUESTION_STATIC_MOM_v1",
+   "spend": 160.0,
+   "currency": "USD",
+   "impressions": 7500,
+   "clicks": 150,
+   "link_clicks": 150,
+   "video_3s": 0,
+   "thruplay": 0,
+   "conversions": {
+    "Lead": 6.0
+   },
+   "conversion_value": 120.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-02",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a4",
+   "entity_name": "SPEED_QUESTION_STATIC_MOM_v1",
+   "spend": 160.0,
+   "currency": "USD",
+   "impressions": 7500,
+   "clicks": 150,
+   "link_clicks": 150,
+   "video_3s": 0,
+   "thruplay": 0,
+   "conversions": {
+    "Lead": 6.0
+   },
+   "conversion_value": 120.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-01",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a5",
+   "entity_name": "TRUST_STORY_STATIC_DAD_v1",
+   "spend": 130.0,
+   "currency": "USD",
+   "impressions": 6000,
+   "clicks": 45,
+   "link_clicks": 45,
+   "video_3s": 0,
+   "thruplay": 0,
+   "conversions": {
+    "Lead": 0.0
+   },
+   "conversion_value": 0.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-02",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a5",
+   "entity_name": "TRUST_STORY_STATIC_DAD_v1",
+   "spend": 130.0,
+   "currency": "USD",
+   "impressions": 6000,
+   "clicks": 45,
+   "link_clicks": 45,
+   "video_3s": 0,
+   "thruplay": 0,
+   "conversions": {
+    "Lead": 0.0
+   },
+   "conversion_value": 0.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-01",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a6",
+   "entity_name": "PRICE_QUESTION_UGC_DAD_v3",
+   "spend": 6.0,
+   "currency": "USD",
+   "impressions": 300,
+   "clicks": 10,
+   "link_clicks": 10,
+   "video_3s": 50,
+   "thruplay": 20,
+   "conversions": {
+    "Lead": 0.5
+   },
+   "conversion_value": 10.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  },
+  {
+   "date": "2026-10-02",
+   "platform": "meta",
+   "account_id": "act_synth",
+   "level": "ad",
+   "entity_id": "a6",
+   "entity_name": "PRICE_QUESTION_UGC_DAD_v3",
+   "spend": 6.0,
+   "currency": "USD",
+   "impressions": 300,
+   "clicks": 10,
+   "link_clicks": 10,
+   "video_3s": 50,
+   "thruplay": 20,
+   "conversions": {
+    "Lead": 0.5
+   },
+   "conversion_value": 10.0,
+   "source": "csv",
+   "evidence_label": "USER_PROVIDED",
+   "synthetic": true
+  }
+ ]
+}

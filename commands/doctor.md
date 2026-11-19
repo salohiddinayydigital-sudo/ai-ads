@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: doctor
 description: "Tyrion v7.1 tizimining ko'p qatlamli sog'liq, katalog, MCP, xavfsizlik va unit-test diagnostikasi"
 ---

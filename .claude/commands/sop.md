@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Vazifa uchun to'g'ri SOP (ish protokolini) topib yuklaydi — ish boshlash tartibi
 argument-hint: <vazifa tavsifi>
 ---

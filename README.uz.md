@@ -13,7 +13,7 @@
 
 **Tyrion v7.1 (Calibrated & Live-Telemetry Edition)** — `affaan-m/ECC` (*Everything Claude Code*) arxitekturasi asosida qurilgan **yagona ildizli (Single-Root)** raqamli reklama, targetologiya va growth-marketing operatsion tizimi.
 
-Barcha **36 ta ixtisoslashgan agent**, **61 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **27 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **31 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
+Barcha **12 ta ixtisoslashgan agent**, **19 ta platforma va marketing skilli**, **9 ta amaliy nisha playbooki**, **6 ta dinamik kontekst rejimi**, **29 ta slash buyruq**, **Bilim: atomik qaydlar (100)** va **39 ta 0-token deterministik Python CLI asbob** yagona, kalibrlangan va real ma'lumotlarga bog'langan arxitekturaga birlashtirilgan.
 
 ## ✨ Tyrion v7.1 Arxitekturasi (Nima o'zgardi?)
 
@@ -24,8 +24,8 @@ tyrion/
 ├── MEMORY.md                 # Operator Xotirasi, O'zbekiston Konteksti va Aktiv Bet Ledger (<=90 qator)
 ├── INDEX.md                  # Yagona Bilim Xaritasi (MOC)
 ├── agents/                   # 36 ta Kanonik Agent Charteri (100% skill ulangan + Prompt Defense)
-├── skills/                   # 61 ta Kanonik Skill (38 platforma + 23 operator + 39 reference fayl)
-├── commands/                 # 27 ta Slash Buyruq (/audit, /auditoriya, /kreativ, /voronka, /eksport, /utm...)
+├── skills/                   # 19 ta Kanonik Skill (0 platforma + 19 operator + 0 reference fayl)
+├── commands/                 # 29 ta Slash Buyruq (/audit, /auditoriya, /kreativ, /voronka, /eksport, /utm...)
 ├── contexts/                 # 6 ta ECC Dynamic Context Mode (audit, launch, scale, creative, uzbekistan + README)
 ├── playbooks/                # 9 ta Tayyor Nisha va Platforma Playbooki (Meta $1k-$10k, E-com, Ta'lim, Ko'chmas mulk...)
 ├── rules/                    # 9 ta Buzilmas Qoida (00-manba .. 70-charter-baseline + README)
@@ -38,9 +38,9 @@ tyrion/
 └── tests/                    # Avtomatlashtirilgan Unit-Testlar To'plami (stdlib unittest — 100% qamrov)
 ```
 
-## 🧠 0. Universal Skill — standart kirish nuqtasi (`skills/tyrion-universal/`)
+## 🧠 0. Universal Skill — standart kirish nuqtasi (`skills/tyrion/references/tyrion-universal/`)
 
-Agent, skill, buyruq yoki asbobni tanlash shart emas: natijani oddiy tilda (uz/ru/en) yozing. `tyrion-universal` yagona dirijyor: `skill-search.py route` va `manifests/workflows.json` orqali oqimni aniqlaydi, tanlangan skill va charterlarni **haqiqatan o'qiydi**, mutaxassislarga topshiradi (Claude Code'da native sub-agent; boshqa muhitda ochiq belgilangan `single_conductor_fallback`), `calculator.py`, `meta-targeting-engine.py`, `creative-matrix.py` kabi asboblarni o'zi tanlaydi, mutaxassis natijalarini tekshiradi va bitta hujjatga sintez qiladi. Mutaxassislar uni qayta chaqirmaydi (rekursiya yo'q). Tekshiruv: `python3 tools/tyrion_workflows.py check`.
+Agent, skill, buyruq yoki asbobni tanlash shart emas: natijani oddiy tilda (uz/ru/en) yozing. `tyrion` yagona dirijyor: `skill-search.py route` va `manifests/workflows.json` orqali oqimni aniqlaydi, tanlangan skill va charterlarni **haqiqatan o'qiydi**, mutaxassislarga topshiradi (Claude Code'da native sub-agent; boshqa muhitda ochiq belgilangan `single_conductor_fallback`), `calculator.py`, `meta-targeting-engine.py`, `creative-matrix.py` kabi asboblarni o'zi tanlaydi, mutaxassis natijalarini tekshiradi va bitta hujjatga sintez qiladi. Mutaxassislar uni qayta chaqirmaydi (rekursiya yo'q). Tekshiruv: `python3 tools/tyrion_workflows.py check`.
 
 ---
 

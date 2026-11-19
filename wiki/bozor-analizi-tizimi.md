@@ -2,7 +2,7 @@
 name: bozor-analizi-tizimi
 description: "Bozor va raqobat tahlili tizimi — Ads Library g'olib pattern oqimi, ochiq manbalar, 10 tamoyilli fikrlash intizomi va RAQOBAT.md artefakti"
 tags: [bozor, raqobat, tadqiqot, tahlil]
-source: "ads/references/thinking-framework.md + meta-ads-library-tadqiqot + sop-raqobat-tahlili + ads/references/meta-ai-stack.md"
+source: "skills/audit/references/ads/thinking-framework.md + meta-ads-library-tadqiqot + sop-raqobat-tahlili + skills/audit/references/ads/meta-ai-stack.md"
 source_status: verified
 updated: 2026-09-20
 ---
@@ -26,7 +26,7 @@ updated: 2026-09-20
 | 9 | **CREATE** | Faqat dalildan keyin yechim generatsiyasi |
 | 10 | **GROW** | Har ishdan saboq → keyingi iteratsiya |
 
-🟢 Manba: `ads/references/thinking-framework.md` (claude-ads canonical)
+🟢 Manba: `skills/audit/references/ads/thinking-framework.md` (claude-ads canonical)
 **Test:** qaysi tamoyilni o'tkazib yubordingiz — ish o'sha yerda zaif.
 
 ## 2. Manbalar (faqat ochiq)

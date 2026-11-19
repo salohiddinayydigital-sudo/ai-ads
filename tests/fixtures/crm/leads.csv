@@ -1,0 +1,7 @@
+lead_id,stage,value,phone,email,first_name,city,consent,campaign,adset,ad,form,event_time,meta_lead_id
+L1,new,0,+998 90 123 45 67,Ali@Example.test,Ali,Tashkent,yes,C1,S1,A1,F1,1700000000,
+L1,new,0,+998901234567,,Ali,,yes,C1,S1,A1,F1,1700000000,
+L2,qualified,0,901112233,,Vali,Samarkand,yes,C1,S1,A2,F1,1700000100,111222333
+L3,won,5000000,998935556677,v@example.test,Sardor,,no,C2,S2,A3,F2,1700000200,
+L4,won,3000000,0 93 777 88 99,,Dilya,Bukhara,ha,C2,S2,A3,F2,1700000300,
+L5,junk,0,,,,,yes,C2,S2,A3,F2,1700000400,

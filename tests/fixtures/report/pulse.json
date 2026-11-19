@@ -1,0 +1,1 @@
+{"findings": [{"check": "frequency_fatigue", "severity": "warning", "evidence": "freq 1.8 -> 2.2", "next_step": "Yangi kreativ", "needs_approval": true, "owner": "creative", "metric": "CTR"}], "synthetic": true}

@@ -1,0 +1,12 @@
+{
+ "synthetic": true,
+ "signals": [
+  {
+   "metric": "cpa",
+   "direction": "up",
+   "severity": "warning",
+   "entity_id": "c1",
+   "detail": "SYNTHETIC anomaly signal"
+  }
+ ]
+}

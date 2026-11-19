@@ -30,15 +30,15 @@ class SkillSearchTests(unittest.TestCase):
         self.assertIn("butun", proc.stdout)
 
     def test_agent_reports_attached_skills(self) -> None:
-        proc = self._run("agent", "video-editor")
+        proc = self._run("agent", "video-producer")
         self.assertEqual(proc.returncode, 0, proc.stdout[-400:])
-        self.assertIn("video-editing", proc.stdout)
-        self.assertIn("video-motion-graphics", proc.stdout)
+        self.assertIn("video", proc.stdout)
+        self.assertIn("video", proc.stdout)
 
     def test_brief_routes_editing_task(self) -> None:
-        proc = self._run("brief", "shu videoni montaj qilib ber", "--agent", "video-editor")
+        proc = self._run("brief", "shu videoni montaj qilib ber", "--agent", "video-producer")
         self.assertEqual(proc.returncode, 0, proc.stdout[-400:])
-        self.assertIn("Tanlandi: video-editing", proc.stdout)
+        self.assertIn("Tanlandi: video ", proc.stdout)
         self.assertIn("SKILL.md", proc.stdout)
 
     def test_routing_matrix(self) -> None:
@@ -48,31 +48,31 @@ class SkillSearchTests(unittest.TestCase):
         IDF (so'z noyobligi) va stop-so'zlar tufayli endi to'g'ri taqsimlanadi.
         """
         cases = [
-            ("animatsion reels yasab ber", "video-motion-graphics"),
-            ("animatsion video kerak", "video-motion-graphics"),
-            ("after effects uslubida logo animatsiya", "video-motion-graphics"),
-            ("kinetik tipografiya bilan video", "video-motion-graphics"),
-            ("motion graphics qilib ber", "video-motion-graphics"),
-            ("mijoz videoni montaj qilib ber", "video-editing"),
-            ("shu videoni kesib ber", "video-editing"),
-            ("bergan videomni edit qilib ber", "video-editing"),
-            ("reels qilib ber", "video-editing"),
-            ("videoimga subtitr qo'sh", "video-editing"),
-            ("materialimni tahrirla", "video-editing"),
+            ("animatsion reels yasab ber", "video"),
+            ("animatsion video kerak", "video"),
+            ("after effects uslubida logo animatsiya", "video"),
+            ("kinetik tipografiya bilan video", "video"),
+            ("motion graphics qilib ber", "video"),
+            ("mijoz videoni montaj qilib ber", "video"),
+            ("shu videoni kesib ber", "video"),
+            ("bergan videomni edit qilib ber", "video"),
+            ("reels qilib ber", "video"),
+            ("videoimga subtitr qo'sh", "video"),
+            ("materialimni tahrirla", "video"),
         ]
         for query, expected in cases:
             with self.subTest(query=query):
-                proc = self._run("brief", query, "--agent", "video-editor")
+                proc = self._run("brief", query, "--agent", "video-producer")
                 self.assertEqual(proc.returncode, 0, proc.stdout[-300:])
                 self.assertIn(f"Tanlandi: {expected}", proc.stdout)
 
     def test_brief_routes_animation_task(self) -> None:
-        proc = self._run("brief", "kinetik tipografiya animatsion video after effects", "--agent", "video-editor")
+        proc = self._run("brief", "kinetik tipografiya animatsion video after effects", "--agent", "video-producer")
         self.assertEqual(proc.returncode, 0, proc.stdout[-400:])
-        self.assertIn("Tanlandi: video-motion-graphics", proc.stdout)
+        self.assertIn("Tanlandi: video ", proc.stdout)
 
     def test_brief_without_match_exits_one(self) -> None:
-        proc = self._run("brief", "zzz qqq www", "--agent", "video-editor")
+        proc = self._run("brief", "zzz qqq www", "--agent", "video-producer")
         self.assertEqual(proc.returncode, 1)
         self.assertIn("mos skill topilmadi", proc.stdout)
 
@@ -81,7 +81,7 @@ class SkillSearchTests(unittest.TestCase):
         self.assertEqual(proc.returncode, 2)
 
     def test_attached_skills_exist_on_disk(self) -> None:
-        proc = self._run("agent", "video-editor")
+        proc = self._run("agent", "video-producer")
         self.assertEqual(proc.returncode, 0, proc.stdout[-400:])
         for rel in re.findall(r"(skills/\S+/SKILL\.md)", proc.stdout):
             self.assertTrue((VAULT / rel).is_file(), f"skill fayli yo'q: {rel}")
@@ -99,30 +99,30 @@ class UniversalAutoRouterTests(unittest.TestCase):
         plan = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True)
         self.assertEqual(plan["primary_agent"], "tracking-specialist")
         self.assertEqual(plan["supporting_agents"], [])
-        self.assertEqual(plan["required_skills"], ["ads-server-side-tracking"])
+        self.assertEqual(plan["required_skills"], ["tracking"])
         self.assertEqual(plan["intent_analysis"]["complexity"], "single_step")
 
     def test_02_multistep_marketing_task_selects_complementary_skills_and_supporting_agents(self) -> None:
         plan = self.ss.route_task("Yangi mijoz uchun to'liq marketing strategiyasi tuz.", load=True)
-        self.assertEqual(plan["primary_agent"], "launch-planner")
+        self.assertEqual(plan["primary_agent"], "strategist")
         self.assertEqual(plan["intent_analysis"]["complexity"], "multi_step")
         self.assertGreaterEqual(len(plan["required_skills"]), 2)
-        self.assertIn("ads-plan", plan["required_skills"])
+        self.assertIn("strategy", plan["required_skills"])
         self.assertGreaterEqual(len(plan["supporting_agents"]), 1)
 
     def test_03_global_registry_fallback_when_agent_hint_skills_insufficient(self) -> None:
         # Hinting `video-editor` for a CAPI server-side tracking query must automatically discover `ads-server-side-tracking` from the global registry
-        plan = self.ss.route_task("Meta CAPI va event_id deduplikatsiya xatolarini tekshir", agent_hint="video-editor", load=True)
+        plan = self.ss.route_task("Meta CAPI va event_id deduplikatsiya xatolarini tekshir", agent_hint="video-producer", load=True)
         self.assertTrue(plan["global_registry_fallback_used"])
-        self.assertIn("ads-server-side-tracking", plan["required_skills"])
+        self.assertIn("tracking", plan["required_skills"])
         self.assertEqual(plan["primary_agent"], "tracking-specialist")
 
     def test_04_multilingual_tasks_uz_latin_uz_cyrillic_ru_en_routed_accurately(self) -> None:
         cases = [
-            ("Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top", "uz_latin", "audit-meta", "ads-meta"),
-            ("Мета рекламада CAPI ишлашини текшир ва пиксель хатоларини топ", "uz_cyrillic", "tracking-specialist", "ads-server-side-tracking"),
-            ("Подбери детальный таргетинг и интересы в Мета для недвижимости", "ru", "meta-audience-architect", "ads-meta-audience"),
-            ("Audit my Google Ads Performance Max and search terms negative keywords", "en", "audit-google", "ads-google"),
+            ("Meta reklamamdan kelayotgan lidlar sifatsiz, sababini top", "uz_latin", "platform-auditor", "audit"),
+            ("Мета рекламада CAPI ишлашини текшир ва пиксель хатоларини топ", "uz_cyrillic", "tracking-specialist", "tracking"),
+            ("Подбери детальный таргетинг и интересы в Мета для недвижимости", "ru", "audience-architect", "audience"),
+            ("Audit my Google Ads Performance Max and search terms negative keywords", "en", "platform-auditor", "audit"),
         ]
         for query, exp_lang, exp_agent, exp_skill in cases:
             with self.subTest(lang=exp_lang):
@@ -135,14 +135,14 @@ class UniversalAutoRouterTests(unittest.TestCase):
         plan = self.ss.route_task("iltimos menga hozir tez yordam qilib ber", load=True)
         self.assertEqual(plan["status"], "fallback_ready")
         self.assertTrue(plan["fallback_plan"]["triggered"])
-        self.assertNotIn(plan["primary_agent"], ("audit-amazon", "audit-apple", "video-editor"))
+        self.assertNotIn(plan["primary_agent"], ("platform-auditor", "platform-auditor", "video-producer"))
 
     def test_06_universal_fallback_works_when_no_skill_matches(self) -> None:
         plan = self.ss.route_task("zzz qqq unknown holographic billboard telemetry xyz", load=True)
         self.assertEqual(plan["status"], "fallback_ready")
         self.assertTrue(plan["fallback_plan"]["triggered"])
         self.assertEqual(plan["fallback_plan"]["conductor"], "ads")
-        self.assertIn("ads", plan["required_skills"])
+        self.assertIn("audit", plan["required_skills"])
         self.assertGreaterEqual(len(plan["fallback_plan"]["steps"]), 2)
 
     def test_07_only_dangerous_or_missing_critical_input_blocks_execution(self) -> None:
@@ -157,19 +157,19 @@ class UniversalAutoRouterTests(unittest.TestCase):
 
     def test_08_mid_task_dynamic_rerouting_adds_specialist_skill_and_agent(self) -> None:
         initial = self.ss.route_task("Instagram uchun bir oylik kontent reja tayyorla", load=True)
-        self.assertEqual(initial["primary_agent"], "social-content-writer")
+        self.assertEqual(initial["primary_agent"], "content-planner")
         self.assertNotIn("tracking-specialist", [initial["primary_agent"]] + initial["supporting_agents"])
 
         rerouted = self.ss.reroute_task(initial, "CAPI ishlashini tekshir va event_id deduplikatsiya xatolarini top", load=True)
         self.assertTrue(rerouted.get("rerouted"))
         self.assertIn("tracking-specialist", rerouted["supporting_agents"])
-        self.assertIn("ads-server-side-tracking", rerouted["supporting_skills"] + rerouted["required_skills"])
-        self.assertIn("ads-server-side-tracking", rerouted["loaded_context"]["loaded_skill_names"])
+        self.assertIn("tracking", rerouted["supporting_skills"] + rerouted["required_skills"])
+        self.assertIn("tracking", rerouted["loaded_context"]["loaded_skill_names"])
 
     def test_09_skill_references_loaded_selectively_only_when_needed(self) -> None:
         plan = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True)
         refs = plan["references_to_load"]
-        self.assertIn("skills/ads/references/conversion-tracking.md", refs)
+        self.assertIn("skills/audit/references/ads/conversion-tracking.md", refs)
         self.assertLessEqual(len(refs), 4, "Should never dump all 39 references into context")
         for r in refs:
             self.assertTrue((VAULT / r).is_file(), f"Reference does not exist: {r}")
@@ -257,7 +257,7 @@ class UniversalAutoRouterTests(unittest.TestCase):
         cache = self.ss.SessionContextCache()
         plan_loaded_1 = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True, session_cache=cache)
         self.assertTrue(plan_loaded_1["loaded_context"]["actually_loaded"])
-        self.assertIn("ads-server-side-tracking", plan_loaded_1["loaded_context"]["loaded_skill_names"])
+        self.assertIn("tracking", plan_loaded_1["loaded_context"]["loaded_skill_names"])
         self.assertFalse(plan_loaded_1["loaded_context"]["loaded_skills"][0]["from_session_cache"])
 
         plan_loaded_2 = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=True, session_cache=cache)
@@ -292,7 +292,7 @@ class AutoRouterExecutionGapTests(unittest.TestCase):
         self.assertEqual(plan["context_mode"], "full")
         self.assertTrue(lc["actually_loaded"])
         self.assertTrue(lc["full_instructions_loaded"])
-        self.assertIn("ads-meta", lc["applied_skills_verified"])
+        self.assertIn("audit", lc["applied_skills_verified"])
 
         # Verify full text (`content` and `body_markdown`) is present and much longer than the 360-char excerpt
         sk_entry = lc["loaded_skills"][0]
@@ -306,8 +306,8 @@ class AutoRouterExecutionGapTests(unittest.TestCase):
 
         # Verify compiled_context_package contains the full markdown bundle
         bundle = lc["compiled_context_package"]["full_markdown_bundle"]
-        self.assertIn("<!-- AGENT_CHARTER: audit-meta", bundle)
-        self.assertIn("<!-- SKILL_INSTRUCTIONS: ads-meta", bundle)
+        self.assertIn("<!-- AGENT_CHARTER: platform-auditor", bundle)
+        self.assertIn("<!-- SKILL_INSTRUCTIONS: audit", bundle)
         self.assertGreater(lc["compiled_context_package"]["total_bytes"], 3000)
 
     def test_gap_02_worker_packet_receives_full_skill_and_reference_content_and_manifest_mode_is_distinct(self) -> None:
@@ -315,9 +315,9 @@ class AutoRouterExecutionGapTests(unittest.TestCase):
         wp = plan_full["worker_packets"][0]
         self.assertTrue(wp["full_instructions_attached"])
         self.assertIsNotNone(wp["full_charter_markdown"])
-        self.assertIn("ads-server-side-tracking", wp["full_skill_instructions"])
-        self.assertGreater(len(wp["full_skill_instructions"]["ads-server-side-tracking"]), 800)
-        self.assertIn("skills/ads/references/conversion-tracking.md", wp["full_reference_contents"])
+        self.assertIn("tracking", wp["full_skill_instructions"])
+        self.assertGreater(len(wp["full_skill_instructions"]["tracking"]), 800)
+        self.assertIn("skills/audit/references/ads/conversion-tracking.md", wp["full_reference_contents"])
 
         # In manifest mode, router must NOT claim full instructions were loaded or applied
         plan_manifest = self.ss.route_task("CAPI ishlashini tekshir, xatolarni top.", load=False, context_mode="manifest")
@@ -352,7 +352,7 @@ class AutoRouterExecutionGapTests(unittest.TestCase):
         )
         self.assertEqual(rep_native["execution_mode"], "native_subagent_dispatch")
         self.assertTrue(rep_native["subagents_actually_spawned"])
-        self.assertIn("launch-planner", dispatched_agents)
+        self.assertIn("strategist", dispatched_agents)
         self.assertGreaterEqual(len(dispatched_agents), 2)
 
     def test_gap_04_context_budget_defers_overflow_references_honestly(self) -> None:
@@ -474,7 +474,7 @@ class AutoRouterExecutionGapTests(unittest.TestCase):
         self.assertEqual(payload["execution_status"], "completed")
         self.assertEqual(payload["harness"]["active_harness"], "cursor")
         self.assertFalse(payload["subagents_actually_spawned"])
-        self.assertIn("social", payload["conductor_synthesis"]["applied_skills_verified"])
+        self.assertIn("content", payload["conductor_synthesis"]["applied_skills_verified"])
 
     def test_gap_10_unapproved_mutation_blocked_in_execute_task(self) -> None:
         rep = self.ss.execute_task("Meta kampaniyamda byudjetni 300% oshir va reklamalarni hoziroq o'chir", mutation_approved=False)

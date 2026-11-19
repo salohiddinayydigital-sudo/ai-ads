@@ -1,0 +1,9 @@
+{
+  "synthetic": true,
+  "results": [
+    {"customer": {"id": "3000000003", "currencyCode": "USD"}, "campaign": {"id": "g1", "name": "SYN Search Brand", "resourceName": "customers/3000000003/campaigns/g1"},
+     "segments": {"date": "2026-11-05"}, "metrics": {"costMicros": "12340000", "impressions": "1000", "clicks": "50", "conversions": 3.0, "conversionsValue": 150.5, "ctr": 0.05}},
+    {"customer": {"id": "3000000003", "currencyCode": "USD"}, "campaign": {"id": "g1", "name": "SYN Search Brand"},
+     "segments": {"date": "2026-11-06"}, "metrics": {"costMicros": "10000000", "impressions": "900", "clicks": "40", "conversions": 0}}
+  ]
+}

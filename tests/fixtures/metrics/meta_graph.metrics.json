@@ -1,0 +1,74 @@
+{
+  "schema": "metrics.v1",
+  "rows": [
+    {
+      "date": "2026-11-01",
+      "platform": "meta",
+      "account_id": "1000000001",
+      "level": "ad",
+      "entity_id": "a1",
+      "entity_name": "ANGLE1_HOOK1_REEL_MOM_v1",
+      "spend": 20.5,
+      "currency": "USD",
+      "source": "meta_graph",
+      "evidence_label": "UNVERIFIED",
+      "synthetic": true,
+      "impressions": 2000,
+      "reach": 1600,
+      "frequency": 1.25,
+      "clicks": 80,
+      "link_clicks": 60,
+      "video_3s": 900,
+      "thruplay": 300,
+      "conversions": {
+        "lead": 6
+      }
+    },
+    {
+      "date": "2026-11-02",
+      "platform": "meta",
+      "account_id": "1000000001",
+      "level": "ad",
+      "entity_id": "a1",
+      "entity_name": "ANGLE1_HOOK1_REEL_MOM_v1",
+      "spend": 22,
+      "currency": "USD",
+      "source": "meta_graph",
+      "evidence_label": "UNVERIFIED",
+      "synthetic": true,
+      "impressions": 2100,
+      "reach": 1650,
+      "frequency": 1.2727,
+      "clicks": 70,
+      "link_clicks": 50,
+      "conversions": {
+        "lead": 4
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "platform": "meta",
+      "account_id": "1000000001",
+      "level": "ad",
+      "entity_id": "a2",
+      "entity_name": "SYN Purchase ad",
+      "spend": 50,
+      "currency": "USD",
+      "source": "meta_graph",
+      "evidence_label": "UNVERIFIED",
+      "synthetic": true,
+      "impressions": 5000,
+      "reach": 4000,
+      "frequency": 1.25,
+      "clicks": 150,
+      "conversions": {
+        "purchase": 5
+      },
+      "conversion_value": 400
+    }
+  ],
+  "synthetic": true,
+  "unmapped_columns": [
+    "quality_ranking"
+  ]
+}

@@ -1,6 +1,6 @@
 # Tyrion v7.1 — Global Paid-Media & Targetology Operating System (`ai-ads`)
 
-<!-- tyrion:catalog agents=36 skills=61 wiki=100 playbooks=9 contexts=6 commands=27 rules=9 tools=31 -->
+<!-- tyrion:catalog agents=12 skills=19 wiki=100 playbooks=9 contexts=6 commands=29 rules=9 tools=39 -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.13](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776AB.svg)](https://www.python.org/)
@@ -27,7 +27,7 @@
 - **Installed Plugin Isolation (`cwd != plugin_root`):** All hooks (`hooks/hooks.json`) and the built-in STDIO MCP server (`.mcp.json`) resolve paths via `${CLAUDE_PLUGIN_ROOT}` and fail open (`exit 0`) on non-strict environment warnings, so Tyrion never blocks file edits in your other projects.
 
 ### Just describe the result (default entry point)
-Tyrion routes ordinary requests itself; you never pick an agent, skill, command or tool. The `tyrion-universal` skill is the single conductor: it runs the deterministic router (`tools/skill-search.py route`, backed by `manifests/workflows.json`), reads the selected skills and charters in full, delegates bounded work to specialist agents (native sub-agents in Claude Code; an explicitly labelled single-conductor fallback in Codex/Cursor/Windsurf/CLI), picks deterministic tools, validates specialist outputs and returns one synthesized deliverable. A `UserPromptSubmit` hook (`prompt:route`) adds a one-line route hint to every marketing message and `SessionStart` reminds the entry point.
+Tyrion routes ordinary requests itself; you never pick an agent, skill, command or tool. The `tyrion` skill is the single conductor: it runs the deterministic router (`tools/skill-search.py route`, backed by `manifests/workflows.json`), reads the selected skills and charters in full, delegates bounded work to specialist agents (native sub-agents in Claude Code; an explicitly labelled single-conductor fallback in Codex/Cursor/Windsurf/CLI), picks deterministic tools, validates specialist outputs and returns one synthesized deliverable. A `UserPromptSubmit` hook (`prompt:route`) adds a one-line route hint to every marketing message and `SessionStart` reminds the entry point.
 
 ```text
 "Shu biznes uchun Meta Ads strategiya tuz"        -> meta_strategy (15-section client-ready strategy)
@@ -42,10 +42,10 @@ Validate the routing table with `python3 tools/tyrion_workflows.py check`; inspe
 
 ## 2. Core Architecture & Inventory
 
-- **36 specialist agents** (`agents/*.md`) — Meta, Google, TikTok, YouTube, LinkedIn, Telegram, CAPI tracking, creative strategy, unit economics, and regulatory compliance.
-- **61 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
-- **27 slash commands** (`commands/*.md`) — canonical English commands (`/audit`, `/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`, `/plan`, `/budget`, `/tracking`, `/learn`, `/shield`, `/doctor`) with full Uzbek aliases (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`).
-- **31 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
+- **12 specialist agents** (`agents/*.md`) — Meta, Google, TikTok, YouTube, LinkedIn, Telegram, CAPI tracking, creative strategy, unit economics, and regulatory compliance.
+- **19 platform & marketing skills** (`skills/*/SKILL.md`) + **6 regional platform skills** (`markets/*/skills/`) covering Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain.
+- **29 slash commands** (`commands/*.md`) — canonical English commands (`/audit`, `/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`, `/plan`, `/budget`, `/tracking`, `/learn`, `/shield`, `/doctor`) with full Uzbek aliases (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`).
+- **39 deterministic 0-token Python CLI tools** (`tools/*.py`) — unit economics, CAPI SHA-256 + Consent Gate, 6-status Meta Detailed Targeting verification, Breakdown Effect detector, 3x3 Creative Matrix, and Spend-Guard.
 - **Bilim: atomik qaydlar (100)** (`wiki/*.md`) — interlinked paid-media knowledge base with zero orphan notes.
 
 ```text
@@ -54,10 +54,10 @@ ai-ads/
 ├── markets/                 # Modular regional Market Packs (global, us, eu, uk, mena, latam, sea, in, uz)
 ├── locales/                 # UI & CLI locale bundles (en, uz, ru)
 ├── agents/                  # 36 specialist agent charters
-├── skills/                  # 61 canonical paid-media & CRO skills
+├── skills/                  # 19 canonical paid-media & CRO skills
 ├── commands/                # 27 slash commands (English canonical + Uzbek aliases)
 ├── hooks/                   # Cross-platform ${CLAUDE_PLUGIN_ROOT} hook launcher & guard
-├── tools/                   # 31 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
+├── tools/                   # 39 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
 └── wiki/                    # 100 atomic wikilinked knowledge notes
 ```
 

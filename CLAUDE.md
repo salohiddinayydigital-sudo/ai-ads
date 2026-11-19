@@ -19,21 +19,21 @@ Tyrion v7.1 — `affaan-m/ECC` (Everything Claude Code) arxitekturasida qurilgan
 | `AGENTS.md` | **Kanonik agent shartnomasi** — 36 agent, orkestratsiya, tamoyillar | Sessiya boshida (boot) |
 | `MEMORY.md` | **Operator xotirasi va Bet Ledger** (`<=90` qator) — til, bozor, aktiv gipotezalar, saboqlar | Sessiya boshida (boot) |
 | `INDEX.md` | **Yagona Bilim Xaritasi (MOC)** — barcha `wiki/` va `playbooks/` jadvali | Bilim qidirish / yozishdan oldin |
-| `agents/` | **36 ta kanonik agent charteri** (13 platforma auditi, 5 ixtisos audit, 18 strategiya/kreativ/auditoriya) | Worker ishga tushganda |
-| `skills/` | **61 ta kanonik skill** (`ads-*` platforma, `ads/` konduktor + 39 `references/`, operator skilllar) | Vazifa boshida (`skill-search.py`) |
-| `commands/` | **27 ta slash buyruq** (`/start`, `/audit`, `/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/utm`, `/budget`, `/scale`, `/raqobatchi`, `/mijoz`, `/tracking`, `/hisobot`, `/savol`, `/sop`, `/learn`, `/shield`, `/doctor`) | Foydalanuvchi chaqirganda |
+| `agents/` | **12 ta kanonik agent charteri** (13 platforma auditi, 5 ixtisos audit, 18 strategiya/kreativ/auditoriya) | Worker ishga tushganda |
+| `skills/` | **19 ta kanonik skill** (`ads-*` platforma, `ads/` konduktor + 39 `references/`, operator skilllar) | Vazifa boshida (`skill-search.py`) |
+| `commands/` | **29 ta slash buyruq** (`/start`, `/audit`, `/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/utm`, `/budget`, `/scale`, `/raqobatchi`, `/mijoz`, `/tracking`, `/hisobot`, `/savol`, `/sop`, `/learn`, `/shield`, `/doctor`) | Foydalanuvchi chaqirganda |
 | `contexts/` | **6 ta kontekst fayli** (5 ta ECC Dynamic Context Mode + `contexts/README.md`) | Vazifa rejimiga qarab ([[contexts/README]]) |
 | `playbooks/` | **9 ta playbook fayli** (8 ta amaliy nisha/platforma playbooki + `playbooks/README.md`) | Kampaniya / nisha strategiyasida ([[playbooks/README]]) |
 | `wiki/` | **100 ta atomik bilim qaydi** (Andromeda 2, Meta Audience, Google Coliseum, Telegram Ads, CJM, 16 SOP) | Faqat kerakli qayd (`brain-search.py`) |
 | `rules/` | **9 ta qoida fayli** (`00-manba` .. `70-charter-baseline` + `rules/README.md`) | Vazifaga mos 1–2 qoida ([[rules/README]]) |
-| `tools/` | **31 ta 0-token deterministik CLI asbob** (`tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py`) | Har tahlil, hisob va tekshiruvda ([[tools/README]]) |
+| `tools/` | **39 ta 0-token deterministik CLI asbob** (`tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py`) | Har tahlil, hisob va tekshiruvda ([[tools/README]]) |
 | `hooks/` | **Deterministik lifecycle hooklar** (`SessionStart`, `PreToolUse`, `PostToolUse`, `Stop`) | Avtomatik ([[hooks/README]]) |
 | `manifests/` | `catalog.json` (generatsiya reestri) va `instincts.json` (`/learn` xotirasi) | `tools/catalog.py` va `tools/instincts.py` |
 
 ## 2. Qat'iy Qoidalar
 
 1. **95% Ishonch Qonuni:** Maqsad, byudjet yoki voronka noaniq bo'lsa — taxmin qilma, avval foydalanuvchidan so'ra.
-2. **Universal Skill va Token Gigiyenasi:** Oddiy marketing so'rovini `tyrion-universal` skilli bilan boshla (agent/skill/asbobni foydalanuvchi tanlamaydi). Butun omborni yoppasiga O'QIMA; har bir vazifada `python3 tools/skill-search.py execute "<vazifa>"` (yoki `route "<vazifa>" --load`) orqali faqat tanlangan charter, `SKILL.md` va reference to'liq matni (`compiled_context_package`) yuklanadi ([[token-gigiyenasi]], [[skill-router]]).
+2. **Universal Skill va Token Gigiyenasi:** Oddiy marketing so'rovini `tyrion` skilli bilan boshla (agent/skill/asbobni foydalanuvchi tanlamaydi). Butun omborni yoppasiga O'QIMA; har bir vazifada `python3 tools/skill-search.py execute "<vazifa>"` (yoki `route "<vazifa>" --load`) orqali faqat tanlangan charter, `SKILL.md` va reference to'liq matni (`compiled_context_package`) yuklanadi ([[token-gigiyenasi]], [[skill-router]]).
 3. **Manbasiz Fakt Yo'q va Model Shaffofligi:** Har bir tavsiyada ma'lumot manbasi (`MEASURED_ACCOUNT_DATA` vs `HEURISTIC_PRIOR_MODEL`), taxminlar va ishonchlilik darajasi ochiq ko'rsatiladi ([[00-manba]]).
 4. **Spend-Guard Himoyasi:** Reklama hisobiga har qanday o'zgartirish (`budget >20%`, yangi kampaniya, pauza) `tools/spend-guard.py` tekshiruvi va foydalanuvchi tasdig'isiz bajarilmaydi ([[40-xavfsizlik-va-hisob]]).
 5. **Atomiklik va Yagona Manba:** 1 qayd = 1 tushuncha, YAML frontmatter (`name/description/tags/source/updated`, `\` o'rniga `/`), kamida 2 ta wikilink (`[[...]]`). Barcha raqamlar `manifests/catalog.json` dan avtomatik sinxronlanadi (`python3 tools/catalog.py sync-claims`).

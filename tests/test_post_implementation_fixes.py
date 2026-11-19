@@ -225,7 +225,7 @@ class PostImplementationFixTests(unittest.TestCase):
             )
             self.assertEqual(proc3.returncode, 0, proc3.stderr)
             route_data = json.loads(proc3.stdout)
-            self.assertEqual(route_data["primary_agent"], "audit-meta")
+            self.assertEqual(route_data["primary_agent"], "platform-auditor")
         finally:
             if old_tok is not None:
                 os.environ["META_ACCESS_TOKEN"] = old_tok

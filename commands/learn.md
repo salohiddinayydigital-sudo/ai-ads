@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Uzluksiz o'rganish — sessiya yoki kampaniyadan tasdiqlangan instinkt (qoida/saboq) ajratib olish va xotiraga muhrlash
 argument-hint: [list | add | promote <id>]
 ---

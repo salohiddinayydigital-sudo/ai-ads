@@ -32,7 +32,7 @@ class VideoRunTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             proc = self._run("new", "--client", "dilobar", "--topic", "kuz aksiya", "--root", tmp)
             self.assertEqual(proc.returncode, 0, proc.stderr[-300:])
-            base = Path(tmp) / f"{datetime.now():%Y-%m-%d}-dilobar-kuz-aksiya" / "workers" / "video-editor"
+            base = Path(tmp) / f"{datetime.now():%Y-%m-%d}-dilobar-kuz-aksiya" / "workers" / "video-producer"
             for name in ("props.json", "build.py", "MANIFEST.md", "qa.md"):
                 self.assertTrue((base / name).is_file(), f"yetishmayapti: {name}")
             self.assertTrue((base / "assets").is_dir())

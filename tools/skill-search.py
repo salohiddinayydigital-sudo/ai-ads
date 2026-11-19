@@ -67,7 +67,7 @@ DEFAULT_MAX_CONTEXT_BYTES = 180_000
 COMPACT_CONTEXT_BUDGET = 4_500
 NAIVE_FULL_VAULT_BYTES = 1_120_000
 
-ORCHESTRATOR_SKILLS = {"tyrion-universal"}
+ORCHESTRATOR_SKILLS = {"tyrion"}
 WORKFLOW_PROGRESSIVE_BUDGET = 36_000  # workflow rejasi: primary + 2 mutaxassis charteri va ularning skilllari
 PROGRESSIVE_SINGLE_STEP_BUDGET = 15_000  # <= 15 KB budget for simple queries (Progressive Disclosure)
 
@@ -109,16 +109,16 @@ UZ_CYR_TO_LAT = str.maketrans({
 
 MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
     (
-        ("ad-creative", "ad creative", "ad-cratinv", "video kontent", "vedio kontent", "video reklama", "reels skript", "reels ssenariy", "ugc video", "imessage ad", "chatgpt ad", "greenscreen ad", "motion video ad", "faceless video ad", "kreativ yozib ber", "видео креатив", "сценарий видео рекламы", "сценарий рилс"),
+        ("creative", "ad creative", "ad-cratinv", "video kontent", "vedio kontent", "video reklama", "reels skript", "reels ssenariy", "ugc video", "imessage ad", "chatgpt ad", "greenscreen ad", "motion video ad", "faceless video ad", "kreativ yozib ber", "видео креатив", "сценарий видео рекламы", "сценарий рилс"),
         {
-            "domains": ["creative", "video", "copywriting"],
+            "domains": ["creative", "video", "creative"],
             "platforms": ["meta", "tiktok", "youtube", "instagram"],
-            "boost_agents": {"creative-strategist": 38.0, "reels-scriptwriter": 36.0, "copy-writer": 22.0},
-            "boost_skills": {"ad-creative": 42.0, "reels-scripting": 36.0, "ads-creative": 28.0},
+            "boost_agents": {"creative-strategist": 38.0, "video-producer": 36.0, "creative-strategist": 22.0},
+            "boost_skills": {"creative": 42.0, "video": 36.0, "creative": 28.0},
             "refs": [
-                "skills/ad-creative/references/meta-creative-formats.md",
-                "skills/ad-creative/references/video-ad-scripts-and-specs.md",
-                "skills/ad-creative/references/no-ai-tells-and-hypotheses.md",
+                "skills/creative/references/ad-creative/references/meta-creative-formats.md",
+                "skills/creative/references/ad-creative/references/video-ad-scripts-and-specs.md",
+                "skills/creative/references/ad-creative/references/no-ai-tells-and-hypotheses.md",
             ],
             "tools": ["tools/creative-matrix.py"],
             "multi_step": False,
@@ -129,9 +129,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["optimization", "budget", "scaling"],
             "platforms": ["multi-platform"],
-            "boost_skills": {"ads-optimize": 65.0, "ads-budget": 45.0, "ads-math": 20.0},
-            "boost_agents": {"audit-budget": 36.0},
-            "refs": ["skills/ads/references/budget-allocation.md", "skills/ads/references/bidding-strategies.md"],
+            "boost_skills": {"analyze": 65.0, "budget": 45.0, "budget": 20.0},
+            "boost_agents": {"budget-analyst": 36.0},
+            "refs": ["skills/audit/references/ads/budget-allocation.md", "skills/audit/references/ads/bidding-strategies.md"],
             "tools": ["tools/spend-guard.py", "tools/calculator.py"],
         },
     ),
@@ -140,9 +140,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["audit", "meta", "audience", "lead-quality"],
             "platforms": ["meta"],
-            "boost_skills": {"ads-meta": 26.0, "ads-meta-audience": 22.0, "uzbekistan-market-intel": 12.0},
-            "boost_agents": {"audit-meta": 30.0, "meta-audience-architect": 18.0},
-            "refs": ["skills/ads/references/meta-audit.md"],
+            "boost_skills": {"audit": 26.0, "audience": 22.0},
+            "boost_agents": {"platform-auditor": 30.0, "audience-architect": 18.0},
+            "refs": ["skills/audit/references/ads/meta-audit.md"],
             "tools": ["tools/meta-audience.py", "tools/meta-targeting-engine.py", "tools/ad-export-analyzer.py"],
         },
     ),
@@ -152,9 +152,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
             "domains": ["strategy", "launch", "planning", "audience", "creative", "budget"],
             "platforms": ["multi-platform"],
             "multi_step": True,
-            "boost_skills": {"ads-plan": 28.0, "ads-launch": 20.0, "product-marketing": 18.0, "offers": 18.0, "ads-budget": 16.0, "ads-meta-audience": 15.0},
-            "boost_agents": {"launch-planner": 30.0, "positioning-strategist": 20.0, "meta-audience-architect": 18.0, "creative-strategist": 16.0, "audit-budget": 16.0},
-            "refs": ["skills/ads/references/thinking-framework.md", "skills/ads/references/budget-allocation.md"],
+            "boost_skills": {"strategy": 28.0, "strategy": 20.0, "strategy": 18.0, "offers": 18.0, "budget": 16.0, "audience": 15.0},
+            "boost_agents": {"strategist": 30.0, "strategist": 20.0, "audience-architect": 18.0, "creative-strategist": 16.0, "budget-analyst": 16.0},
+            "refs": ["skills/audit/references/ads/thinking-framework.md", "skills/audit/references/ads/budget-allocation.md"],
             "tools": ["tools/client-workspace.py", "tools/calculator.py", "tools/meta-audience.py", "tools/creative-matrix.py"],
         },
     ),
@@ -163,9 +163,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["social", "content"],
             "platforms": ["instagram"],
-            "boost_skills": {"social": 28.0, "content-strategy": 24.0, "reels-scripting": 12.0},
-            "boost_agents": {"social-content-writer": 30.0, "content-planner": 24.0},
-            "refs": ["skills/social/references/post-templates.md", "skills/social/references/carousel-frameworks.md", "skills/content-strategy/references/content-distribution.md"],
+            "boost_skills": {"social": 28.0, "content": 24.0, "video": 12.0},
+            "boost_agents": {"content-planner": 30.0, "content-planner": 24.0},
+            "refs": ["skills/content/references/social/references/post-templates.md", "skills/content/references/social/references/carousel-frameworks.md", "skills/content/references/content-strategy/references/content-distribution.md"],
             "tools": ["tools/creative-matrix.py"],
         },
     ),
@@ -174,9 +174,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["tracking", "technical", "analytics"],
             "platforms": ["meta", "web"],
-            "boost_skills": {"ads-server-side-tracking": 32.0, "ads-attribution": 16.0, "analytics": 14.0},
-            "boost_agents": {"tracking-specialist": 32.0, "audit-tracking": 22.0},
-            "refs": ["skills/ads/references/conversion-tracking.md"],
+            "boost_skills": {"tracking": 32.0, "tracking": 16.0, "analytics": 14.0},
+            "boost_agents": {"tracking-specialist": 32.0, "tracking-specialist": 22.0},
+            "refs": ["skills/audit/references/ads/conversion-tracking.md"],
             "tools": ["tools/capi-utm-builder.py", "tools/spend-guard.py"],
         },
     ),
@@ -186,9 +186,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
             "domains": ["competitor", "research", "strategy", "positioning", "offers", "audience"],
             "platforms": ["multi-platform"],
             "multi_step": True,
-            "boost_skills": {"ads-competitor": 38.0, "offers": 34.0, "product-marketing": 22.0, "ads-plan": 20.0, "customer-research": 15.0},
-            "boost_agents": {"positioning-strategist": 32.0, "research-worker": 26.0, "creative-strategist": 16.0},
-            "refs": ["skills/ads/references/thinking-framework.md", "skills/offers/references/value-equation.md"],
+            "boost_skills": {"competitors": 38.0, "offers": 34.0, "strategy": 22.0, "strategy": 20.0, "competitors": 15.0},
+            "boost_agents": {"strategist": 32.0, "research-verifier": 26.0, "creative-strategist": 16.0},
+            "refs": ["skills/audit/references/ads/thinking-framework.md", "skills/strategy/references/offers/references/value-equation.md"],
             "tools": ["tools/meta-audience.py", "tools/brain-search.py", "tools/creative-matrix.py"],
         },
     ),
@@ -198,9 +198,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
             "domains": ["seo", "cro", "web"],
             "platforms": ["web", "google"],
             "multi_step": True,
-            "boost_skills": {"seo-audit": 30.0, "cro": 28.0, "ads-landing": 20.0},
-            "boost_agents": {"seo-auditor": 34.0, "copy-writer": 14.0},
-            "refs": ["skills/seo-audit/references/international-seo.md", "skills/cro/references/experiments.md", "skills/cro/references/form.md"],
+            "boost_skills": {"content": 30.0, "cro": 28.0, "funnel": 20.0},
+            "boost_agents": {"content-planner": 34.0, "creative-strategist": 14.0},
+            "refs": ["skills/content/references/seo-audit/references/international-seo.md", "skills/funnel/references/cro/references/experiments.md", "skills/funnel/references/cro/references/form.md"],
             "tools": ["tools/calculator.py"],
         },
     ),
@@ -209,9 +209,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["audience", "targeting", "meta"],
             "platforms": ["meta"],
-            "boost_skills": {"ads-meta-audience": 32.0, "ads-meta": 14.0},
-            "boost_agents": {"meta-audience-architect": 34.0, "audit-meta": 14.0},
-            "refs": ["docs/DETAILED-TARGETING-ACCURACY.md", "skills/ads/references/meta-audit.md"],
+            "boost_skills": {"audience": 32.0, "audit": 14.0},
+            "boost_agents": {"audience-architect": 34.0, "platform-auditor": 14.0},
+            "refs": ["docs/DETAILED-TARGETING-ACCURACY.md", "skills/audit/references/ads/meta-audit.md"],
             "tools": ["tools/meta-targeting-engine.py", "tools/meta-audience.py"],
         },
     ),
@@ -220,9 +220,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["telegram", "audit", "funnel"],
             "platforms": ["telegram"],
-            "boost_skills": {"ads-telegram": 32.0, "uzbekistan-market-intel": 14.0},
-            "boost_agents": {"audit-telegram": 32.0},
-            "refs": ["skills/ads/references/telegram-audit.md"],
+            "boost_skills": {"audit": 32.0},
+            "boost_agents": {"platform-auditor": 32.0},
+            "refs": ["skills/audit/references/ads/telegram-audit.md"],
             "tools": ["tools/calculator.py", "tools/capi-utm-builder.py", "tools/spend-guard.py"],
         },
     ),
@@ -231,9 +231,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["search", "audit", "paid-media"],
             "platforms": ["google"],
-            "boost_skills": {"ads-google": 32.0},
-            "boost_agents": {"audit-google": 32.0},
-            "refs": ["skills/ads/references/google-audit.md", "skills/ads/references/google-creative-specs.md"],
+            "boost_skills": {"audit": 32.0},
+            "boost_agents": {"platform-auditor": 32.0},
+            "refs": ["skills/audit/references/ads/google-audit.md", "skills/audit/references/ads/google-creative-specs.md"],
             "tools": ["tools/calculator.py", "tools/ad-export-analyzer.py"],
         },
     ),
@@ -242,9 +242,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["tiktok", "audit", "video"],
             "platforms": ["tiktok"],
-            "boost_skills": {"ads-tiktok": 32.0},
-            "boost_agents": {"audit-tiktok": 32.0},
-            "refs": ["skills/ads/references/tiktok-audit.md", "skills/ads/references/tiktok-creative-specs.md"],
+            "boost_skills": {"audit": 32.0},
+            "boost_agents": {"platform-auditor": 32.0},
+            "refs": ["skills/audit/references/ads/tiktok-audit.md", "skills/audit/references/ads/tiktok-creative-specs.md"],
             "tools": ["tools/creative-matrix.py"],
         },
     ),
@@ -253,9 +253,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["budget", "finance"],
             "platforms": ["multi-platform"],
-            "boost_skills": {"ads-math": 28.0, "ads-budget": 26.0},
-            "boost_agents": {"audit-budget": 32.0},
-            "refs": ["skills/ads/references/budget-allocation.md"],
+            "boost_skills": {"budget": 28.0, "budget": 26.0},
+            "boost_agents": {"budget-analyst": 32.0},
+            "refs": ["skills/audit/references/ads/budget-allocation.md"],
             "tools": ["tools/calculator.py", "tools/spend-guard.py"],
         },
     ),
@@ -264,9 +264,9 @@ MULTILINGUAL_CONCEPT_MAP: list[tuple[tuple[str, ...], dict[str, Any]]] = [
         {
             "domains": ["reporting", "analytics"],
             "platforms": ["multi-platform"],
-            "boost_skills": {"ads-report": 30.0},
+            "boost_skills": {"report": 30.0},
             "boost_agents": {"release-verifier": 30.0},
-            "refs": ["skills/ads/references/scoring-system.md", "skills/ads/references/status-contract.md"],
+            "refs": ["skills/audit/references/ads/scoring-system.md", "skills/audit/references/ads/status-contract.md"],
             "tools": ["tools/ad-export-analyzer.py", "tools/calculator.py"],
         },
     ),
@@ -1062,6 +1062,31 @@ def _terminal_plan(
     }
 
 
+_MIGRATION_CACHE: dict[str, Any] | None = None
+
+
+def load_migration() -> dict[str, Any]:
+    """v7.1 -> v8 nom xaritasi (`manifests/migration-v8.json`); yo'q bo'lsa bo'sh."""
+    global _MIGRATION_CACHE
+    if _MIGRATION_CACHE is None:
+        try:
+            _MIGRATION_CACHE = json.loads((VAULT / "manifests" / "migration-v8.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            _MIGRATION_CACHE = {}
+    return _MIGRATION_CACHE
+
+
+def resolve_legacy_agent(name: str) -> str:
+    """Eski agent nomini (masalan `audit-meta`) yangisiga (`platform-auditor`) aylantiradi; boshqasini o'zgartirmaydi."""
+    ent = (load_migration().get("agents") or {}).get(name or "")
+    return ent["new"] if ent else name
+
+
+def resolve_legacy_skill(name: str) -> str:
+    ent = (load_migration().get("skills") or {}).get(name or "")
+    return ent["new"] if ent and not str(ent["new"]).startswith("market:") else name
+
+
 def route_task(
     query: str,
     agent_hint: str = "",
@@ -1128,6 +1153,7 @@ def route_task(
 
     # Workflow qatlami (manifests/workflows.json): cross-agent oqimlar skill reytingidan OLDIN. Mutaxassis (sub-agent)
     # chaqiruvchi bo'lsa, workflow qo'llanmaydi: u faqat o'z domenini oladi (rekursiv delegatsiya yo'q).
+    agent_hint = resolve_legacy_agent(agent_hint)
     caller = "specialist" if (caller == "specialist" or os.environ.get("TYRION_SPECIALIST") == "1") else "user"
     exec_plan = None
     # agent_hint = chaqiruvchi allaqachon mutaxassisni tanlagan (sub-agent yoki `--agent`): workflow qayta tanlanmaydi.
@@ -1186,11 +1212,11 @@ def route_task(
         )
 
     if not strong_hits:
-        primary_agent = agent_hint if (agent_hint and agent_hint in agents) else "positioning-strategist"
+        primary_agent = agent_hint if (agent_hint and agent_hint in agents) else "strategist"
         supporting_agents: list[str] = []
-        required_skills = ["ads"]
-        supporting_skills = ["uzbekistan-market-intel"] if active_market == "uz" else []
-        references_to_load = ["skills/ads/references/thinking-framework.md"]
+        required_skills = ["audit"]
+        supporting_skills = []
+        references_to_load = ["skills/audit/references/ads/thinking-framework.md"]
         tools_to_use = ["tools/brain-search.py", "tools/tyrion.py"]
         confidence_score = 0.35
         confidence_level = "low"
@@ -1238,10 +1264,6 @@ def route_task(
             required_skills = req_list or [top_skill["name"]]
             supporting_skills = [s for s in sup_list if s not in required_skills]
 
-        if active_market != "uz" and "uzbekistan" not in norm_q and "toshkent" not in norm_q and "tashkent" not in norm_q:
-            required_skills = [s for s in required_skills if s != "uzbekistan-market-intel"] or [top_skill["name"]]
-            supporting_skills = [s for s in supporting_skills if s != "uzbekistan-market-intel"]
-
         agent_scores: dict[str, float] = {a: 0.0 for a in agents}
         for cmeta in matched_concepts:
             for aname, bval in cmeta.get("boost_agents", {}).items():
@@ -1277,7 +1299,7 @@ def route_task(
             [(sc, aname) for aname, sc in agent_scores.items() if sc > 0],
             key=lambda x: (-x[0], x[1]),
         )
-        primary_agent = ranked_agents[0][1] if ranked_agents else (top_skill["agents"][0] if top_skill["agents"] else "launch-planner")
+        primary_agent = ranked_agents[0][1] if ranked_agents else (top_skill["agents"][0] if top_skill["agents"] else "strategist")
 
         supporting_agents = []
         if complexity == "multi_step":
@@ -1311,25 +1333,25 @@ def route_task(
 
         tools_to_use = list(concept_tools)
         all_sel_skills = set(required_skills + supporting_skills)
-        if "ads-meta-audience" in all_sel_skills or primary_agent == "meta-audience-architect":
+        if "audience" in all_sel_skills or primary_agent == "audience-architect":
             for t in ("tools/meta-targeting-engine.py", "tools/meta-audience.py"):
                 if t not in tools_to_use:
                     tools_to_use.append(t)
-        if "ads-meta" in all_sel_skills or primary_agent == "audit-meta":
+        if "audit" in all_sel_skills or primary_agent == "platform-auditor":
             for t in ("tools/meta-audience.py", "tools/meta-insights-sync.py", "tools/ad-export-analyzer.py"):
                 if t not in tools_to_use:
                     tools_to_use.append(t)
-        if "ads-server-side-tracking" in all_sel_skills or primary_agent == "tracking-specialist":
+        if "tracking" in all_sel_skills or primary_agent == "tracking-specialist":
             if "tools/capi-utm-builder.py" not in tools_to_use:
                 tools_to_use.append("tools/capi-utm-builder.py")
-        if {"ads-budget", "ads-math", "ads-optimize"} & all_sel_skills or primary_agent == "audit-budget":
+        if {"budget", "budget", "analyze"} & all_sel_skills or primary_agent == "budget-analyst":
             for t in ("tools/calculator.py", "tools/spend-guard.py"):
                 if t not in tools_to_use:
                     tools_to_use.append(t)
-        if {"ad-creative", "ads-creative", "reels-scripting", "social"} & all_sel_skills or primary_agent in ("creative-strategist", "social-content-writer"):
+        if {"creative", "creative", "video", "social"} & all_sel_skills or primary_agent in ("creative-strategist", "content-planner"):
             if "tools/creative-matrix.py" not in tools_to_use:
                 tools_to_use.append("tools/creative-matrix.py")
-        if {"video-editing", "video-motion-graphics"} & all_sel_skills or primary_agent == "video-editor":
+        if {"video", "video"} & all_sel_skills or primary_agent == "video-producer":
             if "tools/video-run.py" not in tools_to_use:
                 tools_to_use.append("tools/video-run.py")
         if not tools_to_use:
@@ -1348,7 +1370,7 @@ def route_task(
             "triggered": False,
             "mode": "ALTERNATIVE_SKILL_AND_CONDUCTOR_BACKUP",
             "conductor": "ads",
-            "fallback_agent": supporting_agents[0] if supporting_agents else "research-worker",
+            "fallback_agent": supporting_agents[0] if supporting_agents else "research-verifier",
             "explanation": "Agar asosiy skill davomida qo'shimcha ma'lumot yoki boshqa platforma ehtiyoji chiqsa, `--reroute-with` orqali zaxira agent va `ads` konduktoriga o'tiladi.",
             "steps": [
                 f"1. Birinchi tanlov (`{required_skills[0]}`) bo'yicha to'liq ko'rsatmalarni o'qib tahlilni bajarish.",
@@ -1406,12 +1428,14 @@ def route_task(
         fallback_plan = {
             "triggered": False,
             "mode": "WORKFLOW_PLAN",
-            "conductor": "tyrion-universal",
+            "conductor": "tyrion",
             "fallback_agent": primary_agent,
             "explanation": "Bosqich uchun sub-agent mavjud bo'lmasa conductor bosqichni o'zi, tegishli charter va skillni to'liq o'qib bajaradi (single_conductor_fallback) va buni hisobotda ochiq aytadi.",
             "steps": [f"{i + 1}. {st['id']}: {st['title']}" for i, st in enumerate(exec_plan["stages"])],
         }
 
+    if active_market == "uz" and (VAULT / "markets/uz/market-intel.md").is_file() and "markets/uz/market-intel.md" not in references_to_load:
+        references_to_load.append("markets/uz/market-intel.md")  # v8: UZ bozor bilimi faqat market=uz da yuklanadi
     if extra_references:
         for eref in extra_references:
             if eref and eref not in references_to_load:
@@ -1426,9 +1450,9 @@ def route_task(
         risk_level = "low"
 
     rules_to_load = ["rules/00-manba.md", "rules/10-til-va-uslub.md", "rules/70-charter-baseline.md"]
-    if risk_level in ("medium", "high") or is_mutation or primary_agent in ("audit-budget", "tracking-specialist", "audit-tracking", "launch-planner"):
+    if risk_level in ("medium", "high") or is_mutation or primary_agent in ("budget-analyst", "tracking-specialist", "tracking-specialist", "strategist"):
         rules_to_load.append("rules/40-xavfsizlik-va-hisob.md")
-    if active_market == "uz" or "uzbekistan-market-intel" in (required_skills + supporting_skills):
+    if active_market == "uz":
         rules_to_load.append("rules/30-ozbekiston-konteksti.md")
         if (VAULT / "markets/uz/README.md").is_file():
             rules_to_load.append("markets/uz/README.md")
@@ -1927,7 +1951,7 @@ def _run_deterministic_tools_for_plan(plan: dict[str, Any]) -> list[dict[str, An
             if tool_rel in ("tools/meta-audience.py", "tools/meta-audience.py market-intel"):
                 ma = importlib.import_module("meta-audience")
                 req_sk = set(plan.get("required_skills", []) + plan.get("supporting_skills", []))
-                if tool_rel == "tools/meta-audience.py market-intel" or bool(req_sk & {"ads-competitor", "offers", "product-marketing"}):
+                if tool_rel == "tools/meta-audience.py market-intel" or bool(req_sk & {"competitors", "offers", "strategy"}):
                     intel = ma.analyze_audience_competitors_and_offers(product=query[:60] or "Offer", niche=niche)
                     outputs.append({
                         "tool": "tools/meta-audience.py",
@@ -2394,7 +2418,7 @@ def cmd_execute(args: argparse.Namespace) -> int:
 def cmd_agent(args: argparse.Namespace) -> int:
     skills = load_skills()
     agents = load_agents()
-    agent = args.name
+    agent = resolve_legacy_agent(args.name)
     if agent not in agents:
         near = [a for a in agents if agent.lower() in a.lower()]
         print(f"✗ agent topilmadi: {agent}" + (f" (o'xshash: {', '.join(near[:5])})" if near else ""))

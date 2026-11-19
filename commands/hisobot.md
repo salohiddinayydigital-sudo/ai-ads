@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Mijoz hisoboti — natijalar, qarorlar, keyingi qadam (fayl bo'lib chiqadi)
 argument-hint: <mijoz> [davr]
 ---

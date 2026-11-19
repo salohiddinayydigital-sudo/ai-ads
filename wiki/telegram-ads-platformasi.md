@@ -76,5 +76,5 @@ Bot backendidan CRM tizimiga (AmoCRM, Bitrix24) har bir `/start`, lead magnit yu
 ---
 
 ## Manbalar
-- `ads/references/telegram-audit.md`
+- `skills/audit/references/ads/telegram-audit.md`
 - `claude-ads-main/local/raw/claudes-bilim/marketolog/KNOWLEDGE.md`

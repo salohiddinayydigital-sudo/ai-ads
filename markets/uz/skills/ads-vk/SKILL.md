@@ -4,7 +4,7 @@ description: "VK Ads (VK Reklama) Audit & Lead/Mini-App Targetology for CIS & Ce
 verified_date: "2026-10-21"
 ---
 
-# `ads-vk` — VK Ads (VK Reklama) Audit & Lead/Mini-App Targetology for CIS & Central Asia
+# `audit` — VK Ads (VK Reklama) Audit & Lead/Mini-App Targetology for CIS & Central Asia
 
 - **Verified Date:** `2026-10-21`
 - **Core Platform Coverage Preserved:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.

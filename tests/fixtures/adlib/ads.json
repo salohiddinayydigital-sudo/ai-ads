@@ -1,0 +1,7 @@
+{"synthetic": true, "ads": [
+ {"id": "1", "advertiser": "Brand X", "text": "Chegirma 30%! Arzon narx faqat bugun", "start_date": "2026-09-01", "end_date": ""},
+ {"id": "2", "advertiser": "Brand X", "text": "Chegirma 30% bepul konsultatsiya", "start_date": "2026-10-01", "end_date": "2026-10-11", "creative_group": "g1"},
+ {"id": "3", "advertiser": "Brand X", "text": "Narx arzon, nasiya bilan", "start_date": "2026-10-05", "creative_group": "g1"},
+ {"id": "4", "advertiser": "Brand Y", "text": "Kafolat va mijoz sharhlari — ishonch", "start_date": "2026-11-10"},
+ {"id": "5", "advertiser": "Brand Y", "text": "Salom", "start_date": "2026-11-12", "end_date": "2026-11-12"}
+]}

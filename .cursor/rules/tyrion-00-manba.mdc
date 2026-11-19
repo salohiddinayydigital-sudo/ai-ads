@@ -14,7 +14,7 @@ alwaysApply: true
 |---|-------|-------|---------|
 | 1 | **Hisobning o'z ma'lumoti** | export, Ads Manager, API/MCP javobi, screenshot | eng yuqori |
 | 2 | **Tyrion wiki qaydi** | `wiki/meta-kampaniya-tuzilmalari.md` (frontmatter'ida manba bor) | yuqori |
-| 3 | **Dated reference** | `ads/references/meta-audit.md`, `local/meta-playbook-uz.md` | o'rta |
+| 3 | **Dated reference** | `skills/audit/references/ads/meta-audit.md`, `local/meta-playbook-uz.md` | o'rta |
 | 4 | **Tashqi manba** | video, maqola, raqobatchi sahifasi | past — **sana + havola shart** |
 | 5 | **Model taxmini** | "odatda shunday bo'ladi" | ❌ manba emas |
 

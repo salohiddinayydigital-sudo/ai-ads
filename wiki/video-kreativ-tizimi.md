@@ -2,7 +2,7 @@
 name: video-kreativ-tizimi
 description: "Video kreativ tizimi — hook/tana/CTA arxitekturasi, 9 uchadigan format, test tartibi, spec darvozasi (joriy rasmiy manbadan), fatigue va AI ishlab chiqarish"
 tags: [kreativ, video, meta-ads, format]
-source: "kanal-bilim/03_9_ta_uchadigan_format.txt + ads/references/meta-creative-specs.md + marketolog/KNOWLEDGE.md §6 + bozor-trend-kreativi"
+source: "kanal-bilim/03_9_ta_uchadigan_format.txt + skills/audit/references/ads/meta-creative-specs.md + marketolog/KNOWLEDGE.md §6 + bozor-trend-kreativi"
 source_status: unverified
 updated: 2026-09-20
 ---
@@ -62,7 +62,7 @@ Ratsionlar, o'lchamlar, davomiylik, xavfsiz zona (safe zone), matn kesilishi, fa
 Har placement uchun **joriy rasmiy manbadan** olinadi va manba ID + sana yoziladi. Tasdiqlanmasa — `needs_input`.
 Bir placement qoidasi boshqasiga ko'chirilmaydi; "muayyan ratsion universal eng yaxshi" degan da'vo qilinmaydi.
 
-🟢 Manba: `ads/references/meta-creative-specs.md` (Meta rasmiy)
+🟢 Manba: `skills/audit/references/ads/meta-creative-specs.md` (Meta rasmiy)
 
 ## 6. Fatigue (charchash)
 

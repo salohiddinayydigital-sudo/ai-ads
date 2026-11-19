@@ -2,7 +2,7 @@
 name: bosh-agent-protokoli
 description: "\"Bosh agent yo'q\" muammosiga yechim — conductor kim, workerlar bilan chegara, plan approval, clean shutdown"
 tags: [orkestratsiya, conductor, agents, protokol]
-source: operator taqdim etgan CEO/orchestrator 4 tamoyili (2026-09-07) + ads/SKILL.md#Worker-orchestration tahlili
+source: operator taqdim etgan CEO/orchestrator 4 tamoyili (2026-09-07) + skills/audit/references/ads-conductor.md#Worker-orchestration tahlili
 source_status: verified
 updated: 2026-09-07
 ---
@@ -16,10 +16,10 @@ aniq "bosh agent"ni ko'rmaydi — natijada tizim "bor lekin tartibsiz" his qilin
 
 ## Aslida bosh agent bor — u yashirin
 
-`ads/SKILL.md` ning birinchi qatori: *"Act as the conductor for a source-grounded
+`skills/audit/references/ads-conductor.md` ning birinchi qatori: *"Act as the conductor for a source-grounded
 paid-media operating system."* — ya'ni **asosiy Claude Code sessiyasining o'zi**
 `/ads` skill yuklanganda conductor (bosh agent) roliga kiradi. Worker'lar hech
-qachon bir-biri bilan ishlamaydi — faqat conductor ular bilan ishlaydi (`ads/SKILL.md`
+qachon bir-biri bilan ishlamaydi — faqat conductor ular bilan ishlaydi (`skills/audit/references/ads-conductor.md`
 § Worker orchestration: "Use one conductor and bounded workers"). [🟢 FAKT — repo kodida yozilgan]
 
 Muammo texnik emas — **ko'rinish** muammosi: bu rol hech qayerda operator uchun
@@ -31,7 +31,7 @@ Operator taqdim etgan tamoyillar (video/kurs manbali, framework nomi noma'lum)
 mavjud arxitekturaga solishtirildi:
 
 ### 1. Goal & Team Size — bor, kuchaytirildi
-`ads/SKILL.md` Operating order #1 allaqachon talab qiladi: maqsad, byudjet,
+`skills/audit/references/ads-conductor.md` Operating order #1 allaqachon talab qiladi: maqsad, byudjet,
 platforma aniqlansin. **Qo'shimcha qoida:** conductor har fan-out oldidan bitta
 qatorda e'lon qiladi — `Maqsad: <X> · Jamoa: <N worker, nomlari>`. Shu orqali
 operator har safar "kim ishlayapti"ni ko'radi.
@@ -39,7 +39,7 @@ operator har safar "kim ishlayapti"ni ko'radi.
 ### 2. File Territory — allaqachon strukturaviy yechilgan
 Video'dagi muammo (agentlar bir-birining faylini o'chirib yuborishi) bu repoda
 umuman yuzaga kelmaydi, chunki **worker'lar fayl yozmaydi** — faqat schema-valid
-`result` obyekti qaytaradi conductor'ga (`ads/SKILL.md`: *"workers never write the
+`result` obyekti qaytaradi conductor'ga (`skills/audit/references/ads-conductor.md`: *"workers never write the
 final report"*). Fayl yozish huquqi FAQAT conductor'da (`.claude-ads/runs/<run-id>/`,
 `journal/<mijoz>.md`, `outputs/`). "Fayl hududi" belgilash shart emas — kirish
 huquqi arxitektura darajasida cheklangan. [🟢 FAKT]
@@ -103,7 +103,7 @@ claude-ads-main ishiga aralashtirmaydi — bu ikkalasi mustaqil kontekst.
 
 ## Xulosa
 
-Bosh agent chaqirilishi shart bo'lgan **yangi fayl emas** — `ads/SKILL.md`
+Bosh agent chaqirilishi shart bo'lgan **yangi fayl emas** — `skills/audit/references/ads-conductor.md`
 allaqachon shu rolni bajaradi. Yetishmayotgan narsa — **ko'rinuvchanlik**
 (team e'loni) va **intizom** (plan approval + clean shutdown), ular yuqorida
 qo'shildi. `ads/`, `.claude/agents/`, `agents/` — asl repo kodi — o'zgartirilmadi

@@ -31,7 +31,7 @@ updated: 2026-09-16
 | `audits/` | Haftalik audit hisobotlari (`report-YYYY-MM-DD.md`) | hafta oxirida |
 | `archive/` | Arxivlangan material — hech narsa o'chirilmaydi | kerak bo'lganda |
 | `graphify-out/` | Bilim grafi (`graph.json`, `GRAPH_REPORT.md`) — generatsiya | `tools/gy.cmd` orqali |
-| `claude-ads-main/` | Ijro dvigateli: 35 charter, 33 + 21 skill (`.agents/skills/` — `video-editing`, `video-motion-graphics`), playbooklar, `local/` (UZ), `outputs/` | alohida yuritiladi |
+| `claude-ads-main/` | Ijro dvigateli: 35 charter, 33 + 21 skill (`.agents/skills/` — `video`, `video`), playbooklar, `local/` (UZ), `outputs/` | alohida yuritiladi |
 
 ### ⭐ Asosiy yo'nalishlar (2026-09-20 — ustuvor uch)
 | Qayd | Nima haqida |

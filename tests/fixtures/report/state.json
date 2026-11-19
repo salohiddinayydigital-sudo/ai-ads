@@ -1,0 +1,23 @@
+{
+ "schema": "client-state.v1",
+ "slug": "demo",
+ "name": "Demo Brand",
+ "language": "uz",
+ "market": "uz",
+ "goals": {
+  "primary_event": "Lead",
+  "target_cpa": 8,
+  "monthly_budget": 1500,
+  "currency": "USD"
+ },
+ "synthetic": true,
+ "updated": "2026-11-01T00:00:00Z",
+ "next_steps": [
+  {
+   "action": "Yangi hook sinash",
+   "owner": "media-buyer",
+   "metric": "CPA",
+   "due": "2026-11-25"
+  }
+ ]
+}

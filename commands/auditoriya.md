@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Meta Ads auditoriya arxitekturasi — 4-qatlamli voronka, 6-statusli Detailed Targeting Accuracy tekshiruvi, Exclusion matritsasi, Overlap (<20%) va Saturation hisobi
 argument-hint: <nisha: ecom|edu|real-estate|medical|b2b|beauty|auto|local> <kunlik_byudjet> [mijoz]
 ---

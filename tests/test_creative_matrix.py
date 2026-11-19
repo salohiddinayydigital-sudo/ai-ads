@@ -27,7 +27,7 @@ class TyrionV7CreativeAndMetaStackTests(unittest.TestCase):
         self.mcp = importlib.import_module("tyrion-mcp-server")
 
     def test_v7_01_ad_creative_skill_and_command_registered_and_routed(self) -> None:
-        self.assertTrue((VAULT / "skills" / "ad-creative" / "SKILL.md").is_file())
+        self.assertTrue((VAULT / "skills" / "creative" / "SKILL.md").is_file())
         self.assertTrue((VAULT / "commands" / "ad-creative.md").is_file())
         self.assertTrue((VAULT / ".claude" / "commands" / "ad-creative.md").is_file())
 
@@ -38,7 +38,7 @@ class TyrionV7CreativeAndMetaStackTests(unittest.TestCase):
         ):
             plan = self.ss.route_task(q, load=True)
             all_skills = plan["required_skills"] + plan["supporting_skills"]
-            self.assertTrue({"ad-creative", "reels-scripting"} & set(all_skills), f"Expected ad-creative or reels-scripting in {all_skills}")
+            self.assertTrue({"creative", "video"} & set(all_skills), f"Expected ad-creative or reels-scripting in {all_skills}")
             self.assertIn("tools/creative-matrix.py", plan["tools_to_use"])
 
     def test_v7_02_video_script_generator_supports_all_7_formats_and_safe_zone_specs(self) -> None:
@@ -162,9 +162,9 @@ class TyrionV7CreativeAndMetaStackTests(unittest.TestCase):
 
         r_typo = self.ss.route_task("Audioturiya va rabotchilar Analiz qilish.audioturiyaga turi taklif berishchi?")
         self.assertEqual(r_typo["intent_analysis"]["detected_language"], "uz_latin")
-        self.assertEqual(r_typo["primary_agent"], "positioning-strategist")
-        self.assertIn("ads-competitor", r_typo["required_skills"] + r_typo["supporting_skills"])
-        self.assertIn("offers", r_typo["required_skills"] + r_typo["supporting_skills"])
+        self.assertEqual(r_typo["primary_agent"], "strategist")
+        self.assertIn("competitors", r_typo["required_skills"] + r_typo["supporting_skills"])
+        self.assertIn("strategy", r_typo["required_skills"] + r_typo["supporting_skills"])
 
         mcp = importlib.import_module("tyrion-mcp-server")
         mcp_intel = mcp.call_tool("tyrion_meta_audience", {"mode": "market-intel", "product": "IELTS Kurs", "niche": "edu", "daily_budget": 50.0})

@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: ad-creative
 description: "Generate high-converting ad creative, S/A-tier 9:16 video ad scripts (UGC, Founder, iMessage/ChatGPT Reveal, Greenscreen, Faceless Motion), Andromeda PDA diversity matrices, and platform-validated copy with zero AI tells (Aliases: /creative, /kreativ)"
 argument-hint: "<product/offer> [--platform meta|google_rsa|tiktok|linkedin|telegram] [--format ugc_reaction_demo|founder_authority|imessage_reveal|greenscreen_proof]"

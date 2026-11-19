@@ -1,0 +1,456 @@
+{
+  "schema": "migration-v8",
+  "from": "7.1.x",
+  "to": "8.0.0",
+  "note": "Eski nomlar router tomonidan alias sifatida taniladi; eski matnlar `path` da saqlangan.",
+  "skills": {
+    "tyrion-universal": {
+      "new": "tyrion",
+      "path": "skills/tyrion/references/conductor-v7.md"
+    },
+    "ads": {
+      "new": "audit",
+      "path": "skills/audit/references/ads-conductor.md"
+    },
+    "ads-validate": {
+      "new": "system",
+      "path": "skills/system/references/ads-validate.md"
+    },
+    "ads-plan": {
+      "new": "strategy",
+      "path": "skills/strategy/references/ads-plan.md"
+    },
+    "ads-launch": {
+      "new": "strategy",
+      "path": "skills/strategy/references/ads-launch.md"
+    },
+    "launch": {
+      "new": "strategy",
+      "path": "skills/strategy/references/launch.md"
+    },
+    "offers": {
+      "new": "strategy",
+      "path": "skills/strategy/references/offers.md"
+    },
+    "product-marketing": {
+      "new": "strategy",
+      "path": "skills/strategy/references/product-marketing.md"
+    },
+    "ads-audit": {
+      "new": "audit",
+      "path": "skills/audit/references/audit-process.md"
+    },
+    "ads-meta": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/meta.md",
+      "platform": "meta"
+    },
+    "ads-google": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/google.md",
+      "platform": "google"
+    },
+    "ads-tiktok": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/tiktok.md",
+      "platform": "tiktok"
+    },
+    "ads-youtube": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/youtube.md",
+      "platform": "youtube"
+    },
+    "ads-linkedin": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/linkedin.md",
+      "platform": "linkedin"
+    },
+    "ads-x": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/x.md",
+      "platform": "x"
+    },
+    "ads-reddit": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/reddit.md",
+      "platform": "reddit"
+    },
+    "ads-pinterest": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/pinterest.md",
+      "platform": "pinterest"
+    },
+    "ads-snapchat": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/snapchat.md",
+      "platform": "snapchat"
+    },
+    "ads-microsoft": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/microsoft.md",
+      "platform": "microsoft"
+    },
+    "ads-amazon": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/amazon.md",
+      "platform": "amazon"
+    },
+    "ads-apple": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/apple.md",
+      "platform": "apple"
+    },
+    "ads-telegram": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/telegram.md",
+      "platform": "telegram"
+    },
+    "ads-vk": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/vk.md",
+      "platform": "vk"
+    },
+    "ads-yandex": {
+      "new": "audit",
+      "path": "skills/audit/references/platforms/yandex.md",
+      "platform": "yandex"
+    },
+    "ads-meta-audience": {
+      "new": "audience",
+      "path": "skills/audience/references/ads-meta-audience.md"
+    },
+    "ad-creative": {
+      "new": "creative",
+      "path": "skills/creative/references/ad-creative.md"
+    },
+    "ads-creative": {
+      "new": "creative",
+      "path": "skills/creative/references/ads-creative.md"
+    },
+    "ads-create": {
+      "new": "creative",
+      "path": "skills/creative/references/ads-create.md"
+    },
+    "ads-generate": {
+      "new": "creative",
+      "path": "skills/creative/references/ads-generate.md"
+    },
+    "ads-photoshoot": {
+      "new": "creative",
+      "path": "skills/creative/references/ads-photoshoot.md"
+    },
+    "copywriting": {
+      "new": "creative",
+      "path": "skills/creative/references/copywriting.md"
+    },
+    "copy-editing": {
+      "new": "creative",
+      "path": "skills/creative/references/copy-editing.md"
+    },
+    "writing-guidelines": {
+      "new": "creative",
+      "path": "skills/creative/references/writing-guidelines.md"
+    },
+    "ads-dna": {
+      "new": "creative",
+      "path": "skills/creative/references/ads-dna.md"
+    },
+    "reels-scripting": {
+      "new": "video",
+      "path": "skills/video/references/reels-scripting.md"
+    },
+    "video-editing": {
+      "new": "video",
+      "path": "skills/video/references/video-editing.md"
+    },
+    "video-motion-graphics": {
+      "new": "video",
+      "path": "skills/video/references/video-motion-graphics.md"
+    },
+    "ads-attribution": {
+      "new": "tracking",
+      "path": "skills/tracking/references/ads-attribution.md"
+    },
+    "ads-server-side-tracking": {
+      "new": "tracking",
+      "path": "skills/tracking/references/ads-server-side-tracking.md"
+    },
+    "analytics": {
+      "new": "tracking",
+      "path": "skills/tracking/references/analytics.md"
+    },
+    "ads-math": {
+      "new": "budget",
+      "path": "skills/budget/references/ads-math.md"
+    },
+    "ads-budget": {
+      "new": "budget",
+      "path": "skills/budget/references/ads-budget.md"
+    },
+    "ads-optimize": {
+      "new": "analyze",
+      "path": "skills/analyze/references/ads-optimize.md"
+    },
+    "ads-monitor": {
+      "new": "analyze",
+      "path": "skills/analyze/references/ads-monitor.md"
+    },
+    "ads-competitor": {
+      "new": "competitors",
+      "path": "skills/competitors/references/ads-competitor.md"
+    },
+    "ads-research": {
+      "new": "competitors",
+      "path": "skills/competitors/references/ads-research.md"
+    },
+    "customer-research": {
+      "new": "competitors",
+      "path": "skills/competitors/references/customer-research.md"
+    },
+    "cro": {
+      "new": "funnel",
+      "path": "skills/funnel/references/cro.md"
+    },
+    "ads-landing": {
+      "new": "funnel",
+      "path": "skills/funnel/references/ads-landing.md"
+    },
+    "web-design-guidelines": {
+      "new": "funnel",
+      "path": "skills/funnel/references/web-design-guidelines.md"
+    },
+    "content-strategy": {
+      "new": "content",
+      "path": "skills/content/references/content-strategy.md"
+    },
+    "social": {
+      "new": "content",
+      "path": "skills/content/references/social.md"
+    },
+    "marketing-ideas": {
+      "new": "content",
+      "path": "skills/content/references/marketing-ideas.md"
+    },
+    "longform-direct-response": {
+      "new": "content",
+      "path": "skills/content/references/longform-direct-response.md"
+    },
+    "marketing-psychology": {
+      "new": "content",
+      "path": "skills/content/references/marketing-psychology.md"
+    },
+    "prospecting": {
+      "new": "content",
+      "path": "skills/content/references/prospecting.md"
+    },
+    "seo-audit": {
+      "new": "content",
+      "path": "skills/content/references/seo-audit.md"
+    },
+    "ads-report": {
+      "new": "report",
+      "path": "skills/report/references/ads-report.md"
+    },
+    "ads-setup": {
+      "new": "client",
+      "path": "skills/client/references/ads-setup.md"
+    },
+    "ads-test": {
+      "new": "experiments",
+      "path": "skills/experiments/references/ads-test.md"
+    },
+    "uzbekistan-market-intel": {
+      "new": "market:uz",
+      "path": "markets/uz/market-intel.md"
+    }
+  },
+  "agents": {
+    "audit-meta": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-meta.md",
+      "platform": "meta"
+    },
+    "audit-google": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-google.md",
+      "platform": "google"
+    },
+    "audit-telegram": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-telegram.md",
+      "platform": "telegram"
+    },
+    "audit-tiktok": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-tiktok.md",
+      "platform": "tiktok"
+    },
+    "audit-youtube": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-youtube.md",
+      "platform": "youtube"
+    },
+    "audit-linkedin": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-linkedin.md",
+      "platform": "linkedin"
+    },
+    "audit-x": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-x.md",
+      "platform": "x"
+    },
+    "audit-reddit": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-reddit.md",
+      "platform": "reddit"
+    },
+    "audit-pinterest": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-pinterest.md",
+      "platform": "pinterest"
+    },
+    "audit-snapchat": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-snapchat.md",
+      "platform": "snapchat"
+    },
+    "audit-microsoft": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-microsoft.md",
+      "platform": "microsoft"
+    },
+    "audit-amazon": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-amazon.md",
+      "platform": "amazon"
+    },
+    "audit-apple": {
+      "new": "platform-auditor",
+      "path": "skills/audit/references/legacy-agents/audit-apple.md",
+      "platform": "apple"
+    },
+    "audit-tracking": {
+      "new": "tracking-specialist",
+      "path": "skills/tracking/references/legacy-agents/audit-tracking.md"
+    },
+    "tracking-specialist": {
+      "new": "tracking-specialist",
+      "path": "skills/tracking/references/legacy-agents/tracking-specialist.md"
+    },
+    "meta-audience-architect": {
+      "new": "audience-architect",
+      "path": "skills/audience/references/legacy-agents/meta-audience-architect.md"
+    },
+    "audit-creative": {
+      "new": "creative-strategist",
+      "path": "skills/creative/references/legacy-agents/audit-creative.md"
+    },
+    "creative-strategist": {
+      "new": "creative-strategist",
+      "path": "skills/creative/references/legacy-agents/creative-strategist.md"
+    },
+    "copy-writer": {
+      "new": "creative-strategist",
+      "path": "skills/creative/references/legacy-agents/copy-writer.md"
+    },
+    "visual-designer": {
+      "new": "creative-strategist",
+      "path": "skills/creative/references/legacy-agents/visual-designer.md"
+    },
+    "format-adapter": {
+      "new": "creative-strategist",
+      "path": "skills/creative/references/legacy-agents/format-adapter.md"
+    },
+    "reels-scriptwriter": {
+      "new": "video-producer",
+      "path": "skills/video/references/legacy-agents/reels-scriptwriter.md"
+    },
+    "video-editor": {
+      "new": "video-producer",
+      "path": "skills/video/references/legacy-agents/video-editor.md"
+    },
+    "audit-budget": {
+      "new": "budget-analyst",
+      "path": "skills/budget/references/legacy-agents/audit-budget.md"
+    },
+    "positioning-strategist": {
+      "new": "strategist",
+      "path": "skills/strategy/references/legacy-agents/positioning-strategist.md"
+    },
+    "launch-planner": {
+      "new": "strategist",
+      "path": "skills/strategy/references/legacy-agents/launch-planner.md"
+    },
+    "campaign-ideator": {
+      "new": "strategist",
+      "path": "skills/strategy/references/legacy-agents/campaign-ideator.md"
+    },
+    "content-planner": {
+      "new": "content-planner",
+      "path": "skills/content/references/legacy-agents/content-planner.md"
+    },
+    "social-content-writer": {
+      "new": "content-planner",
+      "path": "skills/content/references/legacy-agents/social-content-writer.md"
+    },
+    "seo-auditor": {
+      "new": "content-planner",
+      "path": "skills/content/references/legacy-agents/seo-auditor.md"
+    },
+    "audit-policy-compliance": {
+      "new": "compliance-reviewer",
+      "path": "skills/audit/references/legacy-agents/audit-policy-compliance.md"
+    },
+    "audit-regulatory-compliance": {
+      "new": "compliance-reviewer",
+      "path": "skills/audit/references/legacy-agents/audit-regulatory-compliance.md"
+    },
+    "research-worker": {
+      "new": "research-verifier",
+      "path": "skills/competitors/references/legacy-agents/research-worker.md"
+    },
+    "source-verifier": {
+      "new": "research-verifier",
+      "path": "skills/competitors/references/legacy-agents/source-verifier.md"
+    },
+    "release-verifier": {
+      "new": "release-verifier",
+      "path": "skills/system/references/legacy-agents/release-verifier.md"
+    },
+    "skill-reviewer": {
+      "new": "release-verifier",
+      "path": "skills/system/references/legacy-agents/skill-reviewer.md"
+    }
+  },
+  "command_aliases": {
+    "auditoriya": "audience",
+    "kreativ": "creative",
+    "ad-creative": "creative",
+    "voronka": "funnel",
+    "eksport": "export",
+    "hisobot": "report",
+    "mijoz": "client",
+    "raqobatchi": "competitors",
+    "savol": "ask"
+  },
+  "hidden_commands": [
+    "ad-creative",
+    "ask",
+    "auditoriya",
+    "doctor",
+    "eksport",
+    "funnel",
+    "hisobot",
+    "kreativ",
+    "learn",
+    "mijoz",
+    "raqobatchi",
+    "savol",
+    "scale",
+    "shield",
+    "sop",
+    "utm",
+    "voronka"
+  ]
+}

@@ -2,7 +2,7 @@
 name: skill-router
 description: "Skill router — agent ishni boshlashdan oldin 'skill talash so'rovi' chiqaradi va faqat o'ziga ulangan skill bo'yicha ishlaydi; ulanish frontmatter orqali, tekshiruv tools/skill-search.py bilan"
 tags: [skill, agent, router, protokol]
-source: "2026-09-21 Tyrion ishi (video-editor + 2 skill); tools/skill-search.py sinovlari"
+source: "2026-09-21 Tyrion ishi (video-producer + 2 skill); tools/skill-search.py sinovlari"
 source_status: verified
 updated: 2026-09-21
 ---
@@ -21,8 +21,8 @@ yuklanmasdi, ikki agent bir xil ishni har xil tartibda qilardi.
 ## Yechim — ikki tomonlama ulanish (attach)
 
 ```yaml
-# skill: skills/video-editing/SKILL.md
-attached_agents: [video-editor]
+# skill: skills/video/references/video-editing.md
+attached_agents: [video-producer]
 triggers: [montaj, edit qil, kesib ber, ...]     # qidiruv kuchaytirgichi
 
 # agent: agents/video-editor.md
@@ -66,15 +66,15 @@ Chiqish kodlari: `0` — topildi/butun · `1` — topilmadi yoki uzilgan ulanish
 Qidiruv vazni: nom (8) → trigger butun so'z (8) → trigger qismi (4) → tavsif (3) → tana (≤2.5),
 so'ng **IDF** ko'paytmasi — reyestrda ko'p skillda uchraydigan so'z ("reels", "video") kamroq,
 faqat bittasiga xos so'z ("animatsion", "kinetik") ko'proq vazn beradi. Sabab: regressiyada
-"animatsion reels yasab ber" so'rovi `video-editing` ga ketib qolgan edi ([[50-topshirish-dod]]).
+"animatsion reels yasab ber" so'rovi `video` ga ketib qolgan edi ([[50-topshirish-dod]]).
 
 ## Joriy holat (2026-09-21)
 
 - **21 operator skill:** 20 tasi agentga ulangan, 1 tasi `standalone` (`tyrion` — konduktor darajasi).
-- **13 agent** skill oladi: `video-editor` (2) · `copy-writer` (4) · `campaign-ideator` (2) ·
-  `research-worker` (2) · `seo-auditor` (2) va boshqalar.
+- **13 agent** skill oladi: `video-producer` (2) · `creative-strategist` (4) · `strategist` (2) ·
+  `research-verifier` (2) · `content-planner` (2) va boshqalar.
 - **33 platforma skill** (`skills/ads-*`) ulanish talab qilmaydi — ularni
-  `ads/SKILL.md` orchestration routeri boshqaradi.
+  `skills/audit/references/ads-conductor.md` orchestration routeri boshqaradi.
 - Nazorat: `python3 tools/doctor.py` → "Skill reyestri" qatori (ulanishlar soni va uzilishlar).
 
 ## Qoidalar
@@ -90,7 +90,7 @@ faqat bittasiga xos so'z ("animatsion", "kinetik") ko'proq vazn beradi. Sabab: r
 
 - Kanonik agent shartnomasi: [[AGENTS.md]] §2 (Skill router qatori), §6 (ish tartibi), §7 (tekshiruv)
 - Operator xotirasi: `MEMORY.md` §2 qoida 10, §4 avto-skill xaritasi
-- Misol: `agents/video-editor.md` → `.agents/skills/video-editing`, `.agents/skills/video-motion-graphics`
+- Misol: `agents/video-editor.md` → `.agents/skills/video/references/video-editing/`, `.agents/skills/video/references/video-motion-graphics/`
 
 
 ## Universal Auto-Router v7.1 (To'liq Kontekst Yuklash va Amaliy Ijro)

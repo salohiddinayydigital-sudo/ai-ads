@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Kreativ ishi — angle/avatar, hook, matn, format (strategiya + copy)
 argument-hint: <mijoz yoki offer>
 ---
@@ -18,9 +19,9 @@ Vazifa: **$ARGUMENTS**
 
 1. **Strategiya** (`creative-strategist`): avatar → muammolar → angle → big idea.
    Har angle alohida masshtablanadi (kreativ = targeting).
-2. **Matn** (`copy-writer`): hook (3 variant) · body · CTA — til bo'yicha alohida
+2. **Matn** (`creative-strategist`): hook (3 variant) · body · CTA — til bo'yicha alohida
    (uz/ru/kirill), tarjima emas.
-3. **Format** (`reels-scriptwriter` / `format-adapter`): TOF problem-solution va
+3. **Format** (`video-producer` / `creative-strategist`): TOF problem-solution va
    BOF objection — faqat shu 2 format.
 4. **Tekshiruv**: policy ([[40-xavfsizlik-va-hisob]] §5) + hit rate kutilmasi.
 

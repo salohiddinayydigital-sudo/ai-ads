@@ -1,0 +1,5 @@
+{"schema": "metrics.v1", "synthetic": true, "rows": [
+  {"date": "2026-11-01", "platform": "meta", "account_id": "1", "level": "campaign", "entity_id": "c1", "entity_name": "SYN",
+   "spend": 10, "currency": "USD", "impressions": 1000, "clicks": 20, "conversions": {"lead": 2}, "source": "csv",
+   "evidence_label": "UNVERIFIED", "synthetic": true}
+]}
