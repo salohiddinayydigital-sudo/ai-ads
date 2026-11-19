@@ -77,7 +77,7 @@ class TyrionV4EnginesTests(unittest.TestCase):
         he = importlib.import_module("harness-export")
         with tempfile.TemporaryDirectory() as tmp:
             files = he.export_cursor(Path(tmp), dry_run=False)
-            self.assertEqual(len(files), 8)
+            self.assertEqual(len(files), 9)  # 8 rules + tyrion-00-entry.mdc
             sample = (Path(tmp) / files[0]).read_text(encoding="utf-8")
             self.assertIn("alwaysApply: true", sample)
 

@@ -369,3 +369,39 @@ class PluginSyncTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class HarnessExportEntryTests(unittest.TestCase):
+    def test_cursor_and_windsurf_exports_carry_the_conductor_entry_rule(self) -> None:
+        import tempfile
+        he = importlib.import_module("harness-export")
+        with tempfile.TemporaryDirectory() as tmp:
+            files = he.export_cursor(Path(tmp), dry_run=False) + he.export_windsurf(Path(tmp), dry_run=False)
+            entry = (Path(tmp) / ".cursor/rules/tyrion-00-entry.mdc").read_text(encoding="utf-8")
+            wind = (Path(tmp) / ".windsurfrules").read_text(encoding="utf-8")
+        self.assertIn(".cursor/rules/tyrion-00-entry.mdc", files)
+        for txt in (entry, wind):
+            self.assertIn("tyrion_universal_router", txt)
+            self.assertIn("skills/tyrion-universal/SKILL.md", txt)
+            self.assertIn("single_conductor_fallback", txt)
+            self.assertIn("Never claim an agent was spawned", txt)
+
+    def test_committed_cursor_windsurf_exports_are_not_stale(self) -> None:
+        import tempfile
+        he = importlib.import_module("harness-export")
+        with tempfile.TemporaryDirectory() as tmp:
+            he.export_cursor(Path(tmp), dry_run=False)
+            he.export_windsurf(Path(tmp), dry_run=False)
+            for rel in [p.relative_to(tmp).as_posix() for p in Path(tmp).rglob("*") if p.is_file()]:
+                self.assertEqual(
+                    (Path(tmp) / rel).read_bytes().replace(b"\r\n", b"\n"),
+                    (VAULT / rel).read_bytes().replace(b"\r\n", b"\n"),
+                    f"{rel} is stale: run python3 tools/harness-export.py --target all",
+                )
+
+    def test_plugin_manifests_do_not_use_invalid_agents_string(self) -> None:
+        for p in ("plugin.json", ".claude-plugin/plugin.json", ".codex-plugin/plugin.json"):
+            data = json.loads((VAULT / p).read_text(encoding="utf-8"))
+            agents = data.get("agents")
+            self.assertTrue(agents is None or (isinstance(agents, list) and all(str(a).endswith(".md") for a in agents)), p)
+        self.assertTrue((VAULT / ".claude-plugin/icon.png").is_file())

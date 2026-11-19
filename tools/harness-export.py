@@ -44,11 +44,30 @@ def strip_fm(text: str) -> tuple[str, str]:
     return desc, text[m.end():]
 
 
+ENTRY_RULE = """# TYRION ENTRY POINT (single conductor, no sub-agents in this harness)
+
+Treat every marketing, advertising, targeting, creative, video-script, tracking, budget or client-strategy request in plain language (Uzbek, Russian or English) as a task for the Tyrion conductor. The user never picks agents, skills or tools.
+
+1. Route once: call the MCP tool `tyrion_universal_router` with `query` = the user's request and `context_mode: "manifest"` (or run `python3 tools/skill-search.py route "<request>" --context-mode manifest --json`).
+2. Read `skills/tyrion-universal/SKILL.md` and follow its protocol. Read in full every skill, charter and reference you will rely on (see `loaded_context.read_in_full_before_claiming` and `execution_plan`); never say a skill was applied if you only saw its name.
+3. This harness has no native sub-agents: run each stage of `execution_plan` yourself, in dependency order, by reading the stage agent's charter in `agents/<name>.md` and its skills, and label it `executed_by: conductor_as_<agent>` (single_conductor_fallback). Never claim an agent was spawned.
+4. Use deterministic tools from `tools/` (run `<tool> --help` first) for calculations, Meta targeting verification, audience architecture, creative matrices and export analysis.
+5. Validate every stage output (sources labelled, no invented stats/interests/testimonials, no guaranteed results), then deliver one synthesized document. Never change a live ad account; plans only.
+"""
+
+
 def export_cursor(out_root: Path, dry_run: bool) -> list[str]:
     cursor_rules = out_root / ".cursor" / "rules"
     written: list[str] = []
     if not dry_run:
         cursor_rules.mkdir(parents=True, exist_ok=True)
+    entry_dst = cursor_rules / "tyrion-00-entry.mdc"
+    written.append(entry_dst.relative_to(out_root).as_posix())
+    if not dry_run:
+        entry_dst.write_text(
+            f"---\ndescription: Tyrion entry point: route marketing requests through the tyrion-universal conductor\nglobs: *\nalwaysApply: true\n---\n\n{ENTRY_RULE}",
+            encoding="utf-8",
+        )
     for rule_md in sorted((VAULT / "rules").glob("[0-9]*.md")):
         desc, body = strip_fm(rule_md.read_text(encoding="utf-8"))
         mdc_content = f"---\ndescription: {desc}\nglobs: *\nalwaysApply: true\n---\n\n{body.lstrip()}"
@@ -60,7 +79,7 @@ def export_cursor(out_root: Path, dry_run: bool) -> list[str]:
 
 
 def export_windsurf(out_root: Path, dry_run: bool) -> list[str]:
-    parts = ["# TYRION v7.1 — WINDSURF PAID MEDIA & TARGETOLOGY RULES\n"]
+    parts = ["# TYRION v7.1 — WINDSURF PAID MEDIA & TARGETOLOGY RULES\n", ENTRY_RULE.strip() + "\n"]
     for rule_md in sorted((VAULT / "rules").glob("[0-9]*.md")):
         _desc, body = strip_fm(rule_md.read_text(encoding="utf-8"))
         parts.append(body.strip() + "\n")
