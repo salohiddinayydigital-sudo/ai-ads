@@ -5,5 +5,6 @@ tags: [lang:uz-latn, topic:reels-script]
 runs: 2
 max_turns: 15
 timeout_seconds: 300
+allowed_tools: [Read, Bash]
 ---
 Stomatologiya klinikasi uchun 30 soniyalik Reels reklama skripti yoz: 3 ta 3-soniya hook varianti, shot list.

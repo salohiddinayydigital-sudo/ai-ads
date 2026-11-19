@@ -1,5 +1,6 @@
 ---
 type: regex
 match: contains
+flags: i
 ---
-(?i)\b(the|and|with|next step|budget)\b
+\b(the|and|with|next step|budget)\b

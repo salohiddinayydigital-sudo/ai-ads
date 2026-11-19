@@ -65,7 +65,7 @@ def export_cursor(out_root: Path, dry_run: bool) -> list[str]:
     written.append(entry_dst.relative_to(out_root).as_posix())
     if not dry_run:
         entry_dst.write_text(
-            f"---\ndescription: Tyrion entry point: route marketing requests through the tyrion-universal conductor\nglobs: *\nalwaysApply: true\n---\n\n{ENTRY_RULE}",
+            f"---\ndescription: Tyrion entry point: route marketing requests through the tyrion conductor skill\nglobs: *\nalwaysApply: true\n---\n\n{ENTRY_RULE}",
             encoding="utf-8",
         )
     for rule_md in sorted((VAULT / "rules").glob("[0-9]*.md")):

@@ -1,5 +1,5 @@
 ---
-description: Tyrion entry point: route marketing requests through the tyrion-universal conductor
+description: Tyrion entry point: route marketing requests through the tyrion conductor skill
 globs: *
 alwaysApply: true
 ---
