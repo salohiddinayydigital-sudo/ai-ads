@@ -30,7 +30,7 @@ Telegram Ads'da ikkita asosiy targetlash usuli mavjud:
 
 1. **Aniq kanallar bo'yicha (Channel-Specific Targeting) — TAVSIYA ETILADI:**
    - Reklama faqat qo'lda tanlangan, tasdiqlangan kanallarda chiqadi.
-   - Tanlov mezoni: obunachilar $\ge 1,000$, Engagement Rate on Reach (ERR) $\ge 15\%$, auditoriya mavzusi mahsulotga to'g'ridan-to'g'ri mos.
+   - Tanlov mezoni: obunachilar $\ge 1,000$, Engagement Rate on Reach (ERR) $\ge 15\%$, auditoriya mavzusi mahsulotga to'g'ridan-to'g'ri mos. *(manba ko'rsatilmagan — `unverified`; ads.telegram.org dan tasdiqlang)*
    - Soxta (nakrutka) qilingan yoki nofaol kanallar darhol chiqarib tashlanadi (Negative Channels).
 2. **Keng mavzular bo'yicha (Topic/Category Targeting):**
    - Moliya, IT, Ko'chmas mulk, Ta'lim kabi sohalar bo'yicha.

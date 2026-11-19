@@ -12,7 +12,7 @@ Darvoza: `pytest -q tests` · `doctor.py` · `catalog.py check` · `catalog.py d
 | 4 | crm-bridge, creative-analytics, adlib-mine, lead-quality skill, production-pipeline.md | bajarildi | (shu commit) |
 | 5 | audit_scoring.py, ChatGPT Ads reference (CG01–CG09), Telegram 2026/Meta MCP/Advantage+ qaydlari (manbalar `url_cited`/`unverified`) | bajarildi (rasmiy sahifalar bu muhitdan ochilmadi) | (shu commit) |
 | 6 | report-html.py, `/start` wizard, `tyrion.py demo`, README/README.uz | bajarildi | (shu commit) |
-| 7 | 29 golden eval (ishga tushirilmagan), coverage 76.5% (gate 75), CI, VERSION 8.0.0, CHANGELOG, AGENTS/CLAUDE/INDEX | bajarildi; release-verifier tekshiruvi kutilmoqda | (shu commit) |
+| 7 | 29 golden eval (ishga tushirilmagan), coverage 76.5% (gate 75), CI, VERSION 8.0.0, CHANGELOG, AGENTS/CLAUDE/INDEX | bajarildi; release-verifier: 8 mezondan 7 PASS, 1 (sintetik belgi) tuzatildi | (shu commit) |
 
 ## Jurnal
 - 2026-11-19: boot o'qildi; baseline yashil; `docs/v8-roadmap.md` yo'q.

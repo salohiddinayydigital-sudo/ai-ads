@@ -1,15 +1,16 @@
 {
+  "synthetic": true,
   "account_id": "act_88291048201",
   "currency": "USD",
   "window_days": 30,
   "summary": {
-    "total_spend": 3480.50,
+    "total_spend": 3480.5,
     "total_impressions": 482900,
     "total_clicks": 9180,
-    "avg_ctr": 1.90,
+    "avg_ctr": 1.9,
     "total_purchases": 245,
-    "avg_cpa": 14.20,
-    "total_revenue": 6787.00,
+    "avg_cpa": 14.2,
+    "total_revenue": 6787.0,
     "roas": 1.95
   },
   "campaigns": [
@@ -18,7 +19,7 @@
       "name": "BOF_Prospecting_Interests_Split",
       "type": "ABO",
       "status": "ACTIVE",
-      "spend": 2610.00,
+      "spend": 2610.0,
       "ad_sets_count": 8,
       "learning_status": "LEARNING_LIMITED",
       "purchases": 178,
@@ -34,7 +35,7 @@
       "name": "ASC_Advantage_Shopping",
       "type": "ASC",
       "status": "ACTIVE",
-      "spend": 870.50,
+      "spend": 870.5,
       "ad_sets_count": 1,
       "learning_status": "LEARNING",
       "purchases": 67,
