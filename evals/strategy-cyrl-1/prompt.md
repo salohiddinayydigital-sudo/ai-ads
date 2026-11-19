@@ -5,5 +5,6 @@ tags: [lang:uz-cyrl, topic:meta-strategy]
 runs: 2
 max_turns: 15
 timeout_seconds: 300
+allowed_tools: [Read, Bash]
 ---
 Тошкентдаги фитнес клуби учун Meta реклама стратегиясини тузиб бер. Тахминлар ва далил ёрлиқларини кўрсат.

@@ -5,5 +5,6 @@ tags: [lang:en, topic:pulse-explain]
 runs: 2
 max_turns: 15
 timeout_seconds: 300
+allowed_tools: [Read, Bash]
 ---
 Run pulse on tests/fixtures/pulse/healthy.metrics.json and explain whether anything needs attention.

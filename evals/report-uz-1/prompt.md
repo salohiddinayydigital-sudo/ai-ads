@@ -5,5 +5,6 @@ tags: [lang:uz-latn, topic:report]
 runs: 2
 max_turns: 15
 timeout_seconds: 300
+allowed_tools: [Read, Bash]
 ---
 Haftalik mijoz hisobotini tayyorla (sintetik demo: python3 tools/tyrion.py demo). Keyingi qadamlar egasi va metrikasi bilan.

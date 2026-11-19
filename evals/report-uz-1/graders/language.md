@@ -1,5 +1,6 @@
 ---
 type: regex
 match: contains
+flags: i
 ---
-(?i)\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\b
+\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\b

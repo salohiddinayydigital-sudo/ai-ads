@@ -5,5 +5,6 @@ tags: [lang:en, topic:csv-diagnosis]
 runs: 2
 max_turns: 15
 timeout_seconds: 300
+allowed_tools: [Read, Bash]
 ---
 Analyze tests/fixtures/metrics/meta_graph.metrics.json: wasted spend and kill/keep/scale. Use the repo tools for all numbers.

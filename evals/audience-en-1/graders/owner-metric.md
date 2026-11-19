@@ -1,5 +1,6 @@
 ---
 type: regex
 match: contains
+flags: i
 ---
-(?i)(owner)[\s\S]{0,400}(metric)|(metric)[\s\S]{0,400}(owner)
+(owner)[\s\S]{0,400}(metric)|(metric)[\s\S]{0,400}(owner)
