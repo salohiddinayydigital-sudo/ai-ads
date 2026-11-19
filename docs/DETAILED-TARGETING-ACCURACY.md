@@ -1,12 +1,12 @@
 ---
 name: detailed-targeting-accuracy
-description: "Tyrion v7.1 Detailed Targeting Accuracy Engine — Architecture, official Meta Marketing API v26.0 endpoints, 6 verification statuses, caching, and testing guide"
+description: "Tyrion v8.0 Detailed Targeting Accuracy Engine — Architecture, official Meta Marketing API v26.0 endpoints, 6 verification statuses, caching, and testing guide"
 tags: [meta-ads, targeting, api, accuracy, validation]
 source: "tools/meta-targeting-engine.py + Meta Marketing API v26.0"
 updated: 2026-10-20
 ---
 
-# 🎯 Tyrion v7.1 — Detailed Targeting Accuracy Engine (`tools/meta-targeting-engine.py`)
+# 🎯 Tyrion v8.0 — Detailed Targeting Accuracy Engine (`tools/meta-targeting-engine.py`)
 
 ## 1. Overview & Core Design Principle
 

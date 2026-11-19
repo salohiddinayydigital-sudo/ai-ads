@@ -1,4 +1,4 @@
-name: Tyrion v7.1 Global CI & Security Gate
+name: Tyrion v8.0 Global CI & Security Gate
 
 # Barcha branchlarda ishlaydi (claude/**, fix/**, feat/** ... hech biri chetda qolmaydi) va har bir PR da.
 on:
@@ -50,6 +50,21 @@ jobs:
           python tools/skill-search.py route "My Shopify store in Germany has low ROAS on Meta" --json
           python tools/skill-search.py route "Toshkentda ko'chmas mulk uchun Meta reklama" --json
 
+      - name: Always-on description budget (v8 Lean Core, max 3500 tokens)
+        run: python tools/token-budget.py --max-tokens 3500
+
+      - name: v8 tools smoke (metrics.v1 demo flow -> normalize/pulse/report-html, workflows DAG, migration map)
+        run: |
+          python tools/tyrion.py demo --out "$RUNNER_TEMP/tyrion-demo"
+          python tools/tyrion_workflows.py check
+          python tools/skill-search.py check
+          python tools/audit_scoring.py --help
+          python tools/experiments.py design --baseline 0.05 --mde 0.2
+          python tools/crm-bridge.py --help
+          python tools/creative-analytics.py --help
+          python tools/adlib-mine.py --help
+          python tools/spend_gate.py < /dev/null
+
       - name: TyrionShield Static Security Audit
         run: python tools/tyrion-shield.py scan
 
@@ -63,7 +78,7 @@ jobs:
         run: python tools/doctor.py --quick
 
   coverage:
-    name: Coverage gate (stdlib line coverage, minimum 70%)
+    name: Coverage gate (stdlib line coverage, minimum 75%)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -83,7 +98,7 @@ jobs:
         run: python -m pip install --upgrade pip pyyaml
 
       - name: Measure coverage of tools/ and hooks/ and enforce the minimum
-        run: python tests/coverage_gate.py --min 70 --json coverage-report.json
+        run: python tests/coverage_gate.py --min 75 --json coverage-report.json
 
       - name: Upload per-file coverage report
         if: always()

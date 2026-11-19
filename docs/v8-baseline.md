@@ -1,4 +1,4 @@
-# Tyrion v7.1 — Baseline (o'lchangan, 2026-11-19)
+# Tyrion v8.0 — Baseline (o'lchangan, 2026-11-19)
 
 | O'lchov | Qiymat | Buyruq |
 |---|---|---|

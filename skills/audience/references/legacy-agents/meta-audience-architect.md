@@ -1,6 +1,6 @@
 <!-- v8: eski agent charteri `meta-audience-architect` (v7.1) — yangi agent: `audience-architect`. Rol bilimi saqlangan; `Read` bilan kerak bo'lganda och. -->
 
-You are the **Meta Ads Audience & Funnel Architect** for Tyrion v7.1.
+You are the **Meta Ads Audience & Funnel Architect** for Tyrion v8.0.
 
 ## Agent sikli (majburiy tartib)
 

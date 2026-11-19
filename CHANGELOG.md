@@ -2,6 +2,31 @@
 
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
+
+## [8.0.0] — 2026-11-19
+
+Yopiq siklli media-buyer miyasi. 7.x dan o'tish: [MIGRATION.md](MIGRATION.md).
+
+### Qo'shildi
+- **Lean Core:** skill 61 → 19, agent 36 → 12, model ko'radigan buyruq 12 (UZ aliaslar `disable-model-invocation`). Doimiy description narxi ≈10.4K → ≈2.0K token (`tools/token-budget.py`, CI darvozasi 3500). Eski matnlar `references/` va `legacy-agents/` ga ko'chirildi; `manifests/migration-v8.json` + router alias.
+- **Ma'lumot qatlami:** `schemas/metrics.v1.json`, `tools/normalize.py` (meta_mcp, meta_graph, google_ads, tiktok_csv, telegram_csv, generic_csv), "MCP → snapshot → kod" naqshi, `connect` skilli va `docs/integrations.md`, dalil yorlig'i `PLATFORM_BENCHMARK`.
+- **Spend-Guard hook:** MCP yozish asboblari uchun `PreToolUse` darvozasi (`tools/spend_gate.py`): tasdiqlangan, yangi, rollback'li `change-packet.v1`; `strict` — deny, `standard` — ask.
+- **Client Brain:** `schemas/client-state.v1.json`, `client-workspace.py` v2 (`state`, `baseline`, `decision`).
+- **Pulse va eksperimentlar:** `tools/pulse.py`, `tools/experiments.py` (design/register/readout/promote/packet), `ledger.jsonl`.
+- **Lid sifati va kreativ:** `tools/crm-bridge.py` (AmoCRM/Bitrix24/CSV → Meta CAPI, dry-run), `tools/creative-analytics.py`, `tools/adlib-mine.py`, `lead-quality` skilli, `production-pipeline.md`.
+- **Audit v2:** `tools/audit_scoring.py` (health + evidence coverage), ChatGPT Ads reference (CG01–CG09), Telegram 2026 / rasmiy MCP / Advantage+ qaydlari (`url_cited` yoki `unverified`).
+- **Hisobot va onboarding:** `tools/report-html.py`, `tyrion.py demo`, `/start` wizard, README qayta yozildi.
+- **Sifat:** 29 golden eval case (`evals/`), `docs/v8-eval-results.md` (LLM eval bu muhitda ishga tushirilmagan), coverage darvozasi 75%.
+
+### O'zgardi
+- Eski ad-export/creative-matrix/calculator asboblari `--metrics` / `--from-metrics` qabul qiladi.
+- Workflow'lar yangi agentlarga moslandi; `uzbekistan-market-intel` `markets/uz/` ga ko'chdi (faqat `market=uz`).
+
+### Ma'lum cheklovlar
+- Spend-Guard hook fayl belgisiga tayanadi (`approved_by_user` ni model ham yozishi mumkin) va Bash/curl orqali to'g'ridan-to'g'ri API chaqirig'ini ushlamaydi.
+- Rasmiy Meta/Google/OpenAI/Telegram sahifalari bu muhitdan ochilmadi: bog'liq faktlar `unverified`/`url_cited`.
+- Router (`skill-search.py`) hajmi qisqartirilmadi (docs/v8-decisions.md D5).
+
 ## [Unreleased] — Plugin readiness fixes
 
 ### Fixed

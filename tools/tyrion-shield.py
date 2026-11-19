@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""TyrionShield v7.1 — Agent, Skill, Hook, MCP, AST va Sirlar Xavfsizlik Skaneri (0 token).
+"""TyrionShield v8.0 — Agent, Skill, Hook, MCP, AST va Sirlar Xavfsizlik Skaneri (0 token).
 
-ECC (affaan-m/ECC) AgentShield tizimi asosida Tyrion v7.1 uchun qurilgan.
+ECC (affaan-m/ECC) AgentShield tizimi asosida Tyrion v8.0 uchun qurilgan.
 6 ta statik xavfsizlik va sifat qatlamini deterministik tekshiradi (shu jumladan `tests/` papkasini ham!):
   1. secrets        : Butun ombor bo'ylab (tests/ bilan birga) .env, API kalitlar va Private Key sizishi
   2. hooks_mcp      : hooks.json, settings.json va .mcp.json da xavfli buyruqlar yoki qotirilgan yo'llar
@@ -293,7 +293,7 @@ def run_all() -> dict:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tyrion-shield.py", description="TyrionShield v7.1 xavfsizlik va kod tozaligi skaneri")
+    parser = argparse.ArgumentParser(prog="tyrion-shield.py", description="TyrionShield v8.0 xavfsizlik va kod tozaligi skaneri")
     sub = parser.add_subparsers(dest="command")
     p_scan = sub.add_parser("scan", help="to'liq statik xavfsizlik tekshiruvi")
     p_scan.add_argument("--json", action="store_true")

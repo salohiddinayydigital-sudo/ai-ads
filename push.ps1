@@ -1,4 +1,4 @@
-# push.ps1 — Tyrion v7.1 Automated Pre-Flight Verification & GitHub Push Script (Windows PowerShell)
+# push.ps1 — Tyrion v8.0 Automated Pre-Flight Verification & GitHub Push Script (Windows PowerShell)
 param(
     [string]$RemoteUrl = "git@github.com:salohiddinayydigital-sudo/ai-ads.git"
 )
@@ -11,7 +11,7 @@ Set-Location $vaultRoot
 $pyCmd = if (Get-Command py -ErrorAction SilentlyContinue) { "py" } else { "python" }
 
 Write-Host "====================================================================" -ForegroundColor Cyan
-Write-Host "  🚀 TYRION v7.1 — GITHUB PRE-PUSH VERIFICATION & DEPLOY" -ForegroundColor Green
+Write-Host "  🚀 TYRION v8.0 — GITHUB PRE-PUSH VERIFICATION & DEPLOY" -ForegroundColor Green
 Write-Host "====================================================================" -ForegroundColor Cyan
 
 Write-Host "[1/5] TyrionShield 6-qavatli xavfsizlik tekshiruvi..." -ForegroundColor White
@@ -35,4 +35,4 @@ if ($LASTEXITCODE -ne 0) { git remote add origin $RemoteUrl }
 
 $targetBranch = (git branch --show-current).Trim()
 git push -u origin $targetBranch --tags
-Write-Host "✅ Tyrion v7.1 GitHub'ga muvaffaqiyatli yuklandi!" -ForegroundColor Green
+Write-Host "✅ Tyrion v8.0 GitHub'ga muvaffaqiyatli yuklandi!" -ForegroundColor Green
