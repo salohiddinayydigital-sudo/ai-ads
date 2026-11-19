@@ -54,6 +54,7 @@ jobs:
         run: python tools/token-budget.py --max-tokens 3500
 
       - name: v8 tools smoke (metrics.v1 demo flow -> normalize/pulse/report-html, workflows DAG, migration map)
+        shell: bash
         run: |
           python tools/tyrion.py demo --out "$RUNNER_TEMP/tyrion-demo"
           python tools/tyrion_workflows.py check
