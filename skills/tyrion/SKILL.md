@@ -99,6 +99,8 @@ Reject or send back (once) a result that: ignores the contract; states numbers w
 
 ## 7. Synthesize one deliverable
 
+**Next steps rule (every deliverable):** end with a next-steps table `Qadam | Egasi (owner) | Metrika (metric) | Muddat`. Each step names who does it, which metric proves it worked and by when; a step without an owner and a metric is not a next step. Labels for every number follow `rules/00-manba.md`.
+
 Never paste specialist outputs one after another. Produce a single coherent document in the user's language, in the format the deliverable calls for (`execution_plan.deliverable_reference` has the template, e.g. the 15-section Meta strategy). Always include: decisions and why, assumptions table (label + how to verify), risks, next actions with owner and metric, and a short **Execution report**: stages run vs skipped, which were native sub-agents vs conductor fallback, tools actually run, files actually read, anything unavailable. For strategy/audit/report deliverables write `outputs/<client>/<date>-<topic>.md` and give the path.
 
 ## 8. Memory and learning
