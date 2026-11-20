@@ -1,6 +1,6 @@
 # Tyrion v8 — golden eval natijalari
 
-**Natija: 2026-11-19 ishga tushirildi (claude 2.1.328, `--runs 1`, with/without plugin); suite o'tmadi: oxirgi run (4) da 5/28 case ≥ 0.8.** Quyida o'lchangan raqamlar va ularning sabablari.
+**Natija: 2026-11-19 ishga tushirildi (claude 2.1.328, `--runs 1`, with/without plugin); suite o'tmadi: eng so'nggi to'liq run (5) da 9/28 case ≥ 0.8; run 6 hisob limiti tufayli to'liq emas (qarang: "Run 5 va 6").** Quyida o'lchangan raqamlar va ularning sabablari.
 
 ## Ishga tushirish
 
@@ -111,3 +111,62 @@ Sharh:
 - **Hali o'tmaydi:** 23/28 case ≥ 0.8 emas. `no-fabrication` (LLM hakam) plugin bilan 3/9: hakam "taxmin" deb yorliqlangan raqamlarni ham to'qilgan deb baholayotgan bo'lishi mumkin (taxminlar ochiq yorliqlangan, lekin hakam rubrikasi buni farqlamaydi); rubrikani aniqlashtirish kerak, men tekshirmadim. `declines-scope` 0/2 — out-of-scope so'rovga plugin javobi yetarlicha rad etmaydi yoki hakam qattiq.
 - `tool-run` (12) bu mashinada baholanmaydi (sandbox yo'q), shuning uchun u va unga bog'liq natijalar ma'noga ega emas.
 - Xom natija: `evals/results/latest.json` (run 4). Run 1–3 yangilangan graderlar va tuzatishlardan oldin/oraliq edi.
+
+
+## Run 5 va 6 (rubrikalar va dirijyor tuzatilgandan keyin, `--runs 2`)
+
+Run 4 dan keyin ikkita **mahsulot** va uchta **baholash** tuzatishi kiritildi; shuning uchun run 4 bilan solishtirish qat'iy emas (quyida "o'zgargan narsa").
+
+O'zgargan narsa:
+- **Mahsulot:** `rules/00-manba.md` da `USER_PROVIDED`, `SOURCED`, `ASSUMPTION`, `UNVERIFIED` yorliqlari belgilandi (dirijyor va strategiya hujjati ularni oldin ham ishlatardi); dirijyorga "keyingi qadamlar: Qadam | Egasi | Metrika | Muddat" qoidasi qo'shildi (faqat run 6 da mavjud).
+- **Baholash:** `no-fabrication` rubrikasi ochiq yorliqlangan taxminni to'qima hisoblamaydi; `asks-approval` Spend-Guard ishga tushishini talab qilmaydi (bu mashinada Bash yo'q); `out-of-scope` "rad etish" o'rniga "o'zi bajaradi va marketing mazmunini aralashtirmaydi" ni tekshiradi (`handles-offtopic`); `owner-metric` regex'i rus/kirill so'zlarni ham taniydi (oldin rus va kirill case'lari o'ta olmasdi). Rubrikalar plagin ham, baseline ham uchun bir xil.
+
+| | Run 4 (`--runs 1`) | Run 5 (`--runs 2`) |
+|---|---|---|
+| O'tgan case (≥ 0.8) | 5 / 28 | 9 / 28 |
+| O'rtacha ball | 0.558 | 0.684 |
+| Baseline'dan farq | +0.183 | +0.261 |
+| Narx | $3.99 | $7.68 |
+
+**Run 6 to'liq emas.** Claude hisobining 5 soatlik foydalanish limiti tugadi (`You've hit your 5-hour limit`): oxirgi 6 case (`pulse-explain-uz-1`, `reels-script-ru-1`, `reels-script-uz-1`, `report-cyrl-1`, `report-uz-1`, `strategy-cyrl-1`) dagi 24 run model ishga tushmasdan yiqildi. Run 6 ning umumiy raqamlari (13/28, 0.569) shu sababli **ishonchli emas**; ular hisobotga kiritilmadi. Faqat ikkala run da to'liq o'lchangan 22 case bo'yicha taqqoslash:
+
+| 22 ta case | Run 5 | Run 6 (+ "egasi va metrika" qoidasi) |
+|---|---|---|
+| O'rtacha ball (plagin) | 0.715 | 0.724 |
+| O'rtacha ball (baseline) | 0.439 | 0.454 |
+| Farq | +0.275 | +0.270 |
+| ≥ 0.8 bergan case | 8 / 22 | 13 / 22 |
+| owner-metric (plagin / baseline) | 4/24 / 0/24 | **17/24** / 0/24 |
+| evidence-labels (plagin / baseline) | 23/36 / 2/36 | 20/36 / 2/36 |
+| no-fabrication (plagin / baseline) | 14/14 / 7/14 | 11/14 / 8/14 |
+
+Sharh:
+- O'rtacha ball va baseline'dan farq amalda o'zgarmadi; ≥ 0.8 bergan case'lar soni asosan `owner-metric` ning oshishidan ko'paydi. Bu oshishning bir qismi regex tuzatishidan (rus/kirill), bir qismi dirijyor qoidasidan; ikkalasini ajratib o'lchamadim.
+- `evidence-labels` va `no-fabrication` dagi o'zgarishlar 2 run bilan shovqin darajasida bo'lishi mumkin; xulosa chiqarmayman.
+- Plagin baseline'dan barqaror yaxshi (+0.27), lekin suite hali o'tmaydi: eng zaif joylar `evidence-labels` (~55%), `csv-diagnosis-*`, `pulse-explain-*`.
+- Eval'ning o'zi hisob limitini tez yeydi (run 5 ≈ $7.7, ~50 daqiqa). 6 ta tushib qolgan case'ni limit tiklangach (04:40 UTC) `--case` bilan alohida ishga tushirish kerak.
+- `tool-run` graderlari bu mashinada baholanmaydi (sandbox yo'q); ular natijaga ma'noli hissa qo'shmaydi.
+
+Xom natija: `evals/results/latest.json` (run 6, qisman). Run 5 xom natijasi `37721ab` commit'ida.
+
+## Run 6 — yakunlovchi qism (6 ta case qayta ishga tushirildi)
+
+Limit tiklangach, yiqilgan 6 case `--ablation with-without --runs 2` bilan alohida ishga tushirildi (`evals/results/run6-completion/*.json`): 0 xato, jami $1.80.
+
+| 6 ta case | Plagin | Baseline | Farq |
+|---|---|---|---|
+| O'rtacha ball | 0.711 | 0.419 | +0.292 |
+| ≥ 0.8 bergan | 3 / 6 (`reels-script-uz-1`, `report-cyrl-1`, `strategy-cyrl-1`) | — | — |
+
+**28 case birlashtirilgan (run 6: 22 + 6; run 5 bilan taqqoslash):**
+
+| | Run 5 | Run 6 (birlashgan) |
+|---|---|---|
+| ≥ 0.8 bergan case | 9 / 28 | 16 / 28 |
+| O'rtacha ball (plagin) | 0.684 | 0.722 |
+| O'rtacha ball (baseline) | 0.423 | 0.447 |
+| Baseline'dan farq | +0.261 | +0.275 |
+
+Grader bo'yicha (run 6 birlashgan, plagin / baseline): owner-metric 27/36 / 4/36, evidence-labels 27/48 / 2/48, no-fabrication 14/18 / 11/18, language 55/56 / 56/56, tool-run 8/24 / 8/24.
+
+Halol xulosa: suite hali o'tmaydi. Eng zaif case'lar — `pulse-explain-en-1` (0.10), `csv-diagnosis-uz-1/2` (0.25), `pulse-explain-uz-1` (0.33), `csv-diagnosis-ru-1` (0.38). `evidence-labels` ~56% da qolmoqda. Run'lar soni 2, shuning uchun kichik farqlar shovqin bo'lishi mumkin. `tool-run` graderlari sandbox yo'qligi sabab baholanmaydi.

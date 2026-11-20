@@ -38,7 +38,7 @@ You never pick an agent or tool: the `tyrion` skill is the single conductor (`to
 
 ## Connect your data (priority order)
 
-1. **Official Meta Ads MCP** (OAuth) — `https://mcp.facebook.com/ads` *(source_status: unverified — confirm on developers.facebook.com)*.
+1. **Official Meta Ads MCP** (OAuth) — `https://mcp.facebook.com/ads` *(verified against Meta's official docs, 2026-11-19)*.
 2. **Google Ads MCP** — [googleads/google-ads-mcp](https://github.com/googleads/google-ads-mcp).
 3. Graph API token (`META_ACCESS_TOKEN`) → 4. CSV/JSON export → 5. screenshot.
 

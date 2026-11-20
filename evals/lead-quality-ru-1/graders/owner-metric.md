@@ -3,4 +3,4 @@ type: regex
 match: contains
 flags: i
 ---
-(ответственн|владелец|owner)[\s\S]{0,400}(метрик|metric)|(метрик|metric)[\s\S]{0,400}(ответственн|владелец|owner)
+(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\s\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\s\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)

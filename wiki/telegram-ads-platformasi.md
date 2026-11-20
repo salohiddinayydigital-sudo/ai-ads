@@ -75,10 +75,16 @@ Bot backendidan CRM tizimiga (AmoCRM, Bitrix24) har bir `/start`, lead magnit yu
 
 ---
 
-## 2026 yangilanishlari (tekshiruv: 2026-11-19, `unverified`)
-ads.telegram.org bu muhitda to'g'ridan-to'g'ri o'qilmadi; quyidagilar ikkilamchi manbalardan va **zid**:
-- Gram kabineti: ikkilamchi manbalar "TON kabineti" nomi o'zgargan va koin 2026-06-15 da Toncoin → Gram deb qayta nomlangan deydi; rasmiy e'lon topilmadi.
-- Minimal CPM: bir manba "0.1 Gram" ni e'lon qilingan eng past stavka deydi; boshqa manba (ppc.world) EUR kabinetida o'rtacha ~30% pasayish (€1 → €0.7) haqida yozadi; yana bir manba 2026-08-28 dan boshlab Rossiya hisoblari uchun €0.60/€0.30/€0.75 (targeting turiga qarab) deydi. Bu uch da'vo bir-biri bilan tasdiqlanmagan; hech biri rasmiy manbadan tekshirilmadi. Raqamlarni mijozga ko'rsatishdan oldin kabinetda tekshiring.
+## 2026 yangilanishlari (tekshiruv: 2026-11-19)
+
+**Rasmiy manbadan o'qildi (`verified`)** — ads.telegram.org bosh sahifasi, `/tos`, `/guidelines` (2026-11-19):
+- Reklama matni 160 belgigacha, Telegram havolasi va joylashtiriladigan kanallar belgilanadi; kanallarni qo'lda tanlash mumkin.
+- To'lov Gram kriptovalyutasida; kanal egalariga reklama daromadining 50% beriladi.
+- Shartlar (ToS): joylashtirish **auksion** orqali, eng yaxshi taklif qilingan CPM bo'yicha; reklama uchun **Maximum Budget** belgilanadi va unga yetganda reklama to'xtatib qo'yiladi (`on hold`); Telegram **minimal CPM** va mavjud joylashtirish joylarini istalgan vaqtda o'zgartirish huquqini saqlab qoladi.
+
+**Rasmiy sahifalarda topilmadi (`unverified`, ikkilamchi manbalar, zid):**
+- "Gram kabineti" qayta nomlanishi va koinning 2026-06-15 da Toncoin → Gram bo'lishi: bosh sahifada faqat "Gram" yoziladi; qayta nomlash e'loni o'qilgan sahifalarda yo'q.
+- Minimal CPM raqamlari: bir manba "0.1 Gram", boshqasi EUR kabinetida ~30% pasayish (€1 → €0.7), uchinchisi 2026-08-28 dan Rossiya hisoblari uchun €0.60/€0.30/€0.75 deydi. ToS/FAQ/Guidelines'da hech qanday raqam yo'q (ToS faqat minimal CPM mavjudligini va uni Telegram o'zgartirishini aytadi). Kabinetda ko'rinadigan stavkani foydalanuvchidan oling.
 - Foydalanuvchi o'z kabinetidagi stavkani `USER_PROVIDED` deb beradi; global CPM benchmarklari o'ylab topilmaydi.
 
 ## Manbalar

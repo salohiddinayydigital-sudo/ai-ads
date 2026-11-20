@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 1,
+  "claudeVersion": "2.1.329",
+  "startedAt": "2026-11-20T09:46:32.303Z",
+  "durationSeconds": 57,
+  "costUsd": 0.20517650000000004,
+  "partial": false,
+  "suite": {
+    "root": "/home/user/ai-ads",
+    "ablation": "with-without",
+    "caseFilter": "pulse-explain-uz-1",
+    "threshold": 1,
+    "concurrency": 1,
+    "plugins": [
+      {
+        "name": "tyrion",
+        "version": "8.0.1",
+        "path": "/home/user/ai-ads"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "pulse-explain-uz-1",
+      "dir": "evals/pulse-explain-uz-1",
+      "source": "prose",
+      "promptMarkdown": "tests/fixtures/pulse/problem.metrics.json va state.json uchun pulse ishga tushir va chiqqan ogohlantirishlarni oddiy tilda tushuntir. Hech narsani o'zgartirma.",
+      "runsPerCase": 2,
+      "timeoutSeconds": 300,
+      "maxTurns": 15,
+      "graders": [
+        {
+          "name": "evidence-labels",
+          "type": "regex",
+          "weight": 2,
+          "config": {
+            "target": "last_message",
+            "pattern": "MEASURED_ACCOUNT_DATA|HEURISTIC_PRIOR_MODEL|PLATFORM_BENCHMARK|UNVERIFIED|USER_PROVIDED",
+            "flags": "",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "language",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "\\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+            "flags": "i",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "no-send",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "crm-bridge\\.py\\s+send",
+            "flags": "",
+            "match": "not_contains"
+          }
+        },
+        {
+          "name": "owner-metric",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+            "flags": "i",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "tool-run",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Bash",
+            "input_match": "pulse\\.py",
+            "min": 1
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 0.3333333333333333,
+            "passed": false,
+            "turns": 8,
+            "costUsd": 0.0668528,
+            "judgeCostUsd": 0,
+            "durationSeconds": 17,
+            "startedAt": "2026-11-20T09:46:32.519Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-iWacxX/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "mocks": {
+              "servers": [
+                {
+                  "server": "plugin_tyrion_tyrion-core",
+                  "kind": "shadow",
+                  "withheld": true,
+                  "tools": []
+                }
+              ],
+              "warnings": [
+                "mocks: \"plugin:tyrion:tyrion-core\" has no mock and is NOT started — its tools are unavailable this run; add mocks/<server>/ to mock it, or pass --allow-real-servers to run the plugin's real server (as you, outside the sandbox)"
+              ],
+              "calls": {
+                "total": 0,
+                "errors": 0,
+                "unmocked": [],
+                "costUsd": 0,
+                "replay": {
+                  "hits": 0,
+                  "misses": 0
+                }
+              }
+            },
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "no-send",
+                "passed": true,
+                "weight": 1,
+                "explanation": "pattern absent as expected",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "tool-run",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Bash called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0.3333333333333333,
+            "passed": false,
+            "turns": 7,
+            "costUsd": 0.06340470000000001,
+            "judgeCostUsd": 0,
+            "durationSeconds": 16,
+            "startedAt": "2026-11-20T09:46:49.111Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-3TVPXp/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "mocks": {
+              "servers": [
+                {
+                  "server": "plugin_tyrion_tyrion-core",
+                  "kind": "shadow",
+                  "withheld": true,
+                  "tools": []
+                }
+              ],
+              "warnings": [
+                "mocks: \"plugin:tyrion:tyrion-core\" has no mock and is NOT started — its tools are unavailable this run; add mocks/<server>/ to mock it, or pass --allow-real-servers to run the plugin's real server (as you, outside the sandbox)"
+              ],
+              "calls": {
+                "total": 0,
+                "errors": 0,
+                "unmocked": [],
+                "costUsd": 0,
+                "replay": {
+                  "hits": 0,
+                  "misses": 0
+                }
+              }
+            },
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "no-send",
+                "passed": true,
+                "weight": 1,
+                "explanation": "pattern absent as expected",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "tool-run",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Bash called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0.3333333333333333,
+            "passed": false,
+            "turns": 5,
+            "costUsd": 0.0368034,
+            "judgeCostUsd": 0,
+            "durationSeconds": 11,
+            "startedAt": "2026-11-20T09:47:04.884Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-v2sxi9/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "no-send",
+                "passed": true,
+                "weight": 1,
+                "explanation": "pattern absent as expected",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "tool-run",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Bash called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0.3333333333333333,
+            "passed": false,
+            "turns": 5,
+            "costUsd": 0.0381156,
+            "judgeCostUsd": 0,
+            "durationSeconds": 13,
+            "startedAt": "2026-11-20T09:47:16.061Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-PXUvoc/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "no-send",
+                "passed": true,
+                "weight": 1,
+                "explanation": "pattern absent as expected",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "tool-run",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Bash called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "advisories": [
+        "grader \"tool-run\" cannot pass with the granted tools: it needs a Bash call in the trace, but Bash is not granted, so the run withholds it from the model and no call (not even a refused one) can occur — add Bash to the case's allowed_tools and grant it with --allow-tools Bash"
+      ],
+      "aggregates": {
+        "score": 0.3333333333333333,
+        "passRate": 0,
+        "scoreWithout": 0.3333333333333333,
+        "passRateWithout": 0,
+        "delta": 0
+      }
+    }
+  ],
+  "aggregates": {
+    "casesTotal": 1,
+    "casesPassed": 0,
+    "overallScore": 0.3333333333333333,
+    "overallPassRate": 0,
+    "meanDelta": 0
+  }
+}

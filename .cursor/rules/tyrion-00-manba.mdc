@@ -25,6 +25,12 @@ alwaysApply: true
 | `MEASURED_ACCOUNT_DATA` | hisobning o'z ma'lumoti (export, API/MCP, screenshot) |
 | `PLATFORM_BENCHMARK` | **faqat** rasmiy benchmark asbobidan (masalan `ads_insights_industry_benchmark`, `ads_insights_performance_vs_peers`) olingan raqam; asbob nomi va sana yoziladi, qo'lda yoki xotiradan yozilmaydi |
 | `HEURISTIC_PRIOR_MODEL` | model/evristik taxmin; qaror uchun yagona asos emas |
+| `USER_PROVIDED` | foydalanuvchi o'zi bergan raqam yoki fakt (xabar, brief, kabinetdan ko'chirgani); tekshirilmagan, manba — foydalanuvchi |
+| `SOURCED` | tashqi manbadan olingan fakt; **havola + sana** yoziladi (qarang: manba darajasi 4) |
+| `ASSUMPTION` | ish taxmini: foydalanuvchi bermagan, men ochiq e'lon qilib qo'ygan qiymat (masalan marja 50%); o'lchov bilan tekshirish rejasi bilan beriladi, qaror uchun yagona asos emas. `HEURISTIC_PRIOR_MODEL` dan farqi: umumiy qoida emas, aynan shu mijoz uchun taxmin |
+| `UNVERIFIED` | tekshirib bo'lmadi (manba yetarli emas yoki ochilmadi); raqam o'rniga shunday deb yoziladi |
+
+**Yorliqsiz raqam taqiqlanadi.** Ochiq yorliqlangan taxmin (`ASSUMPTION`, `HEURISTIC_PRIOR_MODEL`, `UNVERIFIED`) to'qima emas; yorliqsiz aniq raqam, benchmark yoki mijoz fikri (testimonial) — to'qima.
 
 ## Buzilmaydigan qoidalar
 
