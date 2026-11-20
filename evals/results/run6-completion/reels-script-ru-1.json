@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "claudeVersion": "2.1.329",
+  "startedAt": "2026-11-20T09:47:30.233Z",
+  "durationSeconds": 82,
+  "costUsd": 0.2530331,
+  "partial": false,
+  "suite": {
+    "root": "/home/user/ai-ads",
+    "ablation": "with-without",
+    "caseFilter": "reels-script-ru-1",
+    "threshold": 1,
+    "concurrency": 1,
+    "plugins": [
+      {
+        "name": "tyrion",
+        "version": "8.0.1",
+        "path": "/home/user/ai-ads"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "reels-script-ru-1",
+      "dir": "evals/reels-script-ru-1",
+      "source": "prose",
+      "promptMarkdown": "Напиши сценарий Reels на 30 секунд для магазина детской одежды: 3 варианта хука и список кадров.",
+      "runsPerCase": 2,
+      "timeoutSeconds": 300,
+      "maxTurns": 15,
+      "graders": [
+        {
+          "name": "evidence-labels",
+          "type": "regex",
+          "weight": 2,
+          "config": {
+            "target": "last_message",
+            "pattern": "MEASURED_ACCOUNT_DATA|HEURISTIC_PRIOR_MODEL|PLATFORM_BENCHMARK|UNVERIFIED|USER_PROVIDED",
+            "flags": "",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "language",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "[А-Яа-я]{4,}",
+            "flags": "",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "owner-metric",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+            "flags": "i",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 0.5,
+            "passed": false,
+            "turns": 3,
+            "costUsd": 0.09438919999999999,
+            "judgeCostUsd": 0,
+            "durationSeconds": 31,
+            "startedAt": "2026-11-20T09:47:30.368Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-IaaEij/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "mocks": {
+              "servers": [
+                {
+                  "server": "plugin_tyrion_tyrion-core",
+                  "kind": "shadow",
+                  "withheld": true,
+                  "tools": []
+                }
+              ],
+              "warnings": [
+                "mocks: \"plugin:tyrion:tyrion-core\" has no mock and is NOT started — its tools are unavailable this run; add mocks/<server>/ to mock it, or pass --allow-real-servers to run the plugin's real server (as you, outside the sandbox)"
+              ],
+              "calls": {
+                "total": 0,
+                "errors": 0,
+                "unmocked": [],
+                "costUsd": 0,
+                "replay": {
+                  "hits": 0,
+                  "misses": 0
+                }
+              }
+            },
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched [А-Яа-я]{4,}",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0.5,
+            "passed": false,
+            "turns": 3,
+            "costUsd": 0.0896075,
+            "judgeCostUsd": 0,
+            "durationSeconds": 26,
+            "startedAt": "2026-11-20T09:48:01.680Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-R6vhFF/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "mocks": {
+              "servers": [
+                {
+                  "server": "plugin_tyrion_tyrion-core",
+                  "kind": "shadow",
+                  "withheld": true,
+                  "tools": []
+                }
+              ],
+              "warnings": [
+                "mocks: \"plugin:tyrion:tyrion-core\" has no mock and is NOT started — its tools are unavailable this run; add mocks/<server>/ to mock it, or pass --allow-real-servers to run the plugin's real server (as you, outside the sandbox)"
+              ],
+              "calls": {
+                "total": 0,
+                "errors": 0,
+                "unmocked": [],
+                "costUsd": 0,
+                "replay": {
+                  "hits": 0,
+                  "misses": 0
+                }
+              }
+            },
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched [А-Яа-я]{4,}",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0.25,
+            "passed": false,
+            "turns": 1,
+            "costUsd": 0.034849200000000004,
+            "judgeCostUsd": 0,
+            "durationSeconds": 13,
+            "startedAt": "2026-11-20T09:48:27.519Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-JUUiwZ/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched [А-Яа-я]{4,}",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0.25,
+            "passed": false,
+            "turns": 1,
+            "costUsd": 0.0341872,
+            "judgeCostUsd": 0,
+            "durationSeconds": 12,
+            "startedAt": "2026-11-20T09:48:40.332Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-GEeiUF/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched [А-Яа-я]{4,}",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0.5,
+        "passRate": 0,
+        "scoreWithout": 0.25,
+        "passRateWithout": 0,
+        "delta": 0.25
+      }
+    }
+  ],
+  "aggregates": {
+    "casesTotal": 1,
+    "casesPassed": 0,
+    "overallScore": 0.5,
+    "overallPassRate": 0,
+    "meanDelta": 0.25
+  }
+}

@@ -148,3 +148,25 @@ Sharh:
 - `tool-run` graderlari bu mashinada baholanmaydi (sandbox yo'q); ular natijaga ma'noli hissa qo'shmaydi.
 
 Xom natija: `evals/results/latest.json` (run 6, qisman). Run 5 xom natijasi `37721ab` commit'ida.
+
+## Run 6 — yakunlovchi qism (6 ta case qayta ishga tushirildi)
+
+Limit tiklangach, yiqilgan 6 case `--ablation with-without --runs 2` bilan alohida ishga tushirildi (`evals/results/run6-completion/*.json`): 0 xato, jami $1.80.
+
+| 6 ta case | Plagin | Baseline | Farq |
+|---|---|---|---|
+| O'rtacha ball | 0.711 | 0.419 | +0.292 |
+| ≥ 0.8 bergan | 3 / 6 (`reels-script-uz-1`, `report-cyrl-1`, `strategy-cyrl-1`) | — | — |
+
+**28 case birlashtirilgan (run 6: 22 + 6; run 5 bilan taqqoslash):**
+
+| | Run 5 | Run 6 (birlashgan) |
+|---|---|---|
+| ≥ 0.8 bergan case | 9 / 28 | 16 / 28 |
+| O'rtacha ball (plagin) | 0.684 | 0.722 |
+| O'rtacha ball (baseline) | 0.423 | 0.447 |
+| Baseline'dan farq | +0.261 | +0.275 |
+
+Grader bo'yicha (run 6 birlashgan, plagin / baseline): owner-metric 27/36 / 4/36, evidence-labels 27/48 / 2/48, no-fabrication 14/18 / 11/18, language 55/56 / 56/56, tool-run 8/24 / 8/24.
+
+Halol xulosa: suite hali o'tmaydi. Eng zaif case'lar — `pulse-explain-en-1` (0.10), `csv-diagnosis-uz-1/2` (0.25), `pulse-explain-uz-1` (0.33), `csv-diagnosis-ru-1` (0.38). `evidence-labels` ~56% da qolmoqda. Run'lar soni 2, shuning uchun kichik farqlar shovqin bo'lishi mumkin. `tool-run` graderlari sandbox yo'qligi sabab baholanmaydi.

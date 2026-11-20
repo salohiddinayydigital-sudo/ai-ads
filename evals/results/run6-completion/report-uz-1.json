@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "claudeVersion": "2.1.329",
+  "startedAt": "2026-11-20T09:53:28.350Z",
+  "durationSeconds": 71,
+  "costUsd": 0.2700571,
+  "partial": false,
+  "suite": {
+    "root": "/home/user/ai-ads",
+    "ablation": "with-without",
+    "caseFilter": "report-uz-1",
+    "threshold": 1,
+    "concurrency": 1,
+    "plugins": [
+      {
+        "name": "tyrion",
+        "version": "8.0.1",
+        "path": "/home/user/ai-ads"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "report-uz-1",
+      "dir": "evals/report-uz-1",
+      "source": "prose",
+      "promptMarkdown": "Haftalik mijoz hisobotini tayyorla (sintetik demo: python3 tools/tyrion.py demo). Keyingi qadamlar egasi va metrikasi bilan.",
+      "runsPerCase": 2,
+      "timeoutSeconds": 300,
+      "maxTurns": 15,
+      "graders": [
+        {
+          "name": "evidence-labels",
+          "type": "regex",
+          "weight": 2,
+          "config": {
+            "target": "last_message",
+            "pattern": "MEASURED_ACCOUNT_DATA|HEURISTIC_PRIOR_MODEL|PLATFORM_BENCHMARK|UNVERIFIED|USER_PROVIDED",
+            "flags": "",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "language",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "\\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+            "flags": "i",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "owner-metric",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+            "flags": "i",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "tool-run",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Bash",
+            "input_match": "(tyrion\\.py demo|report-html)",
+            "min": 1
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 0.8,
+            "passed": false,
+            "turns": 9,
+            "costUsd": 0.1008489,
+            "judgeCostUsd": 0,
+            "durationSeconds": 24,
+            "startedAt": "2026-11-20T09:53:28.499Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-Wmz3iZ/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "mocks": {
+              "servers": [
+                {
+                  "server": "plugin_tyrion_tyrion-core",
+                  "kind": "shadow",
+                  "withheld": true,
+                  "tools": []
+                }
+              ],
+              "warnings": [
+                "mocks: \"plugin:tyrion:tyrion-core\" has no mock and is NOT started — its tools are unavailable this run; add mocks/<server>/ to mock it, or pass --allow-real-servers to run the plugin's real server (as you, outside the sandbox)"
+              ],
+              "calls": {
+                "total": 0,
+                "errors": 0,
+                "unmocked": [],
+                "costUsd": 0,
+                "replay": {
+                  "hits": 0,
+                  "misses": 0
+                }
+              }
+            },
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": true,
+                "weight": 2,
+                "explanation": "matched MEASURED_ACCOUNT_DATA|HEURISTIC_PRIOR_MODEL|PLATFORM_BENCHMARK|UNVERIFIED|USER_PROVIDED",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "tool-run",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Bash called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0.4,
+            "passed": false,
+            "turns": 8,
+            "costUsd": 0.0985748,
+            "judgeCostUsd": 0,
+            "durationSeconds": 22,
+            "startedAt": "2026-11-20T09:53:52.873Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-rnDDvE/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "mocks": {
+              "servers": [
+                {
+                  "server": "plugin_tyrion_tyrion-core",
+                  "kind": "shadow",
+                  "withheld": true,
+                  "tools": []
+                }
+              ],
+              "warnings": [
+                "mocks: \"plugin:tyrion:tyrion-core\" has no mock and is NOT started — its tools are unavailable this run; add mocks/<server>/ to mock it, or pass --allow-real-servers to run the plugin's real server (as you, outside the sandbox)"
+              ],
+              "calls": {
+                "total": 0,
+                "errors": 0,
+                "unmocked": [],
+                "costUsd": 0,
+                "replay": {
+                  "hits": 0,
+                  "misses": 0
+                }
+              }
+            },
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "tool-run",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Bash called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0.6,
+            "passed": false,
+            "turns": 3,
+            "costUsd": 0.0335481,
+            "judgeCostUsd": 0,
+            "durationSeconds": 11,
+            "startedAt": "2026-11-20T09:54:14.387Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-ebDe3X/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "tool-run",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Bash called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0.6,
+            "passed": false,
+            "turns": 4,
+            "costUsd": 0.0370853,
+            "judgeCostUsd": 0,
+            "durationSeconds": 14,
+            "startedAt": "2026-11-20T09:54:25.017Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-2SxIed/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "owner-metric",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "tool-run",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Bash called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "advisories": [
+        "grader \"tool-run\" cannot pass with the granted tools: it needs a Bash call in the trace, but Bash is not granted, so the run withholds it from the model and no call (not even a refused one) can occur — add Bash to the case's allowed_tools and grant it with --allow-tools Bash"
+      ],
+      "aggregates": {
+        "score": 0.6000000000000001,
+        "passRate": 0,
+        "scoreWithout": 0.6,
+        "passRateWithout": 0,
+        "delta": 1.1102230246251565e-16
+      }
+    }
+  ],
+  "aggregates": {
+    "casesTotal": 1,
+    "casesPassed": 0,
+    "overallScore": 0.6000000000000001,
+    "overallPassRate": 0,
+    "meanDelta": 1.1102230246251565e-16
+  }
+}

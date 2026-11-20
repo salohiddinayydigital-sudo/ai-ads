@@ -1,0 +1,352 @@
+{
+  "schemaVersion": 1,
+  "claudeVersion": "2.1.329",
+  "startedAt": "2026-11-20T09:48:53.033Z",
+  "durationSeconds": 181,
+  "costUsd": 0.36390969999999995,
+  "partial": false,
+  "suite": {
+    "root": "/home/user/ai-ads",
+    "ablation": "with-without",
+    "caseFilter": "reels-script-uz-1",
+    "threshold": 1,
+    "concurrency": 1,
+    "plugins": [
+      {
+        "name": "tyrion",
+        "version": "8.0.1",
+        "path": "/home/user/ai-ads"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "reels-script-uz-1",
+      "dir": "evals/reels-script-uz-1",
+      "source": "prose",
+      "promptMarkdown": "Stomatologiya klinikasi uchun 30 soniyalik Reels reklama skripti yoz: 3 ta 3-soniya hook varianti, shot list.",
+      "runsPerCase": 2,
+      "timeoutSeconds": 300,
+      "maxTurns": 15,
+      "graders": [
+        {
+          "name": "evidence-labels",
+          "type": "regex",
+          "weight": 2,
+          "config": {
+            "target": "last_message",
+            "pattern": "MEASURED_ACCOUNT_DATA|HEURISTIC_PRIOR_MODEL|PLATFORM_BENCHMARK|UNVERIFIED|USER_PROVIDED",
+            "flags": "",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "language",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "\\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+            "flags": "i",
+            "match": "contains"
+          }
+        },
+        {
+          "name": "no-fabrication",
+          "type": "llm",
+          "weight": 2,
+          "graderMarkdown": "Javobda to'qilgan ma'lumot yo'q: yorliqsiz aniq raqam, manbasiz benchmark yoki mijoz fikri (testimonial) bo'lmasligi kerak. Yorliqlar (`rules/00-manba.md`): MEASURED_ACCOUNT_DATA, PLATFORM_BENCHMARK, HEURISTIC_PRIOR_MODEL, USER_PROVIDED, SOURCED, ASSUMPTION, UNVERIFIED. Ochiq yorliqlangan yoki \"taxmin\" deb aytilgan qiymat to'qima hisoblanmaydi; yorliqsiz aniq raqam yoki umumiy \"odatda shunday\" benchmark — to'qima. Ijro hisoboti halol: haqiqatda chaqirilmagan asbobni 'ishlatildi' demaydi.",
+          "config": {
+            "criteria": "Javobda to'qilgan ma'lumot yo'q: yorliqsiz aniq raqam, manbasiz benchmark yoki mijoz fikri (testimonial) bo'lmasligi kerak. Yorliqlar (`rules/00-manba.md`): MEASURED_ACCOUNT_DATA, PLATFORM_BENCHMARK, HEURISTIC_PRIOR_MODEL, USER_PROVIDED, SOURCED, ASSUMPTION, UNVERIFIED. Ochiq yorliqlangan yoki \"taxmin\" deb aytilgan qiymat to'qima hisoblanmaydi; yorliqsiz aniq raqam yoki umumiy \"odatda shunday\" benchmark — to'qima. Ijro hisoboti halol: haqiqatda chaqirilmagan asbobni 'ishlatildi' demaydi.",
+            "focus": "last_message"
+          }
+        },
+        {
+          "name": "owner-metric",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "last_message",
+            "pattern": "(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+            "flags": "i",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 7,
+            "costUsd": 0.125281,
+            "judgeCostUsd": 0.0020328,
+            "durationSeconds": 54,
+            "startedAt": "2026-11-20T09:48:53.150Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-qFOvbU/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "mocks": {
+              "servers": [
+                {
+                  "server": "plugin_tyrion_tyrion-core",
+                  "kind": "shadow",
+                  "withheld": true,
+                  "tools": []
+                }
+              ],
+              "warnings": [
+                "mocks: \"plugin:tyrion:tyrion-core\" has no mock and is NOT started — its tools are unavailable this run; add mocks/<server>/ to mock it, or pass --allow-real-servers to run the plugin's real server (as you, outside the sandbox)"
+              ],
+              "calls": {
+                "total": 0,
+                "errors": 0,
+                "unmocked": [],
+                "costUsd": 0,
+                "replay": {
+                  "hits": 0,
+                  "misses": 0
+                }
+              }
+            },
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": true,
+                "weight": 2,
+                "explanation": "matched MEASURED_ACCOUNT_DATA|HEURISTIC_PRIOR_MODEL|PLATFORM_BENCHMARK|UNVERIFIED|USER_PROVIDED",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "no-fabrication",
+                "passed": true,
+                "weight": 2,
+                "explanation": "judge votes: PASS FAIL PASS",
+                "withOnly": false,
+                "scored": true,
+                "judgeVotes": [
+                  true,
+                  false,
+                  true
+                ],
+                "evidence": "**Maqsad:** stomatologiya klinikasi uchun 30 soniyalik Reels reklama · **Workflow:** video_script · **Rejim:** single-conductor fallback (`executed_by: conductor_as_video-producer`)\n\n## Taxminlar\n\n| Taxmin | Yorliq | Qanday tekshiriladi |\n|---|---|---|\n| Bozor: Toshkent, til: o'zbek (lotin) | `ASSUMPTION` | Klinika manzili va auditoriyasini tasdiqlang |\n| Maqsad: konsultatsiyaga yozilish (Telegram yoki telefon) | `ASSUMPTION` | CTA kanalini tanlang |\n| Narx, aksiya va shifokor ismi skriptda `[...]` joyida qoldirilgan | `UNVERIFIED` | Klinika o'z ma'lumotini beradi |\n\n## 3 ta hook varianti (0–3 soniya)\n\n| # | Burchak | Ekrandagi matn | Ovoz (voice-over) | Vizual |\n|---|---|---|---|---|\n| **A** | Qo'rquv | \"Stomatologdan qo'rqasizmi?\" | \"Stomatologdan qo'rqasizmi? Biz buni tushunamiz.\" | Yuzga yaqin plan: odam stulga o'tiradi va ikkilanadi. Keyin shifokor tabassum bilan qo'lini cho'zadi. |\n| **B** | Muammoni oldindan aytish | \"Tish og'riguncha kutmang\" | \"Tish og'riguncha kutmang. Og'riq boshlanganda allaqachon kech bo'ladi.\" | Odam yonoqini ushlab turibdi. Tez kesish (cut) bilan kalendar varag'i ko'rinadi. |\n| **C** | Savol + qiziqish | \"Oxirgi marta qachon tekshirtirgansiz?\" | \"Oxirgi marta tishingizni qachon tekshirtirgansiz?\" | Qo'lda ushlangan telefon. Ekranda \"Oxirgi vizit: 2 yil oldin\" eslatmasi ko'rinadi. |\n\n**Test tavsiyasi:** uchala hookni bir xil asosiy qism (3–30 s) bilan alohida reklama sifatida yurgizing. Taqqoslash metrikasi: 3 soniyalik ko'rish ulushi va CPA. Hozircha benchmark yo'q. O'z akkauntingiz tarixi eng yaxshi taqqoslash bo'ladi.\n\n## Asosiy skript (3–30 soniya)\n\n| Vaqt | Shot | Ovoz / matn |\n|---|---|---|\n| 0–3 | **Hook** (A, B yoki C) | yuqoridagi variantlar |\n| 3–8 | Klinika kirishi, ichki makon, administrator iliq kutib oladi | \"[Klinika nomi]da birinchi tashrif — tinch va og'riqsiz tushuntirishdan boshlanadi.\" |\n| 8–15 | Shifokor bemorga monitor orqali tekshiruv natijasini ko'rsatadi | \"Avval nima bo'layotganini ko'rasiz, keyin birga reja tuzamiz.\" |\n| 15–22 | 3 ta tez kadr: zamonaviy asbob, sterilizatsiya, shifokor qo'li | \"Zamonaviy uskuna, steril asboblar, [shifokor/tajriba — klinika tasdiqlagan fakt].\" |\n| 22–27 | Bemor yengil tabassum bilan stuldan turadi (ruxsat olingan model) | \"[Xizmat nomi] — [narx yoki aksiya, agar bor bo'lsa].\" |\n| 27–30 | **CTA** karta: logo, telefon va Telegram | \"Bepul konsultatsiyaga yoziling. Havola pastda.\" |\n\n## Shot list\n\n| № | Vaqt | Kadr turi | Tavsif | Matn qatlami (subtitr) | Audio |\n|---|---|---|---|---|---|\n| 1 | 0–3 | Close-up | Hook (A/B/C) | Katta, 2 qator gacha | Voice + qisqa \"whoosh\" |\n| 2 | 3–5 | Wide | Klinika kirish eshigi, reception | \"[Klinika nomi]\" | Yengil musiqa |\n| 3 | 5–8 | Medium | Administrator salomlashadi | — | Voice |\n| 4 | 8–12 | Over-shoulder | Shifokor monitorni ko'rsatadi | \"Avval ko'rasiz, keyin qaror\" | Voice |\n| 5 | 12–15 | Close-up | Shifokor va bemor suhbati | — | Voice |\n| 6 | 15–18 | Detail | Asboblar, steril paket ochilishi | \"Steril asboblar\" | Musiqa |\n| 7 | 18–22 | Detail | Zamonaviy uskuna ishlayotgani | \"Zamonaviy uskuna\" | Musiqa |\n| 8 | 22–25 | Medium | Bemor tabassum bilan o'rnidan turadi | \"[Xizmat] — [narx/aksiya]\" | Voice |\n| 9 | 25–27 | Medium | Qo'l siqish yoki shifokor bosh irg'ashi | — | Musiqa ko'tariladi |\n| 10 | 27–30 | Grafik karta | Logo, tel., Telegram QR yoki tugma | \"Bepul konsultatsiyaga yoziling\" | Voice + yakuniy zarba |\n\n**Texnik:** 9:16, 1080×1920, subtitrlarni Reels interfeysi chetidan ichkarida (yuqori va pastdan ~250 px xavfsiz zona) joylashtiring. Ovozsiz ko'rishda ham tushunarli bo'lishi uchun har gap subtitrlansin.\n\n## Xavflar va compliance\n\n- **Meta salomatlik siyosati:** \"Siz og'riqdan qutulasiz\", \"100% kafolat\" kabi natija kafolatlari yozilmasin. Reklama foydalanuvchining tibbiy holatini \"bilib turgandek\" ko'rsatmasin. Hook B da \"Og'riq boshlanganda kech bo'ladi\" ham bir oz bosim o'tkazadi. Moderatsiyada rad etilsa, uni \"Og'riq kutmasdan tekshiruvdan o'ting\" shakliga yumshating. Meta siyosati bo'yicha rasmiy tekshiruv bu hujjatda o'tkazilmagan (`UNVERIFIED`).\n- Bemor kadrlari uchun yozma rozilik oling. Tayyor \"before/after\" kadrlar ishlatmang.\n- To'qilgan sharhlar (testimonial), \"eng yaxshi\" kabi isbotsiz da'volar va asossiz statistika yozilmagan. Shunday da'vo qo'shsangiz, klinika hujjat bilan tasdiqlashi kerak.\n- Litsenziya raqami va shifokor unvoni haqiqatga mos bo'lsin.\n\n## Keyingi qadamlar\n\n| Qadam | Egasi | Metrika | Muddat |\n|---|---|---|---|\n| `[...]` joylarni to'ldirish (klinika nomi, xizmat, narx/aksiya, shifokor, CTA kanali) | Klinika menejeri | Barcha maydonlar to'ldirilgan | 1 kun |\n| Model va bemor rozilik hujjatlari | Klinika / prodyuser | Imzolangan ruxsatlar soni = kadrdagi odamlar soni | Syomkadan oldin |\n| Syomka va montaj (3 hook × 1 asosiy qism) | Video prodyuser | 3 ta tayyor 9:16 fayl | 3–5 kun |\n| Reklamani rad etilish xavfiga qarab ko'rib chiqish | Targetolog | Moderatsiyadan o'tgan reklamalar soni | Ishga tushirishdan oldin |\n| A/B test: 3 hook, bir xil auditoriya va byudjet | Targetolog | 3 soniyalik ko'rish ulushi, CPA (klinikaning o'z break-even CPA'si bilan) | Test boshlangandan 7 kun |\n\n## Execution report\n\n- **Bosqichlar:** brief → script → synthesize bitta konduktor sifatida bajarildi. Sub-agent ishlatilmadi (vazifa bitta mutaxassisliknikidir).\n- **O'qilgan fayllar:** `rules/00-manba.md`, `rules/10-til-va-uslub.md`.\n- **Ishlatilmagan:** `tools/skill-search.py` (router), `tools/creative-matrix.py`. Sandbox ruxsatlari cheklangan edi, bitta Glob so'rovi rad etildi, shuning uchun asboblarni ishga tushirmadim. Skript qo'lda yozilgan.\n- **Ma'lumot yo'q:** klinika nomi, xizmatlar, narxlar, break-even CPA va oldingi reklama natijalari. Shu sababli hech qanday raqamli benchmark berilmadi.\n\nKlinika nomi, asosiy xizmat (implant, tozalash, oqartirish va hokazo) va aksiyani yuborsangiz, skriptni shunga moslab tayyor matnga aylantiraman."
+              },
+              {
+                "name": "owner-metric",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0.6666666666666666,
+            "passed": false,
+            "turns": 7,
+            "costUsd": 0.1483,
+            "judgeCostUsd": 0.0024635,
+            "durationSeconds": 65,
+            "startedAt": "2026-11-20T09:49:47.629Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-OHXWLD/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "mocks": {
+              "servers": [
+                {
+                  "server": "plugin_tyrion_tyrion-core",
+                  "kind": "shadow",
+                  "withheld": true,
+                  "tools": []
+                }
+              ],
+              "warnings": [
+                "mocks: \"plugin:tyrion:tyrion-core\" has no mock and is NOT started — its tools are unavailable this run; add mocks/<server>/ to mock it, or pass --allow-real-servers to run the plugin's real server (as you, outside the sandbox)"
+              ],
+              "calls": {
+                "total": 0,
+                "errors": 0,
+                "unmocked": [],
+                "costUsd": 0,
+                "replay": {
+                  "hits": 0,
+                  "misses": 0
+                }
+              }
+            },
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": true,
+                "weight": 2,
+                "explanation": "matched MEASURED_ACCOUNT_DATA|HEURISTIC_PRIOR_MODEL|PLATFORM_BENCHMARK|UNVERIFIED|USER_PROVIDED",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "no-fabrication",
+                "passed": false,
+                "weight": 2,
+                "explanation": "judge votes: FAIL FAIL FAIL",
+                "withOnly": false,
+                "scored": true,
+                "judgeVotes": [
+                  false,
+                  false,
+                  false
+                ],
+                "evidence": "**Maqsad:** stomatologiya klinikasi uchun 30 soniyalik 9:16 Reels reklama (maqsad: konsultatsiyaga yozilish) · **Workflow:** video_script · **Rejim:** single-conductor fallback (`executed_by: conductor_as_video-producer`)\n\n## Taxminlar\n\n| # | Taxmin | Yorlig'i | Qanday tekshiriladi |\n|---|---|---|---|\n| 1 | Bozor: Toshkent, til: o'zbek (lotin) | ASSUMPTION | Klinika manzili va auditoriyani tasdiqlang |\n| 2 | Asosiy xizmat: umumiy ko'rik va konsultatsiya (aniq xizmat berilmagan) | ASSUMPTION | Qaysi xizmat targ'ib qilinishini ayting |\n| 3 | Narx, aksiya, mijoz sharhi, natija raqamlari berilmagan | USER_PROVIDED yo'q | Barchasi `[ADD VERIFIED ...]` joyida qoldi |\n| 4 | CTA: Telegram yoki telefon orqali yozilish | ASSUMPTION | Haqiqiy kanalni kiriting |\n\n## Strategik brief\n\n- **Auditoriya:** 25–45 yoshli, stomatologga borishni kechiktirayotgan odamlar. Ular muammodan xabardor, yechimni hali tanlamagan.\n- **Burchak:** qo'rquv va noaniqlikni kamaytirish: \"birinchi ko'rik oddiy va tushunarli\".\n- **Format:** `founder_authority`, ya'ni shifokor kameraga qarab gapiradi, ustiga B-roll qo'yiladi.\n- **Gipoteza (bitta o'zgaruvchi):** yuqorida \"qo'rquv\" hooki bo'lgan variant 3 soniyalik ko'rish ulushini (hook rate) kuchliroq beradi. Qaror qoidasini ishga tushirishdan oldin belgilang. Bazaviy ko'rsatkich (baseline) sizda yo'q bo'lsa, avval uni yig'ing.\n\n## 3 ta hook (0–3 s), har biri boshqacha mexanizm\n\n| | **Hook A: Qarshi-intuitiv haqiqat** | **Hook B: Aniq og'riq lahzasi** | **Hook C: E'tirozni ag'darish** |\n|---|---|---|---|\n| **Birinchi kadr** | Shifokor oq xalatda, kameraga yaqin plan, qo'lida stomatologik ko'zgu | Odam nonushtada sovuq choydan tishi og'rib, yuzini cho'chitadi | Kreslo yonida ish stoli: chek va hisob-kitob qog'ozi, qo'l uni chetga suradi |\n| **Ekran matni (≤7 so'z)** | \"Og'riganda borish — qimmat yo'l\" | \"Sovuq choydan tish sanchadimi?\" | \"Narxdan qo'rqib kechiktiryapsizmi?\" |\n| **Aytiladigan gap** | \"Tish og'riguncha kutish — eng qimmat odat.\" | \"Choy ichganda tishingiz sanchisa, bu e'tibor talab qiladi.\" | \"Avval narxni bilib oling, keyin qaror qiling.\" |\n| **Kamera** | Dolly-in, ko'z darajasida | Yelkadan handheld, tez zoom | Tepadan (top-down), qo'l kadrga kiradi |\n| **Psixologik maqsad** | Qiziqish va xato qilish qo'rquvi | O'zini tanish (call-out) | Narx e'tirozini olib tashlash |\n\n**Eslatma:** \"qimmat yo'l\" va \"e'tibor talab qiladi\" da'vo emas, umumiy kuzatuv. Raqam, foiz yoki kafolat qo'shmang. Hook B da shaxsiy sog'liq holatiga ishora qilmaslik uchun matn savol ko'rinishida qoldirildi (Meta sog'liq siyosati).\n\n## 30 soniyalik shot list (Hook A asosida, B va C uchun faqat 0–3 s almashtiriladi)\n\n| Vaqt | Vizual / kamera / B-roll | Ekran matni (720×1200 xavfsiz zona) | Ovoz / VO (o'zbek) | SFX / montaj |\n|---|---|---|---|---|\n| **00:00–00:03** | HOOK (A, B yoki C) | Hook matni | Hook gapi | Kuchli birinchi kadr, 0.5–1 s kesish |\n| **00:03–00:10** | Muammo: bemor kreslo oldida ikkilanib turibdi; keyin shifokor tabassum bilan salomlashadi | \"Ko'pchilik shu yerda to'xtaydi\" | \"Ko'pchilik qo'rquv yoki noaniq narx sabab kechiktiradi.\" | Yumshoq whoosh, har 1.5 s da kadr almashadi |\n| **00:10–00:20** | Mexanizm: ko'rik jarayoni. Shifokor ko'zgu bilan ko'rsatadi, planshetda tashxis, qo'l bilan tushuntiradi (haqiqiy klinika, haqiqiy jihoz) | \"1. Ko'rik 2. Reja 3. Aniq narx\" | \"Avval ko'ramiz, so'ng reja tuzamiz va narxni oldindan aytamiz.\" | Har 2 s da B-roll (isbot qatlami) |\n| **00:20–00:26** | Isbot: klinika ichki ko'rinishi, sterilizatsiya, shifokor diplomi. Mijoz sharhi **faqat haqiqiy va roziligi bilan** | `[ADD VERIFIED: tajriba yili / litsenziya]` | `[ADD VERIFIED: shifokor tajribasi]` | Musiqa ovoz ostida (VO ustida past) |\n| **00:26–00:30** | CTA: shifokor kameraga, ekranda klinika nomi va aloqa | \"Konsultatsiyaga yoziling\" + `[ADD: Telegram/telefon]` | \"Konsultatsiyaga hoziroq yoziling.\" + `[ADD VERIFIED: aksiya va muddat, agar haqiqiy bo'lsa]` | Aniq CTA tugma ko'rinishi |\n\n## Montaj va ishlab chiqarish\n\n- **Kesish ritmi:** hook 0.5–1 s, asosiy qism 1.5–2 s.\n- **Subtitrlar:** burned-in, so'z bo'yicha, markaziy xavfsiz zonada. Instagram interfeysi pastki va yon tomonni yopadi.\n- **Ovoz:** −14 LUFS atrofida, musiqa ovozdan past.\n- **Yorug'lik va rekvizit:** ravshan, iliq-neytral yorug'lik. Faqat haqiqiy klinika va jihozlar, litsenziyasiz stock ishlatilmaydi.\n- **Texnik:** 1080×1920, 9:16. Joylashtirishdan oldin Meta'ning joriy creative spetsifikatsiyasini tekshiring.\n- **A/B:** faqat hook almashtiriladi. Asosiy qism, taklif va CTA bir xil qoladi.\n\n## Xavflar va muvofiqlik (claim safety)\n\n- **Kafolat va natija:** \"100% og'riqsiz\", \"kafolatlangan\", \"eng yaxshi\" kabi so'zlar yo'q. Aytmoqchi bo'lsangiz, hujjatlashtirilgan asos bo'lishi kerak.\n- **Oldin/keyin kadrlari:** faqat haqiqiy bemor, yozma roziligi va o'zgartirilmagan holda. Meta ularni qattiq tekshiradi.\n- **Litsenziya:** O'zbekistonda tibbiy reklama uchun klinika litsenziyasi va amaldagi reklama qoidalariga mosligini yuristingiz bilan tekshiring. Men bu yerda muvofiqlik tekshiruvini o'tkazmadim.\n- **Yoshlar va kamsitish:** hooklar shaxsiy holatni (\"sizning tishlaringiz yomon\") taxmin qilmaydi.\n\n## Keyingi qadamlar\n\n| Qadam | Egasi | Metrika | Muddat |\n|---|---|---|---|\n| Xizmat, narx/aksiya, shifokor tajribasi va aloqa kanalini yuborish | Klinika menejeri | Barcha `[ADD VERIFIED]` to'ldirilgan | 1 kun |\n| Yozib olish (3 hook + umumiy qism) | Videograf va shifokor | 3 ta hook klipi + 1 ta asosiy montaj | 3 kun |\n| Yuridik va siyosat tekshiruvi (litsenziya, rozilik) | Klinika yuristi | Rozilik hujjatlari va da'vo ro'yxati tasdiqlangan | 2 kun |\n| A/B test: 3 hook, bir xil asosiy qism | Targetolog | Hook rate, hold rate, tashqi CTR (o'z bazaviy ko'rsatkichingiz bilan solishtiriladi) | Ishga tushgandan 5–7 kun |\n| Natijani tahlil qilish va g'olib hook atrofida yangi variantlar | Targetolog | CPA va sifatli lidlar ulushi (CRM bo'yicha) | Test tugagach |\n\n## Execution report\n\n- **Bajarilgan bosqichlar:** brief, hook va shot list, sintez. Hammasini men o'zim bajardim (`conductor_as_video-producer`), sub-agent chaqirilmadi.\n- **O'qilgan fayllar:** `skills/video/SKILL.md`, `reels-scripting.md`, `performance-video-system.md`.\n- **O'qilmagan:** `rules/00-manba.md` va `rules/10-til-va-uslub.md` (so'ralgan, lekin o'qimadim). Shuning uchun raqam yorliqlash va uslub qoidalari ularga to'liq tekshirilmagan.\n- **Ishga tushmagan asboblar:** `tools/skill-search.py route` va `tools/creative-matrix.py video-script`. Bu sessiyada Bash o'chirilgan, shuning uchun `claim_safety` tekshiruvi ham avtomatik ishlamadi. Yuqoridagi da'volarni qo'lda tekshirdim.\n- **Router:** chaqirilmadi. Marshrut hook xabaridan (`video_script`, `video-producer`) olindi.\n\nXizmat turi (masalan, implant, tish oqartirish, bolalar stomatologiyasi), narx va aksiyani yuborsangiz, hook va shot listni aniq taklifga moslab qayta yozaman."
+              },
+              {
+                "name": "owner-metric",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)[\\s\\S]{0,400}(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)|(metrika|ko'rsatkich|metric|метрик|показател|кўрсаткич)[\\s\\S]{0,400}(mas'ul|egasi|owner|ответственн|владелец|исполнитель|масъул|эгаси)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0.16666666666666666,
+            "passed": false,
+            "turns": 1,
+            "costUsd": 0.044962499999999996,
+            "judgeCostUsd": 0.0011133000000000002,
+            "durationSeconds": 30,
+            "startedAt": "2026-11-20T09:50:52.967Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-9Ncg6q/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "no-fabrication",
+                "passed": false,
+                "weight": 2,
+                "explanation": "judge votes: FAIL FAIL FAIL",
+                "withOnly": false,
+                "scored": true,
+                "judgeVotes": [
+                  false,
+                  false,
+                  false
+                ],
+                "evidence": "# Stomatologiya klinikasi — 30 soniyalik Reels skripti\n\n**Maqsad:** yangi bemorlarni konsultatsiyaga jalb qilish\n**Format:** 9:16, subtitrlar majburiy (ko'pchilik ovozsiz ko'radi), tezkor montaj\n**Ohang:** iliq, ishonchli, qo'rqitmasdan\n\n---\n\n## 🎣 3 ta Hook varianti (0–3 soniya)\n\n**Hook A — Qo'rquvga zarba**\n- Kadr: Bemor stomatolog kreslosida kulib turibdi.\n- Ovoz: *\"Tish davolash og'riqsiz bo'lishi mumkinmi? Ha — mana isboti.\"*\n- Ekranda matn: **\"OG'RIQSIZ DAVOLASH?\"**\n\n**Hook B — Savol/sir**\n- Kadr: Yaqin plan — oq tishli tabassum, \"ding\" ovozi effekti.\n- Ovoz: *\"Bu tabassum uchun atigi 3 ta tashrif kerak bo'ldi.\"*\n- Ekranda matn: **\"3 TA TASHRIF = YANGI TABASSUM\"**\n\n**Hook C — Xato haqida**\n- Kadr: Shifokor kameraga qarab, qo'lini ko'taradi (\"to'xta\" ishorasi).\n- Ovoz: *\"Tishingiz og'rimayaptimi? Baribir buni o'qing!\"*\n- Ekranda matn: **\"OG'RIMASA HAM TEKSHIRTIRING!\"**\n\n---\n\n## 🎬 Asosiy skript (3–30 soniya)\n\n| Vaqt | Shot | Ovoz / Voice-over | Ekranda matn |\n|---|---|---|---|\n| **0–3s** | Hook (A/B/C dan biri) | — | — |\n| **3–7s** | Klinika kirish qismi, ochiq eshik, administrator tabassum bilan kutib oladi | *\"[Klinika nomi]da sizni iliq kutib olamiz.\"* | \"Qulay muhit\" |\n| **7–12s** | Shifokor bemorga monitor orqali rentgen/3D skanerni ko'rsatadi | *\"Zamonaviy diagnostika — aniq tashxis, ortiqcha davolashsiz.\"* | \"3D diagnostika\" |\n| **12–17s** | Tezkor kesishmalar: sterilizatsiya, bir martalik qo'lqop, yangi asboblar paketi | *\"Toza, steril, xavfsiz.\"* | \"100% steril\" |\n| **17–22s** | Davolash jarayoni (bemor xotirjam), shifokor bosh barmog'ini ko'rsatadi | *\"Og'riqsiz anesteziya va tajribali mutaxassislar.\"* | \"Tajribali shifokorlar\" |\n| **22–26s** | Before/After: tishlar oldin va keyin (split-screen yoki swipe) | *\"Natijani o'zingiz ko'ring.\"* | \"Oldin → Keyin\" |\n| **26–30s** | Klinika logotipi, shifokor + bemor tabassumi, manzil/telefon | *\"Bepul konsultatsiyaga yoziling — havola profilda!\"* | **\"BEPUL KONSULTATSIYA 📞 +998 XX XXX XX XX\"** |\n\n---\n\n## 📸 Shot list (suratga olish uchun)\n\n1. **Hook kadrlari** (3 variant, har biri 3–4 s) — bemor kulgisi, close-up tabassum, shifokor \"to'xta\" ishorasi\n2. **Klinika tashqi/kirish** — eshik, vivеska, administrator (gimbal, sekin yaqinlashish)\n3. **Resepshn** — mijozni kutib olish, qo'ng'iroq\n4. **Diagnostika** — monitor ekrani, rentgen/KT, shifokor izoh beryapti\n5. **Steril jarayon** — qo'lqop kiyish, asbob paketini ochish, avtoklav (macro)\n6. **Davolash** — bemor yelkasidan, shifokor ishlayapti (yuz ko'rsatmasdan ham bo'ladi)\n7. **Before/After** — bir xil burchak va yorug'likda, oq fon\n8. **Yakuniy kadr** — shifokor va bemor birga tabassum, logo overlay\n9. **B-roll** — tish modeli, shifokor qo'li, yorqin lampa, kulib turgan bolalar (ruxsat bilan)\n\n---\n\n## 🎵 Montaj bo'yicha maslahatlar\n\n- **Musiqa:** yengil, ko'tarinki trend audio (tijoriy foydalanishga ruxsat etilganini tekshiring)\n- **Kesishma:** har 2–3 soniyada kadr almashsin\n- **Subtitrlar:** katta, kontrastli shrift; muhim so'zlarni rangda ajrating\n- **CTA:** oxirgi 4 soniyada ekranda qoladi, caption'da ham takrorlang\n\n## ✅ Eslatma\n\n- Before/After va \"og'riqsiz\" kabi da'volar uchun **bemorning yozma roziligi** va reklama qonunchiligiga muvofiqlikni tekshiring.\n- \"100% steril\", \"bepul konsultatsiya\" kabi va'dalar haqiqatga mos bo'lsin.\n- Hook'larni A/B test qiling: 3 ta variantni alohida Reels qilib, 48 soatda ko'rishlar va saqlashlarni solishtiring.\n\nXohlasangiz, skriptni klinikangiz nomi, xizmatlari (implant, vinir, bolalar stomatologiyasi) va rus tiliga moslab qayta yozib beraman."
+              },
+              {
+                "name": "owner-metric",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0.5,
+            "passed": false,
+            "turns": 1,
+            "costUsd": 0.0453662,
+            "judgeCostUsd": 0.001327,
+            "durationSeconds": 31,
+            "startedAt": "2026-11-20T09:51:22.878Z",
+            "error": null,
+            "tracePath": "/tmp/claude-eval-Lpxsf5/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "evidence-labels",
+                "passed": false,
+                "weight": 2,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "language",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\b(va|uchun|bilan|kerak|reklama|byudjet|qadam)\\b",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "no-fabrication",
+                "passed": true,
+                "weight": 2,
+                "explanation": "judge votes: PASS PASS PASS",
+                "withOnly": false,
+                "scored": true,
+                "judgeVotes": [
+                  true,
+                  true,
+                  true
+                ],
+                "evidence": "# 30 soniyalik Reels skripti — Stomatologiya klinikasi\n\n**Konsept:** \"Qo'rquvdan tabassumgacha\" — tish shifokoridan qo'rqadiganlarga yumshoq, og'riqsiz xizmat va'dasi.\n**Format:** 9:16, subtitrlar majburiy (ko'pchilik ovozsiz ko'radi), tezkor montaj, iliq yorug'lik.\n\n---\n\n## 🎣 3 ta Hook varianti (0–3 soniya)\n\n**Hook 1 — Qo'rquv/relatable**\n> Ekranda: odam stomatolog kreslosiga qarab qotib qoladi.\n> Matn: **\"Tish shifokoriga borishdan qo'rqasizmi?\"**\n> Ovoz: \"Siz yolg'iz emassiz…\"\n\n**Hook 2 — Shok/savol**\n> Ekranda: qo'l telefon kalendarida \"Tish og'rig'i — 2 yildan beri\" deb yozilgan eslatmani ko'rsatadi.\n> Matn: **\"Bu og'riqni 2 yil kutdingizmi? 🦷\"**\n> Ovoz: \"Kutish uni faqat qimmatlashtiradi.\"\n\n**Hook 3 — Natija/oldin-keyin**\n> Ekranda: 1 soniyada split-screen: sarg'ish tabassum → oppoq tabassum (swipe effekti).\n> Matn: **\"1 tashrif. Yangi tabassum.\"**\n> Ovoz: \"Mana shu — bizning klinikada.\"\n\n---\n\n## 🎬 Asosiy skript va Shot list (3–30 soniya)\n\n| # | Vaqt | Kadr (Shot) | Ovoz / Voiceover | Ekran matni |\n|---|------|-------------|------------------|-------------|\n| 1 | 0–3 | **Hook** (yuqoridagi 3 variantdan biri) | — | Hook matni |\n| 2 | 3–7 | Close-up: bemor xavotirda kirish eshigida; keyin ma'muriyat xodimi iliq kutib oladi | \"Bizda birinchi qadam — suhbat, igna emas.\" | \"Avval suhbat 💬\" |\n| 3 | 7–11 | Medium: shifokor bemorga monitorda tish rentgenini ko'rsatadi, tushuntiradi | \"Shifokor hammasini ko'rsatib, tushuntirib beradi.\" | \"Aniq tashxis\" |\n| 4 | 11–15 | Detal (macro): zamonaviy uskuna, lazer/intraoral kamera, sterilizatsiya qadoqlari | \"Zamonaviy uskunalar va to'liq sterillik.\" | \"Zamonaviy texnologiya\" |\n| 5 | 15–19 | Bemor kreslosida tinch, yengil jilmayadi; shifokor ko'zlari (niqob ustida) kulib turadi | \"Og'riqsiz davolash — bizning asosiy qoidamiz.\" | \"Og'riqsiz ✅\" |\n| 6 | 19–23 | Tezkor montaj (jump cut): tish oqartirish, vinirlar, implant natijalari | \"Davolash, oqartirish, implant, vinir — hammasi bir joyda.\" | \"Davolash • Oqartirish • Implant\" |\n| 7 | 23–27 | Bemor ko'zgudan o'z tabassumiga qaraydi, quvonib kuladi (slow-mo) | \"Va siz yana ochiq kulasiz.\" | \"Tabassumingizni qaytaring 😁\" |\n| 8 | 27–30 | Logotip + manzil + telefon raqam; xodimlar jamoasi qo'l silkitadi | \"Hoziroq yoziling — birinchi konsultatsiya [bepul / chegirma bilan].\" | **\"Yoziling: +998 XX XXX XX XX\"** 📍[Manzil] |\n\n---\n\n## 📝 Tayyor voiceover (to'liq matn, ~75 so'z)\n\n> *(Hook 1 bilan)* Tish shifokoriga borishdan qo'rqasizmi? Siz yolg'iz emassiz. Bizda birinchi qadam — suhbat, igna emas. Shifokor hammasini ko'rsatib, tushuntirib beradi. Zamonaviy uskunalar va to'liq sterillik. Og'riqsiz davolash — bizning asosiy qoidamiz. Davolash, oqartirish, implant, vinir — hammasi bir joyda. Va siz yana ochiq kulasiz. Hoziroq yoziling!\n\n---\n\n## 🎯 Ishlab chiqarish bo'yicha maslahatlar\n\n- **Musiqa:** yengil, ijobiy trend audio (kuchli bas emas — tinchlik hissi uchun).\n- **Rang:** oq, havorang, yumshoq yashil — toza va ishonchli ko'rinish.\n- **Subtitrlar:** katta, 2–4 so'zdan, har 1.5–2 soniyada almashadi.\n- **CTA:** oxirgi 3 soniyada ekranda qolsin; caption va \"link in bio\"ga ham yozing.\n- **A/B test:** 3 hookni alohida Reels qilib 48 soat sinab, eng yuqori \"3-soniya retention\"ni tanlang.\n- **Ehtiyot bo'ling:** \"100% og'riqsiz\" yoki \"kafolatlangan natija\" kabi va'dalardan qoching — reklama qoidalariga zid bo'lishi mumkin. Haqiqiy bemor kadrlaridan foydalanishdan oldin yozma rozilik oling.\n\n---\n\nXohlasangiz, klinikangiz nomi, xizmatlari va aksiyasiga moslashtirib, yakuniy versiyani yozib beraman."
+              },
+              {
+                "name": "owner-metric",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in last_message",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0.8333333333333333,
+        "passRate": 0.5,
+        "scoreWithout": 0.3333333333333333,
+        "passRateWithout": 0,
+        "delta": 0.49999999999999994
+      }
+    }
+  ],
+  "aggregates": {
+    "casesTotal": 1,
+    "casesPassed": 0,
+    "overallScore": 0.8333333333333333,
+    "overallPassRate": 0.5,
+    "meanDelta": 0.49999999999999994
+  }
+}
