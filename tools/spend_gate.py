@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-"""spend_gate.py — MCP yozish asboblari uchun PreToolUse darvozasi (Spend-Guard hook'ining yadrosi).
+"""spend_gate.py — PreToolUse gate for MCP write tools (the core of the Spend-Guard hook).
 
-Hook (`hooks/tyrion-hook.py spend`) Claude Code stdin payload'ini shu yerga beradi. Qaror:
+The hook (`hooks/tyrion-hook.py spend`) passes the Claude Code stdin payload here. Decision:
 
-  read-only asbob / minimal profil / darvoza o'chirilgan  -> allow (jim o'tkazadi, normal ruxsat oqimi davom etadi)
-  tasdiqlangan, yangi, mos change packet bor            -> allow
-  packet yo'q yoki yaroqsiz                              -> strict: deny · standard: ask
+  read-only tool / minimal profile / gate disabled   -> allow (silent pass-through, normal permission flow continues)
+  approved, fresh, matching change packet present   -> allow
+  packet missing or invalid                         -> strict: deny · standard: ask
 
-Packet: `clients/<slug>/changes/<id>.json`, sxema `change-packet.v1` (`experiments.py packet` shu formatni yasaydi):
-  approved_by_user: true · 24 soatdan yangi (approved_at, yo'q bo'lsa created_at) · rollback matni majburiy ·
-  entity payload'dagi id bilan mos (yaratish asboblari uchun proposed_tool == asbob nomi) ·
-  `spend-guard.py packet` tekshiruvidan o'tadi.
+Packet: `clients/<slug>/changes/<id>.json`, schema `change-packet.v1` (`experiments.py packet` builds this format):
+  approved_by_user: true · newer than 24 hours (approved_at, falling back to created_at) · rollback text required ·
+  matches the id in the entity payload (for create tools, proposed_tool == tool name) ·
+  passes the `spend-guard.py packet` check.
 
-HALOL CHEGARA: `approved_by_user` — fayldagi belgi; uni model ham yozishi mumkin. Gate inson tasdig'ini
-kriptografik isbotlay olmaydi: u "tasdiqsiz yozish" xatosini ushlaydi, haqiqiy rozilik esa Claude Code'ning
-o'z ruxsat so'rovi (biz "allow" qaytarmaymiz, shuning uchun u saqlanadi). Rasmiy Meta MCP'da undo yo'q.
+HONEST LIMIT: `approved_by_user` is just a flag in a file; the model can write it too. The gate cannot prove human
+approval cryptographically: it catches the "write without approval" mistake, while real consent remains Claude
+Code's own permission prompt (we never return "allow" for ask-cases, so that prompt is preserved). The official
+Meta MCP has no undo.
 """
 
 from __future__ import annotations
@@ -34,7 +35,7 @@ if str(TOOLS) not in sys.path:
 MAX_AGE_HOURS = 24
 FUTURE_SKEW_MIN = 5
 
-# Meta (ads_*) va Google Ads MCP (assets_*, labels_manage_*) yozish asboblari.
+# Write tools of the Meta (ads_*) and Google Ads (assets_*, labels_manage_*) MCP servers.
 WRITE_RE = re.compile(
     r"(?:^|__)(?:ads_(?:create|update|activate|duplicate|delete|boost|finalize|"
     r"creative_(?:create|update|delete|upload)|"
@@ -124,11 +125,13 @@ def validate_packet(packet: dict, tool_name: str, ids: set[str], now: dt.datetim
                 why.extend("spend-guard: " + e for e in sg.get("errors", []))
             prop = packet.get("proposal") or {}
             cur, new = prop.get("current_daily"), prop.get("proposed_daily")
-            if isinstance(cur, (int, float)) and isinstance(new, (int, float)) and cur > 0:
-                bd = _spend_guard().check_budget_change(float(cur), float(new))
+            if cur is not None or new is not None:
+                # Any budget field present -> run the full check. Invalid values (nan/inf, zero, negative,
+                # non-numeric, or only one side given) are reported instead of silently skipping the 20% rule.
+                bd = _spend_guard().check_budget_change(cur, new)
                 if not bd.get("passed"):
-                    why.extend("budget: " + e for e in bd.get("errors", []))
-        except Exception as exc:  # noqa: BLE001 — darvoza yopiq tomonga xato qiladi
+                    why.extend("budget: " + e for e in (bd.get("errors") or [bd.get("error", "invalid budget")]))
+        except Exception as exc:  # noqa: BLE001 — the gate fails closed
             why.append(f"spend-guard tekshiruvi bajarilmadi: {exc}")
     return why
 

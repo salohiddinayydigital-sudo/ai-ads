@@ -519,6 +519,11 @@ def read_frontmatter(path: Path) -> dict:
         values = _fallback_list(raw, key)
         if values:
             flat[key] = values
+        else:
+            inline = flat.get(key)
+            if isinstance(inline, str) and inline.startswith("[") and inline.endswith("]"):
+                # Inline YAML flow list such as `[]` or `[a, b]` (PyYAML-free fallback).
+                flat[key] = [x.strip().strip("'\"") for x in inline[1:-1].split(",") if x.strip()]
     return flat
 
 
