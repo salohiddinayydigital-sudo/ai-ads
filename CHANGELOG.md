@@ -3,6 +3,19 @@
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
 
+## [Unreleased] — hardening (targets 8.0.2)
+
+### Tuzatildi
+- `spend_gate`: change packet'dagi `current_daily`/`proposed_daily` nan, 0, matn yoki bir tomonlama bo'lsa +20% qoidasi jimgina o'tkazib yuborilardi; endi darvoza yopiq tomonga xato qiladi.
+- `skill-search` PyYAML'siz zaxira parser: inline `[]`/`[a, b]` ro'yxatlar to'g'ri o'qiladi (`skills:check` endi PyYAML'siz ham o'tadi).
+
+### Qo'shildi
+- `pyproject.toml` (nol bog'liqlik, `requires-python >=3.10,<3.14`), `package.json` `engines.node >=18`, `doctor` Python/Node versiya tekshiruvi.
+- 92 ta yangi test: `tyrion_core`, MCP server (JSON-RPC, nan/inf, 1 MB limit, timeout), spend-guard/spend_gate chegaralari, runtime tekshiruvi.
+
+### O'zgardi
+- `tyrion.py`, `tyrion_core.py`, `spend_gate.py`, `spend-guard.py` docstring/izohlari inglizchaga o'tkazildi; o'lik importlar va ishlatilmagan o'zgaruvchilar olib tashlandi (CLI bayroqlari va MCP sxemalari o'zgarmadi).
+
 ## [8.0.1] — 2026-11-19
 
 Birinchi haqiqiy `claude plugin eval` run'idan keyingi tuzatishlar.
