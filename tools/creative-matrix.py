@@ -710,19 +710,19 @@ def generate_ad_copy_pack(
                 "angle": "Pain Point / Costly Mistake",
                 "headline": f"{clean_prod[:22]}: результат за 14 дней"[: limits.get("headline", 40)],
                 "primary_text": f"Устали терять время из-за проблемы «{clean_prob}»? {clean_prod} решает задачу по договору. {clean_proof}. {mat['price_anchor']}.",
-                "description": f"Гарантия по договору"[: limits.get("description", 30)],
+                "description": "Гарантия по договору"[: limits.get("description", 30)],
             },
             {
                 "angle": "Quantified Social Proof",
                 "headline": f"{clean_prod[:20]} ({clean_proof[:14]})"[: limits.get("headline", 40)],
                 "primary_text": f"{clean_proof} уже выбрали {clean_prod} вместо долгих экспериментов. Прозрачный расчет за 2 минуты.",
-                "description": f"Рассрочка 0% без переплат"[: limits.get("description", 30)],
+                "description": "Рассрочка 0% без переплат"[: limits.get("description", 30)],
             },
             {
                 "angle": "Mechanism & Direct Offer",
                 "headline": f"Расчет {clean_prod[:20]} за 2 мин"[: limits.get("headline", 40)],
                 "primary_text": f"Получите готовое решение {clean_prod} с фиксированной сметой и гарантией. {mat['price_anchor']}.",
-                "description": f"Оставьте заявку сейчас"[: limits.get("description", 30)],
+                "description": "Оставьте заявку сейчас"[: limits.get("description", 30)],
             },
         ]
     elif is_en:
@@ -737,13 +737,13 @@ def generate_ad_copy_pack(
                 "angle": "Quantified Social Proof",
                 "headline": f"{clean_prod[:22]} ({clean_proof[:12]})"[: limits.get("headline", 40)],
                 "primary_text": f"See why {clean_proof} switched to {clean_prod} to eliminate {clean_prob}. Clear pricing, fast onboarding.",
-                "description": f"Risk-free guarantee"[: limits.get("description", 30)],
+                "description": "Risk-free guarantee"[: limits.get("description", 30)],
             },
             {
                 "angle": "Mechanism & Direct Offer",
                 "headline": f"Get {clean_prod[:22]} Today"[: limits.get("headline", 40)],
                 "primary_text": f"Built for teams that want measurable ROI on {clean_prod}. {mat['price_anchor']}.",
-                "description": f"Start in 2 minutes"[: limits.get("description", 30)],
+                "description": "Start in 2 minutes"[: limits.get("description", 30)],
             },
         ]
     else:
@@ -752,19 +752,19 @@ def generate_ad_copy_pack(
                 "angle": "Og'riq va Xato (Pain Point)",
                 "headline": f"{clean_prod[:22]}: aniq yechim"[: limits.get("headline", 40)],
                 "primary_text": f"'{clean_prob}' muammosi vaqtingizni olyaptimi? {clean_prod} orqali aniq yechimga chiqing ({clean_proof}). {mat['price_anchor']}.",
-                "description": f"Shartlar oldindan aytiladi"[: limits.get("description", 30)],
+                "description": "Shartlar oldindan aytiladi"[: limits.get("description", 30)],
             },
             {
                 "angle": "Aniq Isbot va Keys (Social Proof)",
                 "headline": f"{clean_prod[:20]} ({clean_proof[:14]})"[: limits.get("headline", 40)],
                 "primary_text": f"{clean_proof} tajribasida sinovdan o'tgan {clean_prod}. Narx va shartlar oldindan aniq aytiladi (tasdiqlangan shartlarni kiriting).",
-                "description": f"Bepul hisob-kitob oling"[: limits.get("description", 30)],
+                "description": "Bepul hisob-kitob oling"[: limits.get("description", 30)],
             },
             {
                 "angle": "Noyob Mexanizm va Nasiya (Offer Anchor)",
                 "headline": f"{clean_prod[:22]}: qulay to'lov"[: limits.get("headline", 40)],
                 "primary_text": f"{clean_prod} bilan '{clean_prob}' muammosini ortiqcha xarajatsiz hal qiling. {mat['price_anchor']}.",
-                "description": f"Hoziroq '+' qoldiring"[: limits.get("description", 30)],
+                "description": "Hoziroq '+' qoldiring"[: limits.get("description", 30)],
             },
         ]
 

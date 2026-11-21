@@ -27,7 +27,6 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 import tyrion_core as tcore
-import market_locale as mloc
 
 for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):

@@ -1091,8 +1091,8 @@ def analyze_audience_competitors_and_offers(
         "4_effort_reduction_lever": "Mijozdan minimal harakat talab qilinadigan 'Tayyor Tizim' (Done-For-You / shaxsiy kuzatuv).",
         "5_bonus_stack": [
             f"Bonus #1 (Boshlang'ich to'siqni yechish): Bepul dastlabki audit / shaxsiy reja ({mloc.format_currency(round(price * 0.25, 2), currency)} qiymatida — bugun murojaat qilganlarga 0).",
-            f"Bonus #2 (Tezlikni oshirish): Tayyor shablonlar / tekshiruv ro'yxati / ekspress yo'riqnoma.",
-            f"Bonus #3 (Xavfsizlik): 30 kunlik qo'llab-quvvatlash va sifat nazorati.",
+            "Bonus #2 (Tezlikni oshirish): Tayyor shablonlar / tekshiruv ro'yxati / ekspress yo'riqnoma.",
+            "Bonus #3 (Xavfsizlik): 30 kunlik qo'llab-quvvatlash va sifat nazorati.",
         ],
         "6_risk_reversal_guarantee": "Shartli Natija Kafolati: Kelishilgan standart va muddat bajarilmasa, kamchilik o'z hisobimizdan bepul bartaraf etiladi.",
         "7_honest_scarcity": "Sifatni saqlash uchun har haftada jamoa sig'imiga qarab cheklangan miqdordagi mijozlar qabul qilinadi (soxta taymerlarsiz).",

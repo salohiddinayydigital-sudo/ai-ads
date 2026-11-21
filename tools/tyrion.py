@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Tyrion v8.0 Master CLI — Butun tizim uchun yagona boshqaruv markazi (0 token).
+"""Tyrion v8.0 Master CLI — single control center for the whole system (0 tokens).
 
-Ishlatish:
+Usage:
   python3 tools/tyrion.py status
-  python3 tools/tyrion.py route "<topshiriq>" [--json]
-  python3 tools/tyrion.py execute "<topshiriq>" [--json]
+  python3 tools/tyrion.py route "<task>" [--json]
+  python3 tools/tyrion.py execute "<task>" [--json]
   python3 tools/tyrion.py doctor [--quick]
   python3 tools/tyrion.py shield
   python3 tools/tyrion.py audience <subcommand> [args...]
@@ -15,7 +15,7 @@ Ishlatish:
   python3 tools/tyrion.py client <subcommand> [args...]
   python3 tools/tyrion.py calc <subcommand> [args...]
   python3 tools/tyrion.py guard <subcommand> [args...]
-  python3 tools/tyrion.py search "<so'z>"
+  python3 tools/tyrion.py search "<keyword>"
   python3 tools/tyrion.py skills <subcommand> [args...]
   python3 tools/tyrion.py instincts <subcommand> [args...]
 """

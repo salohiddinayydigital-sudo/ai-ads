@@ -544,9 +544,9 @@ def main() -> int:
         return tcore.exit_code_for_result(res)
 
     # Inson o'qiydigan chiroyli xulosa
-    print(f"\n========================================================")
+    print("\n========================================================")
     print(f"  TYRION MEDIA MATH — {args.command.upper()}")
-    print(f"========================================================")
+    print("========================================================")
     for k, v in res.items():
         if isinstance(v, dict):
             print(f"\n  [{k}]:")

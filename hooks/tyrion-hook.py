@@ -22,7 +22,7 @@ import os
 import re
 import subprocess
 import sys
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 
 HOOKS = Path(__file__).resolve().parent

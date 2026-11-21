@@ -23,7 +23,7 @@ import argparse
 import math
 import re
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 VAULT = Path(__file__).resolve().parent.parent

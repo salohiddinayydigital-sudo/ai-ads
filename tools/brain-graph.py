@@ -134,7 +134,7 @@ def communities(nodes: list[dict], links: list[dict]) -> None:
 def build() -> dict:
     files = corpus()
     nodes, stem_to_id = load(files)
-    ids = {n["id"] for n in nodes}
+    {n["id"] for n in nodes}
     links: list[dict] = []
     seen: set[tuple[str, str]] = set()
     for n in nodes:

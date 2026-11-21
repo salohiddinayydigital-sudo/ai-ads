@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Tyrion Spend-Guard — Xavfsizlik va Hisob O'zgarishi Nazoratchisi.
+"""Tyrion Spend-Guard — safety and account-change controller.
 
-Qoida: rules/40-xavfsizlik-va-hisob.md (read-only default, 6 darvoza).
-Hech qanday jonli hisob o'zgarmaydi. Tavsiyalar qat'iy tekshiriladi:
-  1. Byudjet o'zgarishi: 24 soatda <= 20% (machine learning / smart bidding barqarorligi)
-  2. Kunlik limit: max daily spend ceiling dan oshmaslik
-  3. Change Packet butunligi: Rollback / Teskari qadam, Xavf, Boshlang'ich ko'rsatkich, Stop-loss
-  4. Nusxa / Copy siyosati: Telegram Ads 160 belgi, max 1 emoji, ALL CAPS taqiqi; Google Ads RSA
-  5. Tracking: CAPI event_id deduplikatsiyasi, fbp/fbc, xeshlangan ma'lumotlar
+Rule: rules/40-xavfsizlik-va-hisob.md (read-only default, 6 gates).
+No live account is ever modified. Recommendations are strictly validated:
+  1. Budget change: <= 20% per 24 hours (machine learning / smart bidding stability)
+  2. Daily limit: must not exceed the max daily spend ceiling
+  3. Change Packet integrity: Rollback / Teskari qadam, Xavf, Boshlang'ich ko'rsatkich, Stop-loss
+     (the Uzbek section labels are matched literally by the validator)
+  4. Copy policy: Telegram Ads 160 characters, max 1 emoji, no ALL CAPS; Google Ads RSA
+  5. Tracking: CAPI event_id deduplication, fbp/fbc, hashed user data
 
-Chiqish kodlari: 0 = o'tdi · 1 = darvoza BLOKLANDI · 2 = validatsiya xatosi (nan/inf, manfiy, fayl yo'q).
+Exit codes: 0 = passed · 1 = gate BLOCKED · 2 = validation error (nan/inf, negative, missing file).
 
-Buyruqlar:
+Commands:
   python3 tools\\spend-guard.py budget --current 100 --proposed 115 --max-cap 200
   python3 tools\\spend-guard.py packet path/to/change-packet.md
   python3 tools\\spend-guard.py copy --platform telegram --text "Matn..."
@@ -31,7 +32,7 @@ if str(_TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(_TOOLS_DIR))
 import tyrion_core as tcore
 
-# Chiqish kodlari (tyrion_core): 0 = o'tdi, 1 = darvoza BLOKLANDI, 2 = validatsiya xatosi (nan/inf, manfiy, fayl yo'q).
+# Exit codes (tyrion_core): 0 = passed, 1 = gate BLOCKED, 2 = validation error (nan/inf, negative, missing file).
 
 # Windows UTF-8
 for _stream in (sys.stdout, sys.stderr):
@@ -85,9 +86,9 @@ def check_budget_change(
             f"maksimal limitdan ({max_daily_cap:.2f}) oshib ketdi."
         )
 
-    # 3. Minimum Learning Volume (Meta uchun tavsiya)
+    # 3. Minimum Learning Volume (recommended for Meta)
     if target_cpa and target_cpa > 0:
-        # 1 ad set uchun kunlik kamida 1.5-2x target CPA kerak (haftasiga kamida 50 ta konversiya)
+        # A single ad set needs at least 1.5-2x target CPA per day (>= 50 conversions per week)
         min_healthy_daily = (target_cpa * 50) / 7.0
         if proposed_daily < min_healthy_daily:
             warnings.append(
