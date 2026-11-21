@@ -66,6 +66,17 @@ SECRET_NAME_RE = re.compile(r"(^|/)(\.env|.*\.pem|.*\.key|.*credential.*|.*secre
 LLM_KEY_ENV = ("DEEPSEEK_API_KEY", "GEMINI_API_KEY", "GOOGLE_API_KEY",
                "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "MOONSHOT_API_KEY")
 
+# Supported runtimes (keep in sync with pyproject.toml and package.json "engines")
+PY_MIN, PY_MAX_EXCL = (3, 10), (3, 14)
+NODE_MIN_MAJOR = 18
+
+
+def _parse_node_version(text: str) -> tuple[int, ...] | None:
+    """Parse `node --version` output such as 'v22.23.5' into a tuple of ints."""
+    m = re.match(r"\s*v?(\d+)\.(\d+)\.(\d+)", text or "")
+    return tuple(int(x) for x in m.groups()) if m else None
+
+
 # operator xotirasi fayli o'zining ixchamlik shartini buzmasin (memory.md: "90 qatordan oshmasin")
 MEMORY_LIMIT = 90
 
@@ -100,6 +111,35 @@ def run(cmd: list[str], cwd: Path | None = None, timeout: int = 120) -> subproce
 # --------------------------------------------------------------------------- #
 # Tekshiruvlar
 # --------------------------------------------------------------------------- #
+
+def check_runtime(report: Report) -> None:
+    """Validate Python (3.10-3.13) and Node (>=18) runtimes."""
+    cur = sys.version_info[:3]
+    label = ".".join(map(str, cur))
+    if cur[:2] < PY_MIN:
+        report.add("Python versiyasi", FAIL, f"{label} qo'llab-quvvatlanmaydi — kamida 3.10 kerak")
+    elif cur[:2] >= PY_MAX_EXCL:
+        report.add("Python versiyasi", WARN, f"{label} sinovdan o'tmagan (qo'llab-quvvatlanadi: 3.10-3.13)")
+    else:
+        report.add("Python versiyasi", OK, f"{label} (3.10-3.13)")
+
+    node = shutil.which("node")
+    if not node:
+        report.add("Node versiyasi", WARN, "node topilmadi — hook va MCP launcher uchun Node >=18 kerak")
+        return
+    try:
+        out = run([node, "--version"], timeout=30).stdout
+    except Exception as exc:  # pragma: no cover
+        report.add("Node versiyasi", WARN, f"node --version ishlamadi: {exc}")
+        return
+    ver = _parse_node_version(out)
+    if ver is None:
+        report.add("Node versiyasi", WARN, f"node versiyasini o'qib bo'lmadi: {out.strip()!r}")
+    elif ver[0] < NODE_MIN_MAJOR:
+        report.add("Node versiyasi", FAIL, f"v{'.'.join(map(str, ver))} — kamida Node {NODE_MIN_MAJOR} kerak")
+    else:
+        report.add("Node versiyasi", OK, f"v{'.'.join(map(str, ver))} (>={NODE_MIN_MAJOR})")
+
 
 def check_required(report: Report) -> None:
     missing = [rel for rel in REQUIRED if not (VAULT / rel).is_file()]
@@ -599,6 +639,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     report = Report()
+    check_runtime(report)
     check_required(report)
     check_vault(report, data)
     check_frontmatter(report, data)
