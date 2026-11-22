@@ -3,7 +3,7 @@
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
 
-## [Unreleased]
+## [8.1.0] — 2026-11-22
 
 Video pre-production tizimi (4 ustun): sotuvchi video, organik/ekspert video, video kontent reja + syomka kuni, motion video blueprint. Montaj/render qatlami (`video-editing.md`, `tools/video-run.py`) o'zgarmagan.
 

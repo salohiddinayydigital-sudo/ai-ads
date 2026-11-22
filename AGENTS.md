@@ -1,14 +1,14 @@
 ---
 name: AGENTS
-description: "Tyrion v8.0 — kanonik agent shartnomasi: yagona qatlamlar, 12 agent va orkestratsiya tartibi (Claude Code, Cursor, Codex, Windsurf)"
+description: "Tyrion v8.1 — kanonik agent shartnomasi: yagona qatlamlar, 12 agent va orkestratsiya tartibi (Claude Code, Cursor, Codex, Windsurf)"
 tags: [router, agents, shartnoma, arxitektura, ecc]
 source: "ECC (affaan-m/ECC) naqshi asosida Tyrion uchun qurildi"
 updated: 2026-11-19
 ---
 
-# 🧠 TYRION v8.0 — KANONIK AGENT SHARTNOMASI
+# 🧠 TYRION v8.1 — KANONIK AGENT SHARTNOMASI
 
-> **Bir qator:** Tyrion v8.0 — pullik reklama va targetologiya uchun yopiq siklli tizim: 12 agent, 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 29 slash buyruq (12 tasi model ko'radi) va 40 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
+> **Bir qator:** Tyrion v8.1 — pullik reklama va targetologiya uchun yopiq siklli tizim: 12 agent, 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 29 slash buyruq (12 tasi model ko'radi) va 40 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
 
 <!-- tyrion:catalog agents=12 skills=19 wiki=101 playbooks=9 contexts=6 commands=35 rules=9 tools=40 -->
 

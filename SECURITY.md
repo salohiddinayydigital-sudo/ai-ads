@@ -4,7 +4,7 @@
 
 | Version | Status | Architecture Inventory |
 |---|---|---|
-| **8.0.x** | Supported (Current Global Release) | **12 agents**, **19 skills**, **35 slash commands**, **40 CLI tools**, 100 wiki notes |
+| **8.1.x** | Supported (Current Global Release) | **12 agents**, **19 skills**, **35 slash commands**, **40 CLI tools**, 100 wiki notes |
 | **5.0.x** | Maintenance | Single-Root ECC (Uzbekistan default) |
 
 ## 2. Reporting a Vulnerability
