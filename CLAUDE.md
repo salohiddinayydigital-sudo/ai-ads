@@ -1,16 +1,16 @@
 ---
 name: CLAUDE
-description: "Tyrion v8.0 — yopiq siklli media-buyer miyasi: skill/agent routeri, ma'lumot qatlami, Spend-Guard"
+description: "Tyrion v8.1 — yopiq siklli media-buyer miyasi: skill/agent routeri, ma'lumot qatlami, Spend-Guard"
 tags: [router, tyrion, ecc, v8]
 source: "affaan-m/ECC arxitekturasi asosida Tyrion uchun"
 updated: 2026-11-19
 ---
 
-# 🧠 TYRION v8.0 — AI PAID MEDIA & TARGETOLOGY OS
+# 🧠 TYRION v8.1 — AI PAID MEDIA & TARGETOLOGY OS
 
 > **Kanonik shartnoma:** [[AGENTS.md]] · **Operator xotirasi:** [[MEMORY.md]] · **Bilim xaritasi:** [[INDEX.md]] · **Kirish:** [[README.md]]
 
-Tyrion v8.0 — pullik reklama va targetologiya uchun yopiq siklli tizim: rasmiy konnektorlardan ma'lumot oladi, raqamlarni kod bilan hisoblaydi (`schemas/metrics.v1.json`), hisobni kuzatadi (`pulse`), testlardan o'rganadi (`experiments`), CRM lid sifatini Meta'ga qaytaradi (`lead-quality`). Arxitektura: yagona ildiz, `affaan-m/ECC` naqshi. 7.x dan o'tish: [[MIGRATION.md]].
+Tyrion v8.1 — pullik reklama va targetologiya uchun yopiq siklli tizim: rasmiy konnektorlardan ma'lumot oladi, raqamlarni kod bilan hisoblaydi (`schemas/metrics.v1.json`), hisobni kuzatadi (`pulse`), testlardan o'rganadi (`experiments`), CRM lid sifatini Meta'ga qaytaradi (`lead-quality`). Arxitektura: yagona ildiz, `affaan-m/ECC` naqshi. 7.x dan o'tish: [[MIGRATION.md]].
 
 ## 1. Yagona Ildizli Tuzilma (Single-Root Architecture)
 
@@ -46,7 +46,7 @@ Tyrion v8.0 — pullik reklama va targetologiya uchun yopiq siklli tizim: rasmiy
 | `python3 tools/tyrion.py status` | **Yagona Master CLI** — tizim holati va barcha buyruqlar menyusi |
 | `python3 tools/tyrion.py route "<vazifa>"` | **Universal Auto-Router** — oddiy tildagi topshiriqdan agent, skill, reference va workflow'ni avtomatik tanlash va yuklash |
 | `python3 tools/doctor.py` | **Tizim sog'lig'i** — ko'p qatlamli tekshiruv (bilim, katalog, skill, sirlar, testlar) |
-| `python3 tools/tyrion-shield.py scan` | **TyrionShield v8.0 (/shield)** — 6 qavatli statik xavfsizlik, AST va governance skaneri |
+| `python3 tools/tyrion-shield.py scan` | **TyrionShield v8.1 (/shield)** — 6 qavatli statik xavfsizlik, AST va governance skaneri |
 | `python3 tools/meta-targeting-engine.py search` | **Detailed Targeting Accuracy Engine (/auditoriya)** — 6-statusli rasmiy Graph API v26.0 interest qidiruv va validation dvigateli |
 | `python3 tools/meta-audience.py <cmd>` | **Meta Ads Audience Studio (/auditoriya)** — `architect`, `interests`, `overlap` (<20%), `saturation`, `retargeting`, `lookalike`, `diagnose` |
 | `python3 tools/meta-insights-sync.py pull` | **Live Meta Ads Insights (/eksport)** — Graph API v26.0 `/act_<id>/insights` sinxronizatsiyasi va auditi |
