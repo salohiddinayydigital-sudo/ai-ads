@@ -84,6 +84,10 @@ Kerakli rolni `Read` bilan och (yoppasiga o'qima):
 | `content-planner` | `skills/content/references/legacy-agents/social-content-writer.md` | Use this agent for - Sotsial kontent worker — IG/Telegram/FB uchun post, repurposing, carousel, organik kontent rejasi (reklama videolari va |
 | `content-planner` | `skills/content/references/legacy-agents/seo-auditor.md` | Use this agent for - SEO audit worker — mijoz sayti/landing uchun texnik + on-page SEO tekshiruvi. 'seo audit', 'saytni tekshir', 'nima uchu |
 
+## Video handoff (video-producer bilan)
+
+Video kontent reja so'ralsa: avval ustunlar (pillar), maqsad va mavzular (`USER_PROVIDED` savollar) shu agentda tuziladi; haftalik/oylik video matritsa va syomka kuni rejasi `skills/video/references/video-content-planning.md` bo'yicha yoziladi (funnel ulushi `HEURISTIC_PRIOR_MODEL` deb belgilanadi). Tayyor mavzular → `video-producer` (`organic` yoki `sales` rejimida ssenariyga aylantiradi); angle/hook g'oyalari kerak bo'lsa → `creative-strategist`. Ssenariyni o'zing yozma va montajga o'tma — bu `video-producer` doirasi.
+
 ## Autonomous Routing & Baseline Contract ([[70-charter-baseline]])
 
 - **Auto-Skill Loading:** `tyrion_universal_router` (`agent_hint: "content-planner"`, `context_mode: "manifest"`) bilan kerakli `SKILL.md` va `references/*.md` aniqlanadi. Hech qachon o'qilmagan skill/reference "qo'llandi" deb yozilmaydi.
