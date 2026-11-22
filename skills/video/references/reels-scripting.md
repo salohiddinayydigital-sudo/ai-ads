@@ -2,6 +2,8 @@
 
 # 🎬 Reels, TikTok & Meta Video Ad Scripting Engine (`reels-scripting`)
 
+> **4 ustunli tizim:** bu fayl eski kirish nuqtasi sifatida saqlanadi (orqaga moslik: `reels-scripting` aliasi, `migration-v8.json`). Yangi ishlar uchun rejimni `skills/video/SKILL.md` Intent Router bilan tanlang: sotuvchi video → `sales-video-scripting.md`; organik/ekspert → `organic-video-content.md`; reja → `video-content-planning.md`; motion → `motion-video-scripting.md`; tekshiruv → `script-quality-rubric.md`. Quyidagi format kutubxonasi (§2) va chiqish tuzilmasi (§3) o'z kuchida; safe-zone/3-Capture spetsifikatsiyasining yagona manbasi — `sales-video-scripting.md` §8.
+
 > **Professional script package**: strategic brief, >= 3 materially different hooks (first frame, on-screen text, spoken line, camera, psychological purpose), time-coded storyboard table (15/30/45 s), editing instructions, ad copy package, `claim_safety` check, and the test -> diagnose -> iterate loop are specified in `skills/video/references/reels-scripting/references/performance-video-system.md`. Read it before writing. Never invent statistics, testimonials, prices or guarantees; use `[ADD VERIFIED ...]` placeholders.
 
 Generate ready-to-shoot, high-retention `9:16` vertical video scripts for **paid Meta/TikTok/YouTube video ads** and **organic Reels/Shorts** — immediately and with **zero mandatory external API keys** (`APIFY_API_TOKEN` is never required).

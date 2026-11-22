@@ -1,5 +1,7 @@
 # Short-Form Video: Hooks, Scripts & Strategy
 
+> **Video pre-production tizimi :** organik/ekspert/brend ssenariy formatlari va qoidalari — `skills/video/references/organic-video-content.md`; TOFU/MOFU/BOFU rejasi, haftalik/oylik matritsa va syomka kuni — `skills/video/references/video-content-planning.md`; sotuvchi video — `sales-video-scripting.md`; motion — `motion-video-scripting.md`. Bu fayl **hook kutubxonasi, platforma tavsiyalari (audio, posting, analitika)** uchun qoladi; ssenariy tuzilishi va pacing bo'yicha yuqoridagilar ustun.
+
 Detailed reference for creating short-form video content on TikTok, Instagram Reels, and YouTube Shorts.
 
 ---
@@ -200,11 +202,7 @@ Best for: Relatable content, humor, niche communities
 
 ### Batch Creation Workflow
 
-1. **Ideate** (30 min): Generate 10-20 concepts
-2. **Script** (1 hour): Write scripts for 5-10 videos
-3. **Batch film** (2 hours): Record all talking head content
-4. **Edit** (2-3 hours): Edit and add captions
-5. **Schedule** (30 min): Queue for optimal times
+To'liq Batch Shooting Plan (lokatsiya, kiyim almashinuvi, yorug'lik, 3-Capture, umumiy B-roll, tartib) — `skills/video/references/video-content-planning.md` §5. Qisqa tartib: g'oya → ssenariy → batch syomka → montaj/subtitr → jadval.
 
 ---
 

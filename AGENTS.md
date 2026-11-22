@@ -10,7 +10,7 @@ updated: 2026-11-19
 
 > **Bir qator:** Tyrion v8.0 — pullik reklama va targetologiya uchun yopiq siklli tizim: 12 agent, 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 29 slash buyruq (12 tasi model ko'radi) va 40 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
 
-<!-- tyrion:catalog agents=12 skills=19 wiki=101 playbooks=9 contexts=6 commands=29 rules=9 tools=40 -->
+<!-- tyrion:catalog agents=12 skills=19 wiki=101 playbooks=9 contexts=6 commands=35 rules=9 tools=40 -->
 
 ## 1. Boot Tartibi (Token Tejamkor)
 
@@ -26,7 +26,7 @@ updated: 2026-11-19
 |---|---|---|---|
 | **Agentlar** | `agents/` (12) | 12 ta ixtisoslashgan agent charteri (`Prompt Defense Baseline` + `skills:` ulangan) | kanonik |
 | **Skilllar** | `skills/` (19) | 19 ta skill: `tyrion`, `strategy`, `audit`, `audience`, `creative`, `video`, `tracking`, `budget`, `analyze`, `competitors`, `funnel`, `content`, `report`, `client`, `system`, `connect`, `pulse`, `experiments`, `lead-quality` | kanonik |
-| **Buyruqlar** | `commands/` (27) | 27 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
+| **Buyruqlar** | `commands/` (35) | 35 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
 | **Kontekstlar** | `contexts/` (6) | 5 ta ECC Dynamic Context Mode (`audit`, `launch`, `scale`, `creative`, `uzbekistan`) + `README.md` | kanonik |
 | **Playbooklar** | `playbooks/` (9) | 8 ta to'liq nisha va platforma playbooki + `README.md` | kanonik |
 | **Bilim (Wiki)** | `wiki/` (100) | 100 ta atomik, wikilink bilan bog'langan bilim qaydi va 16 ta SOP | kanonik |
@@ -43,7 +43,7 @@ updated: 2026-11-19
 | `tracking-specialist` | Pixel/CAPI, atributsiya, CRM→CAPI lid sifati | `audit-tracking`, `tracking-specialist` |
 | `audience-architect` | Meta auditoriya arxitekturasi, 6-statusli interest tekshiruvi | `meta-audience-architect` |
 | `creative-strategist` | Angle, hook, matn (UZ/RU/EN), kreativ audit, format | `audit-creative`, `copy-writer`, `visual-designer`, `format-adapter` |
-| `video-producer` | Reels/TikTok/Shorts skript, montaj spetsifikatsiyasi | `reels-scriptwriter`, `video-editor` |
+| `video-producer` | Video pre-production (sotuvchi/organik video ssenariy, video kontent reja, motion storyboard; Self-Audit >= 85/100) va alohida montaj spetsifikatsiyasi | `reels-scriptwriter`, `video-editor` |
 | `budget-analyst` | Break-even, MER, pacing, scale qarori | `audit-budget` |
 | `data-analyst` | Eksport, `metrics.v1`, pulse, eksperiment natijasi, hisobot | (yangi) |
 | `strategist` | Pozitsiyalash, launch, offer, g'oyalar | `positioning-strategist`, `launch-planner`, `campaign-ideator` |
@@ -62,7 +62,7 @@ Eski nomlar router tomonidan alias sifatida taniladi (`manifests/migration-v8.js
 
 Barcha muhitlarda (Claude Code, Codex, Cursor, Windsurf, CLI/MCP) bitta kanonik oqim amal qiladi:
 
-1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 27 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
+1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 35 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
 2. **Avtomatik tanlash (`route_task`):** `primary_agent`, `supporting_agents` (faqat haqiqatan mustaqil ko'p bosqichli vazifalarda), `required_skills`, `supporting_skills`, `rules_to_load` va `references_to_load` avtomatik aniqlanadi.
 3. **To'liq ko'rsatmalarni yuklash (`full` vs `manifest`):** Standart `full` rejimda tanlangan agent charterlari, `SKILL.md`, qoidalar va reference fayllarning **to'liq matni** (`compiled_context_package`) kontekst byudjeti (`max_context_bytes=180,000`) nazorati ostida yuklanadi. To'liq o'qilmagan skill hech qachon "qo'llanildi" deb ko'rsatilmaydi.
 4. **Amaliy ijro (`execute_task`) va Multi-Harness halolligi:**

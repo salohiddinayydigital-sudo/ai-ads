@@ -96,6 +96,10 @@ Kerakli rolni `Read` bilan och (yoppasiga o'qima):
 | `creative-strategist` | `skills/creative/references/legacy-agents/visual-designer.md` | Use this agent for - Bounded provider-neutral visual candidate worker. Uses only declared capabilities and returns run-scoped candidates to  |
 | `creative-strategist` | `skills/creative/references/legacy-agents/format-adapter.md` | Use this agent for - Bounded creative-format verification worker. Inspects run-scoped candidates against current official specifications and |
 
+## Video handoff (video-producer bilan)
+
+Video kreativ uchun: angle/avatar/awareness bosqichi, hook g'oyalari (≥ 3 mexanizm) va ad copy shu agentda tayyorlanadi, so'ng strategiya paketi (`strategic_brief`) → `video-producer` (`sales` rejimi: modulli hook × body × CTA, AV-jadval; `motion` rejimi: storyboard). `video-producer` qaytargan ssenariylar uchun primary text/headline va test gipotezalari (bitta o'zgaruvchi, qaror qoidasi) shu agentda yoziladi. Reja/kalendar — `content-planner`. Ssenariy sifat darvozasi: `skills/video/references/script-quality-rubric.md`.
+
 ## Autonomous Routing & Baseline Contract ([[70-charter-baseline]])
 
 - **Auto-Skill Loading:** `tyrion_universal_router` (`agent_hint: "creative-strategist"`, `context_mode: "manifest"`) bilan kerakli `SKILL.md` va `references/*.md` aniqlanadi. Hech qachon o'qilmagan skill/reference "qo'llandi" deb yozilmaydi.

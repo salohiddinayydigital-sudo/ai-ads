@@ -4,7 +4,7 @@ description: "Video kreativ tizimi — hook/tana/CTA arxitekturasi, 9 uchadigan 
 tags: [kreativ, video, meta-ads, format]
 source: "kanal-bilim/03_9_ta_uchadigan_format.txt + skills/audit/references/ads/meta-creative-specs.md + marketolog/KNOWLEDGE.md §6 + bozor-trend-kreativi"
 source_status: unverified
-updated: 2026-09-20
+updated: 2026-11-22
 ---
 
 # Video kreativ tizimi
@@ -85,6 +85,21 @@ Avtomatik haftalik refresh — statik + narx langari; to'liq avtonom emas, teksh
 - [ ] CTA aniq, destination Telegram/landing bilan mos
 - [ ] Policy: isbotsiz va'da, "eng yaxshi", raqamsiz da'vo yo'q ([[ozbek-sotuv-matni-standarti]])
 - [ ] Sifat chegarasi: [[sifat-darajasi]] · tekshiruv ro'yxati: [[topshirish-cheklist-matn]]
+
+## 9. Video pre-production: 4 ustunli tizim 
+
+Ssenariy/reja qatlami montaj qatlamidan ajratildi. Rejimni tanlash va yuklash tartibi — `skills/video/SKILL.md` (Intent Router):
+
+| Ustun | Nima | Reference |
+|---|---|---|
+| **Sales Video** | Direct-response: awareness → modulli 3–5 hook × 2 body × 2 CTA, retention, compliance | `skills/video/references/sales-video-scripting.md` |
+| **Organic / Expert / Brand** | 8 format (ekspert, case, mif-buzar, BTS, A vs B, Q&A, listicle, serial) | `skills/video/references/organic-video-content.md` |
+| **Video Content Plan** | TOFU/MOFU/BOFU balansi, matritsa, syomka kuni | `skills/video/references/video-content-planning.md` |
+| **Motion Blueprint** | Montajsiz ssenariy + storyboard + asset checklist | `skills/video/references/motion-video-scripting.md` |
+
+Barchasi bitta chiqish standartiga ega: **Creative Brief Header → 6 ustunli AV-jadval (yoki Motion Storyboard) → Production Notes + Self-Audit** (`skills/video/references/script-quality-rubric.md`, o'tish chegarasi 85/100). Shablonlar: [[video-skript-shablonlari]]. Bu §1–§8 dagi 9 formatli katalogni almashtirmaydi — u funnel va testlash mantig'ining asosi bo'lib qoladi.
+
+🟡 Funnel ulushi (~50/30/20), ritm (har ~2–4 s) va nutq tezligi — `HEURISTIC_PRIOR_MODEL`; hisob ma'lumoti bilan almashtiriladi ([[kreativ-hit-rate]], [[funnel-2-kreativ-format]]).
 
 ## Manba
 

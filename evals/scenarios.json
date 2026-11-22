@@ -86,6 +86,34 @@
       "tool_name": "tyrion_meta_detailed_targeting"
     },
     {
+      "id": "E13_skill_route_sales_video",
+      "type": "skill_route",
+      "agent": "video-producer",
+      "query": "stomatologiya uchun sotuvchi video ssenariy yozib ber",
+      "expected": "video"
+    },
+    {
+      "id": "E14_skill_route_video_plan",
+      "type": "skill_route",
+      "agent": "video-producer",
+      "query": "2 haftalik video kontent reja va syomka kuni rejasi tuz",
+      "expected": "video"
+    },
+    {
+      "id": "E15_skill_route_motion_blueprint",
+      "type": "skill_route",
+      "agent": "video-producer",
+      "query": "motion video ssenariy va storyboard SaaS uchun",
+      "expected": "video"
+    },
+    {
+      "id": "E16_skill_route_organic_video_ru",
+      "type": "skill_route",
+      "agent": "video-producer",
+      "query": "сценарий продающего видео для клиники",
+      "expected": "video"
+    },
+    {
       "id": "R01_meta_low_quality_leads_uz_lat",
       "type": "universal_route",
       "language": "uz_latin",

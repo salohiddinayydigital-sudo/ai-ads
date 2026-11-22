@@ -1,20 +1,11 @@
 # 9:16 Short-Form Video Ad Scripting & Production Specification
 
-## 1. Universal Vertical Video Safe Zone (`1080x1920` Frame -> `720x1200` Safe Area)
-- **Full Canvas:** `1080 x 1920 px` (`9:16` aspect ratio).
-- **Text & Key Visual Safe Zone:** Keep all burned-in captions, headlines, price anchors, and critical product visuals inside the central **`720 x 1200 px`** safe box:
-  - **Top `250 px`:** Covered by Instagram Reels / TikTok profile header and sound badge.
-  - **Bottom `470 px`:** Covered by ad account handle, primary text expansion, CTA button (`Shop Now` / `Learn More`), and progress bar.
-  - **Right `200 px`:** Covered by Like, Comment, Share, and Save icons.
-- **Caption Recipe:** White fill (`#FFFFFF`) with bold black stroke (`3-4px`), centered in the lower-middle third (`Y: 1150-1350px`), 3–5 words per line max, synced to speech.
+> **Yagona manba (Single Source of Truth):** safe-zone (`1080x1920` → `720x1200`), caption retsepti, 3-Capture syomka tizimi va pacing qoidalari endi `skills/video/references/sales-video-scripting.md` §4 va §8 da yuritiladi. Takrorlanish dublikat va nomuvofiqlik manbai bo'lgani uchun bu yerda faqat qisqa xulosa va havola qoldirildi. Organik videolar: `skills/video/references/organic-video-content.md`; sifat darvozasi: `skills/video/references/script-quality-rubric.md`.
 
-## 2. The 0.5–1.5s Pacing & 3-Capture Shooting System
-1. **First 3 Seconds (The Thumbstop Gate):** Must combine **3 simultaneous hooks**:
-   - **Visual Hook:** Motion in frame 1 (hand placing product, split-screen reveal, before/after prop, or Greenscreen zoom).
-   - **On-Screen Text Hook:** 5–7 words inside the `720x1200` safe zone naming the exact avatar or problem.
-   - **Spoken Hook:** Direct statement of problem, counter-intuitive number, or specific buyer situation (zero "Hello guys" intro filler).
-2. **Body Pacing (Seconds 3–20):** Cut dead air (`>0.25s` pauses); change camera crop, B-roll overlay, or visual angle every `1.5–2.5` seconds.
-3. **3-Capture Shooting System (for UGC / Founder shoots):**
-   - **Capture 1:** A-Roll talking head (3 hook variations + full body + 2 CTA variations).
-   - **Capture 2:** Hands-on product/service demonstration B-Roll (close-up mechanism, texture, screen recording, or clinic/showroom tour).
-   - **Capture 3:** Social proof / outcome B-Roll (customer delivery, CRM/review screen, before/after result).
+## Qisqa xulosa (batafsil — yagona manbada)
+
+- **Canvas / safe zone:** 1080×1920; matn va asosiy vizual markaziy **720×1200** ichida (yuqori ~250 px, pastki ~470 px, o'ng ~200 px platforma UI uchun bo'sh). Yetkazishdan oldin joriy rasmiy spetsifikatsiyani tekshiring (`UNVERIFIED`).
+- **Birinchi 3 soniya:** bir vaqtda vizual hook + 5–7 so'zli matnli hook + og'zaki hook; "Hello guys" yo'q.
+- **Tana:** har ~2–4 soniyada pattern interrupt (`HEURISTIC_PRIOR_MODEL`); eski 0.5–1.5 s kesim ritmi montaj uchun yo'riqnoma, ssenariyda o'zgarish nuqtalari AV-jadvalda yoziladi.
+- **3-Capture:** A-roll (3 hook + tana + 2 CTA) → mexanizm B-roll → isbot B-roll.
+- **Generator:** `python3 tools/creative-matrix.py video-script --mode sales ...` (eski rejimsiz chaqiruv ham ishlaydi).

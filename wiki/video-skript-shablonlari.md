@@ -4,7 +4,7 @@ description: "9 uchadigan format uchun to'ldiriladigan video skript shablonlari 
 tags: [kreativ, video, shablon, skript]
 source: "wiki/video-kreativ-tizimi.md + kanal-bilim/03_9_ta_uchadigan_format.txt + video-producer charter"
 source_status: unverified
-updated: 2026-09-20
+updated: 2026-11-22
 ---
 
 # Video skript shablonlari (9 format)
@@ -85,6 +85,19 @@ Tana:   A: {natija} · B: {natija}
 Proof:  {raqam bilan taqqoslash}
 CTA:    "Xohlasangiz — {harakat}"
 ```
+
+## Yangi tizim shablonlari (4 rejim)
+
+9 formatli qisqa shablonlar yuqorida o'z kuchida. To'liq production-ready chiqish uchun 4 ta shablon (`templates/`):
+
+| Rejim | Shablon | Qachon |
+|---|---|---|
+| Sotuvchi video | `templates/sales-video-script.md` | Reklama/lid/sotuv — modulli hook × body × CTA |
+| Organik video | `templates/organic-video-script.md` | Ekspert/brend/case/serial |
+| Video kontent reja | `templates/video-content-plan.md` | Haftalik/oylik matritsa + syomka kuni |
+| Motion blueprint | `templates/motion-video-blueprint.md` | Motion ssenariy va storyboard (montajsiz) |
+
+Moslik: yuqoridagi 9 format → yangi tizimda — 1 *50/50* va 9 *Solishtirish* → Taqqoslash (A vs B); 2 *Savol-Javob* → Q&A; 3 *Ekspert* va 4 *Face-to-camera* → Ekspert/Talking Head; 5 *Storytell* va 6 *Syujetli* → Mikro-storytelling; 7 *Ekstremal* → BTS/Jarayon; 8 *Shaxsiyatni ochish* → Ekspert/Q&A. Hamma shablon 6 ustunli AV-jadval va Self-Audit (≥ 85/100) bilan tugaydi ([[video-kreativ-tizimi]]).
 
 ## Umumiy tekshiruv (har skriptdan keyin)
 
