@@ -38,7 +38,10 @@ updated: 2026-09-16
 |------|-------------|
 | [[meta-katta-byudjet-scaling]] | **Katta byudjet:** marginal CPA/ROAS matematikasi, 6 shartli scale darvozasi, vertikal/gorizontal qadamlar, pause intizomi, change packet |
 | [[video-kreativ-tizimi]] | **Video kreativ:** hook/tana/CTA arxitekturasi, 9 format, test tartibi, spec darvozasi, fatigue, AI pipeline |
-| [[video-skript-shablonlari]] | 9 format uchun to'ldiriladigan skript shablonlari (`{hook}`/`{proof}`/`{CTA}`) |
+| [[video-skript-shablonlari]] | 9 format uchun to'ldiriladigan skript shablonlari (`{hook}`/`{proof}`/`{CTA}`) + 4 rejimli production shablonlar (`templates/`) |
+
+> **Video pre-production (4 ustun):** router `skills/video/SKILL.md`; references: `sales-video-scripting.md`, `organic-video-content.md`, `video-content-planning.md`, `motion-video-scripting.md`, `script-quality-rubric.md` (`skills/video/references/`); buyruqlar `/video-ssenariy`, `/video-reja`, `/motion-ssenariy`; asbob `creative-matrix.py video-script --mode sales|organic|plan|motion`.
+
 | [[bozor-analizi-tizimi]] | **Bozor tahlili:** 10 tamoyilli fikrlash intizomi, Ads Library g'olib oqimi, RAQOBAT.md artefakti, UZ tuzatishlar |
 | [[mijoz-tadqiqoti-custdev]] | **CustDev:** savol bloklari, ballash, topilmalarni rejaга aylantirish (haqiqiy natijalar) |
 | [[ozbekiston-raqamli-bozor]] | **Bozor raqamlari (sanali):** internet 89%, FB/IG ~15 mln, erkak 67%, 18-34 asosiy |

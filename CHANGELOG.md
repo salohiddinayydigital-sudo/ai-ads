@@ -3,6 +3,22 @@
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
 
+## [Unreleased]
+
+Video pre-production tizimi (4 ustun): sotuvchi video, organik/ekspert video, video kontent reja + syomka kuni, motion video blueprint. Montaj/render qatlami (`video-editing.md`, `tools/video-run.py`) o'zgarmagan.
+
+### Qo'shildi
+- `skills/video/SKILL.md` — 4 ustunli Intent Router (Sales / Organic / Plan / Motion + alohida Post-Production); yangi referencelar: `sales-video-scripting.md`, `organic-video-content.md`, `video-content-planning.md`, `motion-video-scripting.md`, `script-quality-rubric.md` (100 ball, o'tish 85).
+- `tools/creative-matrix.py video-script --mode sales|organic|plan|motion --lang uz|ru|en --duration 15|30|45|60 --hooks 3..5` (stdlib-only; rejimsiz eski chaqiruv o'zgarmagan).
+- Buyruqlar: `/video-ssenariy`, `/video-reja`, `/motion-ssenariy` + EN aliaslar `/video-script`, `/video-plan`, `/motion-script` (commands 29 → 35).
+- `templates/`: `sales-video-script.md`, `organic-video-script.md`, `video-content-plan.md`, `motion-video-blueprint.md`; `schemas/`: `video-script-schema.json`, `motion-blueprint-schema.json`.
+- Evals: `sales-video-uz-1`, `organic-video-uz-1`, `video-plan-uz-1`, `motion-script-uz-1` + 4 ta `skill_route` stsenariy; `tests/test_video_scripting.py`.
+
+### O'zgardi
+- `agents/video-producer.md` (+ `.claude/` mirror): rejimlar, majburiy AV-jadval, Self-Audit >= 85/100, handoff; `content-planner` va `creative-strategist` ga video handoff.
+- Takrorlanish olib tashlandi: safe-zone/3-Capture yagona manbasi `sales-video-scripting.md` §8; `video-ad-scripts-and-specs.md` va `short-form-video.md` qisqartirilib havolaga o'tkazildi; `reels-scripting.md` orqaga moslik bilan saqlandi.
+- `wiki/video-kreativ-tizimi.md`, `wiki/video-skript-shablonlari.md` yangi tizimga moslandi.
+
 ## [8.0.1] — 2026-11-19
 
 Birinchi haqiqiy `claude plugin eval` run'idan keyingi tuzatishlar.
