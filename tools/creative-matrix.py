@@ -6,6 +6,7 @@ Commands:
   python3 tools/creative-matrix.py hooks --niche edtech --offer "IELTS 7.0 3 oyda" [--languages uz_latin,ru,en] [--json]
   python3 tools/creative-matrix.py fatigue --hook-rate 22.0 --hold-rate 9.5 --ctr-drop-pct 35.0 --frequency 2.9 --ftir 52.0 [--json]
   python3 tools/creative-matrix.py video-script --niche medical --product "Tish implantatsiyasi" --problem "Tish yo'qotilishi" --format ugc_reaction_demo --language uz_latin [--json]
+  python3 tools/creative-matrix.py video-script --mode sales|organic|plan|motion --lang uz|ru|en --duration 15|30|45|60 --hooks 3 --product "..." [--json]   # video pre-production skeletlari
   python3 tools/creative-matrix.py pda-matrix --niche ecom --product "Espresso Machine" --price 300 --market eu --currency EUR [--json]
   python3 tools/creative-matrix.py ad-copy --platform meta --product "CRM Avtomatlashtirish" --problem "Lidlar yo'qolishi" --proof "300+ kompaniya" --language uz_latin [--json]
 """
@@ -13,7 +14,9 @@ Commands:
 from __future__ import annotations
 
 import argparse
+import datetime as _dt
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -151,7 +154,7 @@ UNVERIFIED_CLAIM_PATTERNS = [
 
 def lint_unverified_claims(payload: Any) -> dict[str, Any]:
     """Skriptdagi tasdiqlanmagan raqam/kafolat/superlativlarni topadi. [ ] ichidagi to'ldirish joylari (placeholder) hisobga olinmaydi."""
-    skip = {"falsifiable_hypothesis", "andromeda_rule", "production_specs", "andromeda_utis_note", "claim_safety", "test_thresholds_note"}
+    skip = {"self_audit_checklist", "funnel_mix", "falsifiable_hypothesis", "andromeda_rule", "production_specs", "andromeda_utis_note", "claim_safety", "test_thresholds_note"}
 
     def _prune(o: Any) -> Any:
         if isinstance(o, dict):
@@ -1005,6 +1008,652 @@ def metrics_creative_signals(rows: list[dict], entity_id: str | None = None) -> 
     }
 
 
+# ---------------------------------------------------------------------------
+# Video pre-production modes: sales | organic | plan | motion  (`video-script --mode ...`)
+# Skelet generatori: struktura, vaqt yig'indisi, so'z limitlari va placeholderlar. Strategiya,
+# isbot, narx va da'volar mijoz ma'lumotidan keladi (`[ADD VERIFIED ...]`), to'qilmaydi.
+# ---------------------------------------------------------------------------
+
+VIDEO_MODES = ("sales", "organic", "plan", "motion")
+VIDEO_LANGS = {"uz": "uz", "uz_latin": "uz", "ru": "ru", "en": "en"}
+VIDEO_DURATIONS = (15, 30, 45, 60)
+MOTION_EXTRA_DURATIONS = (5, 8, 10)
+VO_WORDS_PER_SEC = 2.6  # HEURISTIC_PRIOR_MODEL: 2.2-2.6 so'z/soniya
+AWARENESS_STAGES = ("unaware", "problem_aware", "solution_aware", "product_aware", "most_aware")
+ORGANIC_FORMATS = ("expert", "story", "myth", "bts", "versus", "qa", "listicle", "series")
+MOTION_TYPES = ("kinetic", "ui", "explainer", "data", "bumper")
+MOTION_RATIOS = ("9:16", "16:9", "1:1")
+GREETING_RE = re.compile(r"^\s*(assalomu|salom|hello|hi\b|hey|привет|здравствуй|всем привет)", re.I)
+
+_L = {
+    "uz": {
+        "_k": "uz",
+        "stage": {"hook": "Hook", "problem": "Muammo", "mechanism": "Mexanizm", "proof": "Isbot", "objection": "E'tiroz",
+                  "offer": "Taklif", "cta": "CTA", "thesis": "Tezis", "point": "Nuqta", "conflict": "Ziddiyat", "context": "Kontekst",
+                  "turn": "Burilish", "result": "Natija", "lesson": "Saboq", "myth": "Mif", "why_wrong": "Nega noto'g'ri",
+                  "right_way": "To'g'ri yondashuv", "process": "Jarayon", "team": "Jamoa", "quality": "Sifat nazorati",
+                  "final": "Yakuniy natija", "criteria": "Mezonlar", "option_a": "A variant", "option_b": "B variant",
+                  "verdict": "Xulosa", "question": "Savol", "answer": "Javob", "reason": "Sabab", "example": "Misol",
+                  "item": "Band", "top_item": "Eng muhim band", "recap": "Qisqa eslatma", "main": "Asosiy qism",
+                  "open_loop": "Ochiq savol", "part_next": "Keyingi qism", "summary": "Xulosa", "save_cta": "Saqlash sababi",
+                  "soft_cta": "Yumshoq CTA"},
+        "add": "[ADD: {x}]", "add_proof": "[ADD VERIFIED {x}]",
+        "hooks": {
+            "pain": ("Yaqin plan: {pb} lahzasi, keskin kesim", "{pb}?", "{pb}. Tanishmi?", "Og'riq lahzasi"),
+            "fact": ("Ekranda kutilmagan fakt kartasi, qo'l ishorasi", "[ADD VERIFIED FAKT]", "Bilasizmi, [ADD VERIFIED FAKT]?", "Kutilmagan fakt"),
+            "contrarian": ("Spiker kameraga qaraydi, bosh chayqaydi, 'mif' kartasi", "Bu noto'g'ri", "{prod} haqida hamma xato o'ylaydi.", "Qarshi fikr"),
+            "result": ("Natija ko'rinishi (faqat tasdiqlangan material), taymer", "[ADD VERIFIED NATIJA]", "Mana natija. Qanday qilganimizni ko'rsataman.", "Natija namoyishi"),
+            "direct": ("Spiker aniq auditoriyaga ishora qiladi", "[ADD AVATAR] uchun", "[ADD AVATAR] bo'lsangiz, buni ko'ring.", "To'g'ridan-to'g'ri chaqiriq"),
+        },
+        "vo": {"hook": "[ADD: hook gapi]", "problem": "[ADD: muammo lahzasi, 1 gap]", "mechanism": "{prod}: [ADD MEXANIZM, 1-2 gap]",
+               "proof": "[ADD: isbot, 1 gap]", "objection": "[ADD: asosiy e'tirozga javob]", "offer": "[ADD VERIFIED TAKLIF]",
+               "cta": "[ADD: aniq keyingi qadam]", "generic": "[ADD: {x}, 1 gap]"},
+        "text": {"problem": "[ADD: 3-5 so'z]", "mechanism": "[ADD: 3-5 so'z]", "proof": "[ADD VERIFIED RAQAM]", "objection": "[ADD: 3-5 so'z]",
+                 "offer": "[ADD VERIFIED TAKLIF]", "cta": "[ADD: harakat fe'li]", "generic": "[ADD: 3-5 so'z]"},
+        "visual": {"a_roll": "A-roll: spiker kameraga, yaqin/o'rta plan", "b_roll": "B-roll: jarayon yoki mahsulot, yaqin plan",
+                   "proof": "Isbot B-roll: haqiqiy natija, sharh ekrani yoki hujjat (ruxsat bilan)", "screen": "Ekran yozuvi / UI",
+                   "text_card": "Matn kartochkasi, kalit so'z urg'u rangida", "end_card": "End-card: logo, CTA, aloqa"},
+        "cam": {"a_roll": "Jump cut, ovoz urg'usi", "b_roll": "Rakurs/crop o'zgarishi, whoosh", "proof": "Zoom-in, pop SFX",
+                "screen": "Click SFX, kursor urg'usi", "text_card": "Slide-up reveal, pop", "end_card": "Statik 2 s, musiqa tugaydi"},
+        "pn": {"delivery": "Spiker: tez, jonli, qisqa gaplar; har gapda bitta fikr; hook'da kulgi/jilmayish yo'q ({x})",
+               "light": "Yorug'lik: yuzga yumshoq yon yorug'lik; fon tartibli; mikrofon yaqin",
+               "broll": "B-roll ro'yxati: [ADD: 5-8 klip: yaqin plan, jarayon, ekran, isbot]",
+               "capture": ["Capture 1 (A-roll): 3-5 hook + to'liq tana + 2 CTA bir sozlamada", "Capture 2 (mexanizm B-roll): 5-8 yaqin plan klip",
+                           "Capture 3 (isbot B-roll): haqiqiy natija, sharh ekrani, yetkazib berish"]},
+        "bodies": ("Demo-led: muammo, mexanizm demosi, isbot, e'tiroz", "Case-led: kontekst, case, mexanizm, e'tiroz"),
+        "ctas": ("Direct CTA: aniq taklif + aniq qadam", "Soft CTA: saqlash / profilga o'tish / savol yozish"),
+        "idea": "[ADD: One Big Idea, 1 jumla]", "ph": "[ADD]",
+    },
+    "ru": {
+        "_k": "ru",
+        "stage": {"hook": "Хук", "problem": "Проблема", "mechanism": "Механизм", "proof": "Доказательство", "objection": "Возражение",
+                  "offer": "Оффер", "cta": "CTA", "thesis": "Тезис", "point": "Пункт", "conflict": "Конфликт", "context": "Контекст",
+                  "turn": "Поворот", "result": "Результат", "lesson": "Вывод", "myth": "Миф", "why_wrong": "Почему неверно",
+                  "right_way": "Правильный подход", "process": "Процесс", "team": "Команда", "quality": "Контроль качества",
+                  "final": "Итог", "criteria": "Критерии", "option_a": "Вариант A", "option_b": "Вариант B", "verdict": "Вывод",
+                  "question": "Вопрос", "answer": "Ответ", "reason": "Причина", "example": "Пример", "item": "Пункт",
+                  "top_item": "Главный пункт", "recap": "Краткий пересказ", "main": "Основная часть", "open_loop": "Открытый вопрос",
+                  "part_next": "Следующая часть", "summary": "Итог", "save_cta": "Причина сохранить", "soft_cta": "Мягкий CTA"},
+        "add": "[ВСТАВЬТЕ: {x}]", "add_proof": "[ВСТАВЬТЕ ПРОВЕРЕННЫЙ {x}]",
+        "hooks": {
+            "pain": ("Крупный план: момент проблемы «{pb}», резкая склейка", "{pb}?", "{pb}. Знакомо?", "Момент боли"),
+            "fact": ("На экране карточка с неожиданным фактом, жест рукой", "[ВСТАВЬТЕ ПРОВЕРЕННЫЙ ФАКТ]", "Знаете, что [ВСТАВЬТЕ ПРОВЕРЕННЫЙ ФАКТ]?", "Неожиданный факт"),
+            "contrarian": ("Спикер смотрит в камеру, качает головой, карточка «миф»", "Это неверно", "Про {prod} все думают неправильно.", "Встречное мнение"),
+            "result": ("Показ результата (только подтверждённый материал), таймер", "[ВСТАВЬТЕ ПРОВЕРЕННЫЙ РЕЗУЛЬТАТ]", "Вот результат. Покажу, как мы это сделали.", "Показ результата"),
+            "direct": ("Спикер обращается к конкретной аудитории", "Для [ВСТАВЬТЕ АВАТАР]", "Если вы [ВСТАВЬТЕ АВАТАР], посмотрите.", "Прямое обращение"),
+        },
+        "vo": {"hook": "[ВСТАВЬТЕ: фраза хука]", "problem": "[ВСТАВЬТЕ: момент проблемы, 1 фраза]", "mechanism": "{prod}: [ВСТАВЬТЕ МЕХАНИЗМ, 1-2 фразы]",
+               "proof": "[ВСТАВЬТЕ: доказательство, 1 фраза]", "objection": "[ВСТАВЬТЕ: ответ на возражение]", "offer": "[ВСТАВЬТЕ ПРОВЕРЕННЫЙ ОФФЕР]",
+               "cta": "[ВСТАВЬТЕ: конкретный шаг]", "generic": "[ВСТАВЬТЕ: {x}, 1 фраза]"},
+        "text": {"problem": "[ВСТАВЬТЕ: 3-5 слов]", "mechanism": "[ВСТАВЬТЕ: 3-5 слов]", "proof": "[ВСТАВЬТЕ ПРОВЕРЕННОЕ ЧИСЛО]", "objection": "[ВСТАВЬТЕ: 3-5 слов]",
+                 "offer": "[ВСТАВЬТЕ ПРОВЕРЕННЫЙ ОФФЕР]", "cta": "[ВСТАВЬТЕ: глагол действия]", "generic": "[ВСТАВЬТЕ: 3-5 слов]"},
+        "visual": {"a_roll": "A-roll: спикер в камеру, крупный/средний план", "b_roll": "B-roll: процесс или продукт, крупный план",
+                   "proof": "B-roll доказательства: реальный результат, экран отзыва или документ (с разрешения)", "screen": "Запись экрана / UI",
+                   "text_card": "Текстовая карточка, ключевое слово акцентным цветом", "end_card": "End-card: логотип, CTA, контакт"},
+        "cam": {"a_roll": "Jump cut, акцент голосом", "b_roll": "Смена ракурса/кропа, whoosh", "proof": "Zoom-in, pop SFX",
+                "screen": "Click SFX, акцент курсором", "text_card": "Slide-up reveal, pop", "end_card": "Статика 2 с, музыка затухает"},
+        "pn": {"delivery": "Спикер: быстро, живо, короткие фразы; одна мысль на фразу; в хуке без улыбки-приветствия ({x})",
+               "light": "Свет: мягкий боковой на лицо; аккуратный фон; микрофон близко",
+               "broll": "Список B-roll: [ВСТАВЬТЕ: 5-8 клипов: крупные планы, процесс, экран, доказательство]",
+               "capture": ["Capture 1 (A-roll): 3-5 хуков + полное тело + 2 CTA за один сетап", "Capture 2 (B-roll механизма): 5-8 крупных планов",
+                           "Capture 3 (B-roll доказательства): реальный результат, экран отзыва, доставка"]},
+        "bodies": ("Demo-led: проблема, демонстрация механизма, доказательство, возражение", "Case-led: контекст, кейс, механизм, возражение"),
+        "ctas": ("Direct CTA: конкретный оффер + конкретный шаг", "Soft CTA: сохранить / перейти в профиль / задать вопрос"),
+        "idea": "[ВСТАВЬТЕ: Одна большая идея, 1 фраза]", "ph": "[ВСТАВЬТЕ]",
+    },
+    "en": {
+        "_k": "en",
+        "stage": {"hook": "Hook", "problem": "Problem", "mechanism": "Mechanism", "proof": "Proof", "objection": "Objection",
+                  "offer": "Offer", "cta": "CTA", "thesis": "Thesis", "point": "Point", "conflict": "Conflict", "context": "Context",
+                  "turn": "Turning point", "result": "Result", "lesson": "Lesson", "myth": "Myth", "why_wrong": "Why it is wrong",
+                  "right_way": "Right approach", "process": "Process", "team": "Team", "quality": "Quality control",
+                  "final": "Final result", "criteria": "Criteria", "option_a": "Option A", "option_b": "Option B", "verdict": "Verdict",
+                  "question": "Question", "answer": "Answer", "reason": "Reason", "example": "Example", "item": "Item",
+                  "top_item": "Top item", "recap": "Recap", "main": "Main part", "open_loop": "Open loop", "part_next": "Next part",
+                  "summary": "Summary", "save_cta": "Reason to save", "soft_cta": "Soft CTA"},
+        "add": "[ADD: {x}]", "add_proof": "[ADD VERIFIED {x}]",
+        "hooks": {
+            "pain": ("Close-up: the moment of '{pb}', hard cut", "{pb}?", "{pb}. Sound familiar?", "Pain moment"),
+            "fact": ("Unexpected fact card on screen, hand gesture", "[ADD VERIFIED FACT]", "Did you know [ADD VERIFIED FACT]?", "Unexpected fact"),
+            "contrarian": ("Speaker looks into camera, shakes head, 'myth' card", "That is wrong", "Everyone gets {prod} wrong.", "Contrarian take"),
+            "result": ("Result shown (verified material only), timer", "[ADD VERIFIED RESULT]", "Here is the result. Watch how.", "Result first"),
+            "direct": ("Speaker points at a specific audience", "For [ADD AVATAR]", "If you are [ADD AVATAR], watch this.", "Direct call-out"),
+        },
+        "vo": {"hook": "[ADD: hook line]", "problem": "[ADD: problem moment, 1 sentence]", "mechanism": "{prod}: [ADD MECHANISM, 1-2 sentences]",
+               "proof": "[ADD: proof, 1 sentence]", "objection": "[ADD: answer to the main objection]", "offer": "[ADD VERIFIED OFFER]",
+               "cta": "[ADD: concrete next step]", "generic": "[ADD: {x}, 1 sentence]"},
+        "text": {"problem": "[ADD: 3-5 words]", "mechanism": "[ADD: 3-5 words]", "proof": "[ADD VERIFIED NUMBER]", "objection": "[ADD: 3-5 words]",
+                 "offer": "[ADD VERIFIED OFFER]", "cta": "[ADD: action verb]", "generic": "[ADD: 3-5 words]"},
+        "visual": {"a_roll": "A-roll: speaker to camera, close/medium shot", "b_roll": "B-roll: process or product, close-up",
+                   "proof": "Proof B-roll: real result, review screen or document (with permission)", "screen": "Screen recording / UI",
+                   "text_card": "Text card, keyword in accent colour", "end_card": "End card: logo, CTA, contact"},
+        "cam": {"a_roll": "Jump cut, vocal emphasis", "b_roll": "Angle/crop change, whoosh", "proof": "Zoom-in, pop SFX",
+                "screen": "Click SFX, cursor emphasis", "text_card": "Slide-up reveal, pop", "end_card": "Static 2 s, music ends"},
+        "pn": {"delivery": "Speaker: fast, lively, short sentences; one idea per sentence; no greeting or smile in the hook ({x})",
+               "light": "Light: soft side light on the face; tidy background; mic close",
+               "broll": "B-roll list: [ADD: 5-8 clips: close-ups, process, screen, proof]",
+               "capture": ["Capture 1 (A-roll): 3-5 hooks + full body + 2 CTAs in one setup", "Capture 2 (mechanism B-roll): 5-8 close-up clips",
+                           "Capture 3 (proof B-roll): real result, review screen, delivery"]},
+        "bodies": ("Demo-led: problem, mechanism demo, proof, objection", "Case-led: context, case, mechanism, objection"),
+        "ctas": ("Direct CTA: concrete offer + concrete step", "Soft CTA: save / visit profile / ask a question"),
+        "idea": "[ADD: One Big Idea, 1 sentence]", "ph": "[ADD]",
+    },
+}
+
+_STAGE_KIND = {
+    "hook": "a_roll", "problem": "a_roll", "mechanism": "b_roll", "proof": "proof", "objection": "a_roll", "offer": "text_card", "cta": "end_card",
+    "thesis": "a_roll", "point": "text_card", "conflict": "a_roll", "context": "b_roll", "turn": "b_roll", "result": "proof", "lesson": "a_roll",
+    "myth": "a_roll", "why_wrong": "b_roll", "right_way": "a_roll", "process": "b_roll", "team": "b_roll", "quality": "b_roll", "final": "proof",
+    "criteria": "text_card", "option_a": "b_roll", "option_b": "b_roll", "verdict": "a_roll", "question": "screen", "answer": "a_roll",
+    "reason": "a_roll", "example": "proof", "item": "text_card", "top_item": "a_roll", "recap": "text_card", "main": "a_roll",
+    "open_loop": "a_roll", "part_next": "end_card", "summary": "text_card", "save_cta": "end_card", "soft_cta": "end_card",
+}
+
+_ORGANIC_SKELETONS = {
+    "expert": ("hook", "thesis", "point", "point", "point", "summary", "save_cta"),
+    "story": ("hook", "context", "turn", "result", "lesson", "save_cta"),
+    "myth": ("hook", "why_wrong", "right_way", "example", "save_cta"),
+    "bts": ("hook", "process", "team", "quality", "final", "soft_cta"),
+    "versus": ("hook", "criteria", "option_a", "option_b", "verdict", "save_cta"),
+    "qa": ("hook", "answer", "reason", "example", "soft_cta"),
+    "listicle": ("hook", "item", "item", "item", "top_item", "save_cta"),
+    "series": ("hook", "recap", "main", "open_loop", "part_next"),
+}
+_ORGANIC_HOOK_BY_FORMAT = {"expert": "fact", "story": "pain", "myth": "contrarian", "bts": "result", "versus": "contrarian",
+                           "qa": "direct", "listicle": "fact", "series": "pain"}
+_ORGANIC_METRIC = {"expert": "Watch time / Saves", "story": "Hold / Shares", "myth": "Comments / Shares", "bts": "Hold / Profile visits",
+                   "versus": "Saves / DM", "qa": "Comments / DM", "listicle": "Saves", "series": "Return views / Follow"}
+
+_MOTION_SCENES = {
+    "kinetic": ("hook", "point", "point", "point", "offer", "cta"),
+    "ui": ("hook", "problem", "feature", "feature", "feature", "result", "cta"),
+    "explainer": ("hook", "problem", "solution", "how", "how", "benefit", "cta"),
+    "data": ("hook", "number", "compare", "number", "offer", "cta"),
+    "bumper": ("logo_in", "tagline", "logo_out"),
+}
+_MOTION_CUES = {
+    "hook": ("zoom-in punch", "whoosh + hit"), "point": ("slide-up reveal", "pop"), "problem": ("camera pan", "soft whoosh"),
+    "feature": ("slide-up reveal", "click / pop"), "result": ("counter roll-up", "riser into hit"), "solution": ("morph transition", "whoosh"),
+    "how": ("slide-up reveal", "pop"), "benefit": ("zoom-in punch", "hit"), "number": ("counter roll-up", "tick + hit"),
+    "compare": ("split reveal", "whoosh"), "offer": ("zoom-in punch", "riser, silence hit before the number"),
+    "cta": ("scale-up end-card", "beat drop, then music out"), "logo_in": ("morph transition", "whoosh"),
+    "tagline": ("slide-up reveal", "pop"), "logo_out": ("scale-up end-card", "hit, music out"),
+}
+_MOTION_LABELS = {
+    "uz": {"hook": "Hook", "point": "Asosiy nuqta", "problem": "Muammo", "feature": "Funksiya", "result": "Natija", "solution": "Yechim",
+           "how": "Qanday ishlaydi", "benefit": "Foyda", "number": "Raqam", "compare": "Taqqoslash", "offer": "Taklif", "cta": "CTA + logo",
+           "logo_in": "Logo kirishi", "tagline": "Tagline", "logo_out": "Logo yakuni"},
+    "ru": {"hook": "Хук", "point": "Ключевой пункт", "problem": "Проблема", "feature": "Функция", "result": "Результат", "solution": "Решение",
+           "how": "Как работает", "benefit": "Выгода", "number": "Число", "compare": "Сравнение", "offer": "Оффер", "cta": "CTA + логотип",
+           "logo_in": "Появление логотипа", "tagline": "Тэглайн", "logo_out": "Финал логотипа"},
+    "en": {"hook": "Hook", "point": "Key point", "problem": "Problem", "feature": "Feature", "result": "Result", "solution": "Solution",
+           "how": "How it works", "benefit": "Benefit", "number": "Number", "compare": "Comparison", "offer": "Offer", "cta": "CTA + logo",
+           "logo_in": "Logo in", "tagline": "Tagline", "logo_out": "Logo out"},
+}
+_MOTION_BPM = {"kinetic": 125, "ui": 110, "explainer": 90, "data": 110, "bumper": 120}
+_MOTION_ASSETS = {
+    "kinetic": ["Brend shriftlar (OTF/TTF, litsenziya, lotin+kirill)", "Rang palitrasi (HEX)", "Asosiy matnlar (tasdiqlangan)", "Logo SVG"],
+    "ui": ["UI skrinshot/ekran yozuvi (shaxsiy ma'lumotlar yopilgan)", "Logo SVG", "Brend shriftlar", "Raqamli dalillar (tasdiqlangan)"],
+    "explainer": ["Ikonalar/illustratsiyalar (vektor)", "Jarayon sxemasi", "Logo SVG", "Brend shriftlar", "Voiceover skripti tasdig'i"],
+    "data": ["Tasdiqlangan raqamlar va manba", "Grafik ma'lumotlari (CSV)", "Logo SVG", "Brend shriftlar"],
+    "bumper": ["Logo SVG + monoxrom variant", "Tagline matni", "Brend tovush/musiqa (litsenziyali)", "Rang palitrasi (HEX)"],
+}
+_MOTION_ASSETS_COMMON = ["Musiqa/SFX litsenziyasi (nomi va havola)", "Voiceover yozuvi yoki TTS ovozi (agar bo'lsa)"]
+
+
+_XT = {
+    "ru": {"auditoriya": "аудитория", "muammo": "проблема", "auditoriya savoli": "вопрос аудитории", "kontent ustuni": "рубрика контента",
+           "saqlash/ulashish sababi": "причина сохранить/поделиться", "haqiqiy mijoz savoli #{n}": "реальный вопрос клиента #{n}",
+           "lokatsiya {n}": "локация {n}", "ustun {n}": "рубрика {n}",
+           "umumiy B-roll: qo'llar, jarayon, ekran, mijoz bilan muloqot, detal (20-30 klip)": "общий B-roll: руки, процесс, экран, общение с клиентом, детали (20-30 клипов)",
+           "VO, <= {n} so'z": "VO, <= {n} слов", "3-5 so'z, kalit so'z urg'uli": "3-5 слов, ключевое слово выделено", "logo / tagline": "логотип / тэглайн",
+           "fon, UI karta, ikona, mahsulot yoki grafik: nima qayerda": "фон, UI-карта, иконка, продукт или график: что где",
+           "diktor uslubi, til, tezlik": "стиль диктора, язык, темп", "3 sifat + 1 'bo'lmasin'": "3 качества + 1 «чего не должно быть»"},
+    "en": {"auditoriya": "audience", "muammo": "problem", "auditoriya savoli": "audience question", "kontent ustuni": "content pillar",
+           "saqlash/ulashish sababi": "reason to save/share", "haqiqiy mijoz savoli #{n}": "real customer question #{n}",
+           "lokatsiya {n}": "location {n}", "ustun {n}": "pillar {n}",
+           "umumiy B-roll: qo'llar, jarayon, ekran, mijoz bilan muloqot, detal (20-30 klip)": "common B-roll: hands, process, screen, customer interaction, details (20-30 clips)",
+           "VO, <= {n} so'z": "VO, <= {n} words", "3-5 so'z, kalit so'z urg'uli": "3-5 words, keyword accented", "logo / tagline": "logo / tagline",
+           "fon, UI karta, ikona, mahsulot yoki grafik: nima qayerda": "background, UI card, icon, product or chart: what goes where",
+           "diktor uslubi, til, tezlik": "narrator style, language, pace", "3 sifat + 1 'bo'lmasin'": "3 qualities + 1 'must not be'"},
+}
+
+
+def _a(lang: dict, key: str, **kw: Any) -> str:
+    """Til bo'yicha `[ADD: ...]` placeholder (kalitlar uz matni; ru/en tarjimasi _XT da)."""
+    text = _XT.get(lang["_k"], {}).get(key, key)
+    return lang["add"].format(x=text.format(**kw) if kw else text)
+
+
+def _fmt_t(t: float) -> str:
+    m, s = divmod(float(t), 60.0)
+    return f"{int(m):02d}:{int(s):02d}" + (".5" if abs(s - int(s) - 0.5) < 1e-9 else "")
+
+
+def _split(total: float, parts: int) -> list[float]:
+    """total soniyani parts ta bo'lakka teng (0.5 s qadam) bo'ladi; qoldiq birinchi bo'laklarga qo'shiladi, yig'indisi aniq total."""
+    parts = max(1, min(parts, int(total // 1.5) or 1))
+    units = int(round(total * 2))
+    q, r = divmod(units, parts)
+    return [(q + (1 if i < r else 0)) / 2 for i in range(parts)]
+
+
+def _words(text: str) -> int:
+    return len(re.findall(r"[\w'’]+", text or "", re.U))
+
+
+def _short(text: str, n: int) -> str:
+    w = (text or "").strip().split()
+    return " ".join(w[:n])
+
+
+def _row(start: float, end: float, stage: str, visual: str, vo: str, text: str, cam: str, hint: str = "") -> dict[str, Any]:
+    limit = int((end - start) * VO_WORDS_PER_SEC)
+    if _words(vo) > limit:  # qisqa qatorga sig'maydigan skelet VO ni minimal placeholderga almashtiramiz
+        vo = "[ADD VO]" if limit >= 2 else ""
+    return {"time": f"{_fmt_t(start)}-{_fmt_t(end)}", "start_s": round(start, 2), "end_s": round(end, 2), "stage": stage,
+            "visual": visual, "vo": vo, "on_screen_text": text, "camera_rhythm_sfx": cam, "hint": hint}
+
+
+def check_av_table(rows: list[dict[str, Any]], duration_sec: float, hook_count: int | None = None) -> dict[str, Any]:
+    """Avtomatik tekshiriladigan sifat bandlari (script-quality-rubric.md): vaqt yig'indisi, VO limit, ekran matni, salomlashish."""
+    issues: list[str] = []
+    if not rows:
+        return {"time_sum_matches_duration": False, "vo_within_word_limit": False, "on_screen_text_within_limit": False,
+                "no_greeting_open": False, "hook_count_ok": False, "issues": ["jadval bo'sh"]}
+    ordered = sorted(rows, key=lambda r: r["start_s"])
+    cursor, contiguous = 0.0, True
+    for r in ordered:
+        if abs(r["start_s"] - cursor) > 0.01:
+            contiguous = False
+        cursor = r["end_s"]
+    time_ok = contiguous and abs(cursor - duration_sec) < 0.01
+    if not time_ok:
+        issues.append(f"vaqt yig'indisi {cursor}s != {duration_sec}s yoki bo'shliq bor")
+    vo_ok, txt_ok = True, True
+    for r in ordered:
+        limit = int((r["end_s"] - r["start_s"]) * VO_WORDS_PER_SEC)
+        if _words(r.get("vo", "")) > limit:
+            vo_ok = False
+            issues.append(f"{r['time']}: VO {_words(r['vo'])} so'z > limit {limit}")
+        tlimit = 7 if r["start_s"] < 3 else 5
+        if _words(r.get("on_screen_text", "")) > tlimit:
+            txt_ok = False
+            issues.append(f"{r['time']}: ekran matni {_words(r['on_screen_text'])} so'z > {tlimit}")
+    greet_ok = not GREETING_RE.search(ordered[0].get("vo", ""))
+    if not greet_ok:
+        issues.append("birinchi qator salomlashish bilan boshlanadi")
+    hook_ok = True if hook_count is None else 3 <= hook_count <= 5
+    return {"time_sum_matches_duration": time_ok, "vo_within_word_limit": vo_ok, "on_screen_text_within_limit": txt_ok,
+            "no_greeting_open": greet_ok, "hook_count_ok": hook_ok, "issues": issues}
+
+
+def _self_audit(automated: dict[str, Any], mode: str) -> dict[str, Any]:
+    return {
+        "rubric": "skills/video/references/script-quality-rubric.md",
+        "pass_score": 85,
+        "automated_checks": automated,
+        "manual_criteria": ["hook_strength (20)", "retention_rhythm (15)", "conversion_or_value_logic (20)", "natural_speech_anti_cliche (15)",
+                            "visual_safe_zone_executability (20)", "platform_compliance_honesty (10)"],
+        "evidence_label": "HEURISTIC_PRIOR_MODEL",
+        "note": f"{mode}: skelet tekshiruvi; nutq tabiiyligi va mantiq qo'lda baholanadi; ball natija prognozi emas",
+    }
+
+
+def _vo_for(lang: dict, key: str, prod: str, x: str = "") -> str:
+    tpl = lang["vo"].get(key) or lang["vo"]["generic"]
+    return tpl.format(prod=_short(prod, 3), x=x)
+
+
+def _text_for(lang: dict, key: str) -> str:
+    return lang["text"].get(key) or lang["text"]["generic"]
+
+
+def _stage_row(lang: dict, stage_key: str, start: float, end: float, prod: str, label_suffix: str = "") -> dict[str, Any]:
+    kind = _STAGE_KIND.get(stage_key, "a_roll")
+    label = lang["stage"][stage_key] + label_suffix
+    base = stage_key if stage_key in lang["vo"] else "generic"
+    return _row(start, end, label, lang["visual"][kind], _vo_for(lang, base, prod, x=lang["stage"][stage_key].lower()),
+                _text_for(lang, base if base in lang["text"] else "generic"), lang["cam"][kind])
+
+
+def _validate_common(lang_code: str, duration: int, allow_extra: bool = False) -> str:
+    key = VIDEO_LANGS.get((lang_code or "uz").strip().lower())
+    if not key:
+        raise ValueError(f"lang '{lang_code}' qo'llab-quvvatlanmaydi (uz|ru|en)")
+    allowed = VIDEO_DURATIONS + (MOTION_EXTRA_DURATIONS if allow_extra else ())
+    if duration not in allowed:
+        raise ValueError(f"duration {duration} noto'g'ri; ruxsat: {', '.join(map(str, allowed))}")
+    return key
+
+
+def _brief_header(lang: dict, mode: str, niche: str, product: str, problem: str, goal: str, awareness: str, fmt: str, duration: int, extra: dict | None = None) -> dict[str, Any]:
+    hdr = {
+        "business_product": product, "niche": niche, "problem": problem or lang["ph"], "goal": goal, "audience": _a(lang, "auditoriya"),
+        "awareness_stage": awareness, "format": fmt, "duration_sec": duration, "one_big_idea": lang["idea"],
+        "evidence_label": "ASSUMPTION", "evidence_note": "Maqsad/awareness taxmin; mijoz tasdiqlaguncha ASSUMPTION",
+    }
+    hdr.update(extra or {})
+    return hdr
+
+
+def _generate_sales(lang_key: str, niche: str, product: str, problem: str, duration: int, hooks: int, awareness: str, price: float | None, currency: str) -> dict[str, Any]:
+    L = _L[lang_key]
+    prod = product.strip() or L["ph"]
+    pb = _short(problem.strip(), 5) or _a(L, "muammo")
+    mechs = ["pain", "fact", "contrarian", "result", "direct"]
+    hook_mods = []
+    for i in range(hooks):
+        vis, txt, spoken, label = L["hooks"][mechs[i]]
+        fmtd = lambda s: s.format(pb=pb, prod=_short(prod, 3))
+        hook_mods.append({"hook_id": f"H{i + 1}", "mechanism": mechs[i], "mechanism_label": label, "visual_0_3s": fmtd(vis),
+                          "on_screen_text": fmtd(txt), "spoken_line": fmtd(spoken)})
+    cta_len = 4 if duration <= 15 else (7 if duration <= 30 else 8)
+    body_start, body_end = 3.0, float(duration - cta_len)
+    window = body_end - body_start
+    n_beats = max(4, math.ceil(window / 4.0))
+    seq = ["problem", "mechanism", "proof", "objection"]
+    extras = ["mechanism", "proof"]
+    beat_stages = list(seq)
+    for k in range(n_beats - 4):
+        beat_stages.insert(2 + k, extras[k % 2])
+    durs = _split(window, n_beats)
+
+    def body_rows(variant: int) -> list[dict[str, Any]]:
+        stages = list(beat_stages)
+        if variant == 1:  # case-led: isbot mexanizmdan oldin
+            i_m, i_p = stages.index("mechanism"), stages.index("proof")
+            stages[i_m], stages[i_p] = stages[i_p], stages[i_m]
+        rows, t = [], body_start
+        for st, d in zip(stages, durs):
+            rows.append(_stage_row(L, st, t, t + d, prod))
+            t += d
+        return rows
+
+    bodies = [{"body_id": f"B{i + 1}", "approach": L["bodies"][i], "rows": body_rows(i)} for i in range(2)]
+    offer_line = L["vo"]["offer"]
+    price_note = f"{price:,.2f}".rstrip("0").rstrip(".").replace(",", " ") + (f" {currency}" if currency else "") if price else ""
+    ctas = []
+    for i in range(2):
+        start = float(duration - cta_len)
+        half = start + (cta_len - 2)
+        offer = _row(start, half, L["stage"]["offer"], L["visual"]["text_card"], offer_line, (price_note or _text_for(L, "offer")), L["cam"]["text_card"],
+                     hint="USER_PROVIDED narx" if price_note else "")
+        cta = _row(half, float(duration), L["stage"]["cta"], L["visual"]["end_card"], _vo_for(L, "cta", prod), _text_for(L, "cta"), L["cam"]["end_card"])
+        ctas.append({"cta_id": f"C{i + 1}", "type": "direct" if i == 0 else "soft", "approach": L["ctas"][i], "rows": [offer, cta]})
+
+    h0 = hook_mods[0]
+    hook_row = _row(0.0, 3.0, L["stage"]["hook"], h0["visual_0_3s"], h0["spoken_line"], h0["on_screen_text"], L["cam"]["a_roll"] + ", punch-in + hit",
+                    hint=f"{h0['hook_id']} ({h0['mechanism_label']})")
+    av_table = [hook_row] + bodies[0]["rows"] + ctas[0]["rows"]
+    chk = check_av_table(av_table, duration, hooks)
+    for hm in hook_mods:  # har hook 0-3 s ga sig'ishi kerak
+        if _words(hm["spoken_line"]) > int(3 * VO_WORDS_PER_SEC):
+            chk["vo_within_word_limit"] = False
+            chk["issues"].append(f"{hm['hook_id']}: hook gapi 3 s uchun uzun")
+    return {
+        "schema": "tyrion.video_script/v8", "mode": "sales", "lang": lang_key, "duration_sec": duration,
+        "brief": _brief_header(L, "sales", niche, prod, problem, "Lead / Sale", awareness, "9:16", duration,
+                               {"test_hypothesis": {"variable": "hook (H1..H%d)" % hooks, "success_metric": "3s hook rate vs account baseline",
+                                                    "decision_rule": "[ADD: minimal namuna va qaror qoidasi, ishga tushirishdan oldin]"}}),
+        "modules": {"hooks": hook_mods, "bodies": bodies, "ctas": ctas,
+                    "combinations": [f"H{h}xB{b}xC{c}" for h in range(1, hooks + 1) for b in (1, 2) for c in (1, 2)]},
+        "av_table": av_table,
+        "production_notes": {"delivery": L["pn"]["delivery"].format(x=prod), "lighting_audio": L["pn"]["light"], "broll": L["pn"]["broll"],
+                             "three_capture": L["pn"]["capture"], "open_placeholders": "[ADD ...] / [ADD VERIFIED ...] qatorlarini mijoz ma'lumoti bilan to'ldiring",
+                             "safe_zone": "720x1200 (yagona manba: skills/video/references/sales-video-scripting.md §8)"},
+        "self_audit_checklist": _self_audit(chk, "sales"),
+        "evidence_label": "HEURISTIC_PRIOR_MODEL",
+        "note": "Skelet: strategiya, isbot va da'volar mijoz ma'lumotidan; to'qilgan statistika/sharh yo'q.",
+    }
+
+
+def _generate_organic(lang_key: str, niche: str, product: str, problem: str, duration: int, hooks: int, awareness: str, content_format: str) -> dict[str, Any]:
+    L = _L[lang_key]
+    prod = product.strip() or L["ph"]
+    pb = _short(problem.strip(), 5) or _a(L, "auditoriya savoli")
+    skeleton = _ORGANIC_SKELETONS[content_format]
+    mechs = [_ORGANIC_HOOK_BY_FORMAT[content_format]] + [m for m in ("pain", "fact", "contrarian", "direct", "result") if m != _ORGANIC_HOOK_BY_FORMAT[content_format]]
+    hook_mods = []
+    for i in range(hooks):
+        vis, txt, spoken, label = L["hooks"][mechs[i]]
+        f = lambda s: s.format(pb=pb, prod=_short(prod, 3))
+        hook_mods.append({"hook_id": f"H{i + 1}", "mechanism": mechs[i], "mechanism_label": label, "visual_0_3s": f(vis), "on_screen_text": f(txt), "spoken_line": f(spoken)})
+    n = len(skeleton)
+    durs = [3.0] + _split(float(duration - 3), n - 1)
+    rows, t = [], 0.0
+    point_i = 0
+    for idx, (st, d) in enumerate(zip(skeleton, durs)):
+        suffix = ""
+        if st in ("point", "item"):
+            point_i += 1
+            suffix = f" {point_i}"
+        if idx == 0:
+            h = hook_mods[0]
+            rows.append(_row(t, t + d, L["stage"]["hook"], h["visual_0_3s"], h["spoken_line"], h["on_screen_text"], L["cam"]["a_roll"] + ", punch-in", hint=h["hook_id"]))
+        else:
+            rows.append(_stage_row(L, st, t, t + d, prod, suffix))
+        t += d
+    # >4 s qatorlarni retention uchun bo'lib chiqamiz
+    expanded: list[dict[str, Any]] = []
+    for r in rows:
+        span = r["end_s"] - r["start_s"]
+        if span <= 4.0:
+            expanded.append(r)
+            continue
+        parts = math.ceil(span / 4.0)
+        sub = _split(span, parts)
+        s0 = r["start_s"]
+        for j, d in enumerate(sub):
+            rr = dict(r)
+            rr.update(_row(s0, s0 + d, r["stage"], r["visual"], r["vo"] if j == 0 else L["vo"]["generic"].format(x=r["stage"].lower()),
+                           r["on_screen_text"] if j == 0 else L["text"]["generic"], (r["camera_rhythm_sfx"] if j == 0 else L["cam"]["b_roll"]),
+                           hint=("pattern interrupt: B-roll / matn kartochkasi / zoom" if j else r["hint"])))
+            expanded.append(rr)
+            s0 += d
+    chk = check_av_table(expanded, duration, hooks)
+    return {
+        "schema": "tyrion.video_script/v8", "mode": "organic", "lang": lang_key, "duration_sec": duration, "content_format": content_format,
+        "brief": _brief_header(L, "organic", niche, prod, problem, "Trust / Reach", awareness, "9:16", duration,
+                               {"content_format": content_format, "primary_metric": _ORGANIC_METRIC[content_format],
+                                "funnel_stage": "[ADD: TOFU|MOFU|BOFU]", "pillar": _a(L, "kontent ustuni"),
+                                "save_or_share_reason": _a(L, "saqlash/ulashish sababi")}),
+        "modules": {"hooks": hook_mods},
+        "av_table": expanded,
+        "production_notes": {"delivery": L["pn"]["delivery"].format(x=prod), "lighting_audio": L["pn"]["light"], "broll": L["pn"]["broll"],
+                             "open_placeholders": "[ADD ...] qatorlarini haqiqiy mavzu/keys bilan to'ldiring; to'qilgan hikoya yo'q",
+                             "safe_zone": "720x1200 (yagona manba: skills/video/references/sales-video-scripting.md §8)"},
+        "self_audit_checklist": _self_audit(chk, "organic"),
+        "evidence_label": "HEURISTIC_PRIOR_MODEL",
+        "note": "Organik skelet: mavzu va keys mijozdan (USER_PROVIDED) yoki ASSUMPTION.",
+    }
+
+
+def _interleave(counts: dict[str, int]) -> list[str]:
+    """Funnel bosqichlarini bir tekis taqsimlaydi (deterministik)."""
+    total = sum(counts.values())
+    seq: list[str] = []
+    acc = {k: 0.0 for k in counts}
+    for _ in range(total):
+        for k in counts:
+            acc[k] += counts[k] / total
+        pick = max((k for k in counts if counts[k] > sum(1 for s in seq if s == k)), key=lambda k: acc[k])
+        seq.append(pick)
+        acc[pick] -= 1.0
+    return seq
+
+
+def _generate_plan(lang_key: str, niche: str, product: str, duration: int, weeks: int, per_week: int, platforms: str, start_date: str | None) -> dict[str, Any]:
+    L = _L[lang_key]
+    if weeks not in (1, 2, 4):
+        raise ValueError("weeks 1|2|4 bo'lishi kerak")
+    if not 1 <= per_week <= 14:
+        raise ValueError("per-week 1..14 oralig'ida bo'lishi kerak")
+    total = weeks * per_week
+    bofu = max(1, round(total * 0.2))
+    mofu = max(1 if total >= 3 else 0, round(total * 0.3))
+    tofu = total - bofu - mofu
+    if tofu < 1:
+        tofu, mofu = max(1, total - bofu), max(0, total - bofu - 1)
+    counts = {"TOFU": tofu, "MOFU": mofu, "BOFU": bofu}
+    counts = {k: v for k, v in counts.items() if v > 0}
+    funnel_seq = _interleave(counts)
+    pool = {"TOFU": ["listicle", "myth", "series", "bts"], "MOFU": ["expert", "story", "versus", "qa"], "BOFU": ["sales"]}
+    ctas = {"TOFU": "soft", "MOFU": "soft-to-direct", "BOFU": "direct"}
+    plats = [p.strip() for p in platforms.split(",") if p.strip()] or ["instagram"]
+    base = _dt.date.fromisoformat(start_date) if start_date else None
+    used: dict[str, int] = {}
+    matrix: list[dict[str, Any]] = []
+    prev_fmt = ""
+    step = max(1, 7 // per_week) if per_week <= 7 else 1
+    for i, stage in enumerate(funnel_seq):
+        opts = pool[stage]
+        k = used.get(stage, 0)
+        fmt = opts[k % len(opts)]
+        if fmt == prev_fmt and len(opts) > 1:
+            k += 1
+            fmt = opts[k % len(opts)]
+        used[stage] = k + 1
+        prev_fmt = fmt
+        week, slot = divmod(i, per_week)
+        day_offset = week * 7 + min(6, slot * step)
+        label = (base + _dt.timedelta(days=day_offset)).isoformat() if base else f"W{week + 1}-D{min(7, slot * step + 1)}"
+        mode = "sales" if fmt == "sales" else "organic"
+        matrix.append({
+            "n": i + 1, "date": label, "platform": " + ".join(plats), "funnel": stage, "format": fmt, "script_mode": mode,
+            "pillar": _a(L, "kontent ustuni"), "topic_hook": _a(L, "haqiqiy mijoz savoli #{n}", n=i + 1),
+            "topic_source": "USER_PROVIDED yoki ASSUMPTION (to'ldirilganda belgilang)",
+            "primary_metric": "DM / Lead" if stage == "BOFU" else _ORGANIC_METRIC.get(fmt, "Watch time"),
+            "cta": ctas[stage], "duration_sec": duration,
+        })
+    per_day = 10
+    days = max(1, math.ceil(total / per_day))
+    shoot_days = []
+    for d in range(days):
+        chunk = matrix[d * per_day:(d + 1) * per_day]
+        n_out = min(3, max(1, len(chunk) // 3))
+        shoot_days.append({
+            "shoot_day": d + 1, "videos": [m["n"] for m in chunk], "video_count": len(chunk),
+            "before": ["Ssenariylar telefonda/chop etilgan, mavzu bo'yicha guruhlangan", "Rekvizit va jihoz ro'yxati", "Ruxsatlar: mijoz, litsenziya, joy"],
+            "locations": [_a(L, "lokatsiya {n}", n=j + 1) for j in range(min(3, max(2, len(chunk) // 4)))],
+            "outfits": n_out, "lighting": L["pn"]["light"],
+            "shooting_order": "lokatsiya, keyin kiyim, keyin format; murakkab (ko'p matnli) videolar boshida",
+            "three_capture": L["pn"]["capture"], "common_broll": [_a(L, "umumiy B-roll: qo'llar, jarayon, ekran, mijoz bilan muloqot, detal (20-30 klip)")],
+            "spare_hooks": "har videoga +1 zaxira hook varianti (bir joyda)", "file_naming": "YYYYMMDD_<id>_<hookN>",
+        })
+    chk = {"funnel_counts_sum_matches_total": sum(counts.values()) == total, "formats_per_week_ok": True, "bofu_present": "BOFU" in counts, "issues": []}
+    for w in range(weeks):
+        wk = matrix[w * per_week:(w + 1) * per_week]
+        if per_week >= 3 and len({m["format"] for m in wk}) < 3:
+            chk["formats_per_week_ok"] = False
+            chk["issues"].append(f"hafta {w + 1}: 3 dan kam xil format")
+    return {
+        "schema": "tyrion.video_script/v8", "mode": "plan", "lang": lang_key, "duration_sec": duration, "weeks": weeks, "videos_per_week": per_week, "total_videos": total,
+        "brief": _brief_header(L, "plan", niche, product.strip() or L["ph"], "", "Trust / Lead", "mixed", "9:16", duration,
+                               {"platforms": plats, "pillars": [_a(L, "ustun {n}", n=i) for i in (1, 2, 3)]}),
+        "funnel_mix": {"counts": counts, "target_shares": {"TOFU": 0.5, "MOFU": 0.3, "BOFU": 0.2}, "evidence_label": "HEURISTIC_PRIOR_MODEL",
+                       "note": "Boshlang'ich taxmin; 4 haftalik o'z natijangiz (MEASURED_ACCOUNT_DATA) bilan sozlanadi"},
+        "content_matrix": matrix,
+        "batch_shooting_plan": shoot_days,
+        "self_audit_checklist": _self_audit(chk, "plan"),
+        "evidence_label": "HEURISTIC_PRIOR_MODEL",
+        "note": "Reja skeleti: mavzular haqiqiy mijoz savollaridan (USER_PROVIDED) to'ldiriladi; ssenariylar uchun --mode organic|sales.",
+    }
+
+
+def _generate_motion(lang_key: str, niche: str, product: str, problem: str, duration: int, motion_type: str, ratio: str) -> dict[str, Any]:
+    L = _L[lang_key]
+    labels = _MOTION_LABELS[lang_key]
+    prod = product.strip() or L["ph"]
+    roles = _MOTION_SCENES[motion_type]
+    n = len(roles)
+    if n == 3:
+        durs = _split(float(duration), 3)
+    else:
+        first, last = 2.5, 2.5
+        mid_total = duration - first - last
+        durs = [first] + _split(float(mid_total), n - 2) + [last]
+    scenes, t = [], 0.0
+    counters: dict[str, int] = {}
+    for i, (role, d) in enumerate(zip(roles, durs)):
+        counters[role] = counters.get(role, 0) + 1
+        suffix = f" {counters[role]}" if roles.count(role) > 1 else ""
+        cue, sfx = _MOTION_CUES[role]
+        limit = int(d * VO_WORDS_PER_SEC)
+        scenes.append({
+            "scene": f"S{i + 1}", "time": f"{_fmt_t(t)}-{_fmt_t(t + d)}", "start_s": round(t, 2), "end_s": round(t + d, 2), "duration_s": round(d, 2),
+            "role": labels[role] + suffix,
+            "vo": _a(L, "VO, <= {n} so'z", n=limit) if limit >= 1 else "",
+            "vo_word_limit": limit,
+            "on_screen_text": _a(L, "3-5 so'z, kalit so'z urg'uli") if role not in ("logo_in", "logo_out") else _a(L, "logo / tagline"),
+            "visual_assets": _a(L, "fon, UI karta, ikona, mahsulot yoki grafik: nima qayerda"),
+            "motion_cue": cue, "sfx_music": sfx,
+        })
+        t += d
+    chk = check_av_table([{"start_s": s["start_s"], "end_s": s["end_s"], "time": s["time"], "vo": "", "on_screen_text": ""} for s in scenes], duration)
+    chk["scenes_min_len_ok"] = all(s["duration_s"] >= 1.5 for s in scenes)
+    chk["hook_scene_max_3s"] = scenes[0]["duration_s"] <= 3.0 or motion_type == "bumper"
+    chk["vo_limit_defined_per_scene"] = all("vo_word_limit" in s for s in scenes)
+    if not chk["scenes_min_len_ok"]:
+        chk["issues"].append("sahna 1.5 s dan qisqa")
+    safe = "720x1200 (yagona manba: skills/video/references/sales-video-scripting.md §8)" if ratio == "9:16" else "title-safe zona, pastki subtitr zonasi bo'sh"
+    return {
+        "schema": "tyrion.motion_blueprint/v8", "mode": "motion", "lang": lang_key, "duration_sec": duration, "motion_type": motion_type,
+        "brief": {
+            "concept": L["idea"], "motion_type": motion_type, "format": ratio, "duration_sec": duration, "product": prod, "niche": niche,
+            "problem": problem or L["ph"], "goal": "Lead / Sale / Reach / Trust", "awareness_stage": "[ADD]",
+            "tempo_bpm": _MOTION_BPM[motion_type], "tempo_evidence_label": "HEURISTIC_PRIOR_MODEL",
+            "palette": {"primary": "[ADD HEX]", "accent": "[ADD HEX]", "background": "[ADD HEX]", "text": "[ADD HEX]"},
+            "typography": {"headline": "[ADD: shrift, lotin+kirill glif tekshirilgan]", "keyword_accent": "[ADD]", "secondary": "[ADD]"},
+            "safe_zone": safe, "voice": _a(L, "diktor uslubi, til, tezlik"), "tone": _a(L, "3 sifat + 1 'bo'lmasin'"),
+            "evidence_label": "ASSUMPTION",
+        },
+        "storyboard": scenes,
+        "asset_checklist": [{"asset": a, "owner": "[ADD]", "status": "todo"} for a in _MOTION_ASSETS[motion_type] + _MOTION_ASSETS_COMMON],
+        "self_audit_checklist": _self_audit(chk, "motion"),
+        "render_handoff": "Faqat so'ralsa: video-motion-graphics.md va tools/video-run.py blueprint'ni kirish sifatida oladi; bu generator render qilmaydi.",
+        "evidence_label": "HEURISTIC_PRIOR_MODEL",
+        "note": "Motion blueprint skeleti: matn, raqam va UI mazmuni mijoz materialidan (to'qilmaydi).",
+    }
+
+
+def generate_video_blueprint(
+    mode: str, niche: str = "ecom", product: str = "", problem: str = "", lang: str = "uz", duration_sec: int = 30,
+    hooks: int = 3, awareness: str = "problem_aware", price: float | None = None, currency: str = "",
+    content_format: str = "expert", motion_type: str = "kinetic", ratio: str = "9:16", weeks: int = 2, per_week: int = 5,
+    platforms: str = "instagram,tiktok,youtube", start_date: str | None = None,
+) -> dict[str, Any]:
+    """`video-script --mode sales|organic|plan|motion` skelet generatori (0 token, stdlib). ValueError — noto'g'ri parametr."""
+    if mode not in VIDEO_MODES:
+        raise ValueError(f"mode '{mode}' noto'g'ri; ruxsat: {', '.join(VIDEO_MODES)}")
+    lang_key = _validate_common(lang, int(duration_sec), allow_extra=(mode == "motion"))
+    if not 3 <= hooks <= 5:
+        raise ValueError("hooks 3..5 oralig'ida bo'lishi kerak")
+    if awareness not in AWARENESS_STAGES:
+        raise ValueError(f"awareness noto'g'ri; ruxsat: {', '.join(AWARENESS_STAGES)}")
+    if content_format not in ORGANIC_FORMATS:
+        raise ValueError(f"content-format noto'g'ri; ruxsat: {', '.join(ORGANIC_FORMATS)}")
+    if motion_type not in MOTION_TYPES:
+        raise ValueError(f"motion-type noto'g'ri; ruxsat: {', '.join(MOTION_TYPES)}")
+    if ratio not in MOTION_RATIOS:
+        raise ValueError(f"ratio noto'g'ri; ruxsat: {', '.join(MOTION_RATIOS)}")
+    if start_date:
+        try:
+            _dt.date.fromisoformat(start_date)
+        except ValueError as exc:
+            raise ValueError("start-date YYYY-MM-DD bo'lishi kerak") from exc
+    duration_sec = int(duration_sec)
+    if mode == "motion" and motion_type == "bumper" and duration_sec > 10:
+        raise ValueError("bumper uchun duration 5, 8 yoki 10 s (5-10 soniyalik brend lahzasi)")
+    if mode == "sales":
+        return _generate_sales(lang_key, niche, product, problem, duration_sec, hooks, awareness, price, currency)
+    if mode == "organic":
+        return _generate_organic(lang_key, niche, product, problem, duration_sec, hooks, awareness, content_format)
+    if mode == "plan":
+        return _generate_plan(lang_key, niche, product, duration_sec, weeks, per_week, platforms, start_date)
+    return _generate_motion(lang_key, niche, product, problem, duration_sec, motion_type, ratio)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="creative-matrix.py", description="Tyrion v8.0 Global Creative Matrix, Video Script & Ad Copy Engine")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -1054,6 +1703,18 @@ def main(argv: list[str] | None = None) -> int:
     p_vid.add_argument("--market", default="global")
     p_vid.add_argument("--currency", default="")
     p_vid.add_argument("--language", default="uz_latin")
+    p_vid.add_argument("--mode", choices=list(VIDEO_MODES), default=None,
+                       help="Video pre-production rejimi: sales|organic|plan|motion (berilmasa eski 7 formatli generator o'zgarishsiz ishlaydi)")
+    p_vid.add_argument("--lang", default=None, help="Rejim tili: uz|ru|en (--mode bilan; --language dan ustun)")
+    p_vid.add_argument("--hooks", type=int, default=3, help="Hook variantlari soni 3..5 (sales/organic)")
+    p_vid.add_argument("--awareness", default="problem_aware", choices=list(AWARENESS_STAGES))
+    p_vid.add_argument("--content-format", default="expert", choices=list(ORGANIC_FORMATS), help="organic rejimi formati")
+    p_vid.add_argument("--motion-type", default="kinetic", choices=list(MOTION_TYPES), help="motion rejimi turi")
+    p_vid.add_argument("--ratio", default="9:16", choices=list(MOTION_RATIOS), help="motion rejimi nisbati")
+    p_vid.add_argument("--weeks", type=int, default=2, help="plan rejimi: 1|2|4 hafta")
+    p_vid.add_argument("--per-week", type=int, default=5, help="plan rejimi: haftasiga videolar soni")
+    p_vid.add_argument("--platforms", default="instagram,tiktok,youtube", help="plan rejimi: vergul bilan platformalar")
+    p_vid.add_argument("--start-date", default=None, help="plan rejimi: YYYY-MM-DD (berilmasa W1-D1 yorliqlari)")
     p_vid.add_argument("--json", action="store_true")
 
     p_pda = sub.add_parser("pda-matrix", help="Andromeda Entity-ID & Persona-Desire-Awareness (PDA) Creative Diversity Plan")
@@ -1115,6 +1776,17 @@ def main(argv: list[str] | None = None) -> int:
         )
         if sig and isinstance(res, dict):
             res["metrics_source"] = {"file": args.metrics, "evidence_label": "MEASURED_ACCOUNT_DATA", **sig}
+    elif args.command == "video-script" and args.mode:
+        try:
+            res = generate_video_blueprint(
+                mode=args.mode, niche=args.niche, product=args.product, problem=args.problem, lang=args.lang or args.language,
+                duration_sec=args.duration, hooks=args.hooks, awareness=args.awareness, price=args.price, currency=args.currency,
+                content_format=args.content_format, motion_type=args.motion_type, ratio=args.ratio, weeks=args.weeks,
+                per_week=args.per_week, platforms=args.platforms, start_date=args.start_date,
+            )
+        except ValueError as exc:
+            print(f"Xato: {exc}", file=sys.stderr)
+            return tcore.EXIT_VALIDATION
     elif args.command == "video-script":
         res = generate_video_script(
             niche=args.niche, product=args.product, problem=args.problem,

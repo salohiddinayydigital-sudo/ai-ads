@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tyrion://schemas/motion-blueprint-schema.json",
+  "title": "Tyrion tyrion.motion_blueprint/v8 — `creative-matrix.py video-script --mode motion --json`",
+  "type": "object",
+  "required": [
+    "schema",
+    "mode",
+    "lang",
+    "duration_sec",
+    "motion_type",
+    "brief",
+    "storyboard",
+    "asset_checklist",
+    "self_audit_checklist",
+    "evidence_label"
+  ],
+  "properties": {
+    "schema": {
+      "const": "tyrion.motion_blueprint/v8"
+    },
+    "mode": {
+      "const": "motion"
+    },
+    "lang": {
+      "enum": [
+        "uz",
+        "ru",
+        "en"
+      ]
+    },
+    "duration_sec": {
+      "enum": [
+        5,
+        8,
+        10,
+        15,
+        30,
+        45,
+        60
+      ]
+    },
+    "motion_type": {
+      "enum": [
+        "kinetic",
+        "ui",
+        "explainer",
+        "data",
+        "bumper"
+      ]
+    },
+    "brief": {
+      "type": "object",
+      "required": [
+        "concept",
+        "format",
+        "tempo_bpm",
+        "palette",
+        "typography",
+        "safe_zone"
+      ],
+      "properties": {
+        "concept": {
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "9:16",
+            "16:9",
+            "1:1"
+          ]
+        },
+        "tempo_bpm": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 200
+        },
+        "palette": {
+          "type": "object"
+        },
+        "typography": {
+          "type": "object"
+        },
+        "safe_zone": {
+          "type": "string"
+        }
+      }
+    },
+    "storyboard": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "scene",
+          "time",
+          "start_s",
+          "end_s",
+          "duration_s",
+          "role",
+          "vo",
+          "vo_word_limit",
+          "on_screen_text",
+          "visual_assets",
+          "motion_cue",
+          "sfx_music"
+        ],
+        "properties": {
+          "scene": {
+            "type": "string",
+            "pattern": "^S\\d+$"
+          },
+          "time": {
+            "type": "string"
+          },
+          "start_s": {
+            "type": "number",
+            "minimum": 0
+          },
+          "end_s": {
+            "type": "number"
+          },
+          "duration_s": {
+            "type": "number",
+            "minimum": 1.5
+          },
+          "role": {
+            "type": "string"
+          },
+          "vo": {
+            "type": "string"
+          },
+          "vo_word_limit": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "on_screen_text": {
+            "type": "string"
+          },
+          "visual_assets": {
+            "type": "string"
+          },
+          "motion_cue": {
+            "type": "string",
+            "minLength": 3
+          },
+          "sfx_music": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
+      }
+    },
+    "asset_checklist": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": [
+          "asset",
+          "owner",
+          "status"
+        ],
+        "properties": {
+          "asset": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "todo",
+              "ready"
+            ]
+          }
+        }
+      }
+    },
+    "self_audit_checklist": {
+      "type": "object",
+      "required": [
+        "rubric",
+        "pass_score",
+        "automated_checks",
+        "manual_criteria",
+        "evidence_label"
+      ],
+      "properties": {
+        "rubric": {
+          "type": "string"
+        },
+        "pass_score": {
+          "const": 85
+        },
+        "automated_checks": {
+          "type": "object"
+        },
+        "manual_criteria": {
+          "type": "array",
+          "minItems": 6,
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_label": {
+          "enum": [
+            "HEURISTIC_PRIOR_MODEL"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "render_handoff": {
+      "type": "string"
+    },
+    "claim_safety": {
+      "type": "object"
+    },
+    "evidence_label": {
+      "enum": [
+        "HEURISTIC_PRIOR_MODEL"
+      ]
+    },
+    "note": {
+      "type": "string"
+    }
+  }
+}
