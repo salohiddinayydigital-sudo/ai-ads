@@ -268,7 +268,7 @@ def run_all() -> dict:
     for name, fn in [
         ("Secrets & .env Exposure", scan_secrets),
         ("Hooks & MCP Config Safety", scan_hooks_and_mcp),
-        ("Agent Charter Defense (36)", scan_agents),
+        ("Agent Charter Defense", scan_agents),
         ("Skill Surface & YAML Safety", scan_skills),
         ("Spend-Guard & Mutation Gates", scan_mutation_gates),
         ("Python AST & Dead-Code Hygiene", scan_python_ast),
