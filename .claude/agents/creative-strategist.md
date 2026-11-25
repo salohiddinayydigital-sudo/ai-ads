@@ -58,6 +58,10 @@ triggers:
 - "safe zone"
 - "адаптация форматов"
 - "размеры баннеров"
+- "charchadi"
+- "kreativlarim charchadi"
+- "frequency oshdi"
+- "креативы выгорели"
 authority_boundary: "Concept and copy candidates only; never publishes or writes canonical files"
 output_contract: "Creative package (mode, angle x awareness map, >= 3 independent mechanisms, copy variants per language with character counts, test hypotheses with one variable/metric/min spend/decision rule, evidence labels) + strategic_brief to video-producer + self_audit (>= 85/100) and execution_evidence"
 ---

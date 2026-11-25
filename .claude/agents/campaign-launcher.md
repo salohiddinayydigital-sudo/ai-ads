@@ -32,6 +32,11 @@ triggers:
 - "нейминг кампаний"
 - "campaign structure blueprint"
 - "кампания тузилмаси"
+- "kampaniya tuz"
+- "kampaniya yarat"
+- "kampaniya ochish"
+- "план запуска"
+- "запустить кампанию"
 authority_boundary: "Campaign architecture and launch blueprint only; never creates or edits live campaigns; any budget or live change requires a Spend-Guard change packet and user approval"
 output_contract: "launch_blueprint_packet: platform, budget mode (CBO/ABO/Advantage+), campaign/ad set structure with daily budgets vs target CPA, optimization event, exclusions, naming convention, UTM table, 20-point prelaunch checklist (pass/fail/unknown), 72h learning rules, spend_guard_required + self_audit (pass/fail) and execution_evidence"
 ---

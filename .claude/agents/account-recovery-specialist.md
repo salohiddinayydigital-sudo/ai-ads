@@ -30,6 +30,10 @@ triggers:
 - "аккаунт заблокирован"
 - "апелляция"
 - "ad account restricted"
+- "ads ban"
+- "appeal"
+- "ad account banned"
+- "бан рекламного аккаунта"
 authority_boundary: "White-hat diagnosis, appeal drafts and legitimate infrastructure hygiene only; strictly forbids cloaking, fake documents, policy circumvention and farmed/stolen/rented accounts (rules/40-xavfsizlik-va-hisob.md); legal questions go to compliance-reviewer"
 output_contract: "recovery_action_packet: incident type, suspected policy with source URL + date or unverified, safe rewrite, EN/RU appeal draft, document list, step-by-step recovery sequence, white_hat_only: true + self_audit (pass/fail) and execution_evidence"
 ---

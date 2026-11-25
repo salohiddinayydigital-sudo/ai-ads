@@ -42,6 +42,8 @@ triggers:
 - "aktsiya g'oyasi"
 - "идеи для кампании"
 - "упаковка оффера"
+- "yandex direct strategiya"
+- "reklama strategiyasi"
 skills: [budget, competitors, creative, strategy]
 authority_boundary: "Strategy documents only; no account mutation"
 output_contract: "Strategic brief (mode, ICP, positioning, offer, channel sequence, unit economics from tyrion_media_calculator, KPI table metric/target/deadline/owner, assumptions with evidence labels) + strategic_brief handoff packet + self_audit (>= 85/100) and execution_evidence"
