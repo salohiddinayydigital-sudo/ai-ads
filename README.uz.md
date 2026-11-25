@@ -2,7 +2,7 @@
   <img src="./assets/tyrion-banner.svg" alt="Tyrion AI Paid Media OS Banner" width="100%" />
 </p>
 
-# 🧠 TYRION v8.1 — YOPIQ SIKLLI MEDIA-BUYER MIYASI
+# 🧠 TYRION v8.2 — YOPIQ SIKLLI MEDIA-BUYER MIYASI
 
 [![Version](https://img.shields.io/badge/version-8.0.0-7C3AED.svg)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)

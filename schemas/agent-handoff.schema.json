@@ -1,0 +1,722 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tyrion://schemas/agent-handoff.schema.json",
+  "title": "Tyrion tyrion.agent_handoff/v1 — typed cross-agent handoff packets (Charter v2)",
+  "description": "Har bir agent Conductor'ga yoki keyingi agentga shu konvertda natija uzatadi. `payload` tuzilmasi `packet_type` ga mos `$defs` dan olinadi. Ref: rules/70-charter-baseline.md §6.",
+  "type": "object",
+  "required": [
+    "schema",
+    "packet_type",
+    "from_agent",
+    "to_agents",
+    "status",
+    "payload",
+    "evidence_labels",
+    "execution_evidence",
+    "self_audit"
+  ],
+  "properties": {
+    "schema": {
+      "const": "tyrion.agent_handoff/v1"
+    },
+    "packet_type": {
+      "enum": [
+        "analytics_readout_packet",
+        "audit_findings_packet",
+        "budget_guard_packet",
+        "compliance_clearance_packet",
+        "strategic_brief",
+        "tracking_spec_packet",
+        "verified_research_packet"
+      ]
+    },
+    "from_agent": {
+      "type": "string"
+    },
+    "to_agents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mode": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "needs_input",
+        "blocked_mutation_approval"
+      ]
+    },
+    "missing_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "payload": {
+      "type": "object"
+    },
+    "evidence_labels": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "MEASURED_ACCOUNT_DATA",
+          "USER_PROVIDED",
+          "VERIFIED_SOURCE",
+          "OBSERVED",
+          "HEURISTIC_PRIOR_MODEL",
+          "ASSUMPTION"
+        ]
+      }
+    },
+    "execution_evidence": {
+      "type": "object",
+      "required": [
+        "tools_called",
+        "files_read"
+      ],
+      "properties": {
+        "tools_called": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files_read": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "self_audit": {
+      "type": "object",
+      "required": [
+        "gate",
+        "rewrites"
+      ],
+      "properties": {
+        "gate": {
+          "enum": [
+            "score>=85",
+            "pass_fail"
+          ]
+        },
+        "score": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "failed_checks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rewrites": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "label": {
+          "const": "HEURISTIC_PRIOR_MODEL"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "analytics_readout_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/analytics_readout_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "audit_findings_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/audit_findings_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "budget_guard_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/budget_guard_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "compliance_clearance_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/compliance_clearance_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "strategic_brief"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/strategic_brief"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "tracking_spec_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/tracking_spec_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "verified_research_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/verified_research_packet"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "strategic_brief": {
+      "type": "object",
+      "required": [
+        "icp",
+        "offer",
+        "kpi_targets"
+      ],
+      "properties": {
+        "icp": {
+          "type": "string"
+        },
+        "positioning": {
+          "type": "string"
+        },
+        "offer": {
+          "type": "string"
+        },
+        "awareness_stage": {
+          "enum": [
+            "unaware",
+            "problem_aware",
+            "solution_aware",
+            "product_aware",
+            "most_aware"
+          ]
+        },
+        "angles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kpi_targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "metric"
+            ],
+            "properties": {
+              "metric": {
+                "type": "string"
+              },
+              "target": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "deadline": {
+                "type": "string"
+              },
+              "owner": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Upstream: strategist | creative-strategist → Downstream: audience-architect, creative-strategist, video-producer, budget-analyst, content-planner",
+      "additionalProperties": true
+    },
+    "audit_findings_packet": {
+      "type": "object",
+      "required": [
+        "platform",
+        "findings"
+      ],
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "control_id",
+              "result",
+              "severity",
+              "evidence_refs"
+            ],
+            "properties": {
+              "control_id": {
+                "type": "string"
+              },
+              "result": {
+                "enum": [
+                  "pass",
+                  "warn",
+                  "fail",
+                  "unknown",
+                  "not_applicable"
+                ]
+              },
+              "severity": {
+                "enum": [
+                  "critical",
+                  "high",
+                  "medium",
+                  "low",
+                  "info"
+                ]
+              },
+              "confidence": {
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "impact_estimate": {
+                "type": "string"
+              },
+              "recommendation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "route_to": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recovery_hints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Upstream: platform-auditor | compliance-reviewer → Downstream: tracking-specialist, compliance-reviewer, budget-analyst, creative-strategist",
+      "additionalProperties": true
+    },
+    "analytics_readout_packet": {
+      "type": "object",
+      "required": [
+        "period",
+        "kpis",
+        "sample_size_ok"
+      ],
+      "properties": {
+        "period": {
+          "type": "string"
+        },
+        "attribution_window": {
+          "type": "string"
+        },
+        "metrics_schema": {
+          "const": "metrics.v1"
+        },
+        "sample_size_ok": {
+          "type": "boolean"
+        },
+        "kpis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "metric",
+              "value",
+              "evidence_label"
+            ],
+            "properties": {
+              "metric": {
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "delta_pct": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "evidence_label": {
+                "enum": [
+                  "MEASURED_ACCOUNT_DATA",
+                  "USER_PROVIDED",
+                  "VERIFIED_SOURCE",
+                  "OBSERVED",
+                  "HEURISTIC_PRIOR_MODEL",
+                  "ASSUMPTION"
+                ]
+              }
+            }
+          }
+        },
+        "anomalies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "experiment_verdicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "test_id",
+              "verdict"
+            ],
+            "properties": {
+              "test_id": {
+                "type": "string"
+              },
+              "verdict": {
+                "enum": [
+                  "confirmed",
+                  "refuted",
+                  "inconclusive"
+                ]
+              },
+              "min_sample_met": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "description": "Upstream: data-analyst → Downstream: budget-analyst, creative-strategist, strategist",
+      "additionalProperties": true
+    },
+    "budget_guard_packet": {
+      "type": "object",
+      "required": [
+        "break_even_cpa",
+        "breakdown_effect_checked",
+        "spend_guard_required",
+        "tool_outputs"
+      ],
+      "properties": {
+        "break_even_cpa": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "break_even_roas": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "mer": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "recommended_change_pct": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "breakdown_effect_checked": {
+          "type": "boolean"
+        },
+        "sensitivity": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "spend_guard_required": {
+          "type": "boolean"
+        },
+        "change_packet_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tool_outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Upstream: budget-analyst → Downstream: strategist, conductor (Spend-Guard)",
+      "additionalProperties": true
+    },
+    "tracking_spec_packet": {
+      "type": "object",
+      "required": [
+        "events",
+        "utm_standard"
+      ],
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "source"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "source": {
+                "enum": [
+                  "pixel",
+                  "capi",
+                  "both",
+                  "sdk",
+                  "crm"
+                ]
+              },
+              "dedup_key": {
+                "type": "string"
+              },
+              "hashed_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "emq_score": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "utm_standard": {
+          "type": "string"
+        },
+        "dry_run_evidence": {
+          "type": "string"
+        },
+        "consent_basis": {
+          "type": "string"
+        }
+      },
+      "description": "Upstream: tracking-specialist → Downstream: data-analyst, platform-auditor",
+      "additionalProperties": true
+    },
+    "compliance_clearance_packet": {
+      "type": "object",
+      "required": [
+        "verdict",
+        "issues",
+        "not_legal_advice"
+      ],
+      "properties": {
+        "verdict": {
+          "enum": [
+            "clear",
+            "clear_with_edits",
+            "blocked",
+            "unverified"
+          ]
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "rule_source_url",
+              "severity"
+            ],
+            "properties": {
+              "rule_source_url": {
+                "type": "string"
+              },
+              "rule_date": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string"
+              },
+              "safe_rewrite": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "not_legal_advice": {
+          "const": true
+        }
+      },
+      "description": "Upstream: compliance-reviewer → Downstream: creative-strategist, video-producer",
+      "additionalProperties": true
+    },
+    "verified_research_packet": {
+      "type": "object",
+      "required": [
+        "claims"
+      ],
+      "properties": {
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "claim",
+              "url",
+              "date",
+              "confidence"
+            ],
+            "properties": {
+              "claim": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "confidence": {
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "evidence_tier": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "stale_sources_flagged": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Upstream: research-verifier → Downstream: strategist, creative-strategist, compliance-reviewer",
+      "additionalProperties": true
+    }
+  }
+}

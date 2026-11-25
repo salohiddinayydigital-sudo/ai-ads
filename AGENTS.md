@@ -1,14 +1,14 @@
 ---
 name: AGENTS
-description: "Tyrion v8.1 — kanonik agent shartnomasi: yagona qatlamlar, 12 agent va orkestratsiya tartibi (Claude Code, Cursor, Codex, Windsurf)"
+description: "Tyrion v8.2 — kanonik agent shartnomasi: yagona qatlamlar, 12 agent va orkestratsiya tartibi (Claude Code, Cursor, Codex, Windsurf)"
 tags: [router, agents, shartnoma, arxitektura, ecc]
 source: "ECC (affaan-m/ECC) naqshi asosida Tyrion uchun qurildi"
 updated: 2026-11-19
 ---
 
-# 🧠 TYRION v8.1 — KANONIK AGENT SHARTNOMASI
+# 🧠 TYRION v8.2 — KANONIK AGENT SHARTNOMASI
 
-> **Bir qator:** Tyrion v8.1 — pullik reklama va targetologiya uchun yopiq siklli tizim: 12 agent, 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 29 slash buyruq (12 tasi model ko'radi) va 40 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
+> **Bir qator:** Tyrion v8.2 — pullik reklama va targetologiya uchun yopiq siklli tizim: 12 agent, 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 29 slash buyruq (12 tasi model ko'radi) va 40 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
 
 <!-- tyrion:catalog agents=12 skills=19 wiki=101 playbooks=9 contexts=6 commands=35 rules=9 tools=40 -->
 
@@ -37,20 +37,24 @@ updated: 2026-11-19
 
 ## 3. Agentlar Jamoasi (12 Charter)
 
-| Agent | Vazifa | Eski charterlar (matn saqlangan) |
-|---|---|---|
-| `platform-auditor` | Platforma auditi (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads); platforma delegatsiya paketida beriladi, full audit'da parallel nusxalar | `audit-<platforma>` (13) |
-| `tracking-specialist` | Pixel/CAPI, atributsiya, CRM→CAPI lid sifati | `audit-tracking`, `tracking-specialist` |
-| `audience-architect` | Meta auditoriya arxitekturasi, 6-statusli interest tekshiruvi | `meta-audience-architect` |
-| `creative-strategist` | Angle, hook, matn (UZ/RU/EN), kreativ audit, format | `audit-creative`, `copy-writer`, `visual-designer`, `format-adapter` |
-| `video-producer` | Video pre-production (sotuvchi/organik video ssenariy, video kontent reja, motion storyboard; Self-Audit >= 85/100) va alohida montaj spetsifikatsiyasi | `reels-scriptwriter`, `video-editor` |
-| `budget-analyst` | Break-even, MER, pacing, scale qarori | `audit-budget` |
-| `data-analyst` | Eksport, `metrics.v1`, pulse, eksperiment natijasi, hisobot | (yangi) |
-| `strategist` | Pozitsiyalash, launch, offer, g'oyalar | `positioning-strategist`, `launch-planner`, `campaign-ideator` |
-| `content-planner` | Kontent, sotsial, SEO | `content-planner`, `social-content-writer`, `seo-auditor` |
-| `compliance-reviewer` | Platforma policy va regulyator tekshiruvi | `audit-policy-compliance`, `audit-regulatory-compliance` |
-| `research-verifier` | Tadqiqot va manba tekshiruvi | `research-worker`, `source-verifier` |
-| `release-verifier` | Toza kontekstda qabul/reliz tekshiruvi, skill sifati | `release-verifier`, `skill-reviewer` |
+Har charter **Charter v2** standartida ([[70-charter-baseline]] §6): avval **rejim** tanlanadi, domen **qaror tartibi** va **anti-patternlar** qat'iy, **rolga xos `output_contract`**, qaytarishdan oldin **Self-Audit darvozasi** (generativ: rubrika >= 85/100; tahliliy/audit: Pass/Fail; o'tmasa 1 majburiy ichki qayta yozish) va **typed handoff** (`schemas/agent-handoff.schema.json`). Umumiy Agent sikli, Prompt Defense va Zero-Findings faqat [[70-charter-baseline]] da (charterda nusxa yo'q).
+
+| Agent | Vazifa | Rejimlar | Darvoza · maxTurns | Handoff paketi | Eski charterlar (matn saqlangan) |
+|---|---|---|---|---|---|
+| `strategist` | Pozitsiyalash, offer, launch, turnaround | `positioning` `offer_architecture` `launch_plan` `turnaround` | >= 85 · 28 | `strategic_brief` | `positioning-strategist`, `launch-planner`, `campaign-ideator` |
+| `platform-auditor` | Platforma auditi (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads); platforma delegatsiya paketida | `quick_triage` `full_account_audit` `cross_platform_compare` | Pass/Fail · 28 | `audit_findings_packet` | `audit-<platforma>` (13) |
+| `creative-strategist` | Angle, hook, matn (UZ/RU/EN), kreativ audit, charchoq | `creative_audit` `matrix_3x3` `copy_sprint` `fatigue_recovery` | >= 85 · 28 | `strategic_brief` → video | `audit-creative`, `copy-writer`, `visual-designer`, `format-adapter` |
+| `video-producer` | Video pre-production (sotuvchi/organik, video reja, motion storyboard) va alohida montaj spetsifikatsiyasi | `sales` `organic` `plan` `motion` `edit` | >= 85 · 24 | ssenariy → kreativ/kontent | `reels-scriptwriter`, `video-editor` |
+| `budget-analyst` | Break-even, MER, pacing, scale qarori | `unit_economics` `scaling_decision` `pacing_emergency` `channel_mix` | Pass/Fail · 24 | `budget_guard_packet` | `audit-budget` |
+| `audience-architect` | Meta auditoriya arxitekturasi, 6-statusli interest tekshiruvi | `meta_architecture` `interest_verify` `overlap_audit` `exclusion_design` | Pass/Fail · 24 | auditoriya arxitekturasi | `meta-audience-architect` |
+| `data-analyst` | Eksport, `metrics.v1`, pulse, eksperiment, hisobot | `export_normalize` `weekly_pulse` `experiment_readout` `client_report` | Pass/Fail · 24 | `analytics_readout_packet` | (yangi; playbook: `skills/analyze/references/data-analyst-playbook.md`) |
+| `tracking-specialist` | Pixel/CAPI, atributsiya, UTM, CRM→CAPI lid sifati | `pixel_capi_audit` `event_taxonomy` `utm_governance` `crm_lead_quality` | Pass/Fail · 24 | `tracking_spec_packet` | `audit-tracking`, `tracking-specialist` |
+| `content-planner` | Kontent, sotsial, SEO, nurture | `content_calendar` `social_series` `seo_cluster` `funnel_nurture` | >= 85 · 24 | kalendar → video | `content-planner`, `social-content-writer`, `seo-auditor` |
+| `compliance-reviewer` | Platforma policy va regulyator tekshiruvi | `ad_copy_preflight` `landing_policy_check` `restricted_vertical` `uz_regulatory_check` | Pass/Fail · 18 | `compliance_clearance_packet` | `audit-policy-compliance`, `audit-regulatory-compliance` |
+| `research-verifier` | Tadqiqot va manba tekshiruvi | `competitor_intel` `source_factcheck` `benchmark_verify` `market_scan` | Pass/Fail · 18 | `verified_research_packet` | `research-worker`, `source-verifier` |
+| `release-verifier` | Toza kontekstda qabul/reliz tekshiruvi, skill/charter sifati | `pre_release_gate` `skill_audit` `charter_lint` `eval_regression` | Pass/Fail · 18 | reliz hukmi | `release-verifier`, `skill-reviewer` |
+
+Sifat rubrikalari: `skills/strategy|creative|budget|analyze|content/references/quality-rubric.md`, video uchun `skills/video/references/script-quality-rubric.md`. Charter v2 mosligi `tests/test_agents_charter_v2.py` bilan tekshiriladi.
 
 Eski nomlar router tomonidan alias sifatida taniladi (`manifests/migration-v8.json`, [[MIGRATION.md]]).
 

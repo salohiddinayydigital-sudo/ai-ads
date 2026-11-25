@@ -1,7 +1,7 @@
 ---
 disable-model-invocation: true
 name: doctor
-description: "Tyrion v8.1 tizimining ko'p qatlamli sog'liq, katalog, MCP, xavfsizlik va unit-test diagnostikasi"
+description: "Tyrion v8.2 tizimining ko'p qatlamli sog'liq, katalog, MCP, xavfsizlik va unit-test diagnostikasi"
 ---
 
 # `/doctor` — Tizim Sog'lig'i Diagnostikasi

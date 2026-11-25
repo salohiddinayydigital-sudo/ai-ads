@@ -1,4 +1,4 @@
-# Tyrion v8.1 — closed-loop media-buyer brain for paid ads (`ai-ads`)
+# Tyrion v8.2 — closed-loop media-buyer brain for paid ads (`ai-ads`)
 
 <!-- tyrion:catalog agents=12 skills=19 wiki=101 playbooks=9 contexts=6 commands=35 rules=9 tools=40 -->
 
