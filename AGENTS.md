@@ -1,20 +1,20 @@
 ---
 name: AGENTS
-description: "Tyrion v8.1 — kanonik agent shartnomasi: yagona qatlamlar, 12 agent va orkestratsiya tartibi (Claude Code, Cursor, Codex, Windsurf)"
+description: "Tyrion v8.3 — kanonik agent shartnomasi: yagona qatlamlar, 19 agent (12 core + 7 targetolog) va orkestratsiya tartibi (Claude Code, Cursor, Codex, Windsurf)"
 tags: [router, agents, shartnoma, arxitektura, ecc]
 source: "ECC (affaan-m/ECC) naqshi asosida Tyrion uchun qurildi"
 updated: 2026-11-19
 ---
 
-# 🧠 TYRION v8.1 — KANONIK AGENT SHARTNOMASI
+# 🧠 TYRION v8.3 — KANONIK AGENT SHARTNOMASI
 
-> **Bir qator:** Tyrion v8.1 — pullik reklama va targetologiya uchun yopiq siklli tizim: 12 agent, 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 29 slash buyruq (12 tasi model ko'radi) va 40 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
+> **Bir qator:** Tyrion v8.3 — pullik reklama va targetologiya uchun yopiq siklli tizim: 19 agent (12 core + 7 targetolog assistant), 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 42 slash buyruq (12 tasi model ko'radi) va 40 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
 
-<!-- tyrion:catalog agents=12 skills=19 wiki=101 playbooks=9 contexts=6 commands=35 rules=9 tools=40 -->
+<!-- tyrion:catalog agents=19 skills=19 wiki=101 playbooks=9 contexts=6 commands=42 rules=9 tools=40 -->
 
 ## 1. Boot Tartibi (Token Tejamkor)
 
-1. **Shu fayl (`AGENTS.md`)** — qatlamlar, 12 agent, orkestratsiya va xavfsizlik chegaralari.
+1. **Shu fayl (`AGENTS.md`)** — qatlamlar, 19 agent, orkestratsiya va xavfsizlik chegaralari.
 2. **`MEMORY.md`** — operator xotirasi (`<=90` qator: til qonuni, O'zbekiston bozori asoslari, aktiv Bet Ledger va saboqlar).
 3. **Vazifaga mos Kontekst va Qoida:** `contexts/` dan 1 ta ish rejimi (`audit-mode`, `launch-mode`, `scale-mode`, `creative-mode`, `uzbekistan-market`) va `rules/` dan 1–2 qoida.
 4. **Universal Skill (`tyrion`) — standart kirish nuqtasi:** oddiy marketing so'rovlari uchun yagona dirijyor. U `skill-search.py route` (va `manifests/workflows.json` — yagona marshrut manbasi) orqali agent/skill/asbob/oqimni o'zi aniqlaydi, tanlangan `SKILL.md` va charterlarni haqiqatan o'qiydi, mutaxassislarga delegatsiya qiladi (yoki ochiq `single_conductor_fallback`), natijalarni tekshiradi va bitta hujjatga sintez qiladi. `UserPromptSubmit` hooki (`prompt:route`) har marketing xabarida marshrut maslahatini beradi, `SessionStart` esa kirish nuqtasini eslatadi. Mutaxassis (sub-agent) uni qayta chaqirmaydi (`caller: specialist`).
@@ -24,9 +24,9 @@ updated: 2026-11-19
 
 | Qatlam | Kanonik Manzil | Nima saqlanadi | Holat |
 |---|---|---|---|
-| **Agentlar** | `agents/` (12) | 12 ta ixtisoslashgan agent charteri (`Prompt Defense Baseline` + `skills:` ulangan) | kanonik |
+| **Agentlar** | `agents/` (19) | 19 ta ixtisoslashgan agent charteri (12 core + 7 targetolog assistant, Charter v2) (`Prompt Defense Baseline` + `skills:` ulangan) | kanonik |
 | **Skilllar** | `skills/` (19) | 19 ta skill: `tyrion`, `strategy`, `audit`, `audience`, `creative`, `video`, `tracking`, `budget`, `analyze`, `competitors`, `funnel`, `content`, `report`, `client`, `system`, `connect`, `pulse`, `experiments`, `lead-quality` | kanonik |
-| **Buyruqlar** | `commands/` (35) | 35 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
+| **Buyruqlar** | `commands/` (42) | 42 ta slash buyruq (`.claude/commands/` ga avtomatik mirror qilinadi) | kanonik |
 | **Kontekstlar** | `contexts/` (6) | 5 ta ECC Dynamic Context Mode (`audit`, `launch`, `scale`, `creative`, `uzbekistan`) + `README.md` | kanonik |
 | **Playbooklar** | `playbooks/` (9) | 8 ta to'liq nisha va platforma playbooki + `README.md` | kanonik |
 | **Bilim (Wiki)** | `wiki/` (100) | 100 ta atomik, wikilink bilan bog'langan bilim qaydi va 16 ta SOP | kanonik |
@@ -35,34 +35,54 @@ updated: 2026-11-19
 | **Xotira** | `MEMORY.md` · `manifests/instincts.json` | Operator xotirasi (`<=90` qator) va `/learn` instinktlar reestri | faol |
 | **Katalog & Graf** | `manifests/catalog.json` · `graphify-out/` | Mashina o'qiydigan yagona reestr va 0-token wikilink grafi (generatsiya) | generatsiya |
 
-## 3. Agentlar Jamoasi (12 Charter)
+## 3. Agentlar Jamoasi (19 Charter: 12 Core + 7 Targetolog Assistants)
 
-| Agent | Vazifa | Eski charterlar (matn saqlangan) |
-|---|---|---|
-| `platform-auditor` | Platforma auditi (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads); platforma delegatsiya paketida beriladi, full audit'da parallel nusxalar | `audit-<platforma>` (13) |
-| `tracking-specialist` | Pixel/CAPI, atributsiya, CRM→CAPI lid sifati | `audit-tracking`, `tracking-specialist` |
-| `audience-architect` | Meta auditoriya arxitekturasi, 6-statusli interest tekshiruvi | `meta-audience-architect` |
-| `creative-strategist` | Angle, hook, matn (UZ/RU/EN), kreativ audit, format | `audit-creative`, `copy-writer`, `visual-designer`, `format-adapter` |
-| `video-producer` | Video pre-production (sotuvchi/organik video ssenariy, video kontent reja, motion storyboard; Self-Audit >= 85/100) va alohida montaj spetsifikatsiyasi | `reels-scriptwriter`, `video-editor` |
-| `budget-analyst` | Break-even, MER, pacing, scale qarori | `audit-budget` |
-| `data-analyst` | Eksport, `metrics.v1`, pulse, eksperiment natijasi, hisobot | (yangi) |
-| `strategist` | Pozitsiyalash, launch, offer, g'oyalar | `positioning-strategist`, `launch-planner`, `campaign-ideator` |
-| `content-planner` | Kontent, sotsial, SEO | `content-planner`, `social-content-writer`, `seo-auditor` |
-| `compliance-reviewer` | Platforma policy va regulyator tekshiruvi | `audit-policy-compliance`, `audit-regulatory-compliance` |
-| `research-verifier` | Tadqiqot va manba tekshiruvi | `research-worker`, `source-verifier` |
-| `release-verifier` | Toza kontekstda qabul/reliz tekshiruvi, skill sifati | `release-verifier`, `skill-reviewer` |
+Har charter **Charter v2** standartida ([[70-charter-baseline]] §6): avval **rejim** tanlanadi, domen **qaror tartibi** va **anti-patternlar** qat'iy, **rolga xos `output_contract`**, qaytarishdan oldin **Self-Audit darvozasi** (generativ: rubrika >= 85/100; tahliliy/audit: Pass/Fail; o'tmasa 1 majburiy ichki qayta yozish) va **typed handoff** (`schemas/agent-handoff.schema.json`). Umumiy Agent sikli, Prompt Defense va Zero-Findings faqat [[70-charter-baseline]] da (charterda nusxa yo'q).
+
+| Agent | Vazifa | Rejimlar | Darvoza · maxTurns | Handoff paketi | Eski charterlar (matn saqlangan) |
+|---|---|---|---|---|---|
+| `strategist` | Pozitsiyalash, offer, launch, turnaround | `positioning` `offer_architecture` `launch_plan` `turnaround` | >= 85 · 28 | `strategic_brief` | `positioning-strategist`, `launch-planner`, `campaign-ideator` |
+| `platform-auditor` | Platforma auditi (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads); platforma delegatsiya paketida | `quick_triage` `full_account_audit` `cross_platform_compare` | Pass/Fail · 28 | `audit_findings_packet` | `audit-<platforma>` (13) |
+| `creative-strategist` | Angle, hook, matn (UZ/RU/EN), kreativ audit, charchoq | `creative_audit` `matrix_3x3` `copy_sprint` `fatigue_recovery` | >= 85 · 28 | `strategic_brief` → video | `audit-creative`, `copy-writer`, `visual-designer`, `format-adapter` |
+| `video-producer` | Video pre-production (sotuvchi/organik, video reja, motion storyboard) va alohida montaj spetsifikatsiyasi | `sales` `organic` `plan` `motion` `edit` | >= 85 · 24 | ssenariy → kreativ/kontent | `reels-scriptwriter`, `video-editor` |
+| `budget-analyst` | Break-even, MER, pacing, scale qarori | `unit_economics` `scaling_decision` `pacing_emergency` `channel_mix` | Pass/Fail · 24 | `budget_guard_packet` | `audit-budget` |
+| `audience-architect` | Meta auditoriya arxitekturasi, 6-statusli interest tekshiruvi | `meta_architecture` `interest_verify` `overlap_audit` `exclusion_design` | Pass/Fail · 24 | auditoriya arxitekturasi | `meta-audience-architect` |
+| `data-analyst` | Eksport, `metrics.v1`, pulse, eksperiment, hisobot | `export_normalize` `weekly_pulse` `experiment_readout` `client_report` | Pass/Fail · 24 | `analytics_readout_packet` | (yangi; playbook: `skills/analyze/references/data-analyst-playbook.md`) |
+| `tracking-specialist` | Pixel/CAPI, atributsiya, UTM, CRM→CAPI lid sifati | `pixel_capi_audit` `event_taxonomy` `utm_governance` `crm_lead_quality` | Pass/Fail · 24 | `tracking_spec_packet` | `audit-tracking`, `tracking-specialist` |
+| `content-planner` | Kontent, sotsial, SEO, nurture | `content_calendar` `social_series` `seo_cluster` `funnel_nurture` | >= 85 · 24 | kalendar → video | `content-planner`, `social-content-writer`, `seo-auditor` |
+| `compliance-reviewer` | Platforma policy va regulyator tekshiruvi | `ad_copy_preflight` `landing_policy_check` `restricted_vertical` `uz_regulatory_check` | Pass/Fail · 18 | `compliance_clearance_packet` | `audit-policy-compliance`, `audit-regulatory-compliance` |
+| `research-verifier` | Tadqiqot va manba tekshiruvi | `competitor_intel` `source_factcheck` `benchmark_verify` `market_scan` | Pass/Fail · 18 | `verified_research_packet` | `research-worker`, `source-verifier` |
+| `release-verifier` | Toza kontekstda qabul/reliz tekshiruvi, skill/charter sifati | `pre_release_gate` `skill_audit` `charter_lint` `eval_regression` | Pass/Fail · 18 | reliz hukmi | `release-verifier`, `skill-reviewer` |
+
+### 3.1 Targetolog Copilot Pack (7 yordamchi agent, v8.3)
+
+Amaliyotchi targetologning kunlik operatsion ishlari — yadro 12 agentni takrorlamasdan (`authority_boundary` qat'iy ajratilgan). Har biri Charter v2, metodologiyasi `skills/*/references/` da va slash buyruq orqali chaqiriladi.
+
+| Agent | Vazifa | Rejimlar | Darvoza · maxTurns | Handoff paketi | Buyruq |
+|---|---|---|---|---|---|
+| `client-onboarder` | Yangi mijoz: brif, Go/Fix-First/No-Go, ruxsatlar, kickoff | `intake_brief` `readiness_filter` `access_checklist` `kickoff_proposal` | >= 85 · 20 | `client_onboarding_packet` | `/onboard` |
+| `ad-spy-analyst` | Raqobatchi reklamalari (Ad Library), winner pattern, Counter-Angle | `ad_library_dissect` `winner_pattern_map` `counter_angle_pack` | Pass/Fail · 20 | `ad_spy_packet` | `/ad-spy` |
+| `campaign-launcher` | CBO/ABO tuzilma, naming, UTM, pre-launch gate, 72h learning | `meta_structure` `telegram_tiktok_google_launch` `naming_and_utm` `prelaunch_gate_72h` | Pass/Fail · 24 | `launch_blueprint_packet` | `/launch-plan` |
+| `daily-optimizer` | Ertalabki KILL/HOLD/ITERATE/SCALE, CPL tashxisi, xavfsiz masshtab | `morning_triage` `cpl_spike_diagnosis` `fatigue_rotation` `safe_scale_plan` | Pass/Fail · 24 | `daily_triage_packet` | `/morning-triage` |
+| `funnel-cro-doctor` | Direct/DM skript, Lead Form, landing CRO, sales leak | `direct_dm_script` `lead_form_optimizer` `landing_cro_audit` `sales_leak_diagnosis` | >= 85 · 24 | `cro_fix_packet` | `/cro-dm` |
+| `account-recovery-specialist` | Rad etilish/blokirovka: white-hat triage, apellyatsiya, gigiyena | `rejection_triage` `appeal_draft` `infra_hygiene` | Pass/Fail · 18 | `recovery_action_packet` | `/appeal` |
+| `client-comms-lead` | Mijozga Telegram digest, e'tirozga javob, upsell, inqiroz xabari | `telegram_digest` `objection_handler` `budget_upsell_pitch` `crisis_update` | >= 85 · 18 | `client_comms_packet` | `/client-update` |
+
+Chegara: `compliance-reviewer` — pre-flight policy/regulyator; `account-recovery-specialist` — rad etilgandan/cheklangandan keyingi tiklash (faqat white-hat, [[40-xavfsizlik-va-hisob]]). `daily-optimizer` va `campaign-launcher` jonli akkauntga tegmaydi: > +20% byudjet yoki har qanday jonli o'zgarish — Spend-Guard paketi va foydalanuvchi tasdig'i.
+
+Sifat rubrikalari: `skills/strategy|creative|budget|analyze|content/references/quality-rubric.md`, video uchun `skills/video/references/script-quality-rubric.md`. Charter v2 mosligi `tests/test_agents_charter_v2.py` bilan tekshiriladi.
 
 Eski nomlar router tomonidan alias sifatida taniladi (`manifests/migration-v8.json`, [[MIGRATION.md]]).
 
 ## 3a. Workflow qatlami va Universal Conductor
 
-`manifests/workflows.json` (validatsiya: `python3 tools/tyrion_workflows.py check`) — cross-agent oqimlar: `meta_strategy`, `competitor_strategy`, `marketing_plan_full`, `campaign_diagnosis`, `results_analysis`, `creative_improve`, `video_script`, `video_edit`, `competitor_research`, `audience_design`, `budget_math`, `tracking_setup`, `campaign_launch`, `full_audit`, `weekly_review`, `client_report`. Har oqim DAG: bosqichlar `needs` bilan bog'langan, bog'liq bo'lmaganlari parallel (`parallel_levels`), ixtiyoriy bosqichlar `optional_when` bilan o'tkazib yuboriladi, bitta bosqich = bitta agent = bitta output (dublikat ish yo'q). Router faqat birinchi 2 mutaxassis charteri va primary skilllarni yuklaydi, qolgan bosqich skilllari `stage_skills_deferred` ga tushadi va bosqich boshlanganda o'qiladi. Progressive rejimda kesilgan skill `truncated` deb belgilanadi va `applied_skills_verified` ga kirmaydi: dirijyor uni `Read` bilan to'liq o'qigandan keyingina "qo'llandi" deydi. Yagona oqimga tushmagan oddiy (1 mutaxassis) vazifalar eski skill reytingi bilan marshrutlanadi.
+`manifests/workflows.json` (validatsiya: `python3 tools/tyrion_workflows.py check`) — cross-agent oqimlar: `meta_strategy`, `competitor_strategy`, `marketing_plan_full`, `campaign_diagnosis`, `results_analysis`, `creative_improve`, `video_script`, `video_edit`, `competitor_research`, `audience_design`, `budget_math`, `tracking_setup`, `campaign_launch`, `full_audit`, `weekly_review`, `client_report`, hamda Targetolog Copilot oqimlari `new_client_onboarding`, `campaign_build_to_launch`, `morning_media_buyer_triage`, `lead_quality_and_dm_fix`, `competitor_ad_spy`, `account_restriction_recovery`. Har oqim DAG: bosqichlar `needs` bilan bog'langan, bog'liq bo'lmaganlari parallel (`parallel_levels`), ixtiyoriy bosqichlar `optional_when` bilan o'tkazib yuboriladi, bitta bosqich = bitta agent = bitta output (dublikat ish yo'q). Router faqat birinchi 2 mutaxassis charteri va primary skilllarni yuklaydi, qolgan bosqich skilllari `stage_skills_deferred` ga tushadi va bosqich boshlanganda o'qiladi. Progressive rejimda kesilgan skill `truncated` deb belgilanadi va `applied_skills_verified` ga kirmaydi: dirijyor uni `Read` bilan to'liq o'qigandan keyingina "qo'llandi" deydi. Yagona oqimga tushmagan oddiy (1 mutaxassis) vazifalar eski skill reytingi bilan marshrutlanadi.
 
 ## 4. Kanonik 6-Bosqichli Avtonom Marshrutlash va Orkestratsiya Oqimi
 
 Barcha muhitlarda (Claude Code, Codex, Cursor, Windsurf, CLI/MCP) bitta kanonik oqim amal qiladi:
 
-1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 35 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
+1. **Tabiiy tilda qabul qilish:** Foydalanuvchi oddiy tilda vazifa beradi (`uz_latin`, `uz_cyrillic`, `ru`, `en`). Mavjud 42 ta slash buyruq (`/audit`, `/auditoriya`, `/kreativ`, `/budget`, `/hisobot` va b.) universal routerga raqobatchi emas, balki tezkor yorliqlar (shortcuts) sifatida ishlaydi.
 2. **Avtomatik tanlash (`route_task`):** `primary_agent`, `supporting_agents` (faqat haqiqatan mustaqil ko'p bosqichli vazifalarda), `required_skills`, `supporting_skills`, `rules_to_load` va `references_to_load` avtomatik aniqlanadi.
 3. **To'liq ko'rsatmalarni yuklash (`full` vs `manifest`):** Standart `full` rejimda tanlangan agent charterlari, `SKILL.md`, qoidalar va reference fayllarning **to'liq matni** (`compiled_context_package`) kontekst byudjeti (`max_context_bytes=180,000`) nazorati ostida yuklanadi. To'liq o'qilmagan skill hech qachon "qo'llanildi" deb ko'rsatilmaydi.
 4. **Amaliy ijro (`execute_task`) va Multi-Harness halolligi:**

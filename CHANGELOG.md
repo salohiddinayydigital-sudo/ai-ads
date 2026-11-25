@@ -3,6 +3,39 @@
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
 
+## [8.3.0] — 2026-11-25
+
+Targetolog Copilot Pack: yadro 12 agentni takrorlamasdan amaliyotchi targetologning kunlik operatsion ishlarini yopadigan 7 yordamchi agent (jami 19 kanonik agent: 12 core + 7 targetolog).
+
+### Qo'shildi
+- Agentlar (Charter v2): `client-onboarder`, `ad-spy-analyst`, `campaign-launcher`, `daily-optimizer`, `funnel-cro-doctor`, `account-recovery-specialist` (faqat white-hat), `client-comms-lead` + `.claude/agents/` mirror.
+- Buyruqlar (`disable-model-invocation`): `/onboard`, `/ad-spy`, `/launch-plan`, `/morning-triage`, `/cro-dm`, `/appeal`, `/client-update` (commands 35 → 42).
+- Workflow'lar (`manifests/workflows.json`, 16 → 22): `new_client_onboarding`, `campaign_build_to_launch`, `morning_media_buyer_triage`, `lead_quality_and_dm_fix`, `competitor_ad_spy`, `account_restriction_recovery`.
+- Playbooklar: `skills/strategy/references/client-onboarding-framework.md`, `skills/competitors/references/ad-library-spy-playbook.md`, `skills/budget/references/daily-triage-kill-scale.md`, `skills/funnel/references/direct-dm-and-leadform-cro.md`, `skills/audit/references/account-recovery-whitehat.md`, `skills/report/references/client-comms-playbooks.md`.
+- `schemas/agent-handoff.schema.json`: +7 paket (`client_onboarding_packet`, `ad_spy_packet`, `launch_blueprint_packet`, `daily_triage_packet`, `cro_fix_packet`, `recovery_action_packet` (`white_hat_only: true`), `client_comms_packet`).
+- `tests/test_targetolog_agents.py` — 7 agent, 7 buyruq, 6 DAG, 21 so'rovli UZ/RU/EN routing matritsasi, trigger to'qnashuvi, white-hat va Spend-Guard chegaralari.
+
+### O'zgardi
+- `compliance-reviewer` — pre-flight policy/regulyator; reaktiv "reklama bloklandi / ad rejected / модерация отклонила / блокировка рекламы" triggerlari `account-recovery-specialist` ga ko'chirildi (to'qnashuv yo'q).
+- Skill ulanishlari (ikki tomonlama): `client`, `competitors`, `strategy`, `pulse`, `funnel`, `system`; yangi targetolog triggerlari `client`, `competitors`, `pulse`, `funnel`, `system` skilllarida.
+- Router: scope-darvoza lug'atiga targetolog atamalari (`cpl`, `akkaunt`, `apellyatsiya`, `brif`, `onboarding`, `direct`, `triage`, `optimizatsiya`); `client_report` Telegram/e'tiroz xabarlarini `client-comms-lead` ga qoldiradi.
+- Yadro charterlar handoff'lari yangi agentlarga ulandi; `AGENTS.md` §3.1 va §3a, `CLAUDE.md`, `rules/70-charter-baseline.md` (19 agent) yangilandi.
+
+## [8.2.0] — 2026-11-25
+
+Charter v2: barcha 12 kanonik agent "yupqa qobiq"dan rejimli, o'zini ballaydigan va typed handoff'li mutaxassislarga ko'tarildi.
+
+### Qo'shildi
+- `schemas/agent-handoff.schema.json` — `tyrion.agent_handoff/v1` konverti va 7 typed paket (`strategic_brief`, `audit_findings_packet`, `analytics_readout_packet`, `budget_guard_packet`, `tracking_spec_packet`, `compliance_clearance_packet`, `verified_research_packet`).
+- Sifat rubrikalari: `skills/{strategy,creative,budget,analyze,content}/references/quality-rubric.md`; `skills/analyze/references/data-analyst-playbook.md` (metrics.v1 validatsiya, tanlama hajmi, atributsiya oynasi, anomaliya triage).
+- `tests/test_agents_charter_v2.py` — 6 majburiy blok, rolga xos output_contract, buzilgan yo'llar, maxTurns tabaqalari, "36 agent" drifti, schema va routing regressiyasi.
+
+### O'zgardi
+- `agents/*.md` (12) + `.claude/agents/` mirror: `## Rejimlar`, `## Qaror tartibi`, `## Anti-Patternlar va Qat'iy Taqiqlar`, rolga xos `## Output contract`, `## Self-Audit Sifat Darvozasi` (>= 85/100 yoki Pass/Fail, 1 majburiy qayta yozish), `## Handoff Kontrakti`; takroriy boilerplate `rules/70-charter-baseline.md` ga ko'chirildi.
+- `maxTurns` yuklama bo'yicha tabaqalandi: 28 (strategist, platform-auditor, creative-strategist) · 24 (6 agent) · 18 (compliance/research/release-verifier).
+- `rules/70-charter-baseline.md`: "36 agent" drifti tuzatildi (son `catalog.py sync-claims` bilan avtomatik), umumiy Agent sikli va Charter v2 standarti qo'shildi; `.cursor/rules` va `.windsurfrules` qayta eksport qilindi.
+- `AGENTS.md` §3: rejimlar, darvozalar, maxTurns va handoff paketlari jadvali.
+
 ## [8.1.0] — 2026-11-22
 
 Video pre-production tizimi (4 ustun): sotuvchi video, organik/ekspert video, video kontent reja + syomka kuni, motion video blueprint. Montaj/render qatlami (`video-editing.md`, `tools/video-run.py`) o'zgarmagan.

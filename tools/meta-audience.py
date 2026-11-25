@@ -1262,7 +1262,7 @@ def build_launch_blueprint(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="meta-audience.py",
-        description="Tyrion v8.1 Meta Ads Audience & Detailed Targeting Accuracy Engine",
+        description="Tyrion v8.3 Meta Ads Audience & Detailed Targeting Accuracy Engine",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -1503,7 +1503,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 66)
-    print(f"  🎯 TYRION v8.1 META AUDIENCE ENGINE — {args.command.upper()}")
+    print(f"  🎯 TYRION v8.3 META AUDIENCE ENGINE — {args.command.upper()}")
     print("=" * 66)
     for k, v in res.items():
         if isinstance(v, list):

@@ -27,6 +27,8 @@ triggers:
 - "интервью с клиентами"
 - "анализ целевой аудитории"
 - "мижоз тадқиқоти"
+- "ракобатчи рекламалари"
+- "реклама конкурентов"
 aliases:
 - "competitor"
 - "ads-library"
@@ -54,9 +56,7 @@ platforms:
 - "tiktok"
 - "telegram"
 - "multi-platform"
-attached_agents:
-- "research-verifier"
-- "strategist"
+attached_agents: [ad-spy-analyst, research-verifier, strategist]
 related_skills: []
 references:
 - "skills/competitors/references/ads-competitor.md"

@@ -8,13 +8,16 @@ triggers:
 - "ogohlantirish"
 - "мониторинг"
 - "anomaly"
+- "ertalabki triage"
+- "cpl oshib ketdi"
+- "вырос cpl"
+- "morning triage"
 aliases: []
 domains:
 - monitoring
 platforms:
 - meta
-attached_agents:
-- data-analyst
+attached_agents: [daily-optimizer, data-analyst]
 related_skills: []
 references:
 - "skills/pulse/references/scheduling.md"

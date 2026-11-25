@@ -10,6 +10,10 @@ triggers:
 - "compliance"
 - "модерация рекламы"
 - "блокировка рекламного кабинета"
+- "apellyatsiya"
+- "akkaunt bloklandi"
+- "аккаунт заблокирован"
+- "ad account restricted"
 aliases:
 - "policy-check"
 - "compliance"
@@ -21,7 +25,7 @@ domains:
 - "validation"
 platforms:
 - "multi-platform"
-attached_agents: [compliance-reviewer, release-verifier]
+attached_agents: [account-recovery-specialist, compliance-reviewer, release-verifier]
 related_skills: []
 references:
 - "skills/system/references/ads-validate.md"

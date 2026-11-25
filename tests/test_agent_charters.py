@@ -68,7 +68,7 @@ def required_tools(body: str) -> set[str]:
 
 class AgentCharterTests(unittest.TestCase):
     def test_pending_list_is_explicit(self) -> None:
-        self.assertEqual(len(ALL_AGENTS), 12, "agent qo'shish/olib tashlash — avval so'rang")
+        self.assertEqual(len(ALL_AGENTS), 19, "agent qo'shish/olib tashlash — avval so'rang")
         self.assertTrue(CONVERTED <= set(ALL_AGENTS))
 
     def test_converted_charters(self) -> None:

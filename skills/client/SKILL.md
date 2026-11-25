@@ -9,6 +9,14 @@ triggers:
 - "pixel o'rnatish"
 - "настройка аккаунта"
 - "онбординг клиента"
+- "mijozga javob"
+- "mijoz e'tirozi"
+- "mijozga telegram hisobot"
+- "inqiroz xabari"
+- "отчет клиенту"
+- "client update"
+- "yangi mijoz brif"
+- "бриф клиента"
 aliases:
 - "onboarding"
 - "account-setup"
@@ -20,7 +28,7 @@ domains:
 - "launch"
 platforms:
 - "multi-platform"
-standalone: true
+attached_agents: [client-comms-lead, client-onboarder]
 related_skills: []
 references:
 - "skills/client/references/ads-setup.md"

@@ -682,7 +682,8 @@ _HARD_MARKETING_RE = re.compile(
     r"strategiya\w*|strategy|стратег\w*|raqobat\w*|competitor\w*|конкурент\w*|launch\w*|запуск\w*|interest\w*|qiziqish\w*|интерес\w*|"
     r"e-commerce|ecommerce|do'kon\w*|магазин\w*|kontent\w*|content|контент\w*|copywrit\w*|promo\w*|brief\w*|persona|avatar\w*|"
     r"bid\w*|stavka\w*|ставк\w*|trafik\w*|traffic|reach|impression\w*|show\w*|click\w*|klik\w*|клик\w*|"
-    r"montaj\w*|video\w*|motion|subtitr\w*|tipografiya\w*|animatsion\w*|seo-\w+|geo)\b"
+    r"montaj\w*|video\w*|motion|subtitr\w*|tipografiya\w*|animatsion\w*|seo-\w+|geo|"
+    r"cpl|akkaunt\w*|аккаунт\w*|apellyats\w*|апелляц\w*|appeal\w*|brif\w*|бриф\w*|onboard\w*|онбординг\w*|direct|директ\w*|triage|optimizats\w*|оптимизац\w*)\b"
 )
 
 
@@ -2592,7 +2593,7 @@ def cmd_tokens(args: argparse.Namespace) -> int:
         print(json.dumps(prof, ensure_ascii=False, indent=2))
         return 0
     print("=" * 74)
-    print("  ⚡ TYRION v8.1 TOKEN CONSUMPTION & COST EFFICIENCY REPORT")
+    print("  ⚡ TYRION v8.3 TOKEN CONSUMPTION & COST EFFICIENCY REPORT")
     print("=" * 74)
     nv = prof["naive_full_vault"]
     print(f"  Butun baza hajmi (63 skill + 100 wiki + 36 agent): {nv['total_markdown_bytes']:,} bayt (~{nv['estimated_tokens']:,} token)")

@@ -1,27 +1,27 @@
 ---
 name: CLAUDE
-description: "Tyrion v8.1 — yopiq siklli media-buyer miyasi: skill/agent routeri, ma'lumot qatlami, Spend-Guard"
+description: "Tyrion v8.3 — yopiq siklli media-buyer miyasi: skill/agent routeri, ma'lumot qatlami, Spend-Guard"
 tags: [router, tyrion, ecc, v8]
 source: "affaan-m/ECC arxitekturasi asosida Tyrion uchun"
 updated: 2026-11-19
 ---
 
-# 🧠 TYRION v8.1 — AI PAID MEDIA & TARGETOLOGY OS
+# 🧠 TYRION v8.3 — AI PAID MEDIA & TARGETOLOGY OS
 
 > **Kanonik shartnoma:** [[AGENTS.md]] · **Operator xotirasi:** [[MEMORY.md]] · **Bilim xaritasi:** [[INDEX.md]] · **Kirish:** [[README.md]]
 
-Tyrion v8.1 — pullik reklama va targetologiya uchun yopiq siklli tizim: rasmiy konnektorlardan ma'lumot oladi, raqamlarni kod bilan hisoblaydi (`schemas/metrics.v1.json`), hisobni kuzatadi (`pulse`), testlardan o'rganadi (`experiments`), CRM lid sifatini Meta'ga qaytaradi (`lead-quality`). Arxitektura: yagona ildiz, `affaan-m/ECC` naqshi. 7.x dan o'tish: [[MIGRATION.md]].
+Tyrion v8.3 — pullik reklama va targetologiya uchun yopiq siklli tizim: rasmiy konnektorlardan ma'lumot oladi, raqamlarni kod bilan hisoblaydi (`schemas/metrics.v1.json`), hisobni kuzatadi (`pulse`), testlardan o'rganadi (`experiments`), CRM lid sifatini Meta'ga qaytaradi (`lead-quality`). Arxitektura: yagona ildiz, `affaan-m/ECC` naqshi. 7.x dan o'tish: [[MIGRATION.md]].
 
 ## 1. Yagona Ildizli Tuzilma (Single-Root Architecture)
 
 | Qatlam / Joy | Nima saqlanadi | Qachon o'qiladi |
 |---|---|---|
-| `AGENTS.md` | **Kanonik agent shartnomasi** — 12 agent, orkestratsiya, tamoyillar | Sessiya boshida (boot) |
+| `AGENTS.md` | **Kanonik agent shartnomasi** — 19 agent (12 core + 7 targetolog), orkestratsiya, tamoyillar | Sessiya boshida (boot) |
 | `MEMORY.md` | **Operator xotirasi va Bet Ledger** (`<=90` qator) — til, bozor, aktiv gipotezalar, saboqlar | Sessiya boshida (boot) |
 | `INDEX.md` | **Yagona Bilim Xaritasi (MOC)** — barcha `wiki/` va `playbooks/` jadvali | Bilim qidirish / yozishdan oldin |
-| `agents/` | **12 ta kanonik agent charteri** (`platform-auditor` — platforma delegatsiya paketida; eski 36 charter `skills/*/references/legacy-agents/` da) | Worker ishga tushganda |
+| `agents/` | **19 ta kanonik agent charteri** (12 core + 7 targetolog assistant, Charter v2; `platform-auditor` — platforma delegatsiya paketida; eski 36 charter `skills/*/references/legacy-agents/` da) | Worker ishga tushganda |
 | `skills/` | **19 ta kanonik skill** (`tyrion` dirijyor, `audit`, `strategy`, `creative`, `analyze`, `connect`, `pulse`, `experiments`, `lead-quality` …; eski matnlar `references/` da) | Vazifa boshida (`skill-search.py`) |
-| `commands/` | **35 ta slash buyruq** (model ko'radigan 12 ta: `/start /audit /audience /creative /budget /export /report /client /competitors /tracking /pulse /connect`; UZ aliaslar `/auditoriya /kreativ /voronka /eksport /hisobot /mijoz /raqobatchi /savol` va `/doctor /learn /shield /sop /scale /utm /ask`, hamda video pre-production `/video-ssenariy /video-reja /motion-ssenariy` (EN: `/video-script /video-plan /motion-script`) foydalanuvchi uchun, `disable-model-invocation`) | Foydalanuvchi chaqirganda |
+| `commands/` | **42 ta slash buyruq** (model ko'radigan 12 ta: `/start /audit /audience /creative /budget /export /report /client /competitors /tracking /pulse /connect`; UZ aliaslar `/auditoriya /kreativ /voronka /eksport /hisobot /mijoz /raqobatchi /savol` va `/doctor /learn /shield /sop /scale /utm /ask`, video pre-production `/video-ssenariy /video-reja /motion-ssenariy` (EN: `/video-script /video-plan /motion-script`) va targetolog yordamchilari `/onboard /ad-spy /launch-plan /morning-triage /cro-dm /appeal /client-update` foydalanuvchi uchun, `disable-model-invocation`) | Foydalanuvchi chaqirganda |
 | `contexts/` | **6 ta kontekst fayli** (5 ta ECC Dynamic Context Mode + `contexts/README.md`) | Vazifa rejimiga qarab ([[contexts/README]]) |
 | `playbooks/` | **9 ta playbook fayli** (8 ta amaliy nisha/platforma playbooki + `playbooks/README.md`) | Kampaniya / nisha strategiyasida ([[playbooks/README]]) |
 | `wiki/` | **101 ta atomik bilim qaydi** (Andromeda 2, Meta Audience, Google Coliseum, Telegram Ads, CJM, 16 SOP) | Faqat kerakli qayd (`brain-search.py`) |
@@ -46,7 +46,7 @@ Tyrion v8.1 — pullik reklama va targetologiya uchun yopiq siklli tizim: rasmiy
 | `python3 tools/tyrion.py status` | **Yagona Master CLI** — tizim holati va barcha buyruqlar menyusi |
 | `python3 tools/tyrion.py route "<vazifa>"` | **Universal Auto-Router** — oddiy tildagi topshiriqdan agent, skill, reference va workflow'ni avtomatik tanlash va yuklash |
 | `python3 tools/doctor.py` | **Tizim sog'lig'i** — ko'p qatlamli tekshiruv (bilim, katalog, skill, sirlar, testlar) |
-| `python3 tools/tyrion-shield.py scan` | **TyrionShield v8.1 (/shield)** — 6 qavatli statik xavfsizlik, AST va governance skaneri |
+| `python3 tools/tyrion-shield.py scan` | **TyrionShield v8.3 (/shield)** — 6 qavatli statik xavfsizlik, AST va governance skaneri |
 | `python3 tools/meta-targeting-engine.py search` | **Detailed Targeting Accuracy Engine (/auditoriya)** — 6-statusli rasmiy Graph API v26.0 interest qidiruv va validation dvigateli |
 | `python3 tools/meta-audience.py <cmd>` | **Meta Ads Audience Studio (/auditoriya)** — `architect`, `interests`, `overlap` (<20%), `saturation`, `retargeting`, `lookalike`, `diagnose` |
 | `python3 tools/meta-insights-sync.py pull` | **Live Meta Ads Insights (/eksport)** — Graph API v26.0 `/act_<id>/insights` sinxronizatsiyasi va auditi |
