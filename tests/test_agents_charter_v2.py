@@ -69,6 +69,9 @@ ROUTING_MATRIX = (
     ("контент-план на месяц", "content-planner"),
     ("special ad category policy violation", "compliance-reviewer"),
     ("raqobatchilarni o'rganish bozor tahlili", "research-verifier"),
+    ("Meta reklama ab test natijasi statistik ahamiyatlimi", "data-analyst"),
+    ("результаты a/b теста рекламы статистическая значимость", "data-analyst"),
+    ("ad experiment readout sample size check", "data-analyst"),
 )
 
 

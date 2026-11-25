@@ -66,6 +66,9 @@ ROUTING_MATRIX = (
     ("ad account restricted request review", "account-recovery-specialist"),
     ("отчет клиенту в телеграм", "client-comms-lead"),
     ("client objection reply why no sales", "client-comms-lead"),
+    # v8.3.1 regressiyalari: keng workflow'lar (meta_strategy, weekly_review) bu so'rovlarni egallamasligi kerak
+    ("Meta reklama rejected bo'ldi, apellyatsiya matnini tayyorla", "account-recovery-specialist"),
+    ("Mijozga telegram hisobot yoz: bu hafta lidlar soni va keyingi qadamlar", "client-comms-lead"),
 )
 
 

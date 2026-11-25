@@ -206,6 +206,18 @@
             "marketing reja",
             "marketing plan",
             "маркетинг план"
+          ],
+          [
+            "rejected",
+            "apellyats",
+            "апелляц",
+            "appeal",
+            "request review",
+            "заблокирован",
+            "akkaunt bloklandi",
+            "reklama bloklandi",
+            "rad etildi",
+            "отклонил"
           ]
         ]
       },
@@ -1657,6 +1669,16 @@
             "отчет",
             "отчёт",
             "report"
+          ]
+        ],
+        "none_of": [
+          [
+            "telegram",
+            "телеграм",
+            "e'tiroz",
+            "возражен",
+            "digest",
+            "mijozga xabar"
           ]
         ]
       },

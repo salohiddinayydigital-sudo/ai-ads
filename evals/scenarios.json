@@ -557,6 +557,174 @@
       "expected_status": "ready",
       "expected_language": "ru",
       "expected_skill": "audit"
+    },
+    {
+      "id": "R30_targetolog_onboarding_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "Yangi mijoz brif: stomatologiya klinikasi, Toshkent, oyiga 800$ byudjet, targetga tayyormi?",
+      "expected_primary_agent": "client-onboarder",
+      "expected_skills": [
+        "client"
+      ],
+      "forbidden_agents": [
+        "video-producer"
+      ],
+      "forbidden_skills": [],
+      "expected_rules": [
+        "rules/00-manba.md",
+        "rules/70-charter-baseline.md",
+        "rules/40-xavfsizlik-va-hisob.md"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R31_targetolog_ad_spy_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "Raqobatchi reklamalari: Meta Ad Library'dagi winner e'lonlarni tahlil qil va counter angle ber",
+      "expected_primary_agent": "ad-spy-analyst",
+      "expected_skills": [
+        "competitors"
+      ],
+      "forbidden_agents": [
+        "research-verifier"
+      ],
+      "forbidden_skills": [],
+      "expected_rules": [
+        "rules/00-manba.md",
+        "rules/70-charter-baseline.md",
+        "rules/40-xavfsizlik-va-hisob.md"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R32_targetolog_launch_ru",
+      "type": "universal_route",
+      "language": "ru",
+      "query": "Структура кампании Meta: CBO или ABO, нейминг и UTM перед запуском",
+      "expected_primary_agent": "campaign-launcher",
+      "expected_skills": [
+        "strategy"
+      ],
+      "forbidden_agents": [
+        "video-producer"
+      ],
+      "forbidden_skills": [],
+      "expected_rules": [
+        "rules/00-manba.md",
+        "rules/70-charter-baseline.md",
+        "rules/40-xavfsizlik-va-hisob.md"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R33_targetolog_morning_triage_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "Ertalabki optimizatsiya: CPL oshib ketdi, kill yoki scale qarori kerak",
+      "expected_primary_agent": "daily-optimizer",
+      "expected_skills": [
+        "pulse"
+      ],
+      "forbidden_agents": [
+        "video-producer"
+      ],
+      "forbidden_skills": [],
+      "expected_rules": [
+        "rules/00-manba.md",
+        "rules/70-charter-baseline.md",
+        "rules/40-xavfsizlik-va-hisob.md"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R34_targetolog_dm_cro_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "Instagram direct skript yozib ber, lidlar ko'p lekin sotuv yo'q",
+      "expected_primary_agent": "funnel-cro-doctor",
+      "expected_skills": [
+        "funnel"
+      ],
+      "forbidden_agents": [
+        "video-producer"
+      ],
+      "forbidden_skills": [],
+      "expected_rules": [
+        "rules/00-manba.md",
+        "rules/70-charter-baseline.md",
+        "rules/40-xavfsizlik-va-hisob.md"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R35_targetolog_appeal_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "Meta reklama rejected bo'ldi, apellyatsiya matnini tayyorla",
+      "expected_primary_agent": "account-recovery-specialist",
+      "expected_skills": [
+        "system"
+      ],
+      "forbidden_agents": [
+        "strategist"
+      ],
+      "forbidden_skills": [],
+      "expected_rules": [
+        "rules/00-manba.md",
+        "rules/70-charter-baseline.md",
+        "rules/40-xavfsizlik-va-hisob.md"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R36_targetolog_client_comms_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "Mijozga telegram hisobot yoz: bu hafta lidlar soni va keyingi qadamlar",
+      "expected_primary_agent": "client-comms-lead",
+      "expected_skills": [
+        "client"
+      ],
+      "forbidden_agents": [
+        "release-verifier"
+      ],
+      "forbidden_skills": [],
+      "expected_rules": [
+        "rules/00-manba.md",
+        "rules/70-charter-baseline.md",
+        "rules/40-xavfsizlik-va-hisob.md"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R37_data_analyst_experiment_ru",
+      "type": "universal_route",
+      "language": "ru",
+      "query": "Результаты A/B теста рекламы: есть ли статистическая значимость?",
+      "expected_primary_agent": "data-analyst",
+      "expected_skills": [
+        "analyze"
+      ],
+      "forbidden_agents": [
+        "video-producer"
+      ],
+      "forbidden_skills": [],
+      "expected_rules": [
+        "rules/00-manba.md",
+        "rules/70-charter-baseline.md",
+        "rules/40-xavfsizlik-va-hisob.md"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
     }
   ]
 }
