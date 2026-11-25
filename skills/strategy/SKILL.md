@@ -80,8 +80,7 @@ platforms:
 - "google"
 - "telegram"
 - "tiktok"
-attached_agents:
-- "strategist"
+attached_agents: [campaign-launcher, strategist]
 related_skills: []
 references:
 - "skills/strategy/references/ads-launch.md"

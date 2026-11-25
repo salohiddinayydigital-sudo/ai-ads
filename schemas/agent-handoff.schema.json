@@ -21,10 +21,17 @@
     },
     "packet_type": {
       "enum": [
+        "ad_spy_packet",
         "analytics_readout_packet",
         "audit_findings_packet",
         "budget_guard_packet",
+        "client_comms_packet",
+        "client_onboarding_packet",
         "compliance_clearance_packet",
+        "cro_fix_packet",
+        "daily_triage_packet",
+        "launch_blueprint_packet",
+        "recovery_action_packet",
         "strategic_brief",
         "tracking_spec_packet",
         "verified_research_packet"
@@ -139,6 +146,22 @@
       "if": {
         "properties": {
           "packet_type": {
+            "const": "ad_spy_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/ad_spy_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
             "const": "analytics_readout_packet"
           }
         }
@@ -187,6 +210,38 @@
       "if": {
         "properties": {
           "packet_type": {
+            "const": "client_comms_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/client_comms_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "client_onboarding_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/client_onboarding_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
             "const": "compliance_clearance_packet"
           }
         }
@@ -195,6 +250,70 @@
         "properties": {
           "payload": {
             "$ref": "#/$defs/compliance_clearance_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "cro_fix_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/cro_fix_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "daily_triage_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/daily_triage_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "launch_blueprint_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/launch_blueprint_packet"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_type": {
+            "const": "recovery_action_packet"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/recovery_action_packet"
           }
         }
       }
@@ -619,7 +738,7 @@
           "type": "string"
         }
       },
-      "description": "Upstream: tracking-specialist → Downstream: data-analyst, platform-auditor",
+      "description": "Upstream: tracking-specialist → Downstream: data-analyst, platform-auditor, campaign-launcher, funnel-cro-doctor",
       "additionalProperties": true
     },
     "compliance_clearance_packet": {
@@ -666,7 +785,7 @@
           "const": true
         }
       },
-      "description": "Upstream: compliance-reviewer → Downstream: creative-strategist, video-producer",
+      "description": "Upstream: compliance-reviewer → Downstream: creative-strategist, video-producer, campaign-launcher, account-recovery-specialist, client-comms-lead",
       "additionalProperties": true
     },
     "verified_research_packet": {
@@ -715,7 +834,507 @@
           }
         }
       },
-      "description": "Upstream: research-verifier → Downstream: strategist, creative-strategist, compliance-reviewer",
+      "description": "Upstream: research-verifier → Downstream: strategist, creative-strategist, compliance-reviewer, ad-spy-analyst",
+      "additionalProperties": true
+    },
+    "client_onboarding_packet": {
+      "type": "object",
+      "required": [
+        "business",
+        "readiness",
+        "access_checklist"
+      ],
+      "properties": {
+        "business": {
+          "type": "object",
+          "required": [],
+          "properties": {
+            "product": {
+              "type": "string"
+            },
+            "avg_check": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "margin_pct": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "geo": {
+              "type": "string"
+            },
+            "monthly_budget": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "target_cpl_cpa": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "past_experience": {
+              "type": "string"
+            }
+          }
+        },
+        "icp": {
+          "type": "string"
+        },
+        "readiness": {
+          "enum": [
+            "go",
+            "fix_first",
+            "no_go"
+          ]
+        },
+        "access_checklist": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "asset",
+              "status"
+            ],
+            "properties": {
+              "asset": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "granted",
+                  "pending",
+                  "missing"
+                ]
+              }
+            }
+          }
+        },
+        "missing_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kickoff_scope": {
+          "type": "string"
+        }
+      },
+      "description": "Upstream: client-onboarder → Downstream: strategist, audience-architect, tracking-specialist, ad-spy-analyst",
+      "additionalProperties": true
+    },
+    "ad_spy_packet": {
+      "type": "object",
+      "required": [
+        "observations",
+        "counter_angles"
+      ],
+      "properties": {
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "competitor",
+              "source_ref",
+              "evidence_label"
+            ],
+            "properties": {
+              "competitor": {
+                "type": "string"
+              },
+              "source_ref": {
+                "type": "string"
+              },
+              "days_active": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "hook": {
+                "type": "string"
+              },
+              "offer": {
+                "type": "string"
+              },
+              "format": {
+                "type": "string"
+              },
+              "evidence_label": {
+                "enum": [
+                  "MEASURED_ACCOUNT_DATA",
+                  "USER_PROVIDED",
+                  "VERIFIED_SOURCE",
+                  "OBSERVED",
+                  "HEURISTIC_PRIOR_MODEL",
+                  "ASSUMPTION"
+                ]
+              }
+            }
+          }
+        },
+        "winner_patterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "counter_angles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "angle",
+              "competitor_weakness"
+            ],
+            "properties": {
+              "angle": {
+                "type": "string"
+              },
+              "competitor_weakness": {
+                "type": "string"
+              },
+              "hypothesis": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "description": "Upstream: ad-spy-analyst → Downstream: creative-strategist, video-producer, strategist",
+      "additionalProperties": true
+    },
+    "launch_blueprint_packet": {
+      "type": "object",
+      "required": [
+        "platform",
+        "structure",
+        "naming_convention",
+        "prelaunch_checklist",
+        "spend_guard_required"
+      ],
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "budget_mode": {
+          "enum": [
+            "CBO",
+            "ABO",
+            "advantage_plus",
+            "platform_default"
+          ]
+        },
+        "structure": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "campaign",
+              "ad_set"
+            ],
+            "properties": {
+              "campaign": {
+                "type": "string"
+              },
+              "ad_set": {
+                "type": "string"
+              },
+              "daily_budget": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "optimization_event": {
+                "type": "string"
+              },
+              "exclusions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "naming_convention": {
+          "type": "string"
+        },
+        "utm_table": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prelaunch_checklist": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "check",
+              "status"
+            ],
+            "properties": {
+              "check": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "unknown"
+                ]
+              }
+            }
+          }
+        },
+        "learning_phase_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "spend_guard_required": {
+          "type": "boolean"
+        }
+      },
+      "description": "Upstream: campaign-launcher → Downstream: daily-optimizer, compliance-reviewer",
+      "additionalProperties": true
+    },
+    "daily_triage_packet": {
+      "type": "object",
+      "required": [
+        "decisions"
+      ],
+      "properties": {
+        "window_days": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "entity",
+              "verdict",
+              "reason",
+              "spend_threshold_met"
+            ],
+            "properties": {
+              "entity": {
+                "type": "string"
+              },
+              "verdict": {
+                "enum": [
+                  "KILL",
+                  "HOLD",
+                  "ITERATE",
+                  "SCALE"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              },
+              "spend": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "spend_threshold_met": {
+                "type": "boolean"
+              },
+              "action": {
+                "type": "string"
+              },
+              "spend_guard_required": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "root_cause": {
+          "enum": [
+            "CPM",
+            "CTR",
+            "CVR",
+            "tracking",
+            "unknown",
+            "none"
+          ]
+        },
+        "route_to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Upstream: daily-optimizer → Downstream: creative-strategist, funnel-cro-doctor, budget-analyst, client-comms-lead",
+      "additionalProperties": true
+    },
+    "cro_fix_packet": {
+      "type": "object",
+      "required": [
+        "surface",
+        "fixes"
+      ],
+      "properties": {
+        "surface": {
+          "enum": [
+            "direct_dm",
+            "lead_form",
+            "landing",
+            "sales_process"
+          ]
+        },
+        "message_match": {
+          "type": "boolean"
+        },
+        "fixes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "fix",
+              "impact",
+              "confidence",
+              "ease"
+            ],
+            "properties": {
+              "fix": {
+                "type": "string"
+              },
+              "impact": {
+                "type": "integer"
+              },
+              "confidence": {
+                "type": "integer"
+              },
+              "ease": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "scripts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Upstream: funnel-cro-doctor → Downstream: creative-strategist, client-comms-lead",
+      "additionalProperties": true
+    },
+    "recovery_action_packet": {
+      "type": "object",
+      "required": [
+        "incident",
+        "recovery_steps",
+        "white_hat_only"
+      ],
+      "properties": {
+        "incident": {
+          "enum": [
+            "ad_rejected",
+            "ad_account_restricted",
+            "bm_restricted",
+            "payment_hold",
+            "page_restricted"
+          ]
+        },
+        "suspected_policy": {
+          "type": "string"
+        },
+        "policy_source_url": {
+          "type": "string"
+        },
+        "safe_rewrite": {
+          "type": "string"
+        },
+        "appeal_draft_lang": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recovery_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "white_hat_only": {
+          "const": true
+        }
+      },
+      "description": "Upstream: account-recovery-specialist → Downstream: creative-strategist, compliance-reviewer, client-comms-lead",
+      "additionalProperties": true
+    },
+    "client_comms_packet": {
+      "type": "object",
+      "required": [
+        "channel",
+        "lang",
+        "message",
+        "next_step"
+      ],
+      "properties": {
+        "channel": {
+          "enum": [
+            "telegram",
+            "email",
+            "call_notes"
+          ]
+        },
+        "lang": {
+          "enum": [
+            "uz",
+            "ru",
+            "en"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "numbers_sourced": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "value",
+              "source"
+            ],
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "next_step": {
+          "type": "string"
+        },
+        "deadline": {
+          "type": "string"
+        }
+      },
+      "description": "Upstream: client-comms-lead → Downstream: conductor (user approval before sending)",
       "additionalProperties": true
     }
   }

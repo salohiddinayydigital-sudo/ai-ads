@@ -1,4 +1,4 @@
-# TYRION v8.2 — WINDSURF PAID MEDIA & TARGETOLOGY RULES
+# TYRION v8.3 — WINDSURF PAID MEDIA & TARGETOLOGY RULES
 
 
 # TYRION ENTRY POINT (single conductor, no sub-agents in this harness)
@@ -278,7 +278,7 @@ Loyiha yopilishidan oldin [[50-topshirish-dod]] checklisti: `outputs/` da fayl b
 # 🛡️ 70 — AGENT CHARTER BASELINE (UMUMIY XULQ, AVTONOM ROUTER VA CHARTER v2)
 
 > **Nega bitta fayl:** ECC'da 68 agentga bir xil xavfsizlik va orkestratsiya matni nusxalangan (drift va bloat manbasi).
-> Tyrion'da [[AGENTS.md]] ("Nusxa emas, havola") tamoyiliga ko'ra barcha **12 ta kanonik agent charteri** (`agents/*.md`) shu yagona qoidaga bo'ysunadi. Charter faqat o'z domen intellektini (rejimlar, qaror tartibi, anti-patternlar, rubrika, handoff) saqlaydi; umumiy matn shu yerda.
+> Tyrion'da [[AGENTS.md]] ("Nusxa emas, havola") tamoyiliga ko'ra barcha **19 ta kanonik agent charteri** (`agents/*.md`) shu yagona qoidaga bo'ysunadi. Charter faqat o'z domen intellektini (rejimlar, qaror tartibi, anti-patternlar, rubrika, handoff) saqlaydi; umumiy matn shu yerda.
 
 ## 1. Prompt Defense Baseline (5 qalqon)
 

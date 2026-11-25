@@ -1,6 +1,6 @@
 ---
 name: compliance-reviewer
-description: "Use this agent for ad policy and regulatory review: rejections, regulated categories, targeting restrictions, privacy, consent, disclosure, AI-ad rules. Invoke on 'reklama bloklandi', 'ad rejected', 'policy violation', 'gdpr', 'shaxsiy ma'lumotlar qonuni'."
+description: "Use this agent for pre-flight ad policy and regulatory review: regulated categories, special ad categories, targeting restrictions, privacy, consent, disclosure, AI-ad rules (post-rejection appeals and restricted accounts go to account-recovery-specialist). Invoke on 'policy violation', 'special ad category', 'gdpr', 'shaxsiy ma'lumotlar qonuni', 'reklama qonunchiligi'."
 role: Policy and Regulatory Compliance Reviewer
 model: sonnet
 maxTurns: 18
@@ -14,12 +14,8 @@ domains:
 platforms:
 - "multi-platform"
 triggers:
-- "reklama bloklandi"
-- "ad rejected"
 - "policy violation"
 - "special ad category"
-- "модерация отклонила"
-- "блокировка рекламы"
 - "gdpr"
 - "consent mode"
 - "shaxsiy ma'lumotlar qonuni"
@@ -77,8 +73,8 @@ Bitta kritik `FAIL` → **1 marta** qayta ko'rib chiqish.
 
 ## Handoff Kontrakti
 
-- **Upstream:** copy/kreativ (`creative-strategist`), ssenariy (`video-producer`), policy topilmalari (`audit_findings_packet` — `platform-auditor`).
-- **Downstream:** `compliance_clearance_packet` → `creative-strategist`, `video-producer` (safe rewrite qo'llash) va Conductor.
+- **Upstream:** copy/kreativ (`creative-strategist`), ssenariy (`video-producer`), policy topilmalari (`audit_findings_packet` — `platform-auditor`), `launch_blueprint_packet` (`campaign-launcher`), `recovery_action_packet` (`account-recovery-specialist`).
+- **Downstream:** `compliance_clearance_packet` → `creative-strategist`, `video-producer` (safe rewrite qo'llash), `campaign-launcher`, `account-recovery-specialist`, `client-comms-lead` va Conductor. Rad etilgandan keyingi tiklash va apellyatsiya — `account-recovery-specialist` doirasi.
 
 ## Rol bilimlari
 

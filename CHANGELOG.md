@@ -3,6 +3,24 @@
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
 
+## [8.3.0] — 2026-11-25
+
+Targetolog Copilot Pack: yadro 12 agentni takrorlamasdan amaliyotchi targetologning kunlik operatsion ishlarini yopadigan 7 yordamchi agent (jami 19 kanonik agent: 12 core + 7 targetolog).
+
+### Qo'shildi
+- Agentlar (Charter v2): `client-onboarder`, `ad-spy-analyst`, `campaign-launcher`, `daily-optimizer`, `funnel-cro-doctor`, `account-recovery-specialist` (faqat white-hat), `client-comms-lead` + `.claude/agents/` mirror.
+- Buyruqlar (`disable-model-invocation`): `/onboard`, `/ad-spy`, `/launch-plan`, `/morning-triage`, `/cro-dm`, `/appeal`, `/client-update` (commands 35 → 42).
+- Workflow'lar (`manifests/workflows.json`, 16 → 22): `new_client_onboarding`, `campaign_build_to_launch`, `morning_media_buyer_triage`, `lead_quality_and_dm_fix`, `competitor_ad_spy`, `account_restriction_recovery`.
+- Playbooklar: `skills/strategy/references/client-onboarding-framework.md`, `skills/competitors/references/ad-library-spy-playbook.md`, `skills/budget/references/daily-triage-kill-scale.md`, `skills/funnel/references/direct-dm-and-leadform-cro.md`, `skills/audit/references/account-recovery-whitehat.md`, `skills/report/references/client-comms-playbooks.md`.
+- `schemas/agent-handoff.schema.json`: +7 paket (`client_onboarding_packet`, `ad_spy_packet`, `launch_blueprint_packet`, `daily_triage_packet`, `cro_fix_packet`, `recovery_action_packet` (`white_hat_only: true`), `client_comms_packet`).
+- `tests/test_targetolog_agents.py` — 7 agent, 7 buyruq, 6 DAG, 21 so'rovli UZ/RU/EN routing matritsasi, trigger to'qnashuvi, white-hat va Spend-Guard chegaralari.
+
+### O'zgardi
+- `compliance-reviewer` — pre-flight policy/regulyator; reaktiv "reklama bloklandi / ad rejected / модерация отклонила / блокировка рекламы" triggerlari `account-recovery-specialist` ga ko'chirildi (to'qnashuv yo'q).
+- Skill ulanishlari (ikki tomonlama): `client`, `competitors`, `strategy`, `pulse`, `funnel`, `system`; yangi targetolog triggerlari `client`, `competitors`, `pulse`, `funnel`, `system` skilllarida.
+- Router: scope-darvoza lug'atiga targetolog atamalari (`cpl`, `akkaunt`, `apellyatsiya`, `brif`, `onboarding`, `direct`, `triage`, `optimizatsiya`); `client_report` Telegram/e'tiroz xabarlarini `client-comms-lead` ga qoldiradi.
+- Yadro charterlar handoff'lari yangi agentlarga ulandi; `AGENTS.md` §3.1 va §3a, `CLAUDE.md`, `rules/70-charter-baseline.md` (19 agent) yangilandi.
+
 ## [8.2.0] — 2026-11-25
 
 Charter v2: barcha 12 kanonik agent "yupqa qobiq"dan rejimli, o'zini ballaydigan va typed handoff'li mutaxassislarga ko'tarildi.

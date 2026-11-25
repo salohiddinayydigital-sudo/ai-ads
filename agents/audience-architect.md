@@ -76,8 +76,8 @@ Bitta kritik `FAIL` → **1 marta** qayta ishlash.
 
 ## Handoff Kontrakti
 
-- **Upstream:** `strategic_brief` (`strategist`).
-- **Downstream:** auditoriya arxitekturasi → `platform-auditor` (overlap tekshiruvi), `creative-strategist` (segment bo'yicha angle).
+- **Upstream:** `strategic_brief` (`strategist`), `client_onboarding_packet` (`client-onboarder`: ICP, geo).
+- **Downstream:** auditoriya arxitekturasi → `campaign-launcher` (struktura), `platform-auditor` (overlap tekshiruvi), `creative-strategist` (segment bo'yicha angle).
 
 ## Rol bilimlari
 

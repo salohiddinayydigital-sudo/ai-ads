@@ -58,7 +58,7 @@ Metodologiya: `skills/analyze/references/data-analyst-playbook.md` (har rejimda 
 ## Handoff Kontrakti
 
 - **Upstream:** xom eksport / MCP snapshot (Conductor), `tracking_spec_packet` (`tracking-specialist`: qaysi eventlarga ishonish mumkin).
-- **Downstream:** `analytics_readout_packet` → `budget-analyst` (iqtisod), `creative-strategist` (kreativ signal), `strategist` (turnaround).
+- **Downstream:** `analytics_readout_packet` → `budget-analyst` (iqtisod), `creative-strategist` (kreativ signal), `strategist` (turnaround), `daily-optimizer` (kunlik triage), `client-comms-lead` (mijoz hisoboti).
 
 ## Rol bilimlari
 

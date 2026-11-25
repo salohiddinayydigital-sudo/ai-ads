@@ -2,12 +2,12 @@
   <img src="./assets/tyrion-banner.svg" alt="Tyrion AI Paid Media OS Banner" width="100%" />
 </p>
 
-# 🧠 TYRION v8.2 — YOPIQ SIKLLI MEDIA-BUYER MIYASI
+# 🧠 TYRION v8.3 — YOPIQ SIKLLI MEDIA-BUYER MIYASI
 
 [![Version](https://img.shields.io/badge/version-8.0.0-7C3AED.svg)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
-<!-- tyrion:catalog agents=12 skills=19 wiki=100 playbooks=9 contexts=6 commands=29 rules=9 tools=39 -->
+<!-- tyrion:catalog agents=19 skills=19 wiki=101 playbooks=9 contexts=6 commands=42 rules=9 tools=40 -->
 
 Tyrion rasmiy konnektorlardan jonli ma'lumot oladi, **har bir raqamni kod bilan hisoblaydi**, hisobni har kuni kuzatadi, testlardan o'rganadi va CRM'dagi lid sifatini Meta'ga qaytaradi. Doimiy kontekst narxi v7.1 dagi ≈10.4K dan ≈2K tokenga tushdi (`python3 tools/token-budget.py`). Claude Code, Codex, Cursor va Windsurf'da ishlaydi.
 
@@ -47,7 +47,7 @@ Hisobga yozish asboblari (`ads_create_*`, `ads_update_entity`, `ads_activate_ent
 
 ## Tarkib
 
-- **12 ta ixtisoslashgan agent**, **19 ta skill**, **35 ta slash buyruq** (12 tasi model ko'radi), **39 ta 0-token Python asbob**, **100 ta wiki qayd**, 9 playbook.
+- **19 ta ixtisoslashgan agent**, **19 ta skill**, **42 ta slash buyruq** (12 tasi model ko'radi), **39 ta 0-token Python asbob**, **100 ta wiki qayd**, 9 playbook.
 - 7.x dan o'tish: [MIGRATION.md](MIGRATION.md). O'zbekiston bozori paketi `market=uz` bo'lganda yuklanadi (Telegram, AmoCRM, Payme/Click, Uzum Nasiya).
 
 ## Litsenziya

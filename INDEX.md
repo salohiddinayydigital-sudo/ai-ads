@@ -169,7 +169,7 @@ updated: 2026-09-16
 
 | Qatlam | Nima | Fayl |
 |--------|------|------|
-| **Shartnoma** | Qatlamlar, 12 agent, orkestratsiya, tamoyillar | [[AGENTS.md]] |
+| **Shartnoma** | Qatlamlar, 19 agent, orkestratsiya, tamoyillar | [[AGENTS.md]] |
 | **Qoidalar** | Manba · til · token · UZ kontekst · xavfsizlik · DoD · loyiha papkasi | [[rules/README]] |
 | 00 | Manba majburiyati — raqam to'qilmaydi | [[00-manba]] |
 | 10 | Til va uslub — o'zbekcha, atamalar inglizcha | [[10-til-va-uslub]] |
@@ -228,6 +228,6 @@ updated: 2026-09-16
 | [[metrikalar-formulalari]] | Marketing metrikalari formulalari (ROI, ROAS, ROMI, CPP, CAC, CR) + SMS case raqamlari | kanal-bilim/10, 15 (TXT konvert) |
 | [[nisha-playbooklar]] | Nishalar bo'yicha tayyor strategiyalar — atir, sport zal, avtoservis, mehmonxona, xususiy maktab | kanal-bilim/05, 16, 17, 18, 20, 23 (PDF/TXT konvert) |
 | [[optimitzaetsiya-va-case]] | Real tajriba cases — CPL 2x arzon, tezkor loyiha SOP, yuqori chek mijozlar, budget qoidalari, bloggerlar ro'yxati | kanal-bilim/08, 11, 13, 14, 19, 21 (TXT konvert) |
-| [[mcp-va-multi-harness-integratsiya]] | Tyrion v8.2 Native MCP Server (.mcp.json) va Multi-Harness Exporter (Claude Code, Cursor .mdc, Windsurf, Codex) arxitekturasi | affaan-m/ECC install-targets + pipeboard-co/meta-ads-mcp + googleads/google-ads-mcp (2026-10-18) |
+| [[mcp-va-multi-harness-integratsiya]] | Tyrion v8.3 Native MCP Server (.mcp.json) va Multi-Harness Exporter (Claude Code, Cursor .mdc, Windsurf, Codex) arxitekturasi | affaan-m/ECC install-targets + pipeboard-co/meta-ads-mcp + googleads/google-ads-mcp (2026-10-18) |
 | [[meta-breakdown-effekti]] | Meta Ads 'Breakdown Effect' (Marginal vs Average CPA) — nega o'rtacha CPA baland ko'ringan placement yoki segmentni o'chirish umumiy natijani buzadi | Meta Official Breakdown Effect Documentation + mathiaschu/meta-ads-analyzer tahlili (2026-10-18) |
 | [[mcp-rasmiy-konnektorlar]] | Rasmiy Meta Ads MCP (mcp.facebook.com/ads) va Google Ads MCP (googleads/google-ads-mcp): manzil, kirish usuli, yozish asboblari xavfi va Tyrion qoidasi | https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview ; https://developers.facebook.com/blog/post/2026/07/16/meta-ads-mcp-server/ ; https://github.com/googleads/google-ads-mcp |

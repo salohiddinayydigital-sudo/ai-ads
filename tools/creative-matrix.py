@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tyrion v8.2 Creative Matrix, Video Ad Scripting, Andromeda PDA Diversity & Ad Copy Engine (`tools/creative-matrix.py`).
+"""Tyrion v8.3 Creative Matrix, Video Ad Scripting, Andromeda PDA Diversity & Ad Copy Engine (`tools/creative-matrix.py`).
 
 Commands:
   python3 tools/creative-matrix.py matrix --niche ecom --product "Klassik kostyum" --price 150 [--market uz] [--currency USD] [--json]
@@ -1655,7 +1655,7 @@ def generate_video_blueprint(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="creative-matrix.py", description="Tyrion v8.2 Global Creative Matrix, Video Script & Ad Copy Engine")
+    parser = argparse.ArgumentParser(prog="creative-matrix.py", description="Tyrion v8.3 Global Creative Matrix, Video Script & Ad Copy Engine")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_mat = sub.add_parser("matrix", help="3x3 Angle x Format creative testing matrix with market BNPL anchor & falsifiable hypotheses")
@@ -1813,7 +1813,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     print("=" * 72)
-    print(f"  🎨 TYRION v8.2 CREATIVE & VIDEO STUDIO — {args.command.upper()}")
+    print(f"  🎨 TYRION v8.3 CREATIVE & VIDEO STUDIO — {args.command.upper()}")
     print("=" * 72)
     print(json.dumps(res, ensure_ascii=False, indent=2))
     print("=" * 72)

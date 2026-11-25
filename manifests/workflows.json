@@ -1435,6 +1435,16 @@
           [
             "tahlil qil",
             "analy"
+          ],
+          [
+            "telegram",
+            "телеграм",
+            "e'tiroz",
+            "возражен",
+            "objection",
+            "digest",
+            "upsell",
+            "inqiroz"
           ]
         ]
       },
@@ -1738,6 +1748,601 @@
             "settle"
           ],
           "output": "weekly_report"
+        }
+      ]
+    },
+    {
+      "id": "new_client_onboarding",
+      "title": "Yangi mijozni qabul qilish: brif, tayyorlik filtri, ruxsatlar, raqobatchi razvedkasi va strategiyaga uzatish",
+      "priority": 91,
+      "match": {
+        "all_of": [
+          [
+            "yangi mijoz",
+            "new client",
+            "нового клиента",
+            "новый клиент",
+            "янги мижоз",
+            "mijozni qabul"
+          ],
+          [
+            "brif",
+            "brief",
+            "бриф",
+            "onboard",
+            "онбординг",
+            "qabul",
+            "tayyor",
+            "ruxsat",
+            "доступ",
+            "kickoff"
+          ]
+        ],
+        "none_of": [
+          [
+            "strategiya",
+            "strategy",
+            "стратег"
+          ]
+        ]
+      },
+      "deliverable": "client_onboarding_packet",
+      "reference": "skills/tyrion/references/workflow-recipes.md",
+      "primary_agent": "client-onboarder",
+      "stages": [
+        {
+          "id": "intake",
+          "agent": "client-onboarder",
+          "title": "8 parametrli brif + Go/Fix-First/No-Go + ruxsatlar cheklisti",
+          "skills": [
+            "client"
+          ],
+          "tools": [
+            "tools/calculator.py"
+          ],
+          "needs": [],
+          "output": "client_onboarding_packet",
+          "ask_only_if_missing": [
+            "mijoz xabari yoki ovozli transkript"
+          ]
+        },
+        {
+          "id": "spy",
+          "agent": "ad-spy-analyst",
+          "title": "Raqobatchi reklamalari razvedkasi (Ad Library)",
+          "skills": [
+            "competitors"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "ad_spy_packet",
+          "optional_when": "raqobatchi tahlili so'ralmagan"
+        },
+        {
+          "id": "tracking",
+          "agent": "tracking-specialist",
+          "title": "Pixel/CAPI/UTM tayyorligi",
+          "skills": [
+            "tracking"
+          ],
+          "needs": [
+            "intake"
+          ],
+          "output": "tracking_readiness",
+          "optional_when": "tracking allaqachon tasdiqlangan"
+        },
+        {
+          "id": "strategy",
+          "agent": "strategist",
+          "title": "Brif asosida strategiya (offer, kanal, KPI)",
+          "skills": [
+            "strategy"
+          ],
+          "needs": [
+            "spy",
+            "tracking"
+          ],
+          "output": "onboarding_strategy"
+        }
+      ]
+    },
+    {
+      "id": "campaign_build_to_launch",
+      "title": "Kampaniyani Ads Manager uchun yig'ish: CBO/ABO, naming, UTM, 20 bandli pre-launch va 72h learning",
+      "priority": 96,
+      "match": {
+        "all_of": [
+          [
+            "cbo",
+            "abo",
+            "naming",
+            "nomlash",
+            "tuzilma",
+            "struktura",
+            "структур",
+            "blueprint",
+            "нейминг",
+            "ads manager",
+            "advantage+"
+          ],
+          [
+            "kampaniya",
+            "campaign",
+            "кампани",
+            "launch",
+            "ishga tushir",
+            "запуск",
+            "reklama",
+            "реклам",
+            "ads manager"
+          ]
+        ],
+        "none_of": [
+          [
+            "audit",
+            "аудит",
+            "tekshir",
+            "diagnos",
+            "muammo",
+            "qimmat",
+            "raqobatchi",
+            "competitor",
+            "конкурент",
+            "strategiya",
+            "strategy",
+            "стратег"
+          ]
+        ]
+      },
+      "deliverable": "launch_blueprint_packet",
+      "reference": "skills/tyrion/references/workflow-recipes.md",
+      "primary_agent": "campaign-launcher",
+      "stages": [
+        {
+          "id": "audience",
+          "agent": "audience-architect",
+          "title": "Auditoriya qatlamlari va exclusion",
+          "skills": [
+            "audience"
+          ],
+          "needs": [],
+          "output": "audience_architecture",
+          "optional_when": "auditoriya arxitekturasi tayyor"
+        },
+        {
+          "id": "creative",
+          "agent": "creative-strategist",
+          "title": "Kreativ to'plam (angle x format)",
+          "skills": [
+            "creative"
+          ],
+          "needs": [],
+          "output": "creative_set",
+          "optional_when": "kreativlar tayyor"
+        },
+        {
+          "id": "tracking",
+          "agent": "tracking-specialist",
+          "title": "Event/dedup/UTM oldindan tekshiruv",
+          "skills": [
+            "tracking"
+          ],
+          "needs": [],
+          "output": "tracking_precheck"
+        },
+        {
+          "id": "blueprint",
+          "agent": "campaign-launcher",
+          "title": "CBO/ABO tuzilma, naming, UTM, pre-launch gate, 72h qoidalar (Spend-Guard)",
+          "skills": [
+            "strategy"
+          ],
+          "tools": [
+            "tools/calculator.py",
+            "tools/spend-guard.py"
+          ],
+          "needs": [
+            "audience",
+            "creative",
+            "tracking"
+          ],
+          "output": "launch_blueprint_packet",
+          "ask_only_if_missing": [
+            "kunlik byudjet",
+            "maqsadli CPA yoki break-even"
+          ]
+        },
+        {
+          "id": "policy",
+          "agent": "compliance-reviewer",
+          "title": "Policy pre-flight (muvofiqlik kafolati berilmaydi)",
+          "skills": [
+            "system"
+          ],
+          "needs": [
+            "blueprint"
+          ],
+          "output": "launch_policy_risk"
+        }
+      ]
+    },
+    {
+      "id": "morning_media_buyer_triage",
+      "title": "Ertalabki media-buyer triage: KILL/HOLD/ITERATE/SCALE, CPL tashxisi, mijoz digesti",
+      "priority": 88,
+      "match": {
+        "all_of": [
+          [
+            "ertalabki",
+            "morning",
+            "утренн",
+            "kunlik",
+            "daily",
+            "har kuni",
+            "bugungi"
+          ],
+          [
+            "triage",
+            "optimiz",
+            "оптимиз",
+            "kill",
+            "scale",
+            "qaror",
+            "cpl"
+          ]
+        ],
+        "none_of": [
+          [
+            "audit",
+            "аудит",
+            "haftalik",
+            "weekly",
+            "еженедел"
+          ]
+        ]
+      },
+      "deliverable": "daily_triage_packet",
+      "reference": "skills/tyrion/references/workflow-recipes.md",
+      "primary_agent": "daily-optimizer",
+      "stages": [
+        {
+          "id": "numbers",
+          "agent": "data-analyst",
+          "title": "Eksport -> metrics.v1 + pulse",
+          "skills": [
+            "analyze",
+            "pulse"
+          ],
+          "tools": [
+            "tools/pulse.py"
+          ],
+          "needs": [],
+          "output": "metrics_snapshot",
+          "optional_when": "raqamlar allaqachon metrics.v1 da",
+          "ask_only_if_missing": [
+            "oxirgi 1/3/7 kunlik raqamlar (eksport yoki MCP snapshot)",
+            "maqsadli CPA"
+          ]
+        },
+        {
+          "id": "triage",
+          "agent": "daily-optimizer",
+          "title": "KILL/HOLD/ITERATE/SCALE + CPM x CTR x CVR tashxis",
+          "skills": [
+            "pulse"
+          ],
+          "tools": [
+            "tools/calculator.py",
+            "tools/spend-guard.py"
+          ],
+          "needs": [
+            "numbers"
+          ],
+          "output": "daily_triage_packet"
+        },
+        {
+          "id": "economics",
+          "agent": "budget-analyst",
+          "title": "Masshtab/kill qarorining unit-ekonomikasi",
+          "skills": [
+            "budget"
+          ],
+          "needs": [
+            "triage"
+          ],
+          "output": "triage_economics",
+          "optional_when": "byudjet o'zgarishi yo'q"
+        },
+        {
+          "id": "cro",
+          "agent": "funnel-cro-doctor",
+          "title": "CTR yaxshi, CVR past bo'lsa: Direct/Lead Form/landing",
+          "skills": [
+            "funnel"
+          ],
+          "needs": [
+            "triage"
+          ],
+          "output": "triage_cro_fix",
+          "optional_when": "CVR muammosi yo'q"
+        },
+        {
+          "id": "comms",
+          "agent": "client-comms-lead",
+          "title": "Mijozga 30 soniyalik Telegram digest",
+          "skills": [
+            "client"
+          ],
+          "needs": [
+            "economics",
+            "cro"
+          ],
+          "output": "triage_client_digest",
+          "optional_when": "mijoz hisoboti kerak emas"
+        }
+      ]
+    },
+    {
+      "id": "lead_quality_and_dm_fix",
+      "title": "Lid sifati va Direct/DM/Lead Form konversiyasini tuzatish",
+      "priority": 90,
+      "match": {
+        "all_of": [
+          [
+            "direct",
+            "директ",
+            "lead form",
+            "lid forma",
+            "lid formasi",
+            "instant form",
+            "лид форм",
+            "лид-форм",
+            "dm skript",
+            "dm script",
+            "telegram dm",
+            "whatsapp"
+          ],
+          [
+            "skript",
+            "script",
+            "скрипт",
+            "sifat",
+            "качеств",
+            "savol",
+            "вопрос",
+            "sotuv yo'q",
+            "продаж нет",
+            "konversiya",
+            "конверси",
+            "javob"
+          ]
+        ],
+        "none_of": [
+          [
+            "montaj",
+            "монтаж",
+            "reels",
+            "рилс",
+            "video"
+          ]
+        ]
+      },
+      "deliverable": "cro_fix_packet",
+      "reference": "skills/tyrion/references/workflow-recipes.md",
+      "primary_agent": "funnel-cro-doctor",
+      "stages": [
+        {
+          "id": "tracking",
+          "agent": "tracking-specialist",
+          "title": "CRM -> CAPI lid sifati signali",
+          "skills": [
+            "lead-quality"
+          ],
+          "needs": [],
+          "output": "lead_signal_check",
+          "optional_when": "CRM ma'lumoti yo'q"
+        },
+        {
+          "id": "cro",
+          "agent": "funnel-cro-doctor",
+          "title": "DM skript, Lead Form filtri, landing CRO, sales SLA",
+          "skills": [
+            "funnel"
+          ],
+          "needs": [],
+          "output": "cro_fix_packet",
+          "ask_only_if_missing": [
+            "offer va narx",
+            "reklama hook'i yoki matni"
+          ]
+        },
+        {
+          "id": "creative",
+          "agent": "creative-strategist",
+          "title": "Reklama va'dasini DM/landing bilan moslashtirish",
+          "skills": [
+            "creative"
+          ],
+          "needs": [
+            "tracking",
+            "cro"
+          ],
+          "output": "message_match_copy",
+          "optional_when": "reklama va'dasi mos"
+        },
+        {
+          "id": "comms",
+          "agent": "client-comms-lead",
+          "title": "Mijozga sotuv SLA tavsiyasi",
+          "skills": [
+            "client"
+          ],
+          "needs": [
+            "creative"
+          ],
+          "output": "sla_client_message",
+          "optional_when": "mijoz xabari kerak emas"
+        }
+      ]
+    },
+    {
+      "id": "competitor_ad_spy",
+      "title": "Raqobatchi reklamalari razvedkasi -> Counter-Angle -> kreativ/video",
+      "priority": 97,
+      "match": {
+        "all_of": [
+          [
+            "ad library",
+            "ads library",
+            "adlibrary",
+            "библиотек",
+            "creative center",
+            "spy",
+            "counter angle",
+            "counter-angle",
+            "winner reklama",
+            "winner e'lon",
+            "raqobatchi reklamalari",
+            "raqobatchilar reklamasi",
+            "реклама конкурентов",
+            "рекламу конкурентов",
+            "объявлений конкурентов",
+            "reklama kutubxonasi",
+            "competitor ads",
+            "ракобатчи реклама"
+          ]
+        ],
+        "none_of": [
+          [
+            "strategiya",
+            "strategy",
+            "стратег"
+          ]
+        ]
+      },
+      "deliverable": "ad_spy_packet",
+      "reference": "skills/tyrion/references/workflow-recipes.md",
+      "primary_agent": "ad-spy-analyst",
+      "stages": [
+        {
+          "id": "spy",
+          "agent": "ad-spy-analyst",
+          "title": "Ad Library dekonstruksiya, winner pattern, Counter-Angle",
+          "skills": [
+            "competitors"
+          ],
+          "needs": [],
+          "output": "ad_spy_packet",
+          "ask_only_if_missing": [
+            "raqobatchi nomlari/sahifalari yoki e'lon skrinshotlari"
+          ]
+        },
+        {
+          "id": "creative",
+          "agent": "creative-strategist",
+          "title": "Counter-Angle -> copy va 3x3 test",
+          "skills": [
+            "creative"
+          ],
+          "needs": [
+            "spy"
+          ],
+          "output": "counter_angle_creatives"
+        },
+        {
+          "id": "video",
+          "agent": "video-producer",
+          "title": "Counter-Angle video ssenariy",
+          "skills": [
+            "video"
+          ],
+          "needs": [
+            "creative"
+          ],
+          "output": "counter_angle_scripts",
+          "optional_when": "faqat statik kreativ"
+        }
+      ]
+    },
+    {
+      "id": "account_restriction_recovery",
+      "title": "Rad etilgan reklama / cheklangan akkaunt: white-hat triage, apellyatsiya, mijoz xabari",
+      "priority": 93,
+      "match": {
+        "all_of": [
+          [
+            "rejected",
+            "rad etil",
+            "bloklan",
+            "blokla",
+            "cheklan",
+            "restrict",
+            "заблок",
+            "отклон",
+            "apellyats",
+            "апелляц",
+            "appeal",
+            "request review",
+            "блокировк"
+          ],
+          [
+            "reklama",
+            "реклам",
+            "akkaunt",
+            "аккаунт",
+            "account",
+            "business manager",
+            "biznes menejer",
+            "kabinet",
+            "кабинет",
+            "e'lon",
+            "объявлен"
+          ]
+        ]
+      },
+      "deliverable": "recovery_action_packet",
+      "reference": "skills/tyrion/references/workflow-recipes.md",
+      "primary_agent": "account-recovery-specialist",
+      "stages": [
+        {
+          "id": "triage",
+          "agent": "account-recovery-specialist",
+          "title": "Policy bandi, safe rewrite, EN/RU apellyatsiya (faqat white-hat)",
+          "skills": [
+            "system"
+          ],
+          "needs": [],
+          "output": "recovery_action_packet",
+          "ask_only_if_missing": [
+            "rad etish/cheklov xabari matni",
+            "rad etilgan matn/kreativ yoki landing"
+          ]
+        },
+        {
+          "id": "legal",
+          "agent": "compliance-reviewer",
+          "title": "Policy/regulyator tekshiruvi (yuridik maslahat emas)",
+          "skills": [
+            "system"
+          ],
+          "needs": [
+            "triage"
+          ],
+          "output": "recovery_policy_check"
+        },
+        {
+          "id": "comms",
+          "agent": "client-comms-lead",
+          "title": "Mijozga shaffof inqiroz xabari",
+          "skills": [
+            "client"
+          ],
+          "needs": [
+            "legal"
+          ],
+          "output": "recovery_client_update",
+          "optional_when": "mijoz xabari kerak emas"
         }
       ]
     }

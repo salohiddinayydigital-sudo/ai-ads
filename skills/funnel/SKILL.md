@@ -26,6 +26,9 @@ triggers:
 - "accessibility"
 - "дизайн сайта"
 - "интерфейс"
+- "direct skript"
+- "lead form"
+- "скрипт для директа"
 aliases:
 - "conversion-optimization"
 - "funnel-cro"
@@ -48,8 +51,7 @@ domains:
 platforms:
 - "web"
 - "multi-platform"
-attached_agents:
-- "content-planner"
+attached_agents: [content-planner, funnel-cro-doctor]
 related_skills: []
 references:
 - "skills/funnel/references/ads-landing.md"

@@ -77,7 +77,7 @@ Bitta kritik `FAIL` → **1 marta** qayta tekshirish.
 ## Handoff Kontrakti
 
 - **Upstream:** Conductor tadqiqot savoli; boshqa agentlardan tekshirilishi kerak bo'lgan da'volar.
-- **Downstream:** `verified_research_packet` → `strategist`, `creative-strategist`, `compliance-reviewer`.
+- **Downstream:** `verified_research_packet` → `strategist`, `creative-strategist`, `compliance-reviewer`, `ad-spy-analyst`.
 
 ## Rol bilimlari
 

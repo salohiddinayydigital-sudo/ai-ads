@@ -21,7 +21,7 @@ updated: 2026-10-17
 | [[40-xavfsizlik-va-hisob]] | Read-only default, draft+tasdiq, tokenlar, mijoz ma'lumoti | Hisob o'zgarishi, tracking, mijoz fayli |
 | [[50-topshirish-dod]] | Topshirish darvozasi — DoD, checklist, verifier | Ish tugagach, natija berganda |
 | [[60-loyiha-papkasi]] | Har loyiha `clients/<slug>/` da; ish shu papkada, yangi sessiya shu yerdan davom | Yangi loyiha boshlanganda, sessiya resume'da |
-| [[70-charter-baseline]] | 36 agent uchun Prompt Defense Baseline, Zero-Findings va rol chegaralari | Sub-agent (worker) ishga tushganda va auditda |
+| [[70-charter-baseline]] | 19 kanonik agent uchun Prompt Defense Baseline, Charter v2, Zero-Findings va rol chegaralari | Sub-agent (worker) ishga tushganda va auditda |
 
 ## Buzilmaydigan 3 ta
 

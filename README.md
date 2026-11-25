@@ -1,6 +1,6 @@
-# Tyrion v8.2 — closed-loop media-buyer brain for paid ads (`ai-ads`)
+# Tyrion v8.3 — closed-loop media-buyer brain for paid ads (`ai-ads`)
 
-<!-- tyrion:catalog agents=12 skills=19 wiki=101 playbooks=9 contexts=6 commands=35 rules=9 tools=40 -->
+<!-- tyrion:catalog agents=19 skills=19 wiki=101 playbooks=9 contexts=6 commands=42 rules=9 tools=40 -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.13](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776AB.svg)](https://www.python.org/)
@@ -50,16 +50,16 @@ Account writes (`ads_create_*`, `ads_update_entity`, `ads_activate_entity`, …)
 
 ## What's inside
 
-- **12 specialist agents** — `platform-auditor` (platform passed in the delegation package), `tracking-specialist`, `audience-architect`, `creative-strategist`, `video-producer`, `budget-analyst`, `data-analyst`, `strategist`, `content-planner`, `compliance-reviewer`, `research-verifier`, `release-verifier`.
+- **19 specialist agents** — `platform-auditor` (platform passed in the delegation package), `tracking-specialist`, `audience-architect`, `creative-strategist`, `video-producer`, `budget-analyst`, `data-analyst`, `strategist`, `content-planner`, `compliance-reviewer`, `research-verifier`, `release-verifier`.
 - **19 platform & marketing skills** — `tyrion`, `strategy`, `audit`, `audience`, `creative`, `video`, `tracking`, `budget`, `analyze`, `competitors`, `funnel`, `content`, `report`, `client`, `system`, `connect`, `pulse`, `experiments`, `lead-quality` (the Uzbekistan market pack loads only when `market=uz`).
-- **35 slash commands** — 12 model-visible (`/start /audit /audience /creative /budget /export /report /client /competitors /tracking /pulse /connect`); Uzbek aliases (`/auditoriya /kreativ /voronka /eksport /hisobot /mijoz /raqobatchi /savol`) stay user-invocable but hidden from the model context. Video pre-production commands (user-invocable): `/video-ssenariy` (`/video-script`), `/video-reja` (`/video-plan`), `/motion-ssenariy` (`/motion-script`).
+- **42 slash commands** — 12 model-visible (`/start /audit /audience /creative /budget /export /report /client /competitors /tracking /pulse /connect`); Uzbek aliases (`/auditoriya /kreativ /voronka /eksport /hisobot /mijoz /raqobatchi /savol`) stay user-invocable but hidden from the model context. Video pre-production commands (user-invocable): `/video-ssenariy` (`/video-script`), `/video-reja` (`/video-plan`), `/motion-ssenariy` (`/motion-script`).
 - **40 deterministic 0-token Python CLI tools** (stdlib only) — `normalize`, `pulse`, `experiments`, `crm-bridge`, `creative-analytics`, `adlib-mine`, `audit_scoring`, `report-html`, `calculator`, `spend-guard`, `meta-targeting-engine`, …; Bilim: atomik qaydlar (101), 9 playbooks, market packs `global us eu uk mena latam sea in uz`.
 
 ```text
 ai-ads/
-├── agents/                  # 12 specialist agent charters (old charters kept in skills/*/references/legacy-agents/)
+├── agents/                  # 19 specialist agent charters (12 core + 7 targetolog assistants) (old charters kept in skills/*/references/legacy-agents/)
 ├── skills/                  # 19 skills; SKILL.md + references/
-├── commands/                # 35 slash commands (12 model-visible)
+├── commands/                # 42 slash commands (12 model-visible)
 ├── hooks/                   # ${CLAUDE_PLUGIN_ROOT} hook launcher, guard, Spend-Guard gate
 ├── tools/                   # 40 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
 ├── schemas/                 # metrics.v1, client-state.v1

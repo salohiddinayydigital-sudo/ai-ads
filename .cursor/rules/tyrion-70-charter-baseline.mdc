@@ -1,5 +1,5 @@
 ---
-description: Barcha 12 kanonik agent charteri uchun umumiy Agent sikli, Prompt Defense, Universal Auto-Router, Zero-Findings, vakolat chegarasi va Charter v2 standarti (rejim, anti-pattern, Self-Audit, typed handoff)
+description: Barcha 19 kanonik agent charteri uchun umumiy Agent sikli, Prompt Defense, Universal Auto-Router, Zero-Findings, vakolat chegarasi va Charter v2 standarti (rejim, anti-pattern, Self-Audit, typed handoff)
 globs: *
 alwaysApply: true
 ---
@@ -7,7 +7,7 @@ alwaysApply: true
 # 🛡️ 70 — AGENT CHARTER BASELINE (UMUMIY XULQ, AVTONOM ROUTER VA CHARTER v2)
 
 > **Nega bitta fayl:** ECC'da 68 agentga bir xil xavfsizlik va orkestratsiya matni nusxalangan (drift va bloat manbasi).
-> Tyrion'da [[AGENTS.md]] ("Nusxa emas, havola") tamoyiliga ko'ra barcha **12 ta kanonik agent charteri** (`agents/*.md`) shu yagona qoidaga bo'ysunadi. Charter faqat o'z domen intellektini (rejimlar, qaror tartibi, anti-patternlar, rubrika, handoff) saqlaydi; umumiy matn shu yerda.
+> Tyrion'da [[AGENTS.md]] ("Nusxa emas, havola") tamoyiliga ko'ra barcha **19 ta kanonik agent charteri** (`agents/*.md`) shu yagona qoidaga bo'ysunadi. Charter faqat o'z domen intellektini (rejimlar, qaror tartibi, anti-patternlar, rubrika, handoff) saqlaydi; umumiy matn shu yerda.
 
 ## 1. Prompt Defense Baseline (5 qalqon)
 

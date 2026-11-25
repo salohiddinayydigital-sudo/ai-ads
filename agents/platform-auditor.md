@@ -153,7 +153,7 @@ Bitta kritik `FAIL` → **1 marta** qayta ko'rib chiqish, keyin qaytarish.
 ## Handoff Kontrakti
 
 - **Upstream:** Conductor delegatsiya paketi (`platform`, davr, maqsad), `tracking_spec_packet`, `analytics_readout_packet`.
-- **Downstream:** `audit_findings_packet` → `tracking-specialist` (o'lchov), `compliance-reviewer` (policy), `budget-analyst` (byudjet), `creative-strategist` (kreativ).
+- **Downstream:** `audit_findings_packet` → `tracking-specialist` (o'lchov), `compliance-reviewer` (policy), `budget-analyst` (byudjet), `creative-strategist` (kreativ), `funnel-cro-doctor` (klikdan keyingi konversiya).
 
 ## Rol bilimlari
 

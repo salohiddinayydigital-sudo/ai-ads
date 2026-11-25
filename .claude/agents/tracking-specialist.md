@@ -88,8 +88,8 @@ Bitta kritik `FAIL` → **1 marta** qayta ishlash.
 
 ## Handoff Kontrakti
 
-- **Upstream:** `audit_findings_packet` (`platform-auditor`: o'lchov topilmalari), CRM eksporti.
-- **Downstream:** `tracking_spec_packet` → `data-analyst` (qaysi eventlarga ishonish mumkin), `platform-auditor`.
+- **Upstream:** `audit_findings_packet` (`platform-auditor`: o'lchov topilmalari), `client_onboarding_packet` (`client-onboarder`), CRM eksporti.
+- **Downstream:** `tracking_spec_packet` → `data-analyst` (qaysi eventlarga ishonish mumkin), `platform-auditor`, `campaign-launcher` (pre-launch), `funnel-cro-doctor` (lid sifati).
 
 ## Rol bilimlari
 

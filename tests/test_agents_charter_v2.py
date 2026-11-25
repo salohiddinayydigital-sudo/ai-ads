@@ -21,10 +21,15 @@ CORE_AGENTS = frozenset({
     "audience-architect", "data-analyst", "tracking-specialist", "content-planner",
     "compliance-reviewer", "research-verifier", "release-verifier",
 })
-CANONICAL_AGENTS = CORE_AGENTS
+TARGETOLOG_AGENTS = frozenset({
+    "client-onboarder", "ad-spy-analyst", "campaign-launcher", "daily-optimizer", "funnel-cro-doctor",
+    "account-recovery-specialist", "client-comms-lead",
+})
+CANONICAL_AGENTS = CORE_AGENTS | TARGETOLOG_AGENTS
 
 # Self-Audit turi: generativ/strategik -> rubrika >= 85/100; qolganlari -> Pass/Fail
-SCORE_GATE = frozenset({"strategist", "creative-strategist", "video-producer", "content-planner"})
+SCORE_GATE = frozenset({"strategist", "creative-strategist", "video-producer", "content-planner",
+                        "client-onboarder", "funnel-cro-doctor", "client-comms-lead"})
 # Audit-format (`control_id` findings) faqat shu agentlarda ruxsat etiladi
 AUDIT_FORMAT = frozenset({"platform-auditor", "compliance-reviewer", "tracking-specialist"})
 
@@ -33,6 +38,9 @@ MAX_TURNS = {
     **{a: 24 for a in ("budget-analyst", "data-analyst", "tracking-specialist", "audience-architect",
                        "video-producer", "content-planner")},
     **{a: 18 for a in ("compliance-reviewer", "research-verifier", "release-verifier")},
+    # Targetolog Copilot Pack (v8.3)
+    "client-onboarder": 20, "ad-spy-analyst": 20, "campaign-launcher": 24, "daily-optimizer": 24,
+    "funnel-cro-doctor": 24, "account-recovery-specialist": 18, "client-comms-lead": 18,
 }
 
 REQUIRED_SECTIONS = (
@@ -42,6 +50,8 @@ REQUIRED_SECTIONS = (
 REQUIRED_FM = ("name", "description", "role", "model", "maxTurns", "tools", "skills",
                "authority_boundary", "output_contract")
 PATH_RE = re.compile(r"(?<![\w/.\-])((?:skills|wiki|rules|playbooks|contexts|templates|markets|manifests|docs|schemas|tools)/[\w\-./]*\.(?:md|json|py))")
+ROLE_SUFFIXES = ("-analyst", "-specialist", "-verifier", "-reviewer", "-strategist", "-producer", "-planner",
+                 "-architect", "-auditor", "-onboarder", "-launcher", "-optimizer", "-doctor", "-lead")
 PACKET_RE = re.compile(r"`([a-z_]+_packet|strategic_brief)`")
 
 # Routing regressiyasi: UZ/RU/EN so'rov -> kutilgan primary_agent
@@ -57,7 +67,7 @@ ROUTING_MATRIX = (
     ("detailed targeting lookalike overlap", "audience-architect"),
     ("capi tekshir pixel sozla", "tracking-specialist"),
     ("контент-план на месяц", "content-planner"),
-    ("reklama bloklandi policy violation", "compliance-reviewer"),
+    ("special ad category policy violation", "compliance-reviewer"),
     ("raqobatchilarni o'rganish bozor tahlili", "research-verifier"),
 )
 
@@ -152,7 +162,7 @@ class CharterV2StructureTests(unittest.TestCase):
                 for pkt in PACKET_RE.findall(body):
                     self.assertIn(pkt, packets, f"{name}: `{pkt}` schemas/agent-handoff.schema.json da yo'q")
                 for other in re.findall(r"`([a-z]+(?:-[a-z]+)+)`", handoff):
-                    if (VAULT / "agents" / f"{other}.md").exists() or other.endswith(("-analyst", "-specialist", "-verifier", "-reviewer", "-strategist", "-producer", "-planner", "-architect", "-auditor")):
+                    if (VAULT / "agents" / f"{other}.md").exists() or other.endswith(ROLE_SUFFIXES):
                         self.assertIn(other, CANONICAL_AGENTS, f"{name}: handoff noma'lum agentga: {other}")
 
     def test_every_referenced_path_exists(self) -> None:

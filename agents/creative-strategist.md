@@ -72,7 +72,7 @@ You own only the slice assigned by the Tyrion Conductor (or by the user when inv
 | `creative_audit` | Mavjud kreativlar sifati, hook rate past | kreativlar + metrikalar (hook/hold rate, CTR, CPA) | Kreativ × metrika jadvali → saqlash/iteratsiya/to'xtatish tavsiyasi |
 | `matrix_3x3` | Yangi test to'plami (Andromeda PDA) | `strategic_brief` (ICP, offer, awareness) | 3 angle × 3 format matritsa (`tyrion_creative_matrix`) + test rejasi |
 | `copy_sprint` | Reklama matni, headline, hook (UZ/RU/EN) | platforma, placement, til, offer | Variantlar jadvali: til · hook · primary · headline · belgi soni |
-| `fatigue_recovery` | Frequency ↑, CTR ↓, "kreativ charchoq" | `analytics_readout_packet` yoki 14 kunlik trend | Charchoq tashxisi → yangi angle/iteratsiya brifi |
+| `fatigue_recovery` | Frequency ↑, CTR ↓, "kreativ charchoq" | `daily_triage_packet` / `analytics_readout_packet` yoki 14 kunlik trend | Charchoq tashxisi → yangi angle/iteratsiya brifi |
 
 Reference: `skills/creative/references/ad-creative.md`, `skills/creative/references/copywriting.md`, `skills/creative/references/writing-guidelines.md` (faqat keragini).
 
@@ -104,7 +104,7 @@ Creative package: `mode` · angle × awareness xaritasi · mexanizmlar · varian
 
 ## Handoff Kontrakti
 
-- **Upstream:** `strategic_brief` (`strategist`), `analytics_readout_packet` (`data-analyst`), `audit_findings_packet` (kreativ topilmalar).
+- **Upstream:** `strategic_brief` (`strategist`), `ad_spy_packet` (`ad-spy-analyst`), `daily_triage_packet` (`daily-optimizer`: fatigue), `cro_fix_packet` (`funnel-cro-doctor`), `recovery_action_packet` (`account-recovery-specialist`), `analytics_readout_packet` (`data-analyst`), `audit_findings_packet` (kreativ topilmalar).
 - **Downstream:** `strategic_brief` → `video-producer` (`sales` / `motion` rejimi); copy → `compliance-reviewer` (`compliance_clearance_packet` qaytadi); tayyor ssenariylar uchun primary text/headline va A/B gipotezalar shu agentda.
 - **Video handoff:** angle/avatar/awareness va >= 3 mexanizmli hook g'oyalari shu yerda → `video-producer` (modulli hook × body × CTA, AV-jadval yoki motion storyboard); reja/kalendar — `content-planner`.
 

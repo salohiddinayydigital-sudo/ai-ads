@@ -88,7 +88,7 @@ Strategic brief: `mode` · ICP · positioning · offer · kanal ketma-ketligi ·
 
 ## Handoff Kontrakti
 
-- **Upstream:** `verified_research_packet` (`research-verifier`), `analytics_readout_packet` (`data-analyst`), `budget_guard_packet` (`budget-analyst`).
+- **Upstream:** `client_onboarding_packet` (`client-onboarder`), `ad_spy_packet` (`ad-spy-analyst`), `verified_research_packet` (`research-verifier`), `analytics_readout_packet` (`data-analyst`), `budget_guard_packet` (`budget-analyst`).
 - **Downstream:** `strategic_brief` → `audience-architect`, `creative-strategist`, `budget-analyst`, `content-planner` (`schemas/agent-handoff.schema.json`).
 
 ## Rol bilimlari
