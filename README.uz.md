@@ -47,7 +47,7 @@ Hisobga yozish asboblari (`ads_create_*`, `ads_update_entity`, `ads_activate_ent
 
 ## Tarkib
 
-- **19 ta ixtisoslashgan agent**, **19 ta skill**, **42 ta slash buyruq** (12 tasi model ko'radi), **39 ta 0-token Python asbob**, **100 ta wiki qayd**, 9 playbook.
+- **19 ta ixtisoslashgan agent**, **19 ta skill**, **42 ta slash buyruq** (12 tasi model ko'radi), **40 ta 0-token Python asbob**, **101 ta wiki qayd**, 9 playbook. 19 agent = 12 core + 7 targetolog yordamchi (`client-onboarder`, `ad-spy-analyst`, `campaign-launcher`, `daily-optimizer`, `funnel-cro-doctor`, `account-recovery-specialist`, `client-comms-lead`); buyruqlar: `/onboard /ad-spy /launch-plan /morning-triage /cro-dm /appeal /client-update`.
 - 7.x dan o'tish: [MIGRATION.md](MIGRATION.md). O'zbekiston bozori paketi `market=uz` bo'lganda yuklanadi (Telegram, AmoCRM, Payme/Click, Uzum Nasiya).
 
 ## Litsenziya

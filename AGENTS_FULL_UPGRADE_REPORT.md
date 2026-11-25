@@ -144,10 +144,14 @@ New test suites: `tests/test_agents_charter_v2.py` (16 tests) and `tests/test_ta
   It links to `rules/40-xavfsizlik-va-hisob.md`, and a test checks all of this.
 - These are kept in sync: `.claude/agents/`, `.claude/commands/`, `.cursor/rules/`, `.windsurfrules` and `manifests/catalog.json`. Doctor reports mirror drift as 0 (42 pairs).
 
-## 7. Follow-up recommendations
+## 7. Follow-ups — closed in 8.3.1
 
-1. `data-analyst` still has a single trigger (`data-analyst`), so users reach it through workflows (`results_analysis`, `morning_media_buyer_triage`) rather than by name. Consider adding UZ/RU/EN triggers once the expected routing for "eksport tahlil" is agreed. Today that query goes to `platform-auditor` through `results_analysis`.
-2. `client_report` still names `release-verifier` as primary agent; `data-analyst` or `client-comms-lead` may fit better. This was left unchanged to avoid regressions in existing evals.
-3. Add `skill-eval` scenarios (`evals/scenarios.json`) for the 7 new agents so they also go through the `claude plugin eval` runs.
-4. `skills/tyrion/references/workflow-recipes.md` does not yet describe the 6 new workflows. The manifest and `AGENTS.md` §3a are authoritative.
-5. A `docs/v8-baseline.md` historical snapshot still says "36 agent". It is intentionally unchanged because it records the pre-v8 state.
+All five follow-ups were handled in 8.3.1 (see `CHANGELOG.md`):
+
+1. `data-analyst` now has 17 UZ/RU/EN triggers. Experiment, significance, sample-size and normalisation queries route to it. Export performance analysis stays in the `results_analysis` workflow by design.
+2. `client_report` was checked. Its `release-verifier` primary is intentional: the stage is a fresh-context verification of the report. Client-facing Telegram and objection messages now go to `client-comms-lead`: the `client_report` guard was added in 8.3.0 and the matching `weekly_review` guard in 8.3.1. No eval regressions.
+3. Evals added for the 7 new agents and `data-analyst`: 8 `universal_route` scenarios and 7 golden `claude plugin eval` cases.
+4. `skills/tyrion/references/workflow-recipes.md` now documents all six targetolog workflows (sections E–J).
+5. `docs/v8-baseline.md` is a historical snapshot and is intentionally unchanged.
+
+Two routing defects found while writing the evals were also fixed: `meta_strategy` was capturing ad-rejection appeals, and `weekly_review` was capturing Telegram client messages.

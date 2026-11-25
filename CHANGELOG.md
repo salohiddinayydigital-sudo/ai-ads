@@ -3,6 +3,20 @@
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
 
+## [8.3.1] — 2026-11-25
+
+Ishlatishga tayyorlik: v8.3 hisobotidagi barcha follow-up'lar yopildi.
+
+### Qo'shildi
+- Golden eval'lar (`claude plugin eval`): `onboard-uz-1`, `ad-spy-ru-1`, `launch-plan-en-1`, `morning-triage-uz-1`, `cro-dm-ru-1`, `appeal-cyrl-1`, `client-update-uz-1` (32 → 39 case).
+- `evals/scenarios.json`: 8 ta `universal_route` ssenariy (7 targetolog agent + `data-analyst`), 51 → 59, 100% pass.
+- `skills/tyrion/references/workflow-recipes.md`: E–J bo'limlari — 6 ta targetolog oqimining domen qoidalari.
+
+### O'zgardi
+- `data-analyst`: 17 ta UZ/RU/EN trigger (eksperiment natijasi, statistik ahamiyat, tanlama hajmi, metrics.v1); eksport tahlili ataylab `results_analysis` oqimida qoldi.
+- Marshrut tuzatishlari: `meta_strategy` endi rad etilish/apellyatsiya so'rovlarini, `weekly_review` esa Telegram/e'tiroz xabarlarini egallamaydi ("Meta reklama rejected bo'ldi, apellyatsiya matnini tayyorla" → `account-recovery-specialist`; "Mijozga telegram hisobot ... bu hafta" → `client-comms-lead`). 232+105 trigger regressiya tekshiruvida boshqa o'zgarish yo'q.
+- `README.md` / `README.uz.md`: 7 targetolog agent va buyruqlari ro'yxatda.
+
 ## [8.3.0] — 2026-11-25
 
 Targetolog Copilot Pack: yadro 12 agentni takrorlamasdan amaliyotchi targetologning kunlik operatsion ishlarini yopadigan 7 yordamchi agent (jami 19 kanonik agent: 12 core + 7 targetolog).
