@@ -3,6 +3,25 @@
 All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
 
 
+## [Unreleased] — Router audit
+
+Marshrutlash auditi: 30+ real so'rov sinab ko'rildi, topilgan nuqsonlar kodda tuzatildi.
+
+### Tuzatildi
+- Scope-darvoza: A/B test, eksperiment, statistik ahamiyat, variant, CBO/ABO, naming, custdev kabi so'zlar marketing lug'atida yo'q edi — "A/B test natijasi statistik ahamiyatli mi" noto'g'ri `out_of_scope` bo'lardi. Endi agent trigger iboralari ham scope-darvozadan o'tadi.
+- Qurish niyati ("kampaniya tuz", "составь/создай/build") platforma nomi tufayli `audit`/`platform-auditor` ga ketardi; endi `apply_intent_bias` (audit niyati bo'lmasa) `strategy`/`campaign-launcher` ga yo'naltiradi. Aniq `agent_hint` ustun.
+- Agent tanlashda ko'p so'zli aniq trigger ibora kuchliroq signal; teng ballda alifbo tartibi hal qilardi ("landing sahifa konversiyasi past" → `content-planner`, endi `funnel-cro-doctor`).
+- Qisqa o'zbekcha jumlalar `lang=en` deb aniqlanardi (akkauntim, tuz, yoz, sahifa, byudjet…); lug'at kengaytirildi.
+- `video_script` workflow DM/Direct skriptlarni egallamaydi.
+- Skill triggerlari: `experiments` (test natijasi, variant yutdi…), `strategy` (kampaniya tuz, план запуска…); agent triggerlari: `data-analyst`, `funnel-cro-doctor`, `campaign-launcher`, `creative-strategist`, `account-recovery-specialist`, `research-verifier`, `release-verifier`, `strategist`.
+- So'rov butunlay bitta agentning trigger iborasiga teng bo'lsa, boshqa agentli workflow uni bosib ketmaydi ("pinterest ads" → `platform-auditor`, avval `audience-architect`). Barcha 383 agent triggeri o'z egasiga yo'naladi.
+- 13 ta bir tomonlama handoff tuzatildi: yuboruvchi agent qabul qiluvchi charterning `Upstream` qatoriga qo'shildi (platform-auditor, creative-strategist, compliance-reviewer, client-comms-lead, campaign-launcher, video-producer, budget-analyst).
+- `graphify-out/` bilim grafi deterministik (0 token) qayta qurildi.
+
+### Qo'shildi
+- `tests/test_agent_handoff_reciprocity.py`.
+- `tests/test_router_intent.py` (13 marshrut + til + out-of-scope + hint testlari); `evals/scenarios.json` 59 → 64 (R38–R42).
+
 ## [8.3.1] — 2026-11-25
 
 Ishlatishga tayyorlik: v8.3 hisobotidagi barcha follow-up'lar yopildi.

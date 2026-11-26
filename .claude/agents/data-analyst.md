@@ -27,6 +27,11 @@ triggers:
 - "experiment readout"
 - "sample size check"
 - "экспорт таҳлил"
+- "a/b test natijasi"
+- "test natijasi"
+- "qaysi variant yutdi"
+- "результат теста"
+- "итоги недели"
 authority_boundary: "Analysis through tools; writes only under clients/<slug>/ when asked; never mutates ad accounts"
 output_contract: "analytics_readout_packet (mode, period, attribution window, metrics.v1 KPIs with evidence labels, sample-size verdicts, anomaly triage, experiment verdicts confirmed/refuted/inconclusive) + self_audit (pass/fail) and execution_evidence"
 ---

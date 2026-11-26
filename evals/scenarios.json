@@ -725,6 +725,75 @@
       ],
       "expected_status": "ready",
       "expected_fallback_triggered": false
+    },
+    {
+      "id": "R38_ab_test_significance_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "A/B test natijasi statistik ahamiyatli mi",
+      "expected_primary_agent": "data-analyst",
+      "expected_skills": [
+        "experiments"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R39_variant_winner_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "test natijasi qaysi variant yutdi",
+      "expected_primary_agent": "data-analyst",
+      "expected_skills": [
+        "experiments"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false
+    },
+    {
+      "id": "R40_landing_cro_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "landing sahifa konversiyasi past",
+      "expected_primary_agent": "funnel-cro-doctor",
+      "expected_skills": [
+        "funnel"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false,
+      "forbidden_agents": [
+        "video-producer"
+      ]
+    },
+    {
+      "id": "R41_telegram_campaign_build_uz",
+      "type": "universal_route",
+      "language": "uz_latin",
+      "query": "Telegram Ads kampaniya tuz",
+      "expected_primary_agent": "campaign-launcher",
+      "expected_skills": [
+        "strategy"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false,
+      "forbidden_agents": [
+        "platform-auditor"
+      ]
+    },
+    {
+      "id": "R42_launch_plan_ru",
+      "type": "universal_route",
+      "language": "ru",
+      "query": "сделай план запуска для интернет-магазина",
+      "expected_primary_agent": "campaign-launcher",
+      "expected_skills": [
+        "strategy"
+      ],
+      "expected_status": "ready",
+      "expected_fallback_triggered": false,
+      "forbidden_agents": [
+        "video-producer"
+      ]
     }
   ]
 }

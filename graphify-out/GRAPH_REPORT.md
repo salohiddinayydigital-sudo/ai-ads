@@ -1,26 +1,26 @@
 # GRAPH_REPORT — Tyrion bilim grafi (deterministik)
 
-> Qurilgan: 2026-11-19T12:11:45+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
+> Qurilgan: 2026-11-26T12:54:59+00:00 · generator: `tools/brain-graph.py` (LLM'siz, 0 token)
 
-**Tugunlar:** 172 · **Qirralar:** 799 · **Klasterlar:** 44
+**Tugunlar:** 192 · **Qirralar:** 822 · **Klasterlar:** 44
 
 ## Eng bog'langan tugunlar (hublar)
 
 | # | Tugun | Kiruvchi | Fayl |
 |---|-------|----------|------|
-| 1 | 00-manba | 29 | `rules/00-manba.md` |
-| 2 | 40-xavfsizlik-va-hisob | 27 | `rules/40-xavfsizlik-va-hisob.md` |
-| 3 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
-| 4 | 70-charter-baseline | 17 | `rules/70-charter-baseline.md` |
-| 5 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
-| 6 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
-| 7 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
-| 8 | ad-iteration | 16 | `wiki/ad-iteration.md` |
+| 1 | 00-manba | 36 | `rules/00-manba.md` |
+| 2 | 40-xavfsizlik-va-hisob | 34 | `rules/40-xavfsizlik-va-hisob.md` |
+| 3 | 70-charter-baseline | 24 | `rules/70-charter-baseline.md` |
+| 4 | kreativ-sikl | 19 | `wiki/kreativ-sikl.md` |
+| 5 | taklif-tuzilishi | 16 | `wiki/taklif-tuzilishi.md` |
+| 6 | ad-iteration | 16 | `wiki/ad-iteration.md` |
+| 7 | content-is-targeting | 16 | `wiki/content-is-targeting.md` |
+| 8 | learning-phase-qoidalari | 16 | `wiki/learning-phase-qoidalari.md` |
 | 9 | meta-ads-sozlamalari | 15 | `wiki/meta-ads-sozlamalari.md` |
 | 10 | survey-funnel | 14 | `wiki/survey-funnel.md` |
 | 11 | token-gigiyenasi | 13 | `wiki/token-gigiyenasi.md` |
-| 12 | more-better-new | 13 | `wiki/more-better-new.md` |
-| 13 | etiroz-javob-patternlari | 13 | `wiki/etiroz-javob-patternlari.md` |
+| 12 | etiroz-javob-patternlari | 13 | `wiki/etiroz-javob-patternlari.md` |
+| 13 | more-better-new | 13 | `wiki/more-better-new.md` |
 | 14 | 50-topshirish-dod | 12 | `rules/50-topshirish-dod.md` |
 | 15 | 30-ozbekiston-konteksti | 12 | `rules/30-ozbekiston-konteksti.md` |
 
@@ -28,10 +28,10 @@
 
 | Klaster | Tugunlar |
 |---------|----------|
+| commands | 42 |
 | meta-ads | 35 |
-| commands | 29 |
+| agents | 19 |
 | sop | 16 |
-| agents | 12 |
 | playbook | 9 |
 | rules | 9 |
 | context | 6 |

@@ -58,6 +58,10 @@ triggers:
 - "safe zone"
 - "адаптация форматов"
 - "размеры баннеров"
+- "charchadi"
+- "kreativlarim charchadi"
+- "frequency oshdi"
+- "креативы выгорели"
 skills: [analyze, content, creative, experiments]
 authority_boundary: "Concept and copy candidates only; never publishes or writes canonical files"
 output_contract: "Creative package (mode, angle x awareness map, >= 3 independent mechanisms, copy variants per language with character counts, test hypotheses with one variable/metric/min spend/decision rule, evidence labels) + strategic_brief to video-producer + self_audit (>= 85/100) and execution_evidence"
@@ -104,7 +108,7 @@ Creative package: `mode` · angle × awareness xaritasi · mexanizmlar · varian
 
 ## Handoff Kontrakti
 
-- **Upstream:** `strategic_brief` (`strategist`), `ad_spy_packet` (`ad-spy-analyst`), `daily_triage_packet` (`daily-optimizer`: fatigue), `cro_fix_packet` (`funnel-cro-doctor`), `recovery_action_packet` (`account-recovery-specialist`), `analytics_readout_packet` (`data-analyst`), `audit_findings_packet` (kreativ topilmalar).
+- **Upstream:** `strategic_brief` (`strategist`), `ad_spy_packet` (`ad-spy-analyst`), `daily_triage_packet` (`daily-optimizer`: fatigue), `cro_fix_packet` (`funnel-cro-doctor`), `recovery_action_packet` (`account-recovery-specialist`), `analytics_readout_packet` (`data-analyst`), `audit_findings_packet` (`platform-auditor`) (kreativ topilmalar); auditoriya arxitekturasi (`audience-architect`); `compliance_clearance_packet` (`compliance-reviewer`); kontent kalendari (`content-planner`); `verified_research_packet` (`research-verifier`); ssenariy (`video-producer`)
 - **Downstream:** `strategic_brief` → `video-producer` (`sales` / `motion` rejimi); copy → `compliance-reviewer` (`compliance_clearance_packet` qaytadi); tayyor ssenariylar uchun primary text/headline va A/B gipotezalar shu agentda.
 - **Video handoff:** angle/avatar/awareness va >= 3 mexanizmli hook g'oyalari shu yerda → `video-producer` (modulli hook × body × CTA, AV-jadval yoki motion storyboard); reja/kalendar — `content-planner`.
 

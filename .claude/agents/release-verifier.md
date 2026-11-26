@@ -24,6 +24,9 @@ triggers:
 - "skill tekshiruvi"
 - "routing audit"
 - "charter review"
+- "release tekshir"
+- "skill sifati"
+- "qabul mezonlari"
 authority_boundary: "Verification only; reports defects, does not repair"
 output_contract: "Pass/fail per acceptance criterion with real command output evidence (doctor.py, catalog.py check, tyrion_workflows.py check, pytest), defect list with file:line and severity (no repairs) + self_audit (pass/fail) and execution_evidence"
 ---

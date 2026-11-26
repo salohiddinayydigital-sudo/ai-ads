@@ -635,6 +635,7 @@ _UZ_STRONG_WORDS = re.compile(
     r"sizning|lekin|hamda|yo'q|yoq|kelmayapti|ishlamayapti|ishlamayabdi|sotuv|sotuvlar|narx|qimmat|arzon|oshib|ketdi|tushdi|kamaydi|"
     r"ko'paydi|reklama|reklamam|reklamamda|kampaniyamda|byudjetni|oshir|o'chir|mijoz|strategiya|lidlar|sifatsiz|kontent|tayyorla|tekshir|"
     r"saytimni|o'rganib|montaj|yasab|taklif|berish|berishchi|auditoriya|audioturiya|audioturiyaga|auditoriyaga|raqobatchi|raqobatchilar|"
+    r"akkauntim|bloklandi|cheklandi|rad|etildi|yoz|tuz|yarat|past|sahifa|sahifam|natija|natijasi|natijalari|qaysi|yutdi|hisobot|byudjet|kampaniya|kreativ|kreativlarim|charchadi|charchoq|yangilarini|javob|sinov|"
     r"rabotchilar|tahlil|salom|assalomu|alaykum|rahmat|yaxshimisiz|qalaysiz|bugungi|ob-havo|xato|xatolik|muammo|yordam|ber|qil)\b"
 )
 _UZ_STRONG_SUFFIX = re.compile(r"\b\w*(mayapti|yapti|yotgan|yotir|moqda|maydi|mabdi|yabdi|ingiz|imiz)\b")
@@ -683,8 +684,31 @@ _HARD_MARKETING_RE = re.compile(
     r"e-commerce|ecommerce|do'kon\w*|магазин\w*|kontent\w*|content|контент\w*|copywrit\w*|promo\w*|brief\w*|persona|avatar\w*|"
     r"bid\w*|stavka\w*|ставк\w*|trafik\w*|traffic|reach|impression\w*|show\w*|click\w*|klik\w*|клик\w*|"
     r"montaj\w*|video\w*|motion|subtitr\w*|tipografiya\w*|animatsion\w*|seo-\w+|geo|"
+    r"cbo|abo|naming|custdev|frequency|fatigue|charcho\w*|hook\w*|ban|a/?b|ab-test|split[- ]?test|eksperiment\w*|experiment\w*|эксперимент\w*|а/?б|сплит\w*|statistik\w*|significan\w*|variant\w*|hipotez\w*|гипотез\w*|pulse|kpi|mde|"
     r"cpl|akkaunt\w*|аккаунт\w*|apellyats\w*|апелляц\w*|appeal\w*|brif\w*|бриф\w*|onboard\w*|онбординг\w*|direct|директ\w*|triage|optimizats\w*|оптимизац\w*)\b"
 )
+
+
+_BUILD_INTENT_RE = re.compile(
+    r"\b(tuz|tuzing|tuzib|tuzish|yarat|yaratib|yaratish|qur|qurib|ishga tushir\w*|ochib ber|"
+    r"create|build|set ?up|draft|plan|составь|создай|построй|запусти|сделай)\b"
+)
+_AUDIT_INTENT_RE = re.compile(
+    r"\b(audit\w*|tekshir\w*|tahlil\w*|diagnos\w*|nega|qimmat\w*|muammo\w*|xato\w*|review|check|why|"
+    r"аудит\w*|проверь\w*|почему|дорог\w*|ошибк\w*)\b"
+)
+
+
+def apply_intent_bias(hits: list, norm_q: str) -> list:
+    """Qurish niyati (tuz/yarat/build) bor, audit niyati yo'q bo'lsa — platforma nomi tufayli `audit` skilli
+    ustun kelib ketmasligi uchun uning ballini kamaytiradi va `strategy` ni ko'taradi. Deterministik, LLM'siz."""
+    if not hits or not _BUILD_INTENT_RE.search(norm_q) or _AUDIT_INTENT_RE.search(norm_q):
+        return hits
+    adjusted = []
+    for sc, sk in hits:
+        factor = 0.5 if sk["name"] == "audit" else (1.25 if sk["name"] == "strategy" else 1.0)
+        adjusted.append((sc * factor, sk))
+    return sorted(adjusted, key=lambda x: (-x[0], x[1]["name"]))
 
 
 def scope_signals(query: str, q_tokens: list[str], has_concepts: bool = False) -> dict[str, Any]:
@@ -1155,6 +1179,12 @@ def route_task(
     # Workflow qatlami (manifests/workflows.json): cross-agent oqimlar skill reytingidan OLDIN. Mutaxassis (sub-agent)
     # chaqiruvchi bo'lsa, workflow qo'llanmaydi: u faqat o'z domenini oladi (rekursiv delegatsiya yo'q).
     agent_hint = resolve_legacy_agent(agent_hint)
+    _exact_agent = ""
+    if not agent_hint:
+        # So'rov butunlay bitta agentning trigger iborasiga teng: eng kuchli aniq signal, boshqa agentli workflow uni bosib ketmasin.
+        _exact = [an for an, ai in agents.items() if any(normalize_multilingual_text(t).strip() == norm_q.strip() for t in ai.get("triggers", []))]
+        if len(_exact) == 1:
+            _exact_agent = _exact[0]
     caller = "specialist" if (caller == "specialist" or os.environ.get("TYRION_SPECIALIST") == "1") else "user"
     exec_plan = None
     # agent_hint = chaqiruvchi allaqachon mutaxassisni tanlagan (sub-agent yoki `--agent`): workflow qayta tanlanmaydi.
@@ -1167,7 +1197,13 @@ def route_task(
             caller=caller,
         )
 
+    if _exact_agent and (exec_plan is None or exec_plan["primary_agent"] != _exact_agent):
+        exec_plan = None
+        agent_hint = _exact_agent
+
     global_hits = rank(skills, clean_query, idf_pool=skills)
+    if not agent_hint:
+        global_hits = apply_intent_bias(global_hits, norm_q)
     global_registry_fallback_used = False
 
     if agent_hint and agent_hint in agents:
@@ -1194,7 +1230,12 @@ def route_task(
     strong_hits = [(sc, s) for sc, s in effective_hits if sc >= 10.0 and _has_structured_match(s)]
 
     # Scope-darvoza: marketingga aloqasiz yoki juda umumiy so'rovga agent tanlamaymiz (hech narsa yuklanmaydi).
-    signals = scope_signals(clean_query, q_tokens, has_concepts=bool(matched_concepts))
+    agent_trigger_hits = {
+        an: [t for t in ai.get("triggers", []) if len(t) >= 4 and t.lower() in norm_q]
+        for an, ai in agents.items()
+    }
+    agent_trigger_hits = {an: h for an, h in agent_trigger_hits.items() if h}
+    signals = scope_signals(clean_query, q_tokens, has_concepts=bool(matched_concepts) or bool(agent_trigger_hits))
     scope_status = ""
     if signals["greeting_only"]:
         scope_status = "out_of_scope"
@@ -1204,7 +1245,7 @@ def route_task(
         # mavzusi bor, lekin marketingga aloqasiz (python, ob-havo, retsept...). Mazmunsiz "yordam ber" so'rovi esa
         # eski kelishuv bo'yicha universal conductor fallback'ga tushadi (UniversalAutoRouterTests.test_05).
         scope_status = "out_of_scope"
-    elif signals["generic_only"] or (not strong_hits and 1 <= len(signals["meaningful_tokens"]) <= 2 and not matched_concepts):
+    elif signals["generic_only"] or (not strong_hits and 1 <= len(signals["meaningful_tokens"]) <= 2 and not matched_concepts and not agent_trigger_hits):
         scope_status = "needs_clarification"
     if scope_status and not (exec_plan and scope_status == "needs_clarification"):
         return _terminal_plan(
@@ -1213,9 +1254,11 @@ def route_task(
         )
 
     if not strong_hits:
-        primary_agent = agent_hint if (agent_hint and agent_hint in agents) else "strategist"
+        _trig_agent = max(agent_trigger_hits, key=lambda a: (len(max(agent_trigger_hits[a], key=len)), a)) if agent_trigger_hits else ""
+        primary_agent = agent_hint if (agent_hint and agent_hint in agents) else (_trig_agent or "strategist")
         supporting_agents: list[str] = []
-        required_skills = ["audit"]
+        required_skills = [sk for sk in agents.get(primary_agent, {}).get("skills", [])[:2] if sk in skills_by_name] if _trig_agent and primary_agent == _trig_agent else []
+        required_skills = required_skills or ["audit"]
         supporting_skills = []
         references_to_load = ["skills/audit/references/ads/thinking-framework.md"]
         tools_to_use = ["tools/brain-search.py", "tools/tyrion.py"]
@@ -1284,7 +1327,7 @@ def route_task(
             a_trig = " ".join(ainfo.get("triggers", [])).lower()
             for trig_phrase in ainfo.get("triggers", []):
                 if len(trig_phrase) >= 4 and trig_phrase.lower() in norm_q:
-                    agent_scores[aname] += 22.0
+                    agent_scores[aname] += 22.0 + 20.0 * (len(trig_phrase.split()) - 1)  # ko'p so'zli aniq ibora kuchliroq signal
             for tok in set(q_tokens):
                 if tok in aname.lower():
                     agent_scores[aname] += 8.0
@@ -1292,6 +1335,14 @@ def route_task(
                     agent_scores[aname] += 6.0
                 if tok in {d.lower() for d in ainfo.get("domains", [])} or tok in {p.lower() for p in ainfo.get("platforms", [])}:
                     agent_scores[aname] += 4.0
+
+        if not agent_hint and _BUILD_INTENT_RE.search(norm_q) and not _AUDIT_INTENT_RE.search(norm_q):
+            # qurish niyati: platforma nomi tufayli auditor emas, quruvchi agent (campaign-launcher/strategist) yetakchi bo'ladi
+            if "platform-auditor" in agent_scores:
+                agent_scores["platform-auditor"] *= 0.5
+            for builder in ("campaign-launcher", "strategist"):
+                if builder in agent_scores and agent_scores[builder] > 0:
+                    agent_scores[builder] *= 1.25
 
         if agent_hint and agent_hint in agent_scores and not global_registry_fallback_used:
             agent_scores[agent_hint] += 15.0

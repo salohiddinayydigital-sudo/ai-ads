@@ -10,6 +10,11 @@ triggers:
 - "а/б тест"
 - "сплит тест"
 - "гипотеза"
+- "test natijasi"
+- "a/b test natijasi"
+- "variant yutdi"
+- "statistik ahamiyat"
+- "ab test"
 aliases:
 - "ab-test"
 - "experiment"

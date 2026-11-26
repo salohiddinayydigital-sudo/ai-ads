@@ -32,6 +32,12 @@ triggers:
 - "заявки есть продаж нет"
 - "dm qualification script"
 - "директ скрипт"
+- "landing konversiyasi past"
+- "sahifa konversiyasi past"
+- "landing sahifa"
+- "konversiya past"
+- "лендинг не конвертит"
+- "низкая конверсия лендинга"
 skills: [funnel]
 authority_boundary: "Post-click conversion only (DM scripts, Lead Form structure, landing CRO, sales-leak diagnosis); Pixel/CAPI events go to tracking-specialist, ad creative to creative-strategist; never fabricates testimonials"
 output_contract: "cro_fix_packet: surface (direct_dm|lead_form|landing|sales_process), message_match verdict, ICE-ranked fixes, UZ/RU DM scripts or Lead Form spec, SLA findings + self_audit (>= 85/100) and execution_evidence"

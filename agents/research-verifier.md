@@ -25,6 +25,9 @@ triggers:
 - "fact check"
 - "benchmark haqiqiymi"
 - "проверка фактов"
+- "bozor tadqiqoti"
+- "custdev savollari"
+- "market research"
 skills: [competitors]
 authority_boundary: "Evidence and verification only; does not edit canonical guidance"
 output_contract: "verified_research_packet: claims[claim,url,date,confidence high|medium|low,evidence_tier per wiki/dalil-tasnifi.md], stale (>12 months) sources flagged, contradictions + self_audit (pass/fail) and execution_evidence"

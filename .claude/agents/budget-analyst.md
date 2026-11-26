@@ -66,7 +66,7 @@ Reference: `skills/budget/references/ads-math.md`, `skills/budget/references/ads
 
 ## Handoff Kontrakti
 
-- **Upstream:** `analytics_readout_packet` (`data-analyst`), `audit_findings_packet` (`platform-auditor`), `daily_triage_packet` (`daily-optimizer`).
+- **Upstream:** `analytics_readout_packet` (`data-analyst`), `audit_findings_packet` (`platform-auditor`), `daily_triage_packet` (`daily-optimizer`); `strategic_brief` (`strategist`)
 - **Downstream:** `budget_guard_packet` → `strategist` va Conductor (Spend-Guard paketi bilan; jonli o'zgarish faqat foydalanuvchi tasdig'idan keyin).
 
 ## Rol bilimlari
