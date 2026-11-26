@@ -50,6 +50,14 @@ class RouterIntentTests(unittest.TestCase):
                 self.assertEqual(plan["status"], "out_of_scope")
                 self.assertEqual(plan["primary_agent"], "")
 
+    def test_every_agent_trigger_routes_to_its_owner(self) -> None:
+        """Butun trigger iborasi bo'lgan so'rov boshqa agentga ketmasligi kerak (gate'dan o'tmagan juda qisqa iboralar bundan mustasno)."""
+        for name, agent in ss.load_agents().items():
+            for trig in agent["triggers"]:
+                with self.subTest(agent=name, trigger=trig):
+                    got = ss.route_task(trig, load=False, context_mode="manifest")["primary_agent"]
+                    self.assertIn(got, (name, ""))
+
     def test_explicit_agent_hint_beats_build_bias(self) -> None:
         plan = ss.route_task("Meta Ads strategiya tuz", agent_hint="platform-auditor", load=False, context_mode="manifest")
         self.assertEqual(plan["primary_agent"], "platform-auditor")

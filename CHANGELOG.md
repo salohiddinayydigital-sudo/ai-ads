@@ -14,6 +14,7 @@ Marshrutlash auditi: 30+ real so'rov sinab ko'rildi, topilgan nuqsonlar kodda tu
 - Qisqa o'zbekcha jumlalar `lang=en` deb aniqlanardi (akkauntim, tuz, yoz, sahifa, byudjet…); lug'at kengaytirildi.
 - `video_script` workflow DM/Direct skriptlarni egallamaydi.
 - Skill triggerlari: `experiments` (test natijasi, variant yutdi…), `strategy` (kampaniya tuz, план запуска…); agent triggerlari: `data-analyst`, `funnel-cro-doctor`, `campaign-launcher`, `creative-strategist`, `account-recovery-specialist`, `research-verifier`, `release-verifier`, `strategist`.
+- So'rov butunlay bitta agentning trigger iborasiga teng bo'lsa, boshqa agentli workflow uni bosib ketmaydi ("pinterest ads" → `platform-auditor`, avval `audience-architect`). Barcha 383 agent triggeri o'z egasiga yo'naladi.
 
 ### Qo'shildi
 - `tests/test_router_intent.py` (13 marshrut + til + out-of-scope + hint testlari); `evals/scenarios.json` 59 → 64 (R38–R42).

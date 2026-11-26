@@ -30,8 +30,6 @@ triggers:
 - "a/b test natijasi"
 - "test natijasi"
 - "qaysi variant yutdi"
-- "haftalik review"
-- "weekly review"
 - "результат теста"
 - "итоги недели"
 authority_boundary: "Analysis through tools; writes only under clients/<slug>/ when asked; never mutates ad accounts"

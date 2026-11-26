@@ -1179,6 +1179,12 @@ def route_task(
     # Workflow qatlami (manifests/workflows.json): cross-agent oqimlar skill reytingidan OLDIN. Mutaxassis (sub-agent)
     # chaqiruvchi bo'lsa, workflow qo'llanmaydi: u faqat o'z domenini oladi (rekursiv delegatsiya yo'q).
     agent_hint = resolve_legacy_agent(agent_hint)
+    _exact_agent = ""
+    if not agent_hint:
+        # So'rov butunlay bitta agentning trigger iborasiga teng: eng kuchli aniq signal, boshqa agentli workflow uni bosib ketmasin.
+        _exact = [an for an, ai in agents.items() if any(normalize_multilingual_text(t).strip() == norm_q.strip() for t in ai.get("triggers", []))]
+        if len(_exact) == 1:
+            _exact_agent = _exact[0]
     caller = "specialist" if (caller == "specialist" or os.environ.get("TYRION_SPECIALIST") == "1") else "user"
     exec_plan = None
     # agent_hint = chaqiruvchi allaqachon mutaxassisni tanlagan (sub-agent yoki `--agent`): workflow qayta tanlanmaydi.
@@ -1190,6 +1196,10 @@ def route_task(
             agents=agents,
             caller=caller,
         )
+
+    if _exact_agent and (exec_plan is None or exec_plan["primary_agent"] != _exact_agent):
+        exec_plan = None
+        agent_hint = _exact_agent
 
     global_hits = rank(skills, clean_query, idf_pool=skills)
     if not agent_hint:

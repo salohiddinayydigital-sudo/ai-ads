@@ -30,8 +30,6 @@ triggers:
 - "a/b test natijasi"
 - "test natijasi"
 - "qaysi variant yutdi"
-- "haftalik review"
-- "weekly review"
 - "результат теста"
 - "итоги недели"
 skills: [analyze, connect, experiments, pulse, report]
