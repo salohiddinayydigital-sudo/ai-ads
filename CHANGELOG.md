@@ -15,8 +15,11 @@ Marshrutlash auditi: 30+ real so'rov sinab ko'rildi, topilgan nuqsonlar kodda tu
 - `video_script` workflow DM/Direct skriptlarni egallamaydi.
 - Skill triggerlari: `experiments` (test natijasi, variant yutdi…), `strategy` (kampaniya tuz, план запуска…); agent triggerlari: `data-analyst`, `funnel-cro-doctor`, `campaign-launcher`, `creative-strategist`, `account-recovery-specialist`, `research-verifier`, `release-verifier`, `strategist`.
 - So'rov butunlay bitta agentning trigger iborasiga teng bo'lsa, boshqa agentli workflow uni bosib ketmaydi ("pinterest ads" → `platform-auditor`, avval `audience-architect`). Barcha 383 agent triggeri o'z egasiga yo'naladi.
+- 13 ta bir tomonlama handoff tuzatildi: yuboruvchi agent qabul qiluvchi charterning `Upstream` qatoriga qo'shildi (platform-auditor, creative-strategist, compliance-reviewer, client-comms-lead, campaign-launcher, video-producer, budget-analyst).
+- `graphify-out/` bilim grafi deterministik (0 token) qayta qurildi.
 
 ### Qo'shildi
+- `tests/test_agent_handoff_reciprocity.py`.
 - `tests/test_router_intent.py` (13 marshrut + til + out-of-scope + hint testlari); `evals/scenarios.json` 59 → 64 (R38–R42).
 
 ## [8.3.1] — 2026-11-25

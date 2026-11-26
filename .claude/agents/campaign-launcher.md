@@ -89,7 +89,7 @@ Bitta kritik `FAIL` → **1 marta** qayta ishlash.
 
 ## Handoff Kontrakti
 
-- **Upstream:** `strategic_brief` (`strategist`), auditoriya arxitekturasi (`audience-architect`), kreativ paketi (`creative-strategist`), `tracking_spec_packet` (`tracking-specialist`).
+- **Upstream:** `strategic_brief` (`strategist`), auditoriya arxitekturasi (`audience-architect`), kreativ paketi (`creative-strategist`), `tracking_spec_packet` (`tracking-specialist`); `compliance_clearance_packet` (`compliance-reviewer`)
 - **Downstream:** `launch_blueprint_packet` → `daily-optimizer` (launchdan keyingi triage), `compliance-reviewer` (policy pre-flight).
 
 ## Rol bilimlari

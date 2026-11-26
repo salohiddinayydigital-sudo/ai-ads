@@ -73,7 +73,7 @@ Bitta kritik `FAIL` → **1 marta** qayta ko'rib chiqish.
 
 ## Handoff Kontrakti
 
-- **Upstream:** copy/kreativ (`creative-strategist`), ssenariy (`video-producer`), policy topilmalari (`audit_findings_packet` — `platform-auditor`), `launch_blueprint_packet` (`campaign-launcher`), `recovery_action_packet` (`account-recovery-specialist`).
+- **Upstream:** copy/kreativ (`creative-strategist`), ssenariy (`video-producer`), policy topilmalari (`audit_findings_packet` — `platform-auditor`), `launch_blueprint_packet` (`campaign-launcher`), `recovery_action_packet` (`account-recovery-specialist`); `verified_research_packet` (`research-verifier`)
 - **Downstream:** `compliance_clearance_packet` → `creative-strategist`, `video-producer` (safe rewrite qo'llash), `campaign-launcher`, `account-recovery-specialist`, `client-comms-lead` va Conductor. Rad etilgandan keyingi tiklash va apellyatsiya — `account-recovery-specialist` doirasi.
 
 ## Rol bilimlari

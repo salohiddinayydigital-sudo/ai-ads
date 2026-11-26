@@ -73,7 +73,7 @@ Metodologiya: `skills/report/references/client-comms-playbooks.md`. Til uslubi: 
 
 ## Handoff Kontrakti
 
-- **Upstream:** `analytics_readout_packet` (`data-analyst`), `daily_triage_packet` (`daily-optimizer`), `cro_fix_packet` (`funnel-cro-doctor`), `recovery_action_packet` (`account-recovery-specialist`), `budget_guard_packet` (`budget-analyst`).
+- **Upstream:** `analytics_readout_packet` (`data-analyst`), `daily_triage_packet` (`daily-optimizer`), `cro_fix_packet` (`funnel-cro-doctor`), `recovery_action_packet` (`account-recovery-specialist`), `budget_guard_packet` (`budget-analyst`); `compliance_clearance_packet` (`compliance-reviewer`)
 - **Downstream:** `client_comms_packet` → Conductor (foydalanuvchi tasdiqlab, o'zi yuboradi).
 
 ## Rol bilimlari

@@ -88,7 +88,7 @@ Creative Brief Header + 6 ustunli AV-jadval (yoki Motion Storyboard) + Productio
 
 ## Handoff Kontrakti
 
-- **Upstream:** `strategic_brief` (`strategist` → `creative-strategist`: angle, hook g'oyalari, ad copy), `content-planner` (ustunlar, kalendar, mavzular), `ad_spy_packet` (`ad-spy-analyst`: counter-angle).
+- **Upstream:** `strategic_brief` (`strategist` → `creative-strategist`: angle, hook g'oyalari, ad copy), `content-planner` (ustunlar, kalendar, mavzular), `ad_spy_packet` (`ad-spy-analyst`: counter-angle); `compliance_clearance_packet` (`compliance-reviewer`)
 - **Downstream:** tayyor ssenariylar → `creative-strategist` (primary text/headline, A/B gipotezalar); reja bo'yicha mavzular → `content-planner`; reklama siyosati shubhasi → `compliance-reviewer`.
 - Agent hisob/byudjet o'zgartirmaydi; reklama hisobiga tegadigan har qanday qadam Spend-Guard tasdig'igacha draft.
 
