@@ -1,74 +1,74 @@
-# Performance Video System: research -> concept -> brief -> test -> diagnose -> iterate
+# Performance video tizimi: tadqiqot -> konsept -> brif -> test -> diagnostika -> iteratsiya
 
-Used by the `video_script`, `creative_improve` and `meta_strategy` workflows. Complements the format library in `skills/creative/references/ad-creative/` and the generator `tools/creative-matrix.py`. The generator is a scaffold: it produces structure and placeholders; strategy, proof and claims must come from real client information.
+`video_script`, `creative_improve` va `meta_strategy` workflow'larida ishlatiladi. `skills/creative/references/ad-creative/` dagi format kutubxonasi va `tools/creative-matrix.py` generatorini to'ldiradi. Generator — skelet: u tuzilma va o'rin egalarini yaratadi; strategiya, isbot va da'volar haqiqiy mijoz ma'lumotidan kelishi shart.
 
-## 1. Research inputs (label each)
+## 1. Tadqiqot kirishlari (har birini belgilang)
 
-Product/service and offer; target audience and awareness stage (unaware, problem-aware, solution-aware, product-aware, most-aware); main problem; desires; objections; unique mechanism; competitors; existing winners and past performance data; reviews/testimonials actually provided; available visual assets (footage, location, product, people, licenses).
+Mahsulot/xizmat va taklif; maqsadli auditoriya va xabardorlik bosqichi (unaware, problem-aware, solution-aware, product-aware, most-aware); asosiy muammo; istaklar; e'tirozlar; noyob mexanizm; raqobatchilar; mavjud g'oliblar va o'tgan natija ma'lumotlari; haqiqatan berilgan sharhlar/testimonial'lar; mavjud vizual aktivlar (footage, joy, mahsulot, odamlar, litsenziyalar).
 
-Competitor ads: analyze only ads actually seen (user-pasted, screenshots, Meta Ad Library results from a tool that really ran). For each: hook, offer, angle, structure, visual approach, main message, CTA, audience clues. If not accessible, say "not inspected" and do not infer. Extract the strategic insight (e.g. which objection they ignore); never copy scripts, lines or distinctive visuals.
+Raqobatchi reklamalari: faqat haqiqatan ko'rilgan reklamalarni tahlil qiling (foydalanuvchi qo'ygan, skrinshotlar, haqiqatan ishlagan asbobdan olingan Meta Ad Library natijalari). Har biri uchun: hook, taklif, angle, tuzilma, vizual yondashuv, asosiy xabar, CTA, auditoriya ishoralari. Kirish imkoni bo'lmasa, "ko'rib chiqilmadi" deb ayting va xulosa qilmang. Strategik insaytni ajratib oling (masalan, ular qaysi e'tirozni e'tiborsiz qoldiradi); ssenariylar, jumlalar yoki o'ziga xos vizualni hech qachon nusxalamang.
 
-## 2. Concept diversity
+## 2. Konsept xilma-xilligi
 
-Concepts must differ in at least two of: avatar, problem, desire, awareness stage, angle, offer presentation, storytelling structure, visual approach, proof mechanism, CTA. A different caption, voice or crop of the same video is not a new concept (same Andromeda entity cluster).
+Konseptlar kamida ikkita jihat bo'yicha farqlanishi kerak: avatar, muammo, istak, xabardorlik bosqichi, angle, taklifni taqdim etish, hikoya tuzilmasi, vizual yondashuv, isbot mexanizmi, CTA. Bir xil videoning boshqa caption'i, ovozi yoki crop'i yangi konsept emas (bir xil Andromeda entity klasteri).
 
-Format selection (choose what fits, do not force all):
+Format tanlash (mosini tanlang, hammasini majburlamang):
 
-| Format | Fits when | Needs |
+| Format | Qachon mos | Nima kerak |
 |---|---|---|
-| UGC / customer testimonial | trust and relatability matter; real customers available | real customer, consent, real result |
-| Founder / expert authority | high consideration, expertise sells | credible person on camera |
-| Problem-solution demo | visible transformation, product/service demonstrable | footage of the real thing |
-| Comparison | clear differentiators vs known alternatives | verifiable comparison facts |
-| Objection handling | specific recurring objection (price, trust, safety) | real objection from sales/comments |
-| Storytelling | emotional or process-heavy offers | genuine story |
-| Educational | complex service, cold audience | simple teachable insight |
-| Social proof | strong reviews/results exist | verified proof |
-| Screen recording / comment reply | digital product, DM/Telegram funnel, FAQ | real screens/comments |
-| Faceless / motion graphics | no talent available, explainers | script + stock/animation rights |
-| Offer-focused | warm audience, time-bound real offer | a real offer and date |
+| UGC / mijoz sharhi | ishonch va yaqinlik muhim; haqiqiy mijozlar mavjud | haqiqiy mijoz, rozilik, haqiqiy natija |
+| Asoschi / ekspert obro'si | yuqori o'ylash, ekspertiza sotadi | kamerada ishonchli shaxs |
+| Muammo-yechim demosi | ko'rinadigan o'zgarish, mahsulot/xizmatni ko'rsatish mumkin | haqiqiy narsaning footage'i |
+| Taqqoslash | ma'lum muqobillarga nisbatan aniq farqlar | tekshiriladigan taqqoslash faktlari |
+| E'tirozlar bilan ishlash | aniq takroriy e'tiroz (narx, ishonch, xavfsizlik) | sotuv/izohlardan haqiqiy e'tiroz |
+| Hikoya | hissiy yoki jarayonga boy takliflar | haqiqiy hikoya |
+| Ta'limiy | murakkab xizmat, sovuq auditoriya | oddiy o'rgatiladigan insayt |
+| Ijtimoiy isbot | kuchli sharhlar/natijalar mavjud | tasdiqlangan isbot |
+| Ekran yozuvi / izohga javob | raqamli mahsulot, DM/Telegram voronkasi, FAQ | haqiqiy ekranlar/izohlar |
+| Faceless / motion graphics | iste'dod yo'q, tushuntiruvchi videolar | ssenariy + stok/animatsiya huquqlari |
+| Taklifga qaratilgan | iliq auditoriya, vaqt bilan cheklangan haqiqiy taklif | haqiqiy taklif va sana |
 
-## 3. Script package (what every concept delivers)
+## 3. Ssenariy paketi (har bir konsept nima beradi)
 
-**A. Strategic brief**: audience, funnel stage, awareness stage, angle, objective (what action), strategic reasoning, test hypothesis (single variable, success metric, decision rule).
+**A. Strategik brif**: auditoriya, voronka bosqichi, xabardorlik bosqichi, angle, maqsad (qaysi harakat), strategik asos, test gipotezasi (bitta o'zgaruvchi, muvaffaqiyat metrikasi, qaror qoidasi).
 
-**B. Hooks (>= 3, materially different)**, each with: first visual frame, on-screen text, spoken line, camera direction, psychological purpose. No generic openers ("Stop scrolling"). Vary the mechanism: call-out of a specific person, concrete problem moment, counter-intuitive claim you can prove, objection reversal, result-first (only with verified result), curiosity with a payoff delivered in the body.
+**B. Hooklar (>= 3, mazmunan farqli)**, har biri uchun: birinchi vizual kadr, ekrandagi matn, aytiladigan jumla, kamera yo'nalishi, psixologik maqsad. Umumiy ochilishlar yo'q ("Stop scrolling"). Mexanizmni o'zgartiring: aniq odamga murojaat, aniq muammo lahzasi, isbotlay oladigan qarama-qarshi da'vo, e'tirozni teskari qilish, natijadan boshlash (faqat tasdiqlangan natija bilan), asosiy qismda to'lanadigan qiziqish.
 
-**C. Storyboard (time-coded table)** with columns: `time | duration | visual | camera angle | presenter action | A-roll | B-roll | voice-over | on-screen text | sound/SFX | transition | CTA`. Beat structures by length:
+**C. Storyboard (vaqt kodli jadval)** ustunlari: `time | duration | visual | camera angle | presenter action | A-roll | B-roll | voice-over | on-screen text | sound/SFX | transition | CTA`. Uzunlik bo'yicha beat tuzilmalari:
 
-| Length | Beats |
+| Uzunlik | Beatlar |
 |---|---|
-| 15 s | 0-3 hook, 3-9 problem to solution/proof in one idea, 9-13 proof or offer, 13-15 CTA |
-| 30 s | 0-3 hook, 3-10 problem, 10-20 mechanism/demo, 20-26 proof, 26-30 offer + CTA |
-| 45 s | 0-3 hook, 3-12 story/problem, 12-27 mechanism and demo, 27-37 proof and objection, 37-45 offer, CTA, risk reversal (only if real) |
+| 15 s | 0–3 hook, 3–9 muammodan yechim/isbotgacha bitta g'oyada, 9–13 isbot yoki taklif, 13–15 CTA |
+| 30 s | 0–3 hook, 3–10 muammo, 10–20 mexanizm/demo, 20–26 isbot, 26–30 taklif + CTA |
+| 45 s | 0–3 hook, 3–12 hikoya/muammo, 12–27 mexanizm va demo, 27–37 isbot va e'tiroz, 37–45 taklif, CTA, xavfni qaytarish (faqat haqiqiy bo'lsa) |
 
-**D. Editing instructions**: pacing (cut rhythm per section), transitions, subtitles (burned-in, readable, inside safe zones), typography and hierarchy, sound design (music level under voice, SFX at key beats), B-roll selection, proof placement (earliest believable moment), CTA presentation (visual + spoken). Technical specs (aspect ratio, resolution, safe zones, length limits, file size/format): verify against Meta's current creative documentation before delivery; the repo default for vertical placements is 9:16 with a central text-safe area (generator uses 1080x1920 canvas and a 720x1200 safe box).
+**D. Montaj ko'rsatmalari**: tempo (har bir bo'lim uchun kesish ritmi), o'tishlar, subtitrlar (yoqilgan, o'qiladigan, xavfsiz zonalar ichida), tipografiya va ierarxiya, tovush dizayni (musiqa ovoz ostida, asosiy beatlarda SFX), B-roll tanlash, isbot joylashuvi (eng erta ishonchli lahza), CTA taqdimoti (vizual + og'zaki). Texnik spetsifikatsiyalar (nisbat, o'lcham, xavfsiz zonalar, uzunlik chegaralari, fayl hajmi/formati): topshirishdan oldin Meta'ning joriy kreativ hujjatlariga qarshi tekshiring; vertikal placementlar uchun repozitoriy standarti — markaziy matn-xavfsiz maydonli 9:16 (generator 1080x1920 canvas va 720x1200 xavfsiz quti ishlatadi).
 
-**E. Ad copy package**: primary text variants (short and long), headlines, descriptions, CTA button, campaign objective, and landing page / lead-form message match (the first screen repeats the promise made in the hook). Every claim traces to client-provided information; otherwise `[ADD VERIFIED ...]`.
+**E. Reklama matni paketi**: asosiy matn variantlari (qisqa va uzun), sarlavhalar, tavsiflar, CTA tugmasi, kampaniya maqsadi va landing sahifa / lead-forma xabar mosligi (birinchi ekran hookdagi va'dani takrorlaydi). Har bir da'vo mijoz bergan ma'lumotga izlanishi kerak; aks holda `[ADD VERIFIED ...]`.
 
-## 4. Claim safety
+## 4. Da'vo xavfsizligi
 
-`creative-matrix.py` output includes `claim_safety`. It flags percentages, time-frame promises, ratios, guarantees and superlatives that are not marked as placeholders. Treat `needs_verification: true` as a blocker until each flagged item is either backed by a client-provided source or removed. Never ship a hook containing an invented statistic. Testimonials: real, consented, unaltered.
+`creative-matrix.py` chiqishi `claim_safety` ni o'z ichiga oladi. U o'rin egasi sifatida belgilanmagan foizlar, muddat va'dalari, nisbatlar, kafolatlar va superlativlarni belgilaydi. `needs_verification: true` ni har bir belgilangan element mijoz bergan manba bilan tasdiqlanmaguncha yoki olib tashlanmaguncha to'siq deb qarang. To'qilgan statistikali hookni hech qachon yetkazmang. Sharhlar: haqiqiy, rozilik berilgan, o'zgartirilmagan.
 
-## 5. Test and iterate
+## 5. Test va iteratsiya
 
-Loop: research -> concept -> production brief -> test -> measure -> diagnose -> iterate -> scale.
+Sikl: tadqiqot -> konsept -> ishlab chiqarish brifi -> test -> o'lchov -> diagnostika -> iteratsiya -> masshtab.
 
-Measure along the funnel: hook rate (3-second plays / impressions), hold/retention, watch time, engagement quality (saves/shares/comments vs reactions), outbound CTR, landing-page conversion, lead quality (CRM qualified rate), CPA, ROAS, sales feedback. Compare against the account's own baseline; if none exists, collect it first.
+Voronka bo'ylab o'lchang: hook rate (3 soniyalik o'ynatishlar / ko'rsatuvlar), hold/retention, ko'rish vaqti, engagement sifati (saves/shares/comments va reaksiyalar), outbound CTR, landing sahifa konversiyasi, lid sifati (CRM malakali daraja), CPA, ROAS, sotuv fikr-mulohazasi. Akkauntning o'z bazasi bilan solishtiring; yo'q bo'lsa, avval uni yig'ing.
 
 ```bash
 python3 tools/creative-matrix.py iterate --hook-rate 31 --baseline-hook-rate 27 \
   --hold-rate 8 --baseline-hold-rate 14 --outbound-ctr 0.6 --cpa 12 --breakeven-cpa 9 --impressions 5000 --json
 ```
-Output is ordered diagnostic hypotheses (attention, retention, click, landing, lead quality), the single priority fix, what to change next and what to keep constant, plus warnings (small sample, priors used).
+Chiqish — tartiblangan diagnostik gipotezalar (e'tibor, ushlab turish, klik, landing, lid sifati), yagona ustuvor tuzatish, keyin nimani o'zgartirish va nimani doimiy saqlash, shuningdek ogohlantirishlar (kichik tanlama, ishlatilgan priorlar).
 
-| Pattern | Hypothesis to test (not a conclusion) | Next iteration |
+| Naqsh | Sinaladigan gipoteza (xulosa emas) | Keyingi iteratsiya |
 |---|---|---|
-| Low hook rate | first frame/opening does not stop the right person | new 0-3 s only; keep body, offer, CTA |
-| Good hook, weak hold | body pacing/storytelling or promise-delivery gap | restructure body; keep hook |
-| Good hold, weak outbound CTR | CTA, offer clarity or proof placement | CTA/offer/proof; keep hook and body |
-| Good CTR, weak landing conversion | message mismatch, offer, page speed, form friction | change the page/form, not the creative |
-| Cheap leads, poor sales | qualification, audience relevance, sales handling | add qualifiers in creative/form, CRM feedback, check call handling |
-| CPA above break-even despite healthy upstream metrics | economics or offer problem | revisit price/offer/margin before more creative |
+| Past hook rate | birinchi kadr/ochilish to'g'ri odamni to'xtatmayapti | faqat yangi 0–3 s; asosiy qism, taklif, CTA ni saqlang |
+| Yaxshi hook, zaif hold | asosiy qism tempi/hikoyasi yoki va'da-yetkazish bo'shlig'i | asosiy qismni qayta tuzing; hookni saqlang |
+| Yaxshi hold, zaif outbound CTR | CTA, taklif aniqligi yoki isbot joylashuvi | CTA/taklif/isbot; hook va asosiy qismni saqlang |
+| Yaxshi CTR, zaif landing konversiyasi | xabar nomuvofiqligi, taklif, sahifa tezligi, forma ishqalanishi | kreativni emas, sahifa/formani o'zgartiring |
+| Arzon lidlar, yomon sotuv | saralash, auditoriya relevantligi, sotuv ishlov berishi | kreativ/formaga saralovchilar qo'shing, CRM fikr-mulohazasi, qo'ng'iroqlarni tekshiring |
+| Sog'lom yuqori oqim metrikalariga qaramay CPA break-even'dan yuqori | iqtisod yoki taklif muammosi | ko'proq kreativdan oldin narx/taklif/marjani qayta ko'ring |
 
-Rules: one variable per test; define the decision rule before launch; do not call a winner before the minimum sample from the economics step; scale a winner by new variants of the *winning concept* (new creator, new setting, new hook) rather than resizing it; retire fatigued creatives with new concepts, not re-edits.
+Qoidalar: har bir testda bitta o'zgaruvchi; qaror qoidasini ishga tushirishdan oldin belgilang; iqtisod bosqichidan olingan minimal tanlamagacha g'olibni e'lon qilmang; g'olibni o'lchamini o'zgartirish bilan emas, *g'olib konseptning* yangi variantlari (yangi kreator, yangi sharoit, yangi hook) bilan masshtablang; charchagan kreativlarni qayta montaj bilan emas, yangi konseptlar bilan almashtiring.
