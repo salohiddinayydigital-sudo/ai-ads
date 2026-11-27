@@ -1,175 +1,175 @@
-# Scarcity & Urgency
+# Kamyoblik va shoshilinchlik
 
-The reason to buy now, not later.
+Keyin emas, hozir sotib olish sababi.
 
-This is the most misused offer lever in the industry. Done right, it's a meaningful conversion lift and a respect-the-buyer's-time gesture. Done wrong (fake countdown timers, lies about inventory), it converts once and torches trust permanently.
+Bu soha bo'yicha eng ko'p suiiste'mol qilinadigan taklif richagi. To'g'ri qilinsa — konversiyaning ma'noli oshishi va xaridor vaqtini hurmat qilish ishorasi. Noto'g'ri qilinsa (soxta teskari sanagichlar, inventar haqida yolg'on) — bir marta konvertatsiya qiladi va ishonchni butunlay yoqadi.
 
-The repo voice: **only ship real scarcity.** If the scarcity is fake, take it off the page.
+Repozitoriy ovozi: **faqat haqiqiy kamyoblikni chiqaring.** Kamyoblik soxta bo'lsa, uni sahifadan olib tashlang.
 
-## Scarcity vs urgency
+## Kamyoblik va shoshilinchlik
 
-| | What it limits | Examples |
+| | Nimani cheklaydi | Misollar |
 |---|---|---|
-| **Scarcity** | Quantity | Cohort size, seats, inventory, batch, capacity |
-| **Urgency** | Time | Cohort deadline, season, bonus expiry, price increase |
+| **Kamyoblik** | Miqdor | Kogorta hajmi, o'rinlar, inventar, partiya, quvvat |
+| **Shoshilinchlik** | Vaqt | Kogorta muddati, mavsum, bonus tugashi, narx oshishi |
 
-Both work via the same mechanism — they convert "I'll think about it" into "decide now." The difference is what enforces the decision: a limit on how many, or a limit on when.
-
----
-
-## Honest scarcity formats
-
-The bar: **the constraint has to be real.** Here are the formats that work without lying.
-
-### Capacity-based scarcity
-
-You can only deliver to N customers at a time. The next slot opens when one finishes.
-
-> "We take 2 fractional CMO engagements per quarter. Next slot opens September 15."
-
-Works for: services, agencies, coaching, consulting, anything labor-bound.
-
-### Cohort scarcity
-
-The class starts on a date. After the date, the door closes until the next cohort.
-
-> "Cohort 7 starts October 1. Doors close September 28. Next cohort: January."
-
-Works for: courses, programs, group coaching, anything synchronous.
-
-### Founding-member pricing
-
-The first N buyers get a different price. After that, the price goes up.
-
-> "Founding pricing — $497/mo for the first 50 members. After we hit 50, the price moves to $797/mo."
-
-Works for: SaaS, communities, memberships. Critical: actually raise the price when you hit 50. Otherwise it was a lie.
-
-### Inventory-based scarcity
-
-You have N units. When they're gone, they're gone.
-
-> "We're only producing 100 of the print edition. Sold out, no reprints."
-
-Works for: physical products, limited-run digital, bespoke services.
-
-### Seasonal scarcity
-
-Demand or capacity is seasonal.
-
-> "Tax-prep service for Q1 2026 closes January 15. After that, we focus on existing clients only until April."
-
-Works for: tax, retail Q4, events, education enrollment, anything calendar-bound.
-
-### Bonus expiry
-
-A bonus is available only until X date. The core offer stays the same; the *added value* expires.
-
-> "Order by Friday and the 1:1 onboarding session is included. After Friday, the offer is the same but onboarding is +$497."
-
-Works for: anything with a launch window. Critical: actually remove the bonus when the date hits.
-
-### Price-increase scheduling
-
-The price goes up on a date. Communicate it transparently.
-
-> "On November 1, the program moves from $1,997 to $2,497. Anyone enrolled before November 1 keeps the $1,997 price for life."
-
-Works for: courses, SaaS, communities. Builds credibility because the buyer can verify it later.
+Ikkalasi ham bir xil mexanizm bilan ishlaydi — ular "o'ylab ko'raman" ni "hozir qaror qiling" ga aylantiradi. Farq qarorni nima majburlashida: qancha ekanligi chegarasi yoki qachon ekanligi chegarasi.
 
 ---
 
-## Fake scarcity to avoid
+## Halol kamyoblik formatlari
 
-Pattern-match and rip these off your page:
+Mezon: **cheklov haqiqiy bo'lishi kerak.** Yolg'onsiz ishlaydigan formatlar mana bular.
 
-### Countdown timers that reset
+### Quvvatga asoslangan kamyoblik
 
-The timer hits 0:00 and refreshes. The buyer comes back tomorrow, same timer, same urgency. Every buyer who notices loses trust.
+Siz bir vaqtda faqat N mijozga yetkaza olasiz. Keyingi o'rin biri tugagach ochiladi.
 
-If you use a countdown, it ends on a real date. After that date, the discount or bonus actually ends — verifiably.
+> "Biz har chorakda 2 ta fractional CMO ishini qabul qilamiz. Keyingi o'rin 15-sentabrda ochiladi."
 
-### "Only 3 spots left"
+Mos keladi: xizmatlar, agentliklar, koucing, konsalting, mehnatga bog'langan har qanday narsa.
 
-Especially on digital products where there's no capacity constraint. Especially when the number stays at "3" for weeks.
+### Kogorta kamyobligi
 
-Use this only when the constraint is real (cohort, capacity, inventory) AND when the number reflects reality.
+Sinf sanada boshlanadi. Sanadan keyin eshik keyingi kogortagacha yopiladi.
 
-### Manufactured FOMO
+> "7-kogorta 1-oktabrda boshlanadi. Eshiklar 28-sentabrda yopiladi. Keyingi kogorta: yanvar."
 
-"127 people are looking at this page right now."
+Mos keladi: kurslar, dasturlar, guruh koucing, sinxron har qanday narsa.
 
-These can be honest on some platforms (Booking.com etc.) when they reflect actual traffic. They're dishonest when fabricated. Buyers increasingly assume fabrication.
+### Asoschi-a'zo narxlash
 
-### Bonus "stacking" that's always available
+Birinchi N xaridor boshqa narx oladi. Shundan keyin narx oshadi.
 
-"This bonus expires at midnight!" — but every page on the site says the same thing at midnight every night.
+> "Asoschi narxi — birinchi 50 a'zo uchun oyiga $497. 50 ga yetganimizdan keyin narx oyiga $797 ga o'tadi."
 
-The bonus has to actually expire, or the line is a lie.
+Mos keladi: SaaS, hamjamiyatlar, a'zoliklar. Muhim: 50 ga yetganda narxni haqiqatan oshiring. Aks holda bu yolg'on edi.
 
-### "Last chance" emails for things that aren't actually last chance
+### Inventarga asoslangan kamyoblik
 
-Repeated "FINAL HOURS" emails that send weekly. Every recipient who notices unsubscribes or stops opening.
+Sizda N dona bor. Tugasa, tugadi.
 
-Use "last chance" once. If you use it multiple times, you've taught your list that "last chance" is meaningless.
+> "Biz bosma nashrning faqat 100 nusxasini ishlab chiqaramiz. Sotilib bo'ldi, qayta bosish yo'q."
 
----
+Mos keladi: jismoniy mahsulotlar, cheklangan raqamli nashr, buyurtma xizmatlar.
 
-## Why fake scarcity is uniquely costly
+### Mavsumiy kamyoblik
 
-Buyers compare notes. The internet is small.
+Talab yoki quvvat mavsumiy.
 
-- One Reddit post about a fake countdown becomes the top Google result for your brand
-- One screenshot of "only 3 left" staying at 3 for a month becomes a viral thread
-- One "last chance" email that wasn't goes into a "marketing fails" newsletter
+> "2026-yil 1-chorak uchun soliq tayyorlash xizmati 15-yanvarda yopiladi. Shundan keyin aprelgacha faqat mavjud mijozlarga e'tibor qaratamiz."
 
-Real scarcity converts ~the same as fake scarcity at the moment of purchase. The difference shows up at month 6, when fake-scarcity offers are facing trust collapse and real-scarcity offers are still compounding.
+Mos keladi: soliq, chakana 4-chorak, tadbirlar, ta'lim qabuli, kalendarga bog'langan har qanday narsa.
 
-If you have to fake it, you don't have an offer-design problem — you have a value-equation problem. Go back to [value-equation.md](value-equation.md).
+### Bonus tugashi
 
----
+Bonus faqat X sanagacha mavjud. Asosiy taklif o'zgarishsiz qoladi; *qo'shimcha qiymat* tugaydi.
 
-## When scarcity isn't needed
+> "Juma kuniga qadar buyurtma bering va 1:1 onboarding sessiyasi kiritiladi. Jumadan keyin taklif bir xil, lekin onboarding +$497."
 
-Some offers don't need scarcity:
+Mos keladi: launch oynasi bor har qanday narsa. Muhim: sana kelganda bonusni haqiqatan olib tashlang.
 
-- **Subscription products** that customers can cancel anytime — the natural friction is low enough
-- **Low-priced impulse products** ($5–30) — the deliberation is short; scarcity feels forced
-- **Premium / luxury brands** — scarcity is implicit in the positioning; explicit scarcity reads as low-status
-- **High-trust audiences** who already know they'll buy — scarcity is unnecessary friction
+### Narx oshishini jadvallash
 
-Don't force scarcity into offers that don't need it. The forced version is worse than no scarcity.
+Narx sanada oshadi. Buni shaffof yetkazing.
 
----
+> "1-noyabrda dastur $1 997 dan $2 497 ga o'tadi. 1-noyabrdan oldin yozilgan har bir kishi $1 997 narxni umrbod saqlab qoladi."
 
-## The diagnostic
-
-For an existing offer with weak or no scarcity:
-
-1. **Is there a real constraint?** Capacity, cohort, inventory, season, batch. Find the real one.
-2. **What's the honest version of that constraint?** Write it in plain English.
-3. **Can the buyer verify it?** If you say "founding pricing for the first 50 members," can the buyer see the count?
-4. **Are you willing to actually enforce it?** When the constraint hits, do you have the discipline to actually close the door / raise the price / remove the bonus?
-5. **Where on the page does the scarcity appear?** It should be next to the buy button, not buried.
-
-If you can't find a real constraint, don't ship scarcity. The "trick" of fake scarcity is one of the most expensive shortcuts in marketing. The honest version is usually cheaper than people think — every business has *some* real constraint (capacity, calendar, batch, attention).
+Mos keladi: kurslar, SaaS, hamjamiyatlar. Ishonchlilikni quradi, chunki xaridor buni keyin tekshira oladi.
 
 ---
 
-## Pairing with the rest of the offer
+## Qochish kerak bo'lgan soxta kamyoblik
 
-Scarcity is the final lever. It only works if the rest of the offer is strong.
+Bularni topib sahifangizdan olib tashlang:
 
-- Strong offer + real scarcity = the buyer decides now
-- Weak offer + scarcity = the buyer decides not to buy, faster
+### Qayta boshlanadigan teskari sanagichlar
 
-If conversions are bad, scarcity is rarely the first thing to fix. Run the diagnostic from [value-equation.md](value-equation.md) first.
+Taymer 0:00 ga yetadi va yangilanadi. Xaridor ertaga qaytadi, xuddi shu taymer, xuddi shu shoshilinchlik. Buni payqagan har bir xaridor ishonchni yo'qotadi.
 
-The order is:
-1. Strong dream outcome
-2. Specific perceived likelihood (proof + methodology + guarantee)
-3. Compressed time delay
-4. Reduced effort & sacrifice
-5. *Then* scarcity to get the decision now
+Teskari sanagichdan foydalansangiz, u haqiqiy sanada tugaydi. O'sha sanadan keyin chegirma yoki bonus haqiqatan tugaydi — tekshirsa bo'ladigan tarzda.
 
-Scarcity is the close, not the offer.
+### "Faqat 3 ta o'rin qoldi"
+
+Ayniqsa quvvat cheklovi yo'q raqamli mahsulotlarda. Ayniqsa raqam haftalar davomida "3" da qolganda.
+
+Buni faqat cheklov haqiqiy bo'lganda (kogorta, quvvat, inventar) VA raqam voqelikni aks ettirganda ishlating.
+
+### Sun'iy FOMO
+
+"Hozir bu sahifaga 127 kishi qarayapti."
+
+Ular ba'zi platformalarda (Booking.com va h.k.) haqiqiy trafikni aks ettirganda halol bo'lishi mumkin. To'qilganda — nohalol. Xaridorlar tobora ko'proq to'qilgan deb taxmin qiladi.
+
+### Doim mavjud "bonus to'plash"
+
+"Bu bonus yarim tunda tugaydi!" — lekin saytdagi har bir sahifa har kecha yarim tunda xuddi shuni aytadi.
+
+Bonus haqiqatan tugashi kerak, aks holda satr yolg'on.
+
+### Aslida oxirgi imkoniyat bo'lmagan narsalar uchun "oxirgi imkoniyat" emaillari
+
+Har hafta yuboriladigan takroriy "OXIRGI SOATLAR" emaillari. Buni payqagan har bir oluvchi obunadan chiqadi yoki ochishni to'xtatadi.
+
+"Oxirgi imkoniyat"ni bir marta ishlating. Bir necha marta ishlatsangiz, ro'yxatingizni "oxirgi imkoniyat" ma'nosiz ekaniga o'rgatdingiz.
+
+---
+
+## Nega soxta kamyoblik o'ta qimmatga tushadi
+
+Xaridorlar bir-biri bilan fikr almashadi. Internet kichik.
+
+- Soxta teskari sanagich haqidagi bitta Reddit posti brendingiz uchun Google'dagi birinchi natijaga aylanadi
+- Bir oy davomida 3 da qolgan "faqat 3 ta qoldi" ning bitta skrinshoti viral mavzuga aylanadi
+- Aslida oxirgi bo'lmagan bitta "oxirgi imkoniyat" emaili "marketing nosozliklari" newsletter'iga tushadi
+
+Haqiqiy kamyoblik xarid lahzasida soxta kamyoblik bilan ~bir xil konvertatsiya qiladi. Farq 6-oyda ko'rinadi, soxta-kamyoblikli takliflar ishonch qulashiga duch kelganda, haqiqiy-kamyoblikli takliflar esa hamon jamlanayotganda.
+
+Agar uni soxtalashtirishingiz kerak bo'lsa, sizda taklif dizayni muammosi emas — qiymat tenglamasi muammosi bor. [value-equation.md](value-equation.md) ga qayting.
+
+---
+
+## Kamyoblik kerak bo'lmaganda
+
+Ba'zi takliflarga kamyoblik kerak emas:
+
+- Mijozlar istalgan vaqt bekor qila oladigan **obuna mahsulotlari** — tabiiy ishqalanish yetarlicha past
+- **Past narxli impuls mahsulotlar** ($5–30) — o'ylash qisqa; kamyoblik majburiy tuyuladi
+- **Premium / hashamatli brendlar** — kamyoblik pozitsiyalashda yashirin; aniq kamyoblik past maqom bo'lib o'qiladi
+- Allaqachon sotib olishini biladigan **yuqori ishonchli auditoriyalar** — kamyoblik keraksiz ishqalanish
+
+Kamyoblikni kerak bo'lmagan takliflarga majburlamang. Majburlangan versiya kamyoblik yo'qligidan yomonroq.
+
+---
+
+## Diagnostika
+
+Zaif yoki kamyobligi yo'q mavjud taklif uchun:
+
+1. **Haqiqiy cheklov bormi?** Quvvat, kogorta, inventar, mavsum, partiya. Haqiqiysini toping.
+2. **Bu cheklovning halol versiyasi qanday?** Uni oddiy tilda yozing.
+3. **Xaridor buni tekshira oladimi?** "Birinchi 50 a'zo uchun asoschi narxi" desangiz, xaridor hisobni ko'ra oladimi?
+4. **Uni haqiqatan majburlashga tayyormisiz?** Cheklov kelganda, eshikni yopish / narxni oshirish / bonusni olib tashlash uchun intizomingiz bormi?
+5. **Kamyoblik sahifaning qayerida paydo bo'ladi?** U sotib olish tugmasi yonida bo'lishi kerak, ko'milgan emas.
+
+Haqiqiy cheklovni topa olmasangiz, kamyoblikni chiqarmang. Soxta kamyoblik "hiylasi" marketingdagi eng qimmat yo'llardan biri. Halol versiya odatda odamlar o'ylagandan arzonroq — har bir biznesda *qandaydir* haqiqiy cheklov bor (quvvat, kalendar, partiya, e'tibor).
+
+---
+
+## Taklifning qolgan qismi bilan juftlash
+
+Kamyoblik — yakuniy richag. U faqat taklifning qolgan qismi kuchli bo'lsagina ishlaydi.
+
+- Kuchli taklif + haqiqiy kamyoblik = xaridor hozir qaror qiladi
+- Zaif taklif + kamyoblik = xaridor sotib olmaslikka tezroq qaror qiladi
+
+Konversiya yomon bo'lsa, kamyoblik tuzatiladigan birinchi narsa kamdan-kam. Avval [value-equation.md](value-equation.md) dagi diagnostikani ishga tushiring.
+
+Tartib:
+1. Kuchli orzu natijasi
+2. Aniq sezilgan ehtimol (isbot + metodologiya + kafolat)
+3. Siqilgan kechikish vaqti
+4. Kamaytirilgan mehnat va qurbonlik
+5. *Keyin* qarorni hozir qildirish uchun kamyoblik
+
+Kamyoblik — yopish, taklif emas.

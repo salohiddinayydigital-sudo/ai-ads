@@ -1,172 +1,172 @@
-# Guarantee Design
+# Kafolat dizayni
 
-A guarantee directly raises *perceived likelihood of achievement* (the buyer thinks: "they'll only offer this if they're confident") and lowers *effort & sacrifice* (less emotional risk). It's one of the highest-leverage levers in offer design.
+Kafolat *erishishning sezilgan ehtimolini* bevosita oshiradi (xaridor o'ylaydi: "ular buni faqat ishonch komil bo'lsagina taklif qiladi") va *mehnat va qurbonlikni* kamaytiradi (hissiy xavf kamroq). U taklif dizaynidagi eng yuqori ta'sirli richaglardan biri.
 
-The wrong guarantee hurts more than no guarantee. Pick the type that matches your business model.
+Noto'g'ri kafolat umuman kafolat bo'lmagandan ko'ra ko'proq zarar qiladi. Biznes modelingizga mos turni tanlang.
 
-## The eight guarantee types
+## Sakkiz kafolat turi
 
-| Type | What it promises | When it works | When it backfires |
+| Tur | Nimani va'da qiladi | Qachon ishlaydi | Qachon teskari ta'sir qiladi |
 |------|------------------|---------------|-------------------|
-| 1. **Unconditional money-back** | "Refund anytime within X days, no questions" | Low-priced info, high-trust audience | High-priced/high-touch; refund risk eats margin |
-| 2. **Conditional money-back** | "Refund if you complete X and still don't see Y" | Courses, programs requiring effort | Sophisticated buyers; harder to honor publicly |
-| 3. **Better-than-money-back** | "If it doesn't work, full refund + $X" | Confident delivery, ample margin | If you fail; the few failures explode publicly |
-| 4. **Service-level / SLA** | "If we don't deliver X by Y, your money back" | Productized services, agency work | Vague SLAs you can't measure |
-| 5. **Performance-based** | "Pay only when X happens" (rev share, results-based) | Sophisticated B2B, high-confidence delivery | Long cycles, hard-to-attribute outcomes |
-| 6. **Anti-guarantee** | "No refunds. Make sure you want it." | Premium audiences, mature buyers | Confused / first-time buyers; reads cold |
-| 7. **Outcome-or-extension** | "If you don't get X by Y, we continue free" | Coaching, services with extendable time | Open-ended cost; choose with care |
-| 8. **Comparison guarantee** | "Beat [competitor]'s result or refund" | When you can credibly compare | When you can't measure the competitor cleanly |
+| 1. **Shartsiz pulni qaytarish** | "X kun ichida istalgan vaqt savolsiz qaytarish" | Past narxli axborot, yuqori ishonchli auditoriya | Qimmat/yuqori-aloqali; qaytarish xavfi marjani yeydi |
+| 2. **Shartli pulni qaytarish** | "X ni bajarsangiz va baribir Y ko'rmasangiz, qaytaramiz" | Mehnat talab qiladigan kurslar, dasturlar | Tajribali xaridorlar; ommaviy sharaflash qiyinroq |
+| 3. **Pulni qaytarishdan yaxshiroq** | "Ishlamasa, to'liq qaytarish + $X" | Ishonchli yetkazib berish, yetarli marja | Muvaffaqiyatsiz bo'lsangiz; kam nosozliklar ommaviy portlaydi |
+| 4. **Xizmat darajasi / SLA** | "Agar Y gacha X ni yetkazmasak, pulingiz qaytariladi" | Productized xizmatlar, agentlik ishi | O'lchay olmaydigan noaniq SLA'lar |
+| 5. **Natijaga asoslangan** | "Faqat X sodir bo'lganda to'lang" (rev share, natijaga asoslangan) | Tajribali B2B, ishonchli yetkazib berish | Uzun sikllar, atributsiyasi qiyin natijalar |
+| 6. **Anti-kafolat** | "Qaytarish yo'q. Buni xohlashingizga ishonch hosil qiling." | Premium auditoriya, yetuk xaridorlar | Chalkash / birinchi marta xaridorlar; sovuq o'qiladi |
+| 7. **Natija-yoki-uzaytirish** | "Y gacha X ga erishmasangiz, bepul davom etamiz" | Koucing, vaqtni uzaytirsa bo'ladigan xizmatlar | Cheksiz xarajat; ehtiyotkorlik bilan tanlang |
+| 8. **Taqqoslash kafolati** | "[Raqobatchi] natijasidan o'zing — yoki qaytarish" | Ishonchli taqqoslay olganda | Raqobatchini toza o'lchay olmaganda |
 
 ---
 
-## Picking the right one
+## To'g'risini tanlash
 
-Decision tree:
+Qaror daraxti:
 
-1. **What's your buyer's biggest perceived risk?**
-   - "What if it doesn't work?" → money-back family (1, 2, 3)
-   - "What if you don't deliver on time?" → SLA (4)
-   - "What if I pay and get no results?" → performance-based (5) or outcome-or-extension (7)
-   - "Is this real or scam?" → comparison or specificity-based (8)
+1. **Xaridoringizning eng katta sezilgan xavfi nima?**
+   - "Ishlamasa-chi?" → pulni qaytarish oilasi (1, 2, 3)
+   - "Vaqtida yetkazmasangiz-chi?" → SLA (4)
+   - "To'lab, natija olmasam-chi?" → natijaga asoslangan (5) yoki natija-yoki-uzaytirish (7)
+   - "Bu haqiqiymi yoki firibgarlikmi?" → taqqoslash yoki aniqlikka asoslangan (8)
 
-2. **What's your refund tolerance?**
-   - Can absorb refunds at scale → unconditional (1)
-   - Need to qualify refunders → conditional (2)
-   - Confident enough to add a bonus on top → better-than-money-back (3)
-   - Can't afford refunds at all → anti-guarantee (6) or no guarantee + strong proof
+2. **Qaytarishga toqatingiz qanday?**
+   - Ko'lamda qaytarishlarni ko'tara olsangiz → shartsiz (1)
+   - Qaytarish so'ragunlarni saralash kerak → shartli (2)
+   - Ustiga bonus qo'shadigan darajada ishonchli → pulni qaytarishdan yaxshiroq (3)
+   - Umuman qaytarishlarni ko'tara olmaysiz → anti-kafolat (6) yoki kafolat yo'q + kuchli isbot
 
-3. **What's your buyer sophistication?**
-   - Premium / mature buyers → anti-guarantee can work; "we don't do refunds" reads as confidence
-   - First-time-in-category buyers → strong refund guarantee; they need permission to try
-   - Sophisticated B2B → SLA or performance-based; they expect commercial terms
+3. **Xaridor tajribasi qanday?**
+   - Premium / yetuk xaridorlar → anti-kafolat ishlashi mumkin; "biz qaytarish qilmaymiz" ishonch sifatida o'qiladi
+   - Kategoriyada birinchi marta kelgan xaridorlar → kuchli qaytarish kafolati; ularga sinab ko'rishga ruxsat kerak
+   - Tajribali B2B → SLA yoki natijaga asoslangan; ular tijoriy shartlarni kutadi
 
-4. **How measurable is the outcome?**
-   - Clean and measurable → performance-based, comparison, or outcome-or-extension
-   - Fuzzy / subjective → money-back family with a conditional gate (you completed the work)
+4. **Natija qanchalik o'lchanadi?**
+   - Toza va o'lchanadigan → natijaga asoslangan, taqqoslash yoki natija-yoki-uzaytirish
+   - Xira / sub'ektiv → shartli darvozali pulni qaytarish oilasi (siz ishni bajardingiz)
 
 ---
 
-## Examples by business type
+## Biznes turi bo'yicha misollar
 
-### Course / cohort
+### Kurs / kogorta
 
-**Strong:** "Complete all six modules within 60 days, submit the final exercise, and if you haven't [specific outcome] we refund in full." Conditional on effort, clear on outcome.
+**Kuchli:** "60 kun ichida barcha oltita modulni yakunlang, yakuniy mashqni topshiring va agar [aniq natija] bo'lmasa, to'liq qaytaramiz." Mehnatga shartli, natijada aniq.
 
-**Weak:** "100% money-back guarantee." No conditions = refund magnet for buyers who never engaged.
+**Zaif:** "100% pulni qaytarish kafolati." Shartlarsiz = hech qachon qatnashmagan xaridorlar uchun qaytarish magniti.
 
-### Coaching / consulting
+### Koucing / konsalting
 
-**Strong:** "After the first two sessions, if you don't think the engagement will deliver, we end it and refund the unused balance." Mid-engagement off-ramp builds trust.
+**Kuchli:** "Dastlabki ikki sessiyadan keyin, agar hamkorlik natija bermaydi deb o'ylasangiz, uni tugatamiz va ishlatilmagan qoldiqni qaytaramiz." Hamkorlik o'rtasidagi chiqish yo'li ishonch quradi.
 
-**Weak:** "Satisfaction guaranteed." Means nothing.
+**Zaif:** "Qoniqish kafolatlangan." Hech narsani anglatmaydi.
 
-### Productized service / agency retainer
+### Productized xizmat / agentlik retainer
 
-**Strong:** "First month is a paid pilot. At the end, if you don't see [specific milestone], you don't pay for month 2 and we end on good terms." Clear gate, clear out.
+**Kuchli:** "Birinchi oy — pullik pilot. Oxirida, agar [aniq bosqich] ko'rmasangiz, 2-oy uchun to'lamaysiz va yaxshi shartlarda tugatamiz." Aniq darvoza, aniq chiqish.
 
-**Weak:** "We'll work until you're happy." Open-ended cost. Don't.
+**Zaif:** "Siz mamnun bo'lguncha ishlaymiz." Cheksiz xarajat. Qilmang.
 
-### High-ticket info product (community, mastermind)
+### Qimmat axborot mahsuloti (hamjamiyat, mastermind)
 
-**Strong (premium audience):** "No refunds. The application process is rigorous because the value is real. If you're not sure, don't apply yet." Anti-guarantee works here.
+**Kuchli (premium auditoriya):** "Qaytarish yo'q. Ariza jarayoni qat'iy, chunki qiymat haqiqiy. Ishonchingiz komil bo'lmasa, hali ariza bermang." Anti-kafolat bu yerda ishlaydi.
 
-**Weak (premium audience):** Generic 30-day refund. Reads cheap.
+**Zaif (premium auditoriya):** Umumiy 30 kunlik qaytarish. Arzon o'qiladi.
 
-### Low-ticket info product (template, swipe file)
+### Arzon axborot mahsuloti (shablon, swipe fayl)
 
-**Strong:** "30-day no-questions refund." The transactional bar is "I bought it, looked at it, didn't want it." Unconditional fits.
+**Kuchli:** "30 kunlik savolsiz qaytarish." Tranzaksion mezon: "sotib oldim, ko'rdim, xohlamadim." Shartsiz mos keladi.
 
-**Weak:** No guarantee. The buyer's risk is too high for the price.
+**Zaif:** Kafolat yo'q. Narxga nisbatan xaridor xavfi juda yuqori.
 
 ### SaaS
 
-**Strong:** Free trial *or* annual-prepay-with-money-back-in-first-30-days. Reduces friction without locking in unhappy users.
+**Kuchli:** Bepul sinov *yoki* birinchi 30 kunda pulni qaytarish bilan yillik oldindan to'lov. Norozi foydalanuvchilarni qamamasdan ishqalanishni kamaytiradi.
 
-**Weak:** "Cancel anytime" alone — not a guarantee, just standard SaaS terms.
+**Zaif:** Yolg'iz "istalgan vaqt bekor qiling" — kafolat emas, standart SaaS shartlari.
 
-### Direct response / paid traffic
+### Direct response / pullik trafik
 
-**Strong:** Double-your-money-back or comparable risk inversion. Direct-response buyers expect risk-reversal-heavy offers.
+**Kuchli:** Pulni ikki baravar qaytarish yoki shunga o'xshash xavfni teskari qilish. Direct-response xaridorlari xavfni qaytarishga boy takliflarni kutadi.
 
-**Weak:** Vanilla 30-day refund. Doesn't differentiate from every other ad on the platform.
-
----
-
-## Writing the guarantee
-
-The guarantee text matters. Patterns that work:
-
-**Specific terms:**
-> If, after completing the first 4 weeks of the program, you can't point to one specific business outcome you've achieved, email us and we'll refund 100%.
-
-**Confident tone:**
-> We know this works. If it doesn't for you, we don't want your money.
-
-**Acknowledge the awkwardness:**
-> Guarantees feel slimy. Here's ours anyway: if you do the work in modules 1–3 and don't see meaningful traction, we refund.
-
-**Patterns that don't work:**
-
-- "100% satisfaction guaranteed!" — generic, low-trust
-- "Lifetime guarantee" — meaningless without conditions
-- Multiple stacked guarantees — sophistication-collapsing
-- Guarantees full of legalese — buyers skim and assume the worst
+**Zaif:** Oddiy 30 kunlik qaytarish. Platformadagi boshqa har bir reklamadan farqlamaydi.
 
 ---
 
-## Common mistakes
+## Kafolatni yozish
 
-### Promising more than you can deliver
+Kafolat matni muhim. Ishlaydigan naqshlar:
 
-"Double your revenue or your money back + $1,000." If even 1 in 50 buyers fails and gets the bonus refund + writes a public review, the offer is permanently damaged.
+**Aniq shartlar:**
+> Agar dasturning dastlabki 4 haftasini tugatgandan keyin erishgan bitta aniq biznes natijangizni ko'rsata olmasangiz, bizga email yozing va 100% qaytaramiz.
 
-Stress-test: what happens if 10% of buyers invoke the guarantee?
+**Ishonchli ohang:**
+> Biz buning ishlashini bilamiz. Agar siz uchun ishlamasa, pulingizni xohlamaymiz.
 
-### Conditional guarantees with too many conditions
+**Noqulaylikni tan oling:**
+> Kafolatlar yoqimsiz tuyuladi. Mana baribir bizniki: agar 1–3 modullardagi ishni bajarib, sezilarli tortishuv ko'rmasangiz, qaytaramiz.
 
-"Refund if you watched all 24 modules, completed the 6 exercises, attended every live call, and posted in the community at least once per week."
+**Ishlamaydigan naqshlar:**
 
-Buyers read this as "they made it impossible to actually get a refund." Trust drops.
-
-Two conditions max. Three only if they're closely related (e.g., "completed the course AND submitted the final project AND emailed us a question").
-
-### Hiding the guarantee in the fine print
-
-If your guarantee is your strongest perceived-likelihood lever, *put it on the sales page in 24pt text*. Move it above the buy button.
-
-### Forgetting to test it
-
-Re-read your guarantee text every six months. The wording that worked a year ago may now be undermined by something you've changed about your offer.
-
-### Treating guarantees as a substitute for proof
-
-Strong proof + weak guarantee > strong guarantee + weak proof. Order matters. Build proof first, then layer on the guarantee.
+- "100% qoniqish kafolatlangan!" — umumiy, past ishonch
+- "Umrbod kafolat" — shartlarsiz ma'nosiz
+- Bir nechta to'plangan kafolatlar — tajribani yo'q qiladi
+- Huquqiy jargonga to'la kafolatlar — xaridorlar ko'z yugurtiradi va eng yomonini taxmin qiladi
 
 ---
 
-## The honest case for NO guarantee
+## Keng tarqalgan xatolar
 
-Anti-guarantees ("no refunds, this is final") work when:
+### Yetkaza oladiganingizdan ko'proq va'da qilish
 
-- Buyer sophistication is high
-- Application or qualification process precedes the sale
-- Price is premium-to-luxury
-- Brand is established
-- Proof is overwhelming
+"Daromadingizni ikki baravar oshiring yoki pulingiz qaytariladi + $1 000." Agar 50 xaridordan hatto 1 tasi muvaffaqiyatsiz bo'lib, bonusli qaytarish olsa va ommaviy sharh yozsa, taklif doimiy zarar ko'radi.
 
-What you're saying: "We don't need a guarantee because the work is real, the buyer has self-qualified, and we won't engage in transactional refund games."
+Stress-test: xaridorlarning 10% kafolatdan foydalansa nima bo'ladi?
 
-The wrong audience reads this as cold or scammy. The right audience reads it as confidence. Know your buyer.
+### Haddan tashqari ko'p shartli kafolatlar
+
+"Barcha 24 modulni ko'rgan, 6 mashqni bajargan, har bir jonli qo'ng'iroqda qatnashgan va hamjamiyatda haftasiga kamida bir marta post yozgan bo'lsangiz, qaytaramiz."
+
+Xaridorlar buni "ular qaytarish olishni amalda imkonsiz qilgan" deb o'qiydi. Ishonch pasayadi.
+
+Ko'pi bilan ikki shart. Uchtasi faqat bir-biriga yaqin bog'liq bo'lsa (masalan, "kursni tugatdi VA yakuniy loyihani topshirdi VA bizga savol yubordi").
+
+### Kafolatni mayda yozuvda yashirish
+
+Agar kafolatingiz sezilgan ehtimoldagi eng kuchli richagingiz bo'lsa, *uni sotuv sahifasida 24pt matnda qo'ying*. Uni sotib olish tugmasidan yuqoriga ko'chiring.
+
+### Uni sinashni unutish
+
+Kafolat matnini har olti oyda qayta o'qing. Bir yil oldin ishlagan so'zlash endi taklifingizda o'zgartirgan biror narsa bilan buzilgan bo'lishi mumkin.
+
+### Kafolatlarni isbot o'rniga ishlatish
+
+Kuchli isbot + zaif kafolat > kuchli kafolat + zaif isbot. Tartib muhim. Avval isbotni quring, so'ng ustiga kafolatni qo'ying.
 
 ---
 
-## The diagnostic
+## Kafolat BO'LMASLIGINING halol holati
 
-When auditing an offer with no guarantee (or a weak one), ask:
+Anti-kafolatlar ("qaytarish yo'q, bu yakuniy") quyidagi hollarda ishlaydi:
 
-1. **What's the buyer's actual risk?** Make it concrete. ("$2K and I might not get more clients.")
-2. **What guarantee structure reverses that specific risk?** Match it to one of the eight types.
-3. **What's your honest refund tolerance?** Calculate refund rate × refund cost; can you sustain it?
-4. **Does the guarantee match your audience sophistication?** Premium buyers want anti-guarantee; first-time buyers want unconditional.
+- Xaridor tajribasi yuqori
+- Sotuvdan oldin ariza yoki saralash jarayoni bor
+- Narx premiumdan hashamatgacha
+- Brend mustahkam
+- Isbot ustun
 
-Most offers don't have the wrong guarantee — they have *no* guarantee at all. Adding any guarantee is almost always a lift. Adding the right one is the lever.
+Aytayotganingiz: "bizga kafolat kerak emas, chunki ish haqiqiy, xaridor o'zini saralab oldi va biz tranzaksion qaytarish o'yinlariga kirishmaymiz."
+
+Noto'g'ri auditoriya buni sovuq yoki firibgar deb o'qiydi. To'g'ri auditoriya buni ishonch deb o'qiydi. Xaridoringizni biling.
+
+---
+
+## Diagnostika
+
+Kafolatsiz (yoki zaif kafolatli) taklifni audit qilganda so'rang:
+
+1. **Xaridorning haqiqiy xavfi nima?** Uni aniq qiling. ("$2K va ehtimol ko'proq mijoz topa olmayman.")
+2. **Qaysi kafolat tuzilmasi aynan shu xavfni teskari qiladi?** Uni sakkiz turdan biriga moslang.
+3. **Halol qaytarishga toqatingiz qanday?** Qaytarish darajasi × qaytarish xarajatini hisoblang; bardosh bera olasizmi?
+4. **Kafolat auditoriya tajribasiga mos keladimi?** Premium xaridorlar anti-kafolatni, birinchi marta xaridorlar shartsizni xohlaydi.
+
+Ko'pgina takliflarda noto'g'ri kafolat emas, *umuman* kafolat yo'q. Har qanday kafolat qo'shish deyarli doim ko'tarilishdir. To'g'risini qo'shish — richagning o'zi.

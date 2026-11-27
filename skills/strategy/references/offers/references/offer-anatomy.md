@@ -1,203 +1,203 @@
-# Offer Anatomy
+# Taklif anatomiyasi
 
-A complete offer has six components. Skip any one and conversion suffers — usually noticeably.
+To'liq taklif oltita komponentga ega. Birortasini o'tkazib yuborsangiz, konversiya zarar ko'radi — odatda sezilarli darajada.
 
-## The six components
+## Oltita komponent
 
-| # | Component | Question it answers | Where it fails |
+| # | Komponent | Qaysi savolga javob beradi | Qayerda muvaffaqiyatsiz bo'ladi |
 |---|-----------|---------------------|----------------|
-| 1 | **Core deliverable** | What do they get? | Too vague, or pitched as features instead of outcome |
-| 2 | **Bonus stack** | What else do they get that makes the core feel undervalued? | Either no bonuses, or inflated/fake bonuses |
-| 3 | **Guarantee** | What happens if it doesn't work? | None, wrong type, or over-promising |
-| 4 | **Scarcity / urgency** | Why now, not later? | None, fake, or destructively manipulative |
-| 5 | **Name** | What is this thing called? | Generic, internal-jargon, or no name at all |
-| 6 | **Price + payment structure** | What do they pay and how? | Single number with no payment flexibility |
+| 1 | **Asosiy natija** | Ular nima oladi? | Juda noaniq yoki natija o'rniga funksiyalar sifatida taklif qilingan |
+| 2 | **Bonus to'plami** | Asosiyni kam baholangandek ko'rsatadigan yana nima oladi? | Bonuslar yo'q yoki bo'rttirilgan/soxta bonuslar |
+| 3 | **Kafolat** | Ishlamasa nima bo'ladi? | Yo'q, noto'g'ri tur yoki haddan tashqari va'da |
+| 4 | **Kamyoblik / shoshilinchlik** | Nega keyin emas, hozir? | Yo'q, soxta yoki buzg'unchi manipulyativ |
+| 5 | **Nom** | Bu narsa nima deb ataladi? | Umumiy, ichki jargon yoki nomi umuman yo'q |
+| 6 | **Narx + to'lov tuzilmasi** | Ular nima to'laydi va qanday? | To'lov moslashuvchanligisiz yagona raqam |
 
 ---
 
-## 1. Core deliverable
+## 1. Asosiy natija
 
-The thing they actually get.
+Ular aslida oladigan narsa.
 
-### Define it as an outcome, not a feature list
+### Uni funksiyalar ro'yxati emas, natija sifatida belgilang
 
-- **Feature-pitched (weak):** "6 modules, 24 lessons, weekly calls, private community."
-- **Outcome-pitched (strong):** "A working customer-acquisition system that brings 5 qualified leads per week within 60 days — built with you, not handed to you."
+- **Funksiya sifatida taklif qilingan (zaif):** "6 modul, 24 dars, haftalik qo'ng'iroqlar, yopiq hamjamiyat."
+- **Natija sifatida taklif qilingan (kuchli):** "60 kun ichida haftasiga 5 ta malakali lid olib keladigan ishlaydigan mijoz jalb qilish tizimi — sizga topshirilmaydi, siz bilan qurilgan."
 
-The features still matter — buyers want to know what they're getting — but the *frame* is the outcome. Features support the outcome, they don't replace it.
+Funksiyalar hamon muhim — xaridorlar nima olishini bilmoqchi — lekin *freym* — natija. Funksiyalar natijani qo'llab-quvvatlaydi, uning o'rnini bosmaydi.
 
-### Define the scope explicitly
+### Qamrovni aniq belgilang
 
-What's in. What's out. What's optional. Buyers buy clarity; ambiguity erodes perceived likelihood.
+Nima kiradi. Nima kirmaydi. Nima ixtiyoriy. Xaridorlar aniqlikni sotib oladi; noaniqlik sezilgan ehtimolni yemiradi.
 
-Example scope statement:
+Qamrov bayoni misoli:
 ```
-Includes:
-- 90-day program with weekly live calls (recorded)
-- Private Slack with daily founder access
-- 12 fill-in-the-blank templates
-- 1 90-minute strategy session with a senior strategist
+Kiradi:
+- Haftalik jonli qo'ng'iroqlar bilan 90 kunlik dastur (yozib olingan)
+- Asoschi bilan kundalik aloqali yopiq Slack
+- 12 ta to'ldiriladigan shablon
+- Katta strateg bilan 1 ta 90 daqiqalik strategiya sessiyasi
 
-Doesn't include:
-- 1:1 calls outside the strategy session
-- Implementation of the work (you/your team does this; we coach)
-- Tools and software (you provide; we recommend specific stacks)
+Kirmaydi:
+- Strategiya sessiyasidan tashqari 1:1 qo'ng'iroqlar
+- Ishni amalga oshirish (buni siz/jamoangiz qiladi; biz koucing qilamiz)
+- Asboblar va dasturlar (siz ta'minlaysiz; biz aniq steklarni tavsiya qilamiz)
 ```
 
-### Match the depth to the buyer's stage of awareness
+### Chuqurlikni xaridorning xabardorlik bosqichiga moslang
 
-Sophisticated buyers want the methodology and scope. New-to-category buyers want the dream outcome and proof. Read your audience.
+Tajribali xaridorlar metodologiya va qamrovni xohlaydi. Kategoriyaga yangilar orzu natijasi va isbotni xohlaydi. Auditoriyangizni o'qing.
 
 ---
 
-## 2. Bonus stack
+## 2. Bonus to'plami
 
-What you add to make the core feel undervalued at the asking price.
+Asosiyni so'ralgan narxda kam baholangandek ko'rsatish uchun qo'shadigan narsangiz.
 
-Bonuses do three jobs at once:
-1. **Raise perceived value** of the total offer
-2. **Lower perceived risk** — even if the core underdelivers, "I got X for free"
-3. **Close specific objections** — each bonus can target a different buying objection
+Bonuslar bir vaqtda uchta ishni bajaradi:
+1. Umumiy taklifning **sezilgan qiymatini oshiradi**
+2. **Sezilgan xavfni kamaytiradi** — asosiy yetarli bermasa ham, "men X ni bepul oldim"
+3. **Aniq e'tirozlarni yopadi** — har bir bonus turli xarid e'tiroziga qaratilishi mumkin
 
-### How to construct bonuses
+### Bonuslarni qanday qurish
 
-For each major objection your buyer has, add a bonus that closes it:
+Xaridoringizning har bir asosiy e'tirozi uchun uni yopadigan bonus qo'shing:
 
-| Objection | Targeted bonus |
+| E'tiroz | Nishonli bonus |
 |-----------|---------------|
-| "I don't have time to implement this" | Done-for-you setup, day 1 |
-| "I don't know which tools to use" | Pre-vetted tool stack with discount codes |
-| "What if I get stuck?" | 30-day async support |
-| "I'm not sure my team will buy in" | Stakeholder pitch deck for your team |
-| "I've tried something like this before and it didn't work" | Case study of someone in your exact situation |
+| "Buni joriy qilishga vaqtim yo'q" | Done-for-you sozlash, 1-kun |
+| "Qaysi asboblardan foydalanishni bilmayman" | Chegirma kodli oldindan tekshirilgan asbob steki |
+| "Tiqilib qolsam-chi?" | 30 kunlik asinxron qo'llab-quvvatlash |
+| "Jamoam qo'llab-quvvatlashiga ishonchim komil emas" | Jamoangiz uchun stakeholder pitch deck |
+| "Avval shunga o'xshash narsani sinaganman va ishlamagan" | Aynan sizning vaziyatingizdagi odam keysi |
 
-A 4-bonus stack that closes 4 specific objections converts massively better than a 4-bonus stack of generic "extras."
+4 ta aniq e'tirozni yopadigan 4 ta bonus to'plami umumiy "qo'shimchalar"dan iborat 4 ta bonus to'plamidan keskin yaxshiroq konvertatsiya qiladi.
 
-### Don't inflate
+### Bo'rttirmang
 
-"$50,000 in bonuses!" on a $500 offer reads as scam. The asymmetry destroys trust.
+$500 lik taklifda "$50 000 bonus!" firibgarlikdek o'qiladi. Assimetriya ishonchni yo'q qiladi.
 
-Bonuses should:
-- Have a stated value the buyer can verify (compare to a comparable product)
-- Total to less than 2x the price (e.g., a $1K offer can have ~$1.5K in bonuses comfortably)
-- Be things you'd actually sell separately if you wanted
+Bonuslar quyidagicha bo'lishi kerak:
+- Xaridor tekshira oladigan e'lon qilingan qiymatga ega (taqqoslanadigan mahsulot bilan solishtiring)
+- Narxning 2 baravaridan kamiga teng (masalan, $1K lik taklif ~$1.5K bonusga qulay ega bo'lishi mumkin)
+- Xohlasangiz alohida sotadigan narsangiz bo'lishi kerak
 
-For the full bonus-stacking framework, see [bonus-stacking.md](bonus-stacking.md).
-
----
-
-## 3. Guarantee
-
-What happens if it doesn't work.
-
-A guarantee directly raises perceived likelihood of achievement (the buyer thinks: "they'll only offer this if they're sure"). It also lowers effort & sacrifice (less emotional risk).
-
-The wrong guarantee can hurt:
-- Over-promising guarantees attract refund-seekers
-- Generic "100% guaranteed" with no conditions reads as legally unenforceable
-- No guarantee at all signals you're not confident
-
-The right type depends on your business model, refund risk tolerance, and buyer sophistication. For the full taxonomy, see [guarantee-design.md](guarantee-design.md).
+To'liq bonus-stacking freymvorki uchun [bonus-stacking.md](bonus-stacking.md) ga qarang.
 
 ---
 
-## 4. Scarcity / urgency
+## 3. Kafolat
 
-The reason to buy now, not later.
+Ishlamasa nima bo'ladi.
 
-Two flavors:
-- **Scarcity** — limited *quantity* (cohort size, seats, inventory, batch)
-- **Urgency** — limited *time* (cohort deadline, season, bonus expiry)
+Kafolat erishishning sezilgan ehtimolini bevosita oshiradi (xaridor o'ylaydi: "ular buni faqat ishonch komil bo'lsagina taklif qiladi"). U shuningdek mehnat va qurbonlikni kamaytiradi (hissiy xavf kamroq).
 
-The bar: **the scarcity has to be real.** Fake countdown timers and "only 3 spots left" lies work once and torch trust permanently. The internet is small; you will be caught.
+Noto'g'ri kafolat zarar yetkazishi mumkin:
+- Haddan tashqari va'da qiluvchi kafolatlar qaytarish izlovchilarni jalb qiladi
+- Shartsiz umumiy "100% kafolatlangan" huquqiy jihatdan amalga oshirib bo'lmaydigandek o'qiladi
+- Umuman kafolat yo'qligi ishonchingiz yo'qligini bildiradi
 
-Common honest scarcity formats:
-- Cohort closes Friday (because the cohort actually starts Monday)
-- Founding-member pricing for the first 20 customers (because you're capacity-constrained)
-- Seasonal product or service (because demand is seasonal)
-- Bonus expires at launch end (because the bonus is your time)
-- Capacity-based service tier (because you literally can't take more clients)
-
-For full guidance on creating real scarcity, see [scarcity-urgency.md](scarcity-urgency.md).
+To'g'ri tur biznes modelingiz, qaytarish xavfiga toqatingiz va xaridor tajribasiga bog'liq. To'liq taksonomiya uchun [guarantee-design.md](guarantee-design.md) ga qarang.
 
 ---
 
-## 5. Name
+## 4. Kamyoblik / shoshilinchlik
 
-What this thing is called.
+Keyin emas, hozir sotib olish sababi.
 
-A named offer beats an unnamed offer for three reasons:
-1. **Repeatability** — buyers can tell their friend about it
-2. **Distinction** — a name makes it a *thing*, not a generic service
-3. **Pricing power** — branded offers can charge more than the same delivery sold as a service
+Ikki turi:
+- **Kamyoblik** — cheklangan *miqdor* (kogorta hajmi, o'rinlar, inventar, partiya)
+- **Shoshilinchlik** — cheklangan *vaqt* (kogorta muddati, mavsum, bonus tugashi)
 
-### Naming patterns that work
+Mezon: **kamyoblik haqiqiy bo'lishi kerak.** Soxta teskari sanagichlar va "faqat 3 joy qoldi" yolg'onlari bir marta ishlaydi va ishonchni butunlay yoqadi. Internet kichik; sizni ushlashadi.
 
-- **Outcome-named:** "The 30-Day Activation Sprint" — names what they get
-- **Methodology-named:** "The VAULT Framework" — names how you do it
-- **Identity-named:** "Founder Marketing OS" — names who it's for
-- **Compression-named:** "5-Day Cohort" — names the timing/structure
+Keng tarqalgan halol kamyoblik formatlari:
+- Kogorta juma kuni yopiladi (chunki kogorta dushanba kuni boshlanadi)
+- Birinchi 20 mijoz uchun asoschi-a'zo narxi (chunki quvvatingiz cheklangan)
+- Mavsumiy mahsulot yoki xizmat (chunki talab mavsumiy)
+- Bonus launch oxirida tugaydi (chunki bonus — sizning vaqtingiz)
+- Quvvatga asoslangan xizmat darajasi (chunki aslida ko'proq mijoz qabul qila olmaysiz)
 
-### Naming patterns that don't work
-
-- **Generic descriptors:** "Marketing Coaching Program" — forgettable
-- **Internal jargon:** "Tier 2 Standard" — buyer can't repeat
-- **Course-bro:** "The Money-Making Machine" — pattern-matches to scam
-- **Pun-overload:** "GrowthGoGetter" — reads as low-status
-
-### Practical test
-
-Can a buyer text a friend: "I just signed up for *the [name]*. It's $X and you get [one-line outcome]"? If yes, the name works. If no, rename.
+Haqiqiy kamyoblik yaratish bo'yicha to'liq yo'riqnoma uchun [scarcity-urgency.md](scarcity-urgency.md) ga qarang.
 
 ---
 
-## 6. Price + payment structure
+## 5. Nom
 
-The price is the obvious part. The structure is the underrated part.
+Bu narsa nima deb ataladi.
 
-### Price isn't a number, it's a comparison
+Nomli taklif nomsiz taklifdan uch sababga ko'ra yaxshi:
+1. **Takrorlanuvchanlik** — xaridorlar buni do'stiga aytib bera oladi
+2. **Farqlanish** — nom uni umumiy xizmat emas, *narsa* qiladi
+3. **Narxlash kuchi** — brendlangan takliflar xuddi shu yetkazib berishni xizmat sifatida sotishdan ko'proq narx qo'ya oladi
 
-Buyers compare the price to:
-- The dream outcome (does this get me the result I want?)
-- The next-best alternative (what else could I buy?)
-- The cost of doing nothing (what does the status quo cost me?)
-- Other items in your own catalog (anchor pricing)
+### Ishlaydigan nomlash naqshlari
 
-You can move price perception without changing the number by:
-- Showing the cost of doing nothing more vividly
-- Anchoring against a higher-priced alternative
-- Sequencing other items in your catalog at higher prices first
+- **Natija bo'yicha nomlangan:** "30 kunlik faollashtirish sprinti" — nima olishini nomlaydi
+- **Metodologiya bo'yicha nomlangan:** "VAULT freymvorki" — buni qanday qilishingizni nomlaydi
+- **Identifikatsiya bo'yicha nomlangan:** "Asoschi marketing OS" — kim uchun ekanini nomlaydi
+- **Siqish bo'yicha nomlangan:** "5 kunlik kogorta" — vaqt/tuzilmani nomlaydi
 
-### Payment structure is its own lever
+### Ishlamaydigan nomlash naqshlari
 
-Same total price, different structures convert very differently:
+- **Umumiy tavsiflovchilar:** "Marketing koucing dasturi" — esda qolmaydi
+- **Ichki jargon:** "Tier 2 Standard" — xaridor takrorlay olmaydi
+- **Kurs-bro:** "Pul ishlaydigan mashina" — firibgarlikka o'xshab ketadi
+- **So'z o'yini ortiqchaligi:** "GrowthGoGetter" — past maqomdek o'qiladi
 
-| Structure | When it works | Trade-off |
+### Amaliy test
+
+Xaridor do'stiga yoza oladimi: "Men hozirgina *[nom]*ga yozildim. U $X turadi va [bir qatorli natija] olasiz"? Ha bo'lsa, nom ishlaydi. Yo'q bo'lsa, qayta nomlang.
+
+---
+
+## 6. Narx + to'lov tuzilmasi
+
+Narx — ravshan qism. Tuzilma — kam baholanadigan qism.
+
+### Narx raqam emas, taqqoslash
+
+Xaridorlar narxni quyidagilar bilan taqqoslaydi:
+- Orzu natijasi (bu menga istagan natijani beradimi?)
+- Keyingi eng yaxshi muqobil (yana nimani sotib olsam bo'ladi?)
+- Hech narsa qilmaslik narxi (status-kvo menga nimaga tushadi?)
+- O'z katalogingizdagi boshqa elementlar (anker narxlash)
+
+Narx idrokini raqamni o'zgartirmasdan siljitishingiz mumkin:
+- Hech narsa qilmaslik narxini yorqinroq ko'rsatish
+- Qimmatroq muqobilga qarshi langarlash
+- Katalogingizdagi boshqa elementlarni avval yuqoriroq narxlarda ketma-ketlashtirish
+
+### To'lov tuzilmasi — alohida richag
+
+Bir xil jami narx, turli tuzilmalar juda boshqacha konvertatsiya qiladi:
+
+| Tuzilma | Qachon ishlaydi | Savdo |
 |-----------|---------------|-----------|
-| **Pay in full** | High-trust buyers, lower price points | Highest perceived commitment, smallest buyer pool |
-| **Pay in 2-4 installments** | Mid-range price, hesitant buyers | More buyers, payment defaults |
-| **Monthly subscription** | SaaS, ongoing services | Annuity revenue, churn risk |
-| **Pay-after-results** | High-confidence delivery, sophisticated buyers | Cash flow lag, fewer disputes |
-| **Down payment + balance on delivery** | Services with milestone-based delivery | Balance risk on backend |
-| **Free trial → paid** | Low-friction SaaS, info products | Conversion drop-off |
+| **To'liq to'lash** | Yuqori ishonchli xaridorlar, past narx nuqtalari | Eng yuqori sezilgan majburiyat, eng kichik xaridor havzasi |
+| **2–4 bo'lib to'lash** | O'rta narx, ikkilanayotgan xaridorlar | Ko'proq xaridor, to'lov defoltlari |
+| **Oylik obuna** | SaaS, doimiy xizmatlar | Annuitet daromadi, ketish xavfi |
+| **Natijadan keyin to'lash** | Yuqori ishonchli yetkazib berish, tajribali xaridorlar | Naqd pul oqimi kechikishi, kamroq nizo |
+| **Boshlang'ich to'lov + yetkazib berishda qoldiq** | Bosqichli yetkazib beriladigan xizmatlar | Orqa tomonda qoldiq xavfi |
+| **Bepul sinov → pullik** | Past ishqalanishli SaaS, axborot mahsulotlari | Konversiya tashlab ketish |
 
-Often the right move isn't lowering price — it's adding a payment plan. Same $6K price, "$6K today" vs "$2K × 3 monthly" converts very differently.
+Ko'pincha to'g'ri harakat narxni tushirish emas — to'lov rejasini qo'shish. Bir xil $6K narx, "bugun $6K" va "oyiga $2K × 3" juda boshqacha konvertatsiya qiladi.
 
 ---
 
-## Putting it together: an example
+## Hammasini birlashtirish: misol
 
-A B2B fractional CMO service.
+B2B fractional CMO xizmati.
 
-| Component | Weak version | Strong version |
+| Komponent | Zaif versiya | Kuchli versiya |
 |-----------|--------------|----------------|
-| **Core** | "Fractional CMO services" | "8-week marketing audit + 90-day execution plan, delivered by a CMO who's done it for 3+ similar companies" |
-| **Bonuses** | None | (1) 1:1 weekly check-ins for 90 days; (2) pre-vetted execution-partner introductions; (3) board-deck for marketing strategy section |
-| **Guarantee** | None | "If after the 8-week audit you don't have a clear 90-day plan you'd run yourself, you don't pay the audit fee" |
-| **Scarcity** | None | "We take 2 engagements per quarter — next slot opens [date]" |
-| **Name** | "fCMO Consulting" | "The 90-Day Marketing Reset" |
-| **Price** | "$15K, paid up front" | "$15K → $5K to start, $5K at week 8, $5K at week 16" |
+| **Asosiy** | "Fractional CMO xizmatlari" | "8 haftalik marketing auditi + 90 kunlik ijro rejasi, 3+ o'xshash kompaniya uchun buni bajargan CMO tomonidan yetkaziladi" |
+| **Bonuslar** | Yo'q | (1) 90 kun davomida haftalik 1:1 tekshiruvlar; (2) oldindan tekshirilgan ijro-hamkorlar bilan tanishtirish; (3) marketing strategiyasi bo'limi uchun board-deck |
+| **Kafolat** | Yo'q | "Agar 8 haftalik auditdan keyin o'zingiz bajara oladigan aniq 90 kunlik rejaga ega bo'lmasangiz, audit to'lovini to'lamaysiz" |
+| **Kamyoblik** | Yo'q | "Biz har chorakda 2 ta ish qabul qilamiz — keyingi o'rin [sana] ochiladi" |
+| **Nom** | "fCMO Konsalting" | "90 kunlik marketing qayta ishga tushirish" |
+| **Narx** | "$15K, oldindan to'lanadi" | "$15K → boshlash uchun $5K, 8-haftada $5K, 16-haftada $5K" |
 
-Same delivery. Same person. Different offer. Different conversion.
+Bir xil yetkazib berish. Bir xil odam. Boshqa taklif. Boshqa konversiya.
 
-The point: most "we need to lower our price" conversations are actually "we have one of six components missing or weak" conversations.
+Gap shunda: "narxni tushirishimiz kerak" suhbatlarining ko'pi aslida "oltita komponentdan bittasi yetishmaydi yoki zaif" suhbatlari.

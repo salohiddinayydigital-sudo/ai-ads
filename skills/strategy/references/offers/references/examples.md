@@ -1,215 +1,215 @@
-# Worked Examples — Before/After Offers
+# Ishlangan misollar — oldin/keyin takliflar
 
-Anonymized examples drawn from real engagements. Each shows the weak version, the diagnostic, and the strong version.
+Haqiqiy hamkorliklardan olingan anonimlashtirilgan misollar. Har biri zaif versiya, diagnostika va kuchli versiyani ko'rsatadi.
 
 ---
 
-## Example 1: Fractional CMO service
+## 1-misol: Fractional CMO xizmati
 
-### Before
+### Oldin
 
-**The offer (as it was):**
-> Fractional CMO services. $15K/month. We'll help you grow.
+**Taklif (avvalgidek):**
+> Fractional CMO xizmatlari. Oyiga $15K. Biz o'sishingizga yordam beramiz.
 
-**Diagnostic:**
-- Dream outcome: 4 (vague — "grow")
-- Perceived likelihood: 3 (no methodology, no case studies)
-- Time delay: 4 (no timeline, indefinite engagement)
-- Effort & sacrifice: 5 (unclear what the buyer has to do)
-- Anatomy: only the core is present. No bonuses, no guarantee, no scarcity, no name.
+**Diagnostika:**
+- Orzu natijasi: 4 (noaniq — "o'sish")
+- Sezilgan ehtimol: 3 (metodologiya yo'q, keyslar yo'q)
+- Kechikish vaqti: 4 (muddat yo'q, noaniq muddatli hamkorlik)
+- Mehnat va qurbonlik: 5 (xaridor nima qilishi kerakligi noaniq)
+- Anatomiya: faqat asosiy bor. Bonuslar, kafolat, kamyoblik, nom yo'q.
 
-**Lowest binding constraint:** perceived likelihood. Buyers don't believe an unnamed service will deliver.
+**Eng past bog'lovchi cheklov:** sezilgan ehtimol. Xaridorlar nomsiz xizmat yetkazib berishiga ishonmaydi.
 
-### After
+### Keyin
 
-| Component | What was added |
+| Komponent | Nima qo'shildi |
 |-----------|----------------|
-| **Core** | "The 90-Day Marketing Reset" — 8-week audit + 12-week execution plan, delivered by a CMO who's run marketing at 3+ similar-stage companies |
-| **Bonuses** | (1) Weekly 1:1s for 12 weeks (~$12K value); (2) Pre-vetted execution-partner intros (priceless); (3) Board-deck marketing strategy section template |
-| **Guarantee** | "After the 8-week audit, if you don't have a clear 90-day plan you'd run yourself, you don't pay the audit fee." |
-| **Scarcity** | "We take 2 engagements per quarter — next slot opens [date]" |
-| **Name** | "The 90-Day Marketing Reset" |
-| **Price** | $15K → $5K start, $5K week 8, $5K week 16 |
+| **Asosiy** | "90 kunlik marketing qayta ishga tushirish" — 8 haftalik audit + 12 haftalik ijro rejasi, 3+ o'xshash bosqichdagi kompaniyada marketingni boshqargan CMO tomonidan yetkazib beriladi |
+| **Bonuslar** | (1) 12 hafta davomida haftalik 1:1'lar (~$12K qiymat); (2) Oldindan tekshirilgan ijro-hamkorlar bilan tanishtirish (bebaho); (3) Board-deck marketing strategiyasi bo'limi shabloni |
+| **Kafolat** | "8 haftalik auditdan keyin, o'zingiz bajara oladigan aniq 90 kunlik rejaga ega bo'lmasangiz, audit to'lovini to'lamaysiz." |
+| **Kamyoblik** | "Biz har chorakda 2 ta ish qabul qilamiz — keyingi o'rin [sana] ochiladi" |
+| **Nom** | "90 kunlik marketing qayta ishga tushirish" |
+| **Narx** | $15K → boshlash uchun $5K, 8-hafta $5K, 16-hafta $5K |
 
-Same delivery, same person, ~3x close rate, longer engagements (because the buyer is clearer about scope).
+Bir xil yetkazib berish, bir xil odam, ~3 baravar yopilish darajasi, uzunroq hamkorliklar (chunki xaridor qamrov haqida aniqroq).
 
-**Lesson:** the price didn't move. The structure did.
+**Saboq:** narx siljimadi. Tuzilma siljidi.
 
 ---
 
-## Example 2: $1,997 cohort-based copywriting course
+## 2-misol: $1 997 kogortali kopirayting kursi
 
-### Before
+### Oldin
 
-**The offer:**
-> Learn copywriting. $1,997. Includes 6 modules and Slack access.
+**Taklif:**
+> Kopirayting o'rganing. $1 997. 6 modul va Slack kirishi kiritilgan.
 
-**Diagnostic:**
-- Dream outcome: 5 ("learn copywriting" — surface ask, not dream outcome)
-- Perceived likelihood: 3 (no case studies, no named methodology)
-- Time delay: 4 (6-month course, no first-win)
-- Effort & sacrifice: 4 (lots of homework, weekly calls, big commitment)
+**Diagnostika:**
+- Orzu natijasi: 5 ("kopirayting o'rganish" — yuzaki so'rov, orzu natijasi emas)
+- Sezilgan ehtimol: 3 (keyslar yo'q, nomlangan metodologiya yo'q)
+- Kechikish vaqti: 4 (6 oylik kurs, birinchi-g'alaba yo'q)
+- Mehnat va qurbonlik: 4 (ko'p uy vazifasi, haftalik qo'ng'iroqlar, katta majburiyat)
 
-**Lowest binding constraint:** perceived likelihood. Buyers don't believe THEY can do it.
+**Eng past bog'lovchi cheklov:** sezilgan ehtimol. Xaridorlar O'ZLARI buni qila olishiga ishonmaydi.
 
-### After
+### Keyin
 
-| Component | What changed |
+| Komponent | Nima o'zgardi |
 |-----------|--------------|
-| **Core** | "Write sales pages clients pay you $5K+ for in 12 weeks" — outcome-framed |
-| **Bonuses** | (1) 30 winning sales page templates (last updated Q2 2026) — $297 value; (2) 9 named case studies from copywriters in 6 industries — proof, not pitch; (3) 60-day Slack with weekly office hours — $497 value; (4) The tool stack with discount codes — $1,200 value |
-| **Guarantee** | "Complete all 6 modules, submit the final exercise, and if you haven't written a sales page that lands you a $5K+ client within 12 months, refund in full." |
-| **Scarcity** | Cohort scarcity — doors close Friday, next cohort in 3 months |
-| **Name** | "The $5K Sales Page Bootcamp" |
-| **Price** | $1,997 pay-in-full OR $797 × 3 |
+| **Asosiy** | "12 haftada mijozlar sizga $5K+ to'laydigan sotuv sahifalarini yozing" — natija shaklida |
+| **Bonuslar** | (1) 30 ta g'olib sotuv sahifasi shabloni (oxirgi yangilanish 2026-yil 2-chorak) — $297 qiymat; (2) 6 ta sohadagi kopirayterlarning 9 ta nomlangan keysi — taklif emas, isbot; (3) haftalik office hours bilan 60 kunlik Slack — $497 qiymat; (4) Chegirma kodli asbob steki — $1 200 qiymat |
+| **Kafolat** | "Barcha 6 modulni yakunlang, yakuniy mashqni topshiring va 12 oy ichida sizga $5K+ mijoz keltirgan sotuv sahifasini yozmagan bo'lsangiz, to'liq qaytaramiz." |
+| **Kamyoblik** | Kogorta kamyobligi — eshiklar juma kuni yopiladi, keyingi kogorta 3 oydan keyin |
+| **Nom** | "$5K sotuv sahifasi bootcamp" |
+| **Narx** | $1 997 to'liq to'lash YOKI $797 × 3 |
 
-Same modules. Same instructor. ~4x conversion. Lower refund rate (conditional guarantee qualifies).
+Bir xil modullar. Bir xil o'qituvchi. ~4 baravar konversiya. Pastroq qaytarish darajasi (shartli kafolat saralaydi).
 
-**Lesson:** rename the outcome, add proof, install a real scarcity mechanic.
+**Saboq:** natijani qayta nomlang, isbot qo'shing, haqiqiy kamyoblik mexanikasini o'rnating.
 
 ---
 
-## Example 3: $97 Notion template pack
+## 3-misol: $97 Notion shablonlar to'plami
 
-### Before
+### Oldin
 
-**The offer:**
-> Notion templates for marketers. $97. 20 templates included.
+**Taklif:**
+> Marketerlar uchun Notion shablonlari. $97. 20 ta shablon kiritilgan.
 
-**Diagnostic:**
-- Dream outcome: 6 (clear what you get, less clear what you achieve with it)
-- Perceived likelihood: 6 (templates work for some, less for others — no proof)
-- Time delay: 8 (instant access)
-- Effort & sacrifice: 5 (setup work to customize each template)
+**Diagnostika:**
+- Orzu natijasi: 6 (nima olishi aniq, u bilan nimaga erishishi kamroq aniq)
+- Sezilgan ehtimol: 6 (shablonlar ba'zilar uchun ishlaydi, boshqalar uchun kamroq — isbot yo'q)
+- Kechikish vaqti: 8 (bir zumda kirish)
+- Mehnat va qurbonlik: 5 (har bir shablonni moslashtirish uchun sozlash ishi)
 
-**Lowest binding constraint:** perceived likelihood + dream outcome. "Will these actually save me time, for *my* setup?"
+**Eng past bog'lovchi cheklov:** sezilgan ehtimol + orzu natijasi. "Bular haqiqatan *mening* sozlamamda vaqtimni tejaydimi?"
 
-### After
+### Keyin
 
-| Component | What changed |
+| Komponent | Nima o'zgardi |
 |-----------|--------------|
-| **Core** | "The Marketing Ops Stack — 20 Notion templates that turn your scattered docs into a working marketing OS in one Saturday" — outcome-framed |
-| **Bonuses** | (1) 10-minute "do this first" Loom — speed bonus; (2) "Stack the templates" flowchart (visual setup map); (3) Lifetime updates as templates are added |
-| **Guarantee** | "30-day no-questions money-back" — unconditional, fits the price point |
-| **Scarcity** | Founding-buyer pricing — $97 for the first 200 buyers, then $147 |
-| **Name** | "The Marketing Ops Stack" |
-| **Price** | $97 pay-in-full |
+| **Asosiy** | "Marketing Ops Stack — tarqoq hujjatlaringizni bir shanba kunida ishlaydigan marketing OS'ga aylantiradigan 20 ta Notion shabloni" — natija shaklida |
+| **Bonuslar** | (1) 10 daqiqalik "avval buni qiling" Loom — tezlik bonusi; (2) "Shablonlarni yig'ing" flowchart (vizual sozlash xaritasi); (3) Shablonlar qo'shilganda umrbod yangilanishlar |
+| **Kafolat** | "30 kunlik savolsiz pulni qaytarish" — shartsiz, narx nuqtasiga mos |
+| **Kamyoblik** | Asoschi-xaridor narxi — birinchi 200 xaridor uchun $97, so'ng $147 |
+| **Nom** | "Marketing Ops Stack" |
+| **Narx** | $97 to'liq to'lash |
 
-Same templates. ~2x close rate from the same traffic. The differentiator was the "in one Saturday" outcome anchor and the Loom that proves the speed claim.
+Bir xil shablonlar. Xuddi shu trafikdan ~2 baravar yopilish darajasi. Farqlovchi "bir shanba kunida" natija langari va tezlik da'vosini isbotlaydigan Loom edi.
 
-**Lesson:** for low-priced info products, the dream outcome and a fast first-win are the levers. Don't over-engineer the guarantee.
+**Saboq:** past narxli axborot mahsulotlari uchun orzu natijasi va tezkor birinchi g'alaba — richaglar. Kafolatni haddan tashqari loyihalamang.
 
 ---
 
-## Example 4: $50K B2B SaaS annual contract
+## 4-misol: $50K B2B SaaS yillik shartnoma
 
-### Before
+### Oldin
 
-**The offer:**
-> Enterprise plan: $50K/year. Includes unlimited users, all features, dedicated support.
+**Taklif:**
+> Enterprise tarif: yiliga $50K. Cheksiz foydalanuvchilar, barcha funksiyalar, maxsus qo'llab-quvvatlash kiritilgan.
 
-**Diagnostic:**
-- Dream outcome: 5 (features-listed, not outcome-framed)
-- Perceived likelihood: 5 (no roll-out plan, no time-to-value)
-- Time delay: 3 (unclear when value starts; sales says "implementation varies")
-- Effort & sacrifice: 4 (procurement + security review + IT integration + change management)
+**Diagnostika:**
+- Orzu natijasi: 5 (funksiyalar sanalgan, natija shaklida emas)
+- Sezilgan ehtimol: 5 (joriy qilish rejasi yo'q, qiymatgacha vaqt yo'q)
+- Kechikish vaqti: 3 (qiymat qachon boshlanishi noaniq; sotuv "joriy qilish farqlanadi" deydi)
+- Mehnat va qurbonlik: 4 (xaridlar + xavfsizlik ko'rib chiqishi + IT integratsiyasi + o'zgarishlarni boshqarish)
 
-**Lowest binding constraint:** time delay. Enterprise buyers can't tolerate "implementation varies."
+**Eng past bog'lovchi cheklov:** kechikish vaqti. Enterprise xaridorlar "joriy qilish farqlanadi" ga chiday olmaydi.
 
-### After
+### Keyin
 
-| Component | What changed |
+| Komponent | Nima o'zgardi |
 |-----------|--------------|
-| **Core** | "Production-ready in 30 days, ROI by quarter end" — time-anchored |
-| **Bonuses** | (1) Dedicated implementation engineer for 30 days; (2) Pre-built integration packs for top 5 platforms; (3) Custom training session for the buyer's team; (4) Quarterly business reviews with the buyer's CSM |
-| **Guarantee** | "Not in production by day 30? You don't pay until you are." SLA-based. |
-| **Scarcity** | Capacity-based: "We onboard 4 enterprise accounts per quarter. Next slot starts [date]." |
-| **Name** | Tier name stayed "Enterprise" but added the engagement name "Strategic Onboarding" |
-| **Price** | $50K annual → $50K annual with quarterly billing + paid 30-day pilot |
+| **Asosiy** | "30 kunda production'ga tayyor, chorak oxiriga ROI" — vaqtga langarlangan |
+| **Bonuslar** | (1) 30 kun davomida maxsus joriy qilish muhandisi; (2) Top 5 platforma uchun tayyor integratsiya paketlari; (3) Xaridor jamoasi uchun maxsus o'qitish sessiyasi; (4) Xaridorning CSM'i bilan choraklik biznes ko'rib chiqishlar |
+| **Kafolat** | "30-kunga production'da bo'lmadimi? Bo'lguningizcha to'lamaysiz." SLA'ga asoslangan. |
+| **Kamyoblik** | Quvvatga asoslangan: "Biz har chorakda 4 ta enterprise akkauntni onboard qilamiz. Keyingi o'rin [sana] boshlanadi." |
+| **Nom** | Daraja nomi "Enterprise" qoldi, lekin "Strategik onboarding" hamkorlik nomi qo'shildi |
+| **Narx** | Yiliga $50K → choraklik hisob-kitobli yiliga $50K + pullik 30 kunlik pilot |
 
-Same product. ~30% higher close rate, 50% shorter sales cycle. The pilot + SLA combination removed the procurement objection.
+Bir xil mahsulot. ~30% yuqoriroq yopilish darajasi, 50% qisqaroq sotuv sikli. Pilot + SLA kombinatsiyasi xaridlar e'tirozini olib tashladi.
 
-**Lesson:** for enterprise B2B, time-to-value IS the offer. Solve it explicitly.
+**Saboq:** enterprise B2B uchun qiymatgacha vaqt — taklifning o'zi. Uni aniq hal qiling.
 
 ---
 
-## Example 5: $4K group coaching mastermind
+## 5-misol: $4K guruh koucing mastermind
 
-### Before
+### Oldin
 
-**The offer:**
-> Group coaching for founders. $4K/quarter. Includes 12 calls and Slack.
+**Taklif:**
+> Asoschilar uchun guruh koucingi. Chorakda $4K. 12 qo'ng'iroq va Slack kiritilgan.
 
-**Diagnostic:**
-- Dream outcome: 5 (vague — "be a better founder")
-- Perceived likelihood: 4 (one alumni testimonial, no methodology)
-- Time delay: 6 (quarterly cadence reasonable)
-- Effort & sacrifice: 7 (12 calls is real time)
+**Diagnostika:**
+- Orzu natijasi: 5 (noaniq — "yaxshiroq asoschi bo'ling")
+- Sezilgan ehtimol: 4 (bitta bitiruvchi sharhi, metodologiya yo'q)
+- Kechikish vaqti: 6 (choraklik kadans oqilona)
+- Mehnat va qurbonlik: 7 (12 qo'ng'iroq — haqiqiy vaqt)
 
-**Lowest binding constraint:** dream outcome + perceived likelihood.
+**Eng past bog'lovchi cheklov:** orzu natijasi + sezilgan ehtimol.
 
-### After
+### Keyin
 
-| Component | What changed |
+| Komponent | Nima o'zgardi |
 |-----------|--------------|
-| **Core** | "12 founders, 12 weeks, one specific goal each — and a room that's seen it before" — peer-room positioning |
-| **Bonuses** | (1) 1:1 onboarding call to set the personal goal; (2) Founder Library — 90 frameworks from past members; (3) 1:1 mid-quarter check-in; (4) Alumni access for 1 year after |
-| **Guarantee** | "First two weeks — if it's not the room you wanted, full refund. After that, you're in." |
-| **Scarcity** | Cohort size capped at 12 — once full, you're on the waitlist for next quarter |
-| **Name** | "The Founders' Quarter" |
-| **Price** | $4K/quarter pay-in-full OR $1,500 × 3 |
+| **Asosiy** | "12 asoschi, 12 hafta, har biriga bitta aniq maqsad — va buni oldin ko'rgan xona" — tengdosh-xona pozitsiyalash |
+| **Bonuslar** | (1) Shaxsiy maqsadni belgilash uchun 1:1 onboarding qo'ng'irog'i; (2) Asoschi kutubxonasi — o'tgan a'zolardan 90 freymvork; (3) 1:1 chorak o'rtasi check-in; (4) Keyin 1 yil bitiruvchilar kirishi |
+| **Kafolat** | "Dastlabki ikki hafta — agar siz istagan xona bo'lmasa, to'liq qaytarish. Shundan keyin siz ichkaridasiz." |
+| **Kamyoblik** | Kogorta hajmi 12 bilan cheklangan — to'lgach, keyingi chorak uchun waitlist'dasiz |
+| **Nom** | "Asoschilar choragi" |
+| **Narx** | Chorakda $4K to'liq to'lash YOKI $1 500 × 3 |
 
-Same coach, same cadence. Higher close rate. Notably: members renew at ~70% (was ~35% before) because the "alumni access for 1 year" bonus changed the buying decision frame from "quarter" to "year."
+Bir xil kouch, bir xil kadans. Yuqoriroq yopilish darajasi. Ayniqsa: a'zolar ~70% da yangilanadi (oldin ~35%), chunki "1 yil bitiruvchilar kirishi" bonusi xarid qarorining freymini "chorak"dan "yil"ga o'zgartirdi.
 
-**Lesson:** for coaching, the room IS the offer. Position the room, not the curriculum. Renewal-friendly bonuses lock in long-term LTV.
+**Saboq:** koucing uchun xona — taklifning o'zi. Dasturni emas, xonani pozitsiyalang. Yangilashga qulay bonuslar uzoq muddatli LTV'ni mustahkamlaydi.
 
 ---
 
-## Example 6: Agency retainer — content marketing
+## 6-misol: Agentlik retainer — kontent marketing
 
-### Before
+### Oldin
 
-**The offer:**
-> Content marketing retainer. $8K/month. 4 articles per month + SEO strategy.
+**Taklif:**
+> Kontent marketing retaineri. Oyiga $8K. Oyiga 4 ta maqola + SEO strategiyasi.
 
-**Diagnostic:**
-- Dream outcome: 4 (output-described, not outcome-framed)
-- Perceived likelihood: 5 (no case studies linking content to revenue)
-- Time delay: 3 (SEO is slow; client expectations misaligned)
-- Effort & sacrifice: 6 (interviews, reviews, approvals all on client side)
+**Diagnostika:**
+- Orzu natijasi: 4 (natija emas, ishlab chiqarish tasvirlangan)
+- Sezilgan ehtimol: 5 (kontentni daromadga bog'laydigan keyslar yo'q)
+- Kechikish vaqti: 3 (SEO sekin; mijoz kutilmalari mos emas)
+- Mehnat va qurbonlik: 6 (intervyular, ko'rib chiqishlar, tasdiqlar hammasi mijoz tomonida)
 
-**Lowest binding constraint:** dream outcome (vague) and time delay (misaligned expectations).
+**Eng past bog'lovchi cheklov:** orzu natijasi (noaniq) va kechikish vaqti (mos kelmagan kutilmalar).
 
-### After
+### Keyin
 
-| Component | What changed |
+| Komponent | Nima o'zgardi |
 |-----------|--------------|
-| **Core** | "We own the content engine. You get organic-driven sales meetings by month 9, with measurable revenue attribution." — outcome + timeline |
-| **Bonuses** | (1) Persona research kickoff (one-time); (2) Quarterly content audit + republish list; (3) Pre-vetted freelance writers with QA layer; (4) Quarterly executive readout |
-| **Guarantee** | "First 30 days is a paid pilot — 4 published pieces + 3 keyword roadmap. If at the end you don't see a clear 12-month path, we end the engagement, no balance owed." |
-| **Scarcity** | Capacity-based: "We take on 3 retainer clients per quarter. Next slot is [date]." |
-| **Name** | Tier name: "Growth Retainer"; engagement name: "The 90-Day Content Reset → 9-Month Growth Engine" |
-| **Price** | $8K/month, 6-month minimum, OR $7K/month for 12-month commit |
+| **Asosiy** | "Kontent dvigateliga biz egalik qilamiz. 9-oyga kelib o'lchanadigan daromad atributsiyali organik sotuv uchrashuvlarini olasiz." — natija + muddat |
+| **Bonuslar** | (1) Persona tadqiqoti kickoff (bir martalik); (2) Choraklik kontent auditi + qayta nashr qilish ro'yxati; (3) QA qatlamli oldindan tekshirilgan frilans yozuvchilar; (4) Choraklik ijroiya hisoboti |
+| **Kafolat** | "Dastlabki 30 kun — pullik pilot: 4 ta nashr qilingan material + 3 ta kalit so'z yo'l xaritasi. Oxirida aniq 12 oylik yo'lni ko'rmasangiz, hamkorlikni tugatamiz, qarz yo'q." |
+| **Kamyoblik** | Quvvatga asoslangan: "Biz har chorakda 3 ta retainer mijozni qabul qilamiz. Keyingi o'rin [sana]." |
+| **Nom** | Daraja nomi: "Growth Retainer"; hamkorlik nomi: "90 kunlik kontent qayta ishga tushirish → 9 oylik o'sish dvigateli" |
+| **Narx** | Oyiga $8K, 6 oylik minimum, YOKI 12 oylik majburiyat uchun oyiga $7K |
 
-Same writers. Same SEO methodology. ~2x close rate. 60% of pilots convert to 12-month commits.
+Bir xil yozuvchilar. Bir xil SEO metodologiyasi. ~2 baravar yopilish darajasi. Pilotlarning 60% i 12 oylik majburiyatga konvertatsiya qiladi.
 
-**Lesson:** for slow-cycle services (SEO, brand, content), the offer has to address the timeline explicitly. "Trust us, results in 6 months" doesn't sell; "paid pilot → milestone at day 30 → ramp" does.
+**Saboq:** sekin siklli xizmatlar (SEO, brend, kontent) uchun taklif muddatni aniq hal qilishi kerak. "Bizga ishoning, 6 oyda natija" sotmaydi; "pullik pilot → 30-kun bosqichi → o'sish" sotadi.
 
 ---
 
-## Pattern across all six examples
+## Barcha oltita misoldagi naqsh
 
-Look at the changes side-by-side:
+O'zgarishlarni yonma-yon ko'ring:
 
-| Example | Core change | Most important other change |
+| Misol | Asosiy o'zgarish | Eng muhim boshqa o'zgarish |
 |---------|-------------|----------------------------|
-| Fractional CMO | Named it, added scope | First-milestone guarantee |
-| Copywriting course | Outcome-framed, added proof | Case studies bonus |
-| Notion templates | "in one Saturday" anchor | First-step Loom bonus |
-| B2B SaaS | Time-to-value commitment | SLA-based guarantee + pilot |
-| Coaching mastermind | Positioned the room, not the coach | 1-year alumni access bonus |
-| Agency retainer | Outcome + timeline framing | Paid pilot guarantee |
+| Fractional CMO | Nomladi, qamrov qo'shdi | Birinchi-bosqich kafolati |
+| Kopirayting kursi | Natija shaklida, isbot qo'shdi | Keyslar bonusi |
+| Notion shablonlari | "bir shanba kunida" langari | Birinchi-qadam Loom bonusi |
+| B2B SaaS | Qiymatgacha vaqt majburiyati | SLA'ga asoslangan kafolat + pilot |
+| Koucing mastermind | Koucni emas, xonani pozitsiyaladi | 1 yillik bitiruvchi kirish bonusi |
+| Agentlik retainer | Natija + muddat framing | Pullik pilot kafolati |
 
-**The pattern:** in every case, the price barely moved (or didn't move at all). What moved was the *structure* of the offer — naming, framing, guaranteeing, sequencing.
+**Naqsh:** har bir holatda narx deyarli siljimadi (yoki umuman siljimadi). Siljigani taklifning *tuzilmasi* edi — nomlash, framing, kafolatlash, ketma-ketlash.
 
-The price is the comparison. The value is the offer.
+Narx — taqqoslash. Qiymat — taklif.

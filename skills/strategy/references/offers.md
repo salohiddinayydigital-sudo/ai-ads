@@ -1,153 +1,153 @@
-<!-- v8: eski skill `offers` (v7.1) matni; tavsif: When the user wants to design, construct, or improve an offer — the thing they actually sell — including value framing, bonus stacking, guarantee design, scarcity/urgency, naming, and payment structure. Also use when the user mentions 'offer,' 'offer design,' 'build an offer,' 'grand slam offer,' 'i -->
+<!-- v8: eski skill `offers` (v7.1) matni; tavsif: Foydalanuvchi taklifni — aynan sotadigan narsasini — loyihalash, qurish yoki yaxshilashni xohlaganda: qiymat framing, bonus stacking, kafolat dizayni, kamyoblik/shoshilinchlik, nomlash va to'lov tuzilmasi. 'offer', 'offer design', 'grand slam offer' eslatilganda ham ishlating. -->
 
-# Offer Design
+# Taklif dizayni
 
-You are an expert in offer construction. Your goal is to help the user build offers that move — not by writing better copy on a worse offer, but by improving the offer itself.
+Siz taklif qurish bo'yicha mutaxassissiz. Maqsadingiz — foydalanuvchiga yomonroq taklifga yaxshiroq matn yozish bilan emas, taklifning o'zini yaxshilash orqali harakatlanadigan takliflar qurishda yordam berish.
 
-## Before Starting
+## Boshlashdan oldin
 
-**Check for product marketing context first:**
-If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
-
----
-
-## Core Philosophy
-
-**The offer is the thing, not the page.** Better copy on a weak offer compounds slowly. A stronger offer with average copy converts immediately. Most "we need better copy" requests are actually "we need a better offer" requests in disguise.
-
-This skill exists because the rest of the repo handles the *expression* of an offer — `copywriting` writes the sales page, `cro` optimizes the conversion path, `pricing` sets the tier structure, `launch` orchestrates the moment, `paywalls` shapes the upgrade prompt. None of them ask the deeper question: **is the offer underneath any of that actually good?**
-
-### When this skill matters
-
-You sell:
-- **Services** — consulting, freelance, agency retainers, productized services
-- **Courses** — async, cohort-based, live
-- **Coaching** — 1:1, group, mastermind
-- **Info products** — guides, swipe files, templates, communities
-- **High-ticket B2B** — $5K+ ACV with a sales conversation
-- **Direct-response** — e-com promo offers, infomercial-style, paid-traffic-to-VSL
-
-### When `pricing` does more of the work
-
-You sell:
-- **Self-serve SaaS** with tiered subscriptions — the levers are mostly tier structure, value metric, and packaging; offer construction (bonuses, guarantees) is secondary
-- **Marketplaces** — the offer is structural, not constructed
-
-Skim this skill in those cases for the value equation framing, then go to `pricing`.
+**Avval mahsulot marketing kontekstini tekshiring:**
+Agar `.agents/product-marketing.md` (yoki `.claude/product-marketing.md`, yoki eski sozlamalarda eski `product-marketing-context.md` fayl nomi) mavjud bo'lsa, savol berishdan oldin uni o'qing. Shu kontekstdan foydalaning va faqat qamrab olinmagan yoki shu vazifaga xos ma'lumotni so'rang.
 
 ---
 
-## The Value Equation
+## Asosiy falsafa
 
-The single most useful frame for offer design. Originally from Alex Hormozi's *$100M Offers* — internalized broadly across direct-response and creator-economy training since.
+**Taklif — narsaning o'zi, sahifa emas.** Zaif taklifdagi yaxshiroq matn sekin jamlanadi. O'rtacha matnli kuchliroq taklif darhol konvertatsiya qiladi. "Bizga yaxshiroq matn kerak" so'rovlarining ko'pi aslida niqoblangan "bizga yaxshiroq taklif kerak" so'rovlari.
+
+Bu skill shuning uchun mavjud: repozitoriyning qolgan qismi taklifning *ifodasi* bilan shug'ullanadi — `copywriting` sotuv sahifasini yozadi, `cro` konversiya yo'lini optimallashtiradi, `pricing` tarif tuzilmasini belgilaydi, `launch` lahzani orkestratsiya qiladi, `paywalls` yangilash so'rovini shakllantiradi. Ularning hech biri chuqurroq savol bermaydi: **bularning hammasi ostidagi taklifning o'zi haqiqatan yaxshimi?**
+
+### Bu skill qachon muhim
+
+Siz sotasiz:
+- **Xizmatlar** — konsalting, frilans, agentlik retainer'lari, productized xizmatlar
+- **Kurslar** — asinxron, kogortali, jonli
+- **Koucing** — 1:1, guruh, mastermind
+- **Axborot mahsulotlari** — qo'llanmalar, swipe fayllar, shablonlar, hamjamiyatlar
+- **Qimmat B2B** — sotuv suhbati bilan $5K+ ACV
+- **Direct-response** — e-com aksiya takliflari, infomercial uslubi, pullik trafik-VSL
+
+### `pricing` ko'proq ish qilganda
+
+Siz sotasiz:
+- Tarifli obunali **o'zi-xizmat SaaS** — richaglar asosan tarif tuzilmasi, qiymat metrikasi va qadoqlash; taklif qurish (bonuslar, kafolatlar) ikkilamchi
+- **Marketplace'lar** — taklif tuzilmaviy, qurilmaydi
+
+Bu holatlarda qiymat tenglamasi framing'i uchun bu skillni ko'zdan kechiring, so'ng `pricing` ga o'ting.
+
+---
+
+## Qiymat tenglamasi
+
+Taklif dizayni uchun eng foydali yagona freym. Dastlab Alex Hormozi'ning *$100M Offers* kitobidan — shundan beri direct-response va kreator-iqtisodiyot o'qitishida keng o'zlashtirilgan.
 
 ```
-              Dream Outcome  ×  Perceived Likelihood of Achievement
-  Value  =  ─────────────────────────────────────────────────────────
-              Time Delay     ×   Effort & Sacrifice
+              Orzu natijasi  ×  Erishishning sezilgan ehtimoli
+  Qiymat  =  ─────────────────────────────────────────────────────────
+              Kechikish vaqti  ×   Mehnat va qurbonlik
 ```
 
-You move the four levers like this:
+To'rtta richagni shunday siljitasiz:
 
-| Lever | What it means | How to increase value |
+| Richag | Ma'nosi | Qiymatni qanday oshirish |
 |-------|---------------|-----------------------|
-| **Dream outcome** ↑ | What the customer actually wants | Connect to the bigger goal behind the surface ask. Specify and name it. |
-| **Perceived likelihood** ↑ | Do they believe they'll get it | Proof (case studies, named customers, data), guarantees, methodology specificity |
-| **Time delay** ↓ | How long until result | Faster onboarding, faster first win, faster end-to-end timeline |
-| **Effort & sacrifice** ↓ | What it costs them in time/work/risk besides money | Done-for-you, simpler process, fewer decisions, lower learning curve |
+| **Orzu natijasi** ↑ | Mijoz aslida nimani xohlaydi | Yuzaki so'rov ortidagi kattaroq maqsadga bog'lang. Uni aniqlang va nomlang. |
+| **Sezilgan ehtimol** ↑ | Ular uni olishlariga ishonadimi | Isbot (keyslar, nomlangan mijozlar, ma'lumotlar), kafolatlar, metodologiya aniqligi |
+| **Kechikish vaqti** ↓ | Natijagacha qancha vaqt | Tezroq onboarding, tezroq birinchi g'alaba, tezroq boshidan-oxirigacha muddat |
+| **Mehnat va qurbonlik** ↓ | Pulga qo'shimcha vaqt/ish/xavf bo'yicha ularga nima tushadi | Done-for-you, soddaroq jarayon, kamroq qarorlar, past o'rganish egri chizig'i |
 
-**Implication for offer construction**: most "lower the price" requests are actually "raise the numerator or lower the denominator" requests. Price is the comparison, not the value.
+**Taklif qurish uchun oqibat**: "narxni tushiring" so'rovlarining ko'pi aslida "suratni oshiring yoki maxrajni kamaytiring" so'rovlari. Narx — taqqoslash, qiymat emas.
 
-**For the full framework, examples, and how to diagnose which lever is broken:** see [references/value-equation.md](references/value-equation.md)
+**To'liq freymvork, misollar va qaysi richag buzilganini diagnostika qilish uchun:** [references/value-equation.md](references/value-equation.md) ga qarang
 
 ---
 
-## The Anatomy of a Complete Offer
+## To'liq taklifning anatomiyasi
 
-A complete offer has six components. Skip any one and conversion suffers.
+To'liq taklif oltita komponentga ega. Birortasini o'tkazib yuborsangiz, konversiya zarar ko'radi.
 
-| # | Component | Question it answers |
+| # | Komponent | Qaysi savolga javob beradi |
 |---|-----------|---------------------|
-| 1 | **Core deliverable** | What do they get? |
-| 2 | **Bonus stack** | What else do they get that makes the core feel undervalued? |
-| 3 | **Guarantee** | What happens if it doesn't work? |
-| 4 | **Scarcity / urgency** | Why now, not later? |
-| 5 | **Name** | What is this thing called? |
-| 6 | **Price + payment structure** | What do they pay and how? |
+| 1 | **Asosiy natija** | Ular nima oladi? |
+| 2 | **Bonus to'plami** | Asosiyni kam baholangandek ko'rsatadigan yana nima oladi? |
+| 3 | **Kafolat** | Ishlamasa nima bo'ladi? |
+| 4 | **Kamyoblik / shoshilinchlik** | Nega keyin emas, hozir? |
+| 5 | **Nom** | Bu narsa nima deb ataladi? |
+| 6 | **Narx + to'lov tuzilmasi** | Ular nima to'laydi va qanday? |
 
-Most weak offers fail on bonuses (none), guarantees (none or wrong type), or scarcity (none, or fake). Most aggressive-to-the-point-of-cringe offers fail on guarantee (over-promising) or scarcity (fake countdown timers).
+Ko'pgina zaif takliflar bonuslarda (yo'q), kafolatlarda (yo'q yoki noto'g'ri tur) yoki kamyoblikda (yo'q yoki soxta) muvaffaqiyatsiz bo'ladi. Ko'pgina ahmoqlik darajasigacha agressiv takliflar kafolatda (haddan tashqari va'da) yoki kamyoblikda (soxta teskari sanagich) muvaffaqiyatsiz bo'ladi.
 
-**For the full anatomy with worked examples:** see [references/offer-anatomy.md](references/offer-anatomy.md)
+**Ishlangan misollar bilan to'liq anatomiya uchun:** [references/offer-anatomy.md](references/offer-anatomy.md) ga qarang
 
 ---
 
-## Reference Library
+## Reference kutubxonasi
 
-| Reference | When to read |
+| Reference | Qachon o'qish |
 |-----------|--------------|
-| [value-equation.md](references/value-equation.md) | Diagnosing which lever is broken on a stuck offer |
-| [offer-anatomy.md](references/offer-anatomy.md) | Building a complete offer from scratch |
-| [guarantee-design.md](references/guarantee-design.md) | Picking the right type of guarantee for your business model |
-| [bonus-stacking.md](references/bonus-stacking.md) | Adding bonuses that raise perceived value without devaluing the core |
-| [scarcity-urgency.md](references/scarcity-urgency.md) | Creating *real* scarcity (and avoiding the fake patterns that destroy trust) |
-| [offer-formats.md](references/offer-formats.md) | Format playbooks by business type — service, course, coaching, info product, SaaS lead magnet, agency retainer, high-ticket B2B |
-| [saas-offers.md](references/saas-offers.md) | SaaS specifically — the discount trap (why discounting to acquire backfires) + four SaaS worked offers (AudienceTap, SaberSim, Teachable, Kit) |
-| [examples.md](references/examples.md) | Anonymized worked examples — before/after for each business type |
+| [value-equation.md](references/value-equation.md) | Tiqilib qolgan taklifda qaysi richag buzilganini diagnostika qilish |
+| [offer-anatomy.md](references/offer-anatomy.md) | Taklifni noldan to'liq qurish |
+| [guarantee-design.md](references/guarantee-design.md) | Biznes modelingizga mos kafolat turini tanlash |
+| [bonus-stacking.md](references/bonus-stacking.md) | Asosiyni qadrsizlantirmasdan sezilgan qiymatni oshiradigan bonuslarni qo'shish |
+| [scarcity-urgency.md](references/scarcity-urgency.md) | *Haqiqiy* kamyoblikni yaratish (va ishonchni yo'q qiladigan soxta naqshlardan qochish) |
+| [offer-formats.md](references/offer-formats.md) | Biznes turi bo'yicha format playbooklari — xizmat, kurs, koucing, axborot mahsuloti, SaaS lead magnit, agentlik retainer, qimmat B2B |
+| [saas-offers.md](references/saas-offers.md) | Aynan SaaS — chegirma tuzog'i (nega jalb qilish uchun chegirma teskari ta'sir qiladi) + to'rtta SaaS ishlangan taklif (AudienceTap, SaberSim, Teachable, Kit) |
+| [examples.md](references/examples.md) | Anonimlashtirilgan ishlangan misollar — har bir biznes turi uchun oldin/keyin |
 
 ---
 
-## The Diagnostic Loop
+## Diagnostika sikli
 
-When the user says "my offer isn't converting" or "I want to improve my offer":
+Foydalanuvchi "taklifim konvertatsiya qilmayapti" yoki "taklifimni yaxshilamoqchiman" desa:
 
-1. **Identify the business type** — service, course, coaching, info product, SaaS, agency, B2B. The right playbook is type-specific.
-2. **State the current offer in plain language** — name, price, what they get, guarantee, deadline. Write it down even if it lives in scattered places now.
-3. **Run the value equation** — score each of the four levers 1–10. The lowest is the binding constraint.
-4. **Audit the anatomy** — which of the six components is missing or weak?
-5. **Pick one lever to fix this iteration** — don't rebuild everything. The biggest lever is usually the one currently scoring lowest.
-6. **Draft the changed component** — new bonus, new guarantee, new scarcity, new name, new payment plan
-7. **Project the lift, honestly** — most single-component changes deliver 10–40% conversion lift. Anyone promising 5x is selling something. Two consecutive iterations on different levers can stack to 2–3x.
-
----
-
-## When NOT to Use Offer-Design Tactics
-
-Some offer patterns work but cost more than they're worth:
-
-- **Manipulative scarcity** — fake countdown timers, "only 3 spots left" lies. Short-term lift, long-term trust collapse. Don't.
-- **Over-promising guarantees** — "double your revenue or refund + $1,000." Refund risk eats margin; the few cases that fail nuke your reputation publicly.
-- **Bonus inflation** — stacking $50K of "bonuses" on a $497 product so it "feels like a steal." Sophisticated buyers see this. Treat bonuses as additive, not exaggerated.
-- **Course-bro aesthetic on a serious product** — Gold logos, "secret method," fake urgency. Pattern-matches to scam. Wrong room.
-- **Discounting to acquire** — discount-*askers* churn at ~2× the rate of full-price customers, and a coupon anchors the product as cheap. Discount only for upgrades/cross-sells (rewarding existing customers) or real seasonal windows — never to win a new one. Raise value with an offer instead. See [saas-offers.md](references/saas-offers.md).
-
-The repo voice: opinionated, but honest. Building offers well doesn't mean building offers loud.
+1. **Biznes turini aniqlang** — xizmat, kurs, koucing, axborot mahsuloti, SaaS, agentlik, B2B. To'g'ri playbook turga xos.
+2. **Joriy taklifni oddiy tilda bayon qiling** — nom, narx, nima olishadi, kafolat, muddat. Hozir tarqoq joylarda bo'lsa ham yozib qo'ying.
+3. **Qiymat tenglamasini ishga tushiring** — to'rtta richagning har birini 1–10 ball bilan baholang. Eng pasti — bog'lovchi cheklov.
+4. **Anatomiyani audit qiling** — oltita komponentdan qaysi biri yetishmaydi yoki zaif?
+5. **Shu iteratsiyada tuzatish uchun bitta richagni tanlang** — hammasini qayta qurmang. Eng katta richag odatda hozir eng past ball olgani.
+6. **O'zgargan komponentni qoralang** — yangi bonus, yangi kafolat, yangi kamyoblik, yangi nom, yangi to'lov rejasi
+7. **Ko'tarilishni halol prognoz qiling** — bitta komponent o'zgarishlarining ko'pi 10–40% konversiya oshishini beradi. 5 baravar va'da qilgan har kim nimadir sotyapti. Turli richaglardagi ketma-ket ikki iteratsiya 2–3 baravargacha jamlanishi mumkin.
 
 ---
 
-## Banned Vocabulary
+## Taklif dizayni taktikalarini QACHON ishlatmaslik
 
-When drafting offer language (sales pages, emails, headlines), avoid:
+Ba'zi taklif naqshlari ishlaydi, lekin arzigan narxdan qimmatroq turadi:
 
-- **"Game-changing," "revolutionary," "disruptive," "next-level," "10x"** — pattern-matches to AI slop / course-bro
+- **Manipulyativ kamyoblik** — soxta teskari sanagichlar, "faqat 3 joy qoldi" yolg'onlari. Qisqa muddatli ko'tarilish, uzoq muddatli ishonch qulashi. Qilmang.
+- **Haddan tashqari va'da qilingan kafolatlar** — "daromadingizni ikki baravar oshiring yoki pulni qaytaring + $1 000." Qaytarish xavfi marjani yeydi; muvaffaqiyatsiz bo'lgan kam holatlar obro'ingizni ommaviy yo'q qiladi.
+- **Bonus inflyatsiyasi** — $497 lik mahsulotga $50K "bonus"larni qo'yib, uni "tekin"dek ko'rsatish. Tajribali xaridorlar buni ko'radi. Bonuslarni bo'rttirilgan emas, qo'shimcha deb qarang.
+- **Jiddiy mahsulotda kurs-bro estetikasi** — Oltin logotiplar, "maxfiy usul", soxta shoshilinchlik. Firibgarlikka o'xshab ketadi. Noto'g'ri xona.
+- **Jalb qilish uchun chegirma** — chegirma-*so'raganlar* to'liq narx to'laydigan mijozlarga nisbatan ~2 baravar tez ketadi, kupon esa mahsulotni arzon deb langarlaydi. Chegirmani faqat yangilash/cross-sell (mavjud mijozlarni taqdirlash) yoki haqiqiy mavsumiy oynalar uchun bering — yangi mijozni yutish uchun hech qachon. O'rniga taklif bilan qiymatni oshiring. [saas-offers.md](references/saas-offers.md) ga qarang.
+
+Repozitoriy ovozi: o'z fikrli, lekin halol. Takliflarni yaxshi qurish ularni baqiriq qurishni anglatmaydi.
+
+---
+
+## Taqiqlangan lug'at
+
+Taklif matnini (sotuv sahifalari, emaillar, sarlavhalar) qoralaganda quyidagilardan qoching:
+
+- **"Game-changing," "revolutionary," "disruptive," "next-level," "10x"** — AI axlati / kurs-bro'ga o'xshab ketadi
 - **"Secret," "hidden," "what they don't want you to know"** — clickbait
-- **"Limited time" with no actual time limit** — lying
-- **"Worth $X" or "$Y value" with no comparable** — inflation
-- **"100% guaranteed" without specifying conditions** — legally and brand-wise risky
+- **Aniq muddatsiz "Limited time"** — yolg'on
+- **Taqqoslanadigan narsasiz "Worth $X" yoki "$Y value"** — inflyatsiya
+- **Shartlarni ko'rsatmasdan "100% guaranteed"** — huquqiy va brend jihatidan xavfli
 
-Use specific numbers, named customers, concrete outcomes, real timelines. Specificity beats superlatives.
+Aniq raqamlar, nomlangan mijozlar, aniq natijalar, haqiqiy muddatlardan foydalaning. Aniqlik superlativlardan ustun.
 
 ---
 
-## Related Skills
+## Bog'liq skilllar
 
-- **pricing** — for price levels, tier structure, value metric, packaging, freemium
-- **copywriting** — for the page that presents the offer
-- **cro** — for optimizing the conversion path the offer travels through
-- **launch** — for the moment you ship the offer
-- **paywalls** — for in-app upgrade-prompt versions of an offer
-- **sales-enablement** — for the deck and one-pager that carry the offer into a sales conversation
-- **emails** — for the email sequence that warms up the offer
-- **marketing-psychology** — for the cognitive biases that make offers land or bounce
+- **pricing** — narx darajalari, tarif tuzilmasi, qiymat metrikasi, qadoqlash, freemium uchun
+- **copywriting** — taklifni taqdim etadigan sahifa uchun
+- **cro** — taklif o'tadigan konversiya yo'lini optimallashtirish uchun
+- **launch** — taklifni chiqaradigan lahza uchun
+- **paywalls** — taklifning ilova ichidagi yangilash-so'rovi versiyalari uchun
+- **sales-enablement** — taklifni sotuv suhbatiga olib boradigan deck va one-pager uchun
+- **emails** — taklifni isitadigan email ketma-ketligi uchun
+- **marketing-psychology** — takliflarning qo'nishi yoki qaytishiga olib keladigan kognitiv noxolisliklar uchun
 
 ---
 

@@ -1,116 +1,116 @@
-# SaaS Offers — the discount trap + worked examples
+# SaaS takliflari — chegirma tuzog'i + ishlangan misollar
 
-The rest of the offers library skews services, courses, and coaching. This reference covers the SaaS case specifically: why discounting is the wrong acquisition lever, and four worked offers that stack risk-reversal, bonuses, and scarcity for a software business.
+Takliflar kutubxonasining qolgan qismi xizmatlar, kurslar va koucingga og'gan. Bu reference aynan SaaS holatini qamrab oladi: nega chegirma jalb qilish uchun noto'g'ri richag va dasturiy ta'minot biznesi uchun xavfni qaytarish, bonuslar va kamyoblikni to'playdigan to'rtta ishlangan taklif.
 
-Read this alongside [offer-formats.md](offer-formats.md#self-serve-saas). For price level and tier structure, the `pricing` skill still does the heavier lifting — this covers the *offer* wrapped around the price.
+Buni [offer-formats.md](offer-formats.md#self-serve-saas) bilan birga o'qing. Narx darajasi va tarif tuzilmasi uchun `pricing` skilli hamon og'irroq ishni bajaradi — bu yerda narx atrofidagi *taklif* ko'rib chiqiladi.
 
 ---
 
-## The discount trap
+## Chegirma tuzog'i
 
-The instinct when a SaaS isn't converting is to cut the price — a launch coupon, a "50% off first 3 months," a permanent lower tier. It's the most-reached-for lever and one of the worst.
+SaaS konvertatsiya qilmayotganda instinkt — narxni kesish: launch kuponi, "dastlabki 3 oyga 50% chegirma," doimiy past daraja. Bu eng ko'p tutiladigan richag va eng yomonlaridan biri.
 
-**Offers beat discounts.** A discount lowers the price. An offer raises the value — a guarantee, a done-for-you migration, a bonus that removes the switching cost. Same net price to the buyer, but one trains them to expect cheap and the other trains them to expect valuable.
+**Takliflar chegirmalardan ustun.** Chegirma narxni pasaytiradi. Taklif qiymatni oshiradi — kafolat, done-for-you migratsiya, almashtirish xarajatini olib tashlaydigan bonus. Xaridor uchun sof narx bir xil, lekin biri ularni arzonga, ikkinchisi qimmatli narsaga o'rgatadi.
 
-### The data
+### Ma'lumotlar
 
-**Discount-*askers* churn at roughly 2× the rate of full-price customers.** The buyer who negotiated their way in is signaling something: price was the reason they bought, not value. When a cheaper option appears — or when the renewal hits full price — they leave. You bought a customer who was never yours.
+**Chegirma-*so'ragunlar* to'liq narx to'laydigan mijozlarga nisbatan taxminan 2 baravar tez ketadi.** Muzokara bilan kirgan xaridor nimadir signal beradi: ular narx sababli sotib olgan, qiymat sababli emas. Arzonroq variant paydo bo'lganda — yoki yangilash to'liq narxga kelganda — ular ketadi. Siz hech qachon sizniki bo'lmagan mijozni sotib oldingiz.
 
-This compounds. Discounting to acquire also:
+Bu jamlanadi. Jalb qilish uchun chegirma qo'shimcha ravishda:
 
-- **Anchors the product as cheap** — hard to raise later without churn spikes
-- **Attracts the wrong ICP** — price-shoppers, not value-buyers
-- **Trains the market to wait** — buyers learn there's always a sale coming, so they never pay full
-- Sits next to **trial fatigue and discount fatigue** — the same buyer who's seen a hundred "50% off" banners no longer feels urgency from yours
+- **Mahsulotni arzon deb langarlaydi** — keyinroq ketishlar o'sishisiz narxni ko'tarish qiyin
+- **Noto'g'ri ICP'ni jalb qiladi** — qiymat-xaridorlar emas, narx-izlovchilar
+- **Bozorni kutishga o'rgatadi** — xaridorlar doim chegirma kelishini o'rganadi, shuning uchun hech qachon to'liq to'lamaydi
+- **Sinov charchog'i va chegirma charchog'i** bilan yonma-yon turadi — yuzlab "50% chegirma" bannerlarini ko'rgan xaridor sizniki uchun shoshilinchlik his qilmaydi
 
-### The rule
+### Qoida
 
-**Never discount to acquire.** Discount only in two moments, where the mechanics actually work for you:
+**Jalb qilish uchun hech qachon chegirma bermang.** Chegirmani faqat mexanika sizga ishlaydigan ikki lahzada bering:
 
-| When | Why it works |
+| Qachon | Nega ishlaydi |
 |------|--------------|
-| **Upgrades / cross-sells** | The customer already values the product. A discount to move up a tier or add a product rewards commitment instead of buying a stranger. |
-| **Seasonal moments** | Black Friday, year-end, an annual-plan push — a real, time-bound, everyone-gets-it window. Not a permanent price cut wearing a costume. |
+| **Yangilashlar / cross-sell'lar** | Mijoz mahsulotni allaqachon qadrlaydi. Darajani ko'tarish yoki mahsulot qo'shish uchun chegirma begonani sotib olish o'rniga majburiyatni taqdirlaydi. |
+| **Mavsumiy lahzalar** | Black Friday, yil oxiri, yillik-tarif kampaniyasi — haqiqiy, vaqt bilan cheklangan, hamma oladigan oyna. Libos kiygan doimiy narx kesish emas. |
 
-Everything else is an **offer**, not a discount. If conversion is stuck at the top of the funnel, reverse the risk and stack the value — don't cut the price. See the four examples below.
-
----
-
-## Four SaaS worked offers
-
-Each shows how to wrap a SaaS price in a real offer — risk-reversal, a switching-cost-killing bonus, and honest scarcity — instead of a coupon.
-
-### 1. AudienceTap — $297 fixed-price pilot
-
-**Business:** audience-analytics SaaS, self-serve, mid-market buyers hesitant to sign an annual before seeing value on their own data.
-
-**The offer instead of a discount:**
-
-| Component | What it is |
-|-----------|------------|
-| **Core** | A **$297 fixed-price 30-day pilot** — full product, run against the buyer's real audience, not a demo dataset |
-| **Risk reversal** | "If the pilot doesn't surface an insight your team acts on, the $297 is refunded — and it credits toward annual if you convert." |
-| **Bonus** | A done-with-you setup session (connect sources, first report) so time-to-value is days, not weeks |
-| **Scarcity** | Capacity-real: "We onboard 6 pilots a month so each gets the setup session." Not a fake counter. |
-
-**Why it beats a discount:** the pilot is a paid, low-risk *yes* that filters for value-buyers. The $297 isn't a price cut — it's a fee that credits forward, so full-price annual is the default next step, not a negotiation.
-
-### 2. SaberSim — $497 bundle
-
-**Business:** sports-analytics/optimizer SaaS. Individual tools convert fine alone but the full stack is where retention lives.
-
-**The offer instead of a discount:**
-
-| Component | What it is |
-|-----------|------------|
-| **Core** | A **$497 bundle** of the optimizer + sync + data feed — the tools that only pay off together |
-| **Risk reversal** | 14-day "run it on a real slate" guarantee — use it live, full refund if it doesn't beat the buyer's current workflow |
-| **Bonus** | Strategy walkthroughs + a starter template library so the bundle produces a result on day one |
-| **Scarcity** | Seasonal: bundle priced for the **start of the season**; after kickoff it unbundles to full à-la-carte |
-
-**Why it beats a discount:** the bundle raises perceived value (three tools, one decision) rather than lowering price on one. The season start is *real* seasonal scarcity — an allowed discount moment — not a permanent markdown.
-
-### 3. Teachable — $1,997 accelerator
-
-**Business:** course-platform SaaS. The subscription is cheap; the value (and the switching cost) is getting a course actually launched.
-
-**The offer instead of a discount:**
-
-| Component | What it is |
-|-----------|------------|
-| **Core** | A **$1,997 "Launch Accelerator"** — the platform plan **plus** a structured 6-week program to ship the buyer's first course |
-| **Risk reversal** | Outcome guarantee: "Publish your course in 6 weeks or we work with you free until you do." Tied to a completion condition. |
-| **Bonus** | Launch-email templates, a pricing-page teardown, and a cohort Slack — the pieces creators stall on |
-| **Scarcity** | Cohort-based: accelerator runs on a start date, capped seat count, next cohort later |
-
-**Why it beats a discount:** the accelerator sells the *outcome* (a launched course) at a price far above the raw subscription — the opposite of discounting. The guarantee de-risks the real fear ("I'll pay and never launch"), and the cohort cap is honest scarcity.
-
-### 4. Kit — "Painless Switch" $997 migration offer
-
-**Business:** email-platform SaaS. The blocker isn't price — it's the terror of migrating a list, sequences, and automations off the incumbent.
-
-**The offer instead of a discount:**
-
-| Component | What it is |
-|-----------|------------|
-| **Core** | A **$997 "Painless Switch"** — done-for-you migration of list, forms, sequences, and automations |
-| **Risk reversal** | "If your migration isn't live and verified in 14 days, it's free." The guarantee is on the *switching cost*, the actual objection |
-| **Bonus** | A deliverability audit + a re-warm plan so the switch doesn't tank open rates — removes the second-biggest fear |
-| **Scarcity** | Capacity-real: migration engineers handle a fixed number per month; the offer closes when the queue fills |
-
-**Why it beats a discount:** the entire barrier to a SaaS switch is effort and risk, not price. A discount does nothing about migration dread; a done-for-you offer with a switching-cost guarantee removes it. The buyer pays *more* up front and churns *less*, because they're a value-buyer who committed.
+Qolgan hamma narsa — chegirma emas, **taklif**. Konversiya voronka tepasida tiqilib qolsa, narxni kesmang, xavfni teskari qiling va qiymatni to'plang. Quyidagi to'rtta misolga qarang.
 
 ---
 
-## The pattern across all four
+## To'rtta SaaS ishlangan taklif
 
-| Offer | Price | Risk reversal is on… | Scarcity type |
+Har biri SaaS narxini kupon o'rniga haqiqiy taklif bilan — xavfni qaytarish, almashtirish xarajatini o'ldiradigan bonus va halol kamyoblik bilan — qanday o'rashni ko'rsatadi.
+
+### 1. AudienceTap — $297 qat'iy narxli pilot
+
+**Biznes:** auditoriya-analitika SaaS, o'zi-xizmat, qiymatni o'z ma'lumotida ko'rishdan oldin yillik shartnomaga imzo qo'yishdan ikkilanayotgan o'rta bozor xaridorlari.
+
+**Chegirma o'rniga taklif:**
+
+| Komponent | Nima |
+|-----------|------------|
+| **Asosiy** | **$297 qat'iy narxli 30 kunlik pilot** — to'liq mahsulot, demo ma'lumotlar to'plamiga emas, xaridorning haqiqiy auditoriyasiga qarshi ishlaydi |
+| **Xavfni qaytarish** | "Agar pilot jamoangiz harakat qiladigan insaytni ochmasa, $297 qaytariladi — va konvertatsiya qilsangiz yillikka hisoblanadi." |
+| **Bonus** | Qiymatgacha vaqt haftalar emas, kunlar bo'lishi uchun done-with-you sozlash sessiyasi (manbalarni ulash, birinchi hisobot) |
+| **Kamyoblik** | Haqiqiy quvvat: "Har biri sozlash sessiyasini olishi uchun oyiga 6 ta pilotni qabul qilamiz." Soxta hisoblagich emas. |
+
+**Nega u chegirmadan yaxshi:** pilot — qiymat-xaridorlarni saralaydigan pullik, past xavfli *ha*. $297 narx kesish emas — u oldinga hisoblanadigan to'lov, shuning uchun to'liq narxli yillik muzokara emas, standart keyingi qadam.
+
+### 2. SaberSim — $497 to'plam
+
+**Biznes:** sport-analitika/optimizator SaaS. Alohida asboblar yolg'iz yaxshi konvertatsiya qiladi, lekin saqlash to'liq stekda yashaydi.
+
+**Chegirma o'rniga taklif:**
+
+| Komponent | Nima |
+|-----------|------------|
+| **Asosiy** | Optimizator + sinxronizatsiya + ma'lumotlar oqimining **$497 to'plami** — faqat birga o'zini oqlaydigan asboblar |
+| **Xavfni qaytarish** | 14 kunlik "haqiqiy slate'da ishga tushiring" kafolati — jonli ishlating, xaridorning joriy ish jarayonidan o'zmasa to'liq qaytarish |
+| **Bonus** | To'plam birinchi kundan natija berishi uchun strategiya walkthrough'lari + boshlang'ich shablonlar kutubxonasi |
+| **Kamyoblik** | Mavsumiy: to'plam **mavsum boshlanishi** uchun narxlangan; start'dan keyin to'liq à-la-carte ga ajraladi |
+
+**Nega u chegirmadan yaxshi:** to'plam bitta asbobdagi narxni pasaytirmasdan, sezilgan qiymatni (uchta asbob, bitta qaror) oshiradi. Mavsum boshlanishi — *haqiqiy* mavsumiy kamyoblik, ruxsat etilgan chegirma lahzasi — doimiy tushirish emas.
+
+### 3. Teachable — $1 997 akselerator
+
+**Biznes:** kurs-platforma SaaS. Obuna arzon; qiymat (va almashtirish xarajati) kursni haqiqatan ishga tushirishda.
+
+**Chegirma o'rniga taklif:**
+
+| Komponent | Nima |
+|-----------|------------|
+| **Asosiy** | **$1 997 "Launch Accelerator"** — platforma tarifi **plus** xaridorning birinchi kursini chiqarish uchun tuzilgan 6 haftalik dastur |
+| **Xavfni qaytarish** | Natija kafolati: "Kursingizni 6 hafta ichida nashr qiling yoki nashr qilguningizcha siz bilan bepul ishlaymiz." Yakunlash shartiga bog'langan. |
+| **Bonus** | Launch email shablonlari, narx sahifasi tahlili va kogorta Slack — kreatorlar tiqilib qoladigan qismlar |
+| **Kamyoblik** | Kogortaga asoslangan: akselerator boshlanish sanasida, cheklangan o'rinlar soni bilan ishlaydi, keyingi kogorta keyinroq |
+
+**Nega u chegirmadan yaxshi:** akselerator *natijani* (chiqarilgan kurs) xom obunadan ancha yuqori narxda sotadi — chegirmaning teskarisi. Kafolat haqiqiy qo'rquvni ("to'layman va hech qachon chiqarmayman") xavfsizlantiradi, kogorta chegarasi esa halol kamyoblik.
+
+### 4. Kit — "Painless Switch" $997 migratsiya taklifi
+
+**Biznes:** email-platforma SaaS. To'siq narx emas — ro'yxat, ketma-ketliklar va avtomatlashtirishlarni joriy platformadan ko'chirish dahshati.
+
+**Chegirma o'rniga taklif:**
+
+| Komponent | Nima |
+|-----------|------------|
+| **Asosiy** | **$997 "Painless Switch"** — ro'yxat, formalar, ketma-ketliklar va avtomatlashtirishlarning done-for-you migratsiyasi |
+| **Xavfni qaytarish** | "Agar migratsiyangiz 14 kun ichida jonli va tekshirilgan bo'lmasa, u bepul." Kafolat aslida e'tiroz bo'lgan *almashtirish xarajati*ga qo'yilgan |
+| **Bonus** | O'tish ochish darajalarini tushirmasligi uchun yetkazib berish auditi + qayta isitish rejasi — ikkinchi eng katta qo'rquvni olib tashlaydi |
+| **Kamyoblik** | Haqiqiy quvvat: migratsiya muhandislari oyiga aniq sonni boshqaradi; navbat to'lganda taklif yopiladi |
+
+**Nega u chegirmadan yaxshi:** SaaS almashtirishning butun to'sig'i narx emas, mehnat va xavf. Chegirma migratsiya qo'rquviga hech narsa qilmaydi; almashtirish-xarajati kafolatli done-for-you taklif uni olib tashlaydi. Xaridor oldindan *ko'proq* to'laydi va *kamroq* ketadi, chunki u majburiyat olgan qiymat-xaridor.
+
+---
+
+## To'rttalasidagi naqsh
+
+| Taklif | Narx | Xavfni qaytarish qaysi narsaga… | Kamyoblik turi |
 |-------|-------|----------------------|---------------|
-| AudienceTap pilot | $297 | Whether it surfaces an actionable insight | Capacity (setup sessions) |
-| SaberSim bundle | $497 | Whether it beats the current workflow | Seasonal (season start) |
-| Teachable accelerator | $1,997 | Whether the course actually launches | Cohort (start date + cap) |
-| Kit Painless Switch | $997 | Whether migration is live in 14 days | Capacity (engineer queue) |
+| AudienceTap pilot | $297 | Amaliy insayt ochilishiga | Quvvat (sozlash sessiyalari) |
+| SaberSim to'plam | $497 | Joriy ish jarayonidan o'zishiga | Mavsumiy (mavsum boshlanishi) |
+| Teachable akselerator | $1 997 | Kurs haqiqatan chiqishiga | Kogorta (boshlanish sanasi + chegara) |
+| Kit Painless Switch | $997 | Migratsiya 14 kunda jonli bo'lishiga | Quvvat (muhandis navbati) |
 
-Notice what's *not* here: a coupon, a "% off," a slashed sticker price. Every one raises value and reverses the real risk — and the scarcity is either capacity, cohort, or a genuine seasonal window, never a fake timer.
+Bu yerda nima *yo'q*ligiga e'tibor bering: kupon, "% chegirma", kesilgan sticker narx. Har biri qiymatni oshiradi va haqiqiy xavfni teskari qiladi — kamyoblik esa quvvat, kogorta yoki haqiqiy mavsumiy oyna, hech qachon soxta taymer emas.
 
-**The SaaS takeaway:** when conversion is stuck, your instinct will be to discount. Build the offer instead. Discount only to reward existing customers (upgrades, cross-sells) or in a real seasonal window — never to acquire a stranger you'll watch churn at 2×.
+**SaaS xulosasi:** konversiya tiqilib qolganda instinktingiz chegirma berish bo'ladi. O'rniga taklif quring. Chegirmani faqat mavjud mijozlarni taqdirlash (yangilashlar, cross-sell'lar) yoki haqiqiy mavsumiy oynada bering — hech qachon 2 baravar tez ketishini ko'radigan begonani jalb qilish uchun emas.

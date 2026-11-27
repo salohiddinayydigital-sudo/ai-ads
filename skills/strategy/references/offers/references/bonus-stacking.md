@@ -1,150 +1,150 @@
-# Bonus Stacking
+# Bonus to'plash (bonus stacking)
 
-How to add bonuses that raise perceived value without devaluing the core offer.
+Asosiy taklifni qadrsizlantirmasdan sezilgan qiymatni oshiradigan bonuslarni qanday qo'shish.
 
-## What bonuses actually do
+## Bonuslar aslida nima qiladi
 
-Three jobs at once:
+Bir vaqtda uchta ish:
 
-1. **Raise perceived value** of the total offer
-2. **Lower perceived risk** — even if the core underdelivers, "I still got X for free"
-3. **Close specific buying objections** — each bonus can target one objection
+1. Umumiy taklifning **sezilgan qiymatini oshiradi**
+2. **Sezilgan xavfni kamaytiradi** — asosiy yetarli bermasa ham, "men baribir X ni bepul oldim"
+3. **Aniq xarid e'tirozlarini yopadi** — har bir bonus bitta e'tirozga qaratilishi mumkin
 
-The third job is the underrated one. Most weak bonus stacks throw four generic "extras" at the buyer. Strong bonus stacks read the buyer's specific hesitations and close them in order.
+Uchinchisi — eng kam baholanadigani. Ko'pgina zaif bonus to'plamlari xaridorga to'rtta umumiy "qo'shimcha"ni tashlaydi. Kuchli bonus to'plamlari xaridorning aniq ikkilanishlarini o'qib, ularni tartib bilan yopadi.
 
 ---
 
-## The core principle: bonuses-as-objection-handlers
+## Asosiy tamoyil: bonuslar e'tirozlarni hal qiluvchi sifatida
 
-For each major objection your buyer has, add a bonus that closes it.
+Xaridoringizning har bir asosiy e'tirozi uchun uni yopadigan bonus qo'shing.
 
-### Common objections → matching bonus
+### Keng tarqalgan e'tirozlar → mos bonus
 
-| Objection | Targeted bonus |
+| E'tiroz | Nishonli bonus |
 |-----------|---------------|
-| "I don't have time to implement this" | Done-for-you setup, week 1 |
-| "I don't know which tools to use" | Pre-vetted tool stack with discount codes |
-| "What if I get stuck?" | 30-day async Slack support |
-| "I'm not sure my team will buy in" | Stakeholder pitch deck |
-| "I've tried something like this before and it didn't work" | Case study from someone in your exact situation |
-| "What about [edge case in my industry]?" | Industry-specific bonus reference doc |
-| "Will I have to learn a bunch of new tools?" | Pre-built templates for the tools we recommend |
-| "What if I don't finish it?" | 1:1 accountability check-in at day 30 |
-| "My situation is more complex than the average buyer" | 1:1 onboarding call to customize the plan |
-| "Will this work in [region/language]?" | Localized version or addendum |
+| "Buni joriy qilishga vaqtim yo'q" | Done-for-you sozlash, 1-hafta |
+| "Qaysi asboblardan foydalanishni bilmayman" | Chegirma kodli oldindan tekshirilgan asbob steki |
+| "Tiqilib qolsam-chi?" | 30 kunlik asinxron Slack qo'llab-quvvatlash |
+| "Jamoam qo'llab-quvvatlashiga ishonchim komil emas" | Stakeholder pitch deck |
+| "Avval shunga o'xshash narsani sinaganman va ishlamagan" | Aynan sizning vaziyatingizdagi odam keysi |
+| "Mening sohamdagi [chekka holat]chi?" | Sohaga xos bonus reference hujjati |
+| "Bir qancha yangi asboblarni o'rganishim kerakmi?" | Biz tavsiya qiladigan asboblar uchun tayyor shablonlar |
+| "Yakunlay olmasam-chi?" | 30-kunda 1:1 javobgarlik check-in |
+| "Mening vaziyatim o'rtacha xaridordan murakkabroq" | Rejani moslashtirish uchun 1:1 onboarding qo'ng'irog'i |
+| "Bu [mintaqa/til]da ishlaydimi?" | Lokalizatsiya qilingan versiya yoki qo'shimcha |
 
-A 4-bonus stack that closes 4 specific objections converts massively better than a 4-bonus stack of generic "extras."
+4 ta aniq e'tirozni yopadigan 4 ta bonus to'plami umumiy "qo'shimchalar"dan iborat 4 ta bonus to'plamidan keskin yaxshiroq konvertatsiya qiladi.
 
-### How to find your buyer's actual objections
+### Xaridoringizning haqiqiy e'tirozlarini qanday topish
 
-1. Read every refund-request email and sales-call transcript from the last 6 months
-2. Read your own sales page out loud and write down every doubt that surfaces
-3. Ask 3 recent buyers: "What almost made you not buy?"
+1. So'nggi 6 oydagi har bir qaytarish-so'rovi emaili va sotuv-qo'ng'iroq transkriptini o'qing
+2. O'z sotuv sahifangizni ovoz chiqarib o'qing va paydo bo'lgan har bir shubhani yozib oling
+3. 3 ta so'nggi xaridordan so'rang: "Sotib olmaslikka sal qoldirgan narsa nima edi?"
 
-The answers cluster around 3–6 objections. Build a bonus for each.
-
----
-
-## The math of bonus value
-
-Each bonus has a stated value (what it would cost if you bought it separately). Bonuses should:
-
-1. **Have a stated value the buyer can verify.** Compare to a comparable product or service. "$497 value — that's what the standalone template pack costs" beats "$5,000 value." (Standalone? Compared to what?)
-
-2. **Total to less than 2x the price** of the core offer. A $1K offer can comfortably have $1.5K in bonuses. A $1K offer with "$25K in bonuses" reads as a scam.
-
-3. **Be things you'd actually sell separately.** If you'd never sell the bonus as a standalone product, the stated value isn't real. Sophisticated buyers can tell.
-
-4. **Each have a specific named outcome.** "Bonus: marketing toolkit" is weak. "Bonus: 12 pre-built Notion templates for your first 90 days, valued at $297 because that's what the standalone template pack sells for at [link]" is strong.
+Javoblar 3–6 e'tiroz atrofida to'planadi. Har biri uchun bonus quring.
 
 ---
 
-## The 4-bonus pattern that works
+## Bonus qiymati matematikasi
 
-Most strong offers stack exactly 3–5 bonuses. More starts to feel like padding; fewer leaves objections un-closed.
+Har bir bonusning e'lon qilingan qiymati bor (alohida sotib olganda qancha turishi). Bonuslar quyidagicha bo'lishi kerak:
 
-A common structure:
+1. **Xaridor tekshira oladigan e'lon qilingan qiymatga ega.** Taqqoslanadigan mahsulot yoki xizmat bilan solishtiring. "$497 qiymat — mustaqil shablon paketi shuncha turadi" "$5 000 qiymat" dan yaxshi. (Mustaqilmi? Nimaga nisbatan?)
 
-| # | Type | Purpose | Typical value |
+2. Asosiy taklif narxining **2 baravaridan kamiga teng.** $1K lik taklif $1.5K bonusga qulay ega bo'lishi mumkin. "$25K bonus" li $1K lik taklif firibgarlikdek o'qiladi.
+
+3. **Haqiqatan alohida sotadigan narsangiz bo'lsin.** Bonusni hech qachon mustaqil mahsulot sifatida sotmasangiz, e'lon qilingan qiymat haqiqiy emas. Tajribali xaridorlar buni ajrata oladi.
+
+4. **Har birining aniq nomlangan natijasi bo'lsin.** "Bonus: marketing toolkit" zaif. "Bonus: dastlabki 90 kuningiz uchun 12 ta tayyor Notion shabloni, $297 qiymat, chunki [havola]da mustaqil shablon paketi shuncha turadi" kuchli.
+
+---
+
+## Ishlaydigan 4 bonusli naqsh
+
+Ko'pgina kuchli takliflar aynan 3–5 ta bonusni to'playdi. Ko'p bo'lsa to'ldirishdek tuyuladi; kam bo'lsa e'tirozlar yopilmay qoladi.
+
+Keng tarqalgan tuzilma:
+
+| # | Tur | Maqsad | Odatiy qiymat |
 |---|------|---------|---------------|
-| 1 | **Speed bonus** | Removes time-delay objection | Templates, swipes, accelerators |
-| 2 | **Trust bonus** | Removes likelihood-of-failure objection | Case study, methodology doc, examples library |
-| 3 | **Stuck bonus** | Removes "what if I get stuck" objection | Office hours, Slack, on-demand support |
-| 4 | **Decision bonus** | Removes "I have to choose between X and Y" objection | Tool stack with discount codes, pre-vetted recommendations |
-| 5 (optional) | **Bigger-than-you-asked bonus** | Adds dream-outcome surface area | Adjacent deliverable, related framework, partner offer |
+| 1 | **Tezlik bonusi** | Vaqt-kechikish e'tirozini olib tashlaydi | Shablonlar, swipe'lar, tezlatgichlar |
+| 2 | **Ishonch bonusi** | Muvaffaqiyatsizlik-ehtimoli e'tirozini olib tashlaydi | Keys, metodologiya hujjati, misollar kutubxonasi |
+| 3 | **Tiqilib qolish bonusi** | "Tiqilib qolsam-chi" e'tirozini olib tashlaydi | Office hours, Slack, talab bo'yicha qo'llab-quvvatlash |
+| 4 | **Qaror bonusi** | "X va Y o'rtasida tanlashim kerak" e'tirozini olib tashlaydi | Chegirma kodli asbob steki, oldindan tekshirilgan tavsiyalar |
+| 5 (ixtiyoriy) | **So'raganingizdan kattaroq bonus** | Orzu natijasi yuzasini kengaytiradi | Qo'shni natija, bog'liq freymvork, hamkor taklifi |
 
-Example for a $2K B2B copywriting course:
+$2K lik B2B kopirayting kursi uchun misol:
 
-| # | Bonus | Closes |
+| # | Bonus | Nimani yopadi |
 |---|-------|--------|
-| 1 | "30 winning sales page templates (last updated 2026-Q2)" — $297 value | "I don't have time to write from scratch" |
-| 2 | "9 case studies from agencies that hit $250K MRR using these frameworks" — $0 (proof, not a saleable asset) | "Does this actually work for my situation?" |
-| 3 | "60-day Slack access with weekly office hours" — $497 value | "What if I get stuck on a specific project?" |
-| 4 | "The tool stack: 5 tools we use + discount codes (saves ~$1,200/yr)" — $1,200 value | "I don't know what to use" |
-| 5 | "Bonus session: How to charge $5K+ per project" — $297 value | Pricing confidence (adjacent dream outcome) |
+| 1 | "30 ta g'olib sotuv sahifasi shabloni (oxirgi yangilanish 2026-Q2)" — $297 qiymat | "Noldan yozishga vaqtim yo'q" |
+| 2 | "Shu freymvorklar yordamida $250K MRR'ga yetgan agentliklarning 9 ta keysi" — $0 (isbot, sotiladigan aktiv emas) | "Bu mening vaziyatimda haqiqatan ishlaydimi?" |
+| 3 | "Haftalik office hours bilan 60 kunlik Slack kirishi" — $497 qiymat | "Muayyan loyihada tiqilib qolsam-chi?" |
+| 4 | "Asboblar steki: biz ishlatadigan 5 ta asbob + chegirma kodlari (yiliga ~$1 200 tejaydi)" — $1 200 qiymat | "Nimadan foydalanishni bilmayman" |
+| 5 | "Bonus sessiya: loyiha uchun $5K+ ni qanday olish" — $297 qiymat | Narxlash ishonchi (qo'shni orzu natijasi) |
 
-Total stated value: ~$2,300 in bonuses on a $2K core. Math checks out (under 2x). Each bonus closes a real objection.
-
----
-
-## When bonuses backfire
-
-### Inflated values
-
-"$50,000 in bonuses included today only!" on a $497 product. The asymmetry is the tell — every sophisticated buyer's bullshit detector fires.
-
-Stated values must be defensible. If you can't point to a comparable price, don't quote the value.
-
-### Bonuses that devalue the core
-
-If your core offer is "I'll write your sales page for $5K" and your bonus is "PLUS — bonus sales page edits for free for life!" — the bonus implies the core is incomplete. Now the buyer wonders why they should buy *without* the bonus.
-
-Bonuses should be *additive* to a complete core, not patches on an incomplete one.
-
-### Bonus-stack-as-substitute-for-core
-
-A weak core surrounded by amazing bonuses converts at the moment of sale but produces angry refund requests. The buyer bought the bonuses, got the core, felt cheated.
-
-Order: strong core *first*, then bonuses to address specific objections.
-
-### Stacked too high
-
-5+ bonuses with high stated values starts to read as a course-bro funnel. Premium buyers ignore the bonus list entirely; mid-market buyers feel they're being upsold; new buyers get confused.
-
-3–5 bonuses, each with a specific purpose. Cap it.
-
-### Same-as-everyone-else bonuses
-
-"BONUS! Private community access!" on every course in your category isn't a bonus, it's table stakes. If every competitor offers the same bonuses, none of them are differentiators.
-
-Find bonuses that are specific to your buyer's situation. A SaaS bonus for a SaaS-focused buyer beats a generic "private community" every time.
+Jami e'lon qilingan qiymat: $2K lik asosiy taklifda ~$2 300 bonus. Matematika mos (2 baravardan kam). Har bir bonus haqiqiy e'tirozni yopadi.
 
 ---
 
-## Bonus delivery: timing matters
+## Bonuslar qachon teskari ta'sir qiladi
 
-A bonus delivered on day 1 closes "what if I never use it?" risk.
-A bonus delivered at week 4 maintains momentum.
-A bonus delivered at completion rewards finishing.
+### Bo'rttirilgan qiymatlar
 
-Mix the timing intentionally:
+$497 lik mahsulotda "bugun $50 000 bonus kiritilgan!". Assimetriya — belgi: har bir tajribali xaridorning bullshit detektori ishga tushadi.
 
-- Day 1: speed bonuses (templates, swipes, toolkit)
-- Week 2–4: support bonuses (Slack, office hours, check-ins)
-- Completion: identity bonuses (certificate, alumni access)
+E'lon qilingan qiymatlar himoya qilsa bo'ladigan bo'lishi kerak. Taqqoslanadigan narxni ko'rsata olmasangiz, qiymatni keltirmang.
 
-A buyer who gets all bonuses up-front is more likely to abandon (they got what they wanted, lost incentive to finish). A buyer who gets some bonuses at completion is more likely to finish (and refer).
+### Asosiyni qadrsizlantiradigan bonuslar
+
+Agar asosiy taklifingiz "sotuv sahifangizni $5K ga yozaman" bo'lsa va bonusingiz "PLUS — umrbod bepul sotuv sahifasi tahrirlari!" bo'lsa — bonus asosiy tugallanmaganligini bildiradi. Endi xaridor nega bonussiz sotib olishi kerakligini o'ylaydi.
+
+Bonuslar tugallangan asosiyga *qo'shimcha* bo'lishi kerak, tugallanmaganga yamoq emas.
+
+### Bonus-to'plam asosiy o'rniga
+
+Zaif asosiy atrofidagi ajoyib bonuslar sotuv lahzasida konvertatsiya qiladi, lekin g'azabli qaytarish so'rovlarini beradi. Xaridor bonuslarni sotib oldi, asosiyni oldi, aldanganini his qildi.
+
+Tartib: avval kuchli asosiy, so'ng aniq e'tirozlarni hal qilish uchun bonuslar.
+
+### Haddan tashqari baland to'planganlar
+
+Yuqori e'lon qilingan qiymatli 5+ bonus kurs-bro voronkasidek o'qila boshlaydi. Premium xaridorlar bonus ro'yxatini butunlay e'tiborsiz qoldiradi; o'rta bozor xaridorlari ularga upsell qilinayotganini his qiladi; yangi xaridorlar chalkashadi.
+
+3–5 ta bonus, har birining aniq maqsadi bor. Cheklang.
+
+### Boshqalar bilan bir xil bonuslar
+
+Kategoriyangizdagi har bir kursda "BONUS! Yopiq hamjamiyatga kirish!" bonus emas, minimal talab. Agar har bir raqobatchi bir xil bonuslarni taklif qilsa, hech biri farqlovchi emas.
+
+Xaridoringizning vaziyatiga xos bonuslarni toping. SaaS'ga qaratilgan xaridor uchun SaaS bonusi har doim umumiy "yopiq hamjamiyat"dan yaxshi.
 
 ---
 
-## The audit
+## Bonus yetkazish: vaqt muhim
 
-For each existing bonus on a current offer, ask:
+1-kuni yetkazilgan bonus "uni hech qachon ishlatmasam-chi?" xavfini yopadi.
+4-haftada yetkazilgan bonus momentumni saqlaydi.
+Yakunlashda yetkazilgan bonus tugatishni mukofotlaydi.
 
-1. **What specific buying objection does this close?** If you can't name one, it's filler.
-2. **What's its defensible stated value?** If you can't point to a comparable price, drop the dollar amount.
-3. **Does the buyer get it on day 1, or at a meaningful point in their journey?** Timing should support the customer outcome, not just the conversion event.
-4. **Is this bonus specific to my buyer, or could any competitor offer the same thing?** If it's generic, replace it.
-5. **Is the bonus strong enough that the offer would still convert without the core?** If yes, the core is weak. Fix the core, don't lean on the bonus.
+Vaqtni ongli ravishda aralashtiring:
 
-Most stuck offers have either zero bonuses or too many generic ones. The right move is usually: cut to 3–5 specific objection-closing bonuses, name each one clearly, and put defensible values on them.
+- 1-kun: tezlik bonuslari (shablonlar, swipe'lar, toolkit)
+- 2–4-hafta: qo'llab-quvvatlash bonuslari (Slack, office hours, check-in'lar)
+- Yakunlash: identifikatsiya bonuslari (sertifikat, bitiruvchilar kirishi)
+
+Barcha bonuslarni oldindan olgan xaridor tashlab ketishi ehtimoli yuqori (xohlaganini oldi, yakunlash rag'bati yo'qoldi). Ba'zi bonuslarni yakunlashda olgan xaridor yakunlashi (va tavsiya qilishi) ehtimoli yuqori.
+
+---
+
+## Audit
+
+Joriy taklifdagi har bir mavjud bonus uchun so'rang:
+
+1. **Bu qaysi aniq xarid e'tirozini yopadi?** Birortasini nomlay olmasangiz, bu to'ldiruvchi.
+2. **Uning himoya qilsa bo'ladigan e'lon qilingan qiymati qancha?** Taqqoslanadigan narxni ko'rsata olmasangiz, dollar miqdorini olib tashlang.
+3. **Xaridor uni 1-kuni oladimi yoki sayohatidagi ma'noli nuqtada?** Vaqt faqat konversiya hodisasini emas, mijoz natijasini qo'llab-quvvatlashi kerak.
+4. **Bu bonus mening xaridorimga xosmi yoki har qanday raqobatchi xuddi shuni taklif qila oladimi?** Umumiy bo'lsa, almashtiring.
+5. **Bonus asosiyisiz ham taklif konvertatsiya qiladigan darajada kuchlimi?** Ha bo'lsa, asosiy zaif. Bonusga suyanmasdan, asosiyni tuzating.
+
+Ko'pgina tiqilib qolgan takliflarda yoki nol bonus, yoki juda ko'p umumiy bonus bor. To'g'ri harakat odatda: 3–5 ta aniq e'tirozni yopadigan bonusgacha qisqartirish, har birini aniq nomlash va ularga himoya qilsa bo'ladigan qiymatlar qo'yish.

@@ -1,240 +1,240 @@
-# Offer Formats by Business Type
+# Biznes turi bo'yicha taklif formatlari
 
-The right offer format depends on what you sell. The same six components (core, bonuses, guarantee, scarcity, name, price) get assembled differently by business type.
+To'g'ri taklif formati nima sotishingizga bog'liq. Bir xil oltita komponent (asosiy, bonuslar, kafolat, kamyoblik, nom, narx) biznes turiga qarab turlicha yig'iladi.
 
-This reference is organized by business type. Find yours, then use the format as a starting point — not a fixed recipe.
-
----
-
-## Service / freelance
-
-You sell your time and skill.
-
-### Default format
-
-| Component | Default |
-|-----------|---------|
-| **Core** | A scoped engagement with a specific deliverable and timeline |
-| **Bonuses** | Templates, frameworks, post-engagement support, tool stack |
-| **Guarantee** | First-milestone gate (paid pilot or first-deliverable refund) |
-| **Scarcity** | Capacity-based (next slot opens [date]) |
-| **Name** | Methodology-named or outcome-named (e.g., "The 30-Day Activation Sprint") |
-| **Price** | Project-based with down-payment, or monthly retainer |
-
-### What to watch
-
-- **Naming matters disproportionately** — services without named offers compete on price; named services compete on positioning
-- **Scope creep is the offer killer** — define what's in, out, and optional, *in writing*, before the engagement starts
-- **Bonuses should compound the deliverable** — templates and frameworks that make the buyer self-sufficient after the engagement, not during
-
-### Productizing the offer
-
-Move from "I sell consulting" to "I sell the 8-Week Marketing Reset." Same delivery, different offer.
-
-The productized version:
-- Has a name
-- Has a fixed scope and timeline
-- Has a fixed price
-- Has the same bonuses every time
-- Has a defined gate (week 4 check-in, paid pilot, milestone review)
-
-Productizing raises perceived value, simplifies sales, and creates a repeatable case-study factory.
+Bu reference biznes turi bo'yicha tashkil etilgan. O'zingiznikini toping, so'ng formatdan qat'iy retsept emas, boshlang'ich nuqta sifatida foydalaning.
 
 ---
 
-## Course (async, cohort-based, live)
+## Xizmat / frilans
 
-You sell structured learning.
+Siz vaqtingiz va mahoratingizni sotasiz.
 
-### Default format
+### Standart format
 
-| Component | Default |
+| Komponent | Standart |
 |-----------|---------|
-| **Core** | The curriculum + delivery format |
-| **Bonuses** | Templates, swipe files, case studies, community access |
-| **Guarantee** | Conditional money-back (completion-gated) |
-| **Scarcity** | Cohort scarcity (enrollment closes [date]) |
-| **Name** | Outcome-named or methodology-named |
-| **Price** | Pay-in-full or 2–4 installments |
+| **Asosiy** | Aniq natija va muddatli qamrovli ish |
+| **Bonuslar** | Shablonlar, freymvorklar, ishdan keyingi qo'llab-quvvatlash, asbob steki |
+| **Kafolat** | Birinchi-bosqich darvozasi (pullik pilot yoki birinchi natija qaytarilishi) |
+| **Kamyoblik** | Quvvatga asoslangan (keyingi o'rin [sana] ochiladi) |
+| **Nom** | Metodologiya yoki natija bo'yicha nomlangan (masalan, "30 kunlik faollashtirish sprinti") |
+| **Narx** | Boshlang'ich to'lovli loyihaga asoslangan yoki oylik retainer |
 
-### Async vs cohort-based
+### Nimaga e'tibor berish
 
-| Decision | Async | Cohort |
+- **Nomlash nomutanosib darajada muhim** — nomli takliflarsiz xizmatlar narxda raqobatlashadi; nomli xizmatlar pozitsiyalashda raqobatlashadi
+- **Scope creep — taklif qotili** — ish boshlanishidan oldin nima kiradi, nima kirmaydi va nima ixtiyoriy ekanini *yozma ravishda* belgilang
+- **Bonuslar natijani kuchaytirishi kerak** — hamkorlik davomida emas, undan keyin xaridorni mustaqil qiladigan shablonlar va freymvorklar
+
+### Taklifni productizatsiya qilish
+
+"Men konsalting sotaman" dan "Men 8 haftalik marketing qayta ishga tushirishni sotaman" ga o'ting. Bir xil yetkazib berish, boshqa taklif.
+
+Productizatsiya qilingan versiya:
+- Nomga ega
+- Qat'iy qamrov va muddatga ega
+- Qat'iy narxga ega
+- Har safar bir xil bonuslarga ega
+- Aniqlangan darvozaga ega (4-hafta check-in, pullik pilot, bosqich ko'rib chiqishi)
+
+Productizatsiya sezilgan qiymatni oshiradi, sotuvni soddalashtiradi va takrorlanadigan keys-fabrika yaratadi.
+
+---
+
+## Kurs (asinxron, kogortali, jonli)
+
+Siz tuzilgan o'rganishni sotasiz.
+
+### Standart format
+
+| Komponent | Standart |
+|-----------|---------|
+| **Asosiy** | O'quv dasturi + yetkazib berish formati |
+| **Bonuslar** | Shablonlar, swipe fayllar, keyslar, hamjamiyatga kirish |
+| **Kafolat** | Shartli pulni qaytarish (yakunlashga bog'langan) |
+| **Kamyoblik** | Kogorta kamyobligi (qabul [sana] yopiladi) |
+| **Nom** | Natija yoki metodologiya bo'yicha nomlangan |
+| **Narx** | To'liq to'lash yoki 2–4 bo'lib to'lash |
+
+### Asinxron va kogortali
+
+| Qaror | Asinxron | Kogorta |
 |----------|-------|--------|
-| **Pricing** | Lower ($297–$1,997) | Higher ($1,497–$5,000+) |
-| **Scarcity** | Bonus expiry, price increases | Cohort start date |
-| **Guarantee** | Generous unconditional | Conditional on completion |
-| **Conversion mechanic** | Email funnel, evergreen webinar | Launch window + cohort deadline |
-| **Default bonus** | Templates, swipes | Slack + office hours + 1:1 review |
+| **Narxlash** | Pastroq ($297–$1 997) | Yuqoriroq ($1 497–$5 000+) |
+| **Kamyoblik** | Bonus tugashi, narx oshishi | Kogorta boshlanish sanasi |
+| **Kafolat** | Saxiy shartsiz | Yakunlashga shartli |
+| **Konversiya mexanikasi** | Email voronka, evergreen vebinar | Launch oynasi + kogorta muddati |
+| **Standart bonus** | Shablonlar, swipe'lar | Slack + office hours + 1:1 ko'rib chiqish |
 
-### What to watch
+### Nimaga e'tibor berish
 
-- **Completion is the marketing asset** — every completer is a case study. Engineer the first win in week 1.
-- **Cohort scarcity must be real** — if "doors close Friday" is followed by "doors reopen Monday because we extended the cohort," the trick gets noticed
-- **Refund design matters more than refund rate** — a generous-sounding guarantee with smart conditions converts well and refunds rarely
+- **Yakunlash — marketing aktivi** — har bir yakunlagan kishi — keys. Birinchi g'alabani 1-haftada loyihalang.
+- **Kogorta kamyobligi haqiqiy bo'lishi kerak** — agar "eshiklar juma kuni yopiladi" dan keyin "kogortani uzaytirganimiz uchun eshiklar dushanba kuni qayta ochiladi" kelsa, hiyla payqaladi
+- **Qaytarish dizayni qaytarish darajasidan muhimroq** — aqlli shartli saxiy ko'ringan kafolat yaxshi konvertatsiya qiladi va kamdan-kam qaytariladi
 
 ---
 
-## Coaching (1:1, group, mastermind)
+## Koucing (1:1, guruh, mastermind)
 
-You sell access to your expertise applied to their specific situation.
+Siz ekspertizangizdan ularning aniq vaziyatiga qo'llangan kirishni sotasiz.
 
-### Default format
+### Standart format
 
-| Component | Default |
+| Komponent | Standart |
 |-----------|---------|
-| **Core** | Sessions + asynchronous access + specific outcome focus |
-| **Bonuses** | Resources from your library, intro to network, post-engagement check-ins |
-| **Guarantee** | Outcome-or-extension or first-two-sessions out |
-| **Scarcity** | Capacity-based (N spots / quarter) |
-| **Name** | Identity-named or outcome-named (e.g., "Founder Marketing Mastermind") |
-| **Price** | Monthly retainer or 3/6/12-month engagement |
+| **Asosiy** | Sessiyalar + asinxron kirish + aniq natijaga e'tibor |
+| **Bonuslar** | Kutubxonangizdan resurslar, tarmoqqa tanishtirish, hamkorlikdan keyingi check-in'lar |
+| **Kafolat** | Natija-yoki-uzaytirish yoki birinchi-ikki-sessiyadan chiqish |
+| **Kamyoblik** | Quvvatga asoslangan (chorakda N o'rin) |
+| **Nom** | Identifikatsiya yoki natija bo'yicha nomlangan (masalan, "Asoschi marketing mastermind") |
+| **Narx** | Oylik retainer yoki 3/6/12 oylik hamkorlik |
 
-### 1:1 vs group
+### 1:1 va guruh
 
-| Decision | 1:1 | Group / mastermind |
+| Qaror | 1:1 | Guruh / mastermind |
 |----------|-----|---------------------|
-| **Pricing** | $1,500–$10,000+/mo | $497–$2,500+/mo |
-| **Scarcity** | Capacity (4–10 1:1 clients) | Cohort size (8–30 members) |
-| **Guarantee** | First-two-sessions out | Trial period, no refunds after |
-| **Bonuses** | Custom resources, intros | Group access, peer accountability, library access |
-| **Default delivery** | Weekly or biweekly sessions | Monthly group calls + community |
+| **Narxlash** | Oyiga $1 500–$10 000+ | Oyiga $497–$2 500+ |
+| **Kamyoblik** | Quvvat (4–10 ta 1:1 mijoz) | Kogorta hajmi (8–30 a'zo) |
+| **Kafolat** | Birinchi-ikki-sessiyadan chiqish | Sinov davri, undan keyin qaytarish yo'q |
+| **Bonuslar** | Maxsus resurslar, tanishtirishlar | Guruhga kirish, tengdoshlar javobgarligi, kutubxonaga kirish |
+| **Standart yetkazib berish** | Haftalik yoki ikki haftalik sessiyalar | Oylik guruh qo'ng'iroqlari + hamjamiyat |
 
-### What to watch
+### Nimaga e'tibor berish
 
-- **Identity is the offer** — group coaching is often more about being in the room with peers than about the coach's instruction. Name the room, not the coach.
-- **Onboarding is part of the offer** — a sloppy intake destroys perceived likelihood
-- **Renewal is the real conversion event** — design for the 6-month decision, not the first-month decision
+- **Identifikatsiya — taklif** — guruh koucingi ko'pincha koucning ko'rsatmasidan ko'ra tengdoshlar bilan xonada bo'lish haqida. Koucni emas, xonani nomlang.
+- **Onboarding taklifning bir qismi** — beparvo intake sezilgan ehtimolni yo'q qiladi
+- **Yangilash — haqiqiy konversiya hodisasi** — birinchi oy qarori uchun emas, 6 oylik qaror uchun loyihalang
 
 ---
 
-## Info product (guide, swipe file, template pack, community)
+## Axborot mahsuloti (qo'llanma, swipe fayl, shablonlar to'plami, hamjamiyat)
 
-You sell packaged knowledge or assets.
+Siz paketlangan bilim yoki aktivlarni sotasiz.
 
-### Default format
+### Standart format
 
-| Component | Default |
+| Komponent | Standart |
 |-----------|---------|
-| **Core** | The asset(s) + lifetime access |
-| **Bonuses** | Adjacent assets, walkthroughs, templates |
-| **Guarantee** | Generous unconditional (30-day no-questions) |
-| **Scarcity** | Bonus expiry, price-increase scheduling |
-| **Name** | Outcome-named, often punchy and specific |
-| **Price** | $29–$497, pay-in-full |
+| **Asosiy** | Aktiv(lar) + umrbod kirish |
+| **Bonuslar** | Qo'shni aktivlar, walkthrough'lar, shablonlar |
+| **Kafolat** | Saxiy shartsiz (30 kun, savolsiz) |
+| **Kamyoblik** | Bonus tugashi, narx oshishini jadvallash |
+| **Nom** | Natija bo'yicha nomlangan, ko'pincha o'tkir va aniq |
+| **Narx** | $29–$497, to'liq to'lash |
 
-### What to watch
+### Nimaga e'tibor berish
 
-- **The first-impression matters disproportionately** — the buyer opens it once. If the first 5 minutes don't feel premium, they don't engage with the rest
-- **Quick-start is a bonus** — pair the asset with a 10-minute "do this first" walkthrough
-- **Lifetime access is implicit pricing** — clarify what "lifetime" means (yours, the product's, until you sunset it)
+- **Birinchi taassurot nomutanosib darajada muhim** — xaridor uni bir marta ochadi. Dastlabki 5 daqiqa premium tuyulmasa, qolganini ochmaydi
+- **Tezkor start — bonus** — aktivni 10 daqiqalik "avval buni qiling" walkthrough bilan juftlang
+- **Umrbod kirish — yashirin narxlash** — "umrbod" nimani anglatishini aniqlang (sizniki, mahsulotniki, siz to'xtatguningizcha)
 
 ---
 
-## High-ticket B2B ($5K+ ACV, sales-led)
+## Qimmat B2B ($5K+ ACV, sotuv boshqaradigan)
 
-You sell to companies with a sales conversation.
+Siz sotuv suhbati bilan kompaniyalarga sotasiz.
 
-### Default format
+### Standart format
 
-| Component | Default |
+| Komponent | Standart |
 |-----------|---------|
-| **Core** | A multi-month engagement or annual contract |
-| **Bonuses** | Onboarding, training, integration, dedicated CSM |
-| **Guarantee** | SLA, performance-based, or pilot-gated |
-| **Scarcity** | Quarter-end pricing, capacity (N onboardings/quarter), tier limits |
-| **Name** | Internal-stable (e.g., "Enterprise Plan") + named engagement type (e.g., "Strategic Onboarding") |
-| **Price** | Annual contract with quarterly payment, often custom |
+| **Asosiy** | Ko'p oylik hamkorlik yoki yillik shartnoma |
+| **Bonuslar** | Onboarding, o'qitish, integratsiya, maxsus CSM |
+| **Kafolat** | SLA, natijaga asoslangan yoki pilotga bog'langan |
+| **Kamyoblik** | Chorak oxiri narxlari, quvvat (chorakda N onboarding), daraja chegaralari |
+| **Nom** | Ichki-barqaror (masalan, "Enterprise Plan") + nomlangan hamkorlik turi (masalan, "Strategik onboarding") |
+| **Narx** | Choraklik to'lovli yillik shartnoma, ko'pincha maxsus |
 
-### What to watch
+### Nimaga e'tibor berish
 
-- **Buying committee, not buyer** — the offer has to land with the champion, the economic buyer, and the influencer simultaneously
-- **Procurement is the offer** — your terms (payment, NET 60, security review, MSA) are part of the offer; rigid terms lose deals
-- **Pilot offers convert sophisticated buyers** — "30-day paid pilot, decide to continue at end" reduces decision risk
-- **The CSM is part of the offer** — buyers consistently rate post-sale relationship as part of the offer-perceived-value
+- **Xaridor emas, xarid qo'mitasi** — taklif champion, iqtisodiy xaridor va ta'sir qiluvchi bilan bir vaqtda mos tushishi kerak
+- **Xaridlar bo'limi — taklif** — shartlaringiz (to'lov, NET 60, xavfsizlik ko'rib chiqishi, MSA) taklifning bir qismi; qattiq shartlar bitimlarni yo'qotadi
+- **Pilot takliflar tajribali xaridorlarni konvertatsiya qiladi** — "30 kunlik pullik pilot, oxirida davom etishni hal qiling" qaror xavfini kamaytiradi
+- **CSM — taklifning bir qismi** — xaridorlar doimiy ravishda sotuvdan keyingi munosabatni taklif-sezilgan-qiymat qismi deb baholaydi
 
 ---
 
-## Agency retainer
+## Agentlik retainer
 
-You sell ongoing service delivery.
+Siz doimiy xizmat yetkazib berishni sotasiz.
 
-### Default format
+### Standart format
 
-| Component | Default |
+| Komponent | Standart |
 |-----------|---------|
-| **Core** | Monthly deliverables + dedicated team + reporting cadence |
-| **Bonuses** | Strategy sessions, tool access, audit credits, library access |
-| **Guarantee** | Month-1 paid pilot or 90-day out clause |
-| **Scarcity** | Capacity (N clients / vertical / quarter) |
-| **Name** | Tier-named ("Growth," "Scale," "Enterprise") + service line |
-| **Price** | Monthly retainer with discount for annual commit |
+| **Asosiy** | Oylik natijalar + maxsus jamoa + hisobot kadansi |
+| **Bonuslar** | Strategiya sessiyalari, asbobga kirish, audit kreditlari, kutubxonaga kirish |
+| **Kafolat** | 1-oy pullik pilot yoki 90 kunlik chiqish bandi |
+| **Kamyoblik** | Quvvat (N mijoz / vertikal / chorak) |
+| **Nom** | Daraja bo'yicha nomlangan ("Growth," "Scale," "Enterprise") + xizmat yo'nalishi |
+| **Narx** | Yillik majburiyat uchun chegirmali oylik retainer |
 
-### What to watch
+### Nimaga e'tibor berish
 
-- **Onboarding velocity is the offer** — agencies that take 6 weeks to start delivering lose to agencies that deliver something in week 1
-- **Reporting is part of the offer** — clean, monthly, action-oriented reporting reduces churn more than additional deliverables
-- **Tier upgrades are the easiest revenue** — design tiers with clear value-step-ups so upgrade conversations are obvious
+- **Onboarding tezligi — taklif** — yetkazib berishni boshlashga 6 hafta ketadigan agentliklar 1-haftada nimadir yetkazadigan agentliklarga yutqazadi
+- **Hisobot — taklifning bir qismi** — toza, oylik, harakatga yo'naltirilgan hisobot qo'shimcha natijalardan ko'ra ko'proq ketishni kamaytiradi
+- **Darajani yangilash — eng oson daromad** — yangilash suhbatlari aniq bo'lishi uchun aniq qiymat-qadamli darajalarni loyihalang
 
 ---
 
-## Self-serve SaaS
+## O'zi-xizmat SaaS
 
-You sell a tool with tiered subscriptions.
+Siz darajali obunali asbobni sotasiz.
 
-### Default format
+### Standart format
 
-| Component | Default |
+| Komponent | Standart |
 |-----------|---------|
-| **Core** | Tiered subscription with clear feature differentiation |
-| **Bonuses** | Free onboarding, templates, integrations, partner discounts |
-| **Guarantee** | Free trial OR annual-with-30-day-refund |
-| **Scarcity** | Founding-pricing for first N customers, or seasonal launches |
-| **Name** | Tier-named ("Starter," "Pro," "Team," "Enterprise") |
-| **Price** | Monthly or annual with discount, value-metric-based |
+| **Asosiy** | Aniq funksiya farqli darajali obuna |
+| **Bonuslar** | Bepul onboarding, shablonlar, integratsiyalar, hamkor chegirmalari |
+| **Kafolat** | Bepul sinov YOKI 30 kunlik qaytarishli yillik |
+| **Kamyoblik** | Birinchi N mijoz uchun asoschi narxlash yoki mavsumiy launch'lar |
+| **Nom** | Daraja bo'yicha nomlangan ("Starter," "Pro," "Team," "Enterprise") |
+| **Narx** | Chegirmali oylik yoki yillik, qiymat-metrikaga asoslangan |
 
-### What to watch
+### Nimaga e'tibor berish
 
-- **Pricing tier > offer construction** — for self-serve SaaS, packaging and value metric do more work than guarantees and bonuses. Use the `pricing` skill.
-- **Free trial design IS offer design** — length, gated features, credit-card-required vs not, automatic conversion. Each is an offer decision.
-- **Annual prepay is the offer lever** — same product, different commitment, often 20–40% discount. Many SaaS conversion lifts come from improving the annual offer, not the monthly.
+- **Narx darajasi > taklif qurish** — o'zi-xizmat SaaS uchun qadoqlash va qiymat metrikasi kafolat va bonuslardan ko'proq ish qiladi. `pricing` skilldan foydalaning.
+- **Bepul sinov dizayni — taklif dizayni** — uzunlik, yopiq funksiyalar, kredit karta talab qilinadi yoki yo'q, avtomatik konversiya. Har biri taklif qarori.
+- **Yillik oldindan to'lov — taklif richagi** — bir xil mahsulot, boshqa majburiyat, ko'pincha 20–40% chegirma. Ko'pgina SaaS konversiya oshishlari oylikni emas, yillik taklifni yaxshilashdan keladi.
 
-For SaaS, this skill is supplemental. Read [`pricing`](../../pricing/SKILL.md) first.
+SaaS uchun bu skill qo'shimcha. Avval [`pricing`](../../pricing/SKILL.md) ni o'qing.
 
 ---
 
-## Direct response / paid traffic
+## Direct response / pullik trafik
 
-You sell from a sales page or VSL to cold traffic.
+Siz sotuv sahifasi yoki VSL'dan sovuq trafikka sotasiz.
 
-### Default format
+### Standart format
 
-| Component | Default |
+| Komponent | Standart |
 |-----------|---------|
-| **Core** | The "thing" + clear payoff |
-| **Bonuses** | Heavy bonus stack (5–7 bonuses, layered values) |
-| **Guarantee** | Aggressive risk reversal (better-than-money-back, double guarantee) |
-| **Scarcity** | Real time-bound (launch window, evergreen with hard close) |
-| **Name** | Hooky, often pattern-interrupt |
-| **Price** | Often single-payment with payment plan offered |
+| **Asosiy** | "Narsa" + aniq foyda |
+| **Bonuslar** | Og'ir bonus to'plami (5–7 bonus, qatlamli qiymatlar) |
+| **Kafolat** | Agressiv xavfni qaytarish (pulni qaytarishdan yaxshiroq, ikki kafolat) |
+| **Kamyoblik** | Haqiqiy vaqt bilan cheklangan (launch oynasi, qat'iy yopilishli evergreen) |
+| **Nom** | Hooky, ko'pincha pattern-interrupt |
+| **Narx** | Ko'pincha to'lov rejasi taklif qilingan yagona to'lov |
 
-### What to watch
+### Nimaga e'tibor berish
 
-- **Direct-response buyers expect aggression** — quiet, premium-feeling offers convert badly on cold paid traffic. The aesthetic of the page matters as much as the offer.
-- **Refund rates can be 10–20%** — bake this into the math. If margin can't survive 15% refunds, restructure.
-- **The first 7 seconds determine the rest** — hook, then offer
+- **Direct-response xaridorlari agressiyani kutadi** — sovuq pullik trafikda sokin, premium tuyulgan takliflar yomon konvertatsiya qiladi. Sahifa estetikasi taklifdek muhim.
+- **Qaytarish darajasi 10–20% bo'lishi mumkin** — buni matematikaga kiriting. Marja 15% qaytarishga bardosh bera olmasa, qayta tuzing.
+- **Dastlabki 7 soniya qolganini belgilaydi** — hook, keyin taklif
 
-This format is high-skill. If you're not from a direct-response background, hire someone or partner with someone who is.
+Bu format yuqori mahoratli. Direct-response bilan aloqangiz bo'lmasa, uni yollang yoki shunday odam bilan hamkorlik qiling.
 
 ---
 
-## Choosing your format
+## Formatingizni tanlash
 
-If you're not sure which format applies, pick the closest match and adapt. The biggest mistake is borrowing a format from a different business type (e.g., applying direct-response bonus stacking to a premium B2B service — wrong audience, wrong aesthetic).
+Qaysi format qo'llanilishiga ishonchingiz komil bo'lmasa, eng yaqinini tanlang va moslang. Eng katta xato — boshqa biznes turidan formatni olish (masalan, direct-response bonus stackingni premium B2B xizmatga qo'llash — noto'g'ri auditoriya, noto'g'ri estetika).
 
-Two diagnostic questions:
+Ikki diagnostik savol:
 
-1. **Who buys it, and how sophisticated are they?** Premium B2B and direct-response cold traffic both buy, but they need different offers.
-2. **What's the dominant constraint?** Service businesses are capacity-constrained, SaaS is pricing-tier-constrained, courses are cohort/season constrained. Match the scarcity format to the real constraint.
+1. **Uni kim sotib oladi va ular qanchalik tajribali?** Premium B2B va direct-response sovuq trafik ikkalasi ham sotib oladi, lekin ularga turli takliflar kerak.
+2. **Asosiy cheklov nima?** Xizmat bizneslari quvvat bilan cheklangan, SaaS narx-daraja bilan cheklangan, kurslar kogorta/mavsum bilan cheklangan. Kamyoblik formatini haqiqiy cheklovga moslang.
 
-For worked examples by business type, see [examples.md](examples.md).
+Biznes turi bo'yicha ishlangan misollar uchun [examples.md](examples.md) ga qarang.

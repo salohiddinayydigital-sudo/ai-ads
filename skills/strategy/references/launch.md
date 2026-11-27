@@ -1,379 +1,379 @@
-<!-- v8: eski skill `launch` (v7.1) matni; tavsif: When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' 'product update,' 'how do I launch this,' 'launch checklist -->
+<!-- v8: eski skill `launch` (v7.1) matni; tavsif: Foydalanuvchi mahsulot launch'i, funksiya e'loni yoki reliz strategiyasini rejalashtirishni xohlaganda. 'launch', 'Product Hunt', 'feature release', 'announcement', 'go-to-market', 'beta launch', 'early access', 'waitlist', 'launch checklist' eslatilganda ishlating. -->
 
-# Launch Strategy
+# Launch strategiyasi
 
-You are an expert in SaaS product launches and feature announcements. Your goal is to help users plan launches that build momentum, capture attention, and convert interest into users.
+Siz SaaS mahsulot launch'lari va funksiya e'lonlari bo'yicha mutaxassissiz. Maqsadingiz — foydalanuvchilarga momentum quradigan, e'tiborni tortadigan va qiziqishni foydalanuvchilarga aylantiradigan launch'larni rejalashtirishga yordam berish.
 
-## Before Starting
+## Boshlashdan oldin
 
-**Check for product marketing context first:**
-If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
-
----
-
-## Core Philosophy
-
-The best companies don't just launch once—they launch again and again. Every new feature, improvement, and update is an opportunity to capture attention and engage your audience.
-
-A strong launch isn't about a single moment. It's about:
-- Getting your product into users' hands early
-- Learning from real feedback
-- Making a splash at every stage
-- Building momentum that compounds over time
+**Avval mahsulot marketing kontekstini tekshiring:**
+Agar `.agents/product-marketing.md` (yoki `.claude/product-marketing.md`, yoki eski sozlamalarda eski `product-marketing-context.md` fayl nomi) mavjud bo'lsa, savol berishdan oldin uni o'qing. Shu kontekstdan foydalaning va faqat qamrab olinmagan yoki shu vazifaga xos ma'lumotni so'rang.
 
 ---
 
-## The ORB Framework
+## Asosiy falsafa
 
-Structure your launch marketing across three channel types. Everything should ultimately lead back to owned channels.
+Eng yaxshi kompaniyalar bir marta launch qilmaydi — qayta-qayta launch qiladi. Har bir yangi funksiya, yaxshilanish va yangilanish e'tiborni tortish va auditoriyani jalb qilish imkoniyatidir.
 
-### Owned Channels
-You own the channel (though not the audience). Direct access without algorithms or platform rules.
+Kuchli launch bitta lahza haqida emas. U quyidagilar haqida:
+- Mahsulotni foydalanuvchilar qo'liga erta berish
+- Haqiqiy fikr-mulohazalardan o'rganish
+- Har bir bosqichda shov-shuv yaratish
+- Vaqt o'tishi bilan kuchayadigan momentum qurish
 
-**Examples:**
-- Email list
+---
+
+## ORB freymvorki
+
+Launch marketingingizni uch turdagi kanal bo'ylab tuzing. Hammasi oxir-oqibat egalik qilinadigan kanallarga qaytishi kerak.
+
+### Owned (o'zingizga tegishli) kanallar
+Kanalga siz egalik qilasiz (garchi auditoriyaga emas). Algoritmlar yoki platforma qoidalarisiz to'g'ridan-to'g'ri kirish.
+
+**Misollar:**
+- Email ro'yxati
 - Blog
-- Podcast
-- Branded community (Slack, Discord)
-- Website/product
+- Podkast
+- Brend hamjamiyati (Slack, Discord)
+- Veb-sayt/mahsulot
 
-**Why they matter:**
-- Get more effective over time
-- No algorithm changes or pay-to-play
-- Direct relationship with audience
-- Compound value from content
+**Nega muhim:**
+- Vaqt o'tishi bilan samaraliroq bo'ladi
+- Algoritm o'zgarishlari yoki pay-to-play yo'q
+- Auditoriya bilan to'g'ridan-to'g'ri munosabat
+- Kontentdan jamlanadigan qiymat
 
-**Start with 1-2 based on audience:**
-- Industry lacks quality content → Start a blog
-- People want direct updates → Focus on email
-- Engagement matters → Build a community
+**Auditoriyaga qarab 1–2 tadan boshlang:**
+- Sohada sifatli kontent yetishmaydi → Blog boshlang
+- Odamlar to'g'ridan-to'g'ri yangiliklar istaydi → Emailga e'tibor bering
+- Jalb qilish muhim → Hamjamiyat quring
 
-**Example - Superhuman:**
-Built demand through an invite-only waitlist and one-on-one onboarding sessions. Every new user got a 30-minute live demo. This created exclusivity, FOMO, and word-of-mouth—all through owned relationships. Years later, their original onboarding materials still drive engagement.
+**Misol — Superhuman:**
+Faqat taklifnoma bilan waitlist va yakkama-yakka onboarding sessiyalari orqali talab yaratdi. Har bir yangi foydalanuvchi 30 daqiqalik jonli demo oldi. Bu eksklyuzivlik, FOMO va og'zaki tarqalishni yaratdi — hammasi o'z munosabatlari orqali. Yillar o'tib ham ularning dastlabki onboarding materiallari jalb qilishni davom ettiradi.
 
-### Rented Channels
-Platforms that provide visibility but you don't control. Algorithms shift, rules change, pay-to-play increases.
+### Rented (ijaraga olingan) kanallar
+Ko'rinishni beradigan, lekin siz nazorat qilmaydigan platformalar. Algoritmlar o'zgaradi, qoidalar o'zgaradi, pay-to-play ortadi.
 
-**Examples:**
-- Social media (Twitter/X, LinkedIn, Instagram)
-- App stores and marketplaces
+**Misollar:**
+- Ijtimoiy tarmoqlar (Twitter/X, LinkedIn, Instagram)
+- Ilova do'konlari va marketplace'lar
 - YouTube
 - Reddit
 
-**How to use correctly:**
-- Pick 1-2 platforms where your audience is active
-- Use them to drive traffic to owned channels
-- Don't rely on them as your only strategy
+**To'g'ri foydalanish:**
+- Auditoriyangiz faol bo'lgan 1–2 platformani tanlang
+- Ulardan o'zingizga tegishli kanallarga trafik haydash uchun foydalaning
+- Ularga yagona strategiya sifatida tayanmang
 
-**Example - Notion:**
-Hacked virality through Twitter, YouTube, and Reddit where productivity enthusiasts were active. Encouraged community to share templates and workflows. But they funneled all visibility into owned assets—every viral post led to signups, then targeted email onboarding.
+**Misol — Notion:**
+Unumdorlik ishqibozlari faol bo'lgan Twitter, YouTube va Reddit orqali virallikka erishdi. Hamjamiyatni shablon va ish jarayonlarini ulashishga undadi. Lekin barcha ko'rinishni o'z aktivlariga yo'naltirdi — har bir viral post ro'yxatdan o'tishga, so'ng nishonli email onboardingga olib bordi.
 
-**Platform-specific tactics:**
-- Twitter/X: Threads that spark conversation → link to newsletter
-- LinkedIn: High-value posts → lead to gated content or email signup
-- Marketplaces (Shopify, Slack): Optimize listing → drive to site for more
+**Platformaga xos taktikalar:**
+- Twitter/X: Suhbatni uyg'otadigan threadlar → newsletter'ga havola
+- LinkedIn: Yuqori qiymatli postlar → yopiq kontent yoki email obunaga olib boradi
+- Marketplace'lar (Shopify, Slack): Listingni optimallashtiring → ko'proq uchun saytga haydang
 
-Rented channels give speed, not stability. Capture momentum by bringing users into your owned ecosystem.
+Rented kanallar tezlik beradi, barqarorlik emas. Foydalanuvchilarni o'z ekotizimingizga olib kirib momentumni ushlang.
 
-### Borrowed Channels
-Tap into someone else's audience to shortcut the hardest part—getting noticed.
+### Borrowed (qarzga olingan) kanallar
+Eng qiyin qismni — e'tiborni tortishni — qisqartirish uchun boshqaning auditoriyasidan foydalaning.
 
-**Examples:**
-- Guest content (blog posts, podcast interviews, newsletter features)
-- Collaborations (webinars, co-marketing, social takeovers)
-- Speaking engagements (conferences, panels, virtual summits)
-- Influencer partnerships
+**Misollar:**
+- Mehmon kontent (blog postlari, podkast intervyulari, newsletter chiqishlari)
+- Hamkorliklar (vebinarlar, ko-marketing, ijtimoiy tarmoq egallashlari)
+- Nutqlar (konferensiyalar, panellar, virtual sammitlar)
+- Influenser hamkorliklari
 
-**Be proactive, not passive:**
-1. List industry leaders your audience follows
-2. Pitch win-win collaborations
-3. Use tools like SparkToro or Listen Notes to find audience overlap
-4. Set up affiliate/referral incentives (for channel partner launches, use [Introw](../../tools/integrations/introw.md) to manage deal registration and commissions)
+**Passiv emas, faol bo'ling:**
+1. Auditoriyangiz kuzatadigan soha yetakchilari ro'yxatini tuzing
+2. Ikki tomon uchun foydali hamkorliklarni taklif qiling
+3. Auditoriya kesishuvini topish uchun SparkToro yoki Listen Notes kabi vositalardan foydalaning
+4. Affiliate/referral rag'batlarini o'rnating (kanal hamkorlari launch'lari uchun bitim ro'yxatdan o'tkazish va komissiyalarni boshqarishda [Introw](../../tools/integrations/introw.md) dan foydalaning)
 
-**Example - TRMNL:**
-Sent a free e-ink display to YouTuber Snazzy Labs—not a paid sponsorship, just hoping he'd like it. He created an in-depth review that racked up 500K+ views and drove $500K+ in sales. They also set up an affiliate program for ongoing promotion.
+**Misol — TRMNL:**
+YouTuber Snazzy Labs'ga bepul e-ink displey yubordi — pullik homiylik emas, shunchaki yoqadi degan umidda. U 500K+ ko'rish yig'gan va $500K+ sotuv keltirgan chuqur sharh yaratdi. Shuningdek, doimiy reklama uchun affiliate dasturi o'rnatdilar.
 
-Borrowed channels give instant credibility, but only work if you convert borrowed attention into owned relationships.
-
----
-
-## Readiness Gate: Are You Ready to Launch?
-
-Run this **before** the phased mechanics. Products don't market themselves—but a product that isn't ready won't market either. The launch mechanics only pay off if what you're launching is worth launching.
-
-Two failure modes kill launches from opposite ends:
-
-- **Stealth Mode** — launching too late. "Procrastination in a fancy suit." You keep polishing in private, waiting for the product to be perfect. It never ships, and nobody learns you exist.
-- **"Just One More Feature"** — never launching. Every proposed launch date gets pushed for one more thing. The scope creeps forever; the launch never comes.
-
-The middle path is **SLC — Simple, Lovable, Complete** (Jason Cohen), the antidote to shipping a bare MVP that's minimal but unlovable. Don't launch a stub nobody wants; don't wait for a bloated everything-app. A launchable v1 is:
-
-- **Simple** — it does *one* thing. Not many things poorly. One clear job, done well.
-- **Lovable** — people *want* to use it, not just tolerate it. An MVP asks users to suffer through a stripped-down experience "to give feedback." SLC gives them something they'd choose. If nobody would be sad to lose it, it isn't lovable yet.
-- **Complete** — it's a *whole* experience for that one thing, not a stub with obvious holes. Complete at its chosen scope, not a teaser of a bigger promise.
-
-**The gate:** If it's not yet Simple, Lovable, and Complete, you're in "Just One More Feature" territory only when adding scope is what's missing—otherwise you're in Stealth Mode and should ship. Cut scope until one thing is lovable and complete, then launch that. SLC gives you a real launch now instead of a perfect launch never.
-
-**Quick check before running the phases:**
-- [ ] Does it do one clearly-defined thing? (Simple)
-- [ ] Would a target user *choose* to use it, not just endure it? (Lovable)
-- [ ] Is that one thing a whole experience, with no glaring stubs? (Complete)
-- [ ] Are you polishing past this bar? → Stop. You're in Stealth Mode. Ship.
-- [ ] Are you still adding new things to the scope? → Stop. You're in "Just One More Feature." Cut back to SLC.
-
-Pass the gate, then run the phases below.
+Borrowed kanallar zudlik bilan ishonchlilik beradi, lekin faqat qarzga olingan e'tiborni o'zingizga tegishli munosabatlarga aylantirsangizgina ishlaydi.
 
 ---
 
-## Five-Phase Launch Approach
+## Tayyorlik darvozasi: Launch'ga tayyormisiz?
 
-Launching isn't a one-day event. It's a phased process that builds momentum.
+Buni bosqichli mexanikadan **oldin** ishga tushiring. Mahsulotlar o'zlarini o'zlari marketing qilmaydi — lekin tayyor bo'lmagan mahsulot ham marketing qilmaydi. Launch mexanikasi faqat launch qilayotgan narsangiz launch qilishga arigandagina o'zini oqlaydi.
 
-### Phase 1: Internal Launch
-Gather initial feedback and iron out major issues before going public.
+Ikki nosozlik rejimi launch'larni qarama-qarshi uchlardan o'ldiradi:
 
-**Actions:**
-- Recruit early users one-on-one to test for free
-- Collect feedback on usability gaps and missing features
-- Ensure prototype is functional enough to demo (doesn't need to be production-ready)
+- **Stealth Mode** — juda kech launch qilish. "Chiroyli kostyumdagi kechiktirish." Mahsulot mukammal bo'lishini kutib, yopiq ravishda sayqallayverasiz. U hech qachon chiqmaydi va hech kim sizning mavjudligingizni bilmaydi.
+- **"Yana bitta funksiya"** — hech qachon launch qilmaslik. Har bir taklif etilgan launch sanasi yana bitta narsa uchun surilaveradi. Qamrov abadiy kengayadi; launch hech qachon kelmaydi.
 
-**Goal:** Validate core functionality with friendly users.
+O'rta yo'l — **SLC — Simple, Lovable, Complete** (Jason Cohen), minimal, lekin sevilmaydigan yalang'och MVP'ni chiqarishga qarshi antidot. Hech kimga kerak bo'lmagan bo'sh narsani launch qilmang; shishgan hamma-narsa-ilovasini ham kutmang. Launch qilsa bo'ladigan v1:
 
-### Phase 2: Alpha Launch
-Put the product in front of external users in a controlled way.
+- **Simple (sodda)** — u *bitta* narsani qiladi. Ko'p narsani yomon emas. Bitta aniq vazifa, yaxshi bajarilgan.
+- **Lovable (sevimli)** — odamlar undan shunchaki chidab emas, *foydalanishni xohlaydi*. MVP foydalanuvchilardan "fikr-mulohaza berish uchun" soddalashtirilgan tajribaga chidashni so'raydi. SLC ularga tanlaydigan narsani beradi. Agar uni yo'qotsa hech kim afsuslanmasa, u hali sevimli emas.
+- **Complete (to'liq)** — bu bitta narsa uchun *to'liq* tajriba, ko'zga tashlanadigan bo'shliqlari bor stub emas. Tanlangan qamrovida to'liq, kattaroq va'daning teaser'i emas.
 
-**Actions:**
-- Create landing page with early access signup form
-- Announce the product exists
-- Invite users individually to start testing
-- MVP should be working in production (even if still evolving)
+**Darvoza:** Agar u hali Simple, Lovable va Complete bo'lmasa, siz faqat qamrov qo'shish yetishmayotganda "Yana bitta funksiya" hududidasiz — aks holda Stealth Mode'dasiz va chiqarishingiz kerak. Bitta narsa sevimli va to'liq bo'lguncha qamrovni qisqartiring, so'ng uni launch qiling. SLC sizga mukammal launch hech qachon emas, haqiqiy launch hozir beradi.
 
-**Goal:** First external validation and initial waitlist building.
+**Bosqichlarni ishga tushirishdan oldin tezkor tekshiruv:**
+- [ ] U aniq belgilangan bitta narsani qiladimi? (Simple)
+- [ ] Maqsadli foydalanuvchi uni shunchaki chidab emas, *tanlab* ishlatadimi? (Lovable)
+- [ ] O'sha bitta narsa ko'zga tashlanadigan stub'larsiz to'liq tajribami? (Complete)
+- [ ] Shu darajadan oshib sayqallayapsizmi? → To'xtang. Siz Stealth Mode'dasiz. Chiqaring.
+- [ ] Hali ham qamrovga yangi narsalar qo'shayapsizmi? → To'xtang. Siz "Yana bitta funksiya"dasiz. SLC'ga qaytib qisqartiring.
 
-### Phase 3: Beta Launch
-Scale up early access while generating external buzz.
-
-**Actions:**
-- Work through early access list (some free, some paid)
-- Start marketing with teasers about problems you solve
-- Recruit friends, investors, and influencers to test and share
-
-**Consider adding:**
-- Coming soon landing page or waitlist
-- "Beta" sticker in dashboard navigation
-- Email invites to early access list
-- Early access toggle in settings for experimental features
-
-**Goal:** Build buzz and refine product with broader feedback.
-
-### Phase 4: Early Access Launch
-Shift from small-scale testing to controlled expansion.
-
-**Actions:**
-- Leak product details: screenshots, feature GIFs, demos
-- Gather quantitative usage data and qualitative feedback
-- Run user research with engaged users (incentivize with credits)
-- Optionally run product/market fit survey to refine messaging
-
-**Expansion options:**
-- Option A: Throttle invites in batches (5-10% at a time)
-- Option B: Invite all users at once under "early access" framing
-
-**Goal:** Validate at scale and prepare for full launch.
-
-### Phase 5: Full Launch
-Open the floodgates.
-
-**Actions:**
-- Open self-serve signups
-- Start charging (if not already)
-- Announce general availability across all channels
-
-**Launch touchpoints:**
-- Customer emails
-- In-app popups and product tours
-- Website banner linking to launch assets
-- "New" sticker in dashboard navigation
-- Blog post announcement
-- Social posts across platforms
-- Product Hunt, BetaList, Hacker News, etc.
-
-**Goal:** Maximum visibility and conversion to paying users.
+Darvozadan o'ting, so'ng quyidagi bosqichlarni ishga tushiring.
 
 ---
 
-## Product Hunt Launch Strategy
+## Besh bosqichli launch yondashuvi
 
-Product Hunt can be powerful for reaching early adopters, but it's not magic—it requires preparation.
+Launch bir kunlik tadbir emas. U momentum quradigan bosqichli jarayon.
 
-### Pros
-- Exposure to tech-savvy early adopter audience
-- Credibility bump (especially if Product of the Day)
-- Potential PR coverage and backlinks
+### 1-bosqich: Ichki launch
+Ommaga chiqishdan oldin dastlabki fikr-mulohaza to'plang va asosiy muammolarni tekislang.
 
-### Cons
-- Very competitive to rank well
-- Short-lived traffic spikes
-- Requires significant pre-launch planning
+**Harakatlar:**
+- Erta foydalanuvchilarni yakkama-yakka jalb qilib, bepul sinash uchun taklif qiling
+- Qulaylik bo'shliqlari va yetishmayotgan funksiyalar bo'yicha fikr-mulohazalarni yig'ing
+- Prototip demo qilish uchun yetarlicha ishlashini ta'minlang (production tayyor bo'lishi shart emas)
 
-### How to Launch Successfully
+**Maqsad:** Do'stona foydalanuvchilar bilan asosiy funksionallikni tasdiqlash.
 
-**Before launch day:**
-1. Build relationships with influential supporters, content hubs, and communities
-2. Optimize your listing: compelling tagline, polished visuals, short demo video
-3. Study successful launches to identify what worked
-4. Engage in relevant communities—provide value before pitching
-5. Prepare your team for all-day engagement
+### 2-bosqich: Alfa launch
+Mahsulotni tashqi foydalanuvchilar oldiga nazorat qilinadigan usulda qo'ying.
 
-**On launch day:**
-1. Treat it as an all-day event
-2. Respond to every comment in real-time
-3. Answer questions and spark discussions
-4. Encourage your existing audience to engage
-5. Direct traffic back to your site to capture signups
+**Harakatlar:**
+- Erta kirish ro'yxatdan o'tish formali landing sahifa yarating
+- Mahsulot mavjudligini e'lon qiling
+- Sinashni boshlash uchun foydalanuvchilarni alohida taklif qiling
+- MVP production'da ishlashi kerak (hali rivojlanayotgan bo'lsa ham)
 
-**After launch day:**
-1. Follow up with everyone who engaged
-2. Convert Product Hunt traffic into owned relationships (email signups)
-3. Continue momentum with post-launch content
+**Maqsad:** Birinchi tashqi tasdiqlash va dastlabki waitlist yig'ish.
 
-### Case Studies
+### 3-bosqich: Beta launch
+Erta kirishni kengaytiring va tashqi shov-shuv yarating.
 
-**SavvyCal** (Scheduling tool):
-- Optimized landing page and onboarding before launch
-- Built relationships with productivity/SaaS influencers in advance
-- Responded to every comment on launch day
-- Result: #2 Product of the Month
+**Harakatlar:**
+- Erta kirish ro'yxatidan o'ting (ba'zilari bepul, ba'zilari pullik)
+- Hal qiladigan muammolaringiz haqida teaser'lar bilan marketingni boshlang
+- Do'stlar, investorlar va influenserlarni sinash va ulashishga jalb qiling
 
-**Reform** (Form builder):
-- Studied successful launches and applied insights
-- Crafted clear tagline, polished visuals, demo video
-- Engaged in communities before launch (provided value first)
-- Treated launch as all-day engagement event
-- Directed traffic to capture signups
-- Result: #1 Product of the Day
+**Qo'shishni ko'rib chiqing:**
+- Tez orada landing sahifa yoki waitlist
+- Dashboard navigatsiyasida "Beta" stikeri
+- Erta kirish ro'yxatiga email taklifnomalar
+- Eksperimental funksiyalar uchun sozlamalarda erta kirish tumbleri
 
----
+**Maqsad:** Shov-shuv yaratish va kengroq fikr-mulohaza bilan mahsulotni sayqallash.
 
-## Post-Launch Product Marketing
+### 4-bosqich: Erta kirish launch
+Kichik ko'lamli testdan nazorat qilinadigan kengayishga o'ting.
 
-Your launch isn't over when the announcement goes live. Now comes adoption and retention work.
+**Harakatlar:**
+- Mahsulot tafsilotlarini "sizdiring": skrinshotlar, funksiya GIF'lari, demolar
+- Miqdoriy foydalanish ma'lumotlari va sifatiy fikr-mulohazalarni yig'ing
+- Faol foydalanuvchilar bilan foydalanuvchi tadqiqotini o'tkazing (kreditlar bilan rag'batlantiring)
+- Ixtiyoriy ravishda xabarni aniqlashtirish uchun product/market fit so'rovnomasini o'tkazing
 
-### Immediate Post-Launch Actions
+**Kengayish variantlari:**
+- A variant: Taklifnomalarni partiyalar bo'yicha cheklang (har safar 5–10%)
+- B variant: "Erta kirish" framing'ida barcha foydalanuvchilarni birdaniga taklif qiling
 
-**Educate new users:**
-Set up automated onboarding email sequence introducing key features and use cases.
+**Maqsad:** Ko'lamda tasdiqlash va to'liq launch'ga tayyorgarlik.
 
-**Reinforce the launch:**
-Include announcement in your weekly/biweekly/monthly roundup email to catch people who missed it.
+### 5-bosqich: To'liq launch
+Eshiklarni oching.
 
-**Differentiate against competitors:**
-Publish comparison pages highlighting why you're the obvious choice.
+**Harakatlar:**
+- O'zi-xizmat ro'yxatdan o'tishni oching
+- Pul olishni boshlang (agar hali boshlamagan bo'lsangiz)
+- Barcha kanallarda umumiy mavjudlikni e'lon qiling
 
-**Update web pages:**
-Add dedicated sections about the new feature/product across your site.
+**Launch kontakt nuqtalari:**
+- Mijoz emaillari
+- Ilova ichidagi popuplar va mahsulot turlari
+- Launch aktivlariga havola qiluvchi veb-sayt banneri
+- Dashboard navigatsiyasida "Yangi" stikeri
+- Blog post e'loni
+- Platformalar bo'ylab ijtimoiy postlar
+- Product Hunt, BetaList, Hacker News va h.k.
 
-**Offer hands-on preview:**
-Create no-code interactive demo (using tools like Navattic) so visitors can explore before signing up.
-
-### Keep Momentum Going
-It's easier to build on existing momentum than start from scratch. Every touchpoint reinforces the launch.
+**Maqsad:** Maksimal ko'rinish va to'lovchi foydalanuvchilarga konversiya.
 
 ---
 
-## Ongoing Launch Strategy
+## Product Hunt launch strategiyasi
 
-Don't rely on a single launch event. Regular updates and feature rollouts sustain engagement.
+Product Hunt erta qabul qiluvchilarga yetishda kuchli bo'lishi mumkin, lekin u sehr emas — tayyorgarlik talab qiladi.
 
-### How to Prioritize What to Announce
+### Afzalliklari
+- Texnologiyaga ishtiyoqli erta qabul qiluvchi auditoriyaga ko'rinish
+- Ishonchlilik oshishi (ayniqsa Product of the Day bo'lsa)
+- PR qamrovi va backlinklar ehtimoli
 
-Use this matrix to decide how much marketing each update deserves:
+### Kamchiliklari
+- Yaxshi reyting olish juda raqobatli
+- Qisqa muddatli trafik sakrashlari
+- Launch'dan oldin sezilarli rejalashtirishni talab qiladi
 
-**Major updates** (new features, product overhauls):
-- Full campaign across multiple channels
-- Blog post, email campaign, in-app messages, social media
-- Maximize exposure
+### Qanday muvaffaqiyatli launch qilish
 
-**Medium updates** (new integrations, UI enhancements):
-- Targeted announcement
-- Email to relevant segments, in-app banner
-- Don't need full fanfare
+**Launch kunidan oldin:**
+1. Ta'sirli tarafdorlar, kontent markazlari va hamjamiyatlar bilan munosabatlar quring
+2. Listingingizni optimallashtiring: jozibali tagline, sayqallangan vizuallar, qisqa demo video
+3. Nima ishlaganini aniqlash uchun muvaffaqiyatli launch'larni o'rganing
+4. Tegishli hamjamiyatlarda ishtirok eting — sotishdan oldin qiymat bering
+5. Jamoangizni kun bo'yi jalb qilishga tayyorlang
 
-**Minor updates** (bug fixes, small tweaks):
-- Changelog and release notes
-- Signal that product is improving
-- Don't dominate marketing
+**Launch kuni:**
+1. Buni kun bo'yi davom etadigan tadbir deb qarang
+2. Har bir izohga real vaqtda javob bering
+3. Savollarga javob bering va muhokamalarni qo'zg'ating
+4. Mavjud auditoriyangizni jalb bo'lishga undang
+5. Ro'yxatdan o'tishlarni olish uchun trafikni saytingizga yo'naltiring
 
-### Announcement Tactics
+**Launch kunidan keyin:**
+1. Jalb bo'lgan har bir kishiga keyingi aloqa qiling
+2. Product Hunt trafigini o'zingizga tegishli munosabatlarga (email obuna) aylantiring
+3. Launch'dan keyingi kontent bilan momentumni davom ettiring
 
-**Space out releases:**
-Instead of shipping everything at once, stagger announcements to maintain momentum.
+### Keys tadqiqotlari
 
-**Reuse high-performing tactics:**
-If a previous announcement resonated, apply those insights to future updates.
+**SavvyCal** (rejalashtirish vositasi):
+- Launch'dan oldin landing sahifa va onboardingni optimallashtirdi
+- Unumdorlik/SaaS influenserlari bilan oldindan munosabatlar qurdi
+- Launch kuni har bir izohga javob berdi
+- Natija: Oyning #2 mahsuloti
 
-**Keep engaging:**
-Continue using email, social, and in-app messaging to highlight improvements.
-
-**Signal active development:**
-Even small changelog updates remind customers your product is evolving. This builds retention and word-of-mouth—customers feel confident you'll be around.
-
----
-
-## Launch Checklist
-
-### Pre-Launch
-- [ ] Landing page with clear value proposition
-- [ ] Email capture / waitlist signup
-- [ ] Early access list built
-- [ ] Owned channels established (email, blog, community)
-- [ ] Rented channel presence (social profiles optimized)
-- [ ] Borrowed channel opportunities identified (podcasts, influencers)
-- [ ] Product Hunt listing prepared (if using)
-- [ ] Launch assets created (screenshots, demo video, GIFs)
-- [ ] Onboarding flow ready
-- [ ] Analytics/tracking in place
-
-### Launch Day
-- [ ] Announcement email to list
-- [ ] Blog post published
-- [ ] Social posts scheduled and posted
-- [ ] Product Hunt listing live (if using)
-- [ ] In-app announcement for existing users
-- [ ] Website banner/notification active
-- [ ] Team ready to engage and respond
-- [ ] Monitor for issues and feedback
-
-### Post-Launch
-- [ ] Onboarding email sequence active
-- [ ] Follow-up with engaged prospects
-- [ ] Roundup email includes announcement
-- [ ] Comparison pages published
-- [ ] Interactive demo created
-- [ ] Gather and act on feedback
-- [ ] Plan next launch moment
+**Reform** (forma quruvchi):
+- Muvaffaqiyatli launch'larni o'rganib, insaytlarni qo'lladi
+- Aniq tagline, sayqallangan vizuallar, demo video tayyorladi
+- Launch'dan oldin hamjamiyatlarda ishtirok etdi (avval qiymat berdi)
+- Launch'ni kun bo'yi davom etadigan jalb qilish tadbiri deb qaradi
+- Ro'yxatdan o'tishlarni olish uchun trafikni yo'naltirdi
+- Natija: Kunning #1 mahsuloti
 
 ---
 
-## Task-Specific Questions
+## Launch'dan keyingi mahsulot marketingi
 
-1. What are you launching? (New product, major feature, minor update)
-2. What's your current audience size and engagement?
-3. What owned channels do you have? (Email list size, blog traffic, community)
-4. What's your timeline for launch?
-5. Have you launched before? What worked/didn't work?
-6. Are you considering Product Hunt? What's your preparation status?
+E'lon jonli bo'lganda launch tugamaydi. Endi qabul qilish va saqlash ishi boshlanadi.
+
+### Launch'dan keyingi zudlik bilan harakatlar
+
+**Yangi foydalanuvchilarni o'rgating:**
+Asosiy funksiya va foydalanish holatlarini tanishtiruvchi avtomatik onboarding email ketma-ketligini sozlang.
+
+**Launch'ni mustahkamlang:**
+E'londan o'tkazib yuborganlarni qamrab olish uchun haftalik/ikki haftalik/oylik yig'ma emailingizga e'lonni kiriting.
+
+**Raqobatchilardan farqlaning:**
+Nega siz aniq tanlov ekaningizni ta'kidlaydigan taqqoslash sahifalarini nashr qiling.
+
+**Veb-sahifalarni yangilang:**
+Sayt bo'ylab yangi funksiya/mahsulot haqida maxsus bo'limlar qo'shing.
+
+**Amaliy preview taklif qiling:**
+Tashrifchilar ro'yxatdan o'tishdan oldin o'rganishi uchun kodsiz interaktiv demo yarating (Navattic kabi vositalar yordamida).
+
+### Momentumni davom ettiring
+Mavjud momentum ustiga qurish noldan boshlashdan osonroq. Har bir kontakt nuqtasi launch'ni mustahkamlaydi.
 
 ---
 
-## Related Skills
+## Doimiy launch strategiyasi
 
-- **marketing-ideas**: For additional launch tactics (#22 Product Hunt, #23 Early Access Referrals)
-- **emails**: For launch and onboarding email sequences
-- **cro**: For optimizing launch landing pages
-- **marketing-psychology**: For psychology behind waitlists and exclusivity
-- **programmatic-seo**: For comparison pages mentioned in post-launch
-- **sales-enablement**: For launch sales collateral and enablement materials
+Bitta launch tadbiriga tayanmang. Muntazam yangilanishlar va funksiya relizlari jalb qilishni saqlab turadi.
+
+### Nimani e'lon qilishni qanday ustuvorlashtirish
+
+Har bir yangilanish qancha marketingga loyiq ekanini hal qilish uchun bu matritsadan foydalaning:
+
+**Yirik yangilanishlar** (yangi funksiyalar, mahsulot qayta ko'rib chiqilishi):
+- Bir nechta kanal bo'ylab to'liq kampaniya
+- Blog post, email kampaniya, ilova ichidagi xabarlar, ijtimoiy tarmoq
+- Maksimal ko'rinish
+
+**O'rta yangilanishlar** (yangi integratsiyalar, UI yaxshilanishlari):
+- Nishonli e'lon
+- Tegishli segmentlarga email, ilova ichidagi banner
+- To'liq shov-shuv kerak emas
+
+**Kichik yangilanishlar** (xatolarni tuzatish, mayda tuzatishlar):
+- Changelog va reliz eslatmalari
+- Mahsulot yaxshilanayotganini bildiring
+- Marketingda ustun bo'lmasin
+
+### E'lon taktikalari
+
+**Relizlarni oralatib qo'ying:**
+Hammasini birdaniga chiqarish o'rniga, momentumni saqlash uchun e'lonlarni navbatlashtiring.
+
+**Yuqori natijali taktikalarni qayta ishlating:**
+Oldingi e'lon aks sado bergan bo'lsa, o'sha insaytlarni keyingi yangilanishlarga qo'llang.
+
+**Jalb qilishni davom ettiring:**
+Yaxshilanishlarni ta'kidlash uchun email, ijtimoiy tarmoq va ilova ichidagi xabarlardan foydalanishni davom ettiring.
+
+**Faol rivojlanishdan signal bering:**
+Kichik changelog yangilanishlari ham mijozlarga mahsulotingiz rivojlanayotganini eslatadi. Bu saqlash va og'zaki tarqalishni oshiradi — mijozlar siz mavjud bo'lib turishingizga ishonch his qiladi.
+
+---
+
+## Launch cheklisti
+
+### Launch'dan oldin
+- [ ] Aniq qiymat taklifli landing sahifa
+- [ ] Email yig'ish / waitlist ro'yxatdan o'tish
+- [ ] Erta kirish ro'yxati tuzilgan
+- [ ] Owned kanallar o'rnatilgan (email, blog, hamjamiyat)
+- [ ] Rented kanal mavjudligi (ijtimoiy profillar optimallashtirilgan)
+- [ ] Borrowed kanal imkoniyatlari aniqlangan (podkastlar, influenserlar)
+- [ ] Product Hunt listingi tayyorlangan (ishlatilsa)
+- [ ] Launch aktivlari yaratilgan (skrinshotlar, demo video, GIF'lar)
+- [ ] Onboarding oqimi tayyor
+- [ ] Analitika/treking joyida
+
+### Launch kuni
+- [ ] Ro'yxatga e'lon emaili
+- [ ] Blog post nashr qilingan
+- [ ] Ijtimoiy postlar rejalashtirilgan va joylangan
+- [ ] Product Hunt listingi jonli (ishlatilsa)
+- [ ] Mavjud foydalanuvchilar uchun ilova ichidagi e'lon
+- [ ] Veb-sayt banneri/bildirishnomasi faol
+- [ ] Jamoa jalb bo'lishga va javob berishga tayyor
+- [ ] Muammolar va fikr-mulohazalarni kuzatish
+
+### Launch'dan keyin
+- [ ] Onboarding email ketma-ketligi faol
+- [ ] Jalb bo'lgan prospektlar bilan keyingi aloqa
+- [ ] Yig'ma email e'lonni o'z ichiga oladi
+- [ ] Taqqoslash sahifalari nashr qilingan
+- [ ] Interaktiv demo yaratilgan
+- [ ] Fikr-mulohazalarni yig'ish va ular asosida harakat qilish
+- [ ] Keyingi launch lahzasini rejalash
+
+---
+
+## Vazifaga xos savollar
+
+1. Nimani launch qilyapsiz? (Yangi mahsulot, yirik funksiya, kichik yangilanish)
+2. Joriy auditoriya hajmi va jalb qilish darajasi qanday?
+3. Qanday owned kanallaringiz bor? (Email ro'yxati hajmi, blog trafigi, hamjamiyat)
+4. Launch uchun muddatingiz qanday?
+5. Avval launch qilganmisiz? Nima ishladi/ishlamadi?
+6. Product Hunt'ni ko'rib chiqyapsizmi? Tayyorgarlik holatingiz qanday?
+
+---
+
+## Bog'liq skilllar
+
+- **marketing-ideas**: Qo'shimcha launch taktikalari uchun (#22 Product Hunt, #23 Early Access Referrals)
+- **emails**: Launch va onboarding email ketma-ketliklari uchun
+- **cro**: Launch landing sahifalarini optimallashtirish uchun
+- **marketing-psychology**: Waitlist va eksklyuzivlik ortidagi psixologiya uchun
+- **programmatic-seo**: Launch'dan keyingi qismda eslatilgan taqqoslash sahifalari uchun
+- **sales-enablement**: Launch sotuv materiallari va enablement uchun
 
 ---
 
