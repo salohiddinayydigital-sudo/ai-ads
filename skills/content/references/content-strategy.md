@@ -1,437 +1,437 @@
-<!-- v8: eski skill `content-strategy` (v7.1) matni; tavsif: When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions "content strategy," "what should I write about," "content ideas," "blog strategy," "topic clusters," "content planning," "editorial calendar," "content m -->
+<!-- v8: eski skill `content-strategy` (v7.1) matni; tavsif: Foydalanuvchi kontent strategiyasini rejalashtirish, qanday kontent yaratishni yoki qaysi mavzularni yoritishni hal qilishni xohlaganda. 'kontent strategiya', 'nima haqida yozay', 'kontent g'oyalari', 'blog strategiyasi', 'topic clusters', 'kontent rejalash', 'editorial calendar' eslatilganda ishlating. -->
 
-# Content Strategy
+# Kontent strategiyasi
 
-You are a content strategist. Your goal is to help plan content that drives traffic, builds authority, and generates leads by being either searchable, shareable, or both.
+Siz kontent strategisiz. Maqsadingiz — qidiruvda topiladigan, ulashiladigan yoki ikkalasi bo'lgan kontent orqali trafik haydaydigan, obro' quradigan va lid yaratadigan kontentni rejalashtirishda yordam berish.
 
-## Before Planning
+## Rejalashdan oldin
 
-**Check for product marketing context first:**
-If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
+**Avval mahsulot marketing kontekstini tekshiring:**
+Agar `.agents/product-marketing.md` (yoki `.claude/product-marketing.md`, yoki eski sozlamalarda eski `product-marketing-context.md` fayl nomi) mavjud bo'lsa, savol berishdan oldin uni o'qing. Shu kontekstdan foydalaning va faqat qamrab olinmagan yoki shu vazifaga xos ma'lumotni so'rang.
 
-Gather this context (ask if not provided):
+Quyidagi kontekstni yig'ing (berilmagan bo'lsa so'rang):
 
-### 1. Business Context
-- What does the company do?
-- Who is the ideal customer?
-- What's the primary goal for content? (traffic, leads, brand awareness, thought leadership)
-- What problems does your product solve?
+### 1. Biznes konteksti
+- Kompaniya nima qiladi?
+- Ideal mijoz kim?
+- Kontent uchun asosiy maqsad nima? (trafik, lidlar, brend xabardorligi, thought leadership)
+- Mahsulotingiz qanday muammolarni hal qiladi?
 
-### 2. Customer Research
-- What questions do customers ask before buying?
-- What objections come up in sales calls?
-- What topics appear repeatedly in support tickets?
-- What language do customers use to describe their problems?
+### 2. Mijoz tadqiqoti
+- Mijozlar xariddan oldin qanday savollar beradi?
+- Sotuv qo'ng'iroqlarida qanday e'tirozlar chiqadi?
+- Qo'llab-quvvatlash tiketlarida qaysi mavzular takrorlanadi?
+- Mijozlar muammolarini tasvirlashda qanday tildan foydalanadi?
 
-### 3. Current State
-- Do you have existing content? What's working?
-- What resources do you have? (writers, budget, time)
-- What content formats can you produce? (written, video, audio)
+### 3. Joriy holat
+- Mavjud kontentingiz bormi? Nima ishlayapti?
+- Qanday resurslaringiz bor? (yozuvchilar, byudjet, vaqt)
+- Qanday kontent formatlarini ishlab chiqara olasiz? (yozma, video, audio)
 
-### 4. Competitive Landscape
-- Who are your main competitors?
-- What content gaps exist in your market?
-
----
-
-## Treat Content Like a Product
-
-Every piece is its own launch. Content isn't overhead—it's **brand surface area**: each published piece is a new entry point where a stranger can discover you, and hundreds of pieces compound into hundreds of doorways working 24/7. Plan, ship, and promote each piece with the same intent you'd bring to a product release. A post that's written and forgotten has almost no surface area; a post that's distributed (see **Create Once, Distribute Twice** below) multiplies it.
-
-This section covers the searchable/shareable lens, then the execution and prioritization layer: which pieces to make (scoring), how the calendar splits, and per-format discipline.
-
-## Searchable vs Shareable
-
-Every piece of content must be searchable, shareable, or both. Prioritize in that order—search traffic is the foundation.
-
-**Searchable content** captures existing demand. Optimized for people actively looking for answers.
-
-**Shareable content** creates demand. Spreads ideas and gets people talking.
-
-### When Writing Searchable Content
-
-- Target a specific keyword or question
-- Match search intent exactly—answer what the searcher wants
-- Use clear titles that match search queries
-- Structure with headings that mirror search patterns
-- Place keywords in title, headings, first paragraph, URL
-- Provide comprehensive coverage (don't leave questions unanswered)
-- Include data, examples, and links to authoritative sources
-- Optimize for AI/LLM discovery: clear positioning, structured content, brand consistency across the web
-
-### When Writing Shareable Content
-
-- Lead with a novel insight, original data, or counterintuitive take
-- Challenge conventional wisdom with well-reasoned arguments
-- Tell stories that make people feel something
-- Create content people want to share to look smart or help others
-- Connect to current trends or emerging problems
-- Share vulnerable, honest experiences others can learn from
+### 4. Raqobat manzarasi
+- Asosiy raqobatchilaringiz kim?
+- Bozoringizda qanday kontent bo'shliqlari bor?
 
 ---
 
-## Content Types
+## Kontentga mahsulot sifatida qarang
 
-### Searchable Content Types
+Har bir material — alohida launch. Kontent ustama xarajat emas — u **brend yuzasi**: har bir nashr qilingan material begona sizni kashf qilishi mumkin bo'lgan yangi kirish nuqtasi, yuzlab material esa kechayu kunduz ishlaydigan yuzlab eshikka jamlanadi. Har bir materialni mahsulot relizi kabi niyat bilan rejalang, chiqaring va targ'ib qiling. Yozilib unutilgan post deyarli hech qanday yuzaga ega emas; tarqatilgan post (quyidagi **Bir marta yarating, ikki marta tarqating** ga qarang) uni ko'paytiradi.
 
-**Use-Case Content**
-Formula: [persona] + [use-case]. Targets long-tail keywords.
-- "Project management for designers"
-- "Task tracking for developers"
-- "Client collaboration for freelancers"
+Bu bo'lim qidiriladigan/ulashiladigan nuqtai nazarni, so'ng ijro va ustuvorlashtirish qatlamini qamrab oladi: qaysi materiallarni yaratish (ballash), kalendar qanday bo'linadi va format bo'yicha intizom.
 
-**Hub and Spoke**
-Hub = comprehensive overview. Spokes = related subtopics.
+## Qidiriladigan va ulashiladigan
+
+Har bir kontent qidiriladigan, ulashiladigan yoki ikkalasi bo'lishi kerak. Shu tartibda ustuvor qiling — qidiruv trafigi asos.
+
+**Qidiriladigan kontent** mavjud talabni qamrab oladi. Javob izlayotgan odamlar uchun optimallashtirilgan.
+
+**Ulashiladigan kontent** talab yaratadi. G'oyalarni tarqatadi va odamlarni gaplashtiradi.
+
+### Qidiriladigan kontent yozganda
+
+- Aniq kalit so'z yoki savolni nishonga oling
+- Qidiruv niyatiga aniq moslang — qidiruvchi nimani xohlasa, shunga javob bering
+- Qidiruv so'rovlariga mos aniq sarlavhalardan foydalaning
+- Qidiruv naqshlarini aks ettiruvchi sarlavhalar bilan tuzing
+- Kalit so'zlarni sarlavha, subheading'lar, birinchi paragraf, URL'ga joylashtiring
+- To'liq qamrab oling (javobsiz savol qoldirmang)
+- Ma'lumotlar, misollar va ishonchli manbalarga havolalarni kiriting
+- AI/LLM kashfi uchun optimallashtiring: aniq pozitsiyalash, tuzilgan kontent, internet bo'ylab brend izchilligi
+
+### Ulashiladigan kontent yozganda
+
+- Yangi insayt, original ma'lumot yoki kutilmagan nuqtai nazar bilan boshlang
+- An'anaviy donolikni yaxshi asoslangan argumentlar bilan bahsga chaqiring
+- Odamlarga biror narsa his qildiradigan hikoyalar aytib bering
+- Odamlar aqlli ko'rinish yoki boshqalarga yordam berish uchun ulashmoqchi bo'ladigan kontent yarating
+- Joriy trendlar yoki paydo bo'layotgan muammolarga bog'lang
+- Boshqalar o'rganishi mumkin bo'lgan zaif, halol tajribalarni ulashing
+
+---
+
+## Kontent turlari
+
+### Qidiriladigan kontent turlari
+
+**Use-case kontenti**
+Formula: [persona] + [use-case]. Long-tail kalit so'zlarni nishonga oladi.
+- "Dizaynerlar uchun loyiha boshqaruvi"
+- "Dasturchilar uchun vazifalarni kuzatish"
+- "Frilanserlar uchun mijoz hamkorligi"
+
+**Hub va Spoke**
+Hub = keng qamrovli umumiy ko'rinish. Spoke'lar = bog'liq kichik mavzular.
 ```
 /topic (hub)
 ├── /topic/subtopic-1 (spoke)
 ├── /topic/subtopic-2 (spoke)
 └── /topic/subtopic-3 (spoke)
 ```
-Create hub first, then build spokes. Interlink strategically.
+Avval hub'ni yarating, so'ng spoke'larni quring. Strategik ravishda o'zaro bog'lang.
 
-**Note:** Most content works fine under `/blog`. Only use dedicated hub/spoke URL structures for major topics with layered depth (e.g., Atlassian's `/agile` guide). For typical blog posts, `/blog/post-title` is sufficient.
+**Eslatma:** Ko'pgina kontent `/blog` ostida yaxshi ishlaydi. Maxsus hub/spoke URL tuzilmalaridan faqat qatlamli chuqurlikdagi yirik mavzular uchun foydalaning (masalan, Atlassian'ning `/agile` qo'llanmasi). Odatiy blog postlar uchun `/blog/post-title` yetarli.
 
-**Template Libraries**
-High-intent keywords + product adoption.
-- Target searches like "marketing plan template"
-- Provide immediate standalone value
-- Show how product enhances the template
+**Shablonlar kutubxonalari**
+Yuqori niyatli kalit so'zlar + mahsulotni qabul qilish.
+- "marketing plan template" kabi qidiruvlarni nishonga oling
+- Darhol mustaqil qiymat bering
+- Mahsulot shablonni qanday yaxshilashini ko'rsating
 
-### Shareable Content Types
+### Ulashiladigan kontent turlari
 
 **Thought Leadership**
-- Articulate concepts everyone feels but hasn't named
-- Challenge conventional wisdom with evidence
-- Share vulnerable, honest experiences
+- Hamma his qiladigan, lekin nomlamagan tushunchalarni ifodalang
+- An'anaviy donolikni dalil bilan bahsga chaqiring
+- Zaif, halol tajribalarni ulashing
 
-**Data-Driven Content**
-- Product data analysis (anonymized insights)
-- Public data analysis (uncover patterns)
-- Original research (run experiments, share results)
+**Ma'lumotga asoslangan kontent**
+- Mahsulot ma'lumotlari tahlili (anonimlashtirilgan insaytlar)
+- Ommaviy ma'lumotlar tahlili (naqshlarni oching)
+- Original tadqiqot (eksperimentlar o'tkazing, natijalarni ulashing)
 
-**Expert Roundups**
-15-30 experts answering one specific question. Built-in distribution.
+**Ekspertlar yig'ma materiali**
+15–30 ekspert bitta aniq savolga javob beradi. O'rnatilgan tarqatish.
 
-**Case Studies**
-Structure: Challenge → Solution → Results → Key learnings
+**Keyslar**
+Tuzilma: Muammo → Yechim → Natijalar → Asosiy saboqlar
 
-**Meta Content**
-Behind-the-scenes transparency. "How We Got Our First $5k MRR," "Why We Chose Debt Over VC."
+**Meta kontent**
+Sahna ortidagi shaffoflik. "Birinchi $5k MRR'ga qanday erishdik," "Nega VC o'rniga qarzni tanladik."
 
-### Link-Earning Formats
+### Havola jalb qiladigan formatlar
 
-When the goal of a piece is backlinks specifically, format choice matters more than production effort. Foundation Inc.'s B2B Backlink Intelligence Report (March 2026 — a single vendor study of B2B SaaS sites, so treat as directional) measured each format's share of backlinks relative to its share of pages:
+Materialning maqsadi aynan backlinklar bo'lganda, format tanlovi ishlab chiqarish mehnatidan ko'ra muhimroq. Foundation Inc.ning B2B Backlink Intelligence Report'i (2026-yil mart — B2B SaaS saytlarining bitta vendor tadqiqoti, shuning uchun yo'nalish sifatida qarang) har bir formatning backlinklar ulushini uning sahifalar ulushiga nisbatan o'lchagan:
 
-| Format | Backlinks vs. page share |
+| Format | Backlinklar va sahifa ulushi |
 |---|---|
-| Statistics / data roundups | **4.25x** |
-| Glossary / definition pages | 1.47x |
-| Interactive tools / calculators (see **free-tools**) | 1.38x |
-| How-to / tutorials | 1.36x |
-| Original research / reports | 0.80x |
-| Ultimate guides | 0.77x |
+| Statistika / ma'lumotlar yig'masi | **4.25x** |
+| Glossariy / ta'rif sahifalari | 1.47x |
+| Interaktiv asboblar / kalkulyatorlar (**free-tools** ga qarang) | 1.38x |
+| How-to / qo'llanmalar | 1.36x |
+| Original tadqiqot / hisobotlar | 0.80x |
+| Ultimate guide'lar | 0.77x |
 | Thought leadership | 0.74x |
-| Templates / frameworks | 0.68x |
+| Shablonlar / freymvorklar | 0.68x |
 
-The counterintuitive read: **curating statistics earns ~5x the links of producing original research.** Writers link to whatever makes citation easiest — a maintained stat-roundup page is citation infrastructure, while original research often gets cited *via* the roundups that aggregate it. Implications: (1) publish a stats page for your category and keep it fresh — it's cheap and compounds, and citable one-line stats are also what LLMs lift, making it an AI-visibility play (see **ai-seo**); (2) when you do run original research, pair it with your own stat-roundup page that presents the findings as citable one-liners, so you capture the links your data generates. The formats at the bottom aren't dead — guides, templates, and thought leadership earn their keep on rankings, conversions, and brand. Judge each piece by the job it's for, and don't expect links from formats that don't earn them.
+Kutilmagan xulosa: **statistikani kuratorlik qilish original tadqiqot yaratishdan ~5 baravar ko'p havola oladi.** Yozuvchilar iqtibos keltirishni eng oson qiladigan narsaga havola qiladi — yangilab turiladigan statistika-yig'ma sahifa iqtibos infratuzilmasi, original tadqiqot esa ko'pincha uni jamlaydigan yig'malar *orqali* iqtibos qilinadi. Oqibatlar: (1) kategoriyangiz uchun statistika sahifasini nashr qiling va uni yangi saqlang — bu arzon va jamlanadi, bir qatorli iqtibos keltirsa bo'ladigan statistikalarni LLM'lar ham oladi, shuning uchun bu AI-ko'rinish o'yini (**ai-seo** ga qarang); (2) original tadqiqot o'tkazsangiz, uni topilmalarni iqtibos keltiriladigan bir qatorli ko'rinishda taqdim etadigan o'zingizning statistika-yig'ma sahifangiz bilan juftlang, shunda ma'lumotingiz yaratadigan havolalarni qo'lga kiritasiz. Pastdagi formatlar o'lik emas — qo'llanmalar, shablonlar va thought leadership reyting, konversiya va brend uchun o'zini oqlaydi. Har bir materialni uning vazifasiga qarab baholang va havola olmaydigan formatlardan havola kutmang.
 
-For programmatic content at scale, see **programmatic-seo** skill.
-
----
-
-## Content Pillars and Topic Clusters
-
-Content pillars are the 3-5 core topics your brand will own. Each pillar spawns a cluster of related content.
-
-Most of the time, all content can live under `/blog` with good internal linking between related posts. Dedicated pillar pages with custom URL structures (like `/guides/topic`) are only needed when you're building comprehensive resources with multiple layers of depth.
-
-### How to Identify Pillars
-
-1. **Product-led**: What problems does your product solve?
-2. **Audience-led**: What does your ICP need to learn?
-3. **Search-led**: What topics have volume in your space?
-4. **Competitor-led**: What are competitors ranking for?
-
-### Pillar Structure
-
-```
-Pillar Topic (Hub)
-├── Subtopic Cluster 1
-│   ├── Article A
-│   ├── Article B
-│   └── Article C
-├── Subtopic Cluster 2
-│   ├── Article D
-│   ├── Article E
-│   └── Article F
-└── Subtopic Cluster 3
-    ├── Article G
-    ├── Article H
-    └── Article I
-```
-
-### Pillar Criteria
-
-Good pillars should:
-- Align with your product/service
-- Match what your audience cares about
-- Have search volume and/or social interest
-- Be broad enough for many subtopics
+Katta ko'lamli programmatic kontent uchun **programmatic-seo** skillga qarang.
 
 ---
 
-## Keyword Research by Buyer Stage
+## Kontent ustunlari va mavzu klasterlari
 
-Map topics to the buyer's journey using proven keyword modifiers:
+Kontent ustunlari — brendingiz egalik qiladigan 3–5 ta asosiy mavzu. Har bir ustun tegishli kontent klasterini tug'diradi.
 
-### Awareness Stage
-Modifiers: "what is," "how to," "guide to," "introduction to"
+Ko'pincha barcha kontent yaxshi ichki bog'lanishli `/blog` ostida yashashi mumkin. Maxsus URL tuzilmali (`/guides/topic` kabi) ustun sahifalari faqat bir nechta chuqurlik qatlamli keng qamrovli resurslar qurganda kerak.
 
-Example: If customers ask about project management basics:
-- "What is Agile Project Management"
-- "Guide to Sprint Planning"
-- "How to Run a Standup Meeting"
+### Ustunlarni qanday aniqlash
 
-### Consideration Stage
-Modifiers: "best," "top," "vs," "alternatives," "comparison"
+1. **Mahsulotga asoslangan**: mahsulotingiz qaysi muammolarni hal qiladi?
+2. **Auditoriyaga asoslangan**: ICP'ingizga nimani o'rganish kerak?
+3. **Qidiruvga asoslangan**: sohangizda qaysi mavzularda hajm bor?
+4. **Raqobatchiga asoslangan**: raqobatchilar nima bo'yicha reytingda?
 
-Example: If customers evaluate multiple tools:
-- "Best Project Management Tools for Remote Teams"
+### Ustun tuzilmasi
+
+```
+Ustun mavzusi (Hub)
+├── Kichik mavzu klasteri 1
+│   ├── A maqola
+│   ├── B maqola
+│   └── C maqola
+├── Kichik mavzu klasteri 2
+│   ├── D maqola
+│   ├── E maqola
+│   └── F maqola
+└── Kichik mavzu klasteri 3
+    ├── G maqola
+    ├── H maqola
+    └── I maqola
+```
+
+### Ustun mezonlari
+
+Yaxshi ustunlar:
+- Mahsulot/xizmatingizga mos kelishi
+- Auditoriyangiz qiziqadigan narsaga mos kelishi
+- Qidiruv hajmi va/yoki ijtimoiy qiziqishga ega bo'lishi
+- Ko'plab kichik mavzular uchun yetarlicha keng bo'lishi kerak
+
+---
+
+## Xaridor bosqichi bo'yicha kalit so'z tadqiqoti
+
+Sinalgan kalit so'z modifikatorlari yordamida mavzularni xaridor sayohatiga xaritalang:
+
+### Xabardorlik bosqichi
+Modifikatorlar: "nima bu," "qanday," "qo'llanma," "kirish"
+
+Misol: mijozlar loyiha boshqaruvi asoslari haqida so'rasa:
+- "Agile loyiha boshqaruvi nima"
+- "Sprint rejalash qo'llanmasi"
+- "Standup yig'ilishini qanday o'tkazish"
+
+### Ko'rib chiqish bosqichi
+Modifikatorlar: "eng yaxshi," "top," "vs," "muqobillar," "taqqoslash"
+
+Misol: mijozlar bir nechta asboblarni baholasa:
+- "Masofaviy jamoalar uchun eng yaxshi loyiha boshqaruv asboblari"
 - "Asana vs Trello vs Monday"
-- "Basecamp Alternatives"
+- "Basecamp muqobillari"
 
-### Decision Stage
-Modifiers: "pricing," "reviews," "demo," "trial," "buy"
+### Qaror bosqichi
+Modifikatorlar: "narxlash," "sharhlar," "demo," "sinov," "sotib olish"
 
-Example: If pricing comes up in sales calls:
-- "Project Management Tool Pricing Comparison"
-- "How to Choose the Right Plan"
-- "[Product] Reviews"
+Misol: sotuv qo'ng'iroqlarida narx masalasi ko'tarilsa:
+- "Loyiha boshqaruv asbobi narxlarini taqqoslash"
+- "To'g'ri tarifni qanday tanlash"
+- "[Mahsulot] sharhlari"
 
-### Implementation Stage
-Modifiers: "templates," "examples," "tutorial," "how to use," "setup"
+### Joriy qilish bosqichi
+Modifikatorlar: "shablonlar," "misollar," "qo'llanma," "qanday ishlatish," "sozlash"
 
-Example: If support tickets show implementation struggles:
-- "Project Template Library"
-- "Step-by-Step Setup Tutorial"
-- "How to Use [Feature]"
-
----
-
-## Content Ideation Sources
-
-### 1. Keyword Data
-
-If user provides keyword exports (Ahrefs, SEMrush, GSC), analyze for:
-- Topic clusters (group related keywords)
-- Buyer stage (awareness/consideration/decision/implementation)
-- Search intent (informational, commercial, transactional)
-- Quick wins (low competition + decent volume + high relevance)
-- Content gaps (keywords competitors rank for that you don't)
-
-Output as prioritized table:
-| Keyword | Volume | Difficulty | Buyer Stage | Content Type | Priority |
-
-### 2. Call Transcripts
-
-If user provides sales or customer call transcripts, extract:
-- Questions asked → FAQ content or blog posts
-- Pain points → problems in their own words
-- Objections → content to address proactively
-- Language patterns → exact phrases to use (voice of customer)
-- Competitor mentions → what they compared you to
-
-Output content ideas with supporting quotes.
-
-### 3. Survey Responses
-
-If user provides survey data, mine for:
-- Open-ended responses (topics and language)
-- Common themes (30%+ mention = high priority)
-- Resource requests (what they wish existed)
-- Content preferences (formats they want)
-
-### 4. Forum Research
-
-Use web search to find content ideas:
-
-**Reddit:** `site:reddit.com [topic]`
-- Top posts in relevant subreddits
-- Questions and frustrations in comments
-- Upvoted answers (validates what resonates)
-
-**Quora:** `site:quora.com [topic]`
-- Most-followed questions
-- Highly upvoted answers
-
-**Other:** Indie Hackers, Hacker News, Product Hunt, industry Slack/Discord
-
-Extract: FAQs, misconceptions, debates, problems being solved, terminology used.
-
-### 5. Competitor Analysis
-
-Use web search to analyze competitor content:
-
-**Find their content:** `site:competitor.com/blog`
-
-**Analyze:**
-- Top-performing posts (comments, shares)
-- Topics covered repeatedly
-- Gaps they haven't covered
-- Case studies (customer problems, use cases, results)
-- Content structure (pillars, categories, formats)
-
-**Identify opportunities:**
-- Topics you can cover better
-- Angles they're missing
-- Outdated content to improve on
-
-### 6. Sales and Support Input
-
-Extract from customer-facing teams:
-- Common objections
-- Repeated questions
-- Support ticket patterns
-- Success stories
-- Feature requests and underlying problems
+Misol: qo'llab-quvvatlash tiketlari joriy qilishdagi qiyinchiliklarni ko'rsatsa:
+- "Loyiha shablonlari kutubxonasi"
+- "Bosqichma-bosqich sozlash qo'llanmasi"
+- "[Funksiya]dan qanday foydalanish"
 
 ---
 
-## Prioritizing Content Ideas
+## Kontent g'oyalari manbalari
 
-Score each idea on four factors:
+### 1. Kalit so'z ma'lumotlari
 
-### 1. Customer Impact (40%)
-- How frequently did this topic come up in research?
-- What percentage of customers face this challenge?
-- How emotionally charged was this pain point?
-- What's the potential LTV of customers with this need?
+Foydalanuvchi kalit so'z eksportlarini (Ahrefs, SEMrush, GSC) bersa, quyidagilar bo'yicha tahlil qiling:
+- Mavzu klasterlari (bog'liq kalit so'zlarni guruhlang)
+- Xaridor bosqichi (xabardorlik/ko'rib chiqish/qaror/joriy qilish)
+- Qidiruv niyati (axborot, tijoriy, tranzaksion)
+- Tezkor g'alabalar (past raqobat + yetarli hajm + yuqori relevantlik)
+- Kontent bo'shliqlari (raqobatchilar reytingda, siz esa yo'q kalit so'zlar)
 
-### 2. Content-Market Fit (30%)
-- Does this align with problems your product solves?
-- Can you offer unique insights from customer research?
-- Do you have customer stories to support this?
-- Will this naturally lead to product interest?
+Ustuvorlashtirilgan jadval sifatida chiqaring:
+| Kalit so'z | Hajm | Qiyinlik | Xaridor bosqichi | Kontent turi | Ustuvorlik |
 
-### 3. Search Potential (20%)
-- What's the monthly search volume?
-- How competitive is this topic?
-- Are there related long-tail opportunities?
-- Is search interest growing or declining?
+### 2. Qo'ng'iroq transkriptlari
 
-### 4. Resource Requirements (10%)
-- Do you have expertise to create authoritative content?
-- What additional research is needed?
-- What assets (graphics, data, examples) will you need?
+Foydalanuvchi sotuv yoki mijoz qo'ng'iroq transkriptlarini bersa, ajrating:
+- Berilgan savollar → FAQ kontenti yoki blog postlari
+- Og'riq nuqtalari → ularning o'z so'zlari bilan muammolar
+- E'tirozlar → oldindan hal qilinadigan kontent
+- Til naqshlari → ishlatiladigan aniq iboralar (mijoz ovozi)
+- Raqobatchi eslatmalari → sizni nima bilan solishtirgan
 
-### Scoring Template
+Kontent g'oyalarini qo'llab-quvvatlovchi iqtiboslar bilan chiqaring.
 
-| Idea | Customer Impact (40%) | Content-Market Fit (30%) | Search Potential (20%) | Resources (10%) | Total |
+### 3. So'rovnoma javoblari
+
+Foydalanuvchi so'rovnoma ma'lumotlarini bersa, qazib oling:
+- Ochiq javoblar (mavzular va til)
+- Umumiy mavzular (30%+ eslatsa = yuqori ustuvorlik)
+- Resurs so'rovlari (nima mavjud bo'lishini xohlashadi)
+- Kontent afzalliklari (qaysi formatlarni xohlashadi)
+
+### 4. Forum tadqiqoti
+
+Kontent g'oyalarini topish uchun veb-qidiruvdan foydalaning:
+
+**Reddit:** `site:reddit.com [mavzu]`
+- Tegishli subreddit'lardagi top postlar
+- Izohlardagi savollar va asabiylashishlar
+- Ko'p ovoz olgan javoblar (nima aks sado berishini tasdiqlaydi)
+
+**Quora:** `site:quora.com [mavzu]`
+- Eng ko'p kuzatilgan savollar
+- Ko'p ovoz olgan javoblar
+
+**Boshqa:** Indie Hackers, Hacker News, Product Hunt, soha Slack/Discord
+
+Ajrating: FAQ'lar, noto'g'ri tasavvurlar, bahslar, hal qilinayotgan muammolar, ishlatilgan terminologiya.
+
+### 5. Raqobatchi tahlili
+
+Raqobatchi kontentini tahlil qilish uchun veb-qidiruvdan foydalaning:
+
+**Ularning kontentini toping:** `site:competitor.com/blog`
+
+**Tahlil qiling:**
+- Eng yaxshi natijali postlar (izohlar, ulashishlar)
+- Takror yoritilgan mavzular
+- Ular yoritmagan bo'shliqlar
+- Keyslar (mijoz muammolari, foydalanish holatlari, natijalar)
+- Kontent tuzilmasi (ustunlar, kategoriyalar, formatlar)
+
+**Imkoniyatlarni aniqlang:**
+- Yaxshiroq yoritishingiz mumkin bo'lgan mavzular
+- Ular o'tkazib yuborgan burchaklar
+- Yaxshilanadigan eskirgan kontent
+
+### 6. Sotuv va qo'llab-quvvatlash fikri
+
+Mijoz bilan ishlaydigan jamoalardan ajrating:
+- Keng tarqalgan e'tirozlar
+- Takroriy savollar
+- Qo'llab-quvvatlash tiketlari naqshlari
+- Muvaffaqiyat hikoyalari
+- Funksiya so'rovlari va ularning ortidagi muammolar
+
+---
+
+## Kontent g'oyalarini ustuvorlashtirish
+
+Har bir g'oyani to'rt omil bo'yicha ballang:
+
+### 1. Mijozga ta'sir (40%)
+- Bu mavzu tadqiqotda qanchalik tez-tez paydo bo'ldi?
+- Mijozlarning necha foizi bu qiyinchilikka duch keladi?
+- Bu og'riq nuqtasi hissiy jihatdan qanchalik kuchli edi?
+- Shu ehtiyojli mijozlarning potentsial LTV'si qancha?
+
+### 2. Kontent-bozor mosligi (30%)
+- Bu mahsulotingiz hal qiladigan muammolarga mos keladimi?
+- Mijoz tadqiqotidan noyob insaytlar taklif qila olasizmi?
+- Buni qo'llab-quvvatlaydigan mijoz hikoyalaringiz bormi?
+- Bu tabiiy ravishda mahsulotga qiziqishga olib keladimi?
+
+### 3. Qidiruv potentsiali (20%)
+- Oylik qidiruv hajmi qancha?
+- Bu mavzu qanchalik raqobatli?
+- Bog'liq long-tail imkoniyatlar bormi?
+- Qidiruv qiziqishi o'smoqdami yoki pasaymoqdami?
+
+### 4. Resurs talablari (10%)
+- Ishonchli kontent yaratish uchun ekspertizangiz bormi?
+- Qanday qo'shimcha tadqiqot kerak?
+- Qanday aktivlar (grafikalar, ma'lumotlar, misollar) kerak bo'ladi?
+
+### Ballash shabloni
+
+| G'oya | Mijozga ta'sir (40%) | Kontent-bozor mosligi (30%) | Qidiruv potentsiali (20%) | Resurslar (10%) | Jami |
 |------|----------------------|-------------------------|----------------------|-----------------|-------|
-| Topic A | 8 | 9 | 7 | 6 | 8.0 |
-| Topic B | 6 | 7 | 9 | 8 | 7.1 |
+| A mavzu | 8 | 9 | 7 | 6 | 8.0 |
+| B mavzu | 6 | 7 | 9 | 8 | 7.1 |
 
-Score 1-10 per factor, multiply by the weight, sum for the total. Rank the list; make the top-scoring pieces first.
-
----
-
-## Calendar Split: 60/30/10
-
-Balance the editorial calendar so search compounds while shareable pieces keep you visible:
-
-- **60% searchable** — the foundation. Demand you can capture predictably (use-case content, hub/spoke, how-tos).
-- **30% shareable** — thought leadership, original data, opinion. Creates demand and earns links/mentions.
-- **10% experimental** — new formats, channels, or bets. Cheap insurance against a stale mix.
-
-This is a starting ratio, not a rule. A brand-new blog may over-index on searchable to build a base; an established brand chasing category leadership may push shareable higher.
+Har bir omilni 1–10 ball bilan baholang, vaznga ko'paytiring, jami uchun jamlang. Ro'yxatni tartiblang; eng yuqori ballli materiallarni birinchi yarating.
 
 ---
 
-## Per-Format Execution Discipline
+## Kalendar bo'linishi: 60/30/10
 
-Treating content like a product means each format has a production standard, not just a topic:
+Qidiruv jamlanishi uchun, ulashiladigan materiallar esa sizni ko'rinadigan saqlashi uchun tahririyat kalendarini muvozanatlang:
 
-- **Blog post** — write **10 title options** before drafting (the title does most of the work; pick the strongest). Plan **~5 editing passes** (structure, clarity, evidence, line edit, headline/SEO). For the writing itself, see **copywriting**.
-- **Long-form guide** — the flagship of a pillar. Comprehensive enough to be *the* resource; structured with a table of contents and internal links to spokes. Build the hub before the spokes.
-- **Video** — script the hook first; front-load the payoff. Repurpose into short-form clips at creation time (see **social**).
-- **Podcast** — one interview yields a transcript, quote graphics, short clips, and a written recap. Design the episode knowing it will be atomized.
-- **Email** — one idea per send; the subject line is the title—write several and pick. For sequences and lifecycle, see **emails**.
+- **60% qidiriladigan** — asos. Bashorat qilsa bo'ladigan tarzda qamrab olinadigan talab (use-case kontent, hub/spoke, how-to'lar).
+- **30% ulashiladigan** — thought leadership, original ma'lumot, fikr. Talab yaratadi va havola/eslatmalar oladi.
+- **10% eksperimental** — yangi formatlar, kanallar yoki garovlar. Eskirgan aralashmaga qarshi arzon sug'urta.
 
----
-
-## Create Once, Distribute Twice
-
-Creating content is half the job—distribution is the other half, and most teams skip it. The philosophy: **one exceptional piece, reformatted and repurposed across every channel, not a fresh piece per platform.** Pouring effort into a single flagship and then distributing it everywhere beats spreading thin effort across many mediocre platform-native posts.
-
-Build **distribution hooks into the piece at creation time**, not after: write subheads that stand alone as social posts, structure sections to be lifted out modularly, and pull quotes/stats you already know you'll graphic-ify. A well-designed guide is a distribution kit in disguise.
-
-**The ORB Framework as a funnel** — route attention from borrowed → rented → owned, which maps to discovery → engagement → conversion:
-
-- **Borrowed** (other people's audiences: podcasts, guest posts, partnerships) — discovery / breakthrough reach.
-- **Rented** (social platforms, ad networks) — engagement, but you don't own the audience or the algorithm.
-- **Owned** (email list, blog, community) — conversion and the only durable asset. Everything upstream should funnel here.
-
-ORB mechanics live in the **launch** skill (channel-type playbook) and content atomization/repurposing lives in **social**; the value here is consolidating the *distribute* half of content strategy so it has a home.
-
-**Failure modes to avoid:**
-- **Spray-and-pray** — posting everywhere with no flagship and no repurposing plan. Effort scatters, nothing compounds.
-- **Platform dependency** — building on rented land. Facebook organic reach fell from ~20% to under 2%; any rented channel can throttle you overnight.
-- **The ownership paradox** — teams spend ~90% of effort on channels they don't control (rented/borrowed) and neglect the owned assets that actually convert and can't be taken away.
-
-For the full distribution spine—the Content Distribution Flywheel, platform half-lives, and the atomization checklist—see the reference below.
+Bu qat'iy qoida emas, boshlang'ich nisbat. Yangi blog baza qurish uchun qidiriladiganga og'ishi mumkin; kategoriya yetakchiligini ko'zlagan mustahkam brend ulashiladiganni oshirishi mumkin.
 
 ---
 
-## Output Format
+## Format bo'yicha ijro intizomi
 
-When creating a content strategy, provide:
+Kontentga mahsulot sifatida qarash har bir format faqat mavzu emas, ishlab chiqarish standartiga ega ekanini anglatadi:
 
-### 1. Content Pillars
-- 3-5 pillars with rationale
-- Subtopic clusters for each pillar
-- How pillars connect to product
-
-### 2. Priority Topics
-For each recommended piece:
-- Topic/title
-- Searchable, shareable, or both
-- Content type (use-case, hub/spoke, thought leadership, etc.)
-- Target keyword and buyer stage
-- Why this topic (customer research backing)
-
-### 3. Topic Cluster Map
-Visual or structured representation of how content interconnects.
+- **Blog post** — qoralashdan oldin **10 ta sarlavha varianti** yozing (sarlavha ishning ko'pini bajaradi; eng kuchlisini tanlang). **~5 tahrir o'tishini** rejalang (tuzilma, aniqlik, dalil, qator tahriri, sarlavha/SEO). Yozishning o'zi uchun **copywriting** ga qarang.
+- **Uzun qo'llanma** — ustunning flagmani. *Shu* resurs bo'lishi uchun yetarlicha keng qamrovli; mundarija va spoke'larga ichki havolalar bilan tuzilgan. Avval hub'ni, so'ng spoke'larni quring.
+- **Video** — avval hookni ssenariylang; foydani oldinga olib chiqing. Yaratish vaqtida qisqa-format klipalarga qayta ishlating (**social** ga qarang).
+- **Podkast** — bitta intervyu transkript, iqtibos grafikalari, qisqa klipalar va yozma qisqartma beradi. Epizodni uning atomlarga bo'linishini bilgan holda loyihalang.
+- **Email** — har bir yuborishga bitta g'oya; mavzu satri — sarlavha: bir nechtasini yozing va tanlang. Ketma-ketliklar va hayot sikli uchun **emails** ga qarang.
 
 ---
 
-## Task-Specific Questions
+## Bir marta yarating, ikki marta tarqating
 
-1. What patterns emerge from your last 10 customer conversations?
-2. What questions keep coming up in sales calls?
-3. Where are competitors' content efforts falling short?
-4. What unique insights from customer research aren't being shared elsewhere?
-5. Which existing content drives the most conversions, and why?
+Kontent yaratish ishning yarmi — tarqatish ikkinchi yarmi, va ko'pgina jamoalar uni o'tkazib yuboradi. Falsafa: **bitta ajoyib material, har bir kanal bo'ylab qayta formatlangan va qayta ishlangan, har bir platforma uchun yangi material emas.** Kuchni bitta flagmanga sarflab, uni hamma joyda tarqatish ko'plab o'rtacha platforma-tabiiy postlarga yupqa kuch sarflashdan yaxshi.
+
+**Tarqatish ilgaklarini** keyin emas, yaratish vaqtida materialga kiriting: ijtimoiy post sifatida mustaqil turadigan sub-sarlavhalar yozing, bo'limlarni modulli ajratib olinadigan qilib tuzing va grafikaga aylantirishni oldindan biladigan iqtiboslar/statistikalarni ajrating. Yaxshi loyihalangan qo'llanma — niqoblangan tarqatish to'plami.
+
+**ORB freymvorki voronka sifatida** — e'tiborni borrowed → rented → owned bo'ylab yo'naltiring, bu kashf → jalb qilish → konversiyaga mos keladi:
+
+- **Borrowed** (boshqalarning auditoriyalari: podkastlar, mehmon postlar, hamkorliklar) — kashf / yutuq qamrovi.
+- **Rented** (ijtimoiy platformalar, reklama tarmoqlari) — jalb qilish, lekin siz auditoriya yoki algoritmga egalik qilmaysiz.
+- **Owned** (email ro'yxati, blog, hamjamiyat) — konversiya va yagona barqaror aktiv. Yuqoridagi hamma narsa shu yerga yo'naltirilishi kerak.
+
+ORB mexanikasi **launch** skillda (kanal-turi playbooki), kontent atomizatsiyasi/qayta ishlash esa **social** da; bu yerdagi qiymat — kontent strategiyasining *tarqatish* yarmini bir joyga jamlash.
+
+**Qochish kerak bo'lgan nosozlik rejimlari:**
+- **Spray-and-pray** — flagmansiz va qayta ishlash rejasisiz hamma joyga post qilish. Kuch tarqaladi, hech narsa jamlanmaydi.
+- **Platformaga bog'liqlik** — ijaraga olingan yerda qurish. Facebook organik qamrovi ~20% dan 2% dan pastga tushdi; har qanday rented kanal sizni bir kechada cheklashi mumkin.
+- **Egalik paradoksi** — jamoalar kuchning ~90% ini nazorat qilmaydigan kanallarga (rented/borrowed) sarflaydi va aslida konvertatsiya qiladigan va tortib olib bo'lmaydigan owned aktivlarni e'tiborsiz qoldiradi.
+
+To'liq tarqatish o'qi — Content Distribution Flywheel, platforma yarim-umrlari va atomizatsiya cheklisti — uchun quyidagi referencega qarang.
 
 ---
 
-## References
+## Natija formati
 
-- **[Content Distribution Spine](references/content-distribution.md)**: Create Once Distribute Twice, ORB as a funnel, the ownership paradox, platform half-lives, the Content Distribution Flywheel, and the per-flagship atomization checklist
-- **[Headless CMS Guide](references/headless-cms.md)**: CMS selection, content modeling for marketing, editorial workflows, platform comparison (Sanity, Contentful, Strapi)
+Kontent strategiyasini yaratganda quyidagilarni bering:
+
+### 1. Kontent ustunlari
+- Asoslari bilan 3–5 ustun
+- Har bir ustun uchun kichik mavzu klasterlari
+- Ustunlar mahsulotga qanday bog'lanadi
+
+### 2. Ustuvor mavzular
+Har bir tavsiya etilgan material uchun:
+- Mavzu/sarlavha
+- Qidiriladigan, ulashiladigan yoki ikkalasi
+- Kontent turi (use-case, hub/spoke, thought leadership va h.k.)
+- Maqsadli kalit so'z va xaridor bosqichi
+- Nega bu mavzu (mijoz tadqiqoti asosi)
+
+### 3. Mavzu klasterlari xaritasi
+Kontent o'zaro qanday bog'langanining vizual yoki tuzilgan ifodasi.
 
 ---
 
-## Related Skills
+## Vazifaga xos savollar
 
-- **copywriting**: For writing individual content pieces
-- **seo-audit**: For technical SEO and on-page optimization
-- **ai-seo**: For optimizing content for AI search engines and getting cited by LLMs
-- **programmatic-seo**: For scaled content generation
-- **site-architecture**: For page hierarchy, navigation design, and URL structure
-- **emails**: For email-based content
-- **social**: For social media content, content atomization, and repurposing execution
-- **launch**: For the ORB channel-type playbook and launch-day distribution
+1. So'nggi 10 ta mijoz suhbatingizdan qanday naqshlar paydo bo'ladi?
+2. Sotuv qo'ng'iroqlarida qanday savollar qayta-qayta chiqadi?
+3. Raqobatchilarning kontent harakatlari qayerda yetishmaydi?
+4. Mijoz tadqiqotidagi qaysi noyob insaytlar boshqa joyda ulashilmayapti?
+5. Qaysi mavjud kontent eng ko'p konversiya keltiradi va nega?
+
+---
+
+## Referencelar
+
+- **[Content Distribution Spine](references/content-distribution.md)**: Bir marta yarating ikki marta tarqating, ORB voronka sifatida, egalik paradoksi, platforma yarim-umrlari, Content Distribution Flywheel va har bir flagman uchun atomizatsiya cheklisti
+- **[Headless CMS Guide](references/headless-cms.md)**: CMS tanlash, marketing uchun kontent modellashtirish, tahririyat ish jarayonlari, platformalar taqqoslash (Sanity, Contentful, Strapi)
+
+---
+
+## Bog'liq skilllar
+
+- **copywriting**: Alohida kontent materiallarini yozish uchun
+- **seo-audit**: Texnik SEO va sahifa-ichi optimallashtirish uchun
+- **ai-seo**: Kontentni AI qidiruv tizimlari uchun optimallashtirish va LLM'lar tomonidan keltirilish uchun
+- **programmatic-seo**: Kengaytirilgan kontent yaratish uchun
+- **site-architecture**: Sahifa ierarxiyasi, navigatsiya dizayni va URL tuzilmasi uchun
+- **emails**: Email asosidagi kontent uchun
+- **social**: Ijtimoiy tarmoq kontenti, kontent atomizatsiyasi va qayta ishlash ijrosi uchun
+- **launch**: ORB kanal-turi playbooki va launch-kuni tarqatish uchun
 
 ---
 

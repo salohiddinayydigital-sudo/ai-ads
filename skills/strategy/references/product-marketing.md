@@ -1,253 +1,253 @@
-<!-- v8: eski skill `product-marketing` (v7.1) matni; tavsif: When the user wants to create or update their product marketing context document. Also use when the user mentions 'product context,' 'marketing context,' 'set up context,' 'positioning,' 'who is my target audience,' 'describe my product,' 'ICP,' 'ideal customer profile,' or wants to avoid repeating  -->
+<!-- v8: eski skill `product-marketing` (v7.1) matni; tavsif: Foydalanuvchi mahsulot marketing konteksti hujjatini yaratish yoki yangilashni xohlaganda. 'mahsulot konteksti', 'marketing konteksti', 'pozitsiyalash', 'maqsadli auditoriyam kim', 'mahsulotimni tasvirlash', 'ICP', 'ideal mijoz profili' eslatilganda yoki o'zini takrorlamaslikni xohlaganda ishlating. -->
 
-# Product Marketing Context
+# Mahsulot marketing konteksti
 
-You help users create and maintain a product marketing context document. This captures foundational positioning and messaging information that other marketing skills reference, so users don't repeat themselves.
+Siz foydalanuvchilarga mahsulot marketing konteksti hujjatini yaratish va yuritishda yordam berasiz. U boshqa marketing skilllari tayanadigan asosiy pozitsiyalash va xabar ma'lumotlarini qamrab oladi, shunda foydalanuvchilar o'zlarini takrorlamaydi.
 
-The document is stored at `.agents/product-marketing.md`.
+Hujjat `.agents/product-marketing.md` da saqlanadi.
 
-## Workflow
+## Ish jarayoni
 
-### Step 1: Check for Existing Context
+### 1-qadam: Mavjud kontekstni tekshiring
 
-First, check if `.agents/product-marketing.md` already exists. Also check `.claude/product-marketing.md` and the legacy filename `product-marketing-context.md` (in either `.agents/` or `.claude/`) for older setups — if found anywhere other than `.agents/product-marketing.md`, offer to move it to the canonical location.
+Avval `.agents/product-marketing.md` allaqachon mavjudligini tekshiring. Shuningdek eski sozlamalar uchun `.claude/product-marketing.md` va eski fayl nomi `product-marketing-context.md` ni (`.agents/` yoki `.claude/` ichida) tekshiring — `.agents/product-marketing.md` dan boshqa joyda topilsa, uni kanonik joyga ko'chirishni taklif qiling.
 
-**If it exists:**
-- Read it and summarize what's captured — note its current **Document version** and the last few **Changelog** entries so the user sees where the doc stands and what's changed recently
-- Ask which sections they want to update
-- Only gather info for those sections
-- On any substantive save, bump the version and add a changelog entry (see Step 4). This doc is the shared context every other marketing skill reads, so a dated paper trail of *what changed and why* is worth keeping.
+**Mavjud bo'lsa:**
+- Uni o'qing va nima yozilganini umumlashtiring — foydalanuvchi hujjat qayerda turganini va yaqinda nima o'zgarganini ko'rishi uchun joriy **Hujjat versiyasi** va so'nggi bir nechta **Changelog** yozuvlarini ko'rsating
+- Qaysi bo'limlarni yangilamoqchi ekanini so'rang
+- Faqat o'sha bo'limlar bo'yicha ma'lumot yig'ing
+- Har qanday mazmunli saqlashda versiyani oshiring va changelog yozuvini qo'shing (4-qadamga qarang). Bu hujjat har bir boshqa marketing skill o'qiydigan umumiy kontekst, shuning uchun *nima va nega o'zgargani* haqidagi sanalangan iz saqlashga arziydi.
 
-**If it doesn't exist, offer two options:**
+**Mavjud bo'lmasa, ikki variantni taklif qiling:**
 
-1. **Auto-draft from codebase** (recommended): You'll study the repo—README, landing pages, marketing copy, package.json, etc.—and draft a V1 of the context document. The user then reviews, corrects, and fills gaps. This is faster than starting from scratch.
+1. **Kod bazasidan avto-qoralash** (tavsiya): siz repozitoriyni — README, landing sahifalar, marketing matnlari, package.json va h.k. — o'rganasiz va kontekst hujjatining V1 qoralamasini yozasiz. So'ng foydalanuvchi ko'rib chiqadi, tuzatadi va bo'shliqlarni to'ldiradi. Bu noldan boshlashdan tezroq.
 
-2. **Start from scratch**: Walk through each section conversationally, gathering info one section at a time.
+2. **Noldan boshlash**: ma'lumotni bo'limma-bo'lim yig'ib, har bir bo'limni suhbat tarzida o'ting.
 
-Most users prefer option 1. After presenting the draft, ask: "What needs correcting? What's missing?"
+Ko'p foydalanuvchilar 1-variantni afzal ko'radi. Qoralamani taqdim etgandan keyin so'rang: "Nima tuzatilishi kerak? Nima yetishmayapti?"
 
-### Step 2: Gather Information
+### 2-qadam: Ma'lumot yig'ish
 
-**If auto-drafting:**
-1. Read the codebase: README, landing pages, marketing copy, about pages, meta descriptions, package.json, any existing docs
-2. Draft all sections based on what you find
-3. Present the draft and ask what needs correcting or is missing
-4. Iterate until the user is satisfied
+**Avto-qoralashda:**
+1. Kod bazasini o'qing: README, landing sahifalar, marketing matnlari, biz haqimizda sahifalari, meta tavsiflar, package.json, har qanday mavjud hujjatlar
+2. Topganingizga asoslanib barcha bo'limlarni qoralang
+3. Qoralamani taqdim eting va nima tuzatilishi yoki yetishmasligini so'rang
+4. Foydalanuvchi mamnun bo'lguncha takrorlang
 
-**If starting from scratch:**
-Walk through each section below conversationally, one at a time. Don't dump all questions at once.
+**Noldan boshlashda:**
+Quyidagi har bir bo'limni suhbat tarzida, birma-bir o'ting. Barcha savollarni birdaniga tashlamang.
 
-For each section:
-1. Briefly explain what you're capturing
-2. Ask relevant questions
-3. Confirm accuracy
-4. Move to the next
+Har bir bo'lim uchun:
+1. Nimani yozayotganingizni qisqacha tushuntiring
+2. Tegishli savollarni bering
+3. Aniqligini tasdiqlang
+4. Keyingisiga o'ting
 
-Push for verbatim customer language — exact phrases are more valuable than polished descriptions because they reflect how customers actually think and speak, which makes copy more resonant.
-
----
-
-## Sections to Capture
-
-### 1. Product Overview
-- One-line description
-- What it does (2-3 sentences)
-- Product category (what "shelf" you sit on—how customers search for you)
-- Product type (SaaS, marketplace, e-commerce, service, etc.)
-- Business model and pricing
-
-### 2. Target Audience
-- Target company type (industry, size, stage)
-- Target decision-makers (roles, departments)
-- Primary use case (the main problem you solve)
-- Jobs to be done (2-3 things customers "hire" you for)
-- Specific use cases or scenarios
-
-### 3. Personas (B2B only)
-If multiple stakeholders are involved in buying, capture for each:
-- User, Champion, Decision Maker, Financial Buyer, Technical Influencer
-- What each cares about, their challenge, and the value you promise them
-
-### 4. Problems & Pain Points
-- Core challenge customers face before finding you
-- Why current solutions fall short
-- What it costs them (time, money, opportunities)
-- Emotional tension (stress, fear, doubt)
-
-### 5. Competitive Landscape
-- **Direct competitors**: Same solution, same problem (e.g., Calendly vs SavvyCal)
-- **Secondary competitors**: Different solution, same problem (e.g., Calendly vs Superhuman scheduling)
-- **Indirect competitors**: Conflicting approach (e.g., Calendly vs personal assistant)
-- How each falls short for customers
-
-### 6. Differentiation
-- Key differentiators (capabilities alternatives lack)
-- How you solve it differently
-- Why that's better (benefits)
-- Why customers choose you over alternatives
-
-### 7. Objections & Anti-Personas
-- Top 3 objections heard in sales and how to address them
-- Who is NOT a good fit (anti-persona)
-
-### 8. Switching Dynamics
-The JTBD Four Forces:
-- **Push**: What frustrations drive them away from current solution
-- **Pull**: What attracts them to you
-- **Habit**: What keeps them stuck with current approach
-- **Anxiety**: What worries them about switching
-
-### 9. Customer Language
-- How customers describe the problem (verbatim)
-- How they describe your solution (verbatim)
-- Words/phrases to use
-- Words/phrases to avoid
-- Glossary of product-specific terms
-
-### 10. Brand Voice
-- Tone (professional, casual, playful, etc.)
-- Communication style (direct, conversational, technical)
-- Brand personality (3-5 adjectives)
-
-### 11. Proof Points
-- Key metrics or results to cite
-- Notable customers/logos
-- Testimonial snippets
-- Main value themes and supporting evidence
-
-### 12. Goals
-- Primary business goal
-- Key conversion action (what you want people to do)
-- Current metrics (if known)
+Mijozning so'zma-so'z tilini talab qiling — aniq iboralar sayqallangan tavsiflardan qimmatliroq, chunki ular mijozlar aslida qanday o'ylashi va gapirishini aks ettiradi, bu esa matnni ta'sirliroq qiladi.
 
 ---
 
-## Step 3: Create the Document
+## Yozib olinadigan bo'limlar
 
-After gathering information, create `.agents/product-marketing.md` with this structure:
+### 1. Mahsulotga umumiy nazar
+- Bir qatorli tavsif
+- U nima qiladi (2–3 jumla)
+- Mahsulot kategoriyasi (qaysi "javon"dasiz — mijozlar sizni qanday qidiradi)
+- Mahsulot turi (SaaS, marketplace, e-commerce, xizmat va h.k.)
+- Biznes modeli va narxlash
+
+### 2. Maqsadli auditoriya
+- Maqsadli kompaniya turi (soha, hajm, bosqich)
+- Maqsadli qaror qabul qiluvchilar (rollar, bo'limlar)
+- Asosiy foydalanish holati (hal qiladigan asosiy muammo)
+- Jobs to be done (mijozlar sizni "yollaydigan" 2–3 narsa)
+- Muayyan foydalanish holatlari yoki ssenariylar
+
+### 3. Personalar (faqat B2B)
+Xaridda bir nechta manfaatdor tomon ishtirok etsa, har biri uchun yozing:
+- Foydalanuvchi, Champion, Qaror qabul qiluvchi, Moliyaviy xaridor, Texnik ta'sir qiluvchi
+- Har biri nimaga e'tibor beradi, ularning qiyinchiligi va siz ularga va'da qiladigan qiymat
+
+### 4. Muammolar va og'riq nuqtalari
+- Mijozlar sizni topishdan oldin duch keladigan asosiy qiyinchilik
+- Nega joriy yechimlar yetarli emas
+- Bu ularga nimaga tushadi (vaqt, pul, imkoniyatlar)
+- Hissiy kuchlanish (stress, qo'rquv, shubha)
+
+### 5. Raqobat manzarasi
+- **To'g'ridan-to'g'ri raqobatchilar**: bir xil yechim, bir xil muammo (masalan, Calendly va SavvyCal)
+- **Ikkilamchi raqobatchilar**: boshqa yechim, bir xil muammo (masalan, Calendly va Superhuman rejalashtirish)
+- **Bilvosita raqobatchilar**: ziddiyatli yondashuv (masalan, Calendly va shaxsiy yordamchi)
+- Har biri mijozlar uchun qanday yetishmaydi
+
+### 6. Farqlanish
+- Asosiy farqlovchilar (muqobillarda yo'q imkoniyatlar)
+- Siz buni qanday boshqacha hal qilasiz
+- Nega bu yaxshiroq (foydalar)
+- Mijozlar nega muqobillar o'rniga sizni tanlaydi
+
+### 7. E'tirozlar va anti-personalar
+- Sotuvda eshitilgan eng yaxshi 3 e'tiroz va ularni qanday hal qilish
+- Kim mos EMAS (anti-persona)
+
+### 8. Almashtirish dinamikasi
+JTBD To'rt Kuchi:
+- **Push (itarish)**: qanday asabiylashishlar ularni joriy yechimdan uzoqlashtiradi
+- **Pull (tortish)**: sizga nima jalb qiladi
+- **Habit (odat)**: nima ularni joriy yondashuvda ushlab turadi
+- **Anxiety (xavotir)**: almashtirish haqida nima tashvishlantiradi
+
+### 9. Mijoz tili
+- Mijozlar muammoni qanday tasvirlaydi (so'zma-so'z)
+- Ular yechimingizni qanday tasvirlaydi (so'zma-so'z)
+- Ishlatiladigan so'z/iboralar
+- Qochiladigan so'z/iboralar
+- Mahsulotga xos atamalar lug'ati
+
+### 10. Brend ovozi
+- Ohang (professional, norasmiy, o'ynoqi va h.k.)
+- Muloqot uslubi (to'g'ridan-to'g'ri, suhbat, texnik)
+- Brend shaxsiyati (3–5 sifat)
+
+### 11. Isbot nuqtalari
+- Keltiriladigan asosiy metrikalar yoki natijalar
+- Taniqli mijozlar/logotiplar
+- Sharh parchalari
+- Asosiy qiymat mavzulari va qo'llab-quvvatlovchi dalil
+
+### 12. Maqsadlar
+- Asosiy biznes maqsadi
+- Asosiy konversiya harakati (odamlar nima qilishini xohlaysiz)
+- Joriy metrikalar (ma'lum bo'lsa)
+
+---
+
+## 3-qadam: Hujjatni yarating
+
+Ma'lumotni yig'gandan keyin quyidagi tuzilma bilan `.agents/product-marketing.md` ni yarating:
 
 ```markdown
-# Product Marketing Context
+# Mahsulot marketing konteksti
 
-**Document version:** v1
-**Last updated:** [date]
+**Hujjat versiyasi:** v1
+**Oxirgi yangilanish:** [sana]
 
-## Product Overview
-**One-liner:**
-**What it does:**
-**Product category:**
-**Product type:**
-**Business model:**
+## Mahsulotga umumiy nazar
+**Bir qatorli tavsif:**
+**U nima qiladi:**
+**Mahsulot kategoriyasi:**
+**Mahsulot turi:**
+**Biznes modeli:**
 
-## Target Audience
-**Target companies:**
-**Decision-makers:**
-**Primary use case:**
+## Maqsadli auditoriya
+**Maqsadli kompaniyalar:**
+**Qaror qabul qiluvchilar:**
+**Asosiy foydalanish holati:**
 **Jobs to be done:**
 -
-**Use cases:**
+**Foydalanish holatlari:**
 -
 
-## Personas
-| Persona | Cares about | Challenge | Value we promise |
+## Personalar
+| Persona | Nimaga e'tibor beradi | Qiyinchilik | Biz va'da qiladigan qiymat |
 |---------|-------------|-----------|------------------|
 | | | | |
 
-## Problems & Pain Points
-**Core problem:**
-**Why alternatives fall short:**
+## Muammolar va og'riq nuqtalari
+**Asosiy muammo:**
+**Muqobillar nega yetarli emas:**
 -
-**What it costs them:**
-**Emotional tension:**
+**Bu ularga nimaga tushadi:**
+**Hissiy kuchlanish:**
 
-## Competitive Landscape
-**Direct:** [Competitor] — falls short because...
-**Secondary:** [Approach] — falls short because...
-**Indirect:** [Alternative] — falls short because...
+## Raqobat manzarasi
+**To'g'ridan-to'g'ri:** [Raqobatchi] — yetishmaydi, chunki...
+**Ikkilamchi:** [Yondashuv] — yetishmaydi, chunki...
+**Bilvosita:** [Muqobil] — yetishmaydi, chunki...
 
-## Differentiation
-**Key differentiators:**
+## Farqlanish
+**Asosiy farqlovchilar:**
 -
-**How we do it differently:**
-**Why that's better:**
-**Why customers choose us:**
+**Biz buni qanday boshqacha qilamiz:**
+**Nega bu yaxshiroq:**
+**Mijozlar nega bizni tanlaydi:**
 
-## Objections
-| Objection | Response |
+## E'tirozlar
+| E'tiroz | Javob |
 |-----------|----------|
 | | |
 
 **Anti-persona:**
 
-## Switching Dynamics
+## Almashtirish dinamikasi
 **Push:**
 **Pull:**
 **Habit:**
 **Anxiety:**
 
-## Customer Language
-**How they describe the problem:**
-- "[verbatim]"
-**How they describe us:**
-- "[verbatim]"
-**Words to use:**
-**Words to avoid:**
-**Glossary:**
-| Term | Meaning |
+## Mijoz tili
+**Ular muammoni qanday tasvirlaydi:**
+- "[so'zma-so'z]"
+**Ular bizni qanday tasvirlaydi:**
+- "[so'zma-so'z]"
+**Ishlatiladigan so'zlar:**
+**Qochiladigan so'zlar:**
+**Lug'at:**
+| Atama | Ma'nosi |
 |------|---------|
 | | |
 
-## Brand Voice
-**Tone:**
-**Style:**
-**Personality:**
+## Brend ovozi
+**Ohang:**
+**Uslub:**
+**Shaxsiyat:**
 
-## Proof Points
-**Metrics:**
-**Customers:**
-**Testimonials:**
-> "[quote]" — [who]
-**Value themes:**
-| Theme | Proof |
+## Isbot nuqtalari
+**Metrikalar:**
+**Mijozlar:**
+**Sharhlar:**
+> "[iqtibos]" — [kim]
+**Qiymat mavzulari:**
+| Mavzu | Isbot |
 |-------|-------|
 | | |
 
-## Goals
-**Business goal:**
-**Conversion action:**
-**Current metrics:**
+## Maqsadlar
+**Biznes maqsadi:**
+**Konversiya harakati:**
+**Joriy metrikalar:**
 
 ## Changelog
-*Newest first. One line per revision: what changed and why.*
-- v1 ([date]) — Initial context.
+*Eng yangisi birinchi. Har bir tahrirga bir qator: nima va nega o'zgargani.*
+- v1 ([sana]) — Dastlabki kontekst.
 ```
 
 ---
 
-## Step 4: Confirm, Version, and Save
+## 4-qadam: Tasdiqlang, versiyalang va saqlang
 
-- Show the completed document
-- Ask if anything needs adjustment
-- **Set the version and changelog** — this is the paper trail for a doc every other skill reads:
-  - **New document:** set `Document version: v1` and a single Changelog entry — `- v1 ([today]) — Initial context.`
-  - **Updating an existing document:** increment the version (v2 → v3 …), update `Last updated` to today, and **prepend a new Changelog entry** at the top of the list (newest first) summarizing *what changed and why* in one line. Never rewrite or reorder past entries.
-  - A good entry names the sections touched and the reason, not "updated the doc." Examples:
-    - `- v3 (2026-07-16) — Repositioned from "email tool" to "deliverability platform"; added RevOps to the ICP.`
-    - `- v2 (2026-06-02) — Rewrote value prop and objections after 5 customer interviews; added competitor Acme.`
-  - Use today's date in ISO form (YYYY-MM-DD) for the entry and `Last updated`.
-  - **Pure typo-only fix:** don't bump the version or add a changelog entry — just save the correction. Every other change bumps the version and gets an entry. When the change is a real repositioning, say so plainly — downstream skills will now generate against the new context.
-- Save to `.agents/product-marketing.md`
-- Tell them: "Other marketing skills will now use this context automatically. The Changelog at the bottom tracks every revision — check it to see how your positioning has evolved. Run `/product-marketing` anytime to update it."
+- Tayyor hujjatni ko'rsating
+- Biror narsani moslashtirish kerak yoki yo'qligini so'rang
+- **Versiya va changelog'ni belgilang** — bu har bir boshqa skill o'qiydigan hujjat uchun izlanadigan iz:
+  - **Yangi hujjat:** `Hujjat versiyasi: v1` va bitta Changelog yozuvini belgilang — `- v1 ([bugun]) — Dastlabki kontekst.`
+  - **Mavjud hujjatni yangilash:** versiyani oshiring (v2 → v3 …), `Oxirgi yangilanish` ni bugunga yangilang va ro'yxat boshiga (eng yangisi birinchi) *nima va nega o'zgargani* haqida bir qatorli **yangi Changelog yozuvini qo'shing**. O'tgan yozuvlarni hech qachon qayta yozmang yoki qayta tartiblamang.
+  - Yaxshi yozuv "hujjat yangilandi" emas, tegilgan bo'limlar va sababni nomlaydi. Misollar:
+    - `- v3 (2026-07-16) — "Email vositasi"dan "yetkazib berish platformasi"ga qayta pozitsiyalandi; ICP'ga RevOps qo'shildi.`
+    - `- v2 (2026-06-02) — 5 ta mijoz intervyusidan keyin qiymat taklifi va e'tirozlar qayta yozildi; raqobatchi Acme qo'shildi.`
+  - Yozuv va `Oxirgi yangilanish` uchun bugungi sanani ISO ko'rinishida (YYYY-MM-DD) ishlating.
+  - **Faqat imlo tuzatish:** versiyani oshirmang va changelog yozuvini qo'shmang — faqat tuzatishni saqlang. Boshqa har bir o'zgarish versiyani oshiradi va yozuv oladi. O'zgarish haqiqiy qayta pozitsiyalash bo'lsa, buni ochiq ayting — keyingi skilllar endi yangi kontekstga qarshi yaratadi.
+- `.agents/product-marketing.md` ga saqlang
+- Ularga ayting: "Boshqa marketing skilllari endi bu kontekstdan avtomatik foydalanadi. Pastdagi Changelog har bir tahrirni kuzatadi — pozitsiyalashingiz qanday rivojlanganini ko'rish uchun uni tekshiring. Yangilash uchun istalgan vaqt `/product-marketing` ni ishga tushiring."
 
 ---
 
-## Tips
+## Maslahatlar
 
-- **Be specific**: Ask "What's the #1 frustration that brings them to you?" not "What problem do they solve?"
-- **Capture exact words**: Customer language beats polished descriptions
-- **Ask for examples**: "Can you give me an example?" unlocks better answers
-- **Validate as you go**: Summarize each section and confirm before moving on
-- **Skip what doesn't apply**: Not every product needs all sections (e.g., Personas for B2C)
+- **Aniq bo'ling**: "Ular qaysi muammoni hal qiladi?" emas, "Ularni sizga olib keladigan №1 asabiylashish nima?" deb so'rang
+- **Aniq so'zlarni yozib oling**: Mijoz tili sayqallangan tavsiflardan ustun
+- **Misollar so'rang**: "Misol keltira olasizmi?" yaxshiroq javoblarni ochadi
+- **Borgan sari tasdiqlang**: Har bir bo'limni umumlashtiring va keyingisiga o'tishdan oldin tasdiqlang
+- **Tegishli bo'lmaganini o'tkazib yuboring**: Har bir mahsulotga barcha bo'limlar kerak emas (masalan, B2C uchun Personalar)
 
 ---
 
