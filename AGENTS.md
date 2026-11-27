@@ -8,9 +8,9 @@ updated: 2026-11-19
 
 # 🧠 TYRION v8.3 — KANONIK AGENT SHARTNOMASI
 
-> **Bir qator:** Tyrion v8.3 — pullik reklama va targetologiya uchun yopiq siklli tizim: 19 agent (12 core + 7 targetolog assistant), 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 42 slash buyruq (12 tasi model ko'radi) va 40 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
+> **Bir qator:** Tyrion v8.3 — pullik reklama va targetologiya uchun yopiq siklli tizim: 19 agent (12 core + 7 targetolog assistant), 19 skill, 100+ wiki qayd, 9 playbook, 6 kontekst, 42 slash buyruq (12 tasi model ko'radi) va 41 ta 0-token deterministik Python asbobi. Raqamlar `manifests/catalog.json` dan.
 
-<!-- tyrion:catalog agents=19 skills=19 wiki=101 playbooks=9 contexts=6 commands=42 rules=9 tools=40 -->
+<!-- tyrion:catalog agents=19 skills=19 wiki=101 playbooks=9 contexts=6 commands=42 rules=9 tools=41 -->
 
 ## 1. Boot Tartibi (Token Tejamkor)
 
@@ -31,7 +31,7 @@ updated: 2026-11-19
 | **Playbooklar** | `playbooks/` (9) | 8 ta to'liq nisha va platforma playbooki + `README.md` | kanonik |
 | **Bilim (Wiki)** | `wiki/` (100) | 100 ta atomik, wikilink bilan bog'langan bilim qaydi va 16 ta SOP | kanonik |
 | **Qoidalar** | `rules/` (9) | 8 ta buzilmas qoida (`00-manba` .. `70-charter-baseline`) + `README.md` | kanonik |
-| **Asboblar** | `tools/` (40) | `tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py` | faol |
+| **Asboblar** | `tools/` (41) | `tyrion.py`, `meta-targeting-engine.py`, `meta-audience.py`, `meta-insights-sync.py`, `ad-export-analyzer.py`, `capi-utm-builder.py`, `creative-matrix.py`, `client-workspace.py`, `calculator.py`, `spend-guard.py`, `doctor.py`, `tyrion-shield.py`, `instincts.py` | faol |
 | **Xotira** | `MEMORY.md` · `manifests/instincts.json` | Operator xotirasi (`<=90` qator) va `/learn` instinktlar reestri | faol |
 | **Katalog & Graf** | `manifests/catalog.json` · `graphify-out/` | Mashina o'qiydigan yagona reestr va 0-token wikilink grafi (generatsiya) | generatsiya |
 

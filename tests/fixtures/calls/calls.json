@@ -1,0 +1,7 @@
+{"calls": [
+ {"call_id": "c1", "ad": "A1", "campaign": "C1", "outcome": "lost", "duration_sec": 60, "consent": "yes", "transcript": "Salom. Bu juda qimmat ekan, boshqa joyda arzonroq. Raqamim +998 90 123 45 67"},
+ {"call_id": "c2", "ad": "A1", "campaign": "C1", "outcome": "won", "duration_sec": 120, "consent": "yes", "transcript": "Qachon kelay? Manzilni yuboring."},
+ {"call_id": "c3", "ad": "A2", "campaign": "C1", "outcome": "no_answer", "duration_sec": 0, "consent": "yes", "transcript": ""},
+ {"call_id": "c4", "ad": "A1", "campaign": "C1", "outcome": "lost", "duration_sec": 30, "consent": "no", "transcript": "дорого"},
+ {"call_id": "c5", "ad": "A2", "campaign": "C2", "outcome": "unqualified", "duration_sec": 20, "consent": "yes", "transcript": "Я не оставлял заявку. В рекламе была другая цена."}
+]}
