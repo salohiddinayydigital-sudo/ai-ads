@@ -1,366 +1,366 @@
-# The 139 Marketing Ideas
+# 139 ta marketing g'oyasi
 
-Complete list of proven marketing approaches organized by category.
+Kategoriyalar bo'yicha tartiblangan sinalgan marketing yondashuvlarining to'liq ro'yxati.
 
-## Contents
-- Content & SEO (1-10)
-- Competitor & Comparison (11-13)
-- Free Tools & Engineering (14-22)
-- Paid Advertising (23-34)
-- Social Media & Community (35-44)
-- Email Marketing (45-53)
-- Partnerships & Programs (54-64)
-- Events & Speaking (65-72)
-- PR & Media (73-76)
-- Launches & Promotions (77-86)
-- Product-Led Growth (87-96)
-- Content Formats (97-109)
-- Unconventional & Creative (110-122)
-- Platforms & Marketplaces (123-130)
-- International & Localization (131-132)
-- Developer & Technical (133-136)
-- Audience-Specific (137-139)
+## Mundarija
+- Kontent va SEO (1–10)
+- Raqobatchi va taqqoslash (11–13)
+- Bepul asboblar va muhandislik (14–22)
+- Pullik reklama (23–34)
+- Ijtimoiy tarmoqlar va hamjamiyat (35–44)
+- Email marketing (45–53)
+- Hamkorliklar va dasturlar (54–64)
+- Tadbirlar va chiqishlar (65–72)
+- PR va media (73–76)
+- Launch'lar va aksiyalar (77–86)
+- Product-led growth (87–96)
+- Kontent formatlari (97–109)
+- Noodatiy va ijodiy (110–122)
+- Platformalar va marketpleyslar (123–130)
+- Xalqaro va lokalizatsiya (131–132)
+- Dasturchilar va texnik (133–136)
+- Auditoriyaga xos (137–139)
 
-## Content & SEO (1-10)
+## Kontent va SEO (1–10)
 
-1. **Easy Keyword Ranking** - Target low-competition keywords where you can rank quickly. Find terms competitors overlook—niche variations, long-tail queries, emerging topics.
+1. **Easy Keyword Ranking** (oson kalit so'zlar bo'yicha reyting) - Tez reytingga chiqish mumkin bo'lgan past raqobatli kalit so'zlarni nishonga oling. Raqobatchilar e'tibordan chetda qoldirgan atamalarni toping — nisha variantlari, long-tail so'rovlar, paydo bo'layotgan mavzular.
 
-2. **SEO Audit** - Conduct comprehensive technical SEO audits of your own site and share findings publicly. Document fixes and improvements to build authority.
+2. **SEO Audit** - O'z saytingizning keng qamrovli texnik SEO auditini o'tkazing va topilmalarni ommaviy ulashing. Obro' qurish uchun tuzatishlar va yaxshilanishlarni hujjatlashtiring.
 
-3. **Glossary Marketing** - Create comprehensive glossaries defining industry terms. Each term becomes an SEO-optimized page targeting "what is X" searches.
+3. **Glossary Marketing** (glossariy marketingi) - Soha atamalarini ta'riflovchi keng qamrovli glossariylar yarating. Har bir atama "X nima" qidiruvlarini nishonga olgan SEO-optimallashtirilgan sahifaga aylanadi.
 
-4. **Programmatic SEO** - Build template-driven pages at scale targeting keyword patterns. Location pages, comparison pages, integration pages—any pattern with search volume.
+4. **Programmatic SEO** - Kalit so'z naqshlarini nishonga olgan shablon asosidagi sahifalarni katta ko'lamda quring. Lokatsiya sahifalari, taqqoslash sahifalari, integratsiya sahifalari — qidiruv hajmi bor har qanday naqsh.
 
-5. **Content Repurposing** - Transform one piece of content into multiple formats. Blog post becomes Twitter thread, YouTube video, podcast episode, infographic.
+5. **Content Repurposing** (kontentni qayta ishlash) - Bitta kontentni bir nechta formatga aylantiring. Blog post Twitter thread'ga, YouTube videoga, podkast epizodiga, infografikaga aylanadi.
 
-6. **Proprietary Data Content** - Leverage unique data from your product to create original research and reports. Data competitors can't replicate creates linkable assets.
+6. **Proprietary Data Content** (xususiy ma'lumotli kontent) - Original tadqiqot va hisobotlar yaratish uchun mahsulotingizdagi noyob ma'lumotlardan foydalaning. Raqobatchilar takrorlay olmaydigan ma'lumotlar havola jalb qiladigan aktivlarni yaratadi.
 
-7. **Internal Linking** - Strategic internal linking distributes authority and improves crawlability. Build topical clusters connecting related content.
+7. **Internal Linking** (ichki bog'lanish) - Strategik ichki bog'lanish vakolatni (authority) taqsimlaydi va crawlability'ni yaxshilaydi. Bog'liq kontentni bog'laydigan mavzuviy klasterlarni quring.
 
-8. **Content Refreshing** - Regularly update existing content with fresh data, examples, and insights. Refreshed content often outperforms new content.
+8. **Content Refreshing** (kontentni yangilash) - Mavjud kontentni yangi ma'lumotlar, misollar va insaytlar bilan muntazam yangilang. Yangilangan kontent ko'pincha yangisidan yaxshiroq natija beradi.
 
-9. **Knowledge Base SEO** - Optimize help documentation for search. Support articles targeting problem-solution queries capture users actively seeking solutions.
+9. **Knowledge Base SEO** - Yordam hujjatlarini qidiruv uchun optimallashtiring. Muammo-yechim so'rovlarini nishonga olgan qo'llab-quvvatlash maqolalari yechim izlayotgan faol foydalanuvchilarni jalb qiladi.
 
-10. **Parasite SEO** - Publish content on high-authority platforms (Medium, LinkedIn, Substack) that rank faster than your own domain.
-
----
-
-## Competitor & Comparison (11-13)
-
-11. **Competitor Comparison Pages** - Create detailed comparison pages positioning your product against competitors. "[Your Product] vs [Competitor]" pages capture high-intent searchers.
-
-12. **Marketing Jiu-Jitsu** - Turn competitor weaknesses into your strengths. When competitors raise prices, launch affordability campaigns.
-
-13. **Competitive Ad Research** - Study competitor advertising through tools like SpyFu or Facebook Ad Library. Learn what messaging resonates.
+10. **Parasite SEO** - Kontentni o'z domeningizdan tezroq reytingga chiqadigan yuqori vakolatli platformalarda (Medium, LinkedIn, Substack) nashr qiling.
 
 ---
 
-## Free Tools & Engineering (14-22)
+## Raqobatchi va taqqoslash (11–13)
 
-14. **Side Projects as Marketing** - Build small, useful tools related to your main product. Side projects attract users who may later convert.
+11. **Competitor Comparison Pages** (raqobatchilar taqqoslash sahifalari) - Mahsulotingizni raqobatchilarga qarshi joylashtiradigan batafsil taqqoslash sahifalarini yarating. "[Sizning mahsulot] vs [Raqobatchi]" sahifalari yuqori niyatli qidiruvchilarni jalb qiladi.
 
-15. **Engineering as Marketing** - Build free tools that solve real problems. Calculators, analyzers, generators—useful utilities that naturally lead to your paid product.
+12. **Marketing Jiu-Jitsu** - Raqobatchi kuchsizliklarini o'z kuchingizga aylantiring. Raqobatchilar narxni oshirsa, arzonlik kampaniyalarini ishga tushiring.
 
-16. **Importers as Marketing** - Build import tools for competitor data. "Import from [Competitor]" reduces switching friction.
-
-17. **Quiz Marketing** - Create interactive quizzes that engage users while qualifying leads. Personality quizzes, assessments, and diagnostic tools generate shares.
-
-18. **Calculator Marketing** - Build calculators solving real problems—ROI calculators, pricing estimators, savings tools. Calculators attract links and rank well.
-
-19. **Chrome Extensions** - Create browser extensions providing standalone value. Chrome Web Store becomes another distribution channel.
-
-20. **Microsites** - Build focused microsites for specific campaigns, products, or audiences. Dedicated domains can rank faster.
-
-21. **Scanners** - Build free scanning tools that audit or analyze something. Website scanners, security checkers, performance analyzers.
-
-22. **Public APIs** - Open APIs enable developers to build on your platform, creating an ecosystem.
+13. **Competitive Ad Research** (raqobatchi reklamasini o'rganish) - SpyFu yoki Facebook Ad Library kabi asboblar orqali raqobatchilar reklamasini o'rganing. Qaysi xabar aks sado berishini bilib oling.
 
 ---
 
-## Paid Advertising (23-34)
+## Bepul asboblar va muhandislik (14–22)
 
-23. **Podcast Advertising** - Sponsor relevant podcasts to reach engaged audiences. Host-read ads perform especially well.
+14. **Side Projects as Marketing** (yon loyihalar marketing sifatida) - Asosiy mahsulotingizga bog'liq kichik, foydali asboblar quring. Yon loyihalar keyinchalik konversiya qilishi mumkin bo'lgan foydalanuvchilarni jalb qiladi.
 
-24. **Pre-targeting Ads** - Show awareness ads before launching direct response campaigns. Warm audiences convert better.
+15. **Engineering as Marketing** (muhandislik marketing sifatida) - Haqiqiy muammolarni hal qiladigan bepul asboblar quring. Kalkulyatorlar, analizatorlar, generatorlar — tabiiy ravishda pullik mahsulotingizga olib boradigan foydali utilitalar.
 
-25. **Facebook Ads** - Meta's detailed targeting reaches specific audiences. Test creative variations and leverage retargeting.
+16. **Importers as Marketing** (importerlar) - Raqobatchi ma'lumotlari uchun import asboblarini quring. "[Raqobatchi]dan import qilish" o'tish ishqalanishini kamaytiradi.
 
-26. **Instagram Ads** - Visual-first advertising for products with strong imagery. Stories and Reels ads capture attention.
+17. **Quiz Marketing** (viktorina marketingi) - Foydalanuvchilarni jalb qilib, lidlarni malakalaydigan interaktiv viktorinalar yarating. Shaxsiyat testlari, baholashlar va diagnostika asboblari ulashishlarni keltiradi.
 
-27. **Twitter Ads** - Reach engaged professionals discussing industry topics. Promoted tweets and follower campaigns.
+18. **Calculator Marketing** (kalkulyator marketingi) - Haqiqiy muammolarni hal qiladigan kalkulyatorlar quring — ROI kalkulyatorlari, narx baholagichlar, tejash asboblari. Kalkulyatorlar havolalarni jalb qiladi va yaxshi reytingga chiqadi.
 
-28. **LinkedIn Ads** - Target by job title, company size, and industry. Premium CPMs justified by B2B purchase intent.
+19. **Chrome Extensions** (Chrome kengaytmalari) - Mustaqil qiymat beradigan brauzer kengaytmalarini yarating. Chrome Web Store yana bir tarqatish kanaliga aylanadi.
 
-29. **Reddit Ads** - Reach passionate communities with authentic messaging. Transparency wins on Reddit.
+20. **Microsites** - Aniq kampaniyalar, mahsulotlar yoki auditoriyalar uchun mo'ljallangan mikrosaytlar quring. Maxsus domenlar tezroq reytingga chiqishi mumkin.
 
-30. **Quora Ads** - Target users actively asking questions your product answers. Intent-rich environment.
+21. **Scanners** (skanerlar) - Nimanidir audit qiladigan yoki tahlil qiladigan bepul skanerlash asboblarini quring. Sayt skanerlari, xavfsizlik tekshiruvchilari, unumdorlik analizatorlari.
 
-31. **Google Ads** - Capture high-intent search queries. Brand terms, competitor terms, and category terms.
-
-32. **YouTube Ads** - Video ads with detailed targeting. Pre-roll and discovery ads reach users consuming related content.
-
-33. **Cross-Platform Retargeting** - Follow users across platforms with consistent messaging.
-
-34. **Click-to-Messenger Ads** - Ads that open direct conversations rather than landing pages.
+22. **Public APIs** (ochiq API'lar) - Ochiq API'lar dasturchilarga platformangiz ustida qurish imkonini beradi va ekotizim yaratadi.
 
 ---
 
-## Social Media & Community (35-44)
+## Pullik reklama (23–34)
 
-35. **Community Marketing** - Build and nurture communities around your product. Slack groups, Discord servers, Facebook groups.
+23. **Podcast Advertising** (podkast reklamasi) - Jalb qilingan auditoriyaga yetish uchun tegishli podkastlarga homiylik qiling. Boshlovchi o'qiydigan reklamalar ayniqsa yaxshi ishlaydi.
 
-36. **Quora Marketing** - Answer relevant questions with genuine expertise. Include product mentions where naturally appropriate.
+24. **Pre-targeting Ads** - To'g'ridan-to'g'ri javob kampaniyalarini ishga tushirishdan oldin xabardorlik reklamalarini ko'rsating. Iliq auditoriyalar yaxshiroq konversiya qiladi.
 
-37. **Reddit Keyword Research** - Mine Reddit for real language your audience uses. Discover pain points and desires.
+25. **Facebook Ads** - Meta'ning detailed targeting'i aniq auditoriyalarga yetadi. Kreativ variantlarni sinang va retargetingdan foydalaning.
 
-38. **Reddit Marketing** - Participate authentically in relevant subreddits. Provide value first.
+26. **Instagram Ads** - Kuchli tasvirli mahsulotlar uchun vizual-birinchi reklama. Stories va Reels reklamalari e'tiborni jalb qiladi.
 
-39. **LinkedIn Audience** - Build personal brands on LinkedIn for B2B reach. Thought leadership builds authority.
+27. **Twitter Ads** - Soha mavzularini muhokama qilayotgan jalb qilingan mutaxassislarga yeting. Promoted tweet'lar va follower kampaniyalari.
 
-40. **Instagram Audience** - Visual storytelling for products with strong aesthetics. Behind-the-scenes and user stories.
+28. **LinkedIn Ads** - Lavozim, kompaniya hajmi va soha bo'yicha nishonga oling. Premium CPM'lar B2B xarid niyati bilan oqlanadi.
 
-41. **X Audience** - Build presence on X/Twitter through consistent value. Threads and insights grow followings.
+29. **Reddit Ads** - Ehtirosli hamjamiyatlarga ishonchli xabar bilan yeting. Reddit'da shaffoflik yutadi.
 
-42. **Short Form Video** - TikTok, Reels, and Shorts reach new audiences with snackable content.
+30. **Quora Ads** - Mahsulotingiz javob beradigan savollarni faol so'rayotgan foydalanuvchilarni nishonga oling. Niyatga boy muhit.
 
-43. **Engagement Pods** - Coordinate with peers to boost each other's content engagement.
+31. **Google Ads** - Yuqori niyatli qidiruv so'rovlarini qamrab oling. Brend atamalari, raqobatchi atamalari va kategoriya atamalari.
 
-44. **Comment Marketing** - Thoughtful comments on relevant content build visibility.
+32. **YouTube Ads** - Batafsil targetingli video reklamalar. Pre-roll va discovery reklamalari tegishli kontent ko'rayotgan foydalanuvchilarga yetadi.
 
----
+33. **Cross-Platform Retargeting** - Foydalanuvchilarni platformalar bo'ylab izchil xabar bilan kuzatib boring.
 
-## Email Marketing (45-53)
-
-45. **Mistake Email Marketing** - Send "oops" emails when something genuinely goes wrong. Authenticity generates engagement.
-
-46. **Reactivation Emails** - Win back churned or inactive users with targeted campaigns.
-
-47. **Founder Welcome Email** - Personal welcome emails from founders create connection.
-
-48. **Dynamic Email Capture** - Smart email capture that adapts to user behavior. Exit intent, scroll depth triggers.
-
-49. **Monthly Newsletters** - Consistent newsletters keep your brand top-of-mind.
-
-50. **Inbox Placement** - Technical email optimization for deliverability. Authentication and list hygiene.
-
-51. **Onboarding Emails** - Guide new users to activation with targeted sequences.
-
-52. **Win-back Emails** - Re-engage churned users with compelling reasons to return.
-
-53. **Trial Reactivation** - Expired trials aren't lost causes. Targeted campaigns can recover them.
+34. **Click-to-Messenger Ads** - Landing sahifalar o'rniga to'g'ridan-to'g'ri suhbatlarni ochadigan reklamalar.
 
 ---
 
-## Partnerships & Programs (54-64)
+## Ijtimoiy tarmoqlar va hamjamiyat (35–44)
 
-54. **Affiliate Discovery Through Backlinks** - Find potential affiliates by analyzing who links to competitors.
+35. **Community Marketing** (hamjamiyat marketingi) - Mahsulotingiz atrofida hamjamiyatlarni quring va rivojlantiring. Slack guruhlari, Discord serverlari, Facebook guruhlari.
 
-55. **Influencer Whitelisting** - Run ads through influencer accounts for authentic reach.
+36. **Quora Marketing** - Tegishli savollarga haqiqiy ekspertiza bilan javob bering. Tabiiy joyda mahsulotni eslating.
 
-56. **Reseller Programs** - Enable agencies to resell your product. White-label options create distribution partners.
+37. **Reddit Keyword Research** - Auditoriyangiz ishlatadigan haqiqiy tilni Reddit'dan qazib oling. Og'riq nuqtalari va istaklarni kashf eting.
 
-57. **Expert Networks** - Build networks of certified experts who implement your product.
+38. **Reddit Marketing** - Tegishli subreddit'larda samimiy qatnashing. Avval qiymat bering.
 
-58. **Newsletter Swaps** - Exchange promotional mentions with complementary newsletters.
+39. **LinkedIn Audience** - B2B qamrovi uchun LinkedIn'da shaxsiy brendlarni quring. Thought leadership obro' quradi.
 
-59. **Article Quotes** - Contribute expert quotes to journalists. HARO connects experts with writers.
+40. **Instagram Audience** - Kuchli estetikali mahsulotlar uchun vizual hikoya qilish. Sahna ortidagi va foydalanuvchi hikoyalari.
 
-60. **Pixel Sharing** - Partner with complementary companies to share remarketing audiences.
+41. **X Audience** - Izchil qiymat orqali X/Twitter'da mavjudlikni quring. Thread'lar va insaytlar kuzatuvchilarni o'stiradi.
 
-61. **Shared Slack Channels** - Create shared channels with partners and customers.
+42. **Short Form Video** (qisqa video) - TikTok, Reels va Shorts yengil kontent bilan yangi auditoriyalarga yetadi.
 
-62. **Affiliate Program** - Structured commission programs for referrers.
+43. **Engagement Pods** - Tengdoshlar bilan bir-birining kontentidagi jalb qilishni oshirish uchun muvofiqlashing.
 
-63. **Integration Marketing** - Joint marketing with integration partners.
-
-64. **Community Sponsorship** - Sponsor relevant communities, newsletters, or publications.
+44. **Comment Marketing** (izoh marketingi) - Tegishli kontentga o'ylangan izohlar ko'rinishni quradi.
 
 ---
 
-## Events & Speaking (65-72)
+## Email marketing (45–53)
 
-65. **Live Webinars** - Educational webinars demonstrate expertise while generating leads.
+45. **Mistake Email Marketing** (xato email marketingi) - Haqiqatan nimadir noto'g'ri ketganda "oops" emaillarini yuboring. Samimiylik jalb qilishni yaratadi.
 
-66. **Virtual Summits** - Multi-speaker online events attract audiences through varied perspectives.
+46. **Reactivation Emails** - Ketgan yoki nofaol foydalanuvchilarni nishonli kampaniyalar bilan qaytaring.
 
-67. **Roadshows** - Take your product on the road to meet customers directly.
+47. **Founder Welcome Email** - Asoschilardan shaxsiy xush kelibsiz emaillari aloqa yaratadi.
 
-68. **Local Meetups** - Host or attend local meetups in key markets.
+48. **Dynamic Email Capture** - Foydalanuvchi xatti-harakatiga moslashadigan aqlli email yig'ish. Exit intent, scroll chuqurligi triggerlari.
 
-69. **Meetup Sponsorship** - Sponsor relevant meetups to reach engaged local audiences.
+49. **Monthly Newsletters** - Izchil newsletter'lar brendingizni esda saqlaydi.
 
-70. **Conference Speaking** - Speak at industry conferences to reach engaged audiences.
+50. **Inbox Placement** - Deliverability uchun texnik email optimallashtirish. Autentifikatsiya va ro'yxat gigiyenasi.
 
-71. **Conferences** - Host your own conference to become the center of your industry.
+51. **Onboarding Emails** - Yangi foydalanuvchilarni nishonli ketma-ketliklar bilan aktivatsiyaga yo'naltiring.
 
-72. **Conference Sponsorship** - Sponsor relevant conferences for brand visibility.
+52. **Win-back Emails** - Ketgan foydalanuvchilarni qaytish uchun ishonarli sabablar bilan qayta jalb qiling.
 
----
-
-## PR & Media (73-76)
-
-73. **Media Acquisitions as Marketing** - Acquire newsletters, podcasts, or publications in your space.
-
-74. **Press Coverage** - Pitch newsworthy stories to relevant publications.
-
-75. **Fundraising PR** - Leverage funding announcements for press coverage.
-
-76. **Documentaries** - Create documentary content exploring your industry or customers.
+53. **Trial Reactivation** - Muddati o'tgan sinov davrlari umidsiz emas. Nishonli kampaniyalar ularni tiklashi mumkin.
 
 ---
 
-## Launches & Promotions (77-86)
+## Hamkorliklar va dasturlar (54–64)
 
-77. **Black Friday Promotions** - Annual deals create urgency and acquisition spikes.
+54. **Affiliate Discovery Through Backlinks** - Raqobatchilarga kim havola qilishini tahlil qilib, potentsial affiliate'larni toping.
 
-78. **Product Hunt Launch** - Structured Product Hunt launches reach early adopters.
+55. **Influencer Whitelisting** - Samimiy qamrov uchun reklamani influencer akkauntlari orqali yuriting.
 
-79. **Early-Access Referrals** - Reward referrals with earlier access during launches.
+56. **Reseller Programs** - Agentliklarga mahsulotingizni qayta sotish imkonini bering. White-label variantlari tarqatish hamkorlarini yaratadi.
 
-80. **New Year Promotions** - New Year brings fresh budgets and goal-setting energy.
+57. **Expert Networks** - Mahsulotingizni joriy qiladigan sertifikatlangan ekspertlar tarmog'ini quring.
 
-81. **Early Access Pricing** - Launch with discounted early access tiers.
+58. **Newsletter Swaps** - Bir-birini to'ldiruvchi newsletter'lar bilan reklama eslatmalarini almashing.
 
-82. **Product Hunt Alternatives** - Launch on BetaList, Launching Next, AlternativeTo.
+59. **Article Quotes** - Jurnalistlarga ekspert iqtiboslarini taqdim eting. HARO ekspertlarni yozuvchilar bilan bog'laydi.
 
-83. **Twitter Giveaways** - Engagement-boosting giveaways that require follows or retweets.
+60. **Pixel Sharing** - Remarketing auditoriyalarini ulashish uchun bir-birini to'ldiruvchi kompaniyalar bilan hamkorlik qiling.
 
-84. **Giveaways** - Strategic giveaways attract attention and capture leads.
+61. **Shared Slack Channels** - Hamkorlar va mijozlar bilan umumiy kanallar yarating.
 
-85. **Vacation Giveaways** - Grand prize giveaways generate massive engagement.
+62. **Affiliate Program** - Tavsiya qiluvchilar uchun tuzilgan komissiya dasturlari.
 
-86. **Lifetime Deals** - One-time payment deals generate cash and users.
+63. **Integration Marketing** - Integratsiya hamkorlari bilan qo'shma marketing.
 
----
-
-## Product-Led Growth (87-96)
-
-87. **Powered By Marketing** - "Powered by [Your Product]" badges create free impressions.
-
-88. **Free Migrations** - Offer free migration services from competitors.
-
-89. **Contract Buyouts** - Pay to exit competitor contracts.
-
-90. **One-Click Registration** - Minimize signup friction with OAuth options.
-
-91. **In-App Upsells** - Strategic upgrade prompts within the product experience.
-
-92. **Newsletter Referrals** - Built-in referral programs for newsletters.
-
-93. **Viral Loops** - Product mechanics that naturally encourage sharing.
-
-94. **Offboarding Flows** - Optimize cancellation flows to retain or learn.
-
-95. **Concierge Setup** - White-glove onboarding for high-value accounts.
-
-96. **Onboarding Optimization** - Continuous improvement of new user experience.
+64. **Community Sponsorship** - Tegishli hamjamiyatlar, newsletter'lar yoki nashrlarga homiylik qiling.
 
 ---
 
-## Content Formats (97-109)
+## Tadbirlar va chiqishlar (65–72)
 
-97. **Playlists as Marketing** - Create Spotify playlists for your audience.
+65. **Live Webinars** - Ta'limiy vebinarlar lid generatsiya qilib, ekspertizani namoyish etadi.
 
-98. **Template Marketing** - Offer free templates users can immediately use.
+66. **Virtual Summits** - Ko'p spikerli onlayn tadbirlar turli nuqtai nazarlar orqali auditoriyani jalb qiladi.
 
-99. **Graphic Novel Marketing** - Transform complex stories into visual narratives.
+67. **Roadshows** - Mijozlar bilan bevosita uchrashish uchun mahsulotingizni yo'lga olib chiqing.
 
-100. **Promo Videos** - High-quality promotional videos showcase your product.
+68. **Local Meetups** - Asosiy bozorlarda mahalliy meetup'larni o'tkazing yoki ularda qatnashing.
 
-101. **Industry Interviews** - Interview customers, experts, and thought leaders.
+69. **Meetup Sponsorship** - Jalb qilingan mahalliy auditoriyaga yetish uchun tegishli meetup'larga homiylik qiling.
 
-102. **Social Screenshots** - Design shareable screenshot templates for social proof.
+70. **Conference Speaking** - Jalb qilingan auditoriyaga yetish uchun soha konferensiyalarida so'zlang.
 
-103. **Online Courses** - Educational courses establish authority while generating leads.
+71. **Conferences** - Sohangiz markaziga aylanish uchun o'z konferensiyangizni o'tkazing.
 
-104. **Book Marketing** - Author a book establishing expertise in your domain.
-
-105. **Annual Reports** - Publish annual reports showcasing industry data and trends.
-
-106. **End of Year Wraps** - Personalized year-end summaries users want to share.
-
-107. **Podcasts** - Launch a podcast reaching audiences during commutes.
-
-108. **Changelogs** - Public changelogs showcase product momentum.
-
-109. **Public Demos** - Live product demonstrations showing real usage.
+72. **Conference Sponsorship** - Brend ko'rinishi uchun tegishli konferensiyalarga homiylik qiling.
 
 ---
 
-## Unconventional & Creative (110-122)
+## PR va media (73–76)
 
-110. **Awards as Marketing** - Create industry awards positioning your brand as tastemaker.
+73. **Media Acquisitions as Marketing** - Sohangizdagi newsletter'lar, podkastlar yoki nashrlarni sotib oling.
 
-111. **Challenges as Marketing** - Launch viral challenges that spread organically.
+74. **Press Coverage** (matbuot yoritilishi) - Tegishli nashrlarga yangilikka loyiq hikoyalarni taklif qiling.
 
-112. **Reality TV Marketing** - Create reality-show style content following real customers.
+75. **Fundraising PR** - Investitsiya jalb qilish e'lonlaridan matbuot yoritilishi uchun foydalaning.
 
-113. **Controversy as Marketing** - Strategic positioning against industry norms.
-
-114. **Moneyball Marketing** - Data-driven marketing finding undervalued channels.
-
-115. **Curation as Marketing** - Curate valuable resources for your audience.
-
-116. **Grants as Marketing** - Offer grants to customers or community members.
-
-117. **Product Competitions** - Sponsor competitions using your product.
-
-118. **Cameo Marketing** - Use Cameo celebrities for personalized messages.
-
-119. **OOH Advertising** - Out-of-home advertising—billboards, transit ads.
-
-120. **Marketing Stunts** - Bold, attention-grabbing marketing moments.
-
-121. **Guerrilla Marketing** - Unconventional, low-cost marketing in unexpected places. Deep dive: direct-mail 3-rule framework (relevance / relationship / precision), ROI discipline, and a named case library in [guerrilla-marketing.md](guerrilla-marketing.md).
-
-122. **Humor Marketing** - Use humor to stand out and create memorability.
+76. **Documentaries** - Sohangiz yoki mijozlaringizni o'rganadigan hujjatli kontent yarating.
 
 ---
 
-## Platforms & Marketplaces (123-130)
+## Launch'lar va aksiyalar (77–86)
 
-123. **Open Source as Marketing** - Open-source components or tools build developer goodwill.
+77. **Black Friday Promotions** - Yillik chegirmalar shoshilinchlik va jalb qilish portlashlarini yaratadi.
 
-124. **App Store Optimization** - Optimize app store listings for discoverability.
+78. **Product Hunt Launch** - Tuzilgan Product Hunt launch'lari erta qabul qiluvchilarga yetadi.
 
-125. **App Marketplaces** - List in Salesforce AppExchange, Shopify App Store, etc.
+79. **Early-Access Referrals** - Launch paytida referallarni erta kirish bilan mukofotlang.
 
-126. **YouTube Reviews** - Get YouTubers to review your product.
+80. **New Year Promotions** - Yangi yil yangi byudjetlar va maqsad qo'yish energiyasini olib keladi.
 
-127. **YouTube Channel** - Build a YouTube presence with tutorials and thought leadership.
+81. **Early Access Pricing** - Chegirmali erta kirish tariflari bilan launch qiling.
 
-128. **Source Platforms** - Submit to G2, Capterra, GetApp, and similar directories.
+82. **Product Hunt Alternatives** - BetaList, Launching Next, AlternativeTo'da launch qiling.
 
-129. **Review Sites** - Actively manage presence on review platforms.
+83. **Twitter Giveaways** - Follow yoki retweet talab qiladigan jalb qilishni oshiruvchi giveaway'lar.
 
-130. **Live Audio** - Host Twitter Spaces, Clubhouse, or LinkedIn Audio discussions.
+84. **Giveaways** - Strategik giveaway'lar e'tiborni jalb qiladi va lidlarni yig'adi.
 
----
+85. **Vacation Giveaways** - Bosh sovrinli giveaway'lar katta jalb qilishni yaratadi.
 
-## International & Localization (131-132)
-
-131. **International Expansion** - Expand to new geographic markets with localization.
-
-132. **Price Localization** - Adjust pricing for local purchasing power.
+86. **Lifetime Deals** - Bir martalik to'lovli takliflar naqd pul va foydalanuvchilar keltiradi.
 
 ---
 
-## Developer & Technical (133-136)
+## Product-led growth (87–96)
 
-133. **Investor Marketing** - Market to investors for portfolio introductions.
+87. **Powered By Marketing** - "Powered by [Sizning mahsulot]" nishonlari bepul ko'rsatuvlar yaratadi.
 
-134. **Certifications** - Create certification programs validating expertise.
+88. **Free Migrations** - Raqobatchilardan bepul migratsiya xizmatlarini taklif qiling.
 
-135. **Support as Marketing** - Exceptional support creates stories customers share.
+89. **Contract Buyouts** - Raqobatchi shartnomalaridan chiqish uchun to'lang.
 
-136. **Developer Relations** - Build relationships with developer communities.
+90. **One-Click Registration** - OAuth variantlari bilan ro'yxatdan o'tish ishqalanishini kamaytiring.
+
+91. **In-App Upsells** - Mahsulot tajribasi ichidagi strategik yangilanish takliflari.
+
+92. **Newsletter Referrals** - Newsletter'lar uchun o'rnatilgan referal dasturlari.
+
+93. **Viral Loops** - Tabiiy ravishda ulashishni rag'batlantiradigan mahsulot mexanikasi.
+
+94. **Offboarding Flows** - Ushlab qolish yoki o'rganish uchun bekor qilish oqimlarini optimallashtiring.
+
+95. **Concierge Setup** - Yuqori qiymatli akkauntlar uchun white-glove onboarding.
+
+96. **Onboarding Optimization** - Yangi foydalanuvchi tajribasini doimiy yaxshilash.
 
 ---
 
-## Audience-Specific (137-139)
+## Kontent formatlari (97–109)
 
-137. **Two-Sided Referrals** - Reward both referrer and referred.
+97. **Playlists as Marketing** - Auditoriyangiz uchun Spotify pleylistlarini yarating.
 
-138. **Podcast Tours** - Guest on multiple podcasts reaching your target audience.
+98. **Template Marketing** - Foydalanuvchilar darhol ishlata oladigan bepul shablonlarni taklif qiling.
 
-139. **Customer Language** - Use the exact words your customers use in marketing.
+99. **Graphic Novel Marketing** - Murakkab hikoyalarni vizual rivoyatlarga aylantiring.
+
+100. **Promo Videos** - Yuqori sifatli promo videolar mahsulotingizni namoyish etadi.
+
+101. **Industry Interviews** - Mijozlar, ekspertlar va thought leader'lardan intervyu oling.
+
+102. **Social Screenshots** - Ijtimoiy isbot uchun ulashiladigan skrinshot shablonlarini dizayn qiling.
+
+103. **Online Courses** - Ta'limiy kurslar obro' o'rnatib, lid generatsiya qiladi.
+
+104. **Book Marketing** - Sohangizdagi ekspertizani o'rnatadigan kitob yozing.
+
+105. **Annual Reports** - Soha ma'lumotlari va trendlarini namoyish etadigan yillik hisobotlarni nashr qiling.
+
+106. **End of Year Wraps** - Foydalanuvchilar ulashishni xohlaydigan shaxsiylashtirilgan yil xulosalari.
+
+107. **Podcasts** - Yo'lda yurgan auditoriyaga yetadigan podkast ishga tushiring.
+
+108. **Changelogs** - Ommaviy changelog'lar mahsulot dinamikasini namoyish etadi.
+
+109. **Public Demos** - Haqiqiy foydalanishni ko'rsatadigan jonli mahsulot demolari.
+
+---
+
+## Noodatiy va ijodiy (110–122)
+
+110. **Awards as Marketing** - Brendingizni did-ta'm yaratuvchisi sifatida joylashtiradigan soha mukofotlarini ta'sis eting.
+
+111. **Challenges as Marketing** - Organik tarqaladigan viral challenge'larni ishga tushiring.
+
+112. **Reality TV Marketing** - Haqiqiy mijozlarni kuzatadigan reality-shou uslubidagi kontent yarating.
+
+113. **Controversy as Marketing** - Soha me'yorlariga qarshi strategik pozitsiyalash.
+
+114. **Moneyball Marketing** - Kam baholangan kanallarni topadigan ma'lumotlarga asoslangan marketing.
+
+115. **Curation as Marketing** - Auditoriyangiz uchun qimmatli resurslarni kuratorlik qiling.
+
+116. **Grants as Marketing** - Mijozlar yoki hamjamiyat a'zolariga grantlar taklif qiling.
+
+117. **Product Competitions** - Mahsulotingizdan foydalanadigan tanlovlarga homiylik qiling.
+
+118. **Cameo Marketing** - Shaxsiylashtirilgan xabarlar uchun Cameo mashhurlaridan foydalaning.
+
+119. **OOH Advertising** - Out-of-home reklama — billbordlar, transport reklamasi.
+
+120. **Marketing Stunts** - Jasur, e'tiborni tortadigan marketing lahzalari.
+
+121. **Guerrilla Marketing** - Kutilmagan joylarda noodatiy, arzon marketing. Chuqur tahlil: direct-mail 3-qoidali freymvork (relevantlik / munosabat / aniq nishonga olish), ROI intizomi va nomlangan keyslar kutubxonasi — [guerrilla-marketing.md](guerrilla-marketing.md).
+
+122. **Humor Marketing** - Ajralib turish va esda qolish uchun hazildan foydalaning.
+
+---
+
+## Platformalar va marketpleyslar (123–130)
+
+123. **Open Source as Marketing** - Ochiq manbali komponentlar yoki asboblar dasturchilar ishonchini quradi.
+
+124. **App Store Optimization** - Topilish uchun ilova do'koni sahifalarini optimallashtiring.
+
+125. **App Marketplaces** - Salesforce AppExchange, Shopify App Store va boshqalarda joylashtiring.
+
+126. **YouTube Reviews** - YouTuber'lardan mahsulotingizni sharhlashni so'rang.
+
+127. **YouTube Channel** - Qo'llanmalar va thought leadership bilan YouTube'da mavjud bo'ling.
+
+128. **Source Platforms** - G2, Capterra, GetApp va shunga o'xshash kataloglarga yuboring.
+
+129. **Review Sites** - Sharh platformalaridagi mavjudligingizni faol boshqaring.
+
+130. **Live Audio** - Twitter Spaces, Clubhouse yoki LinkedIn Audio muhokamalarini o'tkazing.
+
+---
+
+## Xalqaro va lokalizatsiya (131–132)
+
+131. **International Expansion** - Lokalizatsiya bilan yangi geografik bozorlarga kengayish.
+
+132. **Price Localization** - Narxlarni mahalliy xarid qobiliyatiga moslang.
+
+---
+
+## Dasturchilar va texnik (133–136)
+
+133. **Investor Marketing** - Portfel tanishtiruvlari uchun investorlarga marketing qiling.
+
+134. **Certifications** - Ekspertizani tasdiqlaydigan sertifikatlash dasturlarini yarating.
+
+135. **Support as Marketing** - A'lo qo'llab-quvvatlash mijozlar ulashadigan hikoyalarni yaratadi.
+
+136. **Developer Relations** - Dasturchilar hamjamiyatlari bilan munosabat quring.
+
+---
+
+## Auditoriyaga xos (137–139)
+
+137. **Two-Sided Referrals** - Tavsiya qiluvchi va tavsiya qilingan ikkala tomonni ham mukofotlang.
+
+138. **Podcast Tours** - Maqsadli auditoriyangizga yetadigan bir nechta podkastlarda mehmon bo'ling.
+
+139. **Customer Language** - Marketingda mijozlaringiz ishlatadigan aniq so'zlardan foydalaning.
