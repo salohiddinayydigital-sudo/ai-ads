@@ -1,25 +1,25 @@
-# International SEO: Evidence & Sources
+# Xalqaro SEO: dalillar va manbalar
 
-Detailed evidence backing the International SEO & Localization section of the SEO Audit skill. Organized by topic with source URLs and key quotes.
+SEO Audit skilidagi Xalqaro SEO va lokalizatsiya bo'limini qo'llab-quvvatlaydigan batafsil dalillar. Mavzu bo'yicha tartiblangan, manba URL'lari va asosiy iqtiboslar bilan. (Iqtiboslar Google va boshqa manbalarning inglizcha matnidan tarjima qilingan.)
 
 ---
 
 ## Hreflang
 
-### Placement Methods
+### Joylashtirish usullari
 
-Google supports three equivalent methods: HTML `<link>` in `<head>`, HTTP `Link` headers, and XML sitemap `<xhtml:link>` elements. Google confirmed no method is prioritized over another.
+Google uchta teng usulni qo'llab-quvvatlaydi: `<head>` ichidagi HTML `<link>`, HTTP `Link` headerlari va XML sitemap `<xhtml:link>` elementlari. Google hech bir usul boshqasidan ustun emasligini tasdiqladi.
 
-Google combines signals from both HTML and sitemaps. If the same language-region pair points to different URLs across methods, Google drops that pair rather than guessing.
+Google ham HTML, ham sitemap signallarini birlashtiradi. Agar bir xil til-mintaqa juftligi usullar bo'ylab turli URL'larga ishora qilsa, Google taxmin qilish o'rniga o'sha juftlikni tashlab yuboradi.
 
 - [Google Search Central: Localized Versions](https://developers.google.com/search/docs/specialty/international/localized-versions)
 - [SEJ: Google Combines Hreflang Signals](https://www.searchenginejournal.com/google-combines-hreflang-signals-from-html-sitemaps/389219/)
 
-### Reciprocal Requirement
+### O'zaro talab
 
-Google's docs: "If page X links to page Y, page Y must link back to page X. If not, those annotations may be ignored or not interpreted correctly."
+Google hujjatlari: "Agar X sahifa Y sahifaga havola qilsa, Y sahifa X sahifaga qaytishi kerak. Aks holda bu annotatsiyalar e'tiborsiz qoldirilishi yoki noto'g'ri talqin qilinishi mumkin."
 
-Every page must include itself (self-referencing) in the hreflang set. Missing self-referencing is the #1 error found by Semrush audits. A study of 374,756 domains found 67% of hreflang implementations had issues.
+Har bir sahifa hreflang to'plamiga o'zini ham kiritishi (o'ziga ishora qilishi) kerak. O'ziga ishora qiluvchi yozuv yo'qligi Semrush auditlarida topilgan №1 xato. 374 756 ta domen bo'yicha tadqiqot hreflang joriy etishlarning 67% da muammolar borligini ko'rsatdi.
 
 - [Google Search Central: Localized Versions](https://developers.google.com/search/docs/specialty/international/localized-versions)
 - [Semrush: 9 Common Hreflang Errors](https://www.semrush.com/blog/hreflang-errors/)
@@ -27,204 +27,204 @@ Every page must include itself (self-referencing) in the hreflang set. Missing s
 
 ### x-default
 
-Introduced April 2013. Designates the fallback page for users whose language/region matches no declared variant. Can point to the same URL as one of the language-specific alternates. Must be included in the complete set of annotations on every variant page.
+2013-yil aprelda kiritilgan. Tili/mintaqasi e'lon qilingan variantlarning hech biriga mos kelmaydigan foydalanuvchilar uchun zaxira sahifani belgilaydi. Tilga xos alternativlardan biri bilan bir xil URL'ga ishora qilishi mumkin. Har bir variant sahifadagi annotatsiyalarning to'liq to'plamiga kiritilishi kerak.
 
 - [Google Blog: x-default hreflang](https://developers.google.com/search/blog/2013/04/x-default-hreflang-for-international-pages)
 - [Google Blog: How x-default can help you (2023)](https://developers.google.com/search/blog/2023/05/x-default)
 
-### Language & Region Codes
+### Til va mintaqa kodlari
 
-Language: ISO 639-1 (2-letter). Region: ISO 3166-1 Alpha 2 (2-letter). Format: `language[-script][-region]`.
+Til: ISO 639-1 (2 harfli). Mintaqa: ISO 3166-1 Alpha 2 (2 harfli). Format: `language[-script][-region]`.
 
-You cannot specify a region code alone. Common mistakes: `en-UK` (should be `en-GB`), `es-419` (not ISO 3166-1). A study found 8.9% of sites using hreflang contain invalid language codes.
+Mintaqa kodini yolg'iz ko'rsatib bo'lmaydi. Keng tarqalgan xatolar: `en-UK` (`en-GB` bo'lishi kerak), `es-419` (ISO 3166-1 emas). Tadqiqot hreflang ishlatadigan saytlarning 8,9% yaroqsiz til kodlariga ega ekanini aniqladi.
 
 - [Google Search Central: Localized Versions](https://developers.google.com/search/docs/specialty/international/localized-versions)
 - [SE Land: 31% Study](https://searchengineland.com/study-31-of-international-websites-contain-hreflang-errors-395161)
 
-### Hreflang at Scale (20+ locales)
+### Katta ko'lamdagi hreflang (20+ lokal)
 
-With 20 locales, HTML `<head>` hreflang adds ~1.5KB per page for zero user benefit. Sitemap-based hreflang has zero runtime performance impact. `<xhtml:link>` child elements do NOT count toward the 50,000 URL sitemap limit (only `<loc>` elements count).
+20 lokal bilan HTML `<head>` hreflang foydalanuvchiga hech qanday foyda keltirmasdan har bir sahifaga ~1,5KB qo'shadi. Sitemap asosidagi hreflang ish vaqti unumdorligiga nol ta'sir ko'rsatadi. `<xhtml:link>` bola elementlari 50 000 URL sitemap limitiga KIRMAYDI (faqat `<loc>` elementlari hisoblanadi).
 
-John Mueller recommends focusing hreflang on pages receiving wrong-language traffic, not every page: "I wouldn't do it for any of the other pages of the site because it's so complex & hard to manage."
+John Mueller hreflang'ni har bir sahifaga emas, noto'g'ri til trafigini olayotgan sahifalarga qaratishni tavsiya qiladi: "Saytning boshqa sahifalari uchun buni qilmagan bo'lardim, chunki bu juda murakkab va boshqarish qiyin."
 
 - [SERoundtable: Child Elements Don't Count](https://www.seroundtable.com/google-child-elements-dont-count-towards-sitemap-url-limit-34377.html)
 - [SERoundtable: Where To Focus Hreflang](https://www.seroundtable.com/using-hreflang-34127.html)
 - [Yoast: hreflang Ultimate Guide](https://yoast.com/hreflang-ultimate-guide/)
 
-### Google vs Bing
+### Google va Bing
 
-Bing treats hreflang as a "weak signal." Bing relies on `content-language` meta tag, HTML `lang` attribute, ccTLDs, and server location. Yandex supports hreflang like Google.
+Bing hreflang'ni "zaif signal" deb hisoblaydi. Bing `content-language` meta tegi, HTML `lang` atributi, ccTLD'lar va server joylashuviga tayanadi. Yandex hreflang'ni Google kabi qo'llab-quvvatlaydi.
 
-For both engines: implement hreflang (Google/Yandex) + `<html lang="...">` + `<meta http-equiv="content-language">` (Bing).
+Ikkala qidiruv tizimi uchun: hreflang (Google/Yandex) + `<html lang="...">` + `<meta http-equiv="content-language">` (Bing) ni joriy qiling.
 
 - [Digital Ready Marketing: Bing Doesn't Use Hreflang](https://digitalreadymarketing.com/bing-doesnt-use-hreflang-annotation-what-does-it-use/)
 - [Yoast: hreflang Ultimate Guide](https://yoast.com/hreflang-ultimate-guide/)
 
 ---
 
-## Canonicalization & i18n
+## Kanonizatsiya va i18n
 
-### Self-Referencing Canonicals
+### O'ziga ishora qiluvchi canonical'lar
 
-Each locale page must canonical to itself. John Mueller: "Don't use a rel=canonical across languages/countries, only use it on a per-country/language basis."
+Har bir lokal sahifa o'ziga canonical bo'lishi kerak. John Mueller: "rel=canonical'ni tillar/mamlakatlar bo'ylab ishlatmang, uni faqat mamlakat/til asosida ishlating."
 
-Google's docs: "Specify a canonical page in the same language, or the best possible substitute language if a canonical doesn't exist for the same language."
+Google hujjatlari: "Xuddi shu tilda kanonik sahifani belgilang yoki xuddi shu til uchun kanonik mavjud bo'lmasa, mumkin bo'lgan eng yaxshi muqobil tilni belgilang."
 
 - [John Mueller: hreflang canonical](https://johnmu.com/hreflang-canonical/)
 - [Google: Consolidate Duplicate URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
 
-### Canonical Overrides Hreflang
+### Canonical hreflang'ni bekor qiladi
 
-Mueller: "If your canonical is pointing somewhere else, Google will follow that and ignore your hreflang annotation." The canonical URL must be one of the URLs in the hreflang set, or all hreflang markup is ignored.
+Mueller: "Agar canonical'ingiz boshqa joyga ishora qilsa, Google unga ergashadi va hreflang annotatsiyangizni e'tiborsiz qoldiradi." Canonical URL hreflang to'plamidagi URL'lardan biri bo'lishi kerak, aks holda barcha hreflang markup e'tiborsiz qoldiriladi.
 
-Google also states: "Google prefers URLs that are part of hreflang clusters for canonicalization" -- when signals align, hreflang strengthens canonical selection.
+Google shuningdek ta'kidlaydi: "Google kanonizatsiya uchun hreflang klasterlariga kiruvchi URL'larni afzal ko'radi" -- signallar mos kelganda hreflang canonical tanlovini kuchaytiradi.
 
 - [John Mueller: hreflang canonical](https://johnmu.com/hreflang-canonical/)
 - [SEJ: Hreflang Tags Are Hints](https://www.searchenginejournal.com/google-reminds-that-hreflang-tags-are-hints-not-directives/546428/)
 - [Google: Consolidate Duplicate URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
 
-### Near-Duplicate Regional Variants
+### Deyarli bir xil mintaqaviy variantlar
 
-Mueller (2023 Office Hours): "If the content is completely the same, and we can't tell any difference, then for simplicity and user experience we may just show one version -- even if hreflang is present."
+Mueller (2023 Office Hours): "Agar kontent butunlay bir xil bo'lsa va biz hech qanday farqni ayta olmasak, soddalik va foydalanuvchi tajribasi uchun biz shunchaki bitta versiyani ko'rsatishimiz mumkin -- hreflang mavjud bo'lsa ham."
 
-Google's duplicate detection runs BEFORE hreflang evaluation. To keep both versions indexed, you need substantive content differences beyond currency symbols.
+Google'ning dublikatni aniqlashi hreflang baholashdan OLDIN ishlaydi. Ikkala versiyani ham indekslangan holda saqlash uchun valyuta belgilaridan tashqari sezilarli kontent farqlari kerak.
 
 - [International Web Mastery: Same-Language Duplicate Pages](https://internationalwebmastery.com/blog/how-google-handles-canonicalization-of-same-language-duplicate-near-duplicate-pages/)
 - [Google: Managing Multi-Regional Sites](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites)
 
-### Pagination Across Locales
+### Lokallar bo'ylab sahifalash
 
-Google: "Don't use the first page of a paginated sequence as the canonical page. Instead, give each page its own canonical URL." Each paginated page in each locale gets self-referencing canonical. `rel="next/prev"` deprecated March 2019.
+Google: "Sahifalangan ketma-ketlikning birinchi sahifasini kanonik sahifa sifatida ishlatmang. Buning o'rniga har bir sahifaga o'z canonical URL'ini bering." Har bir lokaldagi har bir sahifalangan sahifa o'ziga ishora qiluvchi canonical oladi. `rel="next/prev"` 2019-yil martida eskirgan.
 
 - [Google: Pagination Best Practices](https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading)
 
 ---
 
-## International Sitemaps
+## Xalqaro sitemap'lar
 
-### Structure
+### Tuzilma
 
-Each `<url>` entry includes `<xhtml:link>` alternates for every locale. Requires `xmlns:xhtml="http://www.w3.org/1999/xhtml"` namespace.
+Har bir `<url>` yozuvi har bir lokal uchun `<xhtml:link>` alternativlarini o'z ichiga oladi. `xmlns:xhtml="http://www.w3.org/1999/xhtml"` namespace talab qilinadi.
 
-Split sitemaps by content type, not by locale. Splitting by locale creates maintenance problems because every locale sitemap must reference every other locale (reciprocal requirement).
+Sitemap'larni lokal bo'yicha emas, kontent turi bo'yicha bo'ling. Lokal bo'yicha bo'lish texnik xizmat ko'rsatish muammolarini yaratadi, chunki har bir lokal sitemap boshqa har bir lokalga havola qilishi kerak (o'zaro talab).
 
 - [Google Search Central: Localized Versions](https://developers.google.com/search/docs/specialty/international/localized-versions)
 - [Lumar: How Google Handles Hreflang](https://www.lumar.io/office-hours/hreflang/)
 
-### Size Limits
+### Hajm limitlari
 
-50,000 URLs / 50MB uncompressed per sitemap. Only `<loc>` elements count toward the 50K limit. But with 20 hreflang alternates per entry, the 50MB file size limit becomes the bottleneck. Plan for 2,000-5,000 URLs per sitemap when using full hreflang.
+Har bir sitemap uchun 50 000 URL / siqilmagan 50MB. 50K limitga faqat `<loc>` elementlari hisoblanadi. Lekin har bir yozuvda 20 ta hreflang alternativi bilan 50MB fayl hajmi limiti to'siqqa aylanadi. To'liq hreflang ishlatilganda har bir sitemap uchun 2 000–5 000 URL rejalashtiring.
 
 - [Google: Build and Submit a Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
 - [SERoundtable: Sitemap 50,000 Limit](https://www.seroundtable.com/google-sitemap-50-000-limit-based-on-location-urls-not-alternative-urls-33843.html)
 
-### Submission
+### Yuborish
 
-Submit the sitemap index in Search Console AND reference it in robots.txt. Individual child sitemaps can be submitted separately for per-sitemap reporting.
+Sitemap indeksini Search Console'ga yuboring VA robots.txt'da havola qiling. Har bir sitemap bo'yicha hisobot uchun alohida bola sitemap'larni ham yuborish mumkin.
 
 - [Google: Build and Submit a Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
 
-### Next.js Caveat
+### Next.js ogohlantirishi
 
-Next.js `alternates.languages` does NOT automatically include a self-referencing `<xhtml:link>` for the `<loc>` URL. You must explicitly include the `<loc>` URL's own language in the `languages` object.
+Next.js `alternates.languages` `<loc>` URL uchun o'ziga ishora qiluvchi `<xhtml:link>` ni avtomatik KIRITMAYDI. `<loc>` URL'ning o'z tilini `languages` obyektiga aniq kiritishingiz kerak.
 
 - [Next.js Docs: sitemap.xml](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap)
 
 ---
 
-## URL Structure
+## URL tuzilmasi
 
-### Strategies Compared
+### Strategiyalar taqqoslanishi
 
-Google treats subdirectories and subdomains equivalently. Mueller: "From our point of view...they say subdomains and subdirectories are essentially equivalent."
+Google subdirektoriyalar va subdomenlarni teng deb hisoblaydi. Mueller: "Bizning nuqtai nazarimizdan... ular subdomenlar va subdirektoriyalar mohiyatan teng deb aytishadi."
 
-URL parameters (`?lang=en`) are explicitly "Not recommended" per Google docs.
+URL parametrlari (`?lang=en`) Google hujjatlariga ko'ra aniq "Tavsiya etilmaydi".
 
 - [Google: Managing Multi-Regional Sites](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites)
 
-### Default Language
+### Standart til
 
-Mueller recommends: set `/` as x-default, put each language in its own prefix. Without marking `/` as x-default, "to Google it can look like '/' is a separate page from the others."
+Mueller tavsiya qiladi: `/` ni x-default qilib belgilang, har bir tilni o'z prefiksiga joylashtiring. `/` x-default deb belgilanmasa, "Google uchun '/' boshqalardan alohida sahifa bo'lib ko'rinishi mumkin."
 
 - [Google Blog: x-default](https://developers.google.com/search/blog/2023/05/x-default)
 - [Google Blog: Creating the Right Homepage](https://developers.google.com/search/blog/2014/05/creating-right-homepage-for-your)
 
-### Content Negotiation / IP Redirects
+### Kontent kelishuvi / IP redirect'lar
 
-Google strongly advises against locale-adaptive pages. Googlebot crawls from US IPs and does not send Accept-Language headers. Separate URLs + hreflang are required.
+Google lokalga moslashuvchan sahifalarga qat'iy qarshi tavsiya beradi. Googlebot AQSh IP'laridan crawl qiladi va Accept-Language header'larini yubormaydi. Alohida URL'lar + hreflang talab qilinadi.
 
 - [Google: Locale-Adaptive Pages](https://developers.google.com/search/docs/specialty/international/locale-adaptive-pages)
 
-### Trailing Slash Consistency
+### Trailing slash izchilligi
 
-Mueller: trailing slash is "a significant part of the URL and will change the URL if it's there or not." Pick one format for all locale paths, internal links, canonicals, hreflang, and sitemaps.
+Mueller: trailing slash "URL'ning muhim qismi va u mavjud bo'lishi yoki bo'lmasligi URL'ni o'zgartiradi." Barcha lokal yo'llar, ichki havolalar, canonical'lar, hreflang va sitemap'lar uchun bitta formatni tanlang.
 
-Mueller (2025): "Consistency is the biggest technical SEO factor."
+Mueller (2025): "Izchillik — eng katta texnik SEO omili."
 
 - [SERoundtable: Consistency Is The Biggest Technical SEO Factor](https://www.seroundtable.com/google-consistency-seo-40427.html)
 
-### Search Console Geotargeting
+### Search Console geotargeting
 
-The International Targeting report is deprecated. Google now relies entirely on hreflang, content language analysis, and linking patterns. You can add subdirectory properties for per-locale reporting.
+International Targeting hisoboti eskirgan. Google endi butunlay hreflang, kontent tilini tahlil qilish va bog'lanish naqshlariga tayanadi. Har bir lokal bo'yicha hisobot uchun subdirektoriya xususiyatlarini qo'shishingiz mumkin.
 
 - [Google Support: International Targeting Deprecated](https://support.google.com/webmasters/answer/12474899?hl=en)
 
-### Framework Locale Modes
+### Freymvork lokal rejimlari
 
-Use `localePrefix: 'always'` (next-intl) or equivalent. Never hide locale from URLs -- Google needs unique URLs per language. Using `'never'` mode disables alternate links entirely.
+`localePrefix: 'always'` (next-intl) yoki ekvivalentidan foydalaning. Lokalni URL'lardan hech qachon yashirmang -- Google har bir til uchun noyob URL'larni talab qiladi. `'never'` rejimidan foydalanish alternativ havolalarni butunlay o'chiradi.
 
 - [next-intl: Routing Configuration](https://next-intl.dev/docs/routing/configuration)
 - [Next.js Discussion #18419](https://github.com/vercel/next.js/discussions/18419)
 
 ---
 
-## Content Quality Across Locales
+## Lokallar bo'ylab kontent sifati
 
-### Auto-Translated Content (2025 Stance)
+### Avtomatik tarjima qilingan kontent (2025-yil pozitsiyasi)
 
-Google removed longstanding guidance advising against auto-translated content in mid-2025. Current stance: "Our policies do not strictly define content that has been translated by AI as spam." The scaled content abuse policy mentions translation as a possible vector, but does not ban it.
+Google 2025-yil o'rtasida avtomatik tarjima qilingan kontentga qarshi uzoq yillik tavsiyani olib tashladi. Joriy pozitsiya: "Bizning siyosatlarimiz AI tomonidan tarjima qilingan kontentni qat'iy spam deb ta'riflamaydi." Scaled content abuse siyosati tarjimani mumkin bo'lgan vektor sifatida eslatadi, lekin uni taqiqlamaydi.
 
-Reddit scaled AI translations to 35+ languages with Google's knowledge. The key distinction is intent and quality, not the method.
+Reddit Google'ning xabardorligi bilan AI tarjimalarni 35+ tilga masshtabladi. Asosiy farq — usul emas, niyat va sifat.
 
 - [Google Spam Policies](https://developers.google.com/search/docs/essentials/spam-policies)
 - [Glenn Gabe: Auto-Translating Content](https://www.gsqi.com/marketing-blog/auto-translating-content-google-scaled-content-abuse/)
 - [SE Land: Reddit AI Translations](https://searchengineland.com/google-comments-on-reddits-use-of-ai-to-translate-its-pages-456908)
 
-### Thin Locale Pages
+### Yupqa lokal sahifalar
 
-Google: "Localized versions of a page are only considered duplicates if the main content of the page remains untranslated." Pages with only translated boilerplate get clustered as duplicates.
+Google: "Sahifaning lokallashtirilgan versiyalari faqat sahifaning asosiy kontenti tarjima qilinmagan bo'lsa dublikat deb hisoblanadi." Faqat tarjima qilingan shablon matni bor sahifalar dublikat sifatida klasterlanadi.
 
-Do NOT use noindex for unwanted locale pages (wastes crawl budget). Do NOT canonical cross-locale (conflicts with hreflang). Best approach: don't create locale pages you can't make genuinely helpful.
+Keraksiz lokal sahifalar uchun noindex ISHLATMANG (crawl budget isrof bo'ladi). Lokallar-aro canonical QILMANG (hreflang bilan ziddiyatga kiradi). Eng yaxshi yondashuv: haqiqatan foydali qila olmaydigan lokal sahifalarni yaratmang.
 
 - [Google: Localized Versions](https://developers.google.com/search/docs/specialty/international/localized-versions)
 - [Google: Crawl Budget Management](https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget)
 
-### Helpful Content System Impact
+### Foydali kontent tizimining ta'siri
 
-Merged into core ranking March 2024. Site-wide signal: "any content -- not just unhelpful content -- on sites determined to have relatively high amounts of unhelpful content overall is less likely to perform well in Search."
+2024-yil martida asosiy reytingga qo'shildi. Sayt bo'ylab signal: "umuman nisbatan ko'p foydasiz kontentga ega deb baholangan saytlardagi har qanday kontent -- faqat foydasiz kontent emas -- Qidiruvda yaxshi ishlash ehtimoli kamroq."
 
-Low-quality translated pages can drag down the entire site. This is the strongest argument against creating locale pages that aren't genuinely helpful.
+Past sifatli tarjima qilingan sahifalar butun saytni pasaytirishi mumkin. Bu haqiqatan foydali bo'lmagan lokal sahifalarni yaratmaslikning eng kuchli dalili.
 
 - [Google Blog: Helpful Content Update](https://developers.google.com/search/blog/2022/08/helpful-content-update)
 - [Amsive: What Changed in 2024](https://www.amsive.com/insights/seo/googles-helpful-content-update-ranking-system-what-happened-and-what-changed-in-2024/)
 
-### Partial Translation
+### Qisman tarjima
 
-Google: "Translating only the boilerplate text of your pages while keeping the bulk of your content in a single language...can create a bad user experience." Google uses visible content (not lang attribute) to determine page language.
+Google: "Sahifalaringizning faqat shablon matnini tarjima qilib, kontentning asosiy qismini bitta tilda qoldirish... yomon foydalanuvchi tajribasini yaratishi mumkin." Google sahifa tilini aniqlash uchun ko'rinadigan kontentdan (lang atributidan emas) foydalanadi.
 
-Translate ALL content on a page if you create a locale version. Untranslated metadata (title, description) in the wrong language reduces CTR.
+Lokal versiya yaratsangiz, sahifadagi BARCHA kontentni tarjima qiling. Noto'g'ri tildagi tarjima qilinmagan metama'lumotlar (title, description) CTR'ni pasaytiradi.
 
 - [Google: Managing Multi-Regional Sites](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites)
 
-### Crawl Budget
+### Crawl budget
 
-Only a concern for 1M+ pages or 10K+ pages changing daily. But alternate URLs (hreflang targets) do consume crawl budget. Broken hreflang links waste budget AND invalidate signals.
+Faqat 1M+ sahifa yoki kuniga 10K+ sahifa o'zgaradigan holatlarda muammo. Lekin alternativ URL'lar (hreflang nishonlari) crawl budget'ni sarflaydi. Buzilgan hreflang havolalari budget'ni isrof qiladi VA signallarni bekor qiladi.
 
 - [Google: Crawl Budget Management](https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget)
 - [Google Blog: Crawl Budget](https://developers.google.com/search/blog/2017/01/what-crawl-budget-means-for-googlebot)
 
-### Locale-Specific Signals
+### Lokalga xos signallar
 
-Google identifies audience via: "local addresses and phone numbers on the pages, the use of local language and currency, links from other local sites, or signals from your Business Profile."
+Google auditoriyani quyidagilar orqali aniqlaydi: "sahifalardagi mahalliy manzillar va telefon raqamlari, mahalliy til va valyutadan foydalanish, boshqa mahalliy saytlardan havolalar yoki Business Profile signallari."
 
 - [Google: Managing Multi-Regional Sites](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites)

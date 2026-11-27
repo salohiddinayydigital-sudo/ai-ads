@@ -1,34 +1,36 @@
-# AI Writing Detection
+# AI yozuvini aniqlash (AI Writing Detection)
 
-Words, phrases, and punctuation patterns commonly associated with AI-generated text. Avoid these to ensure writing sounds natural and human.
+> **Eslatma:** quyidagi so'z va iboralar ingliz tilidagi matnlarda AI yozuvi belgisi sifatida tanilgan, shuning uchun jadvallardagi misollar ataylab inglizcha qoldirilgan (ular aynan shu shaklda qidiriladi). Tushuntirishlar o'zbekcha. O'zbek yoki rus tilida yozganda esa muqobil naqshlarga e'tibor bering: mashina tarjimasi hissi, haddan tashqari rasmiy kirish iboralari, bir xil tuzilmali gaplar.
 
-Sources: Grammarly (2025), Microsoft 365 Life Hacks (2025), GPTHuman (2025), Walter Writes (2025), Textero (2025), Plagiarism Today (2025), Rolling Stone (2025), MDPI Blog (2025)
+Sun'iy intellekt tomonidan yaratilgan matn bilan odatda bog'lanadigan so'zlar, iboralar va tinish belgilari naqshlari. Yozuv tabiiy va insoniy eshitilishi uchun ulardan qoching.
+
+Manbalar: Grammarly (2025), Microsoft 365 Life Hacks (2025), GPTHuman (2025), Walter Writes (2025), Textero (2025), Plagiarism Today (2025), Rolling Stone (2025), MDPI Blog (2025)
 
 ---
 
-## Contents
-- Em Dashes: The Primary AI Tell
-- Overused Verbs
-- Overused Adjectives
-- Overused Transitions and Connectors
-- Phrases That Signal AI Writing (Opening Phrases, Transitional Phrases, Concluding Phrases, Structural Patterns)
-- Filler Words and Empty Intensifiers
-- Academic-Specific AI Tells
-- How to Self-Check
+## Mundarija
+- Em dash'lar: asosiy AI belgisi
+- Ortiqcha ishlatiladigan fe'llar
+- Ortiqcha ishlatiladigan sifatlar
+- Ortiqcha ishlatiladigan o'tishlar va bog'lovchilar
+- AI yozuvini bildiradigan iboralar (ochuvchi iboralar, o'tish iboralari, yakunlovchi iboralar, tuzilma naqshlari)
+- To'ldiruvchi so'zlar va bo'sh kuchaytirgichlar
+- Akademik AI belgilari
+- O'zini qanday tekshirish
 
-## Em Dashes: The Primary AI Tell
+## Em dash'lar: asosiy AI belgisi
 
-**The em dash (—) has become one of the most reliable markers of AI-generated content.**
+**Em dash (—) AI tomonidan yaratilgan kontentning eng ishonchli belgilaridan biriga aylandi.**
 
-Em dashes are longer than hyphens (-) and are used for emphasis, interruptions, or parenthetical information. While they have legitimate uses in writing, AI models drastically overuse them.
+Em dash'lar defis (-) dan uzunroq bo'lib, urg'u, uzilishlar yoki qavs ichidagi ma'lumot uchun ishlatiladi. Yozuvda qonuniy ishlatilishi bo'lsa-da, AI modellari ularni keskin ortiqcha ishlatadi.
 
-### Why Em Dashes Signal AI Writing
-- AI models were trained on edited books, academic papers, and style guides where em dashes appear frequently
-- AI uses em dashes as a shortcut for sentence variety instead of commas, colons, or parentheses
-- Most human writers rarely use em dashes because they don't exist as a standard keyboard key
-- The overuse is so consistent that it has become the unofficial signature of ChatGPT writing
+### Nega em dash'lar AI yozuvini bildiradi
+- AI modellari em dash'lar tez-tez uchraydigan tahrirlangan kitoblar, akademik maqolalar va uslub qo'llanmalarida o'qitilgan
+- AI em dash'ni vergul, ikki nuqta yoki qavslar o'rniga gap xilma-xilligi uchun yo'l sifatida ishlatadi
+- Ko'pchilik inson yozuvchilar em dash'dan kamdan-kam foydalanadi, chunki u standart klaviatura tugmasi emas
+- Ortiqcha ishlatish shu qadar izchilki, u ChatGPT yozuvining norasmiy imzosiga aylandi
 
-### What To Do Instead
+### Buning o'rniga nima qilish kerak
 | Instead of | Use |
 |------------|-----|
 | The results—which were surprising—showed... | The results, which were surprising, showed... |
@@ -36,16 +38,16 @@ Em dashes are longer than hyphens (-) and are used for emphasis, interruptions, 
 | The study found—as expected—that... | The study found, as expected, that... |
 | Communication skills—both written and verbal—are essential | Communication skills (both written and verbal) are essential |
 
-### Guidelines
-- Use commas for most parenthetical information
-- Use colons to introduce explanations or lists
-- Use parentheses for supplementary information
-- Reserve em dashes for rare, deliberate emphasis only
-- If you find yourself using more than one em dash per page, revise
+### Yo'riqnoma
+- Qavs ichidagi ma'lumotlarning ko'pi uchun vergul ishlating
+- Tushuntirish yoki ro'yxatni kiritish uchun ikki nuqtadan foydalaning
+- Qo'shimcha ma'lumot uchun qavslardan foydalaning
+- Em dash'ni faqat kam uchraydigan, ongli urg'u uchun saqlang
+- Sahifasiga bittadan ko'p em dash ishlatayotganingizni sezsangiz, qayta ko'rib chiqing
 
 ---
 
-## Overused Verbs
+## Ortiqcha ishlatiladigan fe'llar
 
 | Avoid | Use Instead |
 |-------|-------------|
@@ -67,7 +69,7 @@ Em dashes are longer than hyphens (-) and are used for emphasis, interruptions, 
 
 ---
 
-## Overused Adjectives
+## Ortiqcha ishlatiladigan sifatlar
 
 | Avoid | Use Instead |
 |-------|-------------|
@@ -88,7 +90,7 @@ Em dashes are longer than hyphens (-) and are used for emphasis, interruptions, 
 
 ---
 
-## Overused Transitions and Connectors
+## Ortiqcha ishlatiladigan o'tishlar va bog'lovchilar
 
 | Avoid | Use Instead |
 |-------|-------------|
@@ -105,9 +107,9 @@ Em dashes are longer than hyphens (-) and are used for emphasis, interruptions, 
 
 ---
 
-## Phrases That Signal AI Writing
+## AI yozuvini bildiradigan iboralar
 
-### Opening Phrases to Avoid
+### Qochish kerak bo'lgan ochuvchi iboralar
 - "In today's fast-paced world..."
 - "In today's digital age..."
 - "In an era of..."
@@ -117,7 +119,7 @@ Em dashes are longer than hyphens (-) and are used for emphasis, interruptions, 
 - "Let's delve into..."
 - "Imagine a world where..."
 
-### Transitional Phrases to Avoid
+### Qochish kerak bo'lgan o'tish iboralari
 - "That being said..."
 - "With that in mind..."
 - "It's worth mentioning that..."
@@ -126,7 +128,7 @@ Em dashes are longer than hyphens (-) and are used for emphasis, interruptions, 
 - "In essence..."
 - "This begs the question..."
 
-### Concluding Phrases to Avoid
+### Qochish kerak bo'lgan yakunlovchi iboralar
 - "In conclusion..."
 - "To sum up..."
 - "By [doing X], you can [achieve Y]..."
@@ -134,17 +136,17 @@ Em dashes are longer than hyphens (-) and are used for emphasis, interruptions, 
 - "All things considered..."
 - "At the end of the day..."
 
-### Structural Patterns to Avoid
-- "Whether you're a [X], [Y], or [Z]..." (listing three examples after "whether")
+### Qochish kerak bo'lgan tuzilma naqshlari
+- "Whether you're a [X], [Y], or [Z]..." ("whether" dan keyin uchta misol sanash)
 - "It's not just [X], it's also [Y]..."
 - "Think of [X] as [elaborate metaphor]..."
-- Starting sentences with "By" followed by a gerund: "By understanding X, you can Y..."
+- Gaplarni "By" va gerund bilan boshlash: "By understanding X, you can Y..."
 
 ---
 
-## Filler Words and Empty Intensifiers
+## To'ldiruvchi so'zlar va bo'sh kuchaytirgichlar
 
-These words often add nothing to meaning. Remove them or find specific alternatives:
+Bu so'zlar ko'pincha ma'noga hech narsa qo'shmaydi. Ularni olib tashlang yoki aniq muqobil toping:
 
 - absolutely
 - actually
@@ -171,7 +173,7 @@ These words often add nothing to meaning. Remove them or find specific alternati
 
 ---
 
-## Academic-Specific AI Tells
+## Akademik AI belgilari
 
 | Avoid | Use Instead |
 |-------|-------------|
@@ -190,11 +192,11 @@ These words often add nothing to meaning. Remove them or find specific alternati
 
 ---
 
-## How to Self-Check
+## O'zini qanday tekshirish
 
-1. Read your text aloud. If phrases sound unnatural in speech, revise them
-2. Ask: "Would I say this in a conversation with a colleague?"
-3. Check for repetitive sentence structures
-4. Look for clusters of the words listed above
-5. Ensure varied sentence lengths (not all similar length)
-6. Verify each intensifier adds genuine meaning
+1. Matnni ovoz chiqarib o'qing. Iboralar og'zaki nutqda g'ayritabiiy eshitilsa, qayta ko'rib chiqing
+2. So'rang: "Buni hamkasbim bilan suhbatda aytarmidim?"
+3. Takroriy gap tuzilmalarini tekshiring
+4. Yuqoridagi ro'yxatdagi so'zlar to'plamlarini qidiring
+5. Gap uzunliklari xilma-xilligiga ishonch hosil qiling (hammasi bir xil uzunlikda emas)
+6. Har bir kuchaytirgich haqiqiy ma'no qo'shishini tekshiring
