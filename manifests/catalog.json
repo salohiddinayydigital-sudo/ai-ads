@@ -1,6 +1,6 @@
 {
   "schema": "tyrion-catalog/v1",
-  "generated": "2026-11-27T05:00:11+00:00",
+  "generated": "2026-11-27T05:46:14+00:00",
   "generator": "tools/catalog.py",
   "vault": ".",
   "counts": {
@@ -1533,9 +1533,9 @@
         "name": "creative-strategist",
         "layer": "agents",
         "path": "agents/creative-strategist.md",
-        "sha256": "a4013522a72f0431",
-        "bytes": 7479,
-        "updated": "2026-11-26T14:10:01+00:00",
+        "sha256": "08450376cb1f9779",
+        "bytes": 7862,
+        "updated": "2026-11-27T05:46:14+00:00",
         "title": "creative-strategist",
         "description": "Use this agent for ad creative: angles, hooks, 3x3 matrix, copy in UZ/RU/EN, creative audit and fatigue, visual briefs and format adaptation. Returns source-labelled candidates only. Invoke on 'kreativ strategiya', 'reklama matni', 'hook yozish', 'kreativ charchoq', 'copywriting', 'креатив'.",
         "source": null,
