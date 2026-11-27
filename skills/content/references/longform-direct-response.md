@@ -1,9 +1,9 @@
-<!-- v8: eski skill `longform-direct-response` (v7.1) matni; tavsif: Turn transcripts into longform direct response storytelling copy for Facebook, Instagram, LinkedIn, Skool, or Email. Trigger when user uploads a transcript and says "make this a longform direct response copy" or similar phrases like "longform story post", "direct response post", "story copy from thi -->
+<!-- v8: eski skill `longform-direct-response` (v7.1) matni; tavsif: Transkriptlarni Facebook, Instagram, LinkedIn, Skool yoki Email uchun uzun formatli direct response hikoya matniga aylantiring. Foydalanuvchi transkript yuklab 'make this a longform direct response copy' yoki 'longform story post', 'direct response post', 'transkriptdan hikoya posti yoz' kabi iboralarni aytganda ishga tushadi. -->
 
-# Longform Direct Response Copy Skill
+# Longform Direct Response kopirayting skilli
 
-## Trigger Phrases
-Activate this skill when the user uses phrases like:
+## Trigger iboralar
+Foydalanuvchi quyidagi kabi iboralarni ishlatganda ushbu skillni faollashtiring:
 - "make this a longform direct response copy"
 - "longform story post"
 - "direct response copy"
@@ -15,230 +15,230 @@ Activate this skill when the user uses phrases like:
 
 ---
 
-## Workflow
+## Ish jarayoni
 
-### Step 0: Transcript Check
+### 0-qadam: Transkriptni tekshirish
 
-Before anything else, ask:
+Hamma narsadan oldin so'rang:
 
-> "Do you already have a transcript or voice note to work from, or do you want me to walk you through a quick brain dump first?"
+> "Ishlash uchun tayyor transkript yoki ovozli xabaringiz bormi, yoki avval qisqa brain dump (fikrlarni to'kib solish) qilib o'tamizmi?"
 
-- **If they already uploaded or pasted a transcript with their message:** Skip asking and move straight to Step 2.
-- **If they say they have one:** Ask them to upload or paste it, then move to Step 2.
-- **If they don't have a transcript:** Move to Step 1.
+- **Agar foydalanuvchi transkriptni xabari bilan birga yuklagan yoki joylashtirgan bo'lsa:** so'ramang, to'g'ridan-to'g'ri 2-qadamga o'ting.
+- **Agar "bor" desa:** uni yuklashini yoki joylashtirishini so'rang, so'ng 2-qadamga o'ting.
+- **Agar transkripti bo'lmasa:** 1-qadamga o'ting.
 
 ---
 
-### Step 1: Brain Dump (No Transcript Path)
+### 1-qadam: Brain dump (transkriptsiz yo'l)
 
-This is a guided conversation, not a questionnaire. The goal is to pull raw story material out of the user in 2-3 turns.
+Bu so'rovnoma emas, boshqariladigan suhbat. Maqsad — 2–3 navbatda foydalanuvchidan xom hikoya materialini olish.
 
-#### Phase 1: The Open
+#### 1-bosqich: Ochilish
 
-Ask ONE open question:
+BITTA ochiq savol bering:
 
-> "What is on your mind today when it comes to your work? Just brain dump. Do not overthink it."
+> "Bugun ishingiz haqida xayolingizda nima bor? Shunchaki to'kib soling. Ortiqcha o'ylamang."
 >
-> It could be anything:
-> - A client conversation or win from this week
-> - Something you saw online that you agree or disagree with
-> - Something you have been testing or learning lately
-> - A pattern you keep seeing in your audience
-> - Something that frustrates you about your industry
-> - Something you figured out the hard way
-> - Something you would say if nobody could judge you
+> Bu istalgan narsa bo'lishi mumkin:
+> - Shu hafta mijoz bilan suhbat yoki g'alaba
+> - Internetda ko'rgan va rozi yoki norozi bo'lgan narsangiz
+> - So'nggi paytda sinab ko'rayotgan yoki o'rganayotgan narsangiz
+> - Auditoriyangizda qayta-qayta ko'rayotgan naqsh
+> - Sohangizdagi sizni asabiylashtiradigan narsa
+> - Og'ir yo'l bilan tushungan narsangiz
+> - Hech kim hukm qilmasa, aytgan bo'lardingiz narsa
 
-Wait for their response.
+Javobini kuting.
 
-#### Phase 2: Evaluate and Move On (or Dig Deeper Only If Needed)
+#### 2-bosqich: Baholang va davom eting (yoki faqat zarur bo'lsa chuqurlashing)
 
-After the brain dump, check if you have enough to work with. You need at minimum:
+Brain dumpdan so'ng ishlash uchun yetarli material borligini tekshiring. Kamida quyidagilar kerak:
 
-- **A specific moment or experience** (not just a general idea or opinion)
-- **Some emotional weight** (a struggle, a frustration, a realization, a shift)
-- **A point or lesson** the reader can connect to their own life
+- **Aniq lahza yoki tajriba** (shunchaki umumiy g'oya yoki fikr emas)
+- **Hissiy og'irlik** (qiyinchilik, asabiylashish, anglash, o'zgarish)
+- **Mazmun yoki saboq** — o'quvchi uni o'z hayotiga bog'lay oladigan
 
-**If you have all three:** Skip straight to Step 2 (Extract Storylines). Do not ask follow-up questions just for the sake of asking. Most brain dumps will give you more than enough.
+**Agar uchalasi ham bor bo'lsa:** to'g'ridan-to'g'ri 2-qadamga (Hikoya chiziqlarini ajratish) o'ting. Faqat savol berish uchun savol bermang. Ko'pgina brain dumplar yetarlidan ko'proq material beradi.
 
-**Only if the material is genuinely too thin to write a story from**, ask ONE follow-up question to fill the specific gap. Pick from:
+**Faqat material hikoya yozish uchun haqiqatan yupqa bo'lsa**, aniq bo'shliqni to'ldirish uchun BITTA aniqlashtiruvchi savol bering. Shulardan tanlang:
 
-- "Tell me more about that. What happened exactly?"
-- "Why does this matter? Who needs to hear this?"
-- "What do most people get wrong about this?"
-- "Can you give me a real example from your experience?"
-- "What is the one sentence version of this insight?"
-- "What were you doing or feeling right before you realized this?"
-- "What changed after? What did that make possible?"
+- "Bu haqda ko'proq ayting. Aniq nima bo'ldi?"
+- "Bu nega muhim? Buni kim eshitishi kerak?"
+- "Ko'pchilik bunda nimani noto'g'ri tushunadi?"
+- "O'z tajribangizdan haqiqiy misol keltira olasizmi?"
+- "Bu insaytning bir gapdagi varianti qanday?"
+- "Buni anglashingizdan oldin nima qilayotgan yoki his qilayotgan edingiz?"
+- "Keyin nima o'zgardi? Bu nimani mumkin qildi?"
 
-One question. Then move to Step 2.
-
----
-
-### Step 2: Extract Storylines
-
-Read the full transcript or brain dump material. Identify moments that contain:
-- A specific, vivid personal experience (a scene the reader can picture)
-- A moment where something clicked or changed
-- A struggle or mistake that taught them something
-- Something the reader wouldn't expect to hear, an opinion or lesson that goes against what most people say
-
-**Cold audience filter:** For each potential storyline, ask: "Could a complete stranger who knows nothing about this person's industry still feel something in the first 3 lines?" If the answer is no, find the human moment hiding underneath the niche moment and lead with that instead. Every storyline must have a universally relatable entry point.
-
-Present **3 storyline options** to the user. For each, give:
-- A short working title (5-8 words)
-- A 2-sentence summary of the story (what happened and where it leads)
-
-Then say:
-> "Pick one of these, ask me to suggest more, or give me your own storyline direction and I'll write it up."
-
-Wait for the user to choose before proceeding.
-
-### Step 3: Ask for Platform
-
-Once the user picks a storyline, ask:
-
-> "Where is this going? Facebook, Instagram, LinkedIn, Skool, or Email?"
-
-Wait for the answer before writing.
-
-### Step 4: Write the Longform Copy
-
-Write the post following ALL of the style rules below. The platform choice affects formatting and CTA style only (see Platform Adjustments).
+Bitta savol. Keyin 2-qadamga o'ting.
 
 ---
 
-## Writing Style Rules (Non-Negotiable)
+### 2-qadam: Hikoya chiziqlarini ajratish
 
-These rules define the voice and structure. Every piece must follow them.
+To'liq transkript yoki brain dump materialini o'qing. Quyidagilarni o'z ichiga olgan lahzalarni aniqlang:
+- Aniq, yorqin shaxsiy tajriba (o'quvchi ko'z oldiga keltira oladigan sahna)
+- Nimadir "klik" qilgan yoki o'zgargan lahza
+- Ularga nimadir o'rgatgan qiyinchilik yoki xato
+- O'quvchi kutmaydigan narsa — ko'pchilik aytadigan narsaga zid fikr yoki saboq
 
-### Opening
-- **The audience is cold, broad, and unaware.** They don't know you. They don't know your offer. They might not even know they have the problem you solve. Every post must open with something ANY human can relate to before it ever gets niche-specific.
-- Open with a **specific, vivid scene** rooted in a universal human experience: frustration, fear, embarrassment, hope, failure, a moment of doubt, a late night, a conversation that stung. The reader should think "that's happened to me" or "I've felt that" before they even know what the post is about.
-- The first 1-3 lines must create instant curiosity or tension. The reader should feel like they walked into the middle of something.
-- **Never open with industry language, business results, or niche jargon.** No "I was running ads and..." or "My community hit 2,000 members..." as an opener. That only speaks to people already in your world. Instead, open with the human moment underneath it: the feeling, the situation, the scene anyone could picture themselves in.
-- Never open with a generic statement, a quote, or a lesson. Open with a MOMENT.
+**Sovuq auditoriya filtri:** Har bir potentsial hikoya chizig'i uchun so'rang: "Bu odamning sohasi haqida hech narsa bilmaydigan butunlay begona odam birinchi 3 qatorda biror narsa his qila oladimi?" Javob yo'q bo'lsa, nisha lahzasi ostida yashiringan insoniy lahzani toping va undan boshlang. Har bir hikoya chizig'ida hamma uchun tushunarli kirish nuqtasi bo'lishi shart.
 
-### Structure and Pacing
-- **Short sentences. Short paragraphs.** Most paragraphs are 1-3 sentences. Many are just one line.
-- Use **sentence fragments** on purpose. Not every thought needs a full sentence. Sometimes a few words hit harder.
-- **No bullet points. No numbered lists. No headers. No bold text.** This is a story, not a blog post.
-- Build the story **in order or with deliberate flashbacks** ("Let me back up." / "Before that..." / "Rewind to..."). Guide the reader through time.
-- **Change the speed of the writing**: slow down on emotional moments (more detail, more white space), speed up through action (shorter lines, rapid-fire).
+Foydalanuvchiga **3 ta hikoya varianti** taqdim eting. Har biri uchun bering:
+- Qisqa ishchi sarlavha (5–8 so'z)
+- Hikoyaning 2 gaplik xulosasi (nima bo'ldi va u qayerga olib boradi)
 
-### Tone and Voice
-- **First person. Conversational. Vulnerable but not victim-y.**
-- Write like you're telling a friend the real version of what happened. Not the polished highlight reel.
-- Be specific with numbers, dates, amounts, and details. The more specific you are, the more real it feels. ("$27 cost per purchase" not "a cheap sale." "30 funnels" not "dozens of attempts." "My dad's bathroom" not "a quiet room.")
-- Show emotions through actions and physical details, not by labeling them. ("I ran to my mom" shows excitement better than "I was so excited.")
-- **No motivational fluff.** No "believe in yourself" energy. The story itself carries the lesson. Trust the reader to get it.
-- Never use em dashes. Use periods, commas, or line breaks instead.
+So'ng ayting:
+> "Bulardan birini tanlang, ko'proq taklif qilishimni so'rang yoki o'z hikoya yo'nalishingizni bering, men uni yozib beraman."
 
-### Emotional Arc
-Every piece must follow this arc:
-1. **The Scene** - Drop the reader into a vivid moment. This moment must be universally relatable first, niche-specific second. A cold audience needs to feel something familiar before they'll keep reading. Start with the human experience (sitting in a parking lot, staring at a screen at 2am, a conversation with your kid, a moment of embarrassment) then let the story naturally move into your world.
-2. **The Backstory/Struggle** - What led here. The failures, the doubts, the pressure. Be honest. Use specifics. Ease the reader from the relatable moment into the niche details gradually. By the time you mention anything industry-specific, they should already be emotionally invested.
-3. **The Turning Point** - One moment, one conversation, one result that shifted everything. Make it small and real, not some big Hollywood moment.
-4. **What Changed After** - What happened next. How that small shift grew into something bigger. What it meant.
-5. **The Quiet Lesson** - Not a preachy takeaway. A reflection. Something the reader can see themselves in without being told what to think. Bring it back to the universal. The lesson should land for someone whether they're in your niche or not.
-6. **The CTA** - See CTA rules below.
+Davom etishdan oldin foydalanuvchi tanlashini kuting.
 
-### What to Avoid
-- No opening with niche language, industry jargon, or business metrics. The first lines must land for anyone.
-- No assuming the reader knows who you are, what you do, or what your niche is
-- No hashtags in the body of the post (LinkedIn allows 3-5 at the very end, separated by space)
-- No emojis in the body copy
-- No rhetorical questions used as transitions (e.g., "So what did I learn?")
-- No "I" stacking (don't start 3+ consecutive sentences with "I")
-- No cliches: "game-changer," "level up," "it hit different," "the rest is history"
-- No "If you're reading this, you were meant to see it" energy
-- No lecture tone. Never talk down to the reader.
-- No corporate jargon or buzzwords
-- Never use em dashes
+### 3-qadam: Platformani so'rash
 
-### Length Guidelines
-- Facebook: 800-1,500 words (slightly tighter, still story-first)
-- Instagram: 600-1,200 words (must respect the 2,200 character caption limit for the visible portion, but can extend with line breaks since users scroll; aim for punchy and tight)
-- LinkedIn: 1,200-1,800 words (uses the full character allowance for story depth)
-- Skool: 800-1,500 words (community post format, readers are already warm and inside the group so you can be more direct and personal)
-- Email: 1,000-2,000 words (can go longer since the reader opted in)
+Foydalanuvchi hikoyani tanlagach, so'rang:
+
+> "Bu qayerga ketadi? Facebook, Instagram, LinkedIn, Skool yoki Email?"
+
+Yozishdan oldin javobni kuting.
+
+### 4-qadam: Longform kopiyni yozish
+
+Postni quyidagi uslub qoidalarining BARCHASIGA rioya qilib yozing. Platforma tanlovi faqat formatlash va CTA uslubiga ta'sir qiladi (Platformaga moslashtirishlarga qarang).
 
 ---
 
-## CTA Rules
+## Yozuv uslubi qoidalari (muzokarasiz)
 
-The CTA is always about **starting a real conversation**, not pitching. The goal is to get the reader to comment or reach out so you can have a genuine DM exchange that may lead to a discovery call.
+Bu qoidalar ovoz va tuzilmani belgilaydi. Har bir matn ularga amal qilishi shart.
 
-### CTA Structure
-End the story with a natural bridge from the lesson to the reader's situation. Then invite them to connect. The CTA should feel like an extension of the story, not a pitch stuck onto the end.
+### Ochilish
+- **Auditoriya sovuq, keng va xabarsiz.** Ular sizni tanimaydi. Taklifingizni bilmaydi. Hatto sizning yechayotgan muammongiz borligini ham bilmasligi mumkin. Har bir post nisha-spetsifik bo'lishdan oldin HAR QANDAY odam bog'lana oladigan narsa bilan boshlanishi kerak.
+- Universal insoniy tajribaga ildiz otgan **aniq, yorqin sahna** bilan oching: asabiylashish, qo'rquv, uyat, umid, muvaffaqiyatsizlik, shubha lahzasi, kechki soat, achitgan suhbat. Post nima haqida ekanini bilmasdan oldin ham o'quvchi "bu menda ham bo'lgan" yoki "buni men ham his qilganman" deb o'ylashi kerak.
+- Birinchi 1–3 qator zudlik bilan qiziqish yoki tarangilik yaratishi kerak. O'quvchi nimaningdir o'rtasiga kirib qolganday his qilishi kerak.
+- **Hech qachon soha tili, biznes natijalari yoki nisha jargoni bilan ochmang.** "Men reklama yuritayotgan edim va..." yoki "Hamjamiyatim 2000 a'zoga yetdi..." kabi ochilishlar yo'q. Bu faqat sizning dunyongizdagi odamlarga gapiradi. Buning o'rniga uning ostidagi insoniy lahza bilan oching: his, vaziyat, har kim o'zini tasavvur qila oladigan sahna.
+- Hech qachon umumiy gap, iqtibos yoki saboq bilan ochmang. LAHZA bilan oching.
 
-### CTA Formula
-1. **Reflect the reader's reality** - One sentence that names what the reader might be feeling or experiencing right now, based on the theme of the story.
-2. **Offer the door** - Invite them to comment a specific word, drop a comment, or DM you. Keep it simple and easy.
-3. **What happens next** - Tell them what you'll do when they reach out (e.g., "I'll send you a voice note," "I'll ask you a couple of questions to see if I can actually help," "We'll have a quick chat to figure out your next step").
+### Tuzilma va sur'at
+- **Qisqa gaplar. Qisqa paragraflar.** Ko'p paragraflar 1–3 gap. Ko'pi — bitta qator.
+- Ataylab **to'liq bo'lmagan gaplar** (fragmentlar) ishlating. Har bir fikr to'liq gap bo'lishi shart emas. Ba'zan bir necha so'z kuchliroq uradi.
+- **Bullet'lar yo'q. Raqamlangan ro'yxatlar yo'q. Sarlavhalar yo'q. Qalin matn yo'q.** Bu hikoya, blog post emas.
+- Hikoyani **tartib bilan yoki ataylab flashback'lar bilan** quring ("Orqaga qaytay." / "Bundan oldin..." / "Orqaga o'tamiz..."). O'quvchini vaqt bo'ylab olib yuring.
+- **Yozuv tezligini o'zgartiring**: hissiy lahzalarda sekinlashing (ko'proq tafsilot, ko'proq bo'sh joy), harakat paytida tezlashing (qisqa qatorlar, ketma-ket zarbalar).
 
-### CTA Examples (adapt to fit the story and the user's chosen offer)
-- "If you're in the middle of this right now, I built [product name] for exactly this. Drop 'NEXT' in the comments and I'll send you the details."
-- "If this sounds like where you are, send me a message. No pitch. I'll ask you a few questions and tell you honestly if I can help."
-- "Comment 'READY' below if you want my eyes on your situation. I'll send you a DM and we'll take it from there."
-- "This is exactly why I created [product name]. If you want in, drop [KEYWORD] below and I'll reach out."
+### Ohang va ovoz
+- **Birinchi shaxs. Suhbatdosh. Zaif, lekin qurbon bo'lmagan.**
+- Do'stingizga bo'lgan voqeaning haqiqiy versiyasini aytgandek yozing. Sayqallangan "highlight reel" emas.
+- Raqamlar, sanalar, summalar va tafsilotlar bilan aniq bo'ling. Qancha aniq bo'lsangiz, shuncha haqiqiy tuyuladi. ("$27 xarid narxi" — "arzon sotuv" emas. "30 ta voronka" — "o'nlab urinish" emas. "Dadamning hammomi" — "sokin xona" emas.)
+- Hissiyotlarni nomlab emas, harakatlar va jismoniy tafsilotlar orqali ko'rsating. ("Onamning oldiga yugurdim" hayajonni "juda hayajonlandim" dan yaxshiroq ko'rsatadi.)
+- **Motivatsion bo'sh gaplar yo'q.** "O'zingga ishon" ruhi yo'q. Saboqni hikoyaning o'zi olib yuradi. O'quvchiga ishoning.
+- Hech qachon uzun tire (em dash) ishlatmang. Nuqta, vergul yoki qator uzilishidan foydalaning.
 
-### Step 5: Ask What to Promote
+### Hissiy yoy
+Har bir matn quyidagi yoyga amal qilishi kerak:
+1. **Sahna** — O'quvchini yorqin lahzaga tashlang. Bu lahza avvalo universal tanish bo'lishi, keyin nishaga xos bo'lishi kerak. Sovuq auditoriya o'qishni davom ettirishdan oldin tanish narsani his qilishi kerak. Insoniy tajriba bilan boshlang (mashinadagi to'xtash joyida o'tirish, tunda soat 2 da ekranga tikilish, bola bilan suhbat, uyat lahzasi), so'ng hikoya tabiiy ravishda sizning dunyongizga o'tsin.
+2. **Oldingi tarix/qiyinchilik** — Bunga nima olib keldi. Muvaffaqiyatsizliklar, shubhalar, bosim. Halol bo'ling. Aniq tafsilot ishlating. O'quvchini tanish lahzadan nisha tafsilotlariga asta-sekin olib o'ting. Sohaga xos narsani eslatganingizda, ular allaqachon hissiy jihatdan jalb bo'lgan bo'lishi kerak.
+3. **Burilish nuqtasi** — Hamma narsani o'zgartirgan bitta lahza, bitta suhbat, bitta natija. Uni kichik va haqiqiy qiling, Gollivud darajasidagi katta lahza emas.
+4. **Keyin nima o'zgardi** — Keyin nima bo'ldi. Bu kichik siljish qanday kattaroq narsaga aylandi. Bu nimani anglatdi.
+5. **Sokin saboq** — Va'zxonlik xulosasi emas. Mulohaza. O'quvchi nimani o'ylashi kerakligi aytilmasdan o'zini ko'ra oladigan narsa. Universalga qaytaring. Saboq sizning nishangizdagi yoki undan tashqaridagi odamga ham yetib borishi kerak.
+6. **CTA** — Quyidagi CTA qoidalariga qarang.
 
-After writing the post, ask the user:
+### Nimadan qochish kerak
+- Nisha tili, soha jargoni yoki biznes metrikalari bilan ochmang. Birinchi qatorlar har kimga yetib borishi kerak.
+- O'quvchi kimligingizni, nima qilishingizni yoki nishangiz nima ekanini biladi deb faraz qilmang
+- Post matnida hashtag yo'q (LinkedIn oxirida 3–5 tagacha, bo'shliq bilan ajratilgan holda ruxsat beradi)
+- Asosiy matnda emoji yo'q
+- O'tish sifatida ishlatilgan ritorik savollar yo'q (masalan, "Xo'sh, nimani o'rgandim?")
+- "Men" ketma-ketligi yo'q (3 va undan ko'p ketma-ket gapni "Men" bilan boshlamang)
+- Klishelar yo'q: "game-changer," "level up," "it hit different," "the rest is history"
+- "Agar buni o'qiyotgan bo'lsangiz, buni ko'rishingiz taqdir edi" ruhi yo'q
+- Nasihat ohangi yo'q. O'quvchiga hech qachon yuqoridan qaramang.
+- Korporativ jargon yoki buzzword'lar yo'q
+- Hech qachon uzun tire (em dash) ishlatmang
 
-> "What product, offer, or next step do you want the CTA to point to? (e.g., a challenge, a membership, a free resource, a DM conversation, etc.)"
-
-Then update the CTA to mention that specific thing naturally. The CTA should still feel like part of the story, not a hard sell.
-
-### CTA Don'ts
-- Never guess what product or offer to promote. Always ask first.
-- Never say "book a call" directly unless the user tells you to. The CTA leads to a conversation, which may lead to a call naturally.
-- Never use urgency tactics or scarcity
-- Never promise specific results in the CTA
+### Uzunlik ko'rsatmalari
+- Facebook: 800–1 500 so'z (biroz ixchamroq, baribir hikoya birinchi o'rinda)
+- Instagram: 600–1 200 so'z (ko'rinadigan qism uchun 2 200 belgilik caption limitiga rioya qilishi shart, lekin foydalanuvchilar scroll qilgani uchun qator uzilishlari bilan uzaytirish mumkin; ixcham va kuchli yozing)
+- LinkedIn: 1 200–1 800 so'z (hikoya chuqurligi uchun belgilar limitidan to'liq foydalanadi)
+- Skool: 800–1 500 so'z (hamjamiyat posti formati, o'quvchilar allaqachon iliq va guruh ichida, shuning uchun to'g'ridan-to'g'ri va shaxsiyroq bo'lish mumkin)
+- Email: 1 000–2 000 so'z (o'quvchi o'zi obuna bo'lgani uchun uzunroq bo'lishi mumkin)
 
 ---
 
-## Platform Adjustments
+## CTA qoidalari
+
+CTA doim **haqiqiy suhbatni boshlash** haqida, sotish haqida emas. Maqsad — o'quvchini izoh qoldirishga yoki bog'lanishga undash, shunda haqiqiy DM almashinuvi bo'lib, u discovery qo'ng'iroqqa olib kelishi mumkin.
+
+### CTA tuzilmasi
+Hikoyani saboqdan o'quvchining vaziyatiga tabiiy ko'prik bilan tugating. So'ng ularni bog'lanishga taklif qiling. CTA hikoyaning davomi bo'lib tuyulishi kerak, oxiriga yopishtirilgan pitch emas.
+
+### CTA formulasi
+1. **O'quvchining voqeligini aks ettiring** — Hikoya mavzusiga asoslanib, o'quvchi hozir nimani his qilayotgani yoki boshdan kechirayotganini nomlaydigan bitta gap.
+2. **Eshikni oching** — Ularni aniq bir so'zni izohga yozishga, izoh qoldirishga yoki sizga DM yozishga taklif qiling. Oddiy va oson bo'lsin.
+3. **Keyin nima bo'ladi** — Ular bog'langanda nima qilishingizni ayting (masalan, "Ovozli xabar yuboraman," "Haqiqatan yordam bera olamanmi, bilish uchun bir-ikki savol beraman," "Keyingi qadamingizni aniqlash uchun qisqa suhbatlashamiz").
+
+### CTA misollari (hikoya va foydalanuvchi tanlagan taklifga moslang)
+- "Agar hozir shu ichida bo'lsangiz, aynan shu uchun [mahsulot nomi] ni yaratganman. Izohga 'NEXT' deb yozing, tafsilotlarni yuboraman."
+- "Agar bu sizning hozirgi holatingizga o'xshasa, menga xabar yozing. Pitch yo'q. Bir necha savol beraman va yordam bera olishimni halol aytaman."
+- "Vaziyatingizga e'tiborimni qaratishimni xohlasangiz, pastga 'READY' deb yozing. DM yuboraman va u yerdan davom etamiz."
+- "Aynan shuning uchun [mahsulot nomi] ni yaratganman. Kirmoqchi bo'lsangiz, pastga [KALIT SO'Z] deb yozing, men siz bilan bog'lanaman."
+
+### 5-qadam: Nimani targ'ib qilishni so'rash
+
+Postni yozgach, foydalanuvchidan so'rang:
+
+> "CTA qaysi mahsulot, taklif yoki keyingi qadamga yo'naltirilsin? (masalan, challenge, a'zolik, bepul resurs, DM suhbat va h.k.)"
+
+So'ng CTA'ni aynan o'sha narsani tabiiy tarzda eslatadigan qilib yangilang. CTA baribir hikoyaning bir qismi bo'lib tuyulishi kerak, qattiq sotuv emas.
+
+### CTA'da qilmaslik kerak bo'lgan narsalar
+- Qaysi mahsulot yoki taklifni targ'ib qilishni hech qachon taxmin qilmang. Avval doim so'rang.
+- Foydalanuvchi aytmasa, hech qachon to'g'ridan-to'g'ri "qo'ng'iroqqa yoziling" demang. CTA suhbatga olib boradi, u esa tabiiy ravishda qo'ng'iroqqa olib kelishi mumkin.
+- Shoshilinchlik yoki tanqislik usullarini ishlatmang
+- CTA'da aniq natijalarni va'da qilmang
+
+---
+
+## Platformaga moslashtirishlar
 
 ### Facebook
-- Warmer, more personal tone. Slightly more casual.
-- No hashtags
-- Can be slightly more emotionally open since the audience relationship tends to be warmer
+- Iliqroq, shaxsiyroq ohang. Biroz oddiyroq.
+- Hashtag yo'q
+- Auditoriya bilan munosabat odatda iliqroq bo'lgani uchun hissiy jihatdan biroz ochiqroq bo'lish mumkin
 
 ### Instagram
-- Caption must hook in the first line before the "more" cutoff. Lead with the most vivid or surprising line of the story.
-- No hashtags in the body. Can include 5-15 relevant hashtags in a separate comment (note this in the output).
-- Slightly shorter and punchier than Facebook. Every line needs to earn its place because attention is shorter here.
-- Line breaks matter even more. Use white space aggressively to keep it scannable.
-- The CTA should invite comments or DMs. Instagram rewards comment engagement, so make the CTA easy to respond to (e.g., "Drop [KEYWORD] in the comments").
+- Caption "more" uzilishidan oldin birinchi qatorda ilgak bo'lishi shart. Hikoyaning eng yorqin yoki hayratlanarli qatori bilan boshlang.
+- Asosiy matnda hashtag yo'q. Alohida izohda 5–15 ta tegishli hashtag bo'lishi mumkin (buni natijada qayd eting).
+- Facebook'dan biroz qisqaroq va kuchliroq. Har bir qator o'z o'rnini oqlashi kerak, chunki bu yerda e'tibor qisqaroq.
+- Qator uzilishlari yanada muhim. Skanerlash oson bo'lishi uchun bo'sh joydan faol foydalaning.
+- CTA izoh yoki DM'ga taklif qilishi kerak. Instagram izoh orqali jalb qilishni mukofotlaydi, shuning uchun CTA'ga javob berish oson bo'lsin (masalan, "Izohga [KALIT SO'Z] deb yozing").
 
 ### LinkedIn
-- Can include 3-5 relevant hashtags at the very bottom, separated from the post by a line break
-- Slightly more professional lens on the same story (still personal, still vulnerable, but aware the audience includes professional connections)
-- The hook matters even more here. LinkedIn cuts off after about 3 lines. The first line has to make people click "see more."
+- Postning eng pastida, post matnidan qator uzilishi bilan ajratilgan holda 3–5 ta tegishli hashtag qo'shish mumkin
+- Xuddi shu hikoyaga biroz professionalroq nuqtai nazar (baribir shaxsiy, baribir zaif, lekin auditoriya professional aloqalarni ham o'z ichiga olishini bilgan holda)
+- Bu yerda ilgak yanada muhim. LinkedIn taxminan 3 qatordan keyin kesadi. Birinchi qator odamlarni "see more" bosishga undashi kerak.
 
 ### Skool
-- The most personal and direct of all platforms. These readers are already inside your community. They chose to be here. Write like you're talking to people who already trust you.
-- Can be more casual and raw. Less "performing for strangers" energy, more "real talk with your people."
-- No hashtags.
-- The CTA can reference specific community resources, challenges, or tools inside the group (e.g., "Go check out the [resource name] in the classroom" or "Drop your biggest takeaway in the comments so I can see where you're at").
-- Encourage engagement that builds community. Ask for their experience, their version of the story, what they're working on right now.
-- Can reference shared context (past challenges, group wins, things everyone in the community knows about).
+- Barcha platformalar ichida eng shaxsiy va to'g'ridan-to'g'ri. Bu o'quvchilar allaqachon hamjamiyat ichida. Ular bu yerda bo'lishni tanlagan. Sizga allaqachon ishonadigan odamlarga gapirayotgandek yozing.
+- Oddiyroq va xomroq bo'lishi mumkin. Begonalar uchun "ijro" ruhi kamroq, o'zingizning odamlaringiz bilan "haqiqiy gap" ko'proq.
+- Hashtag yo'q.
+- CTA guruh ichidagi aniq hamjamiyat resurslari, challenge'lar yoki asboblarga havola qilishi mumkin (masalan, "Classroom'dagi [resurs nomi]ni ko'rib chiqing" yoki "Qayerda ekaningizni ko'rishim uchun eng katta xulosangizni izohga yozing").
+- Hamjamiyat quradigan jalb qilishni rag'batlantiring. Ularning tajribasi, o'z hikoya versiyasi, hozir nima ustida ishlayotganini so'rang.
+- Umumiy kontekstga havola qilish mumkin (o'tgan challenge'lar, guruh g'alabalari, hamjamiyatdagi hamma biladigan narsalar).
 
 ### Email
-- Add a subject line that reads like a story hook (not salesy, not clickbait, just curiosity-driven)
-- Open the email the same way: drop into the scene immediately
-- Can include a P.S. line that reinforces the CTA in a casual way
-- Sign off with just your first name
+- Hikoya ilgagiga o'xshaydigan mavzu satri qo'shing (sotuvchi emas, clickbait emas, shunchaki qiziqishga asoslangan)
+- Emailni xuddi shunday oching: darhol sahnaga tushing
+- CTA'ni norasmiy tarzda mustahkamlaydigan P.S. qatori qo'shish mumkin
+- Faqat ismingiz bilan imzo qo'ying
 
 ---
 
-## Important Notes
-- The content of the story comes from the TRANSCRIPT or BRAIN DUMP the user provides. Do not make things up or add experiences that aren't there.
-- You are writing in the user's voice, as them. Use the details, language, and experiences from their material.
-- If the material doesn't contain enough vivid detail for a specific scene, ask the user to fill in what they could see or hear or feel (Where were you? What time of day? What were you doing?).
-- Every post must feel like it could only have been written by THIS person. No generic stories.
-- This skill works for any niche. The brain dump flow and writing style work for any coach, consultant, mentor, or service provider in any industry.
+## Muhim eslatmalar
+- Hikoya mazmuni foydalanuvchi bergan TRANSKRIPT yoki BRAIN DUMP'dan olinadi. Hech narsani o'zingizdan to'qimang va materialda yo'q tajribalarni qo'shmang.
+- Siz foydalanuvchi ovozida, uning nomidan yozyapsiz. Ularning materialidagi tafsilotlar, til va tajribalardan foydalaning.
+- Agar material aniq sahna uchun yetarli yorqin tafsilotga ega bo'lmasa, foydalanuvchidan ko'rgan, eshitgan yoki his qilgan narsasini to'ldirishni so'rang (Qayerda edingiz? Kunning qaysi vaqti edi? Nima qilayotgan edingiz?).
+- Har bir post faqat SHU odam yozgan bo'lishi mumkin bo'lgan tuyulishi kerak. Umumiy hikoyalar yo'q.
+- Bu skill istalgan nisha uchun ishlaydi. Brain dump oqimi va yozuv uslubi istalgan soha murabbiysi, maslahatchisi, mentori yoki xizmat ko'rsatuvchisi uchun ishlaydi.
 
 ---
 

@@ -1,83 +1,83 @@
-# Content Distribution Spine
+# Kontent tarqatish o'zagi (Content Distribution Spine)
 
-The "distribute" half of content strategy. Creating a great piece is table stakes; the leverage is in getting it seen. This reference expands the **Create Once, Distribute Twice** section of the skill.
+Kontent strategiyasining "tarqatish" yarmi. Ajoyib material yaratish — minimal talab; asosiy kuch uning ko'rilishida. Ushbu reference skilldagi **Bir marta yarating, ikki marta tarqating** bo'limini kengaytiradi.
 
-Cross-links: ORB channel-type playbook lives in **launch**; atomization/repurposing workflows (podcast → clips, blog → thread) live in **social**. This file consolidates the strategy that ties them together—don't re-derive ORB from scratch here.
+O'zaro havolalar: ORB kanal-turi playbooki **launch** skillda; atomizatsiya/qayta ishlash jarayonlari (podkast → klipalar, blog → thread) **social** skillda. Bu fayl ularni bog'laydigan strategiyani jamlaydi — ORB'ni bu yerda noldan qayta keltirib chiqarmang.
 
-## Create Once, Distribute Twice
+## Bir marta yarating, ikki marta tarqating
 
-One exceptional piece, reformatted across channels—not a fresh piece per platform. The math is simple: a flagship piece plus ten repurposed cuts reaches far more people than eleven mediocre native posts, at a fraction of the effort.
+Bitta mukammal material, kanallar bo'ylab qayta formatlangan — har bir platforma uchun yangi material emas. Hisob oddiy: bitta flagman material va o'nta qayta ishlangan kesim o'n bitta o'rtacha native postdan ancha ko'p odamga yetadi, mehnat esa uning kichik bir ulushi.
 
-The discipline is **designing the piece to be distributed**:
-- Write subheads that read as standalone social posts.
-- Structure sections modularly so they can be lifted out and stand alone.
-- Pre-identify the pull quotes, stats, and frames you'll turn into graphics or short clips.
-- Know the atomized outputs before you write, so the source piece contains them.
+Intizom — **materialni tarqatish uchun loyihalash**:
+- Mustaqil ijtimoiy post sifatida o'qiladigan sub-sarlavhalar yozing.
+- Bo'limlarni modulli tuzing, shunda ularni ajratib olib, mustaqil ishlatish mumkin.
+- Grafika yoki qisqa klipga aylantiradigan iqtiboslar, statistikalar va freymlarni oldindan belgilang.
+- Yozishdan oldin atomizatsiya natijalarini biling, shunda manba material ularni o'z ichiga oladi.
 
-Treat the flagship as the master; every channel gets a cut derived from it.
+Flagmanga master sifatida qarang; har bir kanal undan olingan kesimni oladi.
 
-## The ORB Framework as a Funnel
+## ORB freymvorki voronka sifatida
 
-Own, Rent, Borrow—read as a discovery → engagement → conversion funnel:
+Own, Rent, Borrow — kashf → jalb qilish → konversiya voronkasi sifatida o'qing:
 
-| Layer | Channels | Funnel role | You control |
+| Qatlam | Kanallar | Voronkadagi roli | Nimani nazorat qilasiz |
 |---|---|---|---|
-| **Borrowed** | Podcasts, guest posts, partnerships, PR, other people's audiences | Discovery / breakthrough | Nothing—it's a loan |
-| **Rented** | Social platforms, ad networks, marketplaces | Engagement / reach | The content, not the audience or algorithm |
-| **Owned** | Email list, blog, community, app | Conversion / retention | Everything—the durable asset |
+| **Borrowed** (qarzga olingan) | Podkastlar, mehmon postlar, hamkorliklar, PR, boshqalarning auditoriyalari | Kashf / yutuq qamrovi | Hech narsani — bu qarz |
+| **Rented** (ijaraga olingan) | Ijtimoiy platformalar, reklama tarmoqlari, marketpleyslar | Jalb qilish / qamrov | Kontentni, lekin auditoriya yoki algoritmni emas |
+| **Owned** (o'zingizniki) | Email ro'yxati, blog, hamjamiyat, ilova | Konversiya / ushlab turish | Hammasini — barqaror aktiv |
 
-The strategic move: use borrowed and rented reach to funnel strangers into owned channels where you can convert and retain them. Borrowed and rented are rented land; owned is the only asset you keep.
+Strategik harakat: borrowed va rented qamrovdan begonalarni owned kanallarga yo'naltiring, u yerda ularni konversiya qilib, ushlab tura olasiz. Borrowed va rented — ijara yer; owned — saqlab qoladigan yagona aktiv.
 
-## The Ownership Paradox
+## Egalik paradoksi
 
-Most teams invert the priority: they spend ~90% of effort on borrowed and rented channels they don't control, and neglect the owned assets that actually convert. The paradox is that the channels getting the least attention (email, blog, community) are the ones that compound and can't be revoked. Rebalance toward owned as the destination for all upstream effort.
+Ko'pgina jamoalar ustuvorlikni teskari qo'yadi: kuchning ~90% ini nazorat qilmaydigan borrowed va rented kanallarga sarflaydi, aslida konvertatsiya qiladigan owned aktivlarni esa e'tiborsiz qoldiradi. Paradoks shundaki, eng kam e'tibor oladigan kanallar (email, blog, hamjamiyat) jamlanadigan va tortib olib bo'lmaydigan kanallardir. Barcha yuqori oqim harakatlarining manzili sifatida owned tomonga muvozanatni qayta tiklang.
 
-## Failure Modes
+## Nosozlik rejimlari
 
-- **Spray-and-pray** — publishing across every platform with no flagship and no repurposing system. Effort scatters; nothing compounds; each post starts from zero.
-- **Platform dependency** — building your audience on rented land. Facebook organic reach collapsed from ~20% to under 2% as the platform monetized. Any rented channel can throttle, deprioritize, or de-platform you with no recourse. The lesson isn't "avoid rented"—it's "never let rented be the endpoint."
+- **Spray-and-pray** — flagmansiz va qayta ishlash tizimisiz har bir platformada nashr qilish. Kuch tarqaladi; hech narsa jamlanmaydi; har bir post noldan boshlanadi.
+- **Platformaga bog'liqlik** — auditoriyani ijaraga olingan yerda qurish. Platforma monetizatsiyaga o'tgani sari Facebook organik qamrovi ~20% dan 2% dan pastga tushdi. Har qanday rented kanal sizni hech qanday choralarsiz cheklashi, pasaytirishi yoki platformadan chiqarishi mumkin. Saboq "rented'dan qoching" emas — "rented'ni hech qachon yakuniy nuqta qilmang".
 
-## Platform Half-Lives
+## Platformalarning yarim-umri
 
-Content decays at wildly different rates by channel. Match the piece to the channel's shelf life:
+Kontent turli kanallarda keskin farqli tezlikda eskiradi. Materialni kanalning "saqlanish muddati"ga moslang:
 
-| Channel | Rough half-life | Implication |
+| Kanal | Taxminiy yarim-umr | Ma'nosi |
 |---|---|---|
-| Twitter/X post | Minutes–hours | Post often; repost; thread for reach |
-| Instagram / Facebook | ~a day | Frequent cadence; stories are ephemeral by design |
-| LinkedIn post | ~a day, longer for strong performers | Fewer, higher-effort posts |
-| TikTok / Reels / Shorts | Days–weeks (algorithmic resurfacing) | Evergreen hooks can re-surface long after posting |
-| YouTube video | Months–years | Search-driven; compounds like a blog post |
-| Blog post / SEO | Years | The long tail; the compounding asset |
-| Email | Sent once, but archived / repurposable | One-shot attention; harvest into other formats |
+| Twitter/X post | Daqiqalar–soatlar | Tez-tez post qiling; qayta post qiling; qamrov uchun thread |
+| Instagram / Facebook | ~bir kun | Tez-tez ritm; stories dizayn bo'yicha vaqtinchalik |
+| LinkedIn post | ~bir kun, kuchli postlar uchun uzoqroq | Kamroq, ammo ko'proq mehnat talab qiladigan postlar |
+| TikTok / Reels / Shorts | Kunlar–haftalar (algoritmik qayta chiqish) | Evergreen hooklar post qilingandan ancha keyin ham qayta chiqishi mumkin |
+| YouTube video | Oylar–yillar | Qidiruv orqali; blog post kabi jamlanadi |
+| Blog post / SEO | Yillar | Uzun dum; jamlanadigan aktiv |
+| Email | Bir marta yuboriladi, lekin arxivlanadi / qayta ishlanadi | Bir martalik e'tibor; boshqa formatlarga yig'ib oling |
 
-Short half-life channels reward frequency and repetition; long half-life channels reward depth and evergreen framing. Owned, long-half-life formats (blog, YouTube, email archive) are where distribution effort compounds.
+Qisqa yarim-umrli kanallar chastota va takrorni mukofotlaydi; uzun yarim-umrli kanallar chuqurlik va evergreen freymni mukofotlaydi. Tarqatish harakati jamlanadigan joy — owned, uzun yarim-umrli formatlar (blog, YouTube, email arxivi).
 
-## The Content Distribution Flywheel
+## Kontent tarqatish Flywheel (tarqatish sikli)
 
-Distribution isn't a linear checklist—it's a loop that feeds itself:
+Tarqatish chiziqli cheklist emas — o'zini oziqlantiradigan sikl:
 
-1. **Create** one exceptional flagship piece (guide, video, podcast, original research), with distribution hooks built in.
-2. **Atomize** it into channel-native cuts—clips, threads, carousels, quote graphics, email, subhead-posts.
-3. **Distribute** across owned → rented → borrowed, routing everything back to owned.
-4. **Engage** with the responses; capture the questions, objections, and reactions.
-5. **Feed back** — the engagement surfaces the next flagship topic (what resonated, what got asked), and top-performing atoms signal what to make more of.
+1. **Yarating** — tarqatish ilgaklari kiritilgan bitta ajoyib flagman material (qo'llanma, video, podkast, original tadqiqot).
+2. **Atomizatsiya qiling** — kanalga mos kesimlarga: klipalar, thread'lar, karusellar, iqtibos grafikalari, email, sub-sarlavha postlari.
+3. **Tarqating** — owned → rented → borrowed bo'ylab, hammasini owned'ga qaytarib yo'naltirgan holda.
+4. **Muloqot qiling** — javoblar bilan ishlang; savollar, e'tirozlar va reaksiyalarni qayd eting.
+5. **Qayta ulang** — muloqot keyingi flagman mavzusini ko'rsatadi (nima aks sado berdi, nima so'raldi), eng yaxshi natijali atomlar esa nimani ko'proq qilish kerakligini bildiradi.
 
-Each turn of the loop lowers the cost of the next piece (you learn what lands) and grows the owned audience that amplifies it. The flywheel is why consistent distributors pull away from one-off publishers over time.
+Sikl har aylanganda keyingi materialning narxi pasayadi (nima ishlashini o'rganasiz) va uni kuchaytiradigan owned auditoriya o'sadi. Muntazam tarqatuvchilar vaqt o'tishi bilan bir martalik nashr qiluvchilardan ajralib ketishining sababi — shu sikl.
 
-## Atomization Checklist (per flagship)
+## Atomizatsiya cheklisti (har bir flagman uchun)
 
-For each major piece, produce (see **social** for the platform-native execution):
-- [ ] 3–5 standalone social posts from the subheads/key points
-- [ ] 1 thread (Twitter/X) or carousel (LinkedIn/Instagram) of the core argument
-- [ ] 2–4 short-form video clips (if source is video/podcast)
-- [ ] 1–2 quote or stat graphics
-- [ ] 1 email to the owned list linking the flagship
-- [ ] Repost/reshare schedule across the piece's half-life (don't post once and move on)
+Har bir yirik material uchun yarating (platformaga mos ijro uchun **social** ga qarang):
+- [ ] Sub-sarlavhalar/asosiy fikrlardan 3–5 ta mustaqil ijtimoiy post
+- [ ] Asosiy argumentning 1 ta thread'i (Twitter/X) yoki karuseli (LinkedIn/Instagram)
+- [ ] 2–4 ta qisqa-format video klip (manba video/podkast bo'lsa)
+- [ ] 1–2 ta iqtibos yoki statistika grafikasi
+- [ ] Owned ro'yxatga flagmanga havola qiluvchi 1 ta email
+- [ ] Materialning yarim-umri bo'yicha qayta post/qayta ulashish jadvali (bir marta post qilib, keyingisiga o'tib ketmang)
 
-## Related
+## Bog'liq
 
-- **launch** — ORB channel-type playbook and launch-day distribution
-- **social** — atomization/repurposing workflows and platform-native execution
-- **emails** — the owned channel that converts distributed attention
-- **ai-seo** — making owned content citable by LLMs (another distribution surface)
+- **launch** — ORB kanal-turi playbooki va launch-kuni tarqatish
+- **social** — atomizatsiya/qayta ishlash jarayonlari va platformaga mos ijro
+- **emails** — tarqatilgan e'tiborni konversiya qiladigan owned kanal
+- **ai-seo** — owned kontentni LLM'lar iqtibos keltira oladigan qilish (yana bir tarqatish yuzasi)

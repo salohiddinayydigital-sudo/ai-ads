@@ -1,194 +1,194 @@
-# Headless CMS Guide
+# Headless CMS bo'yicha qo'llanma
 
-Reference for choosing, modeling, and implementing a headless CMS for marketing content.
+Marketing kontenti uchun headless CMS'ni tanlash, modellashtirish va joriy etish bo'yicha reference.
 
-## When to Use This Reference
+## Qachon foydalaniladi
 
-Use this when selecting a CMS for a new project, designing content models for marketing sites, setting up editorial workflows, or connecting CMS content to programmatic pages.
-
----
-
-## Headless vs Traditional CMS
-
-A headless CMS separates content management from presentation. Content is stored in a structured backend and delivered via API to any frontend.
-
-### When Headless Makes Sense
-
-- Multiple frontends consume the same content (web, mobile, email)
-- Developers want full control over the frontend stack
-- Content needs to be reused across channels
-- You're building with a modern framework (Next.js, Remix, Astro)
-- Marketing needs structured, reusable content blocks
-
-### When Traditional Works Better
-
-- Small team with no dedicated developers
-- Simple blog or brochure site
-- WYSIWYG editing is a hard requirement
-- Budget is tight and WordPress/Webflow does the job
-
-### Decision Checklist
-
-| Factor | Headless | Traditional |
-|--------|----------|-------------|
-| Multi-channel delivery | Yes | Limited |
-| Developer control | Full | Constrained |
-| Non-technical editing | Requires setup | Built-in |
-| Time to launch | Longer | Faster |
-| Content reuse | Native | Manual |
-| Hosting flexibility | Any frontend | Platform-dependent |
+Yangi loyiha uchun CMS tanlaganda, marketing saytlari uchun kontent modellarini loyihalashda, tahririyat ish jarayonlarini sozlashda yoki CMS kontentini programmatic sahifalarga ulashda foydalaning.
 
 ---
 
-## Content Modeling for Marketing
+## Headless va an'anaviy CMS
 
-### Core Principles
+Headless CMS kontentni boshqarishni taqdimotdan ajratadi. Kontent tuzilgan backend'da saqlanadi va API orqali istalgan frontend'ga yetkaziladi.
 
-1. **Think in types, not pages.** A "Landing Page" is a content type with fields — not an HTML file. This lets you reuse components across pages.
-2. **Separate content from presentation.** Store the headline text, not the styled headline. Presentation belongs in the frontend.
-3. **Design for reuse.** If testimonials appear on 5 pages, create a Testimonial type and reference it — don't duplicate.
-4. **Keep models flat.** Deeply nested structures are hard to query and maintain. Prefer references over nesting.
+### Headless qachon mantiqli
 
-### Common Marketing Content Types
+- Bir xil kontentni bir nechta frontend ishlatadi (veb, mobil, email)
+- Dasturchilar frontend steki ustidan to'liq nazorat xohlaydi
+- Kontentni kanallar bo'ylab qayta ishlatish kerak
+- Zamonaviy freymvork bilan quryapsiz (Next.js, Remix, Astro)
+- Marketingga tuzilgan, qayta ishlatiladigan kontent bloklari kerak
 
-| Type | Key Fields | Notes |
+### An'anaviy CMS qachon yaxshiroq
+
+- Maxsus dasturchilari yo'q kichik jamoa
+- Oddiy blog yoki vizitka sayt
+- WYSIWYG tahrirlash qat'iy talab
+- Byudjet tor va WordPress/Webflow ishni bajaradi
+
+### Qaror cheklisti
+
+| Omil | Headless | An'anaviy |
+|------|----------|-----------|
+| Ko'p kanalli yetkazib berish | Ha | Cheklangan |
+| Dasturchi nazorati | To'liq | Cheklangan |
+| Texnik bo'lmagan tahrirlash | Sozlash talab qiladi | O'rnatilgan |
+| Ishga tushirish vaqti | Uzoqroq | Tezroq |
+| Kontentni qayta ishlatish | Tabiiy | Qo'lda |
+| Hosting moslashuvchanligi | Istalgan frontend | Platformaga bog'liq |
+
+---
+
+## Marketing uchun kontent modellashtirish
+
+### Asosiy tamoyillar
+
+1. **Sahifalar emas, turlar bilan fikrlang.** "Landing Page" — maydonlari bor kontent turi, HTML fayl emas. Bu komponentlarni sahifalar bo'ylab qayta ishlatish imkonini beradi.
+2. **Kontentni taqdimotdan ajrating.** Bezatilgan sarlavhani emas, sarlavha matnini saqlang. Taqdimot frontend'ga tegishli.
+3. **Qayta ishlatishni loyihalang.** Agar testimoniallar 5 sahifada chiqsa, Testimonial turini yarating va unga havola qiling — nusxalamang.
+4. **Modellarni yassi saqlang.** Chuqur ichma-ich tuzilmalarni so'rash va yuritish qiyin. Ichma-ich o'rniga havolalarni afzal ko'ring.
+
+### Keng tarqalgan marketing kontent turlari
+
+| Tur | Asosiy maydonlar | Izohlar |
 |------|-----------|-------|
-| **Landing Page** | title, slug, hero, sections[], seo | Modular sections for flexibility |
-| **Blog Post** | title, slug, body, author, category, tags, publishedAt, seo | Rich text or Portable Text body |
-| **Case Study** | title, customer, challenge, solution, results, metrics[], logo | Link to related products/features |
-| **Testimonial** | quote, author, role, company, avatar, rating | Reference from landing pages |
-| **FAQ** | question, answer, category | Group by category for programmatic pages |
-| **Author** | name, bio, avatar, social links | Reference from blog posts |
-| **CTA Block** | heading, body, buttonText, buttonUrl, variant | Reusable across pages |
+| **Landing Page** | title, slug, hero, sections[], seo | Moslashuvchanlik uchun modulli bo'limlar |
+| **Blog Post** | title, slug, body, author, category, tags, publishedAt, seo | Rich text yoki Portable Text body |
+| **Case Study** | title, customer, challenge, solution, results, metrics[], logo | Tegishli mahsulot/funksiyalarga havola |
+| **Testimonial** | quote, author, role, company, avatar, rating | Landing sahifalardan havola qilinadi |
+| **FAQ** | question, answer, category | Programmatic sahifalar uchun kategoriya bo'yicha guruhlang |
+| **Author** | name, bio, avatar, social links | Blog postlardan havola qilinadi |
+| **CTA Block** | heading, body, buttonText, buttonUrl, variant | Sahifalar bo'ylab qayta ishlatiladi |
 
-### SEO Fields Checklist
+### SEO maydonlari cheklisti
 
-Every page-level content type needs:
+Har bir sahifa darajasidagi kontent turiga kerak:
 
-- `metaTitle` — 50-60 characters
-- `metaDescription` — 150-160 characters
-- `ogImage` — 1200x630px social preview
-- `slug` — URL path segment
-- `canonicalUrl` — optional override
-- `noIndex` — boolean for excluding from search
-- `structuredData` — optional JSON-LD override
-
----
-
-## Editorial Workflows
-
-### Draft → Review → Publish Cycle
-
-1. **Draft** — Author creates or edits content
-2. **Review** — Editor reviews for accuracy, brand voice, SEO
-3. **Approve** — Stakeholder signs off
-4. **Schedule** — Set publish date/time
-5. **Publish** — Content goes live via API
-
-### Preview APIs
-
-All major headless CMS platforms support draft previews:
-
-- **Sanity**: Real-time preview with `useLiveQuery` or Presentation tool
-- **Contentful**: Preview API (`preview.contentful.com`) with separate access token
-- **Strapi**: Draft & Publish system with `status=draft` query parameter (v5; replaces v4's `publicationState`)
-
-Set up a preview route in your frontend (e.g., `/api/preview`) that authenticates and renders draft content.
-
-### Roles and Permissions
-
-| Role | Can Create | Can Edit | Can Publish | Can Delete |
-|------|:----------:|:--------:|:-----------:|:----------:|
-| Author | Yes | Own | No | Own drafts |
-| Editor | Yes | All | Yes | Drafts |
-| Admin | Yes | All | Yes | All |
-
-Exact permission models vary by platform. Sanity uses role-based access. Contentful has space-level roles. Strapi has granular RBAC.
+- `metaTitle` — 50–60 belgi
+- `metaDescription` — 150–160 belgi
+- `ogImage` — 1200x630px ijtimoiy preview
+- `slug` — URL yo'lining segmenti
+- `canonicalUrl` — ixtiyoriy override
+- `noIndex` — qidiruvdan chiqarish uchun boolean
+- `structuredData` — ixtiyoriy JSON-LD override
 
 ---
 
-## Platform Comparison
+## Tahririyat ish jarayonlari
 
-| Feature | Sanity | Contentful | Strapi |
+### Qoralama → Ko'rib chiqish → Nashr sikli
+
+1. **Qoralama** — Muallif kontent yaratadi yoki tahrirlaydi
+2. **Ko'rib chiqish** — Muharrir aniqlik, brend ovozi va SEO bo'yicha tekshiradi
+3. **Tasdiqlash** — Manfaatdor tomon imzolaydi
+4. **Rejalashtirish** — Nashr sanasi/vaqtini belgilang
+5. **Nashr** — Kontent API orqali jonli bo'ladi
+
+### Preview API'lar
+
+Barcha yirik headless CMS platformalari qoralama preview'ni qo'llab-quvvatlaydi:
+
+- **Sanity**: `useLiveQuery` yoki Presentation tool bilan real vaqtli preview
+- **Contentful**: alohida access token bilan Preview API (`preview.contentful.com`)
+- **Strapi**: `status=draft` so'rov parametri bilan Draft & Publish tizimi (v5; v4'dagi `publicationState` o'rniga)
+
+Frontend'ingizda autentifikatsiya qiladigan va qoralama kontentni render qiladigan preview marshrutini (masalan, `/api/preview`) sozlang.
+
+### Rollar va ruxsatlar
+
+| Rol | Yarata oladi | Tahrirlay oladi | Nashr qila oladi | O'chira oladi |
+|------|:----------:|:--------:|:-----------:|:-----------:|
+| Muallif | Ha | O'zinikini | Yo'q | O'z qoralamalarini |
+| Muharrir | Ha | Hammasini | Ha | Qoralamalarni |
+| Admin | Ha | Hammasini | Ha | Hammasini |
+
+Aniq ruxsat modellari platformaga qarab farq qiladi. Sanity rolga asoslangan kirishdan foydalanadi. Contentful'da space darajasidagi rollar bor. Strapi'da batafsil RBAC mavjud.
+
+---
+
+## Platformalar taqqoslash
+
+| Xususiyat | Sanity | Contentful | Strapi |
 |---------|--------|------------|--------|
-| Hosting | Cloud (managed) | Cloud (managed) | Self-hosted or Cloud |
-| Query Language | GROQ | REST / GraphQL | REST / GraphQL |
-| Free Tier | Generous | Limited | Open source (free) |
-| Real-time Collab | Yes (built-in) | Limited | No |
-| Best For | Developer flexibility | Enterprise multi-locale | Budget / self-hosted |
-| Content Modeling | Schema-as-code | Web UI | Web UI or code |
-| Media Handling | Built-in DAM | Built-in | Plugin-based |
+| Hosting | Cloud (boshqariladigan) | Cloud (boshqariladigan) | O'z serveringizda yoki Cloud |
+| So'rov tili | GROQ | REST / GraphQL | REST / GraphQL |
+| Bepul tarif | Saxiy | Cheklangan | Ochiq manba (bepul) |
+| Real vaqtli hamkorlik | Ha (o'rnatilgan) | Cheklangan | Yo'q |
+| Eng mos | Dasturchi moslashuvchanligi | Enterprise ko'p-lokalli | Byudjet / self-hosted |
+| Kontent modellashtirish | Schema-as-code | Web UI | Web UI yoki kod |
+| Media bilan ishlash | O'rnatilgan DAM | O'rnatilgan | Plagin asosida |
 
 ### Sanity
 
-**Strengths**: GROQ query language is powerful and flexible. Schema defined in code (version-controlled). Real-time collaborative editing. Portable Text for rich content. Generous free tier.
+**Kuchli tomonlari**: GROQ so'rov tili kuchli va moslashuvchan. Sxema kodda aniqlanadi (versiyalanadi). Real vaqtli hamkorlikdagi tahrirlash. Boy kontent uchun Portable Text. Saxiy bepul tarif.
 
-**Considerations**: Steeper learning curve for non-developers. Studio customization requires React knowledge. Vendor lock-in on GROQ queries.
+**E'tiborga olinadigan jihatlar**: Dasturchi bo'lmaganlar uchun o'rganish egri chizig'i keskinroq. Studio'ni moslashtirish React bilimini talab qiladi. GROQ so'rovlarida vendor lock-in.
 
-**Marketing fit**: Best when developers and marketers collaborate closely. Strong for content-heavy sites with complex models.
+**Marketingga mosligi**: Dasturchilar va marketologlar yaqin hamkorlik qilganda eng yaxshi. Murakkab modelli, kontentga boy saytlar uchun kuchli.
 
 ### Contentful
 
-**Strengths**: Mature enterprise platform. Excellent multi-locale support. Strong ecosystem of integrations. Composable content with Studio. Well-documented APIs.
+**Kuchli tomonlari**: Yetuk enterprise platforma. Ajoyib ko'p-lokal qo'llab-quvvatlash. Integratsiyalarning kuchli ekotizimi. Studio bilan kompozitsion kontent. Yaxshi hujjatlangan API'lar.
 
-**Considerations**: Pricing scales with content types and locales. Two separate APIs (Delivery and Management). Rate limits can be tight on lower plans.
+**E'tiborga olinadigan jihatlar**: Narx kontent turlari va lokallar bilan o'sadi. Ikkita alohida API (Delivery va Management). Quyi tariflarda rate limit'lar tor bo'lishi mumkin.
 
-**Marketing fit**: Best for enterprises with multi-market content needs. Good when you need established vendor reliability.
+**Marketingga mosligi**: Ko'p bozorli kontent kerak bo'lgan enterprise'lar uchun eng yaxshi. Tasdiqlangan vendor ishonchliligi kerak bo'lganda yaxshi.
 
 ### Strapi
 
-**Strengths**: Open source, self-hosted option. Full control over data. No per-seat pricing. Customizable admin panel. Plugin ecosystem. REST by default, GraphQL via plugin.
+**Kuchli tomonlari**: Ochiq manba, self-hosted imkoniyati. Ma'lumotlar ustidan to'liq nazorat. O'rindiq (per-seat) uchun to'lov yo'q. Moslashtiriladigan admin panel. Plagin ekotizimi. Standart REST, plagin orqali GraphQL.
 
-**Considerations**: Self-hosting means you handle infrastructure. Smaller ecosystem than Sanity/Contentful. V5 migration can be significant from V4.
+**E'tiborga olinadigan jihatlar**: Self-hosting infratuzilmani o'zingiz boshqarishingizni anglatadi. Ekotizimi Sanity/Contentful'dan kichikroq. V4 dan V5 ga o'tish sezilarli bo'lishi mumkin.
 
-**Marketing fit**: Best for teams with DevOps capability who want full control and no vendor lock-in. Good for budget-conscious projects.
+**Marketingga mosligi**: To'liq nazorat va vendor lock-in'siz xohlaydigan, DevOps imkoniyatiga ega jamoalar uchun eng yaxshi. Byudjetni tejaydigan loyihalar uchun yaxshi.
 
-### Others Worth Knowing
+### Boshqa e'tiborga loyiq variantlar
 
-- **Hygraph** — GraphQL-native, strong for federation and multi-source content
-- **Keystatic** — Git-based, good for developer-content hybrid workflows
-- **Payload** — TypeScript-first, self-hosted, code-configured like Sanity
-- **Builder.io** — Visual editor with headless backend, good for non-technical marketers
-- **Prismic** — Slice-based content modeling, strong Next.js integration
+- **Hygraph** — GraphQL-native, federatsiya va ko'p manbali kontent uchun kuchli
+- **Keystatic** — Git asosida, dasturchi-kontent gibrid ish jarayonlari uchun yaxshi
+- **Payload** — TypeScript-first, self-hosted, Sanity kabi kod orqali sozlanadi
+- **Builder.io** — Headless backend'li vizual muharrir, texnik bo'lmagan marketologlar uchun yaxshi
+- **Prismic** — Slice asosidagi kontent modellashtirish, Next.js bilan kuchli integratsiya
 
 ---
 
-## Integration with Marketing Skills
+## Marketing skilllari bilan integratsiya
 
 ### Programmatic SEO
 
-Use CMS as the data source for programmatic pages. Store structured data (FAQs, comparisons, city pages) as content types and generate pages from queries. See **programmatic-seo** skill.
+CMS'ni programmatic sahifalar uchun ma'lumot manbai sifatida ishlating. Tuzilgan ma'lumotlarni (FAQ'lar, taqqoslashlar, shahar sahifalari) kontent turlari sifatida saqlang va so'rovlardan sahifalar yarating. **programmatic-seo** skillga qarang.
 
 ### Copywriting
 
-CMS content models enforce consistent structure. Define fields that match your copy frameworks (headline, subheadline, social proof, CTA). See **copywriting** skill.
+CMS kontent modellari izchil tuzilmani majbur qiladi. Copy freymvorklaringizga mos maydonlarni belgilang (sarlavha, sub-sarlavha, ijtimoiy isbot, CTA). **copywriting** skillga qarang.
 
-### Site Architecture
+### Sayt arxitekturasi
 
-URL structure, navigation hierarchy, and internal linking all depend on how content is organized in the CMS. Plan your content model and site architecture together. See **site-architecture** skill.
+URL tuzilmasi, navigatsiya ierarxiyasi va ichki bog'lanish — barchasi kontent CMS'da qanday tashkil etilganiga bog'liq. Kontent modeli va sayt arxitekturasini birgalikda rejalang. **site-architecture** skillga qarang.
 
-### Email Sequences
+### Email ketma-ketliklari
 
-Pull CMS content into email templates for consistent messaging across web and email. Case studies, testimonials, and blog posts can feed email nurture sequences. See **emails** skill.
-
----
-
-## Implementation Checklist
-
-- [ ] Define content types based on page types and reusable blocks
-- [ ] Add SEO fields to every page-level content type
-- [ ] Set up preview/draft mode in your frontend
-- [ ] Configure roles and permissions for your team
-- [ ] Create sample content for each type before building frontend
-- [ ] Set up webhook notifications for content changes (rebuild triggers)
-- [ ] Document content guidelines for editors (field descriptions, character limits)
-- [ ] Test content delivery performance (CDN, caching, ISR)
-- [ ] Plan migration strategy if moving from existing CMS
+Veb va email bo'ylab izchil xabar uchun CMS kontentini email shablonlariga torting. Keyslar, testimoniallar va blog postlar email nurture ketma-ketliklarini oziqlantirishi mumkin. **emails** skillga qarang.
 
 ---
 
-## Relevant Integration Guides
+## Joriy qilish cheklisti
 
-- [Sanity](../../../tools/integrations/sanity.md) — GROQ queries, mutations, CLI
-- [Contentful](../../../tools/integrations/contentful.md) — Delivery/Management APIs, publishing
-- [Strapi](../../../tools/integrations/strapi.md) — REST CRUD, filters, document API
+- [ ] Kontent turlarini sahifa turlari va qayta ishlatiladigan bloklar asosida belgilang
+- [ ] Har bir sahifa darajasidagi kontent turiga SEO maydonlarini qo'shing
+- [ ] Frontend'ingizda preview/qoralama rejimini sozlang
+- [ ] Jamoangiz uchun rollar va ruxsatlarni sozlang
+- [ ] Frontend qurishdan oldin har bir tur uchun namunaviy kontent yarating
+- [ ] Kontent o'zgarishlari uchun webhook bildirishnomalarini sozlang (qayta qurish triggerlari)
+- [ ] Muharrirlar uchun kontent yo'riqnomalarini hujjatlashtiring (maydon tavsiflari, belgi limitlari)
+- [ ] Kontent yetkazib berish unumdorligini sinang (CDN, keshlash, ISR)
+- [ ] Mavjud CMS'dan ko'chirilsa, migratsiya strategiyasini rejalang
+
+---
+
+## Tegishli integratsiya qo'llanmalari
+
+- [Sanity](../../../tools/integrations/sanity.md) — GROQ so'rovlari, mutatsiyalar, CLI
+- [Contentful](../../../tools/integrations/contentful.md) — Delivery/Management API'lar, nashr qilish
+- [Strapi](../../../tools/integrations/strapi.md) — REST CRUD, filtrlar, document API
