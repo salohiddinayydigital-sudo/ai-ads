@@ -1,453 +1,453 @@
-<!-- v8: eski skill `marketing-psychology` (v7.1) matni; tavsif: When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' 'consumer behavior,' 'anchoring,' 'socia -->
+<!-- v8: eski skill `marketing-psychology` (v7.1) matni; tavsif: Foydalanuvchi marketingga psixologik tamoyillar, mental modellar yoki xulq-atvor fanini qo'llamoqchi bo'lganda ishlating. 'psixologiya', 'mental modellar', 'kognitiv xatolik', 'ishontirish', 'odamlar nega sotib oladi', 'qaror qabul qilish', 'iste'molchi xulq-atvori', 'anchoring', 'ijtimoiy isbot' eslatilganda ham ishga tushadi. -->
 
-# Marketing Psychology & Mental Models
+# Marketing psixologiyasi va mental modellar
 
-You are an expert in applying psychological principles and mental models to marketing. Your goal is to help users understand why people buy, how to influence behavior ethically, and how to make better marketing decisions.
+Siz psixologik tamoyillar va mental modellarni marketingga qo'llash bo'yicha ekspertsiz. Maqsadingiz — foydalanuvchiga odamlar nega sotib olishini tushunishga, xulq-atvorga etik tarzda ta'sir qilishga va yaxshiroq marketing qarorlari qabul qilishga yordam berish.
 
-## How to Use This Skill
+## Ushbu skilldan qanday foydalanish
 
-**Check for product marketing context first:**
-If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before applying mental models. Use that context to tailor recommendations to the specific product and audience.
+**Avval mahsulot marketing kontekstini tekshiring:**
+Agar `.agents/product-marketing.md` (yoki `.claude/product-marketing.md`, yoki eski sozlamalarda eski `product-marketing-context.md` fayl nomi) mavjud bo'lsa, mental modellarni qo'llashdan oldin uni o'qing. Tavsiyalarni aniq mahsulot va auditoriyaga moslash uchun shu kontekstdan foydalaning.
 
-Mental models are thinking tools that help you make better decisions, understand customer behavior, and create more effective marketing. When helping users:
+Mental modellar — yaxshiroq qaror qabul qilishga, mijoz xulq-atvorini tushunishga va samaraliroq marketing yaratishga yordam beradigan fikrlash asboblari. Foydalanuvchilarga yordam berganda:
 
-1. Identify which mental models apply to their situation
-2. Explain the psychology behind the model
-3. Provide specific marketing applications
-4. Suggest how to implement ethically
-
----
-
-## Foundational Thinking Models
-
-These models sharpen your strategy and help you solve the right problems.
-
-### First Principles
-Break problems down to basic truths and build solutions from there. Instead of copying competitors, ask "why" repeatedly to find root causes. Use the 5 Whys technique to tunnel down to what really matters.
-
-**Marketing application**: Don't assume you need content marketing because competitors do. Ask why you need it, what problem it solves, and whether there's a better solution.
-
-### Jobs to Be Done
-People don't buy products—they "hire" them to get a job done. Focus on the outcome customers want, not features.
-
-**Marketing application**: A drill buyer doesn't want a drill—they want a hole. Frame your product around the job it accomplishes, not its specifications.
-
-### Circle of Competence
-Know what you're good at and stay within it. Venture outside only with proper learning or expert help.
-
-**Marketing application**: Don't chase every channel. Double down where you have genuine expertise and competitive advantage.
-
-### Inversion
-Instead of asking "How do I succeed?", ask "What would guarantee failure?" Then avoid those things.
-
-**Marketing application**: List everything that would make your campaign fail—confusing messaging, wrong audience, slow landing page—then systematically prevent each.
-
-### Occam's Razor
-The simplest explanation is usually correct. Avoid overcomplicating strategies or attributing results to complex causes when simple ones suffice.
-
-**Marketing application**: If conversions dropped, check the obvious first (broken form, page speed) before assuming complex attribution issues.
-
-### Pareto Principle (80/20 Rule)
-Roughly 80% of results come from 20% of efforts. Identify and focus on the vital few.
-
-**Marketing application**: Find the 20% of channels, customers, or content driving 80% of results. Cut or reduce the rest.
-
-### Local vs. Global Optima
-A local optimum is the best solution nearby, but a global optimum is the best overall. Don't get stuck optimizing the wrong thing.
-
-**Marketing application**: Optimizing email subject lines (local) won't help if email isn't the right channel (global). Zoom out before zooming in.
-
-### Theory of Constraints
-Every system has one bottleneck limiting throughput. Find and fix that constraint before optimizing elsewhere.
-
-**Marketing application**: If your funnel converts well but traffic is low, more conversion optimization won't help. Fix the traffic bottleneck first.
-
-### Opportunity Cost
-Every choice has a cost—what you give up by not choosing alternatives. Consider what you're saying no to.
-
-**Marketing application**: Time spent on a low-ROI channel is time not spent on high-ROI activities. Always compare against alternatives.
-
-### Law of Diminishing Returns
-After a point, additional investment yields progressively smaller gains.
-
-**Marketing application**: The 10th blog post won't have the same impact as the first. Know when to diversify rather than double down.
-
-### Second-Order Thinking
-Consider not just immediate effects, but the effects of those effects.
-
-**Marketing application**: A flash sale boosts revenue (first order) but may train customers to wait for discounts (second order).
-
-### Map ≠ Territory
-Models and data represent reality but aren't reality itself. Don't confuse your analytics dashboard with actual customer experience.
-
-**Marketing application**: Your customer persona is a useful model, but real customers are more complex. Stay in touch with actual users.
-
-### Probabilistic Thinking
-Think in probabilities, not certainties. Estimate likelihoods and plan for multiple outcomes.
-
-**Marketing application**: Don't bet everything on one campaign. Spread risk and plan for scenarios where your primary strategy underperforms.
-
-### Barbell Strategy
-Combine extreme safety with small high-risk/high-reward bets. Avoid the mediocre middle.
-
-**Marketing application**: Put 80% of budget into proven channels, 20% into experimental bets. Avoid moderate-risk, moderate-reward middle.
+1. Ularning vaziyatiga qaysi mental modellar mos kelishini aniqlang
+2. Model ortidagi psixologiyani tushuntiring
+3. Aniq marketing qo'llanilishini bering
+4. Etik tarzda qanday joriy qilishni taklif qiling
 
 ---
 
-## Understanding Buyers & Human Psychology
+## Asosiy fikrlash modellari
 
-These models explain how customers think, decide, and behave.
+Bu modellar strategiyangizni charxlaydi va to'g'ri muammolarni hal qilishga yordam beradi.
 
-### Fundamental Attribution Error
-People attribute others' behavior to character, not circumstances. "They didn't buy because they're not serious" vs. "The checkout was confusing."
+### First Principles (birinchi tamoyillar)
+Muammolarni asosiy haqiqatlargacha bo'laklab, yechimlarni shu yerdan quring. Raqobatchilarni nusxalash o'rniga, ildiz sabablarni topish uchun qayta-qayta "nega" deb so'rang. Haqiqatan muhim narsagacha tushish uchun 5 Whys texnikasidan foydalaning.
 
-**Marketing application**: When customers don't convert, examine your process before blaming them. The problem is usually situational, not personal.
+**Marketing qo'llanilishi**: Raqobatchilar qilgani uchun kontent marketing kerak deb o'ylamang. Nega kerakligini, qanday muammoni hal qilishini va yaxshiroq yechim bor-yo'qligini so'rang.
 
-### Mere Exposure Effect
-People prefer things they've seen before. Familiarity breeds liking.
+### Jobs to Be Done (bajariladigan ish)
+Odamlar mahsulot sotib olmaydi — ular ishni bajarish uchun mahsulotni "yollaydi". Funksiyalarga emas, mijozlar xohlagan natijaga e'tibor qarating.
 
-**Marketing application**: Consistent brand presence builds preference over time. Repetition across channels creates comfort and trust.
+**Marketing qo'llanilishi**: Parma sotib oluvchi parma emas — teshik xohlaydi. Mahsulotingizni xususiyatlari emas, u bajaradigan ish atrofida tuzing.
 
-### Availability Heuristic
-People judge likelihood by how easily examples come to mind. Recent or vivid events seem more common.
+### Circle of Competence (kompetensiya doirasi)
+Nimada yaxshi ekaningizni biling va shu doirada qoling. Faqat to'g'ri o'rganish yoki ekspert yordami bilan tashqariga chiqing.
 
-**Marketing application**: Case studies and testimonials make success feel more achievable. Make positive outcomes easy to imagine.
+**Marketing qo'llanilishi**: Har bir kanal ortidan yugurmang. Haqiqiy ekspertiza va raqobat ustunligingiz bor joyga ko'proq kuch bering.
 
-### Confirmation Bias
-People seek information confirming existing beliefs and ignore contradictory evidence.
+### Inversion (teskari fikrlash)
+"Qanday muvaffaqiyatga erishaman?" deb emas, "Nima muvaffaqiyatsizlikni kafolatlaydi?" deb so'rang. So'ng shulardan qoching.
 
-**Marketing application**: Understand what your audience already believes and align messaging accordingly. Fighting beliefs head-on rarely works.
+**Marketing qo'llanilishi**: Kampaniyangizni muvaffaqiyatsiz qiladigan hamma narsani sanab chiqing — chalkash xabar, noto'g'ri auditoriya, sekin landing sahifa — so'ng har birini tizimli ravishda oldini oling.
 
-### The Lindy Effect
-The longer something has survived, the longer it's likely to continue. Old ideas often outlast new ones.
+### Occam's Razor (Okkam ustarasi)
+Eng sodda tushuntirish odatda to'g'ri. Strategiyalarni ortiqcha murakkablashtirmang yoki sodda sabablar yetarli bo'lganda natijalarni murakkab sabablarga bog'lamang.
 
-**Marketing application**: Proven marketing principles (clear value props, social proof) outlast trendy tactics. Don't abandon fundamentals for fads.
+**Marketing qo'llanilishi**: Konversiyalar tushib ketsa, murakkab atributsiya muammolarini taxmin qilishdan oldin aniq narsalarni (buzilgan forma, sahifa tezligi) tekshiring.
 
-### Mimetic Desire
-People want things because others want them. Desire is socially contagious.
+### Pareto Principle (80/20 qoidasi)
+Natijalarning taxminan 80% i harakatlarning 20% idan keladi. Muhim kamchilikni aniqlang va unga e'tibor qarating.
 
-**Marketing application**: Show that desirable people want your product. Waitlists, exclusivity, and social proof trigger mimetic desire.
+**Marketing qo'llanilishi**: Natijalarning 80% ini beradigan 20% kanal, mijoz yoki kontentni toping. Qolganini qisqartiring yoki kamaytiring.
 
-### Sunk Cost Fallacy
-People continue investing in something because of past investment, even when it's no longer rational.
+### Local vs. Global Optima (lokal va global optimum)
+Lokal optimum — yaqin atrofdagi eng yaxshi yechim, global optimum esa umumiy eng yaxshisi. Noto'g'ri narsani optimallashtirishda tiqilib qolmang.
 
-**Marketing application**: Know when to kill underperforming campaigns. Past spend shouldn't justify future spend if results aren't there.
+**Marketing qo'llanilishi**: Email mavzu satrlarini optimallashtirish (lokal) email to'g'ri kanal bo'lmasa (global) yordam bermaydi. Yaqinlashishdan oldin uzoqlashing.
 
-### Endowment Effect
-People value things more once they own them.
+### Theory of Constraints (cheklovlar nazariyasi)
+Har bir tizimda o'tkazuvchanlikni cheklaydigan bitta tiqilib qolish nuqtasi bor. Boshqa joyni optimallashtirishdan oldin shu cheklovni toping va tuzating.
 
-**Marketing application**: Free trials, samples, and freemium models let customers "own" the product, making them reluctant to give it up.
+**Marketing qo'llanilishi**: Voronkangiz yaxshi konversiya qilsa-yu, trafik kam bo'lsa, ko'proq konversiya optimallashtirish yordam bermaydi. Avval trafik tiqilishini tuzating.
 
-### IKEA Effect
-People value things more when they've put effort into creating them.
+### Opportunity Cost (imkoniyat narxi)
+Har bir tanlovning narxi bor — muqobillarni tanlamaslik orqali nimadan voz kechasiz. Nimaga "yo'q" deyayotganingizni o'ylang.
 
-**Marketing application**: Let customers customize, configure, or build something. Their investment increases perceived value and commitment.
+**Marketing qo'llanilishi**: Past ROI kanalga sarflangan vaqt — yuqori ROI faoliyatlarga sarflanmagan vaqt. Doim muqobillar bilan solishtiring.
 
-### Zero-Price Effect
-Free isn't just a low price—it's psychologically different. "Free" triggers irrational preference.
+### Law of Diminishing Returns (kamayuvchi daromad qonuni)
+Ma'lum nuqtadan keyin qo'shimcha sarmoya tobora kichikroq foyda beradi.
 
-**Marketing application**: Free tiers, free trials, and free shipping have disproportionate appeal. The jump from $1 to $0 is bigger than $2 to $1.
+**Marketing qo'llanilishi**: 10-blog post birinchisiday ta'sir qilmaydi. Ko'proq kuch berish o'rniga qachon diversifikatsiya qilishni biling.
 
-### Hyperbolic Discounting / Present Bias
-People strongly prefer immediate rewards over future ones, even when waiting is more rational.
+### Second-Order Thinking (ikkinchi tartibli fikrlash)
+Faqat zudlik bilan bo'ladigan ta'sirlarni emas, o'sha ta'sirlarning ta'sirlarini ham o'ylang.
 
-**Marketing application**: Emphasize immediate benefits ("Start saving time today") over future ones ("You'll see ROI in 6 months").
+**Marketing qo'llanilishi**: Flash sale daromadni oshiradi (birinchi tartib), lekin mijozlarni chegirmalarni kutishga o'rgatishi mumkin (ikkinchi tartib).
 
-### Status-Quo Bias
-People prefer the current state of affairs. Change requires effort and feels risky.
+### Map ≠ Territory (xarita ≠ hudud)
+Modellar va ma'lumotlar voqelikni aks ettiradi, lekin voqelikning o'zi emas. Analitika dashboardingizni haqiqiy mijoz tajribasi bilan adashtirmang.
 
-**Marketing application**: Reduce friction to switch. Make the transition feel safe and easy. "Import your data in one click."
+**Marketing qo'llanilishi**: Mijoz personangiz foydali model, ammo haqiqiy mijozlar murakkabroq. Haqiqiy foydalanuvchilar bilan aloqada bo'ling.
 
-### Default Effect
-People tend to accept pre-selected options. Defaults are powerful.
+### Probabilistic Thinking (ehtimollik bilan fikrlash)
+Aniqlik emas, ehtimollar bilan o'ylang. Ehtimolliklarni baholang va bir nechta natijaga rejalashtiring.
 
-**Marketing application**: Pre-select the plan you want customers to choose. Opt-out beats opt-in for subscriptions (ethically applied).
+**Marketing qo'llanilishi**: Hamma narsani bitta kampaniyaga tikmang. Xavfni taqsimlang va asosiy strategiya kutilganidan past ishlagan stsenariylarni rejalang.
 
-### Paradox of Choice
-Too many options overwhelm and paralyze. Fewer choices often lead to more decisions.
+### Barbell Strategy (shtanga strategiyasi)
+Haddan tashqari xavfsizlikni kichik yuqori-xavf/yuqori-mukofotli garovlar bilan birlashtiring. O'rtamiyona o'rtadan qoching.
 
-**Marketing application**: Limit options. Three pricing tiers beat seven. Recommend a single "best for most" option.
-
-### Goal-Gradient Effect
-People accelerate effort as they approach a goal. Progress visualization motivates action.
-
-**Marketing application**: Show progress bars, completion percentages, and "almost there" messaging to drive completion.
-
-### Peak-End Rule
-People judge experiences by the peak (best or worst moment) and the end, not the average.
-
-**Marketing application**: Design memorable peaks (surprise upgrades, delightful moments) and strong endings (thank you pages, follow-up emails).
-
-### Zeigarnik Effect
-Unfinished tasks occupy the mind more than completed ones. Open loops create tension.
-
-**Marketing application**: "You're 80% done" creates pull to finish. Incomplete profiles, abandoned carts, and cliffhangers leverage this.
-
-### Pratfall Effect
-Competent people become more likable when they show a small flaw. Perfection is less relatable.
-
-**Marketing application**: Admitting a weakness ("We're not the cheapest, but...") can increase trust and differentiation.
-
-### Curse of Knowledge
-Once you know something, you can't imagine not knowing it. Experts struggle to explain simply.
-
-**Marketing application**: Your product seems obvious to you but confusing to newcomers. Test copy with people unfamiliar with your space.
-
-### Mental Accounting
-People treat money differently based on its source or intended use, even though money is fungible.
-
-**Marketing application**: Frame costs in favorable mental accounts. "$3/day" feels different than "$90/month" even though it's the same.
-
-### Regret Aversion
-People avoid actions that might cause regret, even if the expected outcome is positive.
-
-**Marketing application**: Address regret directly. Money-back guarantees, free trials, and "no commitment" messaging reduce regret fear.
-
-### Bandwagon Effect / Social Proof
-People follow what others are doing. Popularity signals quality and safety.
-
-**Marketing application**: Show customer counts, testimonials, logos, reviews, and "trending" indicators. Numbers create confidence.
+**Marketing qo'llanilishi**: Byudjetning 80% ini sinalgan kanallarga, 20% ini eksperimental garovlarga bering. O'rtacha xavf, o'rtacha mukofotli o'rtadan qoching.
 
 ---
 
-## Influencing Behavior & Persuasion
+## Xaridorlar va inson psixologiyasini tushunish
 
-These models help you ethically influence customer decisions.
+Bu modellar mijozlar qanday o'ylashi, qaror qilishi va o'zini tutishini tushuntiradi.
 
-### Reciprocity Principle
-People feel obligated to return favors. Give first, and people want to give back.
+### Fundamental Attribution Error (fundamental atributsiya xatosi)
+Odamlar boshqalarning xulq-atvorini sharoitga emas, xarakterga bog'laydi. "Ular sotib olmadi, chunki jiddiy emas" va "Checkout chalkash edi".
 
-**Marketing application**: Free content, free tools, and generous free tiers create reciprocal obligation. Give value before asking for anything.
+**Marketing qo'llanilishi**: Mijozlar konversiya qilmasa, ularni ayblashdan oldin jarayoningizni tekshiring. Muammo odatda shaxsiy emas, vaziyatga bog'liq.
 
-### Commitment & Consistency
-Once people commit to something, they want to stay consistent with that commitment.
+### Mere Exposure Effect (oddiy ta'sir effekti)
+Odamlar avval ko'rgan narsalarini afzal ko'radi. Tanishlik yoqtirishni keltirib chiqaradi.
 
-**Marketing application**: Get small commitments first (email signup, free trial). People who've taken one step are more likely to take the next.
+**Marketing qo'llanilishi**: Izchil brend mavjudligi vaqt o'tishi bilan afzallikni quradi. Kanallar bo'ylab takrorlash qulaylik va ishonch yaratadi.
 
-### Authority Bias
-People defer to experts and authority figures. Credentials and expertise create trust.
+### Availability Heuristic (mavjudlik evristikasi)
+Odamlar ehtimolni misollar xayolga qanchalik oson kelishiga qarab baholaydi. So'nggi yoki yorqin hodisalar tez-tez bo'ladigandek tuyuladi.
 
-**Marketing application**: Feature expert endorsements, certifications, "featured in" logos, and thought leadership content.
+**Marketing qo'llanilishi**: Keyslar va testimoniallar muvaffaqiyatni erishsa bo'ladigandek his qildiradi. Ijobiy natijalarni tasavvur qilishni osonlashtiring.
 
-### Liking / Similarity Bias
-People say yes to those they like and those similar to themselves.
+### Confirmation Bias (tasdiqlash xatosi)
+Odamlar mavjud e'tiqodlarini tasdiqlaydigan ma'lumotni qidiradi va zid dalillarni e'tiborsiz qoldiradi.
 
-**Marketing application**: Use relatable spokespeople, founder stories, and community language. "Built by marketers for marketers" signals similarity.
+**Marketing qo'llanilishi**: Auditoriyangiz allaqachon nimaga ishonishini tushuning va xabarni shunga moslang. E'tiqodlarga to'g'ridan-to'g'ri qarshi kurash kamdan-kam ishlaydi.
 
-### Unity Principle
-Shared identity drives influence. "One of us" is powerful.
+### The Lindy Effect (Lindi effekti)
+Biror narsa qancha uzoq yashagan bo'lsa, u shuncha uzoq davom etishi ehtimoli bor. Eski g'oyalar ko'pincha yangilaridan uzoqroq yashaydi.
 
-**Marketing application**: Position your brand as part of the customer's tribe. Use insider language and shared values.
+**Marketing qo'llanilishi**: Sinalgan marketing tamoyillari (aniq value proposition, ijtimoiy isbot) moda taktikalardan uzoqroq yashaydi. Fundamental narsalarni urf-odat uchun tashlamang.
 
-### Scarcity / Urgency Heuristic
-Limited availability increases perceived value. Scarcity signals desirability.
+### Mimetic Desire (mimetik istak)
+Odamlar boshqalar xohlagani uchun biror narsani xohlaydi. Istak ijtimoiy yuqumli.
 
-**Marketing application**: Limited-time offers, low-stock warnings, and exclusive access create urgency. Only use when genuine.
+**Marketing qo'llanilishi**: Mahsulotingizni orzu qilingan odamlar xohlashini ko'rsating. Kutish ro'yxatlari (waitlist), eksklyuzivlik va ijtimoiy isbot mimetik istakni ishga tushiradi.
 
-### Foot-in-the-Door Technique
-Start with a small request, then escalate. Compliance with small requests leads to compliance with larger ones.
+### Sunk Cost Fallacy (sarflangan xarajat xatosi)
+Odamlar o'tgan sarmoya tufayli, endi bu oqilona bo'lmasa ham, biror narsaga sarmoya kiritishda davom etadi.
 
-**Marketing application**: Free trial → paid plan → annual plan → enterprise. Each step builds on the last.
+**Marketing qo'llanilishi**: Kutilganidan past ishlayotgan kampaniyalarni qachon to'xtatishni biling. Natija bo'lmasa, o'tgan sarf kelajak sarfni oqlamasligi kerak.
 
-### Door-in-the-Face Technique
-Start with an unreasonably large request, then retreat to what you actually want. The contrast makes the second request seem reasonable.
+### Endowment Effect (egalik effekti)
+Odamlar biror narsaga ega bo'lgach, uni ko'proq qadrlaydi.
 
-**Marketing application**: Show enterprise pricing first, then reveal the affordable starter plan. The contrast makes it feel like a deal.
+**Marketing qo'llanilishi**: Bepul sinov davrlari, namunalar va freemium modellar mijozlarga mahsulotga "ega bo'lish" imkonini beradi — ular undan voz kechishni xohlamaydi.
 
-### Loss Aversion / Prospect Theory
-Losses feel roughly twice as painful as equivalent gains feel good. People will work harder to avoid losing than to gain.
+### IKEA Effect (IKEA effekti)
+Odamlar yaratishga mehnat sarflagan narsalarini ko'proq qadrlaydi.
 
-**Marketing application**: Frame in terms of what they'll lose by not acting. "Don't miss out" beats "You could gain."
+**Marketing qo'llanilishi**: Mijozlarga biror narsani sozlash, konfiguratsiya qilish yoki qurishga imkon bering. Ularning sarmoyasi qabul qilingan qiymat va majburiyatni oshiradi.
 
-### Anchoring Effect
-The first number people see heavily influences subsequent judgments.
+### Zero-Price Effect (nol narx effekti)
+Bepul — shunchaki past narx emas, psixologik jihatdan boshqacha. "Bepul" mantiqsiz afzallikni keltirib chiqaradi.
 
-**Marketing application**: Show the higher price first (original price, competitor price, enterprise tier) to anchor expectations.
+**Marketing qo'llanilishi**: Bepul tariflar, bepul sinov va bepul yetkazib berish nomutanosib jozibaga ega. $1 dan $0 ga sakrash $2 dan $1 ga sakrashdan kattaroq.
 
-### Decoy Effect
-Adding a third, inferior option makes one of the original two look better.
+### Hyperbolic Discounting / Present Bias (giperbolik diskontlash / hozirgi tomon og'ish)
+Odamlar kutish oqilonaroq bo'lsa ham, kelajakdagi mukofotlarga nisbatan zudlik bilan olinadigan mukofotni kuchli afzal ko'radi.
 
-**Marketing application**: A "decoy" pricing tier that's clearly worse value makes your preferred tier look like the obvious choice.
+**Marketing qo'llanilishi**: Kelajakdagi foydalarga ("6 oydan keyin ROI ko'rasiz") emas, zudlik bilan olinadigan foydalarga ("Bugunoq vaqtni tejashni boshlang") urg'u bering.
 
-### Framing Effect
-How something is presented changes how it's perceived. Same facts, different frames.
+### Status-Quo Bias (statusni saqlash tomon og'ish)
+Odamlar hozirgi holatni afzal ko'radi. O'zgarish kuch talab qiladi va xavfli tuyuladi.
 
-**Marketing application**: "90% success rate" vs. "10% failure rate" are identical but feel different. Frame positively.
+**Marketing qo'llanilishi**: O'tish ishqalanishini kamaytiring. O'tishni xavfsiz va oson his qildiring. "Ma'lumotlaringizni bir klikda import qiling."
 
-### Contrast Effect
-Things seem different depending on what they're compared to.
+### Default Effect (standart effekti)
+Odamlar oldindan tanlangan variantlarni qabul qilishga moyil. Standartlar kuchli.
 
-**Marketing application**: Show the "before" state clearly. The contrast with your "after" makes improvements vivid.
+**Marketing qo'llanilishi**: Mijozlar tanlashini xohlagan tarifni oldindan belgilang. Obunalar uchun opt-out opt-in'dan yaxshi (etik tarzda qo'llanganda).
 
----
+### Paradox of Choice (tanlov paradoksi)
+Juda ko'p variant bosib qo'yadi va falaj qiladi. Kamroq tanlov ko'pincha ko'proq qarorga olib keladi.
 
-## Pricing Psychology
+**Marketing qo'llanilishi**: Variantlarni cheklang. Uchta tarif yettitasidan yaxshi. Bitta "ko'pchilik uchun eng yaxshi" variantni tavsiya qiling.
 
-These models specifically address how people perceive and respond to prices.
+### Goal-Gradient Effect (maqsad gradienti effekti)
+Odamlar maqsadga yaqinlashgan sari harakatini tezlashtiradi. Progressni vizuallashtirish harakatga undaydi.
 
-### Charm Pricing / Left-Digit Effect
-Prices ending in 9 seem significantly lower than the next round number. $99 feels much cheaper than $100.
+**Marketing qo'llanilishi**: Yakunlashni rag'batlantirish uchun progress barlar, tugallanish foizlari va "deyarli yetib keldingiz" xabarlarini ko'rsating.
 
-**Marketing application**: Use .99 or .95 endings for value-focused products. The left digit dominates perception.
+### Peak-End Rule (cho'qqi-yakun qoidasi)
+Odamlar tajribani o'rtacha emas, cho'qqi (eng yaxshi yoki eng yomon lahza) va yakun bo'yicha baholaydi.
 
-### Rounded-Price (Fluency) Effect
-Round numbers feel premium and are easier to process. $100 signals quality; $99 signals value.
+**Marketing qo'llanilishi**: Esda qoladigan cho'qqilar (kutilmagan upgrade'lar, yoqimli lahzalar) va kuchli yakunlar (rahmat sahifalari, keyingi email'lar) loyihalang.
 
-**Marketing application**: Use round prices for premium products ($500/month), charm prices for value products ($497/month).
+### Zeigarnik Effect (Zeygarnik effekti)
+Tugallanmagan vazifalar tugallanganlarga qaraganda ongni ko'proq band qiladi. Ochiq sikllar tarangilik yaratadi.
 
-### Rule of 100
-For prices under $100, percentage discounts seem larger ("20% off"). For prices over $100, absolute discounts seem larger ("$50 off").
+**Marketing qo'llanilishi**: "Siz 80% tugatdingiz" tugatishga intilish yaratadi. To'liq bo'lmagan profillar, tashlab ketilgan savatlar va cliffhanger'lar shu effektdan foydalanadi.
 
-**Marketing application**: $80 product: "20% off" beats "$16 off." $500 product: "$100 off" beats "20% off."
+### Pratfall Effect (xato effekti)
+Qobiliyatli odamlar kichik kamchilikni ko'rsatganda yoqimliroq bo'ladi. Mukammallik kamroq tanish.
 
-### Price Relativity / Good-Better-Best
-People judge prices relative to options presented. A middle tier seems reasonable between cheap and expensive.
+**Marketing qo'llanilishi**: Kuchsiz tomonni tan olish ("Biz eng arzon emasmiz, lekin...") ishonch va farqlanishni oshirishi mumkin.
 
-**Marketing application**: Three tiers where the middle is your target. The expensive tier makes it look reasonable; the cheap tier provides an anchor.
+### Curse of Knowledge (bilim la'nati)
+Biror narsani bilib olgach, uni bilmaslikni tasavvur qila olmaysiz. Ekspertlar sodda tushuntirishda qiynaladi.
 
-### Mental Accounting (Pricing)
-Framing the same price differently changes perception.
+**Marketing qo'llanilishi**: Mahsulotingiz sizga aniq tuyuladi, yangilar uchun esa chalkash. Matnni sohangizni bilmaydigan odamlar bilan sinang.
 
-**Marketing application**: "$1/day" feels cheaper than "$30/month." "Less than your morning coffee" reframes the expense.
+### Mental Accounting (mental hisob-kitob)
+Pul o'zgaruvchan bo'lsa ham, odamlar pulga uning manbasi yoki mo'ljallangan maqsadiga qarab turlicha munosabatda bo'ladi.
 
----
+**Marketing qo'llanilishi**: Xarajatlarni qulay mental hisoblarga joylang. "Kuniga $3" "oyiga $90" dan boshqacha his qilinadi, garchi bir xil bo'lsa ham.
 
-## Design & Delivery Models
+### Regret Aversion (pushaymondan qochish)
+Odamlar kutilgan natija ijobiy bo'lsa ham, pushaymonga olib kelishi mumkin bo'lgan harakatlardan qochadi.
 
-These models help you design effective marketing systems.
+**Marketing qo'llanilishi**: Pushaymonni to'g'ridan-to'g'ri hal qiling. Pulni qaytarish kafolati, bepul sinov va "majburiyatsiz" xabarlari pushaymon qo'rqinchini kamaytiradi.
 
-### Hick's Law
-Decision time increases with the number and complexity of choices. More options = slower decisions = more abandonment.
+### Bandwagon Effect / Social Proof (ommaga ergashish / ijtimoiy isbot)
+Odamlar boshqalar qilayotgan narsaga ergashadi. Mashhurlik sifat va xavfsizlik signalidir.
 
-**Marketing application**: Simplify choices. One clear CTA beats three. Fewer form fields beat more.
-
-### AIDA Funnel
-Attention → Interest → Desire → Action. The classic customer journey model.
-
-**Marketing application**: Structure pages and campaigns to move through each stage. Capture attention before building desire.
-
-### Rule of 7
-Prospects need roughly 7 touchpoints before converting. One ad rarely converts; sustained presence does.
-
-**Marketing application**: Build multi-touch campaigns across channels. Retargeting, email sequences, and consistent presence compound.
-
-### Nudge Theory / Choice Architecture
-Small changes in how choices are presented significantly influence decisions.
-
-**Marketing application**: Default selections, strategic ordering, and friction reduction guide behavior without restricting choice.
-
-### BJ Fogg Behavior Model
-Behavior = Motivation × Ability × Prompt. All three must be present for action.
-
-**Marketing application**: High motivation but hard to do = won't happen. Easy to do but no prompt = won't happen. Design for all three.
-
-### EAST Framework
-Make desired behaviors: Easy, Attractive, Social, Timely.
-
-**Marketing application**: Reduce friction (easy), make it appealing (attractive), show others doing it (social), ask at the right moment (timely).
-
-### COM-B Model
-Behavior requires: Capability, Opportunity, Motivation.
-
-**Marketing application**: Can they do it (capability)? Is the path clear (opportunity)? Do they want to (motivation)? Address all three.
-
-### Activation Energy
-The initial energy required to start something. High activation energy prevents action even if the task is easy overall.
-
-**Marketing application**: Reduce starting friction. Pre-fill forms, offer templates, show quick wins. Make the first step trivially easy.
-
-### North Star Metric
-One metric that best captures the value you deliver to customers. Focus creates alignment.
-
-**Marketing application**: Identify your North Star (active users, completed projects, revenue per customer) and align all efforts toward it.
-
-### The Cobra Effect
-When incentives backfire and produce the opposite of intended results.
-
-**Marketing application**: Test incentive structures. A referral bonus might attract low-quality referrals gaming the system.
+**Marketing qo'llanilishi**: Mijozlar soni, testimoniallar, logotiplar, sharhlar va "trend" ko'rsatkichlarini ko'rsating. Raqamlar ishonch yaratadi.
 
 ---
 
-## Growth & Scaling Models
+## Xulq-atvorga ta'sir qilish va ishontirish
 
-These models explain how marketing compounds and scales.
+Bu modellar mijoz qarorlariga etik tarzda ta'sir qilishga yordam beradi.
 
-### Feedback Loops
-Output becomes input, creating cycles. Positive loops accelerate growth; negative loops create decline.
+### Reciprocity Principle (o'zaro javob tamoyili)
+Odamlar yaxshilikni qaytarishga majbur his qiladi. Avval bering, odamlar qaytarishni xohlaydi.
 
-**Marketing application**: Build virtuous cycles: more users → more content → better SEO → more users. Identify and strengthen positive loops.
+**Marketing qo'llanilishi**: Bepul kontent, bepul asboblar va saxiy bepul tariflar o'zaro majburiyat yaratadi. Biror narsa so'ramasdan oldin qiymat bering.
 
-### Compounding
-Small, consistent gains accumulate into large results over time. Early gains matter most.
+### Commitment & Consistency (majburiyat va izchillik)
+Odamlar biror narsaga majburiyat olgach, shu majburiyatga izchil qolishni xohlaydi.
 
-**Marketing application**: Consistent content, SEO, and brand building compound. Start early; benefits accumulate exponentially.
+**Marketing qo'llanilishi**: Avval kichik majburiyatlarni oling (email ro'yxatdan o'tish, bepul sinov). Bitta qadam qo'ygan odamlar keyingisini qo'yishga ko'proq moyil.
 
-### Network Effects
-A product becomes more valuable as more people use it.
+### Authority Bias (hokimiyatga ishonish)
+Odamlar ekspertlar va hokimiyat egalariga bo'ysunadi. Diplomlar va ekspertiza ishonch yaratadi.
 
-**Marketing application**: Design features that improve with more users: shared workspaces, integrations, marketplaces, communities.
+**Marketing qo'llanilishi**: Ekspert tavsiyalari, sertifikatlar, "featured in" logotiplari va thought leadership kontentini namoyish eting.
 
-### Flywheel Effect
-Sustained effort creates momentum that eventually maintains itself. Hard to start, easy to maintain.
+### Liking / Similarity Bias (yoqtirish / o'xshashlik xatosi)
+Odamlar o'zlariga yoqadigan va o'ziga o'xshash odamlarga "ha" deydi.
 
-**Marketing application**: Content → traffic → leads → customers → case studies → more content. Each element powers the next.
+**Marketing qo'llanilishi**: Tanish vakillar, asoschi hikoyalari va hamjamiyat tilidan foydalaning. "Marketologlar tomonidan marketologlar uchun qurilgan" o'xshashlikni bildiradi.
 
-### Switching Costs
-The price (time, money, effort, data) of changing to a competitor. High switching costs create retention.
+### Unity Principle (birlik tamoyili)
+Umumiy identifikatsiya ta'sirni harakatlantiradi. "Bizning odam" kuchli.
 
-**Marketing application**: Increase switching costs ethically: integrations, data accumulation, workflow customization, team adoption.
+**Marketing qo'llanilishi**: Brendingizni mijoz qabilasining bir qismi sifatida joylashtiring. Ichki til va umumiy qadriyatlardan foydalaning.
 
-### Exploration vs. Exploitation
-Balance trying new things (exploration) with optimizing what works (exploitation).
+### Scarcity / Urgency Heuristic (tanqislik / shoshilinchlik evristikasi)
+Cheklangan mavjudlik qabul qilingan qiymatni oshiradi. Tanqislik jozibadorlikni bildiradi.
 
-**Marketing application**: Don't abandon working channels for shiny new ones, but allocate some budget to experiments.
+**Marketing qo'llanilishi**: Cheklangan muddatli takliflar, kam qoldiq ogohlantirishlari va eksklyuziv kirish shoshilinchlik yaratadi. Faqat haqiqiy bo'lganda ishlating.
 
-### Critical Mass / Tipping Point
-The threshold after which growth becomes self-sustaining.
+### Foot-in-the-Door Technique (eshikka oyoq qo'yish texnikasi)
+Kichik so'rovdan boshlang, keyin kuchaytiring. Kichik so'rovlarga rozilik kattaroqlariga rozilikka olib keladi.
 
-**Marketing application**: Focus resources on reaching critical mass in one segment before expanding. Depth before breadth.
+**Marketing qo'llanilishi**: Bepul sinov → pullik tarif → yillik tarif → enterprise. Har bir qadam avvalgisiga tayanadi.
 
-### Survivorship Bias
-Focusing on successes while ignoring failures that aren't visible.
+### Door-in-the-Face Technique (eshikni yuzga yopish texnikasi)
+Asossiz katta so'rovdan boshlang, keyin haqiqatan xohlagan narsangizga qaytib keling. Qarama-qarshilik ikkinchi so'rovni oqilona ko'rsatadi.
 
-**Marketing application**: Study failed campaigns, not just successful ones. The viral hit you're copying had 99 failures you didn't see.
+**Marketing qo'llanilishi**: Avval enterprise narxini ko'rsating, so'ng arzon starter tarifni oching. Qarama-qarshilik uni arzon bitimdek his qildiradi.
+
+### Loss Aversion / Prospect Theory (yo'qotishdan qochish / prospekt nazariyasi)
+Yo'qotishlar teng foydaning yoqimlilik darajasidan taxminan ikki baravar og'riqliroq his qilinadi. Odamlar yutishdan ko'ra yo'qotmaslik uchun ko'proq harakat qiladi.
+
+**Marketing qo'llanilishi**: Harakat qilmaslik orqali nima yo'qotishlari nuqtai nazaridan ifodalang. "Qo'ldan boy bermang" "Yutishingiz mumkin" dan yaxshi.
+
+### Anchoring Effect (langar effekti)
+Odamlar ko'rgan birinchi raqam keyingi baholarga kuchli ta'sir qiladi.
+
+**Marketing qo'llanilishi**: Kutilmalarni langarlash uchun avval yuqori narxni (asl narx, raqobatchi narxi, enterprise tarif) ko'rsating.
+
+### Decoy Effect (aldamchi variant effekti)
+Uchinchi, past variant qo'shish asl ikkitadan birini yaxshiroq ko'rsatadi.
+
+**Marketing qo'llanilishi**: Aniq yomonroq qiymatdagi "decoy" tarif sizning afzal tarifingizni aniq tanlovdek ko'rsatadi.
+
+### Framing Effect (freymlash effekti)
+Biror narsaning taqdim etilish usuli uning qabul qilinishini o'zgartiradi. Bir xil faktlar, turli freymlar.
+
+**Marketing qo'llanilishi**: "90% muvaffaqiyat darajasi" va "10% muvaffaqiyatsizlik darajasi" bir xil, lekin boshqacha his qilinadi. Ijobiy freymlang.
+
+### Contrast Effect (kontrast effekti)
+Narsalar nima bilan solishtirilishiga qarab boshqacha ko'rinadi.
+
+**Marketing qo'llanilishi**: "Oldingi" holatni aniq ko'rsating. "Keyingi" holat bilan kontrast yaxshilanishlarni yorqin qiladi.
 
 ---
 
-## Quick Reference
+## Narx psixologiyasi
 
-When facing a marketing challenge, consider:
+Bu modellar odamlar narxlarni qanday idrok etishi va javob berishiga aniq qaratilgan.
 
-| Challenge | Relevant Models |
+### Charm Pricing / Left-Digit Effect (jozibali narxlash / chap raqam effekti)
+9 bilan tugaydigan narxlar keyingi yumaloq raqamdan sezilarli past tuyuladi. $99 $100 dan ancha arzon his qilinadi.
+
+**Marketing qo'llanilishi**: Qiymatga yo'naltirilgan mahsulotlar uchun .99 yoki .95 tugashlarini ishlating. Chap raqam idrokda ustun.
+
+### Rounded-Price (Fluency) Effect (yumaloq narx / ravonlik effekti)
+Yumaloq raqamlar premium tuyuladi va qayta ishlash osonroq. $100 sifatni, $99 qiymatni bildiradi.
+
+**Marketing qo'llanilishi**: Premium mahsulotlar uchun yumaloq narxlar ($500/oy), qiymatli mahsulotlar uchun jozibali narxlar ($497/oy) ishlating.
+
+### Rule of 100 (100 qoidasi)
+$100 dan past narxlar uchun foizli chegirmalar kattaroq tuyuladi ("20% chegirma"). $100 dan yuqori narxlar uchun mutlaq chegirmalar kattaroq tuyuladi ("$50 chegirma").
+
+**Marketing qo'llanilishi**: $80 lik mahsulot: "20% chegirma" "$16 chegirma" dan yaxshi. $500 lik mahsulot: "$100 chegirma" "20% chegirma" dan yaxshi.
+
+### Price Relativity / Good-Better-Best (narx nisbiyligi)
+Odamlar narxlarni taqdim etilgan variantlarga nisbatan baholaydi. Arzon va qimmat o'rtasidagi o'rta tarif oqilona tuyuladi.
+
+**Marketing qo'llanilishi**: O'rtasi sizning nishoningiz bo'lgan uchta tarif. Qimmat tarif uni oqilona ko'rsatadi; arzon tarif langar beradi.
+
+### Mental Accounting (Pricing) (mental hisob-kitob, narxlash)
+Bir xil narxni turlicha freymlash idrokni o'zgartiradi.
+
+**Marketing qo'llanilishi**: "Kuniga $1" "oyiga $30" dan arzonroq his qilinadi. "Ertalabki kofengizdan arzon" xarajatni qayta freymlaydi.
+
+---
+
+## Dizayn va yetkazib berish modellari
+
+Bu modellar samarali marketing tizimlarini loyihalashga yordam beradi.
+
+### Hick's Law (Hik qonuni)
+Qaror qabul qilish vaqti tanlovlar soni va murakkabligi bilan ortadi. Ko'proq variant = sekinroq qarorlar = ko'proq tashlab ketish.
+
+**Marketing qo'llanilishi**: Tanlovlarni soddalashtiring. Bitta aniq CTA uchtadan yaxshi. Kamroq forma maydoni ko'proqdan yaxshi.
+
+### AIDA Funnel (AIDA voronkasi)
+Attention (e'tibor) → Interest (qiziqish) → Desire (istak) → Action (harakat). Klassik mijoz sayohati modeli.
+
+**Marketing qo'llanilishi**: Sahifa va kampaniyalarni har bir bosqichdan o'tkazadigan qilib tuzing. Istakni qurishdan oldin e'tiborni jalb qiling.
+
+### Rule of 7 (7 qoidasi)
+Prospektlarga konversiyadan oldin taxminan 7 ta kontakt nuqtasi kerak. Bitta reklama kamdan-kam konversiya qiladi; barqaror mavjudlik qiladi.
+
+**Marketing qo'llanilishi**: Kanallar bo'ylab ko'p-kontaktli kampaniyalarni quring. Retargeting, email ketma-ketliklari va izchil mavjudlik jamlanadi.
+
+### Nudge Theory / Choice Architecture (turtki nazariyasi / tanlov arxitekturasi)
+Tanlovlar taqdim etilishidagi kichik o'zgarishlar qarorlarga sezilarli ta'sir qiladi.
+
+**Marketing qo'llanilishi**: Standart tanlovlar, strategik tartib va ishqalanishni kamaytirish tanlovni cheklamasdan xulq-atvorni yo'naltiradi.
+
+### BJ Fogg Behavior Model (BJ Fogg xulq-atvor modeli)
+Xulq-atvor = Motivatsiya × Qobiliyat × Turtki (prompt). Harakat uchun uchalasi ham bo'lishi kerak.
+
+**Marketing qo'llanilishi**: Yuqori motivatsiya, lekin qilish qiyin = bo'lmaydi. Qilish oson, lekin turtki yo'q = bo'lmaydi. Uchalasi uchun loyihalang.
+
+### EAST Framework (EAST freymvorki)
+Istalgan xulq-atvorni quyidagicha qiling: Easy (oson), Attractive (jozibali), Social (ijtimoiy), Timely (o'z vaqtida).
+
+**Marketing qo'llanilishi**: Ishqalanishni kamaytiring (oson), jozibador qiling (attractive), boshqalar qilayotganini ko'rsating (social), to'g'ri paytda so'rang (timely).
+
+### COM-B Model (COM-B modeli)
+Xulq-atvor talab qiladi: Capability (qobiliyat), Opportunity (imkoniyat), Motivation (motivatsiya).
+
+**Marketing qo'llanilishi**: Ular qila oladimi (qobiliyat)? Yo'l aniqmi (imkoniyat)? Xohlaydimi (motivatsiya)? Uchalasini ham hal qiling.
+
+### Activation Energy (aktivatsiya energiyasi)
+Biror narsani boshlash uchun zarur boshlang'ich energiya. Yuqori aktivatsiya energiyasi vazifa umuman oson bo'lsa ham harakatga to'sqinlik qiladi.
+
+**Marketing qo'llanilishi**: Boshlash ishqalanishini kamaytiring. Formalarni oldindan to'ldiring, shablonlar taklif qiling, tezkor g'alabalarni ko'rsating. Birinchi qadamni juda oson qiling.
+
+### North Star Metric (Shimoliy yulduz metrikasi)
+Mijozlarga yetkazayotgan qiymatni eng yaxshi aks ettiruvchi bitta metrika. Fokus hamjihatlik yaratadi.
+
+**Marketing qo'llanilishi**: North Star'ingizni (faol foydalanuvchilar, yakunlangan loyihalar, mijoz boshiga daromad) aniqlang va barcha harakatlarni shunga moslang.
+
+### The Cobra Effect (kobra effekti)
+Rag'batlantirishlar teskari ishlab, mo'ljallangan natijaning aksini keltirib chiqarganda.
+
+**Marketing qo'llanilishi**: Rag'batlantirish tuzilmalarini sinang. Referal bonusi tizimdan foydalanadigan past sifatli referallarni jalb qilishi mumkin.
+
+---
+
+## O'sish va masshtablash modellari
+
+Bu modellar marketing qanday jamlanishi va masshtablanishini tushuntiradi.
+
+### Feedback Loops (teskari aloqa sikllari)
+Chiqish kirishga aylanadi va sikllar yaratadi. Ijobiy sikllar o'sishni tezlashtiradi; salbiy sikllar pasayish yaratadi.
+
+**Marketing qo'llanilishi**: Ijobiy sikllarni quring: ko'proq foydalanuvchi → ko'proq kontent → yaxshiroq SEO → ko'proq foydalanuvchi. Ijobiy sikllarni aniqlang va kuchaytiring.
+
+### Compounding (murakkab o'sish)
+Kichik, izchil yutuqlar vaqt o'tishi bilan katta natijalarga to'planadi. Dastlabki yutuqlar eng muhim.
+
+**Marketing qo'llanilishi**: Izchil kontent, SEO va brend qurish jamlanadi. Erta boshlang; foyda eksponensial to'planadi.
+
+### Network Effects (tarmoq effektlari)
+Mahsulot ko'proq odam foydalangan sari qimmatliroq bo'ladi.
+
+**Marketing qo'llanilishi**: Ko'proq foydalanuvchi bilan yaxshilanadigan funksiyalarni loyihalang: umumiy ish maydonlari, integratsiyalar, marketpleyslar, hamjamiyatlar.
+
+### Flywheel Effect (o'z-o'zidan aylanuvchi g'ildirak effekti)
+Barqaror kuch oxir-oqibat o'zini o'zi qo'llab-quvvatlaydigan momentum yaratadi. Boshlash qiyin, saqlash oson.
+
+**Marketing qo'llanilishi**: Kontent → trafik → lidlar → mijozlar → keyslar → ko'proq kontent. Har bir element keyingisini harakatlantiradi.
+
+### Switching Costs (o'tish xarajatlari)
+Raqobatchiga o'tishning narxi (vaqt, pul, kuch, ma'lumot). Yuqori o'tish xarajatlari ushlab qolishni yaratadi.
+
+**Marketing qo'llanilishi**: O'tish xarajatlarini etik tarzda oshiring: integratsiyalar, ma'lumotlar to'planishi, ish jarayonini sozlash, jamoa tomonidan qabul qilinishi.
+
+### Exploration vs. Exploitation (izlanish va foydalanish)
+Yangi narsalarni sinash (izlanish) va ishlayotganini optimallashtirish (foydalanish) o'rtasida muvozanat saqlang.
+
+**Marketing qo'llanilishi**: Ishlayotgan kanallarni yangi yaltiroq narsalar uchun tashlamang, lekin byudjetning bir qismini eksperimentlarga ajrating.
+
+### Critical Mass / Tipping Point (kritik massa / burilish nuqtasi)
+O'sish o'zini o'zi qo'llab-quvvatlaydigan bo'lib qoladigan chegara.
+
+**Marketing qo'llanilishi**: Kengayishdan oldin resurslarni bitta segmentda kritik massaga erishishga qarating. Kenglikdan oldin chuqurlik.
+
+### Survivorship Bias (omon qolish xatosi)
+Ko'rinmaydigan muvaffaqiyatsizliklarni e'tiborsiz qoldirib, muvaffaqiyatlarga e'tibor qaratish.
+
+**Marketing qo'llanilishi**: Faqat muvaffaqiyatli emas, muvaffaqiyatsiz kampaniyalarni ham o'rganing. Nusxa ko'chirayotgan viral hit'ingiz ortida siz ko'rmagan 99 ta muvaffaqiyatsizlik bor edi.
+
+---
+
+## Tezkor ma'lumotnoma
+
+Marketing muammosiga duch kelganda, o'ylab ko'ring:
+
+| Muammo | Tegishli modellar |
 |-----------|-----------------|
-| Low conversions | Hick's Law, Activation Energy, BJ Fogg, Friction |
-| Price objections | Anchoring, Framing, Mental Accounting, Loss Aversion |
-| Building trust | Authority, Social Proof, Reciprocity, Pratfall Effect |
-| Increasing urgency | Scarcity, Loss Aversion, Zeigarnik Effect |
-| Retention/churn | Endowment Effect, Switching Costs, Status-Quo Bias |
-| Growth stalling | Theory of Constraints, Local vs Global Optima, Compounding |
-| Decision paralysis | Paradox of Choice, Default Effect, Nudge Theory |
+| Past konversiyalar | Hick's Law, Activation Energy, BJ Fogg, Friction |
+| Narx e'tirozlari | Anchoring, Framing, Mental Accounting, Loss Aversion |
+| Ishonch qurish | Authority, Social Proof, Reciprocity, Pratfall Effect |
+| Shoshilinchlikni oshirish | Scarcity, Loss Aversion, Zeigarnik Effect |
+| Ushlab qolish/churn | Endowment Effect, Switching Costs, Status-Quo Bias |
+| O'sish to'xtab qolishi | Theory of Constraints, Local vs Global Optima, Compounding |
+| Qaror falaji | Paradox of Choice, Default Effect, Nudge Theory |
 | Onboarding | Goal-Gradient, IKEA Effect, Commitment & Consistency |
 
 ---
 
-## Task-Specific Questions
+## Vazifaga xos savollar
 
-1. What specific behavior are you trying to influence?
-2. What does your customer believe before encountering your marketing?
-3. Where in the journey (awareness → consideration → decision) is this?
-4. What's currently preventing the desired action?
-5. Have you tested this with real customers?
+1. Qaysi aniq xulq-atvorga ta'sir qilmoqchisiz?
+2. Mijozingiz marketingingizga duch kelishidan oldin nimaga ishonadi?
+3. Bu sayohatning qaysi bosqichida (xabardorlik → ko'rib chiqish → qaror)?
+4. Hozir istalgan harakatga nima to'sqinlik qilmoqda?
+5. Buni haqiqiy mijozlar bilan sinab ko'rdingizmi?
 
 ---
 
-## Related Skills
+## Bog'liq skilllar
 
-- **cro**: Apply psychology to page optimization
-- **copywriting**: Write copy using psychological principles
-- **popups**: Use triggers and psychology in popups
-- **pricing-page optimization**: See cro for pricing psychology
-- **ab-testing**: Test psychological hypotheses
+- **cro**: Psixologiyani sahifa optimallashtirishga qo'llash
+- **copywriting**: Psixologik tamoyillar yordamida matn yozish
+- **popups**: Popup'larda triggerlar va psixologiyadan foydalanish
+- **pricing-page optimization**: Narx psixologiyasi uchun cro'ga qarang
+- **ab-testing**: Psixologik gipotezalarni sinash
 
 ---
 
