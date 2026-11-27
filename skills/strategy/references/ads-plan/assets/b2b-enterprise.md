@@ -1,39 +1,38 @@
-# B2B enterprise paid-media planning questions
+# B2B enterprise pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: document the offer, buying process, decision roles, target accounts,
-  sales ownership, regions, contract motion, conversion definition, and data window.
-- Evidence gate: ground account selection, channel fit, claims, and proof in approved CRM,
-  account, research, and current official source IDs.
-- Privacy gate: confirm lawful use, minimization, matching terms, retention, and access
-  controls before using account or contact data.
-- Regulatory gate: identify applicable industry, employment, credit, privacy, disclosure,
-  and regional constraints and route uncertainty to qualified review.
-- Measurement gate: define how ad interactions connect to account progression, pipeline,
-  revenue, and sales feedback without presenting influence as causation.
+- Kontekst darvozasi: taklif, xarid jarayoni, qaror rollari, maqsadli akkauntlar, sotuv egaligi, mintaqalar,
+  shartnoma harakati, konversiya ta'rifi va ma'lumot oynasini hujjatlashtiring.
+- Dalil darvozasi: akkaunt tanlash, kanal mosligi, da'volar va isbotni tasdiqlangan CRM, akkaunt, tadqiqot va
+  joriy rasmiy manba ID'lariga asoslang.
+- Maxfiylik darvozasi: akkaunt yoki kontakt ma'lumotlaridan foydalanishdan oldin qonuniy foydalanish,
+  minimallashtirish, moslashtirish shartlari, saqlash va kirish nazoratini tasdiqlang.
+- Regulyator darvozasi: tegishli soha, bandlik, kredit, maxfiylik, oshkor qilish va mintaqaviy cheklovlarni
+  aniqlang va noaniqlikni malakali ko'rib chiqishga yo'naltiring.
+- O'lchov darvozasi: reklama o'zaro ta'sirlari akkaunt rivoji, pipeline, daromad va sotuv fikr-mulohazasiga
+  qanday bog'lanishini ta'sirni sababiyat sifatida ko'rsatmasdan belgilang.
 
-## Planning questions
+## Rejalash savollari
 
-- Who participates in the decision, and what evidence does each role need?
-- Which accounts and segments are approved, reachable, sufficiently populated, and current?
-- What distinguishes awareness, consideration, evaluation, purchase, and expansion signals?
-- Which offers and proof assets have owner approval and substantiation?
-- How will marketing and sales handle routing, follow-up, suppression, and disagreement?
-- Which platform capabilities and formats are currently eligible for the account and locale?
-- What observation window matches the buying process and the available outcome latency?
+- Qarorda kim ishtirok etadi va har bir rolga qanday dalil kerak?
+- Qaysi akkauntlar va segmentlar tasdiqlangan, yetib borsa bo'ladigan, yetarlicha to'ldirilgan va joriy?
+- Xabardorlik, ko'rib chiqish, baholash, xarid va kengayish signallarini nima farqlaydi?
+- Qaysi takliflar va isbot aktivlari egasi tasdig'i va asoslashga ega?
+- Marketing va sotuv yo'naltirish, keyingi aloqa, bostirish va kelishmovchilikni qanday hal qiladi?
+- Akkaunt va locale uchun qaysi platforma imkoniyatlari va formatlari hozir yaroqli?
+- Qaysi kuzatuv oynasi xarid jarayoni va mavjud natija kechikishiga mos?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider role-specific or stage-specific hypotheses only when the supporting context exists.
-- Consider account-level measurement alongside person-level signals without merging identities.
-- Use platform and search roles as hypotheses, not a fixed hierarchy or budget mix.
-- Treat content, event, demo, and sales-conversation outcomes as distinct evidence classes.
+- Rol yoki bosqichga xos gipotezalarni faqat qo'llab-quvvatlovchi kontekst mavjud bo'lganda ko'rib chiqing.
+- Shaxslarni birlashtirmasdan, shaxs darajasidagi signallar bilan birga akkaunt darajasidagi o'lchovni ko'rib chiqing.
+- Platforma va qidiruv rollaridan qat'iy ierarxiya yoki byudjet aralashmasi emas, gipoteza sifatida foydalaning.
+- Kontent, tadbir, demo va sotuv-suhbat natijalarini alohida dalil sinflari deb qarang.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return qualitative options, dependencies, source IDs, owners, and measurement questions.
-- Do not prescribe platform shares, audience sizes, bid strategies, attribution windows,
-  pipeline ratios, or performance targets.
+- Sifatiy variantlar, bog'liqliklar, manba ID'lari, egalar va o'lchov savollarini qaytaring.
+- Platforma ulushlari, auditoriya hajmlari, bid strategiyalari, atributsiya oynalari, pipeline nisbatlari yoki natija maqsadlarini buyurmang.

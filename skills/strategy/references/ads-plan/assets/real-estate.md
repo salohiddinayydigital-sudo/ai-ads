@@ -1,40 +1,39 @@
-# Real-estate paid-media planning questions
+# Ko'chmas mulk pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid; not fair-housing, licensing, or legal advice.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi; adolatli uy-joy, litsenziyalash yoki huquqiy maslahat emas.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the advertiser role, property or service, buyer or seller job,
-  geography, listing status, objective, qualified outcome, and accountable reviewer.
-- Evidence gate: verify listings, locations, prices, availability, credentials, claims,
-  and current official source IDs from platforms and regulators.
-- Fairness gate: block targeting, exclusions, delivery inputs, or creative that lack current
-  evidence and qualified review for housing and protected-class requirements.
-- Regulatory gate: obtain current fair-housing, licensing, disclosure, privacy, consent,
-  feed, and platform-category review for every applicable jurisdiction.
-- Feed gate: establish listing ownership, update source, status reconciliation, stale-item
-  handling, image rights, and destination accuracy.
-- Measurement gate: distinguish inquiry, qualified lead, appointment, application,
-  transaction, and offline reconciliation without inferring protected traits.
+- Kontekst darvozasi: reklama beruvchi roli, mulk yoki xizmat, xaridor yoki sotuvchi vazifasi, geografiya,
+  ro'yxat holati, maqsad, malakali natija va mas'ul ko'rib chiquvchini aniqlang.
+- Dalil darvozasi: ro'yxatlar, joylashuvlar, narxlar, mavjudlik, vakolatlar, da'volar va platforma hamda
+  regulyatorlarning joriy rasmiy manba ID'larini tekshiring.
+- Adolat darvozasi: uy-joy va himoyalangan sinf talablari bo'yicha joriy dalil va malakali ko'rib chiqishsiz
+  targeting, exclusion'lar, yetkazib berish kirishlari yoki kreativni bloklang.
+- Regulyator darvozasi: har bir tegishli yurisdiksiya uchun joriy adolatli uy-joy, litsenziyalash, oshkor qilish,
+  maxfiylik, rozilik, feed va platforma-kategoriya ko'rib chiqishini oling.
+- Feed darvozasi: ro'yxat egaligi, yangilash manbai, holatni moslashtirish, eskirgan elementlarni boshqarish,
+  tasvir huquqlari va manzil aniqligini belgilang.
+- O'lchov darvozasi: himoyalangan belgilarni xulosa qilmasdan so'rov, malakali lid, uchrashuv, ariza, tranzaksiya
+  va oflayn moslashtirishni ajrating.
 
-## Planning questions
+## Rejalash savollari
 
-- What is being advertised and which licensed entity owns the representation?
-- Which listing or service facts are current, approved, and consistently displayed?
-- Which audiences, locations, placements, and optimization inputs are eligible now?
-- Could copy, imagery, exclusions, or delivery create discriminatory steering or exclusion?
-- How will listing changes, complaints, consent, lead routing, and data retention be handled?
-- Which platform capabilities and creative formats have current source coverage?
-- What specialist approval is required before the plan can move beyond a draft?
+- Nima reklama qilinmoqda va vakillikka qaysi litsenziyalangan sub'ekt egalik qiladi?
+- Qaysi ro'yxat yoki xizmat faktlari joriy, tasdiqlangan va izchil ko'rsatilgan?
+- Qaysi auditoriyalar, joylar, placementlar va optimallashtirish kirishlari hozir yaroqli?
+- Matn, tasvir, exclusion'lar yoki yetkazib berish kamsituvchi yo'naltirish yoki chetlashtirish yaratishi mumkinmi?
+- Ro'yxat o'zgarishlari, shikoyatlar, rozilik, lid yo'naltirish va ma'lumotlarni saqlash qanday boshqariladi?
+- Qaysi platforma imkoniyatlari va kreativ formatlari joriy manba qamroviga ega?
+- Reja qoralamadan o'tishi uchun qanday mutaxassis tasdig'i kerak?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider listing discovery, service education, market context, and brand hypotheses only
-  after fairness, evidence, feed, and policy gates pass.
-- Keep buyer, seller, renter, investor, and service-provider outcomes distinct when lawful.
+- Ro'yxatni kashf qilish, xizmat ta'limi, bozor konteksti va brend gipotezalarini faqat adolat, dalil, feed va
+  policy darvozalari o'tgandan keyin ko'rib chiqing.
+- Qonuniy bo'lganda xaridor, sotuvchi, ijarachi, investor va xizmat ko'rsatuvchi natijalarini ajrating.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return questions, source IDs, approvals, fairness risks, owners, and stop conditions.
-- Do not prescribe targeting radii, audience traits, platform shares, bids, schedules,
-  lead targets, or legal conclusions.
+- Savollar, manba ID'lari, tasdiqlar, adolat xavflari, egalar va to'xtatish shartlarini qaytaring.
+- Targeting radiuslari, auditoriya belgilari, platforma ulushlari, bidlar, jadvallar, lid maqsadlari yoki huquqiy xulosalarni buyurmang.

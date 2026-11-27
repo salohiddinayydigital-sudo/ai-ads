@@ -1,40 +1,39 @@
-# SaaS paid-media planning questions
+# SaaS pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the product, market, self-serve or sales-assisted motion,
-  buyer roles, objective, approved conversion, contract context, and budget authority.
-- Evidence gate: use current product, pricing, CRM, revenue, account, experiment, and
-  current official source IDs; substantiate security, integration, comparison, and outcome claims.
-- Measurement gate: define how anonymous visits, leads, trials, opportunities, purchases,
-  expansion, churn, and reconciled revenue connect without collapsing funnel stages.
-- Privacy gate: document consent, business-contact use, account lists, matching, product
-  telemetry, retention, suppression, access, and regional requirements.
-- Regulatory gate: identify sector, employment, credit, health, AI, privacy, disclosure,
-  and comparative-claim risks and obtain qualified review where needed.
-- Capability gate: verify current platform, audience, format, measurement, and account
-  eligibility before making them part of a plan.
+- Kontekst darvozasi: mahsulot, bozor, o'zi-xizmat yoki sotuv yordamidagi harakat, xaridor rollari, maqsad,
+  tasdiqlangan konversiya, shartnoma konteksti va byudjet vakolatini aniqlang.
+- Dalil darvozasi: joriy mahsulot, narxlash, CRM, daromad, akkaunt, eksperiment va joriy rasmiy manba ID'laridan
+  foydalaning; xavfsizlik, integratsiya, taqqoslash va natija da'volarini asoslang.
+- O'lchov darvozasi: anonim tashriflar, lidlar, sinovlar, imkoniyatlar, xaridlar, kengayish, ketish va moslashtirilgan
+  daromad voronka bosqichlarini yiqitmasdan qanday bog'lanishini belgilang.
+- Maxfiylik darvozasi: rozilik, biznes-kontakt foydalanishi, akkaunt ro'yxatlari, moslashtirish, mahsulot
+  telemetriyasi, saqlash, bostirish, kirish va mintaqaviy talablarni hujjatlashtiring.
+- Regulyator darvozasi: soha, bandlik, kredit, sog'liq, AI, maxfiylik, oshkor qilish va taqqoslash-da'vo xavflarini
+  aniqlang va kerak bo'lganda malakali ko'rib chiqishni oling.
+- Imkoniyatlar darvozasi: rejaga kiritishdan oldin joriy platforma, auditoriya, format, o'lchov va akkaunt
+  muvofiqligini tekshiring.
 
-## Planning questions
+## Rejalash savollari
 
-- Which buyer problem and product capability are verified and meaningful?
-- Which conversion reflects the business motion rather than a convenient platform event?
-- How do buyer roles, sales follow-up, implementation, and outcome latency affect measurement?
-- Which product, customer, security, service, and comparison claims are approved?
-- Which intent, account, retargeting, or educational hypotheses have sufficient evidence?
-- How will existing customers, employees, competitors, and ineligible regions be handled lawfully?
-- Which product or sales changes could invalidate the media plan?
+- Qaysi xaridor muammosi va mahsulot imkoniyati tasdiqlangan va ma'noli?
+- Qaysi konversiya qulay platforma eventi emas, biznes harakatini aks ettiradi?
+- Xaridor rollari, sotuv keyingi aloqasi, joriy qilish va natija kechikishi o'lchovga qanday ta'sir qiladi?
+- Qaysi mahsulot, mijoz, xavfsizlik, xizmat va taqqoslash da'volari tasdiqlangan?
+- Qaysi niyat, akkaunt, retargeting yoki ta'limiy gipotezalar yetarli dalilga ega?
+- Mavjud mijozlar, xodimlar, raqobatchilar va yaroqsiz mintaqalar qonuniy ravishda qanday boshqariladi?
+- Qaysi mahsulot yoki sotuv o'zgarishlari media rejani yaroqsiz qilishi mumkin?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider intent capture, account education, product demonstration, proof, and remarketing
-  roles without assuming a fixed platform hierarchy.
-- Separate product-qualified, marketing-qualified, sales-qualified, and revenue outcomes.
+- Qat'iy platforma ierarxiyasini taxmin qilmasdan, niyatni qamrab olish, akkaunt ta'limi, mahsulot namoyishi,
+  isbot va remarketing rollarini ko'rib chiqing.
+- Mahsulot-malakali, marketing-malakali, sotuv-malakali va daromad natijalarini ajrating.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return qualitative options, evidence gaps, source IDs, owners, and measurement design.
-- Do not prescribe channel shares, bid strategies, attribution windows, quality scores,
-  pipeline ratios, or performance targets.
+- Sifatiy variantlar, dalil bo'shliqlari, manba ID'lari, egalar va o'lchov dizaynini qaytaring.
+- Kanal ulushlari, bid strategiyalari, atributsiya oynalari, sifat ballari, pipeline nisbatlari yoki natija maqsadlarini buyurmang.

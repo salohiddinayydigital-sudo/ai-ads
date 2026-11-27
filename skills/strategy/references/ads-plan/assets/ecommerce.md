@@ -1,38 +1,37 @@
-# E-commerce paid-media planning questions
+# E-commerce pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: document product economics, fulfillment, inventory, seasonality, customer
-  type, geography, objective, conversion value, return behavior, and approved budget ceiling.
-- Evidence gate: use current catalog, margin, order, analytics, experiment, and current
-  official source IDs; distinguish platform-reported revenue from reconciled business value.
-- Feed gate: verify product identity, availability, price, destination, policy status, and
-  update ownership before relying on catalog-driven activity.
-- Regulatory gate: identify product, pricing, promotion, endorsement, privacy, age, and
-  regional obligations and obtain qualified review where needed.
-- Mutation gate: keep campaign, feed, price, audience, and budget changes as drafts until
-  exact approval, idempotency, verification, and rollback evidence exists.
+- Kontekst darvozasi: mahsulot iqtisodi, yetkazib berish, inventar, mavsumiylik, mijoz turi, geografiya, maqsad,
+  konversiya qiymati, qaytarish xatti-harakati va tasdiqlangan byudjet shiftini hujjatlashtiring.
+- Dalil darvozasi: joriy katalog, marja, buyurtma, analitika, eksperiment va joriy rasmiy manba ID'laridan
+  foydalaning; platforma xabar qilgan daromadni moslashtirilgan biznes qiymatidan ajrating.
+- Feed darvozasi: katalogga asoslangan faoliyatga tayanishdan oldin mahsulot identifikatsiyasi, mavjudlik, narx,
+  manzil, policy holati va yangilash egaligini tekshiring.
+- Regulyator darvozasi: mahsulot, narxlash, aksiya, endorsement, maxfiylik, yosh va mintaqaviy majburiyatlarni
+  aniqlang va kerak bo'lganda malakali ko'rib chiqishni oling.
+- O'zgartirish darvozasi: aniq tasdiq, idempotentlik, tekshiruv va rollback dalili bo'lmaguncha kampaniya, feed,
+  narx, auditoriya va byudjet o'zgarishlarini qoralama holida saqlang.
 
-## Planning questions
+## Rejalash savollari
 
-- Which products, categories, regions, and customer states are in scope?
-- How are contribution, returns, discounts, shipping, tax, and repeat value represented?
-- Which acquisition and retention outcomes can be reconciled outside ad platforms?
-- Which platform capabilities fit the catalog, intent, creative, and measurement evidence?
-- What audience use, suppression, consent, and retention boundaries apply?
-- Which creative and landing claims match the current product record?
-- What uncertainty could make a budget or product recommendation misleading?
+- Qaysi mahsulotlar, kategoriyalar, mintaqalar va mijoz holatlari qamrovda?
+- Hissa, qaytarishlar, chegirmalar, yetkazib berish, soliq va takroriy qiymat qanday aks ettiriladi?
+- Reklama platformalaridan tashqarida qaysi jalb qilish va saqlash natijalarini moslashtirsa bo'ladi?
+- Qaysi platforma imkoniyatlari katalog, niyat, kreativ va o'lchov dalillariga mos keladi?
+- Qanday auditoriyadan foydalanish, bostirish, rozilik va saqlash chegaralari qo'llaniladi?
+- Qaysi kreativ va landing da'volari joriy mahsulot yozuviga mos keladi?
+- Qanday noaniqlik byudjet yoki mahsulot tavsiyasini chalg'ituvchi qilishi mumkin?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider catalog, search, discovery, retargeting, and retention roles as hypotheses.
-- Compare new-customer and repeat-customer outcomes without blending their economics.
-- Use reversible experiments and account-defined guardrails rather than universal rules.
+- Katalog, qidiruv, discovery, retargeting va saqlash rollarini gipoteza sifatida ko'rib chiqing.
+- Yangi mijoz va takroriy mijoz natijalarini ularning iqtisodini aralashtirmasdan taqqoslang.
+- Universal qoidalar o'rniga qaytariladigan eksperimentlar va akkaunt belgilagan himoya chegaralaridan foydalaning.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return qualitative choices, tradeoffs, dependencies, source IDs, and measurement plans.
-- Do not prescribe channel shares, bid strategies, creative volumes, pacing thresholds,
-  or return targets.
+- Sifatiy tanlovlar, savdolar, bog'liqliklar, manba ID'lari va o'lchov rejalarini qaytaring.
+- Kanal ulushlari, bid strategiyalari, kreativ hajmlari, pacing chegaralari yoki qaytarish maqsadlarini buyurmang.

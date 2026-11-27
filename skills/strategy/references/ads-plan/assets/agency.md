@@ -1,41 +1,40 @@
-# Agency paid-media planning questions
+# Agentlik uchun pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the client, business model, objective, conversion definition,
-  geography, currency, data window, budget authority, and active platforms separately.
-- Evidence gate: use only client-approved inputs and current official source IDs; keep
-  assumptions, stale evidence, and cross-client comparisons explicit.
-- Privacy gate: isolate every client's credentials, exports, audiences, creatives,
-  reports, run directory, and retention policy.
-- Regulatory gate: identify the client's category and jurisdictions, then obtain the
-  required platform, privacy, and specialist review before proposing regulated activity.
-- Capability gate: distinguish export analysis, authorized reads, drafts, and disabled
-  writes for each client and platform.
-- Approval gate: record the client owner, agency owner, creative approval, budget ceiling,
-  mutation authority, verification plan, and rollback path.
+- Kontekst darvozasi: mijoz, biznes modeli, maqsad, konversiya ta'rifi, geografiya, valyuta, ma'lumot oynasi,
+  byudjet vakolati va faol platformalarni alohida aniqlang.
+- Dalil darvozasi: faqat mijoz tasdiqlagan kirishlar va joriy rasmiy manba ID'laridan foydalaning; taxminlar,
+  eskirgan dalil va mijozlararo taqqoslashlarni aniq ko'rsating.
+- Maxfiylik darvozasi: har bir mijozning credential'lari, eksportlari, auditoriyalari, kreativlari, hisobotlari,
+  run katalogi va saqlash siyosatini ajrating.
+- Regulyator darvozasi: mijozning kategoriyasi va yurisdiksiyalarini aniqlang, so'ng tartibga solinadigan faoliyatni
+  taklif qilishdan oldin kerakli platforma, maxfiylik va mutaxassis ko'rib chiqishini oling.
+- Imkoniyatlar darvozasi: har bir mijoz va platforma uchun eksport tahlili, vakolatli o'qishlar, qoralamalar va
+  o'chirilgan yozishlarni ajrating.
+- Tasdiq darvozasi: mijoz egasi, agentlik egasi, kreativ tasdig'i, byudjet shifti, o'zgartirish vakolati,
+  tekshiruv rejasi va rollback yo'lini yozing.
 
-## Planning questions
+## Rejalash savollari
 
-- Which business outcome does the client own, and how is it reconciled downstream?
-- Which client facts, claims, audiences, assets, and account permissions are approved?
-- Where do tracking, CRM, consent, feed, and offline outcome definitions disagree?
-- Which platforms are eligible and measurable for this client's objective and geography?
-- Which responsibilities belong to the client, agency, platform, or another vendor?
-- How will findings, approvals, incidents, and changes remain client-specific and auditable?
-- What would cause the plan to stop for missing evidence, privacy, policy, or authority?
+- Mijoz qaysi biznes natijasiga egalik qiladi va u keyingi bosqichda qanday moslashtiriladi?
+- Mijozning qaysi faktlari, da'volari, auditoriyalari, aktivlari va akkaunt ruxsatlari tasdiqlangan?
+- Treking, CRM, rozilik, feed va oflayn natija ta'riflari qayerda bir-biriga zid keladi?
+- Mijozning maqsadi va geografiyasi uchun qaysi platformalar yaroqli va o'lchanadigan?
+- Qaysi mas'uliyatlar mijoz, agentlik, platforma yoki boshqa vendorga tegishli?
+- Topilmalar, tasdiqlar, hodisalar va o'zgarishlar mijozga xos va audit qilinadigan holda qanday qoladi?
+- Reja yetishmayotgan dalil, maxfiylik, policy yoki vakolat tufayli nimadan to'xtashi kerak?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Compare platform roles from current client evidence rather than a standard agency mix.
-- Consider a small, reversible learning plan with client-defined guardrails.
-- Separate internal quality review from client-facing reporting and account execution.
-- Preserve unsuccessful hypotheses and contradictory evidence for the next planning cycle.
+- Platforma rollarini standart agentlik aralashmasidan emas, joriy mijoz dalilidan taqqoslang.
+- Mijoz belgilagan himoya chegaralari bilan kichik, qaytariladigan o'rganish rejasini ko'rib chiqing.
+- Ichki sifat ko'rib chiqishini mijozga mo'ljallangan hisobot va akkaunt ijrosidan ajrating.
+- Keyingi rejalash sikli uchun muvaffaqiyatsiz gipotezalar va ziddiyatli dalilni saqlang.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return options, tradeoffs, owners, assumptions, source IDs, and verification steps.
-- Do not provide universal allocations, unsupported targets, automatic account-action
-  rules, or cross-client performance promises.
+- Variantlar, savdolar, egalar, taxminlar, manba ID'lari va tekshiruv qadamlarini qaytaring.
+- Universal taqsimotlar, asossiz maqsadlar, avtomatik akkaunt-harakat qoidalari yoki mijozlararo natija va'dalarini bermang.

@@ -1,38 +1,37 @@
-# Local-service paid-media planning questions
+# Mahalliy xizmatlar pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: document the service, service area, hours, capacity, seasonality,
-  licensing, objective, qualified outcome, budget authority, and escalation owner.
-- Evidence gate: verify current service, location, availability, price, offer, review,
-  license, and platform facts through approved inputs and current official source IDs.
-- Regulatory gate: identify local licensing, call recording, consent, accessibility,
-  emergency, home-service, and category requirements and route uncertainty to review.
-- Measurement gate: define qualified calls, forms, bookings, completed work, cancellations,
-  duplicates, spam, and offline reconciliation without a universal call-quality rule.
-- Capability gate: verify current location, call, lead, schedule, and audience features for
-  the account and region before including them in a plan.
+- Kontekst darvozasi: xizmat, xizmat hududi, ish soatlari, quvvat, mavsumiylik, litsenziyalash, maqsad,
+  malakali natija, byudjet vakolati va ko'tarish egasini hujjatlashtiring.
+- Dalil darvozasi: tasdiqlangan kirishlar va joriy rasmiy manba ID'lari orqali joriy xizmat, joylashuv, mavjudlik,
+  narx, taklif, sharh, litsenziya va platforma faktlarini tekshiring.
+- Regulyator darvozasi: mahalliy litsenziyalash, qo'ng'iroq yozish, rozilik, qulaylik, favqulodda, uy xizmati va
+  kategoriya talablarini aniqlang va noaniqlikni ko'rib chiqishga yo'naltiring.
+- O'lchov darvozasi: universal qo'ng'iroq-sifat qoidasisiz malakali qo'ng'iroqlar, formalar, bronlar, bajarilgan
+  ish, bekor qilishlar, dublikatlar, spam va oflayn moslashtirishni belgilang.
+- Imkoniyatlar darvozasi: rejaga kiritishdan oldin akkaunt va mintaqa uchun joriy joylashuv, qo'ng'iroq, lid,
+  jadval va auditoriya funksiyalarini tekshiring.
 
-## Planning questions
+## Rejalash savollari
 
-- Which services and places can the business actually fulfill now?
-- What distinguishes an inquiry, qualified opportunity, booking, and completed service?
-- Which claims, offers, reviews, credentials, and availability statements are approved?
-- How do business hours, dispatch capacity, response time, and seasonality affect demand?
-- Which search, local, social, or remarketing roles are eligible and measurable?
-- Which exclusions are supported by query or lead evidence without overblocking demand?
-- How will consent, call handling, routing, follow-up, and customer data be governed?
+- Biznes aslida hozir qaysi xizmat va joylarni bajara oladi?
+- So'rov, malakali imkoniyat, bron va bajarilgan xizmatni nima farqlaydi?
+- Qaysi da'volar, takliflar, sharhlar, ma'lumotlar va mavjudlik bayonotlari tasdiqlangan?
+- Ish soatlari, dispetcherlik quvvati, javob vaqti va mavsumiylik talabga qanday ta'sir qiladi?
+- Qaysi qidiruv, mahalliy, ijtimoiy yoki remarketing rollari yaroqli va o'lchanadigan?
+- Talabni ortiqcha bloklamasdan qaysi exclusion'lar so'rov yoki lid dalili bilan qo'llab-quvvatlanadi?
+- Rozilik, qo'ng'iroqni qayta ishlash, yo'naltirish, keyingi aloqa va mijoz ma'lumotlari qanday boshqariladi?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider intent capture, local awareness, service education, and seasonal hypotheses
-  according to current evidence and operational capacity.
-- Connect media recommendations to lead quality and fulfilled work, not clicks alone.
+- Qidiruv niyatini qamrab olish, mahalliy xabardorlik, xizmat ta'limi va mavsumiy gipotezalarni joriy dalil va
+  operatsion quvvatga ko'ra ko'rib chiqing.
+- Media tavsiyalarini faqat kliklarga emas, lid sifati va bajarilgan ishga bog'lang.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return qualitative options, source IDs, operational dependencies, owners, and checks.
-- Do not prescribe radii, schedules, qualification durations, channel shares, bids,
-  automatic account-action rules, or lead-cost targets.
+- Sifatiy variantlar, manba ID'lari, operatsion bog'liqliklar, egalar va tekshiruvlarni qaytaring.
+- Radiuslar, jadvallar, malaka davomiyliklari, kanal ulushlari, bidlar, avtomatik akkaunt-harakat qoidalari yoki lid narxi maqsadlarini buyurmang.

@@ -1,39 +1,39 @@
-# General paid-media planning questions
+# Umumiy pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the business model, offer, audience, objective, conversion,
-  geography, budget authority, data window, active platforms, and decision owner.
-- Evidence gate: use account evidence and current official source IDs; label missing,
-  stale, practitioner, contested, and contradictory evidence.
-- Measurement gate: define the business outcome, attribution limits, reconciliation source,
-  outcome latency, guardrails, and observation window.
-- Regulatory gate: identify category, privacy, consent, targeting, claim, disclosure,
-  endorsement, and regional risks and route uncertainty to qualified review.
-- Capability gate: separate export, read, draft, and write behavior; unsupported or
-  unauthorized operations remain unavailable.
-- Mutation gate: require an exact preview, approval, idempotency, verification, audit,
-  blast-radius limit, and rollback before any account change.
+- Kontekst darvozasi: biznes modeli, taklif, auditoriya, maqsad, konversiya, geografiya, byudjet vakolati,
+  ma'lumot oynasi, faol platformalar va qaror egasini aniqlang.
+- Dalil darvozasi: akkaunt dalili va joriy rasmiy manba ID'laridan foydalaning; yetishmayotgan, eskirgan,
+  amaliyotchi, bahsli va ziddiyatli dalilni belgilang.
+- O'lchov darvozasi: biznes natijasi, atributsiya cheklovlari, moslashtirish manbai, natija kechikishi,
+  himoya chegaralari va kuzatuv oynasini belgilang.
+- Regulyator darvozasi: kategoriya, maxfiylik, rozilik, targeting, da'vo, oshkor qilish, endorsement va
+  mintaqaviy xavflarni aniqlang va noaniqlikni malakali ko'rib chiqishga yo'naltiring.
+- Imkoniyatlar darvozasi: eksport, o'qish, qoralama va yozish xatti-harakatini ajrating; qo'llab-quvvatlanmaydigan
+  yoki vakolatsiz operatsiyalar mavjud emas holda qoladi.
+- O'zgartirish darvozasi: har qanday akkaunt o'zgarishidan oldin aniq preview, tasdiq, idempotentlik, tekshiruv,
+  audit, ta'sir doirasi chegarasi va rollbackni talab qiling.
 
-## Planning questions
+## Rejalash savollari
 
-- What decision should the plan enable, and what evidence would change that decision?
-- Which audience need and offer claim are supported rather than assumed?
-- Which platforms and placements are eligible, measurable, and operationally supportable?
-- What does success mean in the business system rather than only inside an ad platform?
-- Which inputs are missing, inconsistent, stale, sensitive, or outside authority?
-- What reversible experiment could distinguish the leading hypotheses?
-- Who owns creative, landing, tracking, policy, budget, sales, and follow-up work?
+- Reja qanday qarorni yoqishi kerak va qanday dalil bu qarorni o'zgartirardi?
+- Qaysi auditoriya ehtiyoji va taklif da'vosi taxmin emas, qo'llab-quvvatlanadi?
+- Qaysi platformalar va placementlar yaroqli, o'lchanadigan va operatsion jihatdan qo'llab-quvvatlanadi?
+- Muvaffaqiyat faqat reklama platformasi ichida emas, biznes tizimida nimani anglatadi?
+- Qaysi kirishlar yetishmaydi, nomuvofiq, eskirgan, sezgir yoki vakolatdan tashqarida?
+- Qaysi qaytariladigan eksperiment yetakchi gipotezalarni farqlay oladi?
+- Kreativ, landing, treking, policy, byudjet, sotuv va keyingi ishlar kimga tegishli?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Compare channel roles, audience approaches, messages, and measurement designs as options.
-- Keep health, evidence confidence, regulatory exposure, and opportunity separate.
-- Prefer a provisional or `needs_input` result over invented precision.
+- Kanal rollari, auditoriya yondashuvlari, xabarlar va o'lchov dizaynlarini variantlar sifatida taqqoslang.
+- Sog'liq, dalil ishonchi, regulyator ta'siri va imkoniyatni ajrating.
+- To'qilgan aniqlikdan ko'ra muvaqqat yoki `needs_input` natijani afzal ko'ring.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return options, tradeoffs, assumptions, source IDs, owners, and verification steps.
-- Do not supply universal channel mixes, bid strategies, thresholds, targets, or guarantees.
+- Variantlar, savdolar, taxminlar, manba ID'lari, egalar va tekshiruv qadamlarini qaytaring.
+- Universal kanal aralashmalari, bid strategiyalari, chegaralar, maqsadlar yoki kafolatlarni bermang.

@@ -1,38 +1,37 @@
-# Information-product paid-media planning questions
+# Axborot mahsulotlari pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the product, instructor or publisher, audience, objective,
-  fulfillment, pricing context, refund terms, geography, and conversion definition.
-- Evidence gate: substantiate credentials, curriculum, testimonials, outcomes, comparisons,
-  availability, and offer terms; use current official source IDs from platforms and regulators.
-- Endorsement gate: apply `ftc-endorsement-guides-official` when relevant and document
-  consent, typicality, material connections, edits, and required disclosure.
-- Regulatory gate: identify education, employment, income, health, finance, age, privacy,
-  and regional risks and obtain qualified review for high-stakes claims.
-- Measurement gate: separate lead, attendance, purchase, refund, completion, and downstream
-  outcomes instead of treating funnel progress as customer success.
+- Kontekst darvozasi: mahsulot, o'qituvchi yoki nashriyotchi, auditoriya, maqsad, yetkazib berish, narxlash konteksti,
+  qaytarish shartlari, geografiya va konversiya ta'rifini aniqlang.
+- Dalil darvozasi: vakolat, o'quv dasturi, sharhlar, natijalar, taqqoslashlar, mavjudlik va taklif shartlarini
+  asoslang; platforma va regulyatorlarning joriy rasmiy manba ID'laridan foydalaning.
+- Endorsement darvozasi: tegishli bo'lganda `ftc-endorsement-guides-official` ni qo'llang va rozilik, tipiklik,
+  moddiy aloqalar, tahrirlar va kerakli oshkor qilishni hujjatlashtiring.
+- Regulyator darvozasi: ta'lim, bandlik, daromad, sog'liq, moliya, yosh, maxfiylik va mintaqaviy xavflarni
+  aniqlang va yuqori xavfli da'volar uchun malakali ko'rib chiqishni oling.
+- O'lchov darvozasi: lid, ishtirok, xarid, qaytarish, yakunlash va keyingi natijalarni voronka rivojini mijoz
+  muvaffaqiyati deb qarash o'rniga ajrating.
 
-## Planning questions
+## Rejalash savollari
 
-- What does the product actually teach or provide, and what does it not provide?
-- Which audience need is supported by research rather than personal-attribute inference?
-- Which proof is verified, representative, consented, and presented with limitations?
-- Which offer, refund, renewal, access, and support terms need clear disclosure?
-- Which content or event can demonstrate value without manufacturing urgency or fear?
-- How will refunds, cancellations, complaints, completion, and quality feedback inform review?
-- Which platforms and placements are currently eligible for the category and locale?
+- Mahsulot aslida nimani o'rgatadi yoki beradi va nimani bermaydi?
+- Qaysi auditoriya ehtiyoji shaxsiy belgilarni xulosa qilish emas, tadqiqot bilan qo'llab-quvvatlanadi?
+- Qaysi isbot tasdiqlangan, vakillik qiluvchi, rozilik berilgan va cheklovlar bilan taqdim etilgan?
+- Qaysi taklif, qaytarish, yangilash, kirish va qo'llab-quvvatlash shartlari aniq oshkor qilinishi kerak?
+- Qaysi kontent yoki tadbir sun'iy shoshilinchlik yoki qo'rquv yaratmasdan qiymatni ko'rsata oladi?
+- Qaytarishlar, bekor qilishlar, shikoyatlar, yakunlash va sifat fikr-mulohazasi ko'rib chiqishga qanday ma'lumot beradi?
+- Kategoriya va locale uchun qaysi platformalar va placementlar hozir yaroqli?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider education, demonstration, instructor perspective, curriculum, or learner-story
-  hypotheses only when evidence and rights are supplied.
-- Treat lead magnets, events, purchases, and later outcomes as distinct measurements.
+- Ta'lim, namoyish, o'qituvchi nuqtai nazari, o'quv dasturi yoki o'quvchi hikoyasi gipotezalarini faqat dalil va
+  huquqlar berilganda ko'rib chiqing.
+- Lead magnitlar, tadbirlar, xaridlar va keyingi natijalarni alohida o'lchovlar deb qarang.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return qualitative options, proof gaps, source IDs, owners, and measurement questions.
-- Do not prescribe funnel shares, platform priority, urgency, income outcomes, bid rules,
-  or performance targets.
+- Sifatiy variantlar, isbot bo'shliqlari, manba ID'lari, egalar va o'lchov savollarini qaytaring.
+- Voronka ulushlari, platforma ustuvorligi, shoshilinchlik, daromad natijalari, bid qoidalari yoki natija maqsadlarini buyurmang.

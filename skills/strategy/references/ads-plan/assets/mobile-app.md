@@ -1,39 +1,38 @@
-# Mobile-app paid-media planning questions
+# Mobil ilova pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the app, stores, operating systems, regions, business model,
-  audience, objective, approved in-app outcomes, release state, and budget authority.
-- Evidence gate: use current store, platform, measurement, privacy, and current official source IDs;
-  treat operating-system and attribution behavior as time-sensitive.
-- Privacy gate: document consent, age handling, device and account identifiers, event
-  minimization, partner access, retention, deletion, and regional restrictions.
-- Measurement gate: distinguish store view, install, registration, activation, purchase,
-  subscription, retention, refund, and reconciled value without treating install as value.
-- Capability gate: verify current deep-link, store-page, attribution, audience, creative,
-  and campaign eligibility for each platform and region.
-- Regulatory gate: identify category, child safety, health, finance, gaming, subscription,
-  disclosure, and store-policy risks and route uncertainty to qualified review.
+- Kontekst darvozasi: ilova, do'konlar, operatsion tizimlar, mintaqalar, biznes modeli, auditoriya, maqsad,
+  tasdiqlangan ilova ichidagi natijalar, reliz holati va byudjet vakolatini aniqlang.
+- Dalil darvozasi: joriy do'kon, platforma, o'lchov, maxfiylik va joriy rasmiy manba ID'laridan foydalaning;
+  operatsion tizim va atributsiya xatti-harakatini vaqtga sezgir deb qarang.
+- Maxfiylik darvozasi: rozilik, yosh bilan ishlash, qurilma va akkaunt identifikatorlari, event minimallashtirish,
+  hamkor kirishi, saqlash, o'chirish va mintaqaviy cheklovlarni hujjatlashtiring.
+- O'lchov darvozasi: o'rnatishni qiymat deb hisoblamasdan do'kon ko'rishi, o'rnatish, ro'yxatdan o'tish,
+  faollashtirish, xarid, obuna, saqlash, qaytarish va moslashtirilgan qiymatni ajrating.
+- Imkoniyatlar darvozasi: har bir platforma va mintaqa uchun joriy deep-link, do'kon sahifasi, atributsiya,
+  auditoriya, kreativ va kampaniya muvofiqligini tekshiring.
+- Regulyator darvozasi: kategoriya, bolalar xavfsizligi, sog'liq, moliya, gaming, obuna, oshkor qilish va
+  do'kon-policy xavflarini aniqlang va noaniqlikni malakali ko'rib chiqishga yo'naltiring.
 
-## Planning questions
+## Rejalash savollari
 
-- Which post-install outcome represents real user and business value?
-- Which events are reliable, consented, deduplicated, and comparable across systems?
-- How do onboarding, paywall, product quality, store listing, and deep links affect the plan?
-- Which creative claims match the current app experience and store metadata?
-- Which acquisition and re-engagement audiences are eligible and privacy-safe?
-- How will delayed, aggregated, modeled, or missing attribution be disclosed?
-- What would cause a campaign or measurement proposal to remain provisional?
+- Qaysi o'rnatishdan keyingi natija haqiqiy foydalanuvchi va biznes qiymatini ifodalaydi?
+- Qaysi eventlar ishonchli, rozilik berilgan, deduplikatsiyalangan va tizimlar o'rtasida taqqoslanadi?
+- Onboarding, paywall, mahsulot sifati, do'kon listingi va deep-linklar rejaga qanday ta'sir qiladi?
+- Qaysi kreativ da'volar joriy ilova tajribasi va do'kon metama'lumotlariga mos keladi?
+- Qaysi jalb qilish va qayta jalb qilish auditoriyalari yaroqli va maxfiylik jihatidan xavfsiz?
+- Kechiktirilgan, jamlangan, modellashtirilgan yoki yetishmayotgan atributsiya qanday oshkor qilinadi?
+- Kampaniya yoki o'lchov taklifini nima muvaqqat qoldiradi?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider intent, discovery, store, social, and re-engagement roles as hypotheses.
-- Compare cohorts and downstream value only when definitions and windows are compatible.
+- Niyat, discovery, do'kon, ijtimoiy va qayta jalb qilish rollarini gipoteza sifatida ko'rib chiqing.
+- Kogortalar va keyingi qiymatni faqat ta'riflar va oynalar mos keladigandagina taqqoslang.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return qualitative choices, data gaps, source IDs, owners, and verification needs.
-- Do not prescribe platform shares, event-volume thresholds, bid strategies, attribution
-  windows, retention targets, or value ratios.
+- Sifatiy tanlovlar, ma'lumot bo'shliqlari, manba ID'lari, egalar va tekshiruv ehtiyojlarini qaytaring.
+- Platforma ulushlari, event-hajm chegaralari, bid strategiyalari, atributsiya oynalari, saqlash maqsadlari yoki qiymat nisbatlarini buyurmang.

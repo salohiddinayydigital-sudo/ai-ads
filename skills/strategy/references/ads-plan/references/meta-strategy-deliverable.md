@@ -1,107 +1,107 @@
-# Meta Ads Strategy: workflow and client-ready deliverable
+# Meta Ads strategiyasi: ish jarayoni va mijozga tayyor natija
 
-Used by the `meta_strategy` workflow (`manifests/workflows.json`) and by any request for a Meta/Facebook/Instagram advertising strategy. Planning only: nothing here changes a live account.
+`meta_strategy` workflow'ida (`manifests/workflows.json`) va Meta/Facebook/Instagram reklama strategiyasi so'ralgan har qanday so'rovda ishlatiladi. Faqat rejalash: bu yerdagi hech narsa jonli akkauntni o'zgartirmaydi.
 
-## 0. Non-negotiables
+## 0. Muzokara qilinmaydigan qoidalar
 
-1. Every figure, claim and recommendation carries a label: `USER_PROVIDED`, `MEASURED_ACCOUNT_DATA`, `SOURCED` (with source), `HEURISTIC_PRIOR_MODEL`, `ASSUMPTION`. Unlabelled numbers are not allowed in the deliverable (`rules/00-manba.md`).
-2. Never invent advantages, testimonials, statistics, market sizes, guarantees or competitor facts. Use `[ADD VERIFIED ...]` placeholders and list them in "Open inputs".
-3. No guaranteed CPA/CPL/ROAS/conversions and no universal benchmarks. Targets are derived from the client's own economics (`calculator.py funnel-economics`).
-4. Volatile platform facts (features, specs, policies, minimum budgets, Advantage+ behavior) are verified against Meta's current documentation or the live account before they are stated as fact; otherwise write "verify before launch".
-5. No policy-compliance claims without a real review; say "risk assessment, not approval".
+1. Har bir raqam, da'vo va tavsiya yorliqqa ega bo'ladi: `USER_PROVIDED`, `MEASURED_ACCOUNT_DATA`, `SOURCED` (manba bilan), `HEURISTIC_PRIOR_MODEL`, `ASSUMPTION`. Yorliqsiz raqamlar natijada ruxsat etilmaydi (`rules/00-manba.md`).
+2. Ustunliklar, sharhlar, statistika, bozor hajmlari, kafolatlar yoki raqobatchi faktlarini hech qachon to'qimang. `[ADD VERIFIED ...]` o'rin egalaridan foydalaning va ularni "Ochiq kirishlar" da sanang.
+3. Kafolatlangan CPA/CPL/ROAS/konversiyalar yo'q va universal benchmarklar yo'q. Maqsadlar mijozning o'z iqtisodidan chiqariladi (`calculator.py funnel-economics`).
+4. O'zgaruvchan platforma faktlari (funksiyalar, spetsifikatsiyalar, policy, minimal byudjetlar, Advantage+ xatti-harakati) fakt sifatida aytilishidan oldin Meta'ning joriy hujjatlari yoki jonli akkaunt bilan tekshiriladi; aks holda "ishga tushirishdan oldin tekshiring" deb yozing.
+5. Haqiqiy ko'rib chiqishsiz policy-muvofiqlik da'volari yo'q; "tasdiq emas, xavf baholash" deb ayting.
 
-## 1. Input inventory (ask only for what blocks the first stage)
+## 1. Kirishlar inventari (faqat birinchi bosqichni to'sib turgan narsani so'rang)
 
-| Input | Why | If missing |
+| Kirish | Nima uchun | Yetishmasa |
 |---|---|---|
-| Product/service, offer, price, delivery/sales process | diagnosis, economics | ask (blocking) |
-| COGS or margin, payment/processing fees | break-even | ask; else show formula with placeholders |
-| Goal (leads/sales/bookings/app) and time frame | objective, funnel | ask (blocking) |
-| Monthly or daily budget | testing vs scaling | ask; else show three budget tiers |
-| Lead-to-sale conversion, average order, repeat rate | CPL/CPA targets, LTV | `ASSUMPTION` range with a plan to measure |
-| Pixel/CAPI/CRM/Telegram-bot state, domain, events | measurement plan | audit as unknown, plan setup first |
-| Existing audiences/customer lists/ad history, exports | audience and learning | start cold; plan seeds |
-| Competitors, reviews, assets (videos/photos/proof) | positioning, creative | research stage or placeholders |
-| Constraints: regulated category, geo, language, capacity to handle leads | policy, scale ceiling | flag risk |
+| Mahsulot/xizmat, taklif, narx, yetkazib berish/sotuv jarayoni | diagnostika, iqtisod | so'rang (to'sadi) |
+| COGS yoki marja, to'lov/qayta ishlash to'lovlari | break-even | so'rang; aks holda o'rin egalari bilan formulani ko'rsating |
+| Maqsad (lid/sotuv/bron/ilova) va muddat | maqsad, voronka | so'rang (to'sadi) |
+| Oylik yoki kunlik byudjet | test va masshtab | so'rang; aks holda uchta byudjet darajasini ko'rsating |
+| Lid-sotuv konversiyasi, o'rtacha buyurtma, takroriy daraja | CPL/CPA maqsadlari, LTV | o'lchash rejasi bilan `ASSUMPTION` oralig'i |
+| Pixel/CAPI/CRM/Telegram-bot holati, domen, eventlar | o'lchov rejasi | noma'lum deb audit qiling, avval sozlashni rejalang |
+| Mavjud auditoriyalar/mijoz ro'yxatlari/reklama tarixi, eksportlar | auditoriya va o'rganish | sovuqdan boshlang; seedlarni rejalang |
+| Raqobatchilar, sharhlar, aktivlar (video/foto/isbot) | pozitsiyalash, kreativ | tadqiqot bosqichi yoki o'rin egalari |
+| Cheklovlar: tartibga solinadigan kategoriya, geo, til, lidlarni qayta ishlash quvvati | policy, masshtab shifti | xavfni belgilang |
 
-## 2. Workflow (what each stage must produce)
+## 2. Ish jarayoni (har bir bosqich nimani berishi kerak)
 
-| Stage | Owner | Output | Tools |
+| Bosqich | Egasi | Natija | Asboblar |
 |---|---|---|---|
-| intake | conductor | `business_brief`: verified facts vs assumptions table | `ads-plan` |
-| research | research-worker | competitor/market findings with sources (only what was actually seen; Ads Library items cited) | `ads-competitor`, `customer-research` |
-| economics | audit-budget | break-even/target CPA, CPL, ROAS, test budget, scenarios, scale limits | `calculator.py breakeven`, `funnel-economics` |
-| positioning | positioning-strategist | ICP and personas, awareness stage per segment, pains/desires/objections, USP, conversion barriers | `ads-dna`, `product-marketing` |
-| architecture | launch-planner | objectives, funnel, campaign/ad set structure, ABO/CBO, Advantage+ vs manual, budget split, test/scale logic, roadmap | `ads-plan`, `ads-launch` |
-| audience | meta-audience-architect | 4-layer audience map, exclusions, targeting list with 6-status verification | `meta-targeting-engine.py`, `meta-audience.py` |
-| creative | creative-strategist | angle x avatar x format matrix, concept briefs, test hypotheses | `creative-matrix.py` |
-| tracking | tracking-specialist | event taxonomy, dedup, UTM, CRM/offline feedback plan, attribution limits | `capi-utm-builder.py` |
-| video | reels-scriptwriter | top 1-2 concepts as shoot-ready scripts (see `skills/video/references/reels-scripting/references/performance-video-system.md`) | `creative-matrix.py video-script` |
-| validate | source-verifier | claims table: supported / unsupported / needs source | - |
-| synthesize | conductor | the 15-section document below | - |
+| intake | dirijyor | `business_brief`: tasdiqlangan faktlar va taxminlar jadvali | `ads-plan` |
+| research | research-worker | manbali raqobatchi/bozor topilmalari (faqat haqiqatan ko'rilgan; Ads Library elementlari keltirilgan) | `ads-competitor`, `customer-research` |
+| economics | audit-budget | break-even/maqsad CPA, CPL, ROAS, test byudjeti, ssenariylar, masshtab chegaralari | `calculator.py breakeven`, `funnel-economics` |
+| positioning | positioning-strategist | ICP va personalar, segment bo'yicha xabardorlik bosqichi, og'riqlar/istaklar/e'tirozlar, USP, konversiya to'siqlari | `ads-dna`, `product-marketing` |
+| architecture | launch-planner | maqsadlar, voronka, kampaniya/ad set tuzilmasi, ABO/CBO, Advantage+ va qo'lda, byudjet bo'linishi, test/masshtab mantig'i, yo'l xaritasi | `ads-plan`, `ads-launch` |
+| audience | meta-audience-architect | 4 qatlamli auditoriya xaritasi, exclusion'lar, 6 statusli tekshiruvli targeting ro'yxati | `meta-targeting-engine.py`, `meta-audience.py` |
+| creative | creative-strategist | angle x avatar x format matritsasi, konsept brifleri, test gipotezalari | `creative-matrix.py` |
+| tracking | tracking-specialist | event taksonomiyasi, dedup, UTM, CRM/oflayn fikr-mulohaza rejasi, atributsiya cheklovlari | `capi-utm-builder.py` |
+| video | reels-scriptwriter | syomkaga tayyor ssenariylar sifatida eng yaxshi 1–2 konsept (`skills/video/references/reels-scripting/references/performance-video-system.md` ga qarang) | `creative-matrix.py video-script` |
+| validate | source-verifier | da'volar jadvali: qo'llab-quvvatlanadi / qo'llab-quvvatlanmaydi / manba kerak | - |
+| synthesize | dirijyor | quyidagi 15 bo'limli hujjat | - |
 
-## 3. Decision frameworks (state the choice and the reason in the deliverable)
+## 3. Qaror freymvorklari (natijada tanlov va sababni ko'rsating)
 
-**Funnel applicability** - do not force TOF/MOF/BOF/Retention everywhere. Decide per business:
+**Voronka qo'llanilishi** — TOF/MOF/BOF/Retention ni hamma joyda majburlamang. Har bir biznes uchun hal qiling:
 
-| Situation | Funnel | Reason to state |
+| Vaziyat | Voronka | Aytiladigan sabab |
 |---|---|---|
-| New advertiser, no pixel history, low budget | TOF-only conversion test + proper exclusions; retargeting only once pools reach a size that can learn | audience pools too small to retarget profitably |
-| Local service with a short decision cycle (clinic, courses, repair) | TOF to lead form/Telegram/DM + fast follow-up; BOF = warm leads who did not book | sales speed decides profit |
-| High-ticket or long cycle | TOF + MOF proof/education + BOF retargeting + CRM nurture | trust needed before inquiry |
-| E-commerce with catalog and purchase history | Advantage+ sales campaign plus retention/upsell | enough events for automation |
-| Existing customer base | Add retention and lookalike seeds | seeds exist |
+| Yangi reklama beruvchi, pixel tarixi yo'q, kichik byudjet | Faqat TOF konversiya testi + to'g'ri exclusion'lar; retargeting faqat havzalar o'rganishi mumkin bo'lgan hajmga yetganda | auditoriya havzalari foydali retargeting uchun juda kichik |
+| Qisqa qaror sikli bo'lgan mahalliy xizmat (klinika, kurslar, ta'mirlash) | TOF dan lid formasi/Telegram/DM ga + tezkor keyingi aloqa; BOF = bron qilmagan iliq lidlar | sotuv tezligi foydani hal qiladi |
+| Qimmat yoki uzun sikl | TOF + MOF isbot/ta'lim + BOF retargeting + CRM nurture | so'rovdan oldin ishonch kerak |
+| Katalog va xarid tarixi bor e-commerce | Advantage+ sales kampaniyasi plus saqlash/upsell | avtomatlashtirish uchun yetarli eventlar |
+| Mavjud mijoz bazasi | Saqlash va lookalike seedlarini qo'shing | seedlar mavjud |
 
-**Structure choices**: Advantage+ (automation) vs manual - prefer automation when conversion volume and creative variety are sufficient and the account has clean signals; prefer manual/ABO for controlled creative/audience tests with small budgets. CBO vs ABO - ABO for testing (equal spend per cell), CBO/Advantage budget for scaling proven ad sets. Broad vs Detailed Targeting - Broad when the creative carries the targeting, pixel/CAPI signal quality is good and volume exists; Detailed Targeting as a hypothesis layer for cold tests, small markets, or niches where Broad wastes learning. Always say what evidence would flip the choice. Lookalike only with a valid seed (quality conversions, adequate size); retargeting windows follow the sales cycle.
+**Tuzilma tanlovlari**: Advantage+ (avtomatlashtirish) va qo'lda — konversiya hajmi va kreativ xilma-xilligi yetarli bo'lsa va akkauntda toza signallar bo'lsa avtomatlashtirishni afzal ko'ring; kichik byudjetlarda nazorat qilinadigan kreativ/auditoriya testlari uchun qo'lda/ABO. CBO va ABO — test uchun ABO (har bir katakka teng sarf), isbotlangan ad set'larni masshtablash uchun CBO/Advantage byudjet. Broad va Detailed Targeting — kreativ targetingni ko'targanda, pixel/CAPI signal sifati yaxshi va hajm mavjud bo'lganda Broad; sovuq testlar, kichik bozorlar yoki Broad o'rganishni isrof qiladigan nishalar uchun gipoteza qatlami sifatida Detailed Targeting. Har doim qanday dalil tanlovni o'zgartirishini ayting. Lookalike faqat yaroqli seed bilan (sifatli konversiyalar, yetarli hajm); retargeting oynalari sotuv siklini kuzatadi.
 
-**Budget**: derive from `funnel-economics` (cost to reach a decision, learning-friendly spend per ad set, scale steps within Spend-Guard +20% per change). Give three tiers (minimum viable test / recommended / aggressive) with what each can and cannot prove.
+**Byudjet**: `funnel-economics` dan chiqaring (qarorgacha yetish narxi, ad set uchun o'rganishga mos sarf, Spend-Guard +20% o'zgarish doirasidagi masshtab qadamlari). Har bir daraja nimani isbotlay olishi va olmasligi bilan uchta darajani bering (minimal yaroqli test / tavsiya etilgan / agressiv).
 
-## 4. Audience and targeting rules
+## 4. Auditoriya va targeting qoidalari
 
-- Run `meta-targeting-engine.py search` for candidate interests/behaviors. Preserve the original Meta name and ID exactly as returned. Statuses: `VERIFIED_AVAILABLE`, `FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED`, `RELATED_UNVERIFIED`, `NOT_FOUND`, `API_UNAVAILABLE`.
-- Only `VERIFIED_AVAILABLE` items go in the "ready to use" list. Others are labelled hypotheses to verify in Ads Manager Detailed Targeting. If the API is unavailable (no token), say so; do not present candidates as verified.
-- For each item: why it is relevant to this ICP, expected role (cold test / broad support / exclusion), and its status. Drop irrelevant or invented options rather than padding the list.
-- Exclusions per layer (existing customers, recent leads, employees/competitors where possible, active DM conversations), Static Pool Overlap check (`meta-audience.py overlap`, target below 20%), saturation check for small audiences.
-- Special Ad Categories (credit, housing, employment) restrict targeting; state it if relevant.
+- Nomzod qiziqish/xatti-harakatlar uchun `meta-targeting-engine.py search` ni ishga tushiring. Asl Meta nomi va ID'ni aynan qaytarilganidek saqlang. Statuslar: `VERIFIED_AVAILABLE`, `FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED`, `RELATED_UNVERIFIED`, `NOT_FOUND`, `API_UNAVAILABLE`.
+- Faqat `VERIFIED_AVAILABLE` elementlar "foydalanishga tayyor" ro'yxatga tushadi. Qolganlari Ads Manager Detailed Targeting'da tekshiriladigan gipotezalar deb belgilanadi. API mavjud bo'lmasa (token yo'q), buni ayting; nomzodlarni tasdiqlangan deb ko'rsatmang.
+- Har bir element uchun: nega bu ICP uchun tegishli, kutilgan roli (sovuq test / broad yordam / exclusion) va holati. Ro'yxatni to'ldirish o'rniga tegishli bo'lmagan yoki to'qilgan variantlarni olib tashlang.
+- Har bir qatlam uchun exclusion'lar (mavjud mijozlar, yaqinda lidlar, imkon bo'lsa xodimlar/raqobatchilar, faol DM suhbatlari), Static Pool Overlap tekshiruvi (`meta-audience.py overlap`, maqsad 20% dan past), kichik auditoriyalar uchun to'yinish tekshiruvi.
+- Special Ad Categories (kredit, uy-joy, bandlik) targetingni cheklaydi; tegishli bo'lsa, buni ayting.
 
-## 5. Tracking and measurement section must cover
+## 5. Treking va o'lchov bo'limi qamrab olishi kerak
 
-Pixel and Conversions API (browser + server), event list and priority, deduplication (`event_id`), consent, UTM taxonomy, lead qualification and CRM stage mapping, offline conversion feedback, Telegram bot/DM funnel measurement (deep-link payloads, start events), attribution window limits and the gap between Ads Manager and real revenue. Success is measured on business results (qualified leads, sales, margin), with Ads Manager metrics as diagnostics.
+Pixel va Conversions API (brauzer + server), event ro'yxati va ustuvorligi, deduplikatsiya (`event_id`), rozilik, UTM taksonomiyasi, lid malakasi va CRM bosqich xaritasi, oflayn konversiya fikr-mulohazasi, Telegram bot/DM voronka o'lchovi (deep-link payload'lar, start eventlari), atributsiya oynasi chegaralari va Ads Manager hamda haqiqiy daromad o'rtasidagi bo'shliq. Muvaffaqiyat biznes natijalari (malakali lidlar, sotuvlar, marja) bilan o'lchanadi, Ads Manager metrikalari esa diagnostika sifatida.
 
-## 6. The 15-section client deliverable
+## 6. 15 bo'limli mijoz natijasi
 
-Write in the user's language (default Uzbek Latin; Russian/English on request), concise, with tables. Each section ends with an evidence label summary where numbers appear.
+Foydalanuvchi tilida yozing (standart o'zbek lotin; so'ralganda rus/ingliz), ixcham, jadvallar bilan. Raqamlar paydo bo'lgan har bir bo'lim dalil yorlig'i xulosasi bilan tugaydi.
 
-1. **Executive summary** - the recommendation, expected role of Meta, three key numbers (labelled), the first decision needed.
-2. **Business diagnosis** - product/offer analysis, unit economics snapshot, barriers to conversion.
-3. **Audience analysis** - ICP, personas, awareness stages, pains, desires, objections, buying motivations.
-4. **Market and competitor insights** - only what was actually observed, with sources; positioning gap and USP.
-5. **Campaign objectives** - business goal -> Meta objective -> optimization event, with why.
-6. **Funnel architecture** - applicable stages only, with the reason others are excluded; diagram.
-7. **Campaign structure** - campaigns, ad sets, ads, naming, ABO/CBO and Advantage+ decisions, diagram.
-8. **Audience and targeting** - 4-layer map, verified targeting table (name, ID, status, role), exclusions, broad-vs-detailed rationale.
-9. **Budget** - economics table (break-even and target CPA/CPL/ROAS), three budget tiers, test budget, scale rules.
-10. **Creative strategy** - angle x format matrix, concepts, proof plan, production needs; video scripts appendix.
-11. **Tracking** - measurement plan and gaps (blocking vs non-blocking).
-12. **Testing plan** - hypotheses (single variable, decision rule, minimum data), sequence, what stays constant.
-13. **Optimization and scaling roadmap** - table: stage, actions, dependencies, owner, metrics, decision criteria (below).
-14. **Scenarios and assumptions** - pessimistic/base/optimistic from `funnel-economics`, assumptions register with how to verify each.
-15. **Risks and recommendations** - policy, tracking, capacity (can the client handle leads?), creative supply, dependency on assumptions; prioritized next 5 actions.
+1. **Ijroiya xulosa** - tavsiya, Meta'ning kutilgan roli, uchta asosiy raqam (yorliqli), kerakli birinchi qaror.
+2. **Biznes diagnostikasi** - mahsulot/taklif tahlili, unit-iqtisod snapshoti, konversiya to'siqlari.
+3. **Auditoriya tahlili** - ICP, personalar, xabardorlik bosqichlari, og'riqlar, istaklar, e'tirozlar, xarid motivatsiyalari.
+4. **Bozor va raqobatchi insaytlari** - faqat haqiqatan kuzatilgan, manbalar bilan; pozitsiyalash bo'shlig'i va USP.
+5. **Kampaniya maqsadlari** - biznes maqsadi -> Meta maqsadi -> optimallashtirish eventi, sababi bilan.
+6. **Voronka arxitekturasi** - faqat qo'llaniladigan bosqichlar, boshqalar nega chiqarilgani sababi bilan; diagramma.
+7. **Kampaniya tuzilmasi** - kampaniyalar, ad set'lar, reklamalar, nomlash, ABO/CBO va Advantage+ qarorlari, diagramma.
+8. **Auditoriya va targeting** - 4 qatlamli xarita, tasdiqlangan targeting jadvali (nom, ID, status, rol), exclusion'lar, broad va detailed asosi.
+9. **Byudjet** - iqtisod jadvali (break-even va maqsad CPA/CPL/ROAS), uchta byudjet darajasi, test byudjeti, masshtab qoidalari.
+10. **Kreativ strategiya** - angle x format matritsasi, konseptlar, isbot rejasi, ishlab chiqarish ehtiyojlari; video ssenariylar ilovasi.
+11. **Treking** - o'lchov rejasi va bo'shliqlar (to'sadigan va to'smaydigan).
+12. **Test rejasi** - gipotezalar (bitta o'zgaruvchi, qaror qoidasi, minimal ma'lumot), ketma-ketlik, doimiy qoladigan narsalar.
+13. **Optimallashtirish va masshtablash yo'l xaritasi** - jadval: bosqich, harakatlar, bog'liqliklar, egasi, metrikalar, qaror mezonlari (quyida).
+14. **Ssenariylar va taxminlar** - `funnel-economics` dan pessimistik/bazaviy/optimistik, har birini qanday tekshirish bilan taxminlar reyestri.
+15. **Xavflar va tavsiyalar** - policy, treking, quvvat (mijoz lidlarni qayta ishlay oladimi?), kreativ ta'minot, taxminlarga bog'liqlik; ustuvor keyingi 5 harakat.
 
-### Roadmap table template
+### Yo'l xaritasi jadval shabloni
 
-| Stage | Actions | Depends on | Owner | Metrics | Go / no-go decision criteria |
+| Bosqich | Harakatlar | Bog'liq | Egasi | Metrikalar | Go / no-go qaror mezonlari |
 |---|---|---|---|---|---|
-| Preparation | pixel/CAPI/UTM, assets, landing/bot, CRM mapping | client inputs | client + tracking | events firing, dedup ok | all blocking tracking items closed |
-| Launch | create test structure per architecture | preparation | media buyer | delivery, learning status | no policy flags, budget caps set (Spend-Guard) |
-| Testing | angle/format cells, equal spend | launch | media buyer + creative | hook rate, hold rate, outbound CTR, CPL, lead quality | pre-registered per test |
-| Data collection | accumulate decision-sized samples | testing | analyst | conversions per cell, CRM stage | minimum sample reached (from economics) |
-| Optimization | kill/keep/promote | data | media buyer | CPA vs break-even/target, marginal CPA | thresholds from economics, not generic |
-| Creative iteration | new concepts from diagnosis | optimization | creative | per-stage diagnosis (`creative-matrix.py iterate`) | winner defined by CRM quality |
-| Scaling | +20% steps or horizontal clones | validated CPA | media buyer | marginal CPA, frequency, saturation | marginal CPA below break-even |
-| Reporting | weekly/monthly | all | analyst | blended ROAS, net cash, CRM revenue | report accepted by client |
+| Tayyorgarlik | pixel/CAPI/UTM, aktivlar, landing/bot, CRM xaritasi | mijoz kirishlari | mijoz + treking | eventlar ishlayapti, dedup yaxshi | barcha to'sadigan treking bandlari yopilgan |
+| Ishga tushirish | arxitekturaga ko'ra test tuzilmasini yaratish | tayyorgarlik | media buyer | yetkazib berish, o'rganish holati | policy bayroqlari yo'q, byudjet shiftlari o'rnatilgan (Spend-Guard) |
+| Test | angle/format kataklari, teng sarf | ishga tushirish | media buyer + kreativ | hook rate, hold rate, outbound CTR, CPL, lid sifati | har bir test uchun oldindan ro'yxatdan o'tgan |
+| Ma'lumot yig'ish | qaror hajmidagi tanlamalarni to'plash | test | tahlilchi | katak bo'yicha konversiyalar, CRM bosqichi | minimal tanlamaga yetildi (iqtisoddan) |
+| Optimallashtirish | kill/keep/promote | ma'lumot | media buyer | CPA va break-even/maqsad, marginal CPA | umumiy emas, iqtisoddan olingan chegaralar |
+| Kreativ iteratsiya | diagnostikadan yangi konseptlar | optimallashtirish | kreativ | bosqich bo'yicha diagnostika (`creative-matrix.py iterate`) | g'olib CRM sifati bilan aniqlanadi |
+| Masshtablash | +20% qadamlar yoki gorizontal klonlar | tasdiqlangan CPA | media buyer | marginal CPA, frequency, to'yinish | marginal CPA break-even'dan past |
+| Hisobot | haftalik/oylik | hammasi | tahlilchi | birlashgan ROAS, sof naqd pul, CRM daromadi | hisobot mijoz tomonidan qabul qilingan |
 
-### Diagram templates
+### Diagramma shablonlari
 
 ```mermaid
 flowchart LR
@@ -111,12 +111,12 @@ flowchart LR
   B --> E[BOF: warm non-converters]
   D --> F[Retention / lookalike seed]
 ```
-Replace nodes with the funnel actually chosen in section 6.
+Tugunlarni 6-bo'limda tanlangan haqiqiy voronka bilan almashtiring.
 
-## 7. Uzbekistan market notes (use only when the client operates there; verify with client data)
+## 7. O'zbekiston bozori eslatmalari (faqat mijoz u yerda faoliyat yuritganda; mijoz ma'lumotlari bilan tekshiring)
 
-Language split Uzbek (Latin/Cyrillic) vs Russian affects creative and targeting; plan separate or adapted creatives, never literal translation. Many funnels end in Telegram bots/DMs or phone calls rather than a website: measure those steps explicitly. Payment behavior (installments such as BNPL/Uzum Nasiya, Payme/Click) can change the offer; state which are confirmed by the client. Do not assert market figures without a source.
+O'zbek (lotin/kirill) va rus tili bo'linishi kreativ va targetingga ta'sir qiladi; alohida yoki moslashtirilgan kreativlarni rejalang, hech qachon so'zma-so'z tarjima emas. Ko'plab voronkalar veb-saytda emas, Telegram botlar/DM yoki telefon qo'ng'iroqlarida tugaydi: bu qadamlarni aniq o'lchang. To'lov xatti-harakati (BNPL/Uzum Nasiya kabi bo'lib to'lash, Payme/Click) taklifni o'zgartirishi mumkin; qaysi biri mijoz tomonidan tasdiqlanganini ayting. Manbasiz bozor raqamlarini da'vo qilmang.
 
-## 8. Self-check before delivery
+## 8. Topshirishdan oldin o'z-o'zini tekshirish
 
-All 15 sections present; numbers reconcile (budget = sum of campaigns; volumes consistent with CPL/CVR assumptions); every targeting item has a status; every placeholder listed in "Open inputs"; assumptions register complete; no guarantees; execution report states which stages ran natively, as fallback, or were skipped, and which tools actually ran.
+Barcha 15 bo'lim mavjud; raqamlar mos keladi (byudjet = kampaniyalar yig'indisi; hajmlar CPL/CVR taxminlariga mos); har bir targeting elementining holati bor; har bir o'rin egasi "Ochiq kirishlar" da sanalgan; taxminlar reyestri to'liq; kafolatlar yo'q; bajarish hisoboti qaysi bosqichlar native, zaxira sifatida bajarilgani yoki o'tkazib yuborilganini va qaysi asboblar haqiqatan ishga tushganini ko'rsatadi.

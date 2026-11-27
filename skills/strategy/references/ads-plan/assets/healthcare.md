@@ -1,38 +1,38 @@
-# Healthcare paid-media planning questions
+# Sog'liqni saqlash pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid; not medical, privacy, or legal advice.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi; tibbiy, maxfiylik yoki huquqiy maslahat emas.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the provider, service or product, audience, jurisdiction,
-  care setting, objective, conversion, accountable privacy owner, and clinical reviewer.
-- Evidence gate: verify current official source IDs from platforms and regulators, including
-  `hhs-tracking-guidance-official` when its scope is applicable.
-- Privacy gate: determine whether pages, events, URLs, forms, audiences, or vendor flows
-  could disclose protected or sensitive health information; block uncertain tracking uses.
-- Clinical-claim gate: require approved indication, evidence, limitations, risk language,
-  and qualified review before using outcome or comparative claims.
-- Regulatory gate: identify category, region, certification, targeting, disclosure,
-  accessibility, and emergency-content requirements from current official evidence.
-- Capability gate: keep sensitive data out of unsupported providers, prompts, reports,
-  logs, and account operations.
+- Kontekst darvozasi: provayder, xizmat yoki mahsulot, auditoriya, yurisdiksiya, yordam ko'rsatish sharoiti,
+  maqsad, konversiya, mas'ul maxfiylik egasi va klinik ko'rib chiquvchini aniqlang.
+- Dalil darvozasi: platforma va regulyatorlarning joriy rasmiy manba ID'larini tekshiring, qamrovi mos kelsa
+  `hhs-tracking-guidance-official` ni ham.
+- Maxfiylik darvozasi: sahifalar, eventlar, URL'lar, formalar, auditoriyalar yoki vendor oqimlari himoyalangan
+  yoki sezgir sog'liq ma'lumotini oshkor qilishi mumkinligini aniqlang; noaniq treking foydalanishlarini bloklang.
+- Klinik da'vo darvozasi: natija yoki taqqoslash da'volaridan foydalanishdan oldin tasdiqlangan ko'rsatma, dalil,
+  cheklovlar, xavf tili va malakali ko'rib chiqishni talab qiling.
+- Regulyator darvozasi: joriy rasmiy dalildan kategoriya, mintaqa, sertifikat, targeting, oshkor qilish, qulaylik
+  va favqulodda kontent talablarini aniqlang.
+- Imkoniyatlar darvozasi: sezgir ma'lumotni qo'llab-quvvatlanmaydigan provayderlar, promptlar, hisobotlar,
+  loglar va akkaunt operatsiyalaridan uzoqda saqlang.
 
-## Planning questions
+## Rejalash savollari
 
-- What service or product is offered, to whom, by which authorized entity?
-- Which claims are approved, understandable, balanced, and supported?
-- Which conversion events are useful without exposing health status or treatment interest?
-- Which targeting or creative concepts risk sensitive-trait inference or exploitation?
-- How will consent, vendor access, retention, deletion, incident response, and review work?
-- What should happen when a user may need urgent or professional care rather than an ad?
+- Qanday xizmat yoki mahsulot, kimga, qaysi vakolatli sub'ekt tomonidan taklif qilinadi?
+- Qaysi da'volar tasdiqlangan, tushunarli, muvozanatli va qo'llab-quvvatlangan?
+- Qaysi konversiya eventlari sog'liq holati yoki davolanishga qiziqishni oshkor qilmasdan foydali?
+- Qaysi targeting yoki kreativ konseptlar sezgir belgilarni xulosa qilish yoki ekspluatatsiya xavfini tug'diradi?
+- Rozilik, vendor kirishi, saqlash, o'chirish, hodisaga javob va ko'rib chiqish qanday ishlaydi?
+- Foydalanuvchiga reklama emas, shoshilinch yoki professional yordam kerak bo'lsa nima bo'lishi kerak?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider education, access, service explanation, and trust hypotheses only after the
-  privacy, clinical, regulatory, and platform gates pass.
-- Separate marketing measurement from medical outcomes and never infer diagnosis.
+- Ta'lim, kirish imkoni, xizmatni tushuntirish va ishonch gipotezalarini faqat maxfiylik, klinik, regulyator va
+  platforma darvozalari o'tgandan keyin ko'rib chiqing.
+- Marketing o'lchovini tibbiy natijalardan ajrating va hech qachon tashxisni xulosa qilmang.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return questions, source IDs, approvals, unresolved risks, owners, and stop conditions.
-- Do not prescribe eligibility, targeting, tracking, claims, bids, allocations, or outcomes.
+- Savollar, manba ID'lari, tasdiqlar, hal qilinmagan xavflar, egalar va to'xtatish shartlarini qaytaring.
+- Muvofiqlik, targeting, treking, da'volar, bidlar, taqsimotlar yoki natijalarni buyurmang.

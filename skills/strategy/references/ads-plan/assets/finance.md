@@ -1,39 +1,38 @@
-# Financial-services paid-media planning questions
+# Moliyaviy xizmatlar pullik media rejalash savollari
 
-> Status: qualitative, unscored planning aid; not legal, investment, credit, or compliance advice.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi; huquqiy, investitsiya, kredit yoki muvofiqlik maslahati emas.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the exact product, provider role, audience, jurisdiction, license
-  status, objective, conversion definition, and accountable compliance owner.
-- Evidence gate: register and verify current official source IDs from platforms and regulators for
-  the product and region before stating eligibility, targeting, disclosure, or claim rules.
-- Regulatory gate: block the affected plan section when current legal or platform evidence,
-  required certification, disclosure text, or specialist approval is missing.
-- Fairness gate: review targeting, exclusions, optimization inputs, and creative for protected
-  traits, proxies, vulnerability, deception, unfairness, and accessibility concerns.
-- Data gate: minimize financial and identity data; document consent, purpose, access,
-  matching, retention, suppression, and incident handling.
-- Approval gate: retain the compliance decision, approved copy, source IDs, owner, scope,
-  expiry, and re-review trigger.
+- Kontekst darvozasi: aniq mahsulot, provayder roli, auditoriya, yurisdiksiya, litsenziya holati, maqsad,
+  konversiya ta'rifi va mas'ul muvofiqlik egasini aniqlang.
+- Dalil darvozasi: muvofiqlik, targeting, oshkor qilish yoki da'vo qoidalarini aytishdan oldin mahsulot va
+  mintaqa uchun platforma va regulyatorlarning joriy rasmiy manba ID'larini ro'yxatdan o'tkazing va tekshiring.
+- Regulyator darvozasi: joriy huquqiy yoki platforma dalili, kerakli sertifikat, oshkor qilish matni yoki
+  mutaxassis tasdig'i yo'q bo'lsa, rejaning ta'sirlangan bo'limini bloklang.
+- Adolat darvozasi: targeting, exclusion'lar, optimallashtirish kirishlari va kreativni himoyalangan belgilar,
+  proksilar, zaiflik, aldov, adolatsizlik va qulaylik jihatidan ko'rib chiqing.
+- Ma'lumot darvozasi: moliyaviy va identifikatsiya ma'lumotlarini minimallashtiring; rozilik, maqsad, kirish,
+  moslashtirish, saqlash, bostirish va hodisalar bilan ishlashni hujjatlashtiring.
+- Tasdiq darvozasi: muvofiqlik qarori, tasdiqlangan matn, manba ID'lari, egasi, qamrov, amal qilish muddati va
+  qayta ko'rib chiqish triggerini saqlang.
 
-## Planning questions
+## Rejalash savollari
 
-- What regulated product and provider relationship is actually being advertised?
-- Which claims, rates, fees, risks, comparisons, and examples are approved and current?
-- Which audiences, regions, placements, and optimization signals are eligible now?
-- How will required disclosures remain clear in every requested field and format?
-- Which conversion events avoid sensitive inference and reflect a legitimate business outcome?
-- How will complaints, adverse outcomes, policy changes, and source expiry stop the plan?
+- Aslida qaysi tartibga solinadigan mahsulot va provayder munosabati reklama qilinmoqda?
+- Qaysi da'volar, stavkalar, to'lovlar, xavflar, taqqoslashlar va misollar tasdiqlangan va joriy?
+- Qaysi auditoriyalar, mintaqalar, placementlar va optimallashtirish signallari hozir yaroqli?
+- Majburiy oshkor qilishlar har bir so'ralgan maydon va formatda qanday aniq qoladi?
+- Qaysi konversiya eventlari sezgir xulosadan qochadi va qonuniy biznes natijasini aks ettiradi?
+- Shikoyatlar, salbiy oqibatlar, policy o'zgarishlari va manba muddati tugashi rejani qanday to'xtatadi?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider education, product explanation, trust, and qualified-intent hypotheses only after
-  the evidence and review gates pass.
-- Keep platform eligibility separate from legal permissibility and commercial suitability.
+- Ta'lim, mahsulotni tushuntirish, ishonch va malakali-niyat gipotezalarini faqat dalil va ko'rib chiqish
+  darvozalaridan o'tgandan keyin ko'rib chiqing.
+- Platforma muvofiqligini huquqiy ruxsat etilganlik va tijoriy mosligidan ajrating.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return questions, approvals, source IDs, unresolved risks, owners, and stop conditions.
-- Do not prescribe product eligibility, disclosures, targeting, bids, allocations, returns,
-  or financial outcomes from this template.
+- Savollar, tasdiqlar, manba ID'lari, hal qilinmagan xavflar, egalar va to'xtatish shartlarini qaytaring.
+- Bu shablondan mahsulot muvofiqligi, oshkor qilishlar, targeting, bidlar, taqsimotlar, daromadlar yoki moliyaviy natijalarni buyurmang.

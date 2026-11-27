@@ -1,39 +1,38 @@
-# E-commerce creative planning questions
+# E-commerce kreativ rejalash savollari
 
-> Status: qualitative, unscored planning aid.
+> Holat: sifatiy, ballanmaydigan rejalash yordamchisi.
 
-## Required gates
+## Majburiy darvozalar
 
-- Context gate: identify the product, offer, audience, funnel stage, placements, locale,
-  inventory state, margin context, rights-cleared assets, and approved claims.
-- Evidence gate: resolve live copy and asset requirements through current official source
-  IDs and label all practitioner patterns as hypotheses.
-- Rights gate: verify ownership, consent, likeness, trademark, music, testimonial,
-  endorsement, and synthetic-media permissions before production.
-- Regulatory gate: identify product, pricing, promotion, environmental, health, age,
-  and regional disclosure requirements and route uncertainty to qualified review.
-- Capability gate: record provider operations, accepted inputs, privacy behavior, cost
-  boundary, and verification path before generating or editing any asset.
+- Kontekst darvozasi: mahsulot, taklif, auditoriya, voronka bosqichi, placementlar, locale, inventar holati,
+  marja konteksti, huquqlari tozalangan aktivlar va tasdiqlangan da'volarni aniqlang.
+- Dalil darvozasi: jonli matn va aktiv talablarini joriy rasmiy manba ID'lari orqali aniqlang va barcha
+  amaliyotchi naqshlarini gipoteza deb belgilang.
+- Huquqlar darvozasi: ishlab chiqarishdan oldin egalik, rozilik, qiyofa, savdo belgisi, musiqa, sharh,
+  endorsement va sintetik media ruxsatlarini tekshiring.
+- Regulyator darvozasi: mahsulot, narxlash, aksiya, ekologik, sog'liq, yosh va mintaqaviy oshkor qilish
+  talablarini aniqlang va noaniqlikni malakali ko'rib chiqishga yo'naltiring.
+- Imkoniyatlar darvozasi: har qanday aktivni yaratish yoki tahrirlashdan oldin provayder operatsiyalari,
+  qabul qilinadigan kirishlar, maxfiylik xatti-harakati, xarajat chegarasi va tekshiruv yo'lini yozing.
 
-## Planning questions
+## Rejalash savollari
 
-- Which product facts and differentiators are verified and material to the audience?
-- Is the concept for discovery, evaluation, purchase, retention, or another approved job?
-- Which creative formats are currently eligible for each requested placement?
-- What source material proves price, availability, comparison, review, or testimonial claims?
-- How should product accuracy, brand consistency, accessibility, and copy zones be reviewed?
-- Which variables can be compared without changing audience, offer, and measurement together?
-- What would make an asset unusable because of rights, policy, evidence, or catalog mismatch?
+- Qaysi mahsulot faktlari va farqlovchilar tasdiqlangan va auditoriya uchun muhim?
+- Konsept kashf qilish, baholash, xarid, saqlash yoki boshqa tasdiqlangan vazifa uchunmi?
+- So'ralgan har bir placement uchun qaysi kreativ formatlar hozir yaroqli?
+- Narx, mavjudlik, taqqoslash, sharh yoki testimonial da'volarini qaysi manba material isbotlaydi?
+- Mahsulot aniqligi, brend izchilligi, qulaylik va matn zonalari qanday ko'rib chiqilishi kerak?
+- Qaysi o'zgaruvchilarni auditoriya, taklif va o'lchovni birga o'zgartirmasdan taqqoslash mumkin?
+- Aktivni huquqlar, policy, dalil yoki katalog nomuvofiqligi tufayli yaroqsiz qiladigan nima?
 
-## Candidate considerations
+## Nomzod mulohazalar
 
-- Consider product demonstration, context-of-use, proof, education, comparison, or story
-  concepts only when the required facts and rights are supplied.
-- Separate message hypotheses from visual treatments and placement adaptations.
-- Preserve a control asset and document each meaningful variation.
+- Mahsulot namoyishi, foydalanish konteksti, isbot, ta'lim, taqqoslash yoki hikoya konseptlarini faqat kerakli faktlar
+  va huquqlar berilganda ko'rib chiqing.
+- Xabar gipotezalarini vizual yondashuvlar va placement moslashtirishlaridan ajrating.
+- Nazorat aktivini saqlang va har bir ma'noli variatsiyani hujjatlashtiring.
 
-## Output guardrails
+## Natija chegaralari
 
-- Return unscored concept questions, source IDs, rights status, validation needs, and owners.
-- Do not prescribe platform priority, asset counts, aspect ratios, durations, allocations,
-  or performance claims from this template.
+- Ballanmaydigan konsept savollari, manba ID'lari, huquqlar holati, tekshiruv ehtiyojlari va egalarni qaytaring.
+- Bu shablondan platforma ustuvorligi, aktivlar soni, nisbatlar, davomiyliklar, taqsimotlar yoki natija da'volarini buyurmang.
