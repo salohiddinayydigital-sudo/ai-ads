@@ -4,7 +4,7 @@
 
 # 🧠 TYRION v8.3 — YOPIQ SIKLLI MEDIA-BUYER MIYASI
 
-[![Version](https://img.shields.io/badge/version-8.0.0-7C3AED.svg)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-8.3.1-7C3AED.svg)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
 <!-- tyrion:catalog agents=19 skills=19 wiki=101 playbooks=9 contexts=6 commands=42 rules=9 tools=40 -->
