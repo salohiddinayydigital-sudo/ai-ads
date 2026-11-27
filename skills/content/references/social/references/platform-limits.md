@@ -1,6 +1,6 @@
-# Platform Limits Reference
+# Platforma limitlari bo'yicha ma'lumotnoma
 
-Quick reference for hashtag limits, character counts, and visible text thresholds on each major social platform.
+Har bir yirik ijtimoiy platformadagi hashtag limitlari, belgilar soni va ko'rinadigan matn chegaralari bo'yicha tezkor ma'lumotnoma.
 
 ---
 
@@ -8,10 +8,10 @@ Quick reference for hashtag limits, character counts, and visible text threshold
 
 | Element | Limit |
 |---------|-------|
-| Max hashtags | 5 (official limit) |
-| Recommended hashtags | 3 – 5 |
-| Max caption chars | 2,200 |
-| Visible before "more" | ~125 chars |
+| Maks. hashtag | 5 (rasmiy limit) |
+| Tavsiya etilgan hashtag | 3 – 5 |
+| Maks. caption belgilari | 2 200 |
+| "more" dan oldin ko'rinadi | ~125 belgi |
 
 ---
 
@@ -19,10 +19,10 @@ Quick reference for hashtag limits, character counts, and visible text threshold
 
 | Element | Limit |
 |---------|-------|
-| Max hashtags | No official limit |
-| Recommended hashtags | 1 – 2 |
-| Max post chars | 63,206 |
-| Ideal for engagement | 40 – 80 chars |
+| Maks. hashtag | Rasmiy limit yo'q |
+| Tavsiya etilgan hashtag | 1 – 2 |
+| Maks. post belgilari | 63 206 |
+| Engagement uchun ideal | 40 – 80 belgi |
 
 ---
 
@@ -30,10 +30,10 @@ Quick reference for hashtag limits, character counts, and visible text threshold
 
 | Element | Limit |
 |---------|-------|
-| Max hashtags | 5 (since August 2025) |
-| Recommended hashtags | 3 – 5 |
-| Max caption chars | 4,000 |
-| Visible before "more" | ~150 chars |
+| Maks. hashtag | 5 (2025-yil avgustdan) |
+| Tavsiya etilgan hashtag | 3 – 5 |
+| Maks. caption belgilari | 4 000 |
+| "more" dan oldin ko'rinadi | ~150 belgi |
 
 ---
 
@@ -41,10 +41,10 @@ Quick reference for hashtag limits, character counts, and visible text threshold
 
 | Element | Limit |
 |---------|-------|
-| Max hashtags | No official limit |
-| Recommended hashtags | 3 – 5 |
-| Max post chars | 3,000 |
-| Visible before "more" | ~210 chars |
+| Maks. hashtag | Rasmiy limit yo'q |
+| Tavsiya etilgan hashtag | 3 – 5 |
+| Maks. post belgilari | 3 000 |
+| "more" dan oldin ko'rinadi | ~210 belgi |
 
 ---
 
@@ -52,10 +52,10 @@ Quick reference for hashtag limits, character counts, and visible text threshold
 
 | Element | Limit |
 |---------|-------|
-| Max hashtags | No official limit |
-| Recommended hashtags | 1 – 2 |
-| Max tweet chars | 280 (standard) / 25,000 (Premium+) |
-| Visible before "more" | Full tweet (280 standard) |
+| Maks. hashtag | Rasmiy limit yo'q |
+| Tavsiya etilgan hashtag | 1 – 2 |
+| Maks. tweet belgilari | 280 (standart) / 25 000 (Premium+) |
+| "more" dan oldin ko'rinadi | To'liq tweet (standartda 280) |
 
 ---
 
@@ -63,13 +63,13 @@ Quick reference for hashtag limits, character counts, and visible text threshold
 
 | Element | Limit |
 |---------|-------|
-| Max hashtags | 15 (exceeding this causes YouTube to ignore ALL hashtags) |
-| Recommended hashtags | 3 – 5 |
-| Max title chars | 100 (visible before truncation: ~70) |
-| Max description chars | 5,000 |
-| Visible before "Show more" | ~100 chars |
+| Maks. hashtag | 15 (oshsa, YouTube BARCHA hashtag'larni e'tiborsiz qoldiradi) |
+| Tavsiya etilgan hashtag | 3 – 5 |
+| Maks. sarlavha belgilari | 100 (kesilishdan oldin ko'rinadi: ~70) |
+| Maks. tavsif belgilari | 5 000 |
+| "Show more" dan oldin ko'rinadi | ~100 belgi |
 
-> The first 3 hashtags in the description automatically appear above the title as clickable links. For Shorts, use 1 – 5 hashtags.
+> Tavsifdagi birinchi 3 ta hashtag avtomatik ravishda sarlavha ustida bosiladigan havola sifatida chiqadi. Shorts uchun 1 – 5 ta hashtag ishlating.
 
 ---
 
@@ -77,13 +77,13 @@ Quick reference for hashtag limits, character counts, and visible text threshold
 
 | Element | Limit |
 |---------|-------|
-| Max hashtags | 20 per pin |
-| Recommended hashtags | 2 – 5 |
-| Max pin title chars | 100 |
-| Max description chars | 500 |
-| Visible before "More" | ~50 chars (desktop) |
+| Maks. hashtag | Har bir pin uchun 20 |
+| Tavsiya etilgan hashtag | 2 – 5 |
+| Maks. pin sarlavhasi belgilari | 100 |
+| Maks. tavsif belgilari | 500 |
+| "More" dan oldin ko'rinadi | ~50 belgi (desktop) |
 
-> Pinterest has deprioritized hashtags. Focus on keywords as natural sentences within the description for better SEO instead of relying on hashtags.
+> Pinterest hashtag'larning ustuvorligini pasaytirgan. Hashtag'larga tayanish o'rniga, yaxshiroq SEO uchun tavsif ichidagi tabiiy gaplar sifatida kalit so'zlarga e'tibor qarating.
 
 ---
 
@@ -91,20 +91,20 @@ Quick reference for hashtag limits, character counts, and visible text threshold
 
 | Element | Limit |
 |---------|-------|
-| Max hashtags | 1 per post (topic tag) |
-| Recommended hashtags | 1 |
-| Max post chars | 500 |
-| Max with text attachment | 10,500 (500 + 10,000 expandable) |
-| Visible without expanding | First ~1 – 2 lines |
+| Maks. hashtag | Har bir postga 1 (mavzu tegi) |
+| Tavsiya etilgan hashtag | 1 |
+| Maks. post belgilari | 500 |
+| Matn ilovasi bilan maks. | 10 500 (500 + 10 000 kengaytiriladigan) |
+| Kengaytirmasdan ko'rinadi | Birinchi ~1 – 2 qator |
 
-> Threads limits topic tags to one per post. The platform is not hashtag-driven — the algorithm prioritizes content from followed accounts mixed with recommendations.
+> Threads har bir postga bitta mavzu tegi bilan cheklaydi. Platforma hashtag'ga asoslanmagan — algoritm kuzatilgan akkauntlar kontentini tavsiyalar bilan aralashtirib ustuvor qiladi.
 
 ---
 
-## Usage Tips
+## Foydalanish maslahatlari
 
-- **Hashtags count against character limits** on all platforms
-- **Front-load your message** before the "more" truncation point
-- On Instagram and TikTok, fewer hashtags now outperform hashtag-stuffing
-- On LinkedIn, hashtags at the end of the post perform better than inline
-- On Facebook, hashtags have minimal impact on reach — use sparingly
+- **Hashtag'lar belgilar limitiga kiradi** — barcha platformalarda
+- **Xabaringizni** "more" kesilish nuqtasidan oldin joylashtiring
+- Instagram va TikTok'da endi kamroq hashtag hashtag-to'ldirishdan yaxshi natija beradi
+- LinkedIn'da post oxiridagi hashtag'lar ichki joylashganidan yaxshiroq ishlaydi
+- Facebook'da hashtag'lar qamrovga minimal ta'sir qiladi — tejamkorlik bilan ishlating

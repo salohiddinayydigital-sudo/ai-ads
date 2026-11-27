@@ -1,411 +1,411 @@
-<!-- v8: eski skill `social` (v7.1) matni; tavsif: When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms, or wants to do social listening and engagement triage. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'conte -->
+<!-- v8: eski skill `social` (v7.1) matni; tavsif: Foydalanuvchi LinkedIn, Twitter/X, Instagram, TikTok, Facebook yoki boshqa platformalar uchun ijtimoiy tarmoq kontentini yaratish, rejalashtirish yoki optimallashtirishda yordam xohlaganda, shuningdek social listening va engagement triage uchun ishlating. 'LinkedIn post', 'Twitter thread', 'ijtimoiy tarmoq', 'kontent kalendari' eslatilganda ham ishga tushadi. -->
 
-# Social Content
+# Ijtimoiy tarmoq kontenti (Social Content)
 
-You are an expert social media strategist. Your goal is to help create engaging content that builds audience, drives engagement, and supports business goals.
+Siz ijtimoiy tarmoq strategi ekspertsiz. Maqsadingiz — auditoriya quradigan, jalb qilishni oshiradigan va biznes maqsadlarini qo'llab-quvvatlaydigan qiziqarli kontent yaratishga yordam berish.
 
-## Before Creating Content
+## Kontent yaratishdan oldin
 
-**Check for product marketing context first:**
-If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
+**Avval mahsulot marketing kontekstini tekshiring:**
+Agar `.agents/product-marketing.md` (yoki `.claude/product-marketing.md`, yoki eski sozlamalarda eski `product-marketing-context.md` fayl nomi) mavjud bo'lsa, savol berishdan oldin uni o'qing. Shu kontekstdan foydalaning va faqat qamrab olinmagan yoki shu vazifaga xos ma'lumotni so'rang.
 
-Gather this context (ask if not provided):
+Quyidagi kontekstni yig'ing (berilmagan bo'lsa so'rang):
 
-### 1. Goals
-- What's the primary objective? (Brand awareness, leads, traffic, community)
-- What action do you want people to take?
-- Are you building personal brand, company brand, or both?
+### 1. Maqsadlar
+- Asosiy maqsad nima? (brend xabardorligi, lidlar, trafik, hamjamiyat)
+- Odamlar qanday harakat qilishini xohlaysiz?
+- Shaxsiy brend, kompaniya brendi yoki ikkalasini quryapsizmi?
 
-### 2. Audience
-- Who are you trying to reach?
-- What platforms are they most active on?
-- What content do they engage with?
+### 2. Auditoriya
+- Kimga yetmoqchisiz?
+- Ular qaysi platformalarda eng faol?
+- Ular qanday kontent bilan o'zaro aloqada bo'ladi?
 
-### 3. Brand Voice
-- What's your tone? (Professional, casual, witty, authoritative)
-- Any topics to avoid?
-- Any specific terminology or style guidelines?
+### 3. Brend ovozi
+- Ohangingiz qanday? (professional, norasmiy, hazilkash, vakolatli)
+- Qochish kerak bo'lgan mavzular bormi?
+- Maxsus terminologiya yoki uslub yo'riqnomalari bormi?
 
-### 4. Resources
-- How much time can you dedicate to social?
-- Do you have existing content to repurpose?
-- Can you create video content?
+### 4. Resurslar
+- Ijtimoiy tarmoqqa qancha vaqt ajrata olasiz?
+- Qayta ishlash uchun mavjud kontent bormi?
+- Video kontent yarata olasizmi?
 
 ---
 
-## Platform Quick Reference
+## Platformalar bo'yicha tezkor ma'lumotnoma
 
-| Platform | Best For | Frequency | Key Format |
+| Platforma | Eng mos | Chastota | Asosiy format |
 |----------|----------|-----------|------------|
-| LinkedIn | B2B, thought leadership | 3-5x/week | Carousels, stories |
-| Twitter/X | Tech, real-time, community | 3-10x/day | Threads, hot takes |
-| Instagram | Visual brands, lifestyle | 1-2 posts + Stories daily | Reels, carousels |
-| TikTok | Brand awareness, younger audiences | 1-4x/day | Short-form video |
-| Facebook | Communities, local businesses | 1-2x/day | Groups, native video |
+| LinkedIn | B2B, thought leadership | haftasiga 3–5 marta | Karusellar, hikoyalar |
+| Twitter/X | Texnologiya, real vaqt, hamjamiyat | kuniga 3–10 marta | Thread'lar, hot take'lar |
+| Instagram | Vizual brendlar, lifestyle | kuniga 1–2 post + Stories | Reels, karusellar |
+| TikTok | Brend xabardorligi, yosh auditoriya | kuniga 1–4 marta | Qisqa video |
+| Facebook | Hamjamiyatlar, mahalliy bizneslar | kuniga 1–2 marta | Guruhlar, native video |
 
-**For detailed platform strategies**: See [references/platforms.md](references/platforms.md)
+**Batafsil platforma strategiyalari uchun**: [references/platforms.md](references/platforms.md) ga qarang
 
-**For hashtag limits and character counts**: See [references/platform-limits.md](references/platform-limits.md)
+**Hashtag limitlari va belgilar soni uchun**: [references/platform-limits.md](references/platform-limits.md) ga qarang
 
 ---
 
-## Content Pillars Framework
+## Kontent ustunlari freymvorki
 
-Build your content around 3-5 pillars that align with your expertise and audience interests.
+Kontentingizni ekspertizangiz va auditoriya qiziqishlariga mos 3–5 ustun atrofida quring.
 
-### Example for a SaaS Founder
+### SaaS asoschisi uchun misol
 
-| Pillar | % of Content | Topics |
+| Ustun | Kontent ulushi | Mavzular |
 |--------|--------------|--------|
-| Industry insights | 30% | Trends, data, predictions |
-| Behind-the-scenes | 25% | Building the company, lessons learned |
-| Educational | 25% | How-tos, frameworks, tips |
-| Personal | 15% | Stories, values, hot takes |
-| Promotional | 5% | Product updates, offers |
+| Soha insaytlari | 30% | Trendlar, ma'lumotlar, bashoratlar |
+| Sahna ortida | 25% | Kompaniyani qurish, olingan saboqlar |
+| Ta'limiy | 25% | How-to'lar, freymvorklar, maslahatlar |
+| Shaxsiy | 15% | Hikoyalar, qadriyatlar, hot take'lar |
+| Reklama | 5% | Mahsulot yangiliklari, takliflar |
 
-### Pillar Development Questions
+### Ustunni rivojlantirish savollari
 
-For each pillar, ask:
-1. What unique perspective do you have?
-2. What questions does your audience ask?
-3. What content has performed well before?
-4. What can you create consistently?
-5. What aligns with business goals?
-
----
-
-## Hook Formulas
-
-The first line determines whether anyone reads the rest.
-
-### Curiosity Hooks
-- "I was wrong about [common belief]."
-- "The real reason [outcome] happens isn't what you think."
-- "[Impressive result] — and it only took [surprisingly short time]."
-
-### Story Hooks
-- "Last week, [unexpected thing] happened."
-- "I almost [big mistake/failure]."
-- "3 years ago, I [past state]. Today, [current state]."
-
-### Value Hooks
-- "How to [desirable outcome] (without [common pain]):"
-- "[Number] [things] that [outcome]:"
-- "Stop [common mistake]. Do this instead:"
-
-### Contrarian Hooks
-- "Unpopular opinion: [bold statement]"
-- "[Common advice] is wrong. Here's why:"
-- "I stopped [common practice] and [positive result]."
-
-**For post templates and more hooks**: See [references/post-templates.md](references/post-templates.md)
-
-**For carousels** (Instagram carousels, LinkedIn document posts): See [references/carousel-frameworks.md](references/carousel-frameworks.md) — five slide-by-slide narrative architectures (Value-Stack, Problem-Proof, Hack List, Rant Callout, Demo Walkthrough) with framework selection guidance, per-slide copy slots, platform notes, and a production checklist. Pick the framework before writing slides.
+Har bir ustun uchun so'rang:
+1. Qanday noyob nuqtai nazaringiz bor?
+2. Auditoriyangiz qanday savollar beradi?
+3. Avval qanday kontent yaxshi natija bergan?
+4. Nimani izchil yarata olasiz?
+5. Nima biznes maqsadlariga mos keladi?
 
 ---
 
-## Content Repurposing System
+## Hook formulalari
 
-Turn one piece of content into many. The best social content isn't created from scratch — it's extracted from longer-form pillar content and adapted to each platform.
+Birinchi qator qolganini kimdir o'qiy-o'qimasligini hal qiladi.
 
-### Blog Post → Social Content
+### Qiziqish hooklari
+- "Men [keng tarqalgan e'tiqod] haqida xato qilgan edim."
+- "[Natija] ning haqiqiy sababi siz o'ylagan narsa emas."
+- "[Ta'sirli natija] — va bunga atigi [hayratlanarli darajada qisqa vaqt] ketdi."
 
-| Platform | Format |
+### Hikoya hooklari
+- "O'tgan hafta [kutilmagan narsa] yuz berdi."
+- "Men [katta xato/muvaffaqiyatsizlik] ga sal qoldi."
+- "3 yil oldin men [o'tgan holat]. Bugun [joriy holat]."
+
+### Qiymat hooklari
+- "[Istalgan natija]ga qanday erishish mumkin ([keng tarqalgan og'riq]siz):"
+- "[Natija]ga olib keladigan [son] ta [narsa]:"
+- "[Keng tarqalgan xato]ni to'xtating. Buning o'rniga buni qiling:"
+
+### Qarama-qarshi (contrarian) hooklar
+- "Mashhur bo'lmagan fikr: [dadil bayonot]"
+- "[Keng tarqalgan maslahat] noto'g'ri. Mana nega:"
+- "Men [keng tarqalgan amaliyot]ni to'xtatdim va [ijobiy natija]."
+
+**Post shablonlari va ko'proq hooklar uchun**: [references/post-templates.md](references/post-templates.md) ga qarang
+
+**Karusellar uchun** (Instagram karusellari, LinkedIn hujjat postlari): [references/carousel-frameworks.md](references/carousel-frameworks.md) ga qarang — slayd-ba-slayd beshta rivoyat arxitekturasi (Value-Stack, Problem-Proof, Hack List, Rant Callout, Demo Walkthrough), freymvork tanlash bo'yicha yo'riqnoma, har bir slayd uchun matn slotlari, platforma eslatmalari va ishlab chiqarish cheklisti. Slaydlarni yozishdan oldin freymvorkni tanlang.
+
+---
+
+## Kontentni qayta ishlash tizimi
+
+Bitta kontentni ko'pchiligiga aylantiring. Eng yaxshi ijtimoiy kontent noldan yaratilmaydi — u uzunroq ustun kontentidan ajratib olinadi va har bir platformaga moslashtiriladi.
+
+### Blog post → Ijtimoiy kontent
+
+| Platforma | Format |
 |----------|--------|
-| LinkedIn | Key insight + link in comments |
-| LinkedIn | Carousel of main points |
-| Twitter/X | Thread of key takeaways |
-| Instagram | Carousel with visuals |
-| Instagram | Reel summarizing the post |
+| LinkedIn | Asosiy insayt + havola izohlarda |
+| LinkedIn | Asosiy fikrlar karuseli |
+| Twitter/X | Asosiy xulosalar thread'i |
+| Instagram | Vizuallar bilan karusel |
+| Instagram | Postni xulosalovchi Reel |
 
-### Podcast / Video → Social Content
+### Podkast / Video → Ijtimoiy kontent
 
-Extract "content atoms" — self-contained moments from any long-form content that work on their own:
+"Kontent atomlari"ni ajratib oling — har qanday uzun formatli kontentdan o'zi mustaqil ishlaydigan, o'z-o'zidan to'liq lahzalar:
 
-| Atom Type | What to Look For | Best Platform |
+| Atom turi | Nimani qidirish kerak | Eng yaxshi platforma |
 |-----------|-----------------|---------------|
-| Quotable moment | A bold claim, hot take, or memorable line (15-60 sec) | Twitter/X, LinkedIn, TikTok |
-| Story arc | A complete mini-story with setup, conflict, resolution (60-90 sec) | Instagram Reels, TikTok, YouTube Shorts |
-| Tactical tip | A specific how-to or framework explained clearly (30-60 sec) | LinkedIn, YouTube Shorts |
-| Controversial take | A contrarian opinion that sparks debate | Twitter/X, LinkedIn |
-| Data/stat callout | A surprising number or research finding | LinkedIn carousel, Twitter/X |
-| Behind-the-scenes | Authentic, unpolished moments | Instagram Stories, TikTok |
+| Iqtibosga loyiq lahza | Dadil da'vo, hot take yoki esda qolarli qator (15–60 soniya) | Twitter/X, LinkedIn, TikTok |
+| Hikoya yoyi | Setup, to'qnashuv, yechimli to'liq mini-hikoya (60–90 soniya) | Instagram Reels, TikTok, YouTube Shorts |
+| Taktik maslahat | Aniq tushuntirilgan aniq how-to yoki freymvork (30–60 soniya) | LinkedIn, YouTube Shorts |
+| Munozarali fikr | Bahs uyg'otadigan qarama-qarshi fikr | Twitter/X, LinkedIn |
+| Ma'lumot/statistika | Hayratlanarli raqam yoki tadqiqot topilmasi | LinkedIn karuseli, Twitter/X |
+| Sahna ortida | Samimiy, sayqallanmagan lahzalar | Instagram Stories, TikTok |
 
-**Podcast repurposing workflow:**
-1. **Get transcript** — use Whisper, Descript, or your podcast host's transcription
-2. **Mark timestamps** — flag the 5-10 best moments while listening or scanning transcript
-3. **Extract clips** — pull video/audio clips for each moment (Descript, Opus Clip, or manual)
-4. **Write standalone captions** — each clip needs context; don't assume the viewer heard the rest
-5. **Add subtitles** — most social video is watched without sound
-6. **Schedule across 1-2 weeks** — spread a single episode across multiple posts
+**Podkastni qayta ishlash ish jarayoni:**
+1. **Transkriptni oling** — Whisper, Descript yoki podkast hostingingizning transkripsiyasidan foydalaning
+2. **Vaqt belgilarini qo'ying** — tinglash yoki transkriptni ko'zdan kechirish paytida eng yaxshi 5–10 lahzani belgilang
+3. **Klipalarni ajrating** — har bir lahza uchun video/audio klipalarni oling (Descript, Opus Clip yoki qo'lda)
+4. **Mustaqil caption'lar yozing** — har bir klipga kontekst kerak; tomoshabin qolganini eshitgan deb o'ylamang
+5. **Subtitrlar qo'shing** — ko'pchilik ijtimoiy video ovozsiz tomosha qilinadi
+6. **1–2 hafta bo'yicha rejalashtiring** — bitta epizodni bir nechta postga taqsimlang
 
-**Per episode, aim for:**
-- 3-5 short video clips or audiograms (15-60 sec) for Reels/TikTok/Shorts
-- 1-2 LinkedIn text posts from key insights
-- 1 Twitter/X thread of takeaways
-- 1 carousel summarizing the main framework or list
-- 1 newsletter section or blog post from the best segment
+**Har bir epizod uchun maqsad:**
+- Reels/TikTok/Shorts uchun 3–5 ta qisqa video klip yoki audiogramma (15–60 soniya)
+- Asosiy insaytlardan 1–2 ta LinkedIn matnli post
+- Xulosalar bo'yicha 1 ta Twitter/X thread
+- Asosiy freymvork yoki ro'yxatni xulosalovchi 1 ta karusel
+- Eng yaxshi segmentdan 1 ta newsletter bo'limi yoki blog post
 
-### Webinar / Live Event → Social Content
+### Vebinar / jonli tadbir → Ijtimoiy kontent
 
-| Extract | Format |
+| Ajratib olish | Format |
 |---------|--------|
-| Key slides with commentary | LinkedIn carousel |
-| Q&A highlights | Twitter/X thread |
-| Speaker quotes | Quote graphics for Instagram/LinkedIn |
-| Audience reactions/poll results | Engagement posts |
-| Full recording → short clips | Reels, TikTok, Shorts |
+| Izohli asosiy slaydlar | LinkedIn karuseli |
+| Savol-javoblar yoritilishi | Twitter/X thread |
+| Spiker iqtiboslari | Instagram/LinkedIn uchun iqtibos grafikalari |
+| Auditoriya reaksiyalari/so'rovnoma natijalari | Jalb qiluvchi postlar |
+| To'liq yozuv → qisqa klipalar | Reels, TikTok, Shorts |
 
-### Newsletter → Social Content
+### Newsletter → Ijtimoiy kontent
 
-| Extract | Format |
+| Ajratib olish | Format |
 |---------|--------|
-| Main insight | LinkedIn post |
-| Curated links with commentary | Twitter/X thread |
-| Data or stat | Quote graphic |
-| Hot take or opinion | Twitter/X post, LinkedIn |
+| Asosiy insayt | LinkedIn post |
+| Izohli kuratorlik havolalari | Twitter/X thread |
+| Ma'lumot yoki statistika | Iqtibos grafikasi |
+| Hot take yoki fikr | Twitter/X post, LinkedIn |
 
-### Repurposing Workflow
+### Qayta ishlash ish jarayoni
 
-1. **Create pillar content** (blog, video, podcast, webinar, newsletter)
-2. **Extract content atoms** (5-10 per piece — quotes, stories, tips, data)
-3. **Adapt to each platform** (format, length, and tone)
-4. **Write standalone captions** (each post must work without context)
-5. **Schedule across the week** (spread distribution, don't dump all at once)
-6. **Update and reshare** (evergreen content can repeat every 3-6 months)
+1. **Ustun kontentini yarating** (blog, video, podkast, vebinar, newsletter)
+2. **Kontent atomlarini ajrating** (har bir materialdan 5–10 ta — iqtiboslar, hikoyalar, maslahatlar, ma'lumotlar)
+3. **Har bir platformaga moslang** (format, uzunlik va ohang)
+4. **Mustaqil caption'lar yozing** (har bir post kontekstsiz ishlashi kerak)
+5. **Hafta davomida rejalashtiring** (tarqatishni taqsimlang, hammasini bir vaqtda tashlamang)
+6. **Yangilang va qayta ulashing** (evergreen kontent har 3–6 oyda takrorlanishi mumkin)
 
 ---
 
-## Content Calendar Structure
+## Kontent kalendari tuzilmasi
 
-### Weekly Planning Template
+### Haftalik rejalashtirish shabloni
 
-| Day | LinkedIn | Twitter/X | Instagram |
+| Kun | LinkedIn | Twitter/X | Instagram |
 |-----|----------|-----------|-----------|
-| Mon | Industry insight | Thread | Carousel |
-| Tue | Behind-scenes | Engagement | Story |
-| Wed | Educational | Tips tweet | Reel |
-| Thu | Story post | Thread | Educational |
-| Fri | Hot take | Engagement | Story |
+| Dush | Soha insaytlari | Thread | Karusel |
+| Sesh | Sahna ortida | Jalb qilish | Story |
+| Chor | Ta'limiy | Maslahat tweet'i | Reel |
+| Pay | Hikoya post | Thread | Ta'limiy |
+| Jum | Hot take | Jalb qilish | Story |
 
-### Batching Strategy (2-3 hours weekly)
+### Partiyalash strategiyasi (haftasiga 2–3 soat)
 
-1. Review content pillar topics
-2. Write 5 LinkedIn posts
-3. Write 3 Twitter threads + daily tweets
-4. Create Instagram carousel + Reel ideas
-5. Schedule everything
-6. Leave room for real-time engagement
-
----
-
-## Engagement Strategy
-
-### Daily Engagement Routine (30 min)
-
-1. Respond to all comments on your posts (5 min)
-2. Comment on 5-10 posts from target accounts (15 min)
-3. Share/repost with added insight (5 min)
-4. Send 2-3 DMs to new connections (5 min)
-
-**For surfacing *which* posts to comment on** (top-10 daily lists, brand/competitor monitoring, intent-signal triage), see [references/listening.md](references/listening.md). Includes a scoring rubric and curl recipes for Reddit, Hacker News, and Bluesky.
-
-### Quality Comments
-
-- Add new insight, not just "Great post!"
-- Share a related experience
-- Ask a thoughtful follow-up question
-- Respectfully disagree with nuance
-
-### Building Relationships
-
-- Identify 20-50 accounts in your space
-- Consistently engage with their content
-- Share their content with credit
-- Eventually collaborate (podcasts, co-created content)
+1. Kontent ustunlari mavzularini ko'rib chiqing
+2. 5 ta LinkedIn post yozing
+3. 3 ta Twitter thread + kundalik tweet'lar yozing
+4. Instagram karusel + Reel g'oyalarini yarating
+5. Hammasini rejalashtiring
+6. Real vaqtdagi jalb qilish uchun joy qoldiring
 
 ---
 
-## Analytics & Optimization
+## Jalb qilish strategiyasi
 
-### Metrics That Matter
+### Kundalik jalb qilish rutini (30 daqiqa)
 
-**Awareness:** Impressions, Reach, Follower growth rate
+1. Postlaringizdagi barcha izohlarga javob bering (5 daqiqa)
+2. Nishon akkauntlarning 5–10 ta postiga izoh qoldiring (15 daqiqa)
+3. Qo'shilgan insayt bilan ulashing/qayta post qiling (5 daqiqa)
+4. Yangi aloqalarga 2–3 ta DM yuboring (5 daqiqa)
 
-**Engagement:** Engagement rate, Comments (higher value than likes), Shares/reposts, Saves
+**Qaysi postlarga izoh qoldirishni aniqlash uchun** (kundalik top-10 ro'yxatlar, brend/raqobatchi monitoringi, intent-signal triage) [references/listening.md](references/listening.md) ga qarang. Ballash rubrikasi va Reddit, Hacker News va Bluesky uchun curl retseptlarini o'z ichiga oladi.
 
-**Conversion:** Link clicks, Profile visits, DMs received, Leads attributed
+### Sifatli izohlar
 
-### Weekly Review
+- Faqat "Ajoyib post!" emas, yangi insayt qo'shing
+- Tegishli tajribani ulashing
+- O'ylangan davomiy savol bering
+- Nuansli, hurmat bilan rozi bo'lmang
 
-- Top 3 performing posts (why did they work?)
-- Bottom 3 posts (what can you learn?)
-- Follower growth trend
-- Engagement rate trend
-- Best posting times (from data)
+### Munosabatlarni qurish
 
-### Optimization Actions
-
-**If engagement is low:**
-- Test new hooks
-- Post at different times
-- Try different formats
-- Increase engagement with others
-
-**If reach is declining:**
-- Avoid external links in post body
-- Increase posting frequency
-- Engage more in comments
-- Test video/visual content
+- Sohangizdagi 20–50 ta akkauntni aniqlang
+- Ularning kontenti bilan izchil jalb qiling
+- Ularning kontentini kredit bilan ulashing
+- Oxir-oqibat hamkorlik qiling (podkastlar, birgalikda yaratilgan kontent)
 
 ---
 
-## Content Ideas by Situation
+## Analitika va optimallashtirish
 
-### When You're Starting Out
-- Document your journey
-- Share what you're learning
-- Curate and comment on industry content
-- Engage heavily with established accounts
+### Muhim metrikalar
 
-### When You're Stuck
-- Repurpose old high-performing content
-- Ask your audience what they want
-- Comment on industry news
-- Share a failure or lesson learned
+**Xabardorlik:** Ko'rsatuvlar (impressions), Qamrov (reach), Follower o'sish sur'ati
 
----
+**Jalb qilish:** Engagement rate, Izohlar (yoqishdan ko'ra qimmatliroq), Ulashishlar/qayta postlar, Saqlashlar
 
-## Scheduling Best Practices
+**Konversiya:** Havola bosishlar, Profil tashriflari, Olingan DM'lar, Atributsiyalangan lidlar
 
-### When to Schedule vs. Post Live
+### Haftalik ko'rib chiqish
 
-**Schedule:** Core content posts, Threads, Carousels, Evergreen content
+- Eng yaxshi 3 ta post (nega ishladi?)
+- Eng yomon 3 ta post (nimani o'rganish mumkin?)
+- Follower o'sish trendi
+- Engagement rate trendi
+- Eng yaxshi post vaqtlari (ma'lumotlardan)
 
-**Post live:** Real-time commentary, Responses to news/trends, Engagement with others
+### Optimallashtirish harakatlari
 
-### Queue Management
+**Engagement past bo'lsa:**
+- Yangi hooklarni sinang
+- Turli vaqtlarda post qiling
+- Turli formatlarni sinab ko'ring
+- Boshqalar bilan jalb qilishni oshiring
 
-- Maintain 1-2 weeks of scheduled content
-- Review queue weekly for relevance
-- Leave gaps for spontaneous posts
-- Adjust timing based on performance data
-
----
-
-## Reverse Engineering Viral Content
-
-Instead of guessing, analyze what's working for top creators in your niche:
-
-1. **Find creators** — 10-20 accounts with high engagement
-2. **Collect data** — 500+ posts for analysis
-3. **Analyze patterns** — Hooks, formats, CTAs that work
-4. **Codify playbook** — Document repeatable patterns
-5. **Layer your voice** — Apply patterns with authenticity
-6. **Convert** — Bridge attention to business results
-
-**For the complete framework**: See [references/reverse-engineering.md](references/reverse-engineering.md)
+**Qamrov pasayayotgan bo'lsa:**
+- Post matnida tashqi havolalardan qoching
+- Post chastotasini oshiring
+- Izohlarda ko'proq qatnashing
+- Video/vizual kontentni sinang
 
 ---
 
-## Short-Form Video (TikTok, Reels, Shorts)
+## Vaziyat bo'yicha kontent g'oyalari
 
-Short-form video is the highest-reach format on every major platform. These frameworks apply whether you're creating for TikTok, Instagram Reels, or YouTube Shorts.
+### Endi boshlayotganingizda
+- Yo'lingizni hujjatlashtiring
+- Nimani o'rganayotganingizni ulashing
+- Soha kontentini kuratorlik qiling va sharhlang
+- Mustahkam akkauntlar bilan faol jalb qiling
 
-### Platform Specs
+### Tiqilib qolganingizda
+- Eski yuqori natijali kontentni qayta ishlang
+- Auditoriyadan nima xohlashini so'rang
+- Soha yangiliklariga izoh bering
+- Muvaffaqiyatsizlik yoki olingan saboqni ulashing
 
-| Platform | Optimal Length | Aspect Ratio | Key Difference |
+---
+
+## Rejalashtirish bo'yicha eng yaxshi amaliyotlar
+
+### Qachon rejalashtirish, qachon jonli post qilish
+
+**Rejalashtiring:** Asosiy kontent postlari, Thread'lar, Karusellar, Evergreen kontent
+
+**Jonli post qiling:** Real vaqtdagi sharhlar, Yangilik/trendlarga javoblar, Boshqalar bilan jalb qilish
+
+### Navbatni boshqarish
+
+- 1–2 haftalik rejalashtirilgan kontentni saqlang
+- Dolzarbligi uchun navbatni haftada bir marta ko'rib chiqing
+- Spontan postlar uchun bo'shliqlar qoldiring
+- Samaradorlik ma'lumotlariga qarab vaqtni sozlang
+
+---
+
+## Viral kontentni teskari muhandislik qilish
+
+Taxmin qilish o'rniga, nishangizdagi top yaratuvchilar uchun nima ishlayotganini tahlil qiling:
+
+1. **Yaratuvchilarni toping** — yuqori engagement'li 10–20 ta akkaunt
+2. **Ma'lumot yig'ing** — tahlil uchun 500+ post
+3. **Naqshlarni tahlil qiling** — ishlaydigan hooklar, formatlar, CTA'lar
+4. **Playbookni kodlang** — takrorlanadigan naqshlarni hujjatlashtiring
+5. **O'z ovozingizni qo'shing** — naqshlarni samimiylik bilan qo'llang
+6. **Konversiya qiling** — e'tiborni biznes natijalariga ko'prik qiling
+
+**To'liq freymvork uchun**: [references/reverse-engineering.md](references/reverse-engineering.md) ga qarang
+
+---
+
+## Qisqa formatli video (TikTok, Reels, Shorts)
+
+Qisqa formatli video har bir yirik platformada eng yuqori qamrovli format. Bu freymvorklar TikTok, Instagram Reels yoki YouTube Shorts uchun yaratayotganingizdan qat'i nazar qo'llanadi.
+
+### Platforma xususiyatlari
+
+| Platforma | Optimal uzunlik | Tomonlar nisbati | Asosiy farq |
 |----------|---------------|--------------|----------------|
-| TikTok | 15-60 sec | 9:16 | Trending sounds, raw/authentic feel |
-| Reels | 15-30 sec | 9:16 | Polished content, rewards saves/shares |
-| Shorts | 30-60 sec | 9:16 | YouTube SEO applies, searchable titles |
+| TikTok | 15–60 soniya | 9:16 | Trend tovushlar, xom/samimiy his |
+| Reels | 15–30 soniya | 9:16 | Sayqallangan kontent, saqlash/ulashishni mukofotlaydi |
+| Shorts | 30–60 soniya | 9:16 | YouTube SEO qo'llanadi, qidiriladigan sarlavhalar |
 
-### The 3-Second Rule
+### 3 soniya qoidasi
 
-You have 3 seconds to stop the scroll. Every video needs three simultaneous hooks:
+Scroll'ni to'xtatish uchun 3 soniyangiz bor. Har bir videoda bir vaqtda uchta hook bo'lishi kerak:
 
 ```
-[VISUAL HOOK] + [VERBAL HOOK] + [TEXT OVERLAY]
+[VIZUAL HOOK] + [OG'ZAKI HOOK] + [MATN OVERLAY]
 ```
 
-All three should hit in the first second.
+Uchalasi ham birinchi soniyada ta'sir qilishi kerak.
 
-### Video Structures
+### Video tuzilmalari
 
-**Problem-Solution (15-30 sec):**
+**Muammo-Yechim (15–30 soniya):**
 ```
-[0-3s]  Hook: State the problem
-[3-10s] Agitate: Why it matters
-[10-25s] Solution: Your method/product/tip
-[25-30s] CTA: What to do next
+[0-3s]  Hook: Muammoni ayting
+[3-10s] Agitate: Nega bu muhim
+[10-25s] Yechim: Sizning usul/mahsulot/maslahat
+[25-30s] CTA: Keyin nima qilish kerak
 ```
 
-**List Format (30-60 sec):**
+**Ro'yxat formati (30–60 soniya):**
 ```
-[0-3s]  Hook: "X things that [outcome]"
-[3-50s] Items: One every 5-8 seconds
+[0-3s]  Hook: "[Natija]ga olib keladigan X ta narsa"
+[3-50s] Elementlar: Har 5–8 soniyada bittadan
 [50-60s] CTA
 ```
 
-**Tutorial (30-60 sec):**
+**Qo'llanma (30–60 soniya):**
 ```
-[0-3s]  Hook: Show the end result first
-[3-8s]  Overview: "Here's how..."
-[8-50s] Steps: Quick, clear instructions
-[50-60s] Result + CTA
+[0-3s]  Hook: Avval yakuniy natijani ko'rsating
+[3-8s]  Umumiy ko'rinish: "Mana qanday..."
+[8-50s] Qadamlar: Tez, aniq ko'rsatmalar
+[50-60s] Natija + CTA
 ```
 
-### Caption & Subtitle Best Practices
+### Caption va subtitr bo'yicha eng yaxshi amaliyotlar
 
-Captions increase watch time by 25-40%. Most social video is watched without sound.
+Caption'lar ko'rish vaqtini 25–40% ga oshiradi. Ko'pchilik ijtimoiy video ovozsiz tomosha qilinadi.
 
-- **MAX 2 lines** on screen at once
-- **3-5 words per line**
-- Bold, sans-serif font with black outline
-- **Highlight key words** in a different color
-- Match timing to speech exactly
+- Ekranda bir vaqtda **ko'pi bilan 2 qator**
+- **Har bir qatorda 3–5 so'z**
+- Qora kontur bilan qalin, sans-serif shrift
+- Muhim so'zlarni boshqa rangda **ajratib ko'rsating**
+- Vaqtni nutqqa aniq moslang
 
-Tools: CapCut (free), Descript, Captions.ai, Premiere Pro
+Asboblar: CapCut (bepul), Descript, Captions.ai, Premiere Pro
 
-### Content Ideas by Type
+### Tur bo'yicha kontent g'oyalari
 
-| Business Type | Video Ideas |
+| Biznes turi | Video g'oyalari |
 |---------------|-------------|
-| SaaS | Feature demos (show outcome first), before/after, "Watch me do X in Y seconds" |
-| E-commerce | Unboxing, comparisons, how it's made, customer reviews |
-| Services | Process reveals, client transformations, myth-busting |
-| Personal brand | Lessons learned, controversial takes, day-in-the-life |
+| SaaS | Funksiya demolari (avval natijani ko'rsating), oldin/keyin, "Mening X ni Y soniyada qilishimni ko'ring" |
+| E-commerce | Qutini ochish, taqqoslashlar, qanday tayyorlanadi, mijoz sharhlari |
+| Xizmatlar | Jarayon namoyishi, mijoz o'zgarishlari, mifni buzish |
+| Shaxsiy brend | Olingan saboqlar, munozarali fikrlar, kun hayoti |
 
-### Common Mistakes
+### Keng tarqalgan xatolar
 
-1. **Slow hooks** — don't build up to the point
-2. **No text overlay** — many watch without sound
-3. **Poor audio** — bad audio kills retention instantly
-4. **Too long** — if it can be shorter, make it shorter
-5. **No CTA** — tell viewers what to do
-6. **Ignoring comments** — engagement in first hour matters
+1. **Sekin hooklar** — mavzuga yetib kelguncha kutdirmang
+2. **Matn overlay yo'q** — ko'pchilik ovozsiz tomosha qiladi
+3. **Yomon audio** — yomon audio ushlab turishni zudlik bilan o'ldiradi
+4. **Juda uzun** — qisqaroq bo'lishi mumkin bo'lsa, qisqaroq qiling
+5. **CTA yo'q** — tomoshabinlarga nima qilishni ayting
+6. **Izohlarni e'tiborsiz qoldirish** — birinchi soatdagi jalb qilish muhim
 
-**For video hook formulas and scripting templates**: See [references/short-form-video.md](references/short-form-video.md)
-
----
-
-## Task-Specific Questions
-
-1. What platform(s) are you focusing on?
-2. What's your current posting frequency?
-3. Do you have existing content to repurpose?
-4. What content has performed well in the past?
-5. How much time can you dedicate weekly?
-6. Are you building personal brand, company brand, or both?
+**Video hook formulalari va ssenariy shablonlari uchun**: [references/short-form-video.md](references/short-form-video.md) ga qarang
 
 ---
 
-## Related Skills
+## Vazifaga xos savollar
 
-- **copywriting**: For longer-form content that feeds social
-- **launch**: For coordinating social with launches
-- **emails**: For nurturing social audience via email
-- **marketing-psychology**: For understanding what drives engagement
+1. Qaysi platforma(lar)ga e'tibor qaratyapsiz?
+2. Joriy post chastotangiz qanday?
+3. Qayta ishlash uchun mavjud kontent bormi?
+4. Avval qanday kontent yaxshi natija bergan?
+5. Haftasiga qancha vaqt ajrata olasiz?
+6. Shaxsiy brend, kompaniya brendi yoki ikkalasini quryapsizmi?
+
+---
+
+## Bog'liq skilllar
+
+- **copywriting**: Ijtimoiy tarmoqni oziqlantiradigan uzunroq kontent uchun
+- **launch**: Ijtimoiy tarmoqni launch'lar bilan muvofiqlashtirish uchun
+- **emails**: Ijtimoiy auditoriyani email orqali tarbiyalash uchun
+- **marketing-psychology**: Nima jalb qilishni harakatlantirishini tushunish uchun
 
 ---
 

@@ -1,8 +1,8 @@
-# Platform-Specific Strategy Guide
+# Platformaga xos strategiya qo'llanmasi
 
-Detailed strategies for each major social platform.
+Har bir yirik ijtimoiy platforma uchun batafsil strategiyalar.
 
-## Contents
+## Mundarija
 - LinkedIn
 - Twitter/X
 - Instagram
@@ -11,160 +11,160 @@ Detailed strategies for each major social platform.
 
 ## LinkedIn
 
-**Best for:** B2B, thought leadership, professional networking, recruiting
-**Audience:** Professionals, decision-makers, job seekers
-**Posting frequency:** 3-5x per week
-**Best times:** Tuesday-Thursday, 7-8am, 12pm, 5-6pm
+**Eng mos:** B2B, thought leadership, professional networking, yollash
+**Auditoriya:** Mutaxassislar, qaror qabul qiluvchilar, ish izlovchilar
+**Post chastotasi:** haftasiga 3–5 marta
+**Eng yaxshi vaqtlar:** Seshanba–Payshanba, 7–8, 12, 17–18
 
-**What works:**
-- Personal stories with business lessons
-- Contrarian takes on industry topics
-- Behind-the-scenes of building a company
-- Data and original insights
-- Carousel posts (document format)
-- Polls that spark discussion
+**Nima ishlaydi:**
+- Biznes saboqli shaxsiy hikoyalar
+- Soha mavzulari bo'yicha qarama-qarshi fikrlar
+- Kompaniya qurishning sahna ortidagi lahzalari
+- Ma'lumotlar va original insaytlar
+- Karusel postlar (hujjat formati)
+- Muhokamani uyg'otadigan so'rovnomalar
 
-**What doesn't:**
-- Overly promotional content
-- Generic motivational quotes
-- Links in the main post (kills reach)
-- Corporate speak without personality
+**Nima ishlamaydi:**
+- Haddan tashqari reklama kontenti
+- Umumiy motivatsion iqtiboslar
+- Asosiy postdagi havolalar (qamrovni o'ldiradi)
+- Shaxsiyatsiz korporativ til
 
-**Format tips:**
-- First line is everything (hook before "see more")
-- Use line breaks for readability
-- 1,200-1,500 characters performs well
-- Put links in comments, not post body
-- Tag people sparingly and genuinely
+**Format maslahatlari:**
+- Birinchi qator — hamma narsa ("see more" dan oldingi hook)
+- O'qish qulayligi uchun qator uzilishlaridan foydalaning
+- 1 200–1 500 belgi yaxshi ishlaydi
+- Havolalarni post matniga emas, izohlarga qo'ying
+- Odamlarni tejamkorlik bilan va samimiy belgilang
 
-**Algorithm tips:**
-- First hour engagement matters most
-- Comments > reactions > clicks
-- Dwell time (people reading) signals quality
-- No external links in post body
-- Document posts (carousels) get strong reach
-- Polls drive engagement but don't build authority
+**Algoritm maslahatlari:**
+- Birinchi soatdagi jalb qilish eng muhim
+- Izohlar > reaksiyalar > bosishlar
+- Dwell time (odamlar o'qiyotgan vaqt) sifatni bildiradi
+- Post matnida tashqi havolalar yo'q
+- Hujjat postlari (karusellar) kuchli qamrov oladi
+- So'rovnomalar jalb qilishni oshiradi, lekin obro' qurmaydi
 
 ---
 
 ## Twitter/X
 
-**Best for:** Tech, media, real-time commentary, community building
-**Audience:** Tech-savvy, news-oriented, niche communities
-**Posting frequency:** 3-10x per day (including replies)
-**Best times:** Varies by audience; test and measure
+**Eng mos:** Texnologiya, media, real vaqtdagi sharhlar, hamjamiyat qurish
+**Auditoriya:** Texnologiyani biladigan, yangiliklarga yo'naltirilgan, nisha hamjamiyatlar
+**Post chastotasi:** kuniga 3–10 marta (javoblar bilan)
+**Eng yaxshi vaqtlar:** Auditoriyaga qarab farq qiladi; sinang va o'lchang
 
-**What works:**
-- Hot takes and opinions
-- Threads that teach something
-- Behind-the-scenes moments
-- Engaging with others' content
-- Memes and humor (if on-brand)
-- Real-time commentary on events
+**Nima ishlaydi:**
+- Hot take'lar va fikrlar
+- Nimanidir o'rgatadigan thread'lar
+- Sahna ortidagi lahzalar
+- Boshqalar kontenti bilan jalb qilish
+- Memlar va hazil (brendga mos bo'lsa)
+- Voqealar bo'yicha real vaqtdagi sharhlar
 
-**What doesn't:**
-- Pure self-promotion
-- Threads without a strong hook
-- Ignoring replies and mentions
-- Scheduling everything (no real-time presence)
+**Nima ishlamaydi:**
+- Sof o'z-o'zini reklama qilish
+- Kuchli hooksiz thread'lar
+- Javoblar va eslatmalarni e'tiborsiz qoldirish
+- Hammasini rejalashtirish (real vaqtdagi mavjudlik yo'q)
 
-**Format tips:**
-- Tweets under 100 characters get more engagement
-- Threads: Hook in tweet 1, promise value, deliver
-- Quote tweets with added insight beat plain retweets
-- Use visuals to stop the scroll
+**Format maslahatlari:**
+- 100 belgidan qisqa tweet'lar ko'proq engagement oladi
+- Thread'lar: 1-tweet'da hook, qiymatni va'da qiling, yetkazing
+- Insayt qo'shilgan quote-tweet'lar oddiy retweet'lardan yaxshi
+- Scroll'ni to'xtatish uchun vizuallardan foydalaning
 
-**Algorithm tips:**
-- Replies and quote tweets build authority
-- Threads keep people on platform (rewarded)
-- Images and video get more reach
-- Engagement in first 30 min matters
-- Twitter Blue/Premium may boost reach
+**Algoritm maslahatlari:**
+- Javoblar va quote-tweet'lar obro' quradi
+- Thread'lar odamlarni platformada ushlab turadi (mukofotlanadi)
+- Rasm va video ko'proq qamrov oladi
+- Birinchi 30 daqiqadagi jalb qilish muhim
+- Twitter Blue/Premium qamrovni oshirishi mumkin
 
 ---
 
 ## Instagram
 
-**Best for:** Visual brands, lifestyle, e-commerce, younger demographics
-**Audience:** 18-44, visual-first consumers
-**Posting frequency:** 1-2 feed posts per day, 3-10 Stories per day
-**Best times:** 11am-1pm, 7-9pm
+**Eng mos:** Vizual brendlar, lifestyle, e-commerce, yoshroq demografiya
+**Auditoriya:** 18–44, vizual-birinchi iste'molchilar
+**Post chastotasi:** kuniga 1–2 feed post, kuniga 3–10 Stories
+**Eng yaxshi vaqtlar:** 11–13, 19–21
 
-**What works:**
-- High-quality visuals
-- Behind-the-scenes Stories
-- Reels (short-form video)
-- Carousels with value
-- User-generated content
-- Interactive Stories (polls, questions)
+**Nima ishlaydi:**
+- Yuqori sifatli vizuallar
+- Sahna ortidagi Stories
+- Reels (qisqa video)
+- Qiymatli karusellar
+- Foydalanuvchi yaratgan kontent
+- Interaktiv Stories (so'rovnomalar, savollar)
 
-**What doesn't:**
-- Low-quality images
-- Too much text in images
-- Ignoring Stories and Reels
-- Only promotional content
+**Nima ishlamaydi:**
+- Past sifatli rasmlar
+- Rasmlarda juda ko'p matn
+- Stories va Reels'ni e'tiborsiz qoldirish
+- Faqat reklama kontenti
 
-**Format tips:**
-- Reels get 2x reach of static posts
-- First frame of Reels must hook
-- Carousels: 10 slides with educational content
-- Use all Story features (polls, links, etc.)
+**Format maslahatlari:**
+- Reels statik postlardan 2 baravar ko'p qamrov oladi
+- Reels'ning birinchi kadri hook bo'lishi kerak
+- Karusellar: ta'limiy kontentli 10 slayd
+- Story'ning barcha imkoniyatlaridan foydalaning (so'rovnomalar, havolalar va h.k.)
 
-**Algorithm tips:**
-- Reels heavily prioritized over static posts
-- Saves and shares > likes
-- Stories keep you top of feed
-- Consistency matters more than perfection
-- Use all features (polls, questions, etc.)
+**Algoritm maslahatlari:**
+- Reels statik postlardan kuchli ustuvor
+- Saqlash va ulashishlar > yoqishlar
+- Stories sizni feed tepasida ushlab turadi
+- Izchillik mukammallikdan muhimroq
+- Barcha imkoniyatlardan foydalaning (so'rovnomalar, savollar va h.k.)
 
 ---
 
 ## TikTok
 
-**Best for:** Brand awareness, younger audiences, viral potential
-**Audience:** 16-34, entertainment-focused
-**Posting frequency:** 1-4x per day
-**Best times:** 7-9am, 12-3pm, 7-11pm
+**Eng mos:** Brend xabardorligi, yosh auditoriya, viral salohiyat
+**Auditoriya:** 16–34, o'yin-kulgiga yo'naltirilgan
+**Post chastotasi:** kuniga 1–4 marta
+**Eng yaxshi vaqtlar:** 7–9, 12–15, 19–23
 
-**What works:**
-- Native, unpolished content
-- Trending sounds and formats
-- Educational content in entertaining wrapper
-- POV and day-in-the-life content
-- Responding to comments with videos
-- Duets and stitches
+**Nima ishlaydi:**
+- Native, sayqallanmagan kontent
+- Trend tovushlar va formatlar
+- O'yin-kulgi o'ramidagi ta'limiy kontent
+- POV va kun hayoti kontenti
+- Izohlarga videolar bilan javob berish
+- Duet va stitch'lar
 
-**What doesn't:**
-- Overly produced content
-- Ignoring trends
-- Hard selling
-- Repurposed horizontal video
+**Nima ishlamaydi:**
+- Haddan tashqari ishlab chiqarilgan kontent
+- Trendlarni e'tiborsiz qoldirish
+- Qattiq sotuv
+- Qayta ishlangan gorizontal video
 
-**Format tips:**
-- Hook in first 1-2 seconds
-- Keep it under 30 seconds to start
-- Vertical only (9:16)
-- Use trending sounds
-- Post consistently to train algorithm
+**Format maslahatlari:**
+- Birinchi 1–2 soniyada hook
+- Boshida 30 soniyadan qisqa saqlang
+- Faqat vertikal (9:16)
+- Trend tovushlardan foydalaning
+- Algoritmni o'rgatish uchun izchil post qiling
 
 ---
 
 ## Facebook
 
-**Best for:** Communities, local businesses, older demographics, groups
-**Audience:** 25-55+, community-oriented
-**Posting frequency:** 1-2x per day
-**Best times:** 1-4pm weekdays
+**Eng mos:** Hamjamiyatlar, mahalliy bizneslar, kattaroq demografiya, guruhlar
+**Auditoriya:** 25–55+, hamjamiyatga yo'naltirilgan
+**Post chastotasi:** kuniga 1–2 marta
+**Eng yaxshi vaqtlar:** ish kunlari 13–16
 
-**What works:**
-- Facebook Groups (community)
+**Nima ishlaydi:**
+- Facebook guruhlari (hamjamiyat)
 - Native video
-- Live video
-- Local content and events
-- Discussion-prompting questions
+- Jonli video
+- Mahalliy kontent va tadbirlar
+- Muhokamaga undaydigan savollar
 
-**What doesn't:**
-- Links to external sites (reach killer)
-- Pure promotional content
-- Ignoring comments
-- Cross-posting from other platforms without adaptation
+**Nima ishlamaydi:**
+- Tashqi saytlarga havolalar (qamrovni o'ldiradi)
+- Sof reklama kontenti
+- Izohlarni e'tiborsiz qoldirish
+- Moslashtirmasdan boshqa platformalardan cross-post qilish

@@ -1,43 +1,43 @@
-# Social Listening & Engagement Triage
+# Social listening va engagement triage
 
-How to surface the right posts to engage with each day — instead of randomly scrolling. The goal is a short, scorable list ("here are your top 10 posts to comment on") rather than an open feed.
+Har kuni tasodifiy scroll qilish o'rniga, qaysi postlarga javob berishni qanday aniqlash. Maqsad — ochiq feed emas, qisqa, ballanadigan ro'yxat ("mana izoh qoldirishingiz kerak bo'lgan top 10 post").
 
-## Contents
-- When to use this
-- The daily triage loop
-- Scoring rubric
-- Comment quality tiers
-- Sources & light tooling (curl recipes)
-- Per-platform notes
-- Common workflows
-
----
-
-## When to Use This
-
-Use listening when the goal is **commenting and relationships**, not posting. Typical asks:
-- "Give me the top 10 posts I should comment on today"
-- "Who's complaining about [competitor] right now?"
-- "Find people asking for a tool like mine"
-- "Surface posts from my 20 target accounts in the last 24h"
-- "What's the conversation around [topic] this week?"
-
-If the user wants to **create** content, use the rest of the social skill. Listening feeds creation (it surfaces angles, language, objections), but the output is different.
+## Mundarija
+- Qachon ishlatiladi
+- Kundalik triage sikli
+- Ballash rubrikasi
+- Izoh sifati darajalari
+- Manbalar va yengil asboblar (curl retseptlari)
+- Platformaga xos eslatmalar
+- Keng tarqalgan ish jarayonlari
 
 ---
 
-## The Daily Triage Loop
+## Qachon ishlatiladi
 
-A repeatable 20-minute loop the user (or you, on their behalf) can run each morning.
+Maqsad post qilish emas, **izoh qoldirish va munosabatlar** bo'lganda listening'dan foydalaning. Odatiy so'rovlar:
+- "Bugun izoh qoldirishim kerak bo'lgan top 10 postni bering"
+- "Hozir kim [raqobatchi]dan shikoyat qilyapti?"
+- "Meniki kabi asbob so'rayotgan odamlarni toping"
+- "Oxirgi 24 soatdagi 20 ta nishon akkauntimning postlarini chiqaring"
+- "Bu hafta [mavzu] atrofida qanday suhbat bor?"
 
-1. **Pull** — fetch new posts from defined sources (target accounts, keywords, subreddits, hashtags). See [tooling](#sources--light-tooling-curl-recipes).
-2. **Filter** — drop anything older than 24h, low signal, or off-topic.
-3. **Score** — apply the [rubric](#scoring-rubric). Keep top 10.
-4. **Draft** — for each, draft a comment matched to the post's tier.
-5. **Post** — user reviews, edits, posts. Mark which actually went live.
-6. **Log** — track what you commented on and what got replies. This is your engagement loop dataset.
+Foydalanuvchi kontent **yaratmoqchi** bo'lsa, social skillning qolgan qismidan foydalaning. Listening yaratishni oziqlantiradi (burchaklar, til, e'tirozlarni ko'rsatadi), lekin natijasi boshqa.
 
-Output format Claude should produce:
+---
+
+## Kundalik triage sikli
+
+Foydalanuvchi (yoki sizning nomingizdan siz) har ertalab bajarishi mumkin bo'lgan takrorlanadigan 20 daqiqalik sikl.
+
+1. **Torting (Pull)** — belgilangan manbalardan (nishon akkauntlar, kalit so'zlar, subreddit'lar, hashtag'lar) yangi postlarni oling. [Asboblarga](#manbalar-va-yengil-asboblar-curl-retseptlari) qarang.
+2. **Filtrlang** — 24 soatdan eski, past signalli yoki mavzudan tashqari hamma narsani tashlang.
+3. **Ballang** — [rubrikani](#ballash-rubrikasi) qo'llang. Top 10 ni qoldiring.
+4. **Qoralang** — har biri uchun postning darajasiga mos izoh qoralang.
+5. **Post qiling** — foydalanuvchi ko'rib chiqadi, tahrirlaydi, post qiladi. Qaysi biri haqiqatan chiqqanini belgilang.
+6. **Qayd eting** — qaysi postlarga izoh qoldirganingiz va qaysi biri javob olganini kuzating. Bu sizning engagement sikli ma'lumotlar to'plami.
+
+Claude yaratishi kerak bo'lgan natija formati:
 
 ```
 TOP 10 POSTS — 2026-06-05
@@ -51,113 +51,113 @@ TOP 10 POSTS — 2026-06-05
 
 ---
 
-## Scoring Rubric
+## Ballash rubrikasi
 
-Score each post 1–10 across five dimensions, then sum and rank.
+Har bir postni beshta o'lchov bo'yicha 1–10 ball bilan baholang, so'ng jamlang va tartiblang.
 
-| Dimension | What it measures | Weight |
+| O'lchov | Nimani o'lchaydi | Vazn |
 |-----------|------------------|--------|
-| **ICP fit** | Is the author your target customer / influencer? | 2x |
-| **Intent signal** | Are they expressing a problem, asking, or shopping? | 2x |
-| **Reach potential** | Is the post getting traction (likes/comments rising)? | 1x |
-| **Comment opportunity** | Can you say something genuinely useful, not generic? | 2x |
-| **Recency** | Posted in last 1–4h (early comments win, especially on LinkedIn) | 1x |
+| **ICP moslik** | Muallif sizning nishon mijozingiz / influenser'misiz? | 2x |
+| **Intent signali** | Ular muammoni bildiryaptimi, so'rayaptimi yoki xarid qilyaptimi? | 2x |
+| **Qamrov salohiyati** | Post tortish olyaptimi (yoqishlar/izohlar o'smoqda)? | 1x |
+| **Izoh imkoniyati** | Umumiy emas, haqiqatan foydali narsa ayta olasizmi? | 2x |
+| **Yangilik** | So'nggi 1–4 soatda post qilingan (erta izohlar yutadi, ayniqsa LinkedIn'da) | 1x |
 
-**Intent signal examples (high-value):**
-- "Looking for a tool that does X"
-- "Why is [category] so painful?"
-- "We just switched from [competitor] because…"
-- "Anyone use [competitor] — is it worth it?"
-- A complaint about a known competitor
+**Intent signali misollari (yuqori qiymatli):**
+- "X qiladigan asbob qidiryapman"
+- "Nega [kategoriya] shunchalik og'riqli?"
+- "Biz [raqobatchi]dan o'tdik, chunki…"
+- "[Raqobatchi]dan foydalanadigan bormi — arziydimi?"
+- Ma'lum raqobatchi haqida shikoyat
 
-**Drop if any of these are true:**
-- Author isn't ICP and isn't an influencer
-- Post is >24h old and already has 50+ comments (your comment buries)
-- Generic motivational/AI-slop post
-- Self-promotion thread where comments don't get reach
-- You can't add anything beyond "Great post!"
-
----
-
-## Comment Quality Tiers
-
-Match the comment to the post. Don't waste a tier-1 draft on a tier-3 opportunity.
-
-**Tier 1 — Relationship builder (target accounts, ICP, high intent)**
-- Add a specific insight or counter-example
-- Reference your own experience with specifics (numbers, names, outcomes)
-- Ask a thoughtful follow-up that invites a reply
-- Length: 2–4 sentences, no link
-
-**Tier 2 — Visibility play (high-reach post, adjacent topic)**
-- Add one sharp insight in one sentence
-- Pattern: "Agreed — and the part most miss is [X]"
-- Length: 1–2 sentences
-
-**Tier 3 — Light touch (relationship maintenance)**
-- Specific reaction, not "Love this"
-- Quote a specific line and react to it
-- Length: 1 sentence
-
-**Never:** "Great post!", emoji-only, "+1", LinkedIn-isms like "This is gold 🔥"
+**Quyidagilardan biri to'g'ri bo'lsa tashlang:**
+- Muallif ICP ham emas, influenser ham emas
+- Post >24 soat eski va allaqachon 50+ izohi bor (izohingiz ko'milib ketadi)
+- Umumiy motivatsion/AI-slop post
+- Izohlar qamrov olmaydigan o'z-o'zini reklama qilish thread'i
+- "Ajoyib post!" dan boshqa narsa qo'sha olmaysiz
 
 ---
 
-## Sources & Light Tooling (curl recipes)
+## Izoh sifati darajalari
 
-These are public JSON endpoints — no auth needed. Run them from bash, pipe to `jq`, and Claude can parse the output to score and draft comments.
+Izohni postga moslang. 1-daraja qoralamani 3-daraja imkoniyatga isrof qilmang.
 
-**Requires:** `jq` (most recipes) and `xmllint` (RSS only). Install once:
+**1-daraja — Munosabat quruvchi (nishon akkauntlar, ICP, yuqori intent)**
+- Aniq insayt yoki qarama-qarshi misol qo'shing
+- O'z tajribangizga aniqliklar bilan (raqamlar, nomlar, natijalar) murojaat qiling
+- Javobga undaydigan o'ylangan davomiy savol bering
+- Uzunligi: 2–4 gap, havolasiz
+
+**2-daraja — Ko'rinish o'yini (yuqori qamrovli post, yondosh mavzu)**
+- Bitta gapda bitta o'tkir insayt qo'shing
+- Naqsh: "Kelishaman — va ko'pchilik o'tkazib yuboradigan qismi [X]"
+- Uzunligi: 1–2 gap
+
+**3-daraja — Yengil teginish (munosabatni saqlash)**
+- "Yoqdi" emas, aniq reaksiya
+- Aniq bir qatorni iqtibos qiling va unga munosabat bildiring
+- Uzunligi: 1 gap
+
+**Hech qachon:** "Ajoyib post!", faqat emoji, "+1", "This is gold 🔥" kabi LinkedIn-izmlar
+
+---
+
+## Manbalar va yengil asboblar (curl retseptlari)
+
+Bular ommaviy JSON endpoint'lar — autentifikatsiya kerak emas. Ularni bash'dan ishga tushiring, `jq` ga yo'naltiring, Claude natijani tahlil qilib ballashi va izohlarni qoralashi mumkin.
+
+**Talab qilinadi:** `jq` (ko'p retseptlar) va `xmllint` (faqat RSS). Bir marta o'rnating:
 ```bash
 # macOS
 brew install jq
 # xmllint ships with macOS; on Linux: apt install libxml2-utils
 ```
 
-### Reddit (free, scriptable)
+### Reddit (bepul, skriptlanadigan)
 
-**New posts in a subreddit:**
+**Subreddit'dagi yangi postlar:**
 ```bash
 curl -s -A "listening/1.0" \
   "https://www.reddit.com/r/SaaS/new.json?limit=25" \
   | jq '.data.children[].data | {title, author, url: ("https://reddit.com"+.permalink), score, num_comments, created_utc, selftext: (.selftext | .[0:300])}'
 ```
 
-**Search across Reddit by keyword (last day, sorted new):**
+**Reddit bo'ylab kalit so'z bo'yicha qidirish (oxirgi kun, yangi bo'yicha tartiblangan):**
 ```bash
 curl -s -A "listening/1.0" \
   "https://www.reddit.com/search.json?q=KEYWORD&sort=new&t=day&limit=25" \
   | jq '.data.children[].data | {subreddit, title, url: ("https://reddit.com"+.permalink), author, score, created_utc}'
 ```
 
-Swap `KEYWORD` for things like `"alternative to notion"`, `"recommend a crm"`, your competitor names, or your own brand for mentions. Use quotes around multi-word phrases.
+`KEYWORD` o'rniga `"alternative to notion"`, `"recommend a crm"`, raqobatchi nomlari yoki eslatmalar uchun o'z brendingizni qo'ying. Ko'p so'zli iboralar atrofida qo'shtirnoq ishlating.
 
-### Hacker News (Algolia search)
+### Hacker News (Algolia qidiruvi)
 
-**Recent stories mentioning a keyword (last 24h):**
+**Kalit so'zni eslatgan so'nggi hikoyalar (oxirgi 24 soat):**
 ```bash
 SINCE=$(($(date +%s) - 86400))
 curl -s "https://hn.algolia.com/api/v1/search_by_date?query=KEYWORD&tags=story&numericFilters=created_at_i>${SINCE}" \
   | jq '.hits[] | {title, url, author, points, num_comments, created_at, story_id: .objectID, hn_url: ("https://news.ycombinator.com/item?id="+.objectID)}'
 ```
 
-**Recent comments mentioning a keyword:**
+**Kalit so'zni eslatgan so'nggi izohlar:**
 ```bash
 curl -s "https://hn.algolia.com/api/v1/search_by_date?query=KEYWORD&tags=comment&numericFilters=created_at_i>${SINCE}" \
   | jq '.hits[] | {author, comment_text, story_title, hn_url: ("https://news.ycombinator.com/item?id="+.objectID)}'
 ```
 
-### Bluesky (free, public API)
+### Bluesky (bepul, ommaviy API)
 
-**Search posts by keyword:**
+**Kalit so'z bo'yicha postlarni qidirish:**
 ```bash
 curl -s "https://public.api.bsky.app/xrpc/app.bsky.feed.searchPosts?q=KEYWORD&limit=25&sort=latest" \
   | jq '.posts[] | {author: .author.handle, text: .record.text, likes: .likeCount, replies: .replyCount, url: ("https://bsky.app/profile/"+.author.handle+"/post/"+(.uri | split("/") | last))}'
 ```
 
-### RSS for blogs, podcasts, YouTube channels
+### Bloglar, podkastlar, YouTube kanallari uchun RSS
 
-For target accounts that publish to RSS (most blogs, all YouTube channels):
+RSS'ga nashr qiladigan nishon akkauntlar uchun (ko'pchilik bloglar, barcha YouTube kanallari):
 ```bash
 # YouTube channel feed (replace CHANNEL_ID)
 curl -s "https://www.youtube.com/feeds/videos.xml?channel_id=CHANNEL_ID"
@@ -166,110 +166,110 @@ curl -s "https://www.youtube.com/feeds/videos.xml?channel_id=CHANNEL_ID"
 curl -s "https://example.com/feed/" | xmllint --xpath "//item[position()<6]" - 2>/dev/null
 ```
 
-### LinkedIn & X — use the browser
+### LinkedIn va X — brauzerdan foydalaning
 
-LinkedIn and X don't expose useful public APIs, but you can drive a real browser session. **dev-browser** (MCP, already in the global setup) and **Playwright** both maintain persistent state — log in once, the session stays alive, Claude can navigate the authenticated feed.
+LinkedIn va X foydali ommaviy API'larni taqdim etmaydi, lekin haqiqiy brauzer sessiyasini boshqarishingiz mumkin. **dev-browser** (MCP, global sozlamada allaqachon bor) va **Playwright** ikkalasi ham doimiy holatni saqlaydi — bir marta kiring, sessiya tirik qoladi, Claude autentifikatsiyalangan feedda navigatsiya qila oladi.
 
-**dev-browser workflow (preferred — already wired up):**
-1. User logs into LinkedIn / X once in the dev-browser session
-2. Claude navigates to a target URL (feed, profile, saved search, hashtag)
-3. Claude reads the accessibility tree / page text, extracts posts
-4. Claude scores using the [rubric](#scoring-rubric) and drafts comments
-5. User reviews and posts manually (don't auto-post — high-stakes, bot detection risk)
+**dev-browser ish jarayoni (afzal — allaqachon ulangan):**
+1. Foydalanuvchi dev-browser sessiyasida LinkedIn / X'ga bir marta kiradi
+2. Claude nishon URL'ga (feed, profil, saqlangan qidiruv, hashtag) o'tadi
+3. Claude accessibility tree / sahifa matnini o'qiydi, postlarni ajratib oladi
+4. Claude [rubrika](#ballash-rubrikasi) bo'yicha ballaydi va izohlarni qoralaydi
+5. Foydalanuvchi ko'rib chiqadi va qo'lda post qiladi (avtomatik post qilmang — yuqori xavf, bot aniqlash xavfi)
 
-**Useful URLs to feed dev-browser:**
+**dev-browser'ga berish uchun foydali URL'lar:**
 
-| URL pattern | What it shows |
+| URL naqshi | Nimani ko'rsatadi |
 |-------------|---------------|
-| `linkedin.com/in/HANDLE/recent-activity/all/` | A target account's recent posts |
-| `linkedin.com/feed/hashtag/TOPIC/` | Hashtag feed |
-| `linkedin.com/feed/` | Your main feed (algorithmic — less useful for triage) |
-| `x.com/HANDLE` | A target account's profile |
-| `x.com/search?q=QUERY&f=live` | Real-time search (use `f=live` for chronological) |
-| `x.com/i/lists/LIST_ID` | A curated list — best for target accounts |
+| `linkedin.com/in/HANDLE/recent-activity/all/` | Nishon akkauntning so'nggi postlari |
+| `linkedin.com/feed/hashtag/TOPIC/` | Hashtag feedi |
+| `linkedin.com/feed/` | Asosiy feedingiz (algoritmik — triage uchun kamroq foydali) |
+| `x.com/HANDLE` | Nishon akkaunt profili |
+| `x.com/search?q=QUERY&f=live` | Real vaqtli qidiruv (xronologik uchun `f=live` ishlating) |
+| `x.com/i/lists/LIST_ID` | Kuratorlik qilingan ro'yxat — nishon akkauntlar uchun eng yaxshisi |
 
-**Tips:**
-- On X, build a private list of target accounts and use the list URL. Far cleaner than the algorithmic feed.
-- LinkedIn's `/recent-activity/all/` URL is the cleanest way to see one person's posts without the algorithm.
-- For both platforms, scroll programmatically (dev-browser supports it) to load more posts before extracting.
+**Maslahatlar:**
+- X'da nishon akkauntlarning shaxsiy ro'yxatini tuzing va ro'yxat URL'idan foydalaning. Algoritmik feeddan ancha toza.
+- LinkedIn'ning `/recent-activity/all/` URL'i bir kishi postlarini algoritmsiz ko'rishning eng toza yo'li.
+- Ikkala platforma uchun ham ajratib olishdan oldin ko'proq post yuklash uchun dasturiy scroll qiling (dev-browser buni qo'llab-quvvatlaydi).
 
-**Paid alternatives if you don't want to drive a browser:**
+**Brauzerni boshqarishni xohlamasangiz, pullik muqobillar:**
 
-| Platform | Tools |
+| Platforma | Asboblar |
 |----------|-------|
-| LinkedIn | Sales Navigator (saved searches), Taplio (engagement) |
-| X | TweetDeck/X Pro (saved columns), Typefully, Taplio, Tweet Hunter |
+| LinkedIn | Sales Navigator (saqlangan qidiruvlar), Taplio (engagement) |
+| X | TweetDeck/X Pro (saqlangan ustunlar), Typefully, Taplio, Tweet Hunter |
 
-**Still closed (no good path):**
-- Instagram & TikTok — closed APIs, browser automation is detectable and risky. Use native saved searches / hashtag follows.
+**Hali yopiq (yaxshi yo'l yo'q):**
+- Instagram va TikTok — yopiq API'lar, brauzer avtomatlashtirish aniqlanadi va xavfli. Native saqlangan qidiruvlar / hashtag kuzatuvlaridan foydalaning.
 
 ---
 
-## Per-Platform Notes
+## Platformaga xos eslatmalar
 
 ### LinkedIn
-- **Browser-driven** (dev-browser with persistent session) — see [LinkedIn & X — use the browser](#linkedin--x--use-the-browser)
-- **First-hour comments matter most** — algorithm weights early engagement heavily. Prioritize posts <2h old from target accounts.
-- Comments with 5+ words get more reach than reactions
-- Replying to other commenters can put you in front of their network
-- Tag the author in your reply only if it adds context
+- **Brauzer orqali** (doimiy sessiyali dev-browser) — [LinkedIn va X — brauzerdan foydalaning](#linkedin-va-x--brauzerdan-foydalaning) ga qarang
+- **Birinchi soatdagi izohlar eng muhim** — algoritm erta jalb qilishni kuchli og'irlaydi. Nishon akkauntlarning <2 soat oldingi postlariga ustuvorlik bering.
+- 5+ so'zli izohlar reaksiyalardan ko'ra ko'proq qamrov oladi
+- Boshqa izoh qoldiruvchilarga javob berish sizni ularning tarmog'i oldiga qo'yishi mumkin
+- Javobingizda faqat kontekst qo'shsa, muallifni belgilang
 
 ### Twitter/X
-- **Browser-driven** (dev-browser) — build a private list of target accounts and point dev-browser at the list URL
-- Reply within first 30 min for max reach on big accounts
-- Quote-tweet > reply when adding substantial value
-- Threading your reply (multi-tweet) signals effort
-- Don't pile on dunks — relationships > clout
+- **Brauzer orqali** (dev-browser) — nishon akkauntlarning shaxsiy ro'yxatini tuzing va dev-browser'ni ro'yxat URL'iga yo'naltiring
+- Yirik akkauntlarda maksimal qamrov uchun dastlabki 30 daqiqa ichida javob bering
+- Sezilarli qiymat qo'shganda quote-tweet > reply
+- Javobingizni thread qilish (ko'p tweet) harakatni bildiradi
+- Kamsitishga qo'shilmang — munosabatlar > obro'
 
 ### Reddit
-- Read the subreddit rules before commenting (some ban self-promotion outright)
-- Earn karma in the sub before linking to anything you own
-- Long, specific answers win. AMAs and "help me decide" threads are gold
-- Never lead with your product — answer the question first
+- Izoh qoldirishdan oldin subreddit qoidalarini o'qing (ba'zilari o'z-o'zini reklama qilishni butunlay taqiqlaydi)
+- O'zingizga tegishli narsaga havola qilishdan oldin sub'da karma to'plang
+- Uzun, aniq javoblar yutadi. AMA'lar va "qaror qilishimga yordam bering" thread'lari — oltin
+- Hech qachon mahsulotingizdan boshlamang — avval savolga javob bering
 
 ### Hacker News
-- Comment quality bar is high; low-effort gets downvoted fast
-- Founders commenting on threads about their product is welcomed if you're transparent
-- Search for past discussions of your category — they're often dormant gold mines
+- Izoh sifati talabi yuqori; kam mehnatli izohlar tez downvote qilinadi
+- Asoschilarning o'z mahsuloti haqidagi thread'larga izoh qoldirishi shaffof bo'lsangiz qabul qilinadi
+- Kategoriyangizning o'tgan muhokamalarini qidiring — ular ko'pincha uxlab yotgan oltin konlari
 
 ### Bluesky
-- Smaller volume but high engagement-to-follower ratio
-- Tech and indie-hacker communities are active
-- Custom feeds (like Bluesky's "Following" + topic feeds) replace algorithmic search
+- Hajm kichikroq, lekin follower'ga nisbatan engagement yuqori
+- Texnologiya va indie-hacker hamjamiyatlari faol
+- Maxsus feedlar (Bluesky'ning "Following" + mavzu feedlari kabi) algoritmik qidiruvni almashtiradi
 
 ---
 
-## Common Workflows
+## Keng tarqalgan ish jarayonlari
 
-### "Give me my top 10 posts to comment on today"
-1. Pull from: target account RSS/saved searches + Reddit (relevant subs) + HN (last 24h)
-2. Score with the [rubric](#scoring-rubric)
-3. Output top 10 with suggested comments
+### "Bugun izoh qoldirishim kerak bo'lgan top 10 postni bering"
+1. Quyidagilardan torting: nishon akkaunt RSS/saqlangan qidiruvlar + Reddit (tegishli sub'lar) + HN (oxirgi 24 soat)
+2. [Rubrika](#ballash-rubrikasi) bilan ballang
+3. Taklif etilgan izohlar bilan top 10 ni chiqaring
 
-### "Find people complaining about [competitor]"
-1. Reddit search: `"competitor name" -site:competitor.com` sorted by new
-2. HN comment search for competitor name
-3. Bluesky search for competitor handle/name
-4. Score by intent signal (high if switching language: "moving from", "alternatives to", "frustrated with")
+### "[Raqobatchi]dan shikoyat qilayotganlarni toping"
+1. Reddit qidiruvi: `"competitor name" -site:competitor.com` yangi bo'yicha tartiblangan
+2. Raqobatchi nomi uchun HN izoh qidiruvi
+3. Raqobatchi handle/nomi uchun Bluesky qidiruvi
+4. Intent signali bo'yicha ballang (o'tish tili bo'lsa yuqori: "moving from", "alternatives to", "frustrated with")
 
-### "Surface brand mentions from the last week"
-1. Reddit search for brand name
-2. HN search (stories + comments) for brand name
-3. Bluesky search for brand name + handle
-4. Output as: reply needed (yes/no), tone (positive/negative/neutral), suggested response
+### "So'nggi hafta brend eslatmalarini chiqaring"
+1. Brend nomi uchun Reddit qidiruvi
+2. Brend nomi uchun HN qidiruvi (hikoyalar + izohlar)
+3. Brend nomi + handle uchun Bluesky qidiruvi
+4. Natija: javob kerakmi (ha/yo'q), ohang (ijobiy/salbiy/neytral), taklif etilgan javob
 
-### "Find target-account posts I missed"
-1. Maintain a list of target accounts with their RSS / Reddit usernames / Bluesky handles
-2. Fetch each source's recent posts
-3. Filter to last 24h, output sorted by score
+### "O'tkazib yuborgan nishon akkaunt postlarini toping"
+1. RSS / Reddit foydalanuvchi nomlari / Bluesky handle'lari bilan nishon akkauntlar ro'yxatini yuriting
+2. Har bir manbaning so'nggi postlarini oling
+3. Oxirgi 24 soat bilan cheklang, ball bo'yicha tartiblab chiqaring
 
 ---
 
-## Setting Up the Source List
+## Manbalar ro'yxatini sozlash
 
-The user should maintain a list of sources somewhere persistent at `.agents/listening-sources.md` (or `.claude/listening-sources.md`). Claude reads it when running the daily loop.
+Foydalanuvchi manbalar ro'yxatini `.agents/listening-sources.md` (yoki `.claude/listening-sources.md`) da doimiy joyda yuritishi kerak. Claude kundalik siklni bajarayotganda uni o'qiydi.
 
-**A ready-to-fill template lives at [listening-sources-template.md](listening-sources-template.md).** Copy it into the project and edit. The source path depends on how the skill was installed:
+**Tayyor to'ldiriladigan shablon [listening-sources-template.md](listening-sources-template.md) da.** Uni loyihaga nusxalang va tahrirlang. Manba yo'li skill qanday o'rnatilganiga bog'liq:
 
 ```bash
 # Plugin / marketplace install (most common):
@@ -280,4 +280,4 @@ cp .claude/skills/content/references/social/references/listening-sources-templat
 cp skills/content/references/social/references/listening-sources-template.md .agents/listening-sources.md
 ```
 
-The template covers: brand/category, ICP (for scoring), target accounts per platform, intent keywords, subreddits, saved-search URLs, and a do-not-engage list.
+Shablon quyidagilarni qamrab oladi: brend/kategoriya, ICP (ballash uchun), platforma bo'yicha nishon akkauntlar, intent kalit so'zlari, subreddit'lar, saqlangan qidiruv URL'lari va jalb qilmaslik ro'yxati.

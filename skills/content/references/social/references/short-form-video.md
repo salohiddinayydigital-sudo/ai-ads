@@ -1,235 +1,235 @@
-# Short-Form Video: Hooks, Scripts & Strategy
+# Qisqa formatli video: hooklar, ssenariylar va strategiya
 
 > **Video pre-production tizimi :** organik/ekspert/brend ssenariy formatlari va qoidalari — `skills/video/references/organic-video-content.md`; TOFU/MOFU/BOFU rejasi, haftalik/oylik matritsa va syomka kuni — `skills/video/references/video-content-planning.md`; sotuvchi video — `sales-video-scripting.md`; motion — `motion-video-scripting.md`. Bu fayl **hook kutubxonasi, platforma tavsiyalari (audio, posting, analitika)** uchun qoladi; ssenariy tuzilishi va pacing bo'yicha yuqoridagilar ustun.
 
-Detailed reference for creating short-form video content on TikTok, Instagram Reels, and YouTube Shorts.
+TikTok, Instagram Reels va YouTube Shorts uchun qisqa formatli video kontent yaratish bo'yicha batafsil reference.
 
 ---
 
-## Video Hook Library
+## Video hook kutubxonasi
 
-### Curiosity Hooks (Best for engagement)
+### Qiziqish hooklari (engagement uchun eng yaxshi)
 
-**The "Secret" Formula:**
-- "The secret to [outcome] that nobody talks about"
-- "I found the hidden feature in [product/platform] that changes everything"
-- "I can't believe this actually works..."
+**"Sir" formulasi:**
+- "Hech kim gapirmaydigan [natija] siri"
+- "Men [mahsulot/platforma] da hamma narsani o'zgartiradigan yashirin funksiyani topdim"
+- "Bu haqiqatan ishlashiga ishonmayman..."
 
-**The Unexpected Discovery:**
-- "I tried [thing] for 30 days and I was NOT expecting this"
-- "This completely changed how I think about [topic]"
-- "Nobody talks about this, but..."
+**Kutilmagan kashfiyot:**
+- "Men [narsa] ni 30 kun sinadim va bunga TAYYOR EMAS edim"
+- "Bu [mavzu] haqida o'ylashimni butunlay o'zgartirdi"
+- "Hech kim bu haqda gapirmaydi, lekin..."
 
-**The Question:**
-- "Why does nobody talk about this?"
-- "Am I the only one who didn't know this?"
-- "The reason [common thing] doesn't work is..."
+**Savol:**
+- "Nega hech kim bu haqda gapirmaydi?"
+- "Buni bilmaganlardan yagonasi menmanmi?"
+- "[Keng tarqalgan narsa] ishlamasligining sababi..."
 
-### Value Hooks (Best for saves)
+### Qiymat hooklari (saqlashlar uchun eng yaxshi)
 
-**The Promise:**
-- "How to [achieve outcome] in [specific timeframe]"
-- "[Number] [things] that will [benefit]"
-- "Everything you need to know about [topic] in 60 seconds"
+**Va'da:**
+- "[Aniq muddat] ichida [natija]ga qanday erishish"
+- "[Foyda] keltiradigan [son] ta [narsa]"
+- "[Mavzu] haqida bilishingiz kerak bo'lgan hamma narsa 60 soniyada"
 
-**The Hack/Shortcut:**
-- "[Outcome] hack that actually works"
-- "The [adjective] way to [outcome]"
-- "If you're struggling with [problem], watch this"
+**Hack/yorliq:**
+- "Haqiqatan ishlaydigan [natija] hack'i"
+- "[Natija]ga erishishning [sifat] yo'li"
+- "Agar [muammo] bilan qiynalayotgan bo'lsangiz, buni ko'ring"
 
-**The Warning:**
-- "Stop doing [common practice] — here's why"
-- "[Number] mistakes that are killing your [results]"
-- "Why [thing you think is good] is actually hurting you"
+**Ogohlantirish:**
+- "[Keng tarqalgan amaliyot]ni to'xtating — mana nega"
+- "[Natijalaringiz]ni o'ldirayotgan [son] ta xato"
+- "Nega yaxshi deb o'ylagan [narsa] aslida sizga zarar keltiradi"
 
-### Story Hooks (Best for watch time)
+### Hikoya hooklari (ko'rish vaqti uchun eng yaxshi)
 
-**The Transformation:**
-- "3 months ago, I [bad state]. Today, I [good state]."
-- "Here's how I went from [before] to [after]"
-- "I used to think [old belief]. Then [event] changed everything."
+**O'zgarish:**
+- "3 oy oldin men [yomon holat]. Bugun men [yaxshi holat]."
+- "Mana men [oldingi]dan [keyingi]ga qanday o'tdim"
+- "Men [eski e'tiqod] deb o'ylardim. Keyin [voqea] hamma narsani o'zgartirdi."
 
-**The Failure:**
-- "I made a huge mistake with [topic]"
-- "Here's why I stopped [common practice]"
-- "I lost [something significant] because of this mistake"
+**Muvaffaqiyatsizlik:**
+- "Men [mavzu] bilan katta xato qildim"
+- "Mana nega men [keng tarqalgan amaliyot]ni to'xtatdim"
+- "Men bu xato tufayli [muhim narsa]ni yo'qotdim"
 
-**The Journey:**
-- "So this just happened..."
-- "This changed everything for me"
-- "Let me tell you about the time I [interesting situation]"
+**Sayohat:**
+- "Xo'sh, hozirgina shu bo'ldi..."
+- "Bu men uchun hamma narsani o'zgartirdi"
+- "Sizga [qiziqarli vaziyat] bo'lgan vaqtimni aytib beray"
 
-### Controversial Hooks (Best for comments)
+### Munozarali hooklar (izohlar uchun eng yaxshi)
 
-- "Unpopular opinion: [bold statement]"
-- "[Common advice] is actually wrong"
-- "I'm going to get hate for this, but..."
-- "Most [audience] get this completely wrong"
+- "Mashhur bo'lmagan fikr: [dadil bayonot]"
+- "[Keng tarqalgan maslahat] aslida noto'g'ri"
+- "Bu uchun nafrat olaman, lekin..."
+- "Ko'pchilik [auditoriya] buni butunlay noto'g'ri tushunadi"
 
 ---
 
-## Scripting Template
+## Ssenariy shabloni
 
 ```markdown
-## Video: [Working Title]
+## Video: [Ishchi sarlavha]
 
-**Platform:** TikTok / Reels / Shorts
-**Length:** XX seconds
+**Platforma:** TikTok / Reels / Shorts
+**Uzunlik:** XX soniya
 **Format:** [Talking head / Slideshow / Demo / Screen recording]
 
-### Hook (0-3 sec)
-- Visual: [What viewer sees]
-- Audio: [What they hear]
-- Text overlay: [On-screen text]
+### Hook (0-3 soniya)
+- Vizual: [Tomoshabin nimani ko'radi]
+- Audio: [Ular nimani eshitadi]
+- Matn overlay: [Ekrandagi matn]
 
-### Body (3-X sec)
-- [Timestamp] - [What happens/what you say]
-- [Timestamp] - [Next beat]
-- [Continue...]
+### Asosiy qism (3-X soniya)
+- [Vaqt belgisi] - [Nima bo'ladi/siz nima deysiz]
+- [Vaqt belgisi] - [Keyingi lahza]
+- [Davom eting...]
 
-### CTA (final 3-5 sec)
-- Verbal: [What you say]
-- Text: [On-screen text]
-- Action: [Follow, comment, link in bio, etc.]
+### CTA (oxirgi 3-5 soniya)
+- Og'zaki: [Siz nima deysiz]
+- Matn: [Ekrandagi matn]
+- Harakat: [Follow, izoh, bio'dagi havola va h.k.]
 
-### Production Notes
-- Music/sound: [Trending sound or music choice]
-- B-roll needed: [List any clips needed]
-- Graphics: [Any text animations or overlays]
+### Ishlab chiqarish eslatmalari
+- Musiqa/tovush: [Trend tovush yoki musiqa tanlovi]
+- Kerakli B-roll: [Kerakli klipalar ro'yxati]
+- Grafika: [Har qanday matn animatsiyalari yoki overlay'lar]
 ```
 
 ---
 
-## Additional Video Structures
+## Qo'shimcha video tuzilmalari
 
-### The Story Arc (45-60 sec)
-
-```
-[0-3s]  Hook: Tease the outcome
-[3-15s] Setup: Context and stakes
-[15-45s] Journey: What happened
-[45-55s] Resolution: The result
-[55-60s] Lesson/CTA
-```
-
-Best for: Personal stories, case studies, testimonials
-
-### The POV/Skit (15-30 sec)
+### Hikoya yoyi (45–60 soniya)
 
 ```
-[0-3s]  Setup: Text overlay sets the scene
-[3-25s] Performance: Act out the relatable scenario
-[25-30s] Punchline or twist
+[0-3s]  Hook: Natijani ishora qiling
+[3-15s] Setup: Kontekst va garov
+[15-45s] Sayohat: Nima bo'ldi
+[45-55s] Yechim: Natija
+[55-60s] Saboq/CTA
 ```
 
-Best for: Relatable content, humor, niche communities
+Eng mos: Shaxsiy hikoyalar, keyslar, testimoniallar
+
+### POV/Skit (15–30 soniya)
+
+```
+[0-3s]  Setup: Matn overlay sahnani belgilaydi
+[3-25s] Ijro: Tanish vaziyatni sahnalashtiring
+[25-30s] Punchline yoki burilish
+```
+
+Eng mos: Tanish kontent, hazil, nisha hamjamiyatlar
 
 ---
 
-## Visual Patterns
+## Vizual naqshlar
 
 ### Talking Head
-- Good lighting (ring light or window light)
-- Eye contact with camera
-- Hand gestures for emphasis
-- Interesting background (bookshelf, plants, studio setup)
+- Yaxshi yoritish (ring light yoki deraza yorug'ligi)
+- Kamera bilan ko'z aloqasi
+- Urg'u uchun qo'l harakatlari
+- Qiziqarli fon (kitob javoni, o'simliklar, studiya)
 
-### Slideshow/Carousel Video
-- Strong visual on each slide (2-4 seconds per slide)
-- Text overlays with key points
-- Consistent style/branding
-- Voiceover or trending sound
+### Slideshow/Karusel video
+- Har bir slaydda kuchli vizual (slaydga 2–4 soniya)
+- Asosiy fikrlar bilan matn overlay'lar
+- Izchil uslub/brending
+- Voiceover yoki trend tovush
 
 ### Screen Recording
-- Zoom in on important areas
-- Add cursor highlight or click animations
-- Keep movements smooth and intentional
-- Overlay your face in corner (optional but boosts engagement)
+- Muhim joylarni zoom qiling
+- Kursor ajratish yoki bosish animatsiyalarini qo'shing
+- Harakatlarni silliq va ongli saqlang
+- Yuzingizni burchakka qo'ying (ixtiyoriy, lekin jalb qilishni oshiradi)
 
-### B-Roll Heavy
-- Show don't tell
-- Quick cuts (1-3 seconds per shot)
-- Match cuts to voiceover beats
-- Mix wide, medium, and close-up shots
-
----
-
-## Audio Strategy
-
-### When to Use Trending Sounds
-- Entertainment/lifestyle content where the sound fits your message
-- When the trend is still rising (check platform trending pages)
-- Don't use when it distracts from your message or is already declining
-
-### When to Use Original Audio
-- Educational content where you're speaking
-- Storytimes and personal narratives
-- Product demos and tutorials
-- Building a recognizable brand voice
-
-### Voiceover Tips
-- Speak slightly faster than normal conversation
-- Vary your tone — avoid monotone delivery
-- Pause for emphasis on key points
-- Record in a quiet space, use noise removal
-- AI voices work for faceless content (ElevenLabs, etc.)
-
-### Music Selection
-- Match energy to content (upbeat for tips, emotional for stories)
-- Avoid copyrighted music on Reels/Shorts
-- Use platform music libraries for safety
-- Lower music volume under voiceover (ducking)
+### B-Roll ko'p
+- Aytmang, ko'rsating
+- Tez kesishlar (kadrga 1–3 soniya)
+- Kesishlarni voiceover lahzalariga moslang
+- Keng, o'rta va yaqin kadrlarni aralashtiring
 
 ---
 
-## Posting Strategy
+## Audio strategiyasi
 
-### Optimal Posting Times (test your audience)
+### Trend tovushlardan qachon foydalanish
+- Tovush xabaringizga mos keladigan o'yin-kulgi/lifestyle kontenti uchun
+- Trend hali ko'tarilayotganda (platformaning trending sahifalarini tekshiring)
+- Xabaringizdan chalg'itsa yoki allaqachon pasayayotgan bo'lsa ishlatmang
 
-| Platform | Best Times (local) |
+### Original audiodan qachon foydalanish
+- O'zingiz gapiradigan ta'limiy kontent uchun
+- Storytime va shaxsiy rivoyatlar
+- Mahsulot demolari va qo'llanmalar
+- Tanib olinadigan brend ovozini qurish
+
+### Voiceover maslahatlari
+- Oddiy suhbatdan biroz tezroq gapiring
+- Ohangni o'zgartiring — monoton yetkazishdan qoching
+- Asosiy fikrlarda urg'u uchun pauza qiling
+- Sokin joyda yozing, shovqinni olib tashlashdan foydalaning
+- AI ovozlar yuzsiz kontent uchun ishlaydi (ElevenLabs va h.k.)
+
+### Musiqa tanlash
+- Energiyani kontentga moslang (maslahatlar uchun jo'shqin, hikoyalar uchun hissiy)
+- Reels/Shorts'da mualliflik huquqi himoyalangan musiqadan qoching
+- Xavfsizlik uchun platforma musiqa kutubxonalaridan foydalaning
+- Voiceover ostida musiqa balandligini pasaytiring (ducking)
+
+---
+
+## Post strategiyasi
+
+### Optimal post vaqtlari (auditoriyangizni sinang)
+
+| Platforma | Eng yaxshi vaqtlar (mahalliy) |
 |----------|-------------------|
-| TikTok | 7-9 AM, 12-3 PM, 7-11 PM |
-| Reels | 9 AM, 12 PM, 7-9 PM |
-| Shorts | 12-3 PM, 7-9 PM |
+| TikTok | 7–9, 12–15, 19–23 |
+| Reels | 9, 12, 19–21 |
+| Shorts | 12–15, 19–21 |
 
-### Frequency Recommendations
+### Chastota tavsiyalari
 
-| Goal | Minimum | Optimal |
+| Maqsad | Minimum | Optimal |
 |------|---------|---------|
-| Growing | 1/day | 2-4/day |
-| Maintaining | 3/week | 1/day |
-| Testing | 2/week | 5/week |
+| O'sish | kuniga 1 | kuniga 2–4 |
+| Saqlash | haftasiga 3 | kuniga 1 |
+| Sinash | haftasiga 2 | haftasiga 5 |
 
-### Batch Creation Workflow
+### Partiyalab yaratish ish jarayoni
 
 To'liq Batch Shooting Plan (lokatsiya, kiyim almashinuvi, yorug'lik, 3-Capture, umumiy B-roll, tartib) — `skills/video/references/video-content-planning.md` §5. Qisqa tartib: g'oya → ssenariy → batch syomka → montaj/subtitr → jadval.
 
 ---
 
-## Analytics & Iteration
+## Analitika va takrorlash
 
-### Metrics That Matter
+### Muhim metrikalar
 
-| Metric | What It Tells You |
+| Metrika | Nimani aytadi |
 |--------|-------------------|
-| Watch time % | Is content engaging throughout? |
-| Completion rate | Did hook + content deliver? |
-| Saves | Is content valuable enough to revisit? |
-| Shares | Is content worth spreading? |
-| Comments | Did content spark conversation? |
-| Follows | Did viewer want more from you? |
+| Watch time % | Kontent boshidan oxirigacha qiziqarlimi? |
+| Completion rate | Hook + kontent va'dani bajardimi? |
+| Saves | Kontent qaytib ko'rishga arzigulik qimmatlimi? |
+| Shares | Kontent tarqatishga arziydimi? |
+| Comments | Kontent suhbat uyg'otdimi? |
+| Follows | Tomoshabin sizdan ko'proq xohladimi? |
 
-### What to Test
+### Nimani sinash kerak
 
-1. **Hooks**: Same content, different opening
-2. **Length**: 15 sec vs 30 sec vs 60 sec
-3. **Format**: Talking head vs slideshow vs demo
-4. **Time**: Morning vs afternoon vs evening
-5. **CTA**: Different calls to action
+1. **Hooklar**: bir xil kontent, turli ochilish
+2. **Uzunlik**: 15 soniya va 30 soniya va 60 soniya
+3. **Format**: Talking head va slideshow va demo
+4. **Vaqt**: ertalab va tushdan keyin va kechqurun
+5. **CTA**: turli harakatga chaqiriqlar
 
-### When to Pivot
+### Qachon yo'nalishni o'zgartirish
 
-- 5+ videos with <1% completion rate → change hooks
-- High views but low follows → check CTA and content-audience fit
-- High saves but low shares → content is valuable but not social
-- Lots of comments but negative → lean into controversy or adjust tone
+- Tugatish darajasi <1% bo'lgan 5+ video → hooklarni o'zgartiring
+- Ko'p ko'rishlar, lekin kam follow → CTA va kontent-auditoriya mosligini tekshiring
+- Ko'p saqlashlar, lekin kam ulashishlar → kontent qimmatli, lekin ijtimoiy emas
+- Ko'p izohlar, lekin salbiy → munozaraga tayaning yoki ohangni sozlang

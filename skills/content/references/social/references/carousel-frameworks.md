@@ -1,141 +1,141 @@
-# Carousel Frameworks
+# Karusel freymvorklari
 
-Five slide-by-slide narrative architectures for carousels — Instagram carousels and LinkedIn document posts. Each framework is a different *reason to keep swiping*; picking the right one for the content matters more than polishing individual slides.
+Karusellar uchun slayd-ba-slayd beshta rivoyat arxitekturasi — Instagram karusellari va LinkedIn hujjat postlari. Har bir freymvork — *scroll qilishni davom ettirish uchun* alohida sabab; kontent uchun to'g'ri freymvorkni tanlash alohida slaydlarni sayqallashdan ko'ra muhimroq.
 
-A carousel is not a blog post chopped into squares. It's a swipe-through with two jobs per slide: deliver one idea, and make the next swipe irresistible. These frameworks encode structures that show up repeatedly in high-performing carousels; treat them as starting structures to adapt, not rigid formulas — and expect to validate against your own analytics.
+Karusel — kvadratlarga bo'laklangan blog post emas. Bu har bir slaydda ikkita vazifasi bor swipe: bitta g'oyani yetkazish va keyingi swipe'ni qarshilik qilib bo'lmaydigan qilish. Bu freymvorklar yuqori natijali karusellarda qayta-qayta uchraydigan tuzilmalarni aks ettiradi; ularni qat'iy formula emas, moslashtiriladigan boshlang'ich tuzilma deb biling — va o'z analitikangizga qarshi tekshirishni kuting.
 
-## Picking a Framework
+## Freymvork tanlash
 
-| Your content is... | Use | Why |
+| Kontentingiz... | Foydalaning | Nega |
 |---|---|---|
-| A list of resources, tools, or tips | **A: Value-Stack** | Completeness is the promise; the count is the hook |
-| A personal result with a system behind it | **B: Problem-Proof** | Proof opens and closes the loop; the system is the meat |
-| Several named techniques on one theme | **C: Hack List** | Each hack re-earns the swipe independently |
-| A strong opinion about a common practice | **D: Rant Callout** | Conviction is the content; structure keeps it fair |
-| A product or workflow you can show | **E: Demo Walkthrough** | Seeing the steps is more persuasive than describing them |
+| Resurslar, asboblar yoki maslahatlar ro'yxati | **A: Value-Stack** | To'liqlik — va'da; son — hook |
+| Ortida tizimi bor shaxsiy natija | **B: Problem-Proof** | Isbot siklni ochadi va yopadi; tizim — asosiy qism |
+| Bitta mavzu bo'yicha bir nechta nomlangan texnika | **C: Hack List** | Har bir hack swipe'ni mustaqil qayta qozonadi |
+| Keng tarqalgan amaliyot haqida kuchli fikr | **D: Rant Callout** | Ishonch — kontent; tuzilma uni adolatli saqlaydi |
+| Ko'rsatsa bo'ladigan mahsulot yoki ish jarayoni | **E: Demo Walkthrough** | Qadamlarni ko'rish ularni tasvirlashdan ko'ra ishontiruvchi |
 
-Two cross-framework rules before the specifics:
+Tafsilotlardan oldin ikkita freymvorklar-aro qoida:
 
-- **Slide 1 is the thumbnail.** It competes in the feed alone, before anyone knows a carousel follows. Design and write it as a standalone scroll-stopper.
-- **One visual template per carousel.** Same layout, type scale, and palette on every interior slide. Variety between slides reads as clutter; consistency lets the *content* change while the frame stays still.
+- **1-slayd — thumbnail.** U feedda yolg'iz raqobatlashadi, hech kim karusel davom etishini bilmasdan oldin. Uni mustaqil scroll-to'xtatuvchi sifatida loyihalang va yozing.
+- **Karusel uchun bitta vizual shablon.** Har bir ichki slaydda bir xil maket, shrift shkalasi va palitra. Slaydlar o'rtasidagi xilma-xillik tartibsizlik bo'lib o'qiladi; izchillik ramka o'zgarmay turganda *kontent* o'zgarishiga imkon beradi.
 
 ---
 
-## Framework A: Value-Stack (4–14 slides)
+## A freymvork: Value-Stack (4–14 slayd)
 
-The "everything you need" carousel. Works because the cover makes a completeness claim — an exact count and an exact deliverable — and every swipe pays it down.
+"Sizga kerak bo'lgan hamma narsa" karuseli. U ishlaydi, chunki cover to'liqlik da'vosini — aniq son va aniq yetkaziladigan narsani — bildiradi va har bir swipe uni to'laydi.
 
-| Slide | Job | Pattern |
+| Slayd | Vazifa | Naqsh |
 |---|---|---|
-| 1 — Cover | State the exact count + exact deliverable. Specificity proves scale upfront. | "[N] [resource type] for [role/outcome]" |
-| 2 to N−1 — Value delivery | One item or category per slide, 3–6 concrete sub-items each. Same visual template, zero filler slides. | "[Category/item] — [sub-items]" |
-| N — Close | Convert the swipe-through into an action. | "[Action] for [the payoff]" — comment a keyword, follow, link in bio |
+| 1 — Cover | Aniq son + aniq yetkaziladigan narsani ayting. Aniqlik masshtabni oldindan isbotlaydi. | "[Rol/natija] uchun [N] ta [resurs turi]" |
+| 2 dan N−1 gacha — Qiymat yetkazish | Har bir slaydda bitta element yoki kategoriya, har biri uchun 3–6 aniq kichik element. Bir xil vizual shablon, bo'sh slaydlar yo'q. | "[Kategoriya/element] — [kichik elementlar]" |
+| N — Yakun | Swipe'ni harakatga aylantiring. | "[Foyda] uchun [harakat]" — kalit so'z izohlang, follow qiling, bio'dagi havola |
 
-**Why the exact count matters:** "27 free tools" outperforms "the best free tools" because a number is a checkable promise — the reader can verify you delivered. Rounding up with padding breaks the trust the count created.
+**Nega aniq son muhim:** "27 ta bepul asbob" "eng yaxshi bepul asboblar" dan yaxshiroq ishlaydi, chunki raqam tekshirsa bo'ladigan va'da — o'quvchi yetkazganingizni tekshira oladi. Ortiqcha to'ldirish bilan yaxlitlash son yaratgan ishonchni buzadi.
 
-*SaaS example:* "12 ChatGPT prompts for SaaS onboarding emails" → one prompt per slide with the use case → "Comment PROMPTS and I'll send the full doc."
+*SaaS misoli:* "SaaS onboarding emaillari uchun 12 ta ChatGPT prompt" → har bir slaydda bitta prompt va foydalanish holati → "PROMPTS deb izohlang, to'liq hujjatni yuboraman."
 
-**Failure mode:** filler slides to hit a bigger number. Cut to the real count; a tight 8 beats a padded 14.
+**Nosozlik rejimi:** kattaroq songa erishish uchun bo'sh slaydlar. Haqiqiy songacha qisqartiring; ixcham 8 ta to'ldirilgan 14 tadan yaxshi.
 
 ---
 
-## Framework B: Problem-Proof (6–10 slides)
+## B freymvork: Problem-Proof (6–10 slayd)
 
-The "I did X, here's the system" carousel. The hook is a *result stated as fact*, not advice — and the final slide shows the receipt, closing the loop slide 1 opened.
+"Men X qildim, mana tizim" karuseli. Hook — maslahat emas, *fakt sifatida aytilgan natija* — va oxirgi slayd 1-slayd ochgan siklni yopib, kvitansiyani ko'rsatadi.
 
-| Slide | Job | Pattern |
+| Slayd | Vazifa | Naqsh |
 |---|---|---|
-| 1 — Hook | A specific personal claim with a number. A result, not a tip. | "[I/we did X]. [Specific result, with number]." |
-| 2 — Reframe the problem | Name what's *actually* going wrong so the reader recognizes themselves. | "The real problem — [named issue]" |
-| 3–4 — The mechanism | Show the real system: named tools, named steps. Concrete beats vague. | "The system — [named tools/steps]" |
-| 5 to N−1 — The detail | The literal prompt text, template, or step-by-step. This is the save-worthy part. | "[The literal prompt or process detail]" |
-| N — Proof | The actual output artifact. A screenshot, not a description. | "[Screenshot of output] — the receipt" |
+| 1 — Hook | Raqamli aniq shaxsiy da'vo. Natija, maslahat emas. | "[Men/biz X qildik]. [Aniq natija, raqam bilan]." |
+| 2 — Muammoni qayta freymlash | *Aslida* nima noto'g'ri ketayotganini nomlang, o'quvchi o'zini tanisin. | "Haqiqiy muammo — [nomlangan masala]" |
+| 3–4 — Mexanizm | Haqiqiy tizimni ko'rsating: nomlangan asboblar, nomlangan qadamlar. Aniqlik noaniqlikdan yaxshi. | "Tizim — [nomlangan asboblar/qadamlar]" |
+| 5 dan N−1 gacha — Tafsilot | So'zma-so'z prompt matni, shablon yoki qadamma-qadam. Bu saqlashga loyiq qism. | "[So'zma-so'z prompt yoki jarayon tafsiloti]" |
+| N — Isbot | Haqiqiy natija artefakti. Tavsif emas, skrinshot. | "[Natija skrinshoti] — kvitansiya" |
 
-**The open loop is the engine:** slide 1 makes a claim, the last slide proves it, and everything between explains how. Readers swipe to see whether the receipt is real.
+**Ochiq sikl — dvigatel:** 1-slayd da'vo qiladi, oxirgisi uni isbotlaydi, oradagi hamma narsa qanday ekanini tushuntiradi. O'quvchilar kvitansiya haqiqiy ekanini ko'rish uchun swipe qiladi.
 
-*SaaS example:* "We cut churn 22% with one onboarding email." → the real problem (activation, not price) → the sequence structure → the literal email copy → the retention chart.
+*SaaS misoli:* "Bitta onboarding emaili bilan churn'ni 22% ga kamaytirdik." → haqiqiy muammo (narx emas, aktivatsiya) → ketma-ketlik tuzilmasi → so'zma-so'z email matni → retention grafigi.
 
-**Failure mode:** vague mechanism slides ("optimize your workflow") — if the middle slides don't name tools and steps, the proof slide reads as luck, not system.
+**Nosozlik rejimi:** noaniq mexanizm slaydlari ("ish jarayoningizni optimallashtiring") — o'rtadagi slaydlar asboblar va qadamlarni nomlamasa, isbot slaydi tizim emas, omad bo'lib o'qiladi.
 
 ---
 
-## Framework C: Hack List (6–10 slides)
+## C freymvork: Hack List (6–10 slayd)
 
-The "numbered techniques" carousel. A contrarian cover creates status anxiety — most people are doing this wrong — and each numbered hack independently re-earns the swipe.
+"Raqamlangan texnikalar" karuseli. Qarama-qarshi cover maqom tashvishini yaratadi — ko'pchilik buni noto'g'ri qilmoqda — va har bir raqamlangan hack swipe'ni mustaqil qayta qozonadi.
 
-| Slide | Job | Pattern |
+| Slayd | Vazifa | Naqsh |
 |---|---|---|
-| 1 — Contrarian hook | A stat or claim implying most people fail at this. | "[Stat implying most people fail at X]" |
-| 2 — The problem | Why the common approach fails, ideally with an analogy. | "The problem — [why it fails]" |
-| 3 to N−1 — Numbered hacks | One named technique per slide. Bad-vs-good contrast makes each hack land instantly. | "Hack #[n] — [named technique]" |
-| N — Synthesis + close | A one-line thesis tying the hacks together, then a save/share/follow CTA. | "[Thesis tying hacks together]" + [CTA] |
+| 1 — Qarama-qarshi hook | Ko'pchilik bunda muvaffaqiyatsiz bo'lishini bildiruvchi statistika yoki da'vo. | "[Ko'pchilik X da muvaffaqiyatsiz ekanini bildiruvchi statistika]" |
+| 2 — Muammo | Umumiy yondashuv nega ishlamaydi, ideal holda analogiya bilan. | "Muammo — [nega ishlamaydi]" |
+| 3 dan N−1 gacha — Raqamlangan hack'lar | Har bir slaydda bitta nomlangan texnika. Yomon-va-yaxshi kontrasti har bir hack'ni bir zumda yetkazadi. | "Hack #[n] — [nomlangan texnika]" |
+| N — Sintez + yakun | Hack'larni bog'laydigan bir qatorli tezis, so'ng saqlash/ulashish/follow CTA. | "[Hack'larni bog'laydigan tezis]" + [CTA] |
 
-**Name every technique.** "The 3-second rule" is shareable and memorable; "keep it short" is neither. Named techniques travel — people repeat them and credit the source.
+**Har bir texnikani nomlang.** "3 soniya qoidasi" ulashsa bo'ladigan va esda qoladigan; "qisqa qiling" — ikkalasi ham emas. Nomlangan texnikalar tarqaladi — odamlar ularni takrorlaydi va manbani eslaydi.
 
-*SaaS example:* "90% of trial emails never get opened." → why (they read like receipts, not messages) → Hack #1: The founder-from line, Hack #2: The one-question subject, ... → "Trial emails are conversations, not confirmations. Save this for your next sequence."
+*SaaS misoli:* "Sinov emaillarining 90% hech qachon ochilmaydi." → nega (ular xabar emas, kvitansiyaga o'xshaydi) → Hack #1: Asoschi-from qatori, Hack #2: Bitta savolli mavzu, ... → "Sinov emaillari — tasdiqlash emas, suhbat. Keyingi ketma-ketligingiz uchun saqlang."
 
-**Failure mode:** hacks that are restatements of each other. Each slide must survive alone — if two hacks collapse into one idea, merge them and go shorter.
+**Nosozlik rejimi:** bir-birini takrorlaydigan hack'lar. Har bir slayd yolg'iz o'zi turishi kerak — ikkita hack bitta g'oyaga qulasa, ularni birlashtiring va qisqaroq qiling.
 
 ---
 
-## Framework D: Rant Callout (4–8 slides)
+## D freymvork: Rant Callout (4–8 slayd)
 
-The "someone had to say it" carousel. Personality-led and polarizing by design — the structure exists to keep the heat *fair* so it reads as conviction, not bitterness.
+"Kimdir buni aytishi kerak edi" karuseli. Shaxsiyatga yo'naltirilgan va dizayn bo'yicha qutblantiruvchi — tuzilma qizg'inlikni *adolatli* saqlash uchun mavjud, shunda u achchiqlik emas, ishonch bo'lib o'qiladi.
 
-| Slide | Job | Pattern |
+| Slayd | Vazifa | Naqsh |
 |---|---|---|
-| 1 — Provocative claim | An unpopular opinion or direct accusation about a common practice. | "Unpopular opinion — [common practice]" |
-| 2 to N−2 — Escalate the argument | Sensory, specific detail. Show the offense; don't gesture at it abstractly. Each slide raises the stakes. | "[Escalating, specific complaint]" |
-| N−1 — Fairness pivot | "Don't get me wrong…" — clarify what you're *not* attacking. Anti-laziness, not anti-tool; anti-practice, not anti-person. | "The problem isn't [X], it's [Y]" |
-| N — Close | Firm, personality-forward sign-off. Signed rants read as owned opinions; anonymous ones read as potshots. | "[Firm sign-off] — signed [name/persona]" |
+| 1 — Provokatsion da'vo | Keng tarqalgan amaliyot haqida mashhur bo'lmagan fikr yoki to'g'ridan-to'g'ri ayblov. | "Mashhur bo'lmagan fikr — [keng tarqalgan amaliyot]" |
+| 2 dan N−2 gacha — Argumentni kuchaytirish | Sezgi orqali sezilarli, aniq tafsilot. Huquqbuzarlikni ko'rsating; mavhum ishora qilmang. Har bir slayd garovni oshiradi. | "[Kuchayib boruvchi, aniq shikoyat]" |
+| N−1 — Adolat burilishi | "Meni noto'g'ri tushunmang…" — nimani *hujum qilmayotganingizni* aniqlang. Dangasalikka qarshi, asbobga emas; amaliyotga qarshi, odamga emas. | "Muammo [X] emas, [Y]" |
+| N — Yakun | Qat'iy, shaxsiyatga yo'naltirilgan xayrlashuv. Imzolangan rant'lar egalik qilingan fikr, anonimlari esa yerdan otilgan o'q bo'lib o'qiladi. | "[Qat'iy xayrlashuv] — imzo [ism/persona]" |
 
-**The fairness pivot is what makes it work.** Without it you're yelling; with it you're drawing a precise line, and precise lines get quoted. It also pre-empts the top hostile comment.
+**Adolat burilishi uni ishlatadi.** Usiz siz baqiryapsiz; u bilan aniq chiziq chizyapsiz, aniq chiziqlar esa iqtibos qilinadi. U shuningdek eng yomon dushmanlik izohini oldindan to'xtatadi.
 
-*SaaS example:* "Your AI-generated LinkedIn posts are costing you customers." → the specifics (same em-dash cadence, same 'game-changer' vocabulary, zero lived detail) → "Don't get me wrong — I use AI daily. The problem isn't the tool, it's publishing the first draft." → "Write like you talk. — [Name]"
+*SaaS misoli:* "AI yaratgan LinkedIn postlaringiz sizga mijozlarga qimmatga tushmoqda." → aniq tafsilotlar (bir xil em-dash ritmi, bir xil 'game-changer' lug'ati, nol real tafsilot) → "Meni noto'g'ri tushunmang — men AI'dan har kuni foydalanaman. Muammo asbob emas, birinchi qoralamani nashr qilishda." → "Gapirganingizdek yozing. — [Ism]"
 
-**Failure modes:** skipping the pivot (reads unhinged, invites pile-ons), or ranting about something your own product/content visibly does (the comments will find it).
+**Nosozlik rejimlari:** burilishni o'tkazib yuborish (aqldan ozgandek o'qiladi, hujumlarni taklif qiladi) yoki o'z mahsulotingiz/kontentingiz ko'rinib turgan narsa haqida rant qilish (izohlar buni topadi).
 
 ---
 
-## Framework E: Demo Walkthrough (5–11 slides)
+## E freymvork: Demo Walkthrough (5–11 slayd)
 
-The "watch it work" carousel for product or workflow content. Show the finished result first, then the steps — the outcome earns attention for the process.
+Mahsulot yoki ish jarayoni kontenti uchun "ishlaganini ko'ring" karuseli. Avval tugallangan natijani, keyin qadamlarni ko'rsating — natija jarayon uchun e'tibor qozonadi.
 
-| Slide | Job | Pattern |
+| Slayd | Vazifa | Naqsh |
 |---|---|---|
-| 1 — Product + outcome | Brand/product plus the finished result. Lead with what they get. | "[Product] + [outcome], finished result" |
-| 2 — Problem it solves | The specific frustration this replaces. | "[The specific pain this replaces]" |
-| 3 — Process overview | The numbered step list, shown *before* the detail. Seeing the whole path lowers mid-swipe drop-off — readers commit when they know how long the road is. | "[N] steps to [outcome] in [timeframe]" |
-| 4 to N−1 — Step-by-step | One real UI screenshot per step with a short caption. Real screenshots; mockups read as vaporware. | "Step [n] — [screenshot] — [caption]" |
-| N — Result + positioning | The full-size output plus one brand-philosophy line. | "[Final output] + [positioning line]" |
+| 1 — Mahsulot + natija | Brend/mahsulot plyus tugallangan natija. Ular nima olishidan boshlang. | "[Mahsulot] + [natija], tugallangan natija" |
+| 2 — U hal qiladigan muammo | Bu almashtiradigan aniq asabiylashish. | "[Bu almashtiradigan aniq og'riq]" |
+| 3 — Jarayonga umumiy nazar | Tafsilotdan *oldin* ko'rsatiladigan raqamlangan qadamlar ro'yxati. Butun yo'lni ko'rish swipe o'rtasidagi tashlab ketishni kamaytiradi — o'quvchilar yo'l qancha uzunligini bilganda majburiyat oladi. | "[Vaqt] ichida [natija]ga [N] qadam" |
+| 4 dan N−1 gacha — Qadamma-qadam | Har bir qadam uchun bitta haqiqiy UI skrinshoti qisqa caption bilan. Haqiqiy skrinshotlar; mockup'lar vaporware bo'lib o'qiladi. | "[n]-qadam — [skrinshot] — [caption]" |
+| N — Natija + pozitsiyalash | To'liq o'lchamli natija plyus bitta brend-falsafa qatori. | "[Yakuniy natija] + [pozitsiyalash qatori]" |
 
-**Overview-before-detail is the key move** (same reason recipe sites list ingredients before instructions): a reader who's seen "4 steps, 10 minutes" on slide 3 will finish; a reader dropped straight into step 1 with no map bails at step 2.
+**Tafsilotdan oldin umumiy nazar — asosiy harakat** (retsept saytlari ko'rsatmalardan oldin ingredientlarni ro'yxatlashining sababi bilan bir xil): 3-slaydda "4 qadam, 10 daqiqa" ni ko'rgan o'quvchi tugatadi; xaritasiz to'g'ridan-to'g'ri 1-qadamga tushgan o'quvchi 2-qadamda ketib qoladi.
 
-*SaaS example:* "From CSV to live dashboard in 4 steps" → the pain (weekly manual reporting) → the 4-step overview → one screenshot per step → the finished dashboard + "Built for marketers, not analysts."
+*SaaS misoli:* "CSV'dan jonli dashboardga 4 qadamda" → og'riq (haftalik qo'lda hisobot) → 4 qadamli umumiy nazar → har bir qadam uchun bitta skrinshot → tugallangan dashboard + "Analitiklar emas, marketologlar uchun qurilgan."
 
-**Failure mode:** screenshots with too much UI. Crop to the action, zoom the relevant control, annotate with one arrow — each screenshot should make sense at thumbnail size.
+**Nosozlik rejimi:** juda ko'p UI'li skrinshotlar. Harakatgacha kesing, tegishli boshqaruvni zoom qiling, bitta o'q bilan belgilang — har bir skrinshot thumbnail o'lchamida ham mantiqli bo'lishi kerak.
 
 ---
 
-## Platform Notes
+## Platforma eslatmalari
 
-**Instagram:** 1080×1350 (4:5) slides; up to 20 slides but the frameworks' ranges above reflect where completion rates hold. The caption carries the searchable text — restate the hook and add context, don't just repeat slide 1. First slide doubles as the grid thumbnail.
+**Instagram:** 1080×1350 (4:5) slaydlar; 20 gacha slayd, lekin yuqoridagi freymvork diapazonlari tugallash darajalari saqlanadigan joyni aks ettiradi. Caption qidiriladigan matnni olib yuradi — hook'ni qayta bayon qiling va kontekst qo'shing, shunchaki 1-slaydni takrorlamang. Birinchi slayd grid thumbnail vazifasini ham o'taydi.
 
-**LinkedIn (document posts):** Upload as PDF. Square or 4:5. LinkedIn shows a "N pages" badge — Value-Stack's exact-count cover plays especially well here. B2B tolerates denser text per slide than Instagram, but the one-idea-per-slide rule still holds. The post text above the document is a second hook — write it as its own post, not a throwaway "see attached."
+**LinkedIn (hujjat postlari):** PDF sifatida yuklang. Kvadrat yoki 4:5. LinkedIn "N sahifa" nishonini ko'rsatadi — Value-Stack'ning aniq sonli cover'i bu yerda ayniqsa yaxshi ishlaydi. B2B Instagram'dan ko'ra har bir slaydda zichroq matnni qabul qiladi, lekin har bir slaydda bitta g'oya qoidasi baribir amal qiladi. Hujjat ustidagi post matni — ikkinchi hook: uni "ilovaga qarang" kabi tashlab yuboriladigan emas, alohida post sifatida yozing.
 
-**TikTok photo mode:** Same frameworks work; pacing skews faster — trim each framework toward its minimum slide count.
+**TikTok photo mode:** Bir xil freymvorklar ishlaydi; sur'at tezroq — har bir freymvorkni minimal slaydlar soniga qarab qisqartiring.
 
-## Production Checklist
+## Ishlab chiqarish cheklisti
 
-- [ ] Slide 1 works as a standalone feed post (test: would it stop the scroll with no carousel behind it?)
-- [ ] One idea per slide — if a slide needs two sentences of setup, split it
-- [ ] Same visual template on every interior slide
-- [ ] Any count promised on the cover is exactly delivered (no filler, no rounding)
-- [ ] Claims and numbers are real and yours — no invented stats or borrowed screenshots
-- [ ] Text is legible at thumbnail size (minimum ~28pt at 1080px wide)
-- [ ] Final slide has one CTA, not three
-- [ ] Caption/post text written as its own hook, not a repeat of slide 1
+- [ ] 1-slayd mustaqil feed posti sifatida ishlaydi (sinov: orqasida karusel bo'lmasa, scroll'ni to'xtatarmidi?)
+- [ ] Har bir slaydda bitta g'oya — slaydga ikki gaplik setup kerak bo'lsa, bo'ling
+- [ ] Har bir ichki slaydda bir xil vizual shablon
+- [ ] Cover'da va'da qilingan har qanday son aynan yetkazilgan (bo'sh to'ldirish yo'q, yaxlitlash yo'q)
+- [ ] Da'volar va raqamlar haqiqiy va sizniki — to'qilgan statistika yoki olingan skrinshotlar yo'q
+- [ ] Matn thumbnail o'lchamida o'qiladi (1080px kenglikda minimal ~28pt)
+- [ ] Oxirgi slaydda uchta emas, bitta CTA
+- [ ] Caption/post matni 1-slaydni takrorlash emas, o'z hook sifatida yozilgan
 
-## Measuring What Worked
+## Nima ishlaganini o'lchash
 
-Judge carousels on **saves and completion**, not likes — saves signal reference value (the algorithmic win for carousels), and where per-slide analytics exist (Instagram professional insights, LinkedIn document analytics, or third-party tools), drop-off position tells you which slide broke the swipe chain. When a carousel underperforms, the fix is usually slide 1 (didn't stop the scroll) or the framework choice (list content forced into a rant structure), not the middle slides. Track per-framework performance and double down on the two that fit your audience — see [reverse-engineering.md](reverse-engineering.md) for the analysis workflow.
+Karusellarni yoqishlar emas, **saqlash va tugatish** bo'yicha baholang — saqlashlar ma'lumotnoma qiymatini bildiradi (karusellar uchun algoritmik g'alaba) va slayd bo'yicha analitika mavjud bo'lgan joyda (Instagram professional insights, LinkedIn document analytics yoki uchinchi tomon asboblari) tashlab ketish pozitsiyasi qaysi slayd swipe zanjirini uzganini aytadi. Karusel yomon ishlasa, tuzatish odatda 1-slayd (scroll'ni to'xtatmadi) yoki freymvork tanlovi (ro'yxat kontenti rant tuzilmasiga majburlangan), o'rtadagi slaydlar emas. Har bir freymvork bo'yicha natijani kuzating va auditoriyangizga mos ikkitasiga ko'proq e'tibor bering — tahlil ish jarayoni uchun [reverse-engineering.md](reverse-engineering.md) ga qarang.

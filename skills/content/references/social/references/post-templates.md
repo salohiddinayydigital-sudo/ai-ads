@@ -1,179 +1,179 @@
-# Post Format Templates
+# Post format shablonlari
 
-Ready-to-use templates for different platforms and content types.
+Turli platformalar va kontent turlari uchun tayyor shablonlar.
 
-## Contents
-- LinkedIn Post Templates (The Story Post, The Contrarian Take, The List Post, The How-To)
-- Twitter/X Thread Templates (The Tutorial Thread, The Story Thread, The Breakdown Thread)
-- Instagram Templates (The Carousel Hook, The Reel Script)
-- Hook Formulas (Curiosity Hooks, Story Hooks, Value Hooks, Contrarian Hooks, Social Proof Hooks)
+## Mundarija
+- LinkedIn post shablonlari (Hikoya posti, Qarama-qarshi fikr, Ro'yxat posti, How-To)
+- Twitter/X thread shablonlari (Qo'llanma thread'i, Hikoya thread'i, Tahlil thread'i)
+- Instagram shablonlari (Karusel hook'i, Reel ssenariysi)
+- Hook formulalari (Qiziqish hooklari, Hikoya hooklari, Qiymat hooklari, Qarama-qarshi hooklar, Ijtimoiy isbot hooklari)
 
-## LinkedIn Post Templates
+## LinkedIn post shablonlari
 
-### The Story Post
+### Hikoya posti
 ```
-[Hook: Unexpected outcome or lesson]
+[Hook: Kutilmagan natija yoki saboq]
 
-[Set the scene: When/where this happened]
+[Sahnani belgilang: Bu qachon/qayerda bo'lgan]
 
-[The challenge you faced]
+[Duch kelgan qiyinchiligingiz]
 
-[What you tried / what happened]
+[Nimani sinab ko'rdingiz / nima bo'ldi]
 
-[The turning point]
+[Burilish nuqtasi]
 
-[The result]
+[Natija]
 
-[The lesson for readers]
+[O'quvchilar uchun saboq]
 
-[Question to prompt engagement]
-```
-
-### The Contrarian Take
-```
-[Unpopular opinion stated boldly]
-
-Here's why:
-
-[Reason 1]
-[Reason 2]
-[Reason 3]
-
-[What you recommend instead]
-
-[Invite discussion: "Am I wrong?"]
+[Jalb qilishga undaydigan savol]
 ```
 
-### The List Post
+### Qarama-qarshi fikr
 ```
-[X things I learned about [topic] after [credibility builder]:
+[Dadil aytilgan mashhur bo'lmagan fikr]
 
-1. [Point] — [Brief explanation]
+Mana nega:
 
-2. [Point] — [Brief explanation]
+[1-sabab]
+[2-sabab]
+[3-sabab]
 
-3. [Point] — [Brief explanation]
+[Buning o'rniga nimani tavsiya qilasiz]
 
-[Wrap-up insight]
-
-Which resonates most with you?
-```
-
-### The How-To
-```
-How to [achieve outcome] in [timeframe]:
-
-Step 1: [Action]
-↳ [Why this matters]
-
-Step 2: [Action]
-↳ [Key detail]
-
-Step 3: [Action]
-↳ [Common mistake to avoid]
-
-[Result you can expect]
-
-[CTA or question]
+[Muhokamaga taklif: "Noto'g'rimanmi?"]
 ```
 
----
-
-## Twitter/X Thread Templates
-
-### The Tutorial Thread
+### Ro'yxat posti
 ```
-Tweet 1: [Hook + promise of value]
+[[Ishonchlilik quruvchi] dan keyin [mavzu] haqida o'rgangan X ta narsa:
 
-"Here's exactly how to [outcome] (step-by-step):"
+1. [Fikr] — [Qisqa tushuntirish]
 
-Tweet 2-7: [One step per tweet with details]
+2. [Fikr] — [Qisqa tushuntirish]
 
-Final tweet: [Summary + CTA]
+3. [Fikr] — [Qisqa tushuntirish]
 
-"If this was helpful, follow me for more on [topic]"
+[Yakuniy insayt]
+
+Qaysi biri sizga eng yaqin?
 ```
 
-### The Story Thread
+### How-To
 ```
-Tweet 1: [Intriguing hook]
+[Vaqt] ichida [natijaga] qanday erishish:
 
-"[Time] ago, [unexpected thing happened]. Here's the full story:"
+1-qadam: [Harakat]
+↳ [Nega bu muhim]
 
-Tweet 2-6: [Story beats, building tension]
+2-qadam: [Harakat]
+↳ [Asosiy tafsilot]
 
-Tweet 7: [Resolution and lesson]
+3-qadam: [Harakat]
+↳ [Qochish kerak bo'lgan keng tarqalgan xato]
 
-Final tweet: [Takeaway + engagement ask]
-```
+[Kutish mumkin bo'lgan natija]
 
-### The Breakdown Thread
-```
-Tweet 1: [Company/person] just [did thing].
-
-Here's why it's genius (and what you can learn):
-
-Tweet 2-6: [Analysis points]
-
-Tweet 7: [Your key takeaway]
-
-"[Related insight + follow CTA]"
+[CTA yoki savol]
 ```
 
 ---
 
-## Instagram Templates
+## Twitter/X thread shablonlari
 
-### The Carousel Hook
+### Qo'llanma thread'i
 ```
-[Slide 1: Bold statement or question]
-[Slides 2-9: One point per slide, visual + text]
-[Slide 10: Summary + CTA]
+1-tweet: [Hook + qiymat va'dasi]
 
-Caption: [Expand on the topic, add context, include CTA]
+"[Natija]ga qanday erishish (qadamma-qadam):"
+
+2–7-tweet: [Har bir tweet'da bitta qadam tafsilotlari bilan]
+
+Oxirgi tweet: [Xulosa + CTA]
+
+"Bu foydali bo'lsa, [mavzu] haqida ko'proq uchun meni kuzating"
 ```
 
-This is the generic shape. For five full slide-by-slide narrative architectures (Value-Stack, Problem-Proof, Hack List, Rant Callout, Demo Walkthrough) with selection guidance and per-slide copy slots, see [carousel-frameworks.md](carousel-frameworks.md).
-
-### The Reel Script
+### Hikoya thread'i
 ```
-Hook (0-2 sec): [Pattern interrupt or bold claim]
-Setup (2-5 sec): [Context for the tip]
-Value (5-25 sec): [The actual advice/content]
-CTA (25-30 sec): [Follow, comment, share, link]
+1-tweet: [Qiziqarli hook]
+
+"[Vaqt] oldin [kutilmagan narsa yuz berdi]. Mana to'liq hikoya:"
+
+2–6-tweet: [Hikoya lahzalari, tarangilikni kuchaytirib]
+
+7-tweet: [Yechim va saboq]
+
+Oxirgi tweet: [Xulosa + jalb qilish so'rovi]
+```
+
+### Tahlil thread'i
+```
+1-tweet: [Kompaniya/shaxs] hozirgina [narsa qildi].
+
+Mana nega bu daho (va undan nimani o'rganish mumkin):
+
+2–6-tweet: [Tahlil nuqtalari]
+
+7-tweet: [Sizning asosiy xulosangiz]
+
+"[Tegishli insayt + follow CTA]"
 ```
 
 ---
 
-## Hook Formulas
+## Instagram shablonlari
 
-The first line determines whether anyone reads the rest.
+### Karusel hook'i
+```
+[1-slayd: Dadil bayonot yoki savol]
+[2–9-slaydlar: Har bir slaydda bitta fikr, vizual + matn]
+[10-slayd: Xulosa + CTA]
 
-### Curiosity Hooks
-- "I was wrong about [common belief]."
-- "The real reason [outcome] happens isn't what you think."
-- "[Impressive result] — and it only took [surprisingly short time]."
-- "Nobody talks about [insider knowledge]."
+Caption: [Mavzuni kengaytiring, kontekst qo'shing, CTA kiriting]
+```
 
-### Story Hooks
-- "Last week, [unexpected thing] happened."
-- "I almost [big mistake/failure]."
-- "3 years ago, I [past state]. Today, [current state]."
-- "[Person] told me something I'll never forget."
+Bu umumiy shakl. Tanlov bo'yicha yo'riqnoma va har bir slayd uchun matn slotlari bilan beshta to'liq slayd-ba-slayd rivoyat arxitekturasi (Value-Stack, Problem-Proof, Hack List, Rant Callout, Demo Walkthrough) uchun [carousel-frameworks.md](carousel-frameworks.md) ga qarang.
 
-### Value Hooks
-- "How to [desirable outcome] (without [common pain]):"
-- "[Number] [things] that [outcome]:"
-- "The simplest way to [outcome]:"
-- "Stop [common mistake]. Do this instead:"
+### Reel ssenariysi
+```
+Hook (0–2 soniya): [Pattern interrupt yoki dadil da'vo]
+Setup (2–5 soniya): [Maslahat uchun kontekst]
+Qiymat (5–25 soniya): [Haqiqiy maslahat/kontent]
+CTA (25–30 soniya): [Follow, izoh, ulashish, havola]
+```
 
-### Contrarian Hooks
-- "Unpopular opinion: [bold statement]"
-- "[Common advice] is wrong. Here's why:"
-- "I stopped [common practice] and [positive result]."
-- "Everyone says [X]. The truth is [Y]."
+---
 
-### Social Proof Hooks
-- "We [achieved result] in [timeframe]. Here's the full story:"
-- "[Number] people asked me about [topic]. Here's my answer:"
-- "[Authority figure] taught me [lesson]."
+## Hook formulalari
+
+Birinchi qator qolganini kimdir o'qiy-o'qimasligini hal qiladi.
+
+### Qiziqish hooklari
+- "Men [keng tarqalgan e'tiqod] haqida xato qilgan edim."
+- "[Natija] ning haqiqiy sababi siz o'ylagan narsa emas."
+- "[Ta'sirli natija] — va bunga atigi [hayratlanarli darajada qisqa vaqt] ketdi."
+- "Hech kim [ichki bilim] haqida gapirmaydi."
+
+### Hikoya hooklari
+- "O'tgan hafta [kutilmagan narsa] yuz berdi."
+- "Men [katta xato/muvaffaqiyatsizlik] ga sal qoldi."
+- "3 yil oldin men [o'tgan holat]. Bugun [joriy holat]."
+- "[Shaxs] menga hech qachon unutmaydigan narsani aytdi."
+
+### Qiymat hooklari
+- "[Istalgan natija]ga qanday erishish mumkin ([keng tarqalgan og'riq]siz):"
+- "[Natija]ga olib keladigan [son] ta [narsa]:"
+- "[Natija]ga erishishning eng oddiy yo'li:"
+- "[Keng tarqalgan xato]ni to'xtating. Buning o'rniga buni qiling:"
+
+### Qarama-qarshi hooklar
+- "Mashhur bo'lmagan fikr: [dadil bayonot]"
+- "[Keng tarqalgan maslahat] noto'g'ri. Mana nega:"
+- "Men [keng tarqalgan amaliyot]ni to'xtatdim va [ijobiy natija]."
+- "Hamma [X] deydi. Haqiqat esa [Y]."
+
+### Ijtimoiy isbot hooklari
+- "Biz [muddat] ichida [natijaga erishdik]. Mana to'liq hikoya:"
+- "[Son] kishi mendan [mavzu] haqida so'radi. Mana mening javobim:"
+- "[Obro'li shaxs] menga [saboq] o'rgatdi."

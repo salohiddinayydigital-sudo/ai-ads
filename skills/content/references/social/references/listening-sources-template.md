@@ -1,37 +1,37 @@
-# Listening Sources — Template
+# Listening manbalari — shablon
 
-Copy this file to `.agents/listening-sources.md` in your project (or `.claude/listening-sources.md`) and fill in the brackets. Claude reads it when running the [listening workflow](listening.md).
+Ushbu faylni loyihangizdagi `.agents/listening-sources.md` ga (yoki `.claude/listening-sources.md` ga) nusxalang va qavslarni to'ldiring. Claude [listening ish jarayoni](listening.md) ni bajarayotganda uni o'qiydi.
 
-Delete sections you don't use. Keep this short and current — stale sources are worse than no sources.
-
----
-
-## What We're Listening For
-
-**Brand / product:** [Your product name]
-**Category:** [e.g., "AI writing assistant", "Postgres GUI"]
-**Goal:** [e.g., "find people switching from Notion", "engage with B2B SaaS founders 50-200 employees"]
-
-## ICP (for scoring)
-
-Used by the [scoring rubric](listening.md#scoring-rubric) to judge ICP fit.
-
-- **Role:** [e.g., "founder, head of marketing, marketing ops lead"]
-- **Company stage:** [e.g., "seed to Series B SaaS, 10-200 employees"]
-- **Industry:** [e.g., "B2B SaaS, infra, devtools"]
-- **Signals they're a fit:** [e.g., "writes about GTM, runs paid ads, recently raised"]
+Ishlatmaydigan bo'limlarni o'chiring. Qisqa va dolzarb saqlang — eskirgan manbalar manbasizlikdan yomonroq.
 
 ---
 
-## Target Accounts
+## Nimani tinglayapmiz
 
-Engage with **every** post from these accounts when relevant. Keep this list to 20-50 max.
+**Brend / mahsulot:** [Mahsulotingiz nomi]
+**Kategoriya:** [masalan, "AI yozuv yordamchisi", "Postgres GUI"]
+**Maqsad:** [masalan, "Notion'dan o'tayotgan odamlarni topish", "50–200 xodimli B2B SaaS asoschilari bilan jalb qilish"]
 
-### LinkedIn (browser-driven — use dev-browser to view feed)
-- [Name] — `linkedin.com/in/handle`
-- [Name] — `linkedin.com/in/handle`
+## ICP (ballash uchun)
 
-### X / Twitter (browser-driven)
+ICP moslikni baholash uchun [ballash rubrikasi](listening.md#scoring-rubric) tomonidan ishlatiladi.
+
+- **Rol:** [masalan, "asoschi, marketing rahbari, marketing ops lead"]
+- **Kompaniya bosqichi:** [masalan, "seed'dan Series B gacha SaaS, 10–200 xodim"]
+- **Soha:** [masalan, "B2B SaaS, infra, devtools"]
+- **Mos kelishini bildiruvchi signallar:** [masalan, "GTM haqida yozadi, pullik reklama yuritadi, yaqinda investitsiya olgan"]
+
+---
+
+## Nishon akkauntlar
+
+Tegishli bo'lganda bu akkauntlarning **har bir** postiga javob bering. Ro'yxatni 20–50 tagacha saqlang.
+
+### LinkedIn (brauzer orqali — feedni ko'rish uchun dev-browser ishlating)
+- [Ism] — `linkedin.com/in/handle`
+- [Ism] — `linkedin.com/in/handle`
+
+### X / Twitter (brauzer orqali)
 - [@handle]
 - [@handle]
 
@@ -42,82 +42,82 @@ Engage with **every** post from these accounts when relevant. Keep this list to 
 ### Bluesky
 - [handle.bsky.social]
 
-### Blogs / Newsletters (RSS)
-- [Name] — `https://example.com/feed/`
-- [Name] — `https://example.substack.com/feed`
+### Bloglar / Newsletter'lar (RSS)
+- [Ism] — `https://example.com/feed/`
+- [Ism] — `https://example.substack.com/feed`
 
-### YouTube channels (RSS)
-- [Name] — channel ID `UCxxxxxxxx`
+### YouTube kanallari (RSS)
+- [Ism] — kanal ID `UCxxxxxxxx`
 
 ---
 
-## Keywords (intent signals)
+## Kalit so'zlar (intent signallari)
 
-Search across all platforms. Claude runs these through Reddit, HN, Bluesky on the [daily loop](listening.md#the-daily-triage-loop).
+Barcha platformalar bo'ylab qidiring. Claude bularni [kundalik siklda](listening.md#the-daily-triage-loop) Reddit, HN, Bluesky orqali ishga tushiradi.
 
-### High-intent (someone shopping or switching)
+### Yuqori intent (kimdir izlayapti yoki o'tayapti)
 - `"alternative to [competitor]"`
 - `"looking for a [category] tool"`
 - `"recommend a [category]"`
 - `"switching from [competitor]"`
 - `"frustrated with [competitor]"`
 
-### Problem signals (someone in pain)
+### Muammo signallari (kimdir og'riqda)
 - `"[category] is so [bad/hard/expensive]"`
 - `"why is [category] [problem]"`
 - `"hate [pain point]"`
 
-### Brand mentions
-- `"[your brand]"`
-- `"[your brand misspelling]"`
-- `"[your domain]"`
+### Brend eslatmalari
+- `"[sizning brend]"`
+- `"[brendning yozilishidagi xatolar]"`
+- `"[sizning domen]"`
 
-### Competitor mentions (monitor for switching language)
-- `"[competitor 1]"`
-- `"[competitor 2]"`
+### Raqobatchi eslatmalari (o'tish tilini kuzating)
+- `"[raqobatchi 1]"`
+- `"[raqobatchi 2]"`
 
 ---
 
-## Subreddits
+## Subreddit'lar
 
-Pulled via Reddit JSON API on the daily loop.
+Kundalik siklda Reddit JSON API orqali tortiladi.
 
 - r/SaaS
 - r/Entrepreneur
-- r/[your niche, e.g., "marketing", "devtools"]
-- r/[adjacent community]
+- r/[sizning nisha, masalan, "marketing", "devtools"]
+- r/[yondosh hamjamiyat]
 
 ---
 
-## Saved Searches (manual / browser-driven)
+## Saqlangan qidiruvlar (qo'lda / brauzer orqali)
 
-URLs Claude opens via dev-browser to scan.
+Claude skanerlash uchun dev-browser orqali ochadigan URL'lar.
 
 ### LinkedIn Sales Navigator
-- [Search name] — `https://linkedin.com/sales/search/people?...`
+- [Qidiruv nomi] — `https://linkedin.com/sales/search/people?...`
 
-### LinkedIn (regular)
-- Posts hashtag — `https://linkedin.com/feed/hashtag/yourtopic/`
+### LinkedIn (oddiy)
+- Post hashtag — `https://linkedin.com/feed/hashtag/yourtopic/`
 
-### X advanced search
-- [Search name] — `https://x.com/search?q=...&f=live`
-
----
-
-## Do Not Engage
-
-Save yourself the regret.
-
-- Accounts known for bad-faith dunking: [@handle], [@handle]
-- Blocked brands / competitors who'll screenshot: [list]
-- Topics to avoid: [politics, [your founder's hot takes], etc.]
+### X kengaytirilgan qidiruv
+- [Qidiruv nomi] — `https://x.com/search?q=...&f=live`
 
 ---
 
-## Notes for Claude
+## Jalb qilmaslik kerak
 
-- When asked for "today's top 10," output in the format defined in [listening.md](listening.md#the-daily-triage-loop)
-- For LinkedIn and X, use dev-browser with the persistent session (user is logged in)
-- For everything else, use the curl recipes in [listening.md](listening.md#sources--light-tooling-curl-recipes)
-- Default lookback: 24h. User can override.
-- Always ask before posting — output drafts, user approves and posts manually
+O'zingizni pushaymondan saqlang.
+
+- Yomon niyatli kamsitish bilan tanilgan akkauntlar: [@handle], [@handle]
+- Bloklangan brendlar / skrinshot qiladigan raqobatchilar: [ro'yxat]
+- Qochish kerak bo'lgan mavzular: [siyosat, [asoschingizning hot take'lari] va h.k.]
+
+---
+
+## Claude uchun eslatmalar
+
+- "Bugungi top 10" so'ralganda, [listening.md](listening.md#the-daily-triage-loop) da belgilangan formatda chiqaring
+- LinkedIn va X uchun doimiy sessiyali dev-browser'dan foydalaning (foydalanuvchi tizimga kirgan)
+- Qolgan hamma narsa uchun [listening.md](listening.md#sources--light-tooling-curl-recipes) dagi curl retseptlaridan foydalaning
+- Standart ortga qarash muddati: 24 soat. Foydalanuvchi o'zgartirishi mumkin.
+- Post qilishdan oldin doim so'rang — qoralamalarni chiqaring, foydalanuvchi tasdiqlab, qo'lda post qiladi
