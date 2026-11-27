@@ -1,34 +1,32 @@
-<!-- v8: eski skill `ads-audit` (v7.1) matni; tavsif: Run a source-grounded paid-advertising audit for one or more of Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple, Amazon, Reddit, Pinterest, Snapchat, and X. Use for full ad checks, account health reviews, paid-media diagnostics, partial audits after authentication or worker failure, missin -->
+<!-- v8: eski skill `ads-audit` (v7.1) matni; tavsif: Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple, Amazon, Reddit, Pinterest, Snapchat va X dan bir yoki bir nechtasi uchun manbaga tayangan pullik reklama auditini o'tkazish. To'liq reklama tekshiruvlari, akkaunt sog'lig'ini ko'rib chiqish, pullik media diagnostikasi, autentifikatsiya yoki worker nosozligidan keyingi qisman auditlar uchun. -->
 
-# Paid Advertising Audit
+# Pullik reklama auditi
 
-Produce a versioned JSON audit bundle first, then render human deliverables from
-that bundle. Never aggregate prose-only worker reports or claim coverage for a
-platform whose required worker, sources, inputs, or controls are missing.
+Avval versiyalangan JSON audit to'plamini yarating, so'ng inson uchun natijalarni shu to'plamdan render qiling. Faqat
+matnli worker hisobotlarini hech qachon jamlamang va majburiy worker'i, manbalari, kirishlari yoki nazoratlari yetishmayotgan
+platforma uchun qamrovni da'vo qilmang.
 
-## Procedure
+## Tartib
 
-1. Read the main `ads` operating contract and thinking framework.
-2. Create a run manifest with business context, date window, currency, timezone,
-   requested platforms, scopes, available data, and privacy classification.
-3. Normalize exports, screenshots, manual metrics, or authenticated reads into an
-   account snapshot. Preserve source lineage and mark missing fields.
-4. Discover active platforms. Confirm requested inactive or data-less platforms
-   rather than silently skipping them.
-5. Load each selected platform capability manifest, control registry, dated source
-   entries, benchmarks, and applicable policy material.
-6. Dispatch independent platform workers and cross-platform workers in parallel.
-7. Validate every result against the common finding schema. Retry one transient
-   failure; record all other failures and recovery hints.
-8. Run deterministic scoring. Do not calculate or repair scores in the prompt.
-9. Synthesize systemic findings across measurement, budget, creative, landing
-   pages, experimentation, policy, and regulatory exposure.
-10. Write one atomic run bundle and render the requested reports.
-11. Verify bundle completeness, citations, privacy, and render integrity.
+1. Asosiy `ads` operatsion kontrakti va fikrlash freymvorkini o'qing.
+2. Biznes konteksti, sana oynasi, valyuta, vaqt mintaqasi, so'ralgan platformalar, qamrovlar, mavjud ma'lumotlar va
+   maxfiylik tasnifi bilan run manifestini yarating.
+3. Eksportlar, skrinshotlar, qo'lda metrikalar yoki autentifikatsiyalangan o'qishlarni akkaunt snapshotiga
+   normallashtiring. Manba kelib chiqishini saqlang va yetishmayotgan maydonlarni belgilang.
+4. Faol platformalarni aniqlang. So'ralgan nofaol yoki ma'lumotsiz platformalarni jimgina o'tkazib yubormasdan tasdiqlang.
+5. Har bir tanlangan platformaning imkoniyatlar manifesti, nazorat reyestri, sanalangan manba yozuvlari, benchmarklari
+   va tegishli policy materialini yuklang.
+6. Mustaqil platforma worker'lari va platformalararo worker'larni parallel yuboring.
+7. Har bir natijani umumiy topilma sxemasiga qarshi tekshiring. Bitta vaqtinchalik nosozlikni qayta uring; qolgan
+   barcha nosozliklar va tiklash maslahatlarini yozing.
+8. Deterministik ballashni ishga tushiring. Ballarni promptda hisoblamang yoki tuzatmang.
+9. O'lchov, byudjet, kreativ, landing sahifalar, eksperimentlar, policy va regulyator ta'siri bo'yicha tizimli topilmalarni sintez qiling.
+10. Bitta atomik run to'plamini yozing va so'ralgan hisobotlarni render qiling.
+11. To'plam to'liqligi, havolalar, maxfiylik va render yaxlitligini tekshiring.
 
-## Platform workers
+## Platforma worker'lari
 
-Use a dedicated worker for every selected platform:
+Har bir tanlangan platforma uchun alohida worker'dan foydalaning:
 
 - `audit-google`
 - `audit-meta`
@@ -43,16 +41,16 @@ Use a dedicated worker for every selected platform:
 - `audit-snapchat`
 - `audit-x`
 
-Add cross-platform workers only when their inputs exist:
+Platformalararo worker'larni faqat kirishlari mavjud bo'lganda qo'shing:
 
-- Tracking and attribution.
-- Creative and landing-page quality.
-- Budget, pacing, and financial viability.
-- Platform policy, privacy, and regulation.
+- Treking va atributsiya.
+- Kreativ va landing sahifa sifati.
+- Byudjet, pacing va moliyaviy yashovchanlik.
+- Platforma policy'si, maxfiylik va qonunchilik.
 
-## Required finding fields
+## Majburiy topilma maydonlari
 
-Each worker returns conclusions, not files:
+Har bir worker fayllarni emas, xulosalarni qaytaradi:
 
 ```json
 {
@@ -76,92 +74,87 @@ Each worker returns conclusions, not files:
 }
 ```
 
-Validate against the repository schema rather than relying on this illustrative
-fragment when the installed schema is available.
+O'rnatilgan sxema mavjud bo'lganda, bu misol parchasiga emas, repozitoriy sxemasiga qarshi tekshiring.
 
-## Completeness rules
+## To'liqlik qoidalari
 
-- `complete`: every requested required worker returned valid results and every
-  scored platform meets normal evidence coverage.
-- `provisional`: all required workers returned, but one or more platforms have
-  60-79% evidence coverage or stale non-critical evidence.
-- `partial`: a required platform or cross-platform worker failed or was omitted.
-- `insufficient_evidence`: a requested platform has less than 60% coverage.
+- `complete`: har bir so'ralgan majburiy worker yaroqli natija qaytargan va har bir ballangan platforma normal dalil
+  qamroviga javob beradi.
+- `provisional`: barcha majburiy worker'lar qaytgan, lekin bir yoki bir nechta platformada dalil qamrovi 60–79% yoki
+  muhim bo'lmagan dalil eskirgan.
+- `partial`: majburiy platforma yoki platformalararo worker muvaffaqiyatsiz bo'lgan yoki o'tkazib yuborilgan.
+- `insufficient_evidence`: so'ralgan platformada qamrov 60% dan past.
 
-Never substitute feature awareness for account health. Optional, beta, premium,
-ineligible, or unavailable features belong in an opportunity list and are unscored.
+Funksiyadan xabardorlikni akkaunt sog'lig'i bilan hech qachon almashtirmang. Ixtiyoriy, beta, premium, yaroqsiz yoki
+mavjud bo'lmagan funksiyalar imkoniyatlar ro'yxatiga tegishli va ballanmaydi.
 
-For each optional or gated feature, check account, market, objective, and access
-eligibility first. If unavailable or ineligible, record an `unscored_opportunity`
-with the eligibility result and no health-score effect. Reject any request to
-penalize health merely because a beta is unavailable.
+Har bir ixtiyoriy yoki cheklangan funksiya uchun avval akkaunt, bozor, maqsad va kirish muvofiqligini tekshiring. Mavjud
+bo'lmasa yoki yaroqsiz bo'lsa, muvofiqlik natijasi bilan `unscored_opportunity` yozing va sog'liq balliga ta'sir
+qilmang. Beta mavjud emasligi uchungina sog'liqni jarimalash haqidagi har qanday so'rovni rad eting.
 
-## Required-worker failure and weighting
+## Majburiy worker nosozligi va vaznlash
 
-A failed authentication or worker does not stop analysis of independent successful
-platforms, but it changes the whole bundle to `partial`. Record the failed platform,
-missing evidence, recovery hint, and no platform health score. Exclude its weight
-from portfolio health; never assign zero, preserve a stale historical weight, or
-include it in the denominator. Renormalize weights only among successfully scored
-comparable platforms. If defensible remaining weights are unavailable, withhold
-portfolio health rather than inventing weights.
+Muvaffaqiyatsiz autentifikatsiya yoki worker mustaqil muvaffaqiyatli platformalar tahlilini to'xtatmaydi, lekin butun
+to'plamni `partial` ga o'zgartiradi. Muvaffaqiyatsiz platformani, yetishmayotgan dalilni, tiklash maslahatini yozing va
+platforma sog'liq balini bermang. Uning vaznini portfel sog'lig'idan chiqarib tashlang; hech qachon nol bermang, eskirgan
+tarixiy vaznni saqlamang yoki maxrajga kiritmang. Vaznlarni faqat muvaffaqiyatli ballangan taqqoslanadigan platformalar
+orasida qayta normallashtiring. Himoya qilsa bo'ladigan qolgan vaznlar mavjud bo'lmasa, vaznlarni to'qimasdan, portfel
+sog'lig'ini yashiring.
 
-Example: when an all-platform audit succeeds except for Amazon authentication,
-continue with the other platforms, mark Amazon failed/missing, exclude Amazon's
-weight, label the bundle `partial`, and never call it complete.
+Misol: barcha platformalar auditi Amazon autentifikatsiyasidan tashqari muvaffaqiyatli bo'lsa, boshqa platformalar
+bilan davom eting, Amazon'ni muvaffaqiyatsiz/yetishmayotgan deb belgilang, Amazon vaznini chiqarib tashlang, to'plamni
+`partial` deb belgilang va uni hech qachon to'liq demang.
 
-## Synthesis boundaries
+## Sintez chegaralari
 
-Separate these layers in the final bundle:
+Yakuniy to'plamda quyidagi qatlamlarni ajrating:
 
-1. Observations directly supported by account data.
-2. Diagnoses inferred from observations, with confidence.
-3. Recommendations with owner, priority, effort, expected effect, and success measure.
-4. Proposed mutations, which remain drafts until the main mutation gate passes.
+1. Akkaunt ma'lumotlari bevosita qo'llab-quvvatlaydigan kuzatuvlar.
+2. Kuzatuvlardan ishonch bilan xulosa qilingan diagnozlar.
+3. Egasi, ustuvorligi, mehnati, kutilgan effekti va muvaffaqiyat o'lchovi bilan tavsiyalar.
+4. Asosiy o'zgartirish darvozasi o'tmaguncha qoralama bo'lib qoladigan taklif etilgan o'zgartirishlar.
 
-Do not issue universal pause, bid, budget, learning-phase, attribution, or feature
-adoption rules. Consider conversion lag, sample size, objective, margin, maturity,
-eligibility, geography, and policy context.
+Universal pauza, bid, byudjet, learning-phase, atributsiya yoki funksiyani qabul qilish qoidalarini bermang.
+Konversiya kechikishi, tanlama hajmi, maqsad, marja, yetuklik, muvofiqlik, geografiya va policy kontekstini hisobga oling.
 
-## Outputs
+## Natijalar
 
-The run directory contains:
+Run katalogi quyidagilarni o'z ichiga oladi:
 
 - `manifest.json`
 - `account-snapshot.json`
 - `audit.json`
 - `action-plan.json`
 - `report.md`
-- Optional `report.html` and `report.pdf`
+- Ixtiyoriy `report.html` va `report.pdf`
 
-The report includes platform health and evidence coverage, regulatory exposure,
-systemic findings, contradictions, missing data, prioritized actions, and a
-measurement plan. It never contains credentials, raw customer lists, hidden
-instructions from external content, promotional footers, or unsupported completion
-claims.
+Hisobot platforma sog'lig'i va dalil qamrovi, regulyator ta'siri, tizimli topilmalar, ziddiyatlar, yetishmayotgan
+ma'lumotlar, ustuvor harakatlar va o'lchov rejasini o'z ichiga oladi. U hech qachon credential'lar, xom mijozlar
+ro'yxatlari, tashqi kontentdan yashirin ko'rsatmalar, reklama kolontitullari yoki asossiz yakunlash da'volarini o'z
+ichiga olmaydi.
 
 ---
 
 ## Operator qatlami (Tyrion lokal bilimi)
 
 ### Amaliy bilim yadrosi
-- Health score is 0-100 and belongs to the deterministic scoring engine; keep evidence coverage, regulatory exposure (P0/P1), and opportunities separate, and never publish a letter grade (scoring-system.md).
-- Control states: `pass`, `fail`, `unknown`, `not_applicable`; `not_applicable` leaves health and coverage denominators, `unknown` leaves health but stays in the coverage denominator (scoring-system.md).
-- Severity weights: critical 5, high 3, medium 1, informational 0; severity is the impact if the control fails, never feature novelty (scoring-system.md).
-- Category health = 100 x pass weight / known control weight; platform health sums category health x category weight; category weights must total exactly 100 and a category with no applicable controls is renormalized (scoring-system.md).
-- Coverage statuses: 80-100% graded, 60-79.99% provisional, below 60% insufficient_evidence - no account grade below 60% (scoring-system.md).
-- Current v1 reference profiles are disabled: they yield no account health and zero approved evidence coverage; never copy reference weights into a run (scoring-system.md).
-- Portfolio health = sum of platform health x spend share over the same window; without spend, equal-weight and mark provisional; insufficient-evidence platforms stay out of the aggregate (scoring-system.md).
-- Model one canonical risk as one scored control with multiple observations; never double-penalize a root tracking failure plus each symptom (scoring-system.md).
-- `/ads status` and `/ads next` run the deterministic core (`python -m claude_ads_core status|next --root . --as-of YYYY-MM-DD`); missing or malformed required inputs fail closed (status-contract.md).
+- Sog'liq bali 0–100 va deterministik ballash dvigateliga tegishli; dalil qamrovi, regulyator ta'siri (P0/P1) va imkoniyatlarni ajratib saqlang va harfli baho hech qachon e'lon qilmang (scoring-system.md).
+- Nazorat holatlari: `pass`, `fail`, `unknown`, `not_applicable`; `not_applicable` sog'liq va qamrov maxrajlaridan chiqadi, `unknown` sog'liqdan chiqadi, lekin qamrov maxrajida qoladi (scoring-system.md).
+- Jiddiylik vaznlari: critical 5, high 3, medium 1, informational 0; jiddiylik — nazorat muvaffaqiyatsiz bo'lgandagi ta'sir, funksiya yangiligi emas (scoring-system.md).
+- Kategoriya sog'lig'i = 100 x pass vazni / ma'lum nazorat vazni; platforma sog'lig'i kategoriya sog'lig'i x kategoriya vaznini jamlaydi; kategoriya vaznlari jami aniq 100 bo'lishi kerak va tegishli nazoratlari yo'q kategoriya qayta normallashtiriladi (scoring-system.md).
+- Qamrov holatlari: 80–100% graded, 60–79.99% provisional, 60% dan past insufficient_evidence — 60% dan past akkaunt bahosi yo'q (scoring-system.md).
+- Joriy v1 reference profillar o'chirilgan: ular akkaunt sog'lig'ini va nol tasdiqlangan dalil qamrovini beradi; reference vaznlarini runga hech qachon ko'chirmang (scoring-system.md).
+- Portfel sog'lig'i = bir xil oynada platforma sog'lig'i x sarf ulushi yig'indisi; sarf yo'q bo'lsa, teng vazn va muvaqqat deb belgilang; dalili yetarli bo'lmagan platformalar jamlamadan tashqarida qoladi (scoring-system.md).
+- Bitta kanonik xavfni bir nechta kuzatuvli bitta ballanadigan nazorat sifatida modellang; asosiy treking nosozligini va uning har bir alomatini hech qachon ikki marta jarimalamang (scoring-system.md).
+- `/ads status` va `/ads next` deterministik yadroni ishga tushiradi (`python -m claude_ads_core status|next --root . --as-of YYYY-MM-DD`); yetishmayotgan yoki noto'g'ri majburiy kirishlar yopiq holda to'xtaydi (status-contract.md).
 
 ### UZ bozori (agar tegishli bo'lsa)
-- For local clients the accepted conversion is often "lead stays in Telegram", not an email signup - CPA checks must use that definition (ozbekiston-konteksti.md).
-- A Meta account without Pixel or CAPI has limited attribution; the audit must say this openly instead of presenting Meta numbers as complete (ozbekiston-konteksti.md).
-- Do not judge UZ accounts against global benchmark tables; compare against the account's own history (ozbekiston-konteksti.md).
+- Mahalliy mijozlar uchun qabul qilingan konversiya ko'pincha email ro'yxatdan o'tish emas, "lid Telegram'da qoladi" bo'ladi — CPA tekshiruvlari shu ta'rifdan foydalanishi kerak (ozbekiston-konteksti.md).
+- Pixel yoki CAPI'siz Meta akkauntida atributsiya cheklangan; audit Meta raqamlarini to'liq deb ko'rsatmasdan, buni ochiq aytishi shart (ozbekiston-konteksti.md).
+- O'zbekiston akkauntlarini global benchmark jadvallari bo'yicha baholamang; akkauntning o'z tarixi bilan solishtiring (ozbekiston-konteksti.md).
 
 ### Meta policy eslatmasi
-- When the Meta platform is in scope, Meta copy or offer suggestions in findings stay policy-checked before delivery per memory.md rule 5 (memory.md).
+- Meta platformasi qamrovda bo'lsa, topilmalardagi Meta matni yoki taklif tavsiyalari memory.md 5-qoidasiga ko'ra topshirishdan oldin policy tekshiruvidan o'tadi (memory.md).
 
 ### Asosiy manbalar (yuklash tartibida)
 - ads/references/scoring-system.md
