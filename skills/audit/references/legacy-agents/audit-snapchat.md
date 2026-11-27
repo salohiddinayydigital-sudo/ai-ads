@@ -58,7 +58,7 @@ o'zgartirish darvozasidan o'tmaguncha qoralama bo'lib qoladi.
 
 ### Tekshiruv manbalari (birinchi navbatda)
 - `skills/audit/references/ads/snapchat-audit.md`
-- `skills/audit/references/ads/platform-specs.md` - creative format/placement resolution when a creative control applies
+- `skills/audit/references/ads/platform-specs.md` - kreativ/aktiv kontrol qo'llanganda kreativ format/placement o'lchamlari
 
 - `wiki/sop-xarita.md` ? vazifa -> SOP router (matn/strategiya ishida birinchi yuklanadi)
 - `wiki/dalil-tasnifi.md` ? da'vo tasnifi: FAKT/TAJRIBA/FIKR/REKLAMA, manba rubrikasi 1-5; AI xulosasi FAKT emas
