@@ -1,155 +1,155 @@
-# Customer Research — Interviews & Surveys (Primary Research)
+# Mijoz tadqiqoti — intervyu va so'rovnomalar (birlamchi tadqiqot)
 
-Going to the source. Mode 2 mines what customers already said in public; this is Mode 3 — you *ask*. Customer research is your marketing cheat code, and the highest-signal version is talking to customers directly.
+Manbaning o'ziga borish. 2-rejim mijozlar ommaviy aytib bo'lgan narsani qazib oladi; bu 3-rejim — siz *so'raysiz*. Mijoz tadqiqoti — marketingdagi "cheat code", eng yuqori signalli varianti esa mijozlar bilan bevosita gaplashishdir.
 
-Three primary-research pillars, best used together:
-1. **Video calls** — deep, unstructured, follow-the-thread (this file)
-2. **Surveys** — broad, quantified, benchmarkable (this file)
-3. **Online sleuthing** — Sales Safari and watering-hole mining (see `references/source-guides.md`)
+Uchta birlamchi tadqiqot ustuni, birgalikda ishlatilgani yaxshi:
+1. **Video qo'ng'iroqlar** — chuqur, tuzilmasiz, ipni kuzatib borish (shu fayl)
+2. **So'rovnomalar** — keng, miqdoriy, benchmark qilinadigan (shu fayl)
+3. **Onlayn izlanish** — Sales Safari va sug'orish joyi tadqiqoti (`references/source-guides.md` ga qarang)
 
 ---
 
-## The First Rule of Customer Research
+## Mijoz tadqiqotining birinchi qoidasi
 
-> The first rule of customer research: you do not talk about customer research.
+> Mijoz tadqiqotining birinchi qoidasi: mijoz tadqiqoti haqida gapirmaysiz.
 
-Keep it casual. The moment a customer thinks they're in "a research study" they perform — they give you the polished, socially-acceptable answer instead of the real one. Frame calls as a chat, not an interview. Don't lead. Don't pitch. Don't defend the product. You're there to listen and learn how they actually think, talk, and decide.
+Norasmiy saqlang. Mijoz "tadqiqot"da ishtirok etayotganini his qilgan lahzadan boshlab u ijro qiladi — haqiqiy emas, sayqallangan, ijtimoiy jihatdan maqbul javobni beradi. Qo'ng'iroqlarni intervyu emas, suhbat sifatida taqdim eting. Yo'naltirmang. Sotmang. Mahsulotni himoya qilmang. Siz ularning haqiqatan qanday o'ylashi, gapirishi va qaror qilishini tinglash va o'rganish uchun keldingiz.
 
-**Prove yourself wrong, not right.** The point of research is not validation — it's disconfirmation. Go in trying to *break* your assumptions, not confirm them. If you only look for evidence you're right, you'll find it, and it'll be worthless.
+**O'zingiz noto'g'riligingizni isbotlang, to'g'riligingizni emas.** Tadqiqotning maqsadi tasdiqlash emas — rad etish. Taxminlaringizni tasdiqlash emas, *buzish* niyatida kiring. Faqat to'g'ri ekaningizga dalil izlasangiz, topasiz, lekin u qadrsiz bo'ladi.
 
-- **Dropbox example**: the team assumed users would care most about sync *speed*. Research aimed at disproving the assumption revealed users cared more that files were *reliably there and safe* than about raw speed. Chasing the confirmation would have optimized the wrong thing.
-- Ask questions that could return an answer you don't want to hear. If none of your questions can prove you wrong, rewrite them.
+- **Dropbox misoli**: jamoa foydalanuvchilar eng avvalo sinxronizatsiya *tezligi*ga e'tibor beradi deb taxmin qildi. Taxminni rad etishga qaratilgan tadqiqot foydalanuvchilar xom tezlikdan ko'ra fayllar *ishonchli ravishda joyida va xavfsiz* bo'lishini muhimroq deb bilishini ko'rsatdi. Tasdiqlashga intilish noto'g'ri narsani optimallashtirgan bo'lardi.
+- O'zingiz eshitishni xohlamaydigan javobni qaytarishi mumkin bo'lgan savollar bering. Agar savollaringizning birortasi sizni noto'g'ri deb isbotlay olmasa, ularni qayta yozing.
 
 ---
 
 ## Sales Safari (Amy Hoy)
 
-Amy Hoy's **Sales Safari**: go where your audience already congregates and observe them in the wild, without interrupting. It's structured online sleuthing — read threads, reviews, comments, and forum posts to mine four things:
+Amy Hoy'ning **Sales Safari**'si: auditoriyangiz allaqachon yig'iladigan joyga boring va ularni halaqit bermasdan tabiiy muhitda kuzating. Bu tuzilgan onlayn izlanish — to'rt narsani qazib olish uchun mavzular, sharhlar, izohlar va forum postlarini o'qing:
 
-| Mine for | What you're capturing |
+| Nimani qazish | Nimani yozib olasiz |
 |----------|-----------------------|
-| **Pains** | The problems, frustrations, and workarounds they describe unprompted |
-| **Jargon** | The exact words, phrases, and shorthand they use — copy gold |
-| **Recommendations** | What they tell each other to buy, try, or avoid |
-| **Worldview** | Their beliefs, biases, and how they see themselves and the problem |
+| **Og'riqlar** | Ular so'ralmasdan tasvirlaydigan muammolar, asabiylashishlar va aylanma yo'llar |
+| **Jargon** | Ular ishlatadigan aniq so'z, ibora va qisqartmalar — matn uchun oltin |
+| **Tavsiyalar** | Ular bir-biriga nimani sotib olish, sinash yoki qochishni aytadi |
+| **Dunyoqarash** | Ularning e'tiqodlari, noxolisliklari va o'zlarini hamda muammoni qanday ko'rishlari |
 
-Safari is passive (you observe) where interviews are active (you ask). Run it first: it tells you what to ask about, and in whose words. For per-platform search operators and extraction tips, see `references/source-guides.md`.
+Safari passiv (siz kuzatasiz), intervyular esa faol (siz so'raysiz). Uni birinchi ishga tushiring: u nima haqida va kimning so'zlari bilan so'rashni aytadi. Platformaga xos qidiruv operatorlari va ajratib olish maslahatlari uchun `references/source-guides.md` ga qarang.
 
 ---
 
-## Customer Interviews (Video Calls)
+## Mijoz intervyulari (video qo'ng'iroqlar)
 
-### Recruit your best customers
+### Eng yaxshi mijozlaringizni jalb qiling
 
-Don't interview whoever answers first. Interview the customers you want *more of*. Segment your CRM and prioritize by:
+Birinchi javob bergan kishi bilan intervyu o'tkazmang. Siz *ko'proq istaydigan* mijozlar bilan intervyu o'tkazing. CRM'ni segmentlang va quyidagilar bo'yicha ustuvor qiling:
 
-- **High deal size** — the accounts worth the most
-- **Short sales cycle** — they "got it" fast; their language converts fast
-- **Low churn / high retention** — they got real, lasting value
+- **Yuqori bitim hajmi** — eng qimmat akkauntlar
+- **Qisqa sotuv sikli** — ular tez "tushundi"; ularning tili tez konvertatsiya qiladi
+- **Past ketish / yuqori saqlash** — ular haqiqiy, uzoq muddatli qiymat oldi
 
-Recruitment methods, in order of leverage:
-1. **Segment the CRM** by the three signals above and pull a shortlist
-2. **Ask sales and CS for referrals** — they know who loves the product and who articulates why
-3. **Always close every call with**: *"Who else should we talk to?"* — the single most reliable way to compound your interview pipeline
+Jalb qilish usullari, ta'sir kuchi tartibida:
+1. Yuqoridagi uch signal bo'yicha **CRM'ni segmentlang** va qisqa ro'yxat oling
+2. **Sotuv va CS'dan tavsiyalar so'rang** — ular kim mahsulotni sevishini va nega ekanini kim ifodalay olishini biladi
+3. **Har bir qo'ng'iroqni quyidagi bilan yakunlang**: *"Yana kim bilan gaplashishimiz kerak?"* — intervyu quvurini ko'paytirishning eng ishonchli yo'li
 
-### Incentives
+### Rag'batlar
 
-- **$50 per call** (~30 min); **$5 per survey response**
-- Aim for **10 calls, be happy with 5.** Signal saturates fast — by call 5-6 you'll hear the same themes repeat. Don't stall the project waiting for a perfect sample.
-- Offer the incentive up front; it dramatically lifts response rate and shows you value their time. Gift cards work fine.
+- **Qo'ng'iroq uchun $50** (~30 daqiqa); **so'rovnoma javobi uchun $5**
+- **10 ta qo'ng'iroqni maqsad qiling, 5 tasidan mamnun bo'ling.** Signal tez to'yinadi — 5–6-qo'ng'iroqqa kelib bir xil mavzularni takrorlanishini eshitasiz. Mukammal tanlamani kutib loyihani to'xtatmang.
+- Rag'batni oldindan taklif eting; bu javob darajasini keskin oshiradi va ularning vaqtini qadrlashingizni ko'rsatadi. Sovg'a kartalari yaxshi ishlaydi.
 
-### Outreach email template
+### Murojaat email shabloni
 
-Keep it short, casual, specific, and low-commitment. Not a "research study."
+Qisqa, norasmiy, aniq va past majburiyatli bo'lsin. "Tadqiqot" emas.
 
 ```
-Subject: Quick favor — 30 min, on us
+Mavzu: Kichik iltimos — 30 daqiqa, hisobimizdan
 
-Hi [First name],
+Salom [Ism],
 
-I'm [name] from [company]. I'm trying to get better at helping customers
-like you, and I'd love to steal 30 minutes to hear how [product area] is
-actually working for you — what's good, what's annoying, what you wish
-were different. No pitch, no agenda.
+Men [kompaniya]dan [ism]man. Siz kabi mijozlarga yordam berishni yaxshilashga
+harakat qilyapman va [mahsulot sohasi] sizga haqiqatan qanday ishlayotganini —
+nima yaxshi, nima bezovta qiladi, nimani boshqacha bo'lishini xohlaysiz —
+eshitish uchun 30 daqiqangizni olishni istardim. Sotuv ham, kun tartibi ham yo'q.
 
-As a thank you I'll send you a $50 [Amazon/Visa] gift card.
+Minnatdorchilik sifatida sizga $50 [Amazon/Visa] sovg'a kartasini yuboraman.
 
-Are you free [day] or [day] this week? Here's my calendar: [link]
+Shu hafta [kun] yoki [kun] bo'sh bo'lasizmi? Mana mening kalendarim: [havola]
 
-Thanks either way,
-[Name]
+Har holda rahmat,
+[Ism]
 ```
 
-Notes:
-- "No pitch, no agenda" and "what's annoying" signal you actually want the truth.
-- One clear ask, two concrete time options, a booking link. Remove friction.
-- Never say "customer research study."
+Eslatmalar:
+- "Sotuv ham, kun tartibi ham yo'q" va "nima bezovta qiladi" haqiqatni istayotganingizni bildiradi.
+- Bitta aniq so'rov, ikkita aniq vaqt varianti, bron qilish havolasi. Ishqalanishni olib tashlang.
+- Hech qachon "mijoz tadqiqoti" demang.
 
 ---
 
-## Keep Asking Why (5-Why Laddering)
+## Keep Asking Why (5-why zinapoyasi)
 
-The first answer is never the real answer. **Keep Asking Why** — ladder each response down 3-5 levels until you hit the root motivation, the business outcome, or the emotional driver. Surface answers are features; the bottom of the ladder is why they pay and why they stay.
+Birinchi javob hech qachon haqiqiy javob emas. **Keep Asking Why** — har bir javobni asosiy motivatsiya, biznes natijasi yoki hissiy harakatlantiruvchi kuchga yetguncha 3–5 darajaga tushiring. Yuza javoblar — funksiyalar; zinapoyaning tubi — nega to'lashlari va nega qolishlari.
 
-**Worked example** — laddering a churn signal to NRR:
+**Ishlangan misol** — ketish signalini NRR'gacha tushirish:
 
-- **Q: Why did you downgrade your plan last quarter?**
-  - "We weren't using the advanced reports."
-- **Why weren't you using them?**
-  - "Nobody on the team knew how to build one."
-- **Why didn't anyone learn?**
-  - "The person who set us up left, and onboarding never got re-run for the new hires."
-- **Why did that matter enough to downgrade?**
-  - "Without the reports, my boss couldn't see the ROI, so at renewal it looked like an easy cost to cut."
-- **Why is that the real risk?**
-  - "If leadership can't see value, we churn — and if we *had* seen it, we'd probably have added seats, not cut them."
+- **S: O'tgan chorakda nega tarifni pasaytirdingiz?**
+  - "Kengaytirilgan hisobotlardan foydalanmadik."
+- **Nega ulardan foydalanmadingiz?**
+  - "Jamoada hech kim uni qanday qurishni bilmasdi."
+- **Nega hech kim o'rganmadi?**
+  - "Bizni sozlagan odam ketib qoldi, yangi xodimlar uchun onboarding qayta o'tkazilmadi."
+- **Nega bu tarifni pasaytirishga yetarlicha muhim bo'ldi?**
+  - "Hisobotlarsiz boshlig'im ROI'ni ko'rmadi, shuning uchun yangilashda bu qisqartirish oson xarajat bo'lib ko'rindi."
+- **Nega bu asosiy xavf?**
+  - "Rahbariyat qiymatni ko'rmasa, ketamiz — agar *ko'rganda* edi, ehtimol o'rinlarni qisqartirmay, qo'shgan bo'lardik."
 
-The surface answer was "we don't use reports." The root is an **onboarding gap that quietly converts an expansion (NRR up) into a contraction or churn (NRR down)**. You can't fix "they don't use reports." You can fix re-onboarding new hires and surfacing ROI to the buyer — which is the difference between contraction and net revenue retention.
+Yuza javob "hisobotlardan foydalanmaymiz" edi. Ildiz — **tinchgina kengayishni (NRR yuqoriga) qisqarish yoki ketishga (NRR pastga) aylantiradigan onboarding bo'shlig'i**. "Ular hisobotlardan foydalanmaydi"ni tuzatib bo'lmaydi. Yangi xodimlarni qayta onboarding qilish va xaridorga ROI'ni ko'rsatishni tuzatish mumkin — bu qisqarish va sof daromadni saqlab qolish o'rtasidagi farq.
 
-**Pain points vs. passion points.** Ladder for both. Pain points are what's broken and what they'll pay to escape. Passion points are what they love, brag about, and would be "very disappointed" to lose. Passion points drive retention and referrals; pains drive acquisition. Capture both in their words.
-
----
-
-## Surveys
-
-### The PMF Survey (Sean Ellis / Superhuman)
-
-The single most useful survey question, from Sean Ellis and popularized by Superhuman's Rahul Vohra:
-
-> **"How would you feel if you could no longer use [product]?"**
-> - Very disappointed
-> - Somewhat disappointed
-> - Not disappointed
-> - N/A — I no longer use it
-
-**The 40% benchmark**: if **40% or more** of users answer **"very disappointed,"** you likely have product/market fit. Below 40%, keep iterating. **Superhuman reached 58%** by engineering their roadmap around this metric — segmenting on the "very disappointed" cohort, doubling down on what that cohort loved, and converting the "somewhat disappointed" fence-sitters.
-
-Run it as a recurring pulse, not once. Follow the core question with:
-- *"What type of person do you think would most benefit from [product]?"* (sharpens ICP)
-- *"What is the main benefit you receive from [product]?"* (your positioning, in their words)
-- *"How can we improve [product] for you?"* (roadmap fuel from fence-sitters)
-
-Segment every answer by the "very disappointed" cohort vs. the rest — that cohort is your true market.
-
-### Survey design guardrails
-
-- Keep it short — every extra question drops completion.
-- Prefer open-ended for language mining; multiple-choice answers are artifacts of the options you gave.
-- Don't lead. A question that telegraphs the answer you want returns the answer you want, not the truth.
-- $5/response incentive lifts completion; deliver it on submit.
+**Og'riq nuqtalari va ishtiyoq nuqtalari.** Ikkalasi uchun zinapoya quring. Og'riq nuqtalari — nima buzilgan va ulardan qutulish uchun to'laydigan narsa. Ishtiyoq nuqtalari — ular nimani sevadi, maqtanadi va yo'qotsa "juda xafa bo'ladi". Ishtiyoq nuqtalari saqlash va tavsiyalarni harakatlantiradi; og'riqlar jalb qilishni. Ikkalasini ham ularning so'zlari bilan yozib oling.
 
 ---
 
-## Case Anchors
+## So'rovnomalar
 
-- **Airbnb (host photography)**: research revealed listings failed because the *photos* were bad, not the pricing or copy. Airbnb sent photographers to shoot host homes — a fix nobody would have guessed without talking to the market. Research points at problems you can't see from inside.
-- **Dropbox (confirmation bias)**: assumed sync speed mattered most; disconfirming research showed reliability/safety of files mattered more. Prove yourself wrong.
-- **Superhuman (PMF survey)**: engineered the roadmap around the "very disappointed" metric, 40% → 58%.
+### PMF so'rovnomasi (Sean Ellis / Superhuman)
+
+Sean Ellis'dan kelgan va Superhuman'ning Rahul Vohra'si ommalashtirgan eng foydali yagona so'rovnoma savoli:
+
+> **"Agar [mahsulot]dan endi foydalana olmasangiz, o'zingizni qanday his qilgan bo'lardingiz?"**
+> - Juda xafa
+> - Biroz xafa
+> - Xafa bo'lmasdim
+> - N/A — endi foydalanmayman
+
+**40% benchmarki**: foydalanuvchilarning **40% yoki undan ko'pi "juda xafa" deb** javob bersa, sizda ehtimol product/market fit bor. 40% dan past — davom eting. **Superhuman 58% ga yetdi** — yo'l xaritasini shu metrika atrofida qurib, "juda xafa" kogortani segmentlab, shu kogorta yoqtirgan narsani kuchaytirib va "biroz xafa" ikkilanuvchilarni konvertatsiya qilib.
+
+Uni bir martalik emas, takroriy puls sifatida ishga tushiring. Asosiy savoldan keyin:
+- *"[mahsulot]dan eng ko'p qanday odam foyda ko'radi deb o'ylaysiz?"* (ICP'ni aniqlashtiradi)
+- *"[mahsulot]dan olayotgan asosiy foydangiz nima?"* (pozitsiyalashingiz, ularning so'zlari bilan)
+- *"[mahsulot]ni siz uchun qanday yaxshilashimiz mumkin?"* (ikkilanuvchilardan yo'l xaritasi yoqilg'isi)
+
+Har bir javobni "juda xafa" kogortasi va qolganlar bo'yicha segmentlang — o'sha kogorta sizning haqiqiy bozoringiz.
+
+### So'rovnoma dizayni himoyalari
+
+- Qisqa saqlang — har bir qo'shimcha savol yakunlanishni pasaytiradi.
+- Til qazib olish uchun ochiq savollarni afzal ko'ring; ko'p tanlovli javoblar — siz bergan variantlarning artefaktlari.
+- Yo'naltirmang. Istagan javobingizni oshkor qiladigan savol haqiqatni emas, istagan javobingizni qaytaradi.
+- $5/javob rag'bati yakunlanishni oshiradi; uni yuborilganda bering.
 
 ---
 
-## Where This Fits
+## Keys langarlari
 
-- **Analyze what you gather** with the Mode 1 extraction framework in `SKILL.md` (jobs to be done, pains, triggers, outcomes, language, alternatives) and the confidence guardrails.
-- **Mine public sources** (the passive Safari half) via `references/source-guides.md`.
-- Interview + survey signal is **first-party and high-confidence** — weight it above scraped online sources when they conflict.
+- **Airbnb (xost fotosuratlari)**: tadqiqot ro'yxatlar narx yoki matn emas, *fotosuratlar* yomon bo'lgani uchun muvaffaqiyatsiz bo'lganini ko'rsatdi. Airbnb xost uylarini suratga olish uchun fotograflar yubordi — bozor bilan gaplashmasdan hech kim topmaydigan yechim. Tadqiqot ichkaridan ko'rinmaydigan muammolarga ishora qiladi.
+- **Dropbox (tasdiqlash noxolisligi)**: sinxronizatsiya tezligi eng muhim deb taxmin qildi; rad etuvchi tadqiqot fayllarning ishonchliligi/xavfsizligi muhimroq ekanini ko'rsatdi. O'zingiz noto'g'riligingizni isbotlang.
+- **Superhuman (PMF so'rovnomasi)**: yo'l xaritasini "juda xafa" metrikasi atrofida qurdi, 40% → 58%.
+
+---
+
+## Bu qayerga mos keladi
+
+- Yig'gan narsangizni `SKILL.md` dagi 1-rejim ajratib olish freymvorki (jobs to be done, og'riqlar, triggerlar, natijalar, til, muqobillar) va ishonch himoyalari bilan **tahlil qiling**.
+- **Ommaviy manbalarni qazing** (passiv Safari yarmi) `references/source-guides.md` orqali.
+- Intervyu + so'rovnoma signali **first-party va yuqori ishonchli** — ziddiyatga kelganda uni onlayn skreyping qilingan manbalardan ustun qo'ying.

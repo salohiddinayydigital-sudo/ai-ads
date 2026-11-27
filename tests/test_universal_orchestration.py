@@ -217,7 +217,7 @@ class SkillReadingHonestyAndTokenTests(unittest.TestCase):
         self.assertLess(len(text.splitlines()), 160)
         for ref in ("orchestration-protocol.md", "workflow-recipes.md"):
             self.assertTrue((VAULT / "skills/tyrion/references" / ref).is_file())
-        self.assertIn("## 3. Read before you claim", text)
+        self.assertIn("## 3. Da'vodan oldin o'qing", text)
         errs, _w = ss.validate_registry()
         self.assertEqual(errs, [])
 

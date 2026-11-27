@@ -1,30 +1,30 @@
-# Customer Research — Source Guides
+# Mijoz tadqiqoti — manba qo'llanmalari
 
-Detailed, source-by-source playbooks for gathering customer intelligence from online watering holes.
+Onlayn "sug'orish joylari"dan mijoz razvedkasini yig'ish bo'yicha batafsil, manbama-manba playbooklar.
 
 ---
 
-## Reddit Research
+## Reddit tadqiqoti
 
-### Finding the Right Subreddits
+### To'g'ri subreddit'larni topish
 
-Start by identifying where your ICP spends time, not where your product is discussed.
+ICP vaqtini qayerda o'tkazishidan boshlang, mahsulotingiz qayerda muhokama qilinishidan emas.
 
-**Discovery methods:**
-- Search `site:reddit.com "[job title] tools"` or `site:reddit.com "[problem category] software"`
-- Use [subreddit search tools](https://www.reddit.com/subreddits/search) with problem-space keywords
-- Look at what subreddits show up in Google results when you search ICP problems
-- Check what subreddits competitors' customers mention in reviews
+**Topish usullari:**
+- `site:reddit.com "[lavozim] tools"` yoki `site:reddit.com "[muammo kategoriyasi] software"` ni qidiring
+- Muammo sohasi kalit so'zlari bilan [subreddit qidiruv vositalari](https://www.reddit.com/subreddits/search) dan foydalaning
+- ICP muammolarini qidirganda Google natijalarida qaysi subreddit'lar chiqishiga qarang
+- Raqobatchilar mijozlari sharhlarida qaysi subreddit'larni eslatishini tekshiring
 
-**Common high-value subreddits by category:**
+**Kategoriya bo'yicha keng tarqalgan yuqori qiymatli subreddit'lar:**
 - B2B SaaS: r/sales, r/marketing, r/entrepreneur, r/startups, r/smallbusiness
-- Dev tools: r/programming, r/devops, r/webdev, r/cscareerquestions
-- Analytics/data: r/analytics, r/dataengineering, r/BusinessIntelligence
+- Dev asboblari: r/programming, r/devops, r/webdev, r/cscareerquestions
+- Analitika/ma'lumot: r/analytics, r/dataengineering, r/BusinessIntelligence
 - Marketing: r/PPC, r/SEO, r/emailmarketing, r/content_marketing
-- HR/recruiting: r/recruiting, r/humanresources, r/jobs
-- Finance/ops: r/accounting, r/financialplanning, r/projectmanagement
+- HR/rekruting: r/recruiting, r/humanresources, r/jobs
+- Moliya/operatsiya: r/accounting, r/financialplanning, r/projectmanagement
 
-### Search Operators
+### Qidiruv operatorlari
 
 ```
 site:reddit.com/r/[subreddit] "[keyword]"
@@ -32,150 +32,150 @@ site:reddit.com "[problem]" "recommend" OR "suggestion" OR "alternative"
 site:reddit.com "[competitor name]" "vs" OR "alternative" OR "switched"
 ```
 
-### What to Look For
+### Nimaga qarash kerak
 
-**High-signal post types:**
-- "What tools do you use for X?" → reveals alternatives and vocab
-- "Frustrated with [competitor], looking for alternatives" → reveals pain and switching triggers
-- "How do you handle X?" → reveals workflow and workarounds
-- "Is [your category] worth it?" → reveals objections and evaluation criteria
-- Complaint threads about competitors → reveals gaps you might fill
+**Yuqori signalli post turlari:**
+- "X uchun qanday asboblardan foydalanasiz?" → muqobillar va lug'atni ochadi
+- "[Raqobatchi]dan hafsalam pir bo'ldi, muqobil izlayapman" → og'riq va almashtirish triggerlarini ochadi
+- "X ni qanday hal qilasiz?" → ish jarayoni va aylanma yo'llarni ochadi
+- "[Sizning kategoriyangiz] arziydimi?" → e'tirozlar va baholash mezonlarini ochadi
+- Raqobatchilar haqida shikoyat mavzulari → siz to'ldirishingiz mumkin bo'lgan bo'shliqlarni ochadi
 
-**What to extract:**
-- The exact problem described in the post
-- Top-voted solutions (what do practitioners actually recommend?)
-- Complaints about existing solutions in comments
-- The language used — note specific words and phrases
-- Upvote patterns — consensus vs. controversy
+**Nimani ajratib olish:**
+- Postda tasvirlangan aniq muammo
+- Eng ko'p ovoz olgan yechimlar (amaliyotchilar haqiqatan nimani tavsiya qiladi?)
+- Izohlardagi mavjud yechimlar haqida shikoyatlar
+- Ishlatilgan til — aniq so'z va iboralarni yozib oling
+- Upvote naqshlari — konsensus va tortishuv
 
-### Tools
-- Reddit's native search (limited but fast)
-- Google: `site:reddit.com [query]` (better results)
-- Pullpush.io — search archived Reddit posts (good for older threads)
+### Asboblar
+- Reddit'ning o'z qidiruvi (cheklangan, lekin tez)
+- Google: `site:reddit.com [query]` (yaxshiroq natijalar)
+- Pullpush.io — arxivlangan Reddit postlarini qidirish (eski mavzular uchun yaxshi)
 
 ---
 
-## G2 and Review Site Mining
+## G2 va sharh saytlarini qazish
 
-### Your Own Product Reviews
+### O'z mahsulotingiz sharhlari
 
-Read in this order for maximum signal:
+Maksimal signal uchun shu tartibda o'qing:
 
-1. **3-star reviews** — these are the most honest. Customer liked it enough to stay but felt something was missing.
-2. **1-star reviews** — understand the failure modes. Separate product issues from support/onboarding issues.
-3. **5-star reviews** — extract the "what they love" language. These are your proof points.
-4. **4-star reviews** — often contain "the only thing I wish…" buried in praise.
+1. **3 yulduzli sharhlar** — eng halollari. Mijozga qolish uchun yetarlicha yoqdi, lekin nimadir yetishmasligini his qildi.
+2. **1 yulduzli sharhlar** — nosozlik rejimlarini tushuning. Mahsulot muammolarini qo'llab-quvvatlash/onboarding muammolaridan ajrating.
+3. **5 yulduzli sharhlar** — "nimani yoqtirishadi" tilini ajratib oling. Bular sizning isbot nuqtalaringiz.
+4. **4 yulduzli sharhlar** — ko'pincha maqtov ichida ko'milgan "yagona istagim…" bo'ladi.
 
-**What to extract:**
-- What they say they use it *for* (the job to be done)
-- What they say is hardest or most frustrating
-- What they compare it to ("coming from [X]", "better than [Y]")
-- Industry and role signals in reviewer profiles
+**Nimani ajratib olish:**
+- Ular uni *nima uchun* ishlatishini aytadi (bajariladigan vazifa)
+- Ular eng qiyin yoki eng asabiylashtiradigan narsa deb nimani aytadi
+- Ular uni nima bilan solishtiradi ("[X]dan kelgan holda", "[Y]dan yaxshiroq")
+- Sharhlovchi profillaridagi soha va rol signallari
 
-### Competitor Reviews on G2
+### G2 dagi raqobatchi sharhlari
 
-The 4-star competitor reviews are gold — customers who like the product but still have complaints.
+Raqobatchining 4 yulduzli sharhlari — oltin: mahsulotni yoqtirgan, lekin baribir shikoyatlari bor mijozlar.
 
-**G2 structure to exploit:**
-- "What do you like best?" → their strengths (your battlecard intel)
-- "What do you dislike?" → their weaknesses (your opportunities)
-- "What problems are you solving?" → the job to be done
+**G2 tuzilmasidan foydalanish:**
+- "Eng yoqqan narsa?" → ularning kuchli tomonlari (sizning battlecard razvedkangiz)
+- "Nima yoqmaydi?" → ularning zaif tomonlari (sizning imkoniyatlaringiz)
+- "Qaysi muammolarni hal qilyapsiz?" → bajariladigan vazifa
 
-**Capterra** has similar structure. **Trustpilot** skews B2C. **AppSumo** reviews are useful for SMB/prosumer SaaS.
+**Capterra** shunga o'xshash tuzilmaga ega. **Trustpilot** B2C ga og'gan. **AppSumo** sharhlari SMB/prosumer SaaS uchun foydali.
 
-### Review Mining Template
+### Sharhlarni qazish shabloni
 
-For each competitor's 4-star reviews, extract:
+Har bir raqobatchining 4 yulduzli sharhlaridan ajrating:
 
-| Category | Notes |
+| Kategoriya | Eslatmalar |
 |----------|-------|
-| Job to be done | Why do they use the product? |
-| Top praise | What do they love (and might be hard for you to match)? |
-| Top complaint | What frustrates them? |
-| Switching context | Did they mention switching from something else? |
-| Unmet need | "I wish it could…" or "It would be better if…" |
+| Bajariladigan vazifa | Nega mahsulotdan foydalanadi? |
+| Asosiy maqtov | Nimani yaxshi ko'radi (va sizga moslashish qiyin bo'lishi mumkin)? |
+| Asosiy shikoyat | Nima asabiylashtiradi? |
+| Almashtirish konteksti | Boshqa narsadan o'tganini eslatdimi? |
+| Qondirilmagan ehtiyoj | "Kashki u … qila olsa edi" yoki "… bo'lsa yaxshi bo'lardi" |
 
 ---
 
-## Indie Hackers and Product Hunt
+## Indie Hackers va Product Hunt
 
 ### Indie Hackers
 
-Strong signal for founder/builder/SMB ICP.
+Asoschi/quruvchi/SMB ICP uchun kuchli signal.
 
-**Where to look:**
-- "Ask IH" posts: questions about problems your product solves
-- Milestone posts: when founders describe their stack, they reveal tool preferences and pain
-- Comment threads on product launches in your category
+**Qayerga qarash:**
+- "Ask IH" postlari: mahsulotingiz hal qiladigan muammolar haqidagi savollar
+- Milestone postlari: asoschilar steklarini tasvirlaganda asbob afzalliklari va og'riqni ochadi
+- Kategoriyangizdagi mahsulot launch'lari ostidagi izoh mavzulari
 
-**Search:** `site:indiehackers.com "[problem]"` or use IH's native search.
+**Qidiruv:** `site:indiehackers.com "[problem]"` yoki IH'ning o'z qidiruvidan foydalaning.
 
 ### Product Hunt
 
-**Discussion tabs** on competing products are a research goldmine:
-- Questions asked = pre-sales concerns = objections
-- Comments = early adopter reactions = leading indicators of reception
-- "Alternatives to X" collections reveal the competitive landscape as users see it
+Raqobatchi mahsulotlardagi **muhokama tablari** — tadqiqot oltin koni:
+- Berilgan savollar = sotuvdan oldingi xavotirlar = e'tirozlar
+- Izohlar = erta qabul qiluvchilar reaksiyasi = qabul qilinishining oldingi ko'rsatkichlari
+- "X ga muqobillar" to'plamlari raqobat manzarasini foydalanuvchilar ko'rgandek ochadi
 
 ---
 
 ## Hacker News
 
-Strong signal for technical/developer ICP. Skews toward builders and skeptics.
+Texnik/developer ICP uchun kuchli signal. Quruvchilar va skeptiklarga og'gan.
 
-**High-value searches:**
+**Yuqori qiymatli qidiruvlar:**
 - `site:news.ycombinator.com "[competitor or category]"`
-- HN "Ask HN: best tools for X" threads
-- "Show HN" posts for competitors — read the skeptical comments
+- HN "Ask HN: X uchun eng yaxshi asboblar" mavzulari
+- Raqobatchilar uchun "Show HN" postlari — skeptik izohlarni o'qing
 
-**What's different about HN:**
-- Users are more likely to critique underlying architecture and business model
-- Strong opinions about pricing models (especially anything subscription-based)
-- First principles objections you might not hear elsewhere
-
----
-
-## LinkedIn Research
-
-### Posts and Comments
-
-Search for posts by practitioners describing their workflows:
-- "[Role] at [company size]" + problem keyword
-- "We used to [old way] but now we [new way]" stories
-- Posts asking for tool recommendations get comments from active buyers
-
-### Job Postings
-
-A job posting is a company's admission of a pain point.
-
-**What to look for:**
-- What tools are listed as "nice to have" vs. "required"? (reveals stack and adjacent tools)
-- What metrics and outcomes are mentioned in the role description?
-- What does the role spend most of its time doing? (reveals the job to be done)
-
-**Search:** `site:linkedin.com/jobs "[role title]" "[relevant tool or category]"`
+**HN'ning farqi:**
+- Foydalanuvchilar asosiy arxitektura va biznes modelni ko'proq tanqid qiladi
+- Narxlash modellari haqida kuchli fikrlar (ayniqsa obunaga asoslangan har qanday narsa)
+- Boshqa joyda eshitmasligingiz mumkin bo'lgan birinchi tamoyillar e'tirozlari
 
 ---
 
-## YouTube Comments
+## LinkedIn tadqiqoti
 
-### Finding High-Signal Videos
+### Postlar va izohlar
 
-- Tutorial videos for problems your product solves
-- "Best tools for X in [year]" roundup videos
-- Competitor product demos and walkthroughs
+Ish jarayonlarini tasvirlaydigan amaliyotchilar postlarini qidiring:
+- "[Lavozim] [kompaniya hajmi]da" + muammo kalit so'zi
+- "Biz [eski usul] edik, endi [yangi usul]" hikoyalari
+- Asbob tavsiyalarini so'ragan postlar faol xaridorlardan izoh oladi
 
-**What to look for in comments:**
-- "Does this work for [specific use case]?" → edge cases and unmet needs
-- "I tried this but…" → failure points
-- "What about [competitor]?" → active evaluation
-- Timestamps with questions → confusion points in the workflow
+### Ish e'lonlari
+
+Ish e'loni — kompaniyaning og'riq nuqtasini tan olishi.
+
+**Nimaga qarash:**
+- Qaysi asboblar "bo'lsa yaxshi" va qaysilari "majburiy" deb sanalgan? (stek va qo'shni asboblarni ochadi)
+- Rol tavsifida qaysi metrikalar va natijalar eslatilgan?
+- Rol vaqtining ko'pini nimaga sarflaydi? (bajariladigan vazifani ochadi)
+
+**Qidiruv:** `site:linkedin.com/jobs "[role title]" "[relevant tool or category]"`
 
 ---
 
-## Twitter / X Research
+## YouTube izohlari
 
-### Search Operators
+### Yuqori signalli videolarni topish
+
+- Mahsulotingiz hal qiladigan muammolar bo'yicha qo'llanma videolari
+- "[Yil]da X uchun eng yaxshi asboblar" sharh videolari
+- Raqobatchi mahsulot demolari va walkthrough'lar
+
+**Izohlarda nimaga qarash:**
+- "Bu [muayyan holat] uchun ishlaydimi?" → chekka holatlar va qondirilmagan ehtiyojlar
+- "Men buni sinadim, lekin…" → nosozlik nuqtalari
+- "[Raqobatchi]chi?" → faol baholash
+- Savolli vaqt tamg'alari → ish jarayonidagi chalkashlik nuqtalari
+
+---
+
+## Twitter / X tadqiqoti
+
+### Qidiruv operatorlari
 
 ```
 "[competitor]" -filter:replies min_faves:10
@@ -183,219 +183,219 @@ A job posting is a company's admission of a pain point.
 "[category] is broken" OR "frustrated with [category]"
 ```
 
-### What to Find
+### Nimani topish
 
-- Real-time complaints about competitors
-- Practitioners discussing their stack
-- Influencers/thought leaders your ICP follows (useful for distribution)
-
----
-
-## Blog Post and Forum Research
-
-### Comparison Content
-
-Google: `"[competitor 1] vs [competitor 2]"` or `"best [category] software [year]"`
-
-Read the comments on these posts — people who find comparison content are actively evaluating. Their comments are questions your sales process should answer.
-
-### Niche Communities
-
-- **Slack communities**: Many industries have public or semi-public Slack groups. Search "[industry] Slack community".
-- **Discord servers**: Growing for developer and creator communities.
-- **Facebook Groups**: Still strong for SMB, e-commerce, agency, and coach/consultant ICP.
-- **Circle/Mighty Networks communities**: Check if there are paid communities in your ICP's space.
+- Raqobatchilar haqida real vaqtdagi shikoyatlar
+- Steklarini muhokama qilayotgan amaliyotchilar
+- ICP'ingiz kuzatadigan influenserlar/fikr yetakchilari (tarqatish uchun foydali)
 
 ---
 
-## B2C and Consumer App Research
+## Blog posti va forum tadqiqoti
 
-B2C research requires different sources than B2B SaaS. Consumer buyers don't congregate on LinkedIn or G2 — they leave traces in app stores, social media, and communities built around the activity your product serves.
+### Taqqoslash kontenti
 
-### App Store Reviews (iOS App Store / Google Play)
+Google: `"[competitor 1] vs [competitor 2]"` yoki `"best [category] software [year]"`
 
-One of the richest unfiltered sources for mobile/consumer products.
+Bu postlardagi izohlarni o'qing — taqqoslash kontentini topgan odamlar faol baholayapti. Ularning izohlari — sotuv jarayoningiz javob berishi kerak bo'lgan savollar.
 
-**Read in this order:**
-1. **1-2 star reviews** — failure modes, unmet expectations, frustration peaks
-2. **3-star reviews** — honest tradeoffs and "it's good but…" feedback
-3. **5-star reviews** — what they love in their own words (proof points and positioning)
+### Nisha hamjamiyatlari
 
-**What to extract:**
-- What job they hired the app to do ("I use this to…")
-- The moment it stopped working for them
-- What they compared it to or switched from
-- Emotional language — "I love how…", "I'm so frustrated that…"
-
-**Search tip:** Sort by "Most Recent" to get fresh signal, then "Most Critical" for pain themes.
-
-### Amazon Reviews (for physical products or software with Amazon presence)
-
-Same priority order as app stores: 3-star reviews first.
-
-**G2 analog for consumer SaaS**: Trustpilot, Sitejabber, and product-specific review aggregators.
-
-### Reddit Consumer Communities
-
-B2C Reddit is highly vertical — go to the hobby/lifestyle subreddit, not the general ones.
-
-**Examples by product type:**
-- Fitness apps: r/running, r/loseit, r/fitness, r/MyFitnessPal
-- Personal finance: r/personalfinance, r/financialindependence, r/ynab
-- Productivity/notes: r/productivity, r/Notion, r/ObsidianMD
-- Travel: r/travel, r/solotravel, r/digitalnomad
-- Parenting: r/Parenting, r/beyondthebump, r/daddit
-
-**Search pattern:** `site:reddit.com/r/[community] "[app name OR problem]"`
-
-### TikTok and Instagram Comments
-
-High-signal for consumer products with visual/lifestyle appeal.
-
-**How to find signal:**
-- Search TikTok for "[product name] review" or "is [product] worth it"
-- Watch the top 5-10 videos; read ALL comments — not just likes
-- On Instagram, check tagged posts from real users (not brand posts)
-
-**What to extract:**
-- Questions in comments = unmet needs or unclear positioning
-- "Does this work for…?" = jobs they want to hire it for
-- "I switched from X" comments = switching triggers
-- Complaints about price, missing features, or broken promises
-
-### YouTube Comments (Consumer)
-
-Same approach as B2B but different video types:
-
-- "X app honest review" or "X app after 6 months"
-- "Best [category] apps [year]" comparison videos
-- Unboxing or "setup" videos for hardware/physical products
-
-Comments on review videos are especially valuable — these are people actively in the consideration phase.
-
-### Consumer Community Platforms
-
-- **Facebook Groups**: Still dominant for many consumer verticals (parenting, fitness, local services, hobbies)
-- **Discord servers**: Growing for gaming, creator tools, productivity, crypto, lifestyle communities
-- **Nextdoor**: Useful for local service businesses
-- **Quora**: Long-form questions reveal decision anxiety and evaluation criteria
+- **Slack hamjamiyatlari**: Ko'plab sohalarda ommaviy yoki yarim ommaviy Slack guruhlari bor. "[soha] Slack community" ni qidiring.
+- **Discord serverlari**: Developer va kreator hamjamiyatlari uchun o'sib bormoqda.
+- **Facebook guruhlari**: SMB, e-commerce, agentlik va murabbiy/konsultant ICP uchun hamon kuchli.
+- **Circle/Mighty Networks hamjamiyatlari**: ICP sohasida pullik hamjamiyatlar bor-yo'qligini tekshiring.
 
 ---
 
-## SparkToro (Audience Intelligence)
+## B2C va iste'molchi ilovalari tadqiqoti
 
-SparkToro is a behavioral audience research tool. Instead of mining individual posts and comments, it aggregates clickstream, search, and social data to show what your audience does at scale — what they read, watch, listen to, follow, and search for.
+B2C tadqiqot B2B SaaS'dan boshqa manbalarni talab qiladi. Iste'molchi xaridorlar LinkedIn yoki G2 da to'planmaydi — ular ilova do'konlari, ijtimoiy tarmoqlar va mahsulotingiz xizmat qiladigan faoliyat atrofidagi hamjamiyatlarda iz qoldiradi.
 
-### When to Use SparkToro vs. Manual Research
+### Ilova do'koni sharhlari (iOS App Store / Google Play)
 
-- **SparkToro first** when you need to understand where your ICP spends time, what content they consume, and which influencers they follow — it answers these questions in seconds with aggregated data
-- **Manual research first** (Reddit, G2, communities) when you need raw language, exact quotes, emotional context, and the "why" behind behavior
-- **Best together**: Use SparkToro to identify which podcasts, subreddits, and websites matter, then go mine those sources manually for voice-of-customer language
+Mobil/iste'molchi mahsulotlar uchun eng boy filtrlanmagan manbalardan biri.
 
-### Key Queries to Run
+**Shu tartibda o'qing:**
+1. **1–2 yulduzli sharhlar** — nosozlik rejimlari, qondirilmagan kutilmalar, asabiylashish cho'qqilari
+2. **3 yulduzli sharhlar** — halol kelishuvlar va "yaxshi, lekin…" fikr-mulohazalari
+3. **5 yulduzli sharhlar** — ular o'z so'zlari bilan nimani yoqtiradi (isbot nuqtalari va pozitsiyalash)
 
-**By competitor:**
-- "People who follow @competitor" — reveals shared audience affinities
-- "People who visit competitor.com" — shows what else they consume
+**Nimani ajratib olish:**
+- Ular ilovani qanday vazifa uchun yollagan ("Men buni … uchun ishlataman")
+- U ular uchun ishlamay qolgan lahza
+- Ular uni nima bilan solishtirdi yoki nimadan o'tdi
+- Hissiy til — "Menga … yoqadi", "Men … ga juda asabiylashaman"
 
-**By audience description:**
-- "People who frequently talk about [topic]" — finds audience behaviors
-- "People whose bio contains [job title]" — profiles a role-based segment
+**Qidiruv maslahati:** Yangi signal uchun "Most Recent" bo'yicha saralang, so'ng og'riq mavzulari uchun "Most Critical".
 
-**By your own audience:**
-- "People who visit yourdomain.com" — understand your actual audience
-- Compare against competitor audience profiles to find gaps
+### Amazon sharhlari (jismoniy mahsulotlar yoki Amazon'da mavjud dasturiy ta'minot uchun)
 
-### What to Extract
+Ilova do'konlari bilan bir xil ustuvorlik tartibi: avval 3 yulduzli sharhlar.
 
-| Data Type | What It Tells You | Use It For |
+**Iste'molchi SaaS uchun G2 analogi**: Trustpilot, Sitejabber va mahsulotga xos sharh agregatorlari.
+
+### Reddit iste'molchi hamjamiyatlari
+
+B2C Reddit juda vertikal — umumiylarga emas, hobbi/turmush tarzi subreddit'iga boring.
+
+**Mahsulot turi bo'yicha misollar:**
+- Fitnes ilovalari: r/running, r/loseit, r/fitness, r/MyFitnessPal
+- Shaxsiy moliya: r/personalfinance, r/financialindependence, r/ynab
+- Unumdorlik/eslatmalar: r/productivity, r/Notion, r/ObsidianMD
+- Sayohat: r/travel, r/solotravel, r/digitalnomad
+- Ota-onalik: r/Parenting, r/beyondthebump, r/daddit
+
+**Qidiruv naqshi:** `site:reddit.com/r/[community] "[app name OR problem]"`
+
+### TikTok va Instagram izohlari
+
+Vizual/turmush tarzi jozibali iste'molchi mahsulotlar uchun yuqori signal.
+
+**Signalni qanday topish:**
+- TikTok'da "[mahsulot nomi] review" yoki "[mahsulot] arziydimi" ni qidiring
+- Eng yaxshi 5–10 videoni tomosha qiling; BARCHA izohlarni o'qing — faqat layklarni emas
+- Instagram'da haqiqiy foydalanuvchilarning (brend postlari emas) tegli postlarini tekshiring
+
+**Nimani ajratib olish:**
+- Izohlardagi savollar = qondirilmagan ehtiyojlar yoki noaniq pozitsiyalash
+- "Bu … uchun ishlaydimi?" = ular mahsulotni yollamoqchi bo'lgan vazifalar
+- "Men X dan o'tdim" izohlari = almashtirish triggerlari
+- Narx, yetishmayotgan funksiyalar yoki buzilgan va'dalar haqida shikoyatlar
+
+### YouTube izohlari (iste'molchi)
+
+B2B bilan bir xil yondashuv, lekin boshqa video turlari:
+
+- "X ilova halol sharh" yoki "X ilova 6 oydan keyin"
+- "[Yil]da eng yaxshi [kategoriya] ilovalar" taqqoslash videolari
+- Uskuna/jismoniy mahsulotlar uchun unboxing yoki "sozlash" videolari
+
+Sharh videolaridagi izohlar ayniqsa qimmatli — bu odamlar faol ko'rib chiqish bosqichida.
+
+### Iste'molchi hamjamiyat platformalari
+
+- **Facebook guruhlari**: Ko'plab iste'molchi vertikallar (ota-onalik, fitnes, mahalliy xizmatlar, hobbilar) uchun hamon dominant
+- **Discord serverlari**: Gaming, kreator asboblari, unumdorlik, kripto, turmush tarzi hamjamiyatlari uchun o'sib bormoqda
+- **Nextdoor**: Mahalliy xizmat bizneslari uchun foydali
+- **Quora**: Uzun formatdagi savollar qaror xavotiri va baholash mezonlarini ochadi
+
+---
+
+## SparkToro (auditoriya razvedkasi)
+
+SparkToro — xulq-atvor auditoriya tadqiqoti vositasi. Alohida post va izohlarni qazish o'rniga, u clickstream, qidiruv va ijtimoiy ma'lumotlarni jamlab, auditoriyangiz keng ko'lamda nima qilishini — nimani o'qishi, tomosha qilishi, tinglashi, kuzatishi va qidirishini ko'rsatadi.
+
+### SparkToro va qo'lda tadqiqot qachon
+
+- **Avval SparkToro** ICP vaqtini qayerda o'tkazishi, qanday kontent iste'mol qilishi va qaysi influenserlarni kuzatishini tushunish kerak bo'lganda — u bu savollarga jamlangan ma'lumot bilan soniyalarda javob beradi
+- **Avval qo'lda tadqiqot** (Reddit, G2, hamjamiyatlar) xom til, aniq iqtiboslar, hissiy kontekst va xatti-harakat ortidagi "nega" kerak bo'lganda
+- **Birgalikda eng yaxshi**: qaysi podkastlar, subreddit'lar va veb-saytlar muhimligini SparkToro bilan aniqlang, so'ng voice-of-customer tili uchun o'sha manbalarni qo'lda qazing
+
+### Ishga tushiriladigan asosiy so'rovlar
+
+**Raqobatchi bo'yicha:**
+- "@competitor ni kuzatadigan odamlar" — umumiy auditoriya yaqinliklarini ochadi
+- "competitor.com ga kiradigan odamlar" — ular yana nimani iste'mol qilishini ko'rsatadi
+
+**Auditoriya tavsifi bo'yicha:**
+- "[mavzu] haqida tez-tez gapiradigan odamlar" — auditoriya xatti-harakatlarini topadi
+- "Bio'sida [lavozim] bor odamlar" — rolga asoslangan segmentni profillaydi
+
+**O'z auditoriyangiz bo'yicha:**
+- "yourdomain.com ga kiradigan odamlar" — haqiqiy auditoriyangizni tushuning
+- Bo'shliqlarni topish uchun raqobatchi auditoriya profillari bilan solishtiring
+
+### Nimani ajratib olish
+
+| Ma'lumot turi | Sizga nimani aytadi | Nima uchun ishlatish |
 |-----------|------------------|------------|
-| Top websites visited | Where your audience reads | Content partnerships, guest posting targets |
-| Top podcasts | What they listen to | Podcast guesting, sponsorship decisions |
-| Top YouTube channels | What they watch | Video content strategy, ad placements |
-| Top subreddits | Where they discuss | Community participation, Reddit ad targeting |
-| Search keywords | What they Google | SEO and content topic planning |
-| AI prompt topics | What they ask AI tools | Emerging content opportunities |
-| Social accounts followed | Who influences them | Influencer partnerships, co-marketing |
-| Demographics | Who they are | Persona building, ad targeting |
+| Eng ko'p kirilgan veb-saytlar | Auditoriyangiz qayerda o'qiydi | Kontent hamkorliklari, mehmon post maqsadlari |
+| Top podkastlar | Nimani tinglaydi | Podkastga mehmon bo'lish, homiylik qarorlari |
+| Top YouTube kanallari | Nimani tomosha qiladi | Video kontent strategiyasi, reklama placementlari |
+| Top subreddit'lar | Qayerda muhokama qiladi | Hamjamiyatda ishtirok, Reddit reklama targetingi |
+| Qidiruv kalit so'zlari | Google'da nimani qidiradi | SEO va kontent mavzularini rejalash |
+| AI prompt mavzulari | AI asboblardan nimani so'raydi | Paydo bo'layotgan kontent imkoniyatlari |
+| Kuzatiladigan ijtimoiy akkauntlar | Ularga kim ta'sir qiladi | Influenser hamkorliklari, ko-marketing |
+| Demografiya | Ular kim | Persona qurish, reklama targetingi |
 
-### Source Weighting
+### Manba vaznlari
 
-SparkToro data is aggregated and anonymized — it shows patterns, not individual opinions. Treat it as:
-- **High confidence** for behavioral data (what they visit, follow, search for)
-- **Medium confidence** for demographic data (self-reported, may be incomplete)
-- **Not a substitute** for qualitative research (doesn't capture language, emotions, or the "why")
+SparkToro ma'lumotlari jamlangan va anonimlashtirilgan — u alohida fikrlarni emas, naqshlarni ko'rsatadi. Uni quyidagicha qabul qiling:
+- Xulq-atvor ma'lumotlari (nimaga kiradi, kuzatadi, qidiradi) uchun **yuqori ishonch**
+- Demografik ma'lumotlar uchun **o'rta ishonch** (o'zi xabar qilgan, to'liq bo'lmasligi mumkin)
+- Sifatiy tadqiqotning **o'rnini bosmaydi** (til, his-tuyg'u yoki "nega"ni qamrab olmaydi)
 
-### Limitations
+### Cheklovlar
 
-- Free tier: 5 reports/month, shallow results (top 5–10)
-- No public API — all research done through web interface
-- Skews English-language, US-centric
-- Shows what audiences do, not why — pair with qualitative sources
+- Bepul daraja: oyiga 5 hisobot, sayoz natijalar (top 5–10)
+- Ommaviy API yo'q — barcha tadqiqot veb interfeys orqali
+- Ingliz tiliga va AQSh-markazli
+- Auditoriya nima qilishini ko'rsatadi, nega emas — sifatiy manbalar bilan juftlang
 
-See [tools/integrations/sparktoro.md](../../../tools/integrations/sparktoro.md) for full tool details and pricing.
+To'liq asbob tafsilotlari va narxlar uchun [tools/integrations/sparktoro.md](../../../tools/integrations/sparktoro.md) ga qarang.
 
 ---
 
-## Organizing Your Research
+## Tadqiqotingizni tartiblash
 
-Use a simple tagging system across all sources:
+Barcha manbalar bo'ylab oddiy teglash tizimidan foydalaning:
 
-| Tag | Meaning |
+| Teg | Ma'nosi |
 |-----|---------|
-| `#pain` | A problem or frustration |
-| `#trigger` | An event that prompted the search |
-| `#outcome` | What success looks like |
-| `#language` | Exact phrases worth using in copy |
-| `#alternative` | Another solution they considered or use |
-| `#objection` | Reason to hesitate or not buy |
-| `#competitor` | Anything about a competing product |
+| `#pain` | Muammo yoki asabiylashish |
+| `#trigger` | Qidiruvni boshlagan hodisa |
+| `#outcome` | Muvaffaqiyat qanday ko'rinadi |
+| `#language` | Matnda ishlatishga arziydigan aniq iboralar |
+| `#alternative` | Ular ko'rib chiqqan yoki ishlatadigan boshqa yechim |
+| `#objection` | Ikkilanish yoki sotib olmaslik sababi |
+| `#competitor` | Raqobatchi mahsulot haqidagi har qanday narsa |
 
-Keep a running doc with columns: Source | Date | Quote | Tags | Notes
+Ustunlari: Manba | Sana | Iqtibos | Teglar | Eslatmalar bo'lgan doimiy hujjat yuriting.
 
-After 20-30 entries, patterns will emerge. Look for quotes that appear in multiple unrelated sources — those are your highest-confidence insights.
+20–30 yozuvdan keyin naqshlar paydo bo'ladi. Bir nechta aloqasiz manbalarda paydo bo'ladigan iqtiboslarni qidiring — bular eng yuqori ishonchli xulosalaringiz.
 
 ---
 
-## Source Reliability and Confidence Scoring
+## Manba ishonchliligi va ishonch ballash
 
-Not all sources carry equal weight. Use this guide when assigning confidence labels.
+Barcha manbalar teng vaznga ega emas. Ishonch yorliqlarini belgilashda shu yo'riqnomadan foydalaning.
 
-### Source Weighting
+### Manba vaznlari
 
-| Source | Signal Strength | Bias to Note |
+| Manba | Signal kuchi | Ehtiyot bo'ladigan noxolislik |
 |--------|----------------|--------------|
-| Customer interviews (unprompted) | Very high | Small sample; selection bias toward engaged customers |
-| Win/loss interviews | High | Recent memory only; rationalization common |
-| App store / G2 reviews | High | Skews toward strong opinions (love or hate) |
-| Reddit / community posts | Medium-high | Skews technical, skeptical, vocal minorities |
-| Support tickets | Medium | Skews toward problems; silent majority not represented |
-| Survey (open-ended) | Medium | Primed by question framing |
-| Survey (multiple choice) | Low-medium | Artifacts of the options you provided |
-| NPS verbatims | Medium | Correlates with score; prompted by the survey moment |
-| YouTube/TikTok comments | Medium | Skews toward engaged viewers; social performance |
-| SparkToro audience data | Medium-high | Aggregated behavioral data; strong for "what" but not "why" |
-| Job postings | Low-medium | Aspirational, not necessarily reflective of current pain |
+| Mijoz intervyulari (so'ralmagan) | Juda yuqori | Kichik tanlama; faol mijozlarga tanlov noxolisligi |
+| Yutish/yutqazish intervyulari | Yuqori | Faqat yaqin xotira; oqlash keng tarqalgan |
+| Ilova do'koni / G2 sharhlari | Yuqori | Kuchli fikrlarga (sevgi yoki nafrat) og'gan |
+| Reddit / hamjamiyat postlari | O'rta-yuqori | Texnik, skeptik, ovozli ozchiliklarga og'gan |
+| Qo'llab-quvvatlash tiketlari | O'rta | Muammolarga og'gan; jim ko'pchilik ifodalanmagan |
+| So'rovnoma (ochiq) | O'rta | Savol shakllantirishi bilan oldindan tayyorlangan |
+| So'rovnoma (ko'p tanlovli) | Past-o'rta | Siz bergan variantlarning artefaktlari |
+| NPS verbatim'lari | O'rta | Ball bilan korrelyatsiya qiladi; so'rovnoma lahzasi bilan turtki |
+| YouTube/TikTok izohlari | O'rta | Faol tomoshabinlarga og'gan; ijtimoiy ijro |
+| SparkToro auditoriya ma'lumotlari | O'rta-yuqori | Jamlangan xulq-atvor ma'lumoti; "nima" uchun kuchli, "nega" uchun emas |
+| Ish e'lonlari | Past-o'rta | Intilishga oid, joriy og'riqni aks ettirishi shart emas |
 
-### Confidence Labels in Practice
+### Amaliyotda ishonch yorliqlari
 
-When presenting insights, lead with confidence:
+Xulosalarni taqdim etganda ishonchdan boshlang:
 
 ```
-[HIGH CONFIDENCE] Customers feel overwhelmed by manual reporting — appears in 12 of 20 interviews,
-4 Reddit threads, and is the #1 complaint in 3-star G2 reviews. Consistent across SMB and mid-market.
+[YUQORI ISHONCH] Mijozlar qo'lda hisobotdan charchagan — 20 ta intervyudan 12 tasida,
+4 ta Reddit mavzusida paydo bo'ladi va G2 3 yulduzli sharhlarida №1 shikoyat. SMB va o'rta bozor bo'ylab izchil.
 
-[MEDIUM CONFIDENCE] Customers compare us to spreadsheets more than to direct competitors —
-mentioned in 6 interviews and 3 Reddit threads, but not yet seen in review data.
+[O'RTA ISHONCH] Mijozlar bizni to'g'ridan-to'g'ri raqobatchilardan ko'ra ko'proq jadvallar bilan solishtiradi —
+6 ta intervyu va 3 ta Reddit mavzusida eslatilgan, lekin sharh ma'lumotlarida hali ko'rinmagan.
 
-[LOW CONFIDENCE] Enterprise buyers may have procurement concerns — mentioned by 2 interviewees
-from companies 500+. Needs more signal before acting on it.
+[PAST ISHONCH] Enterprise xaridorlarda xarid bo'limi xavotirlari bo'lishi mumkin — 500+ kompaniyalardan
+2 ta intervyu beruvchi eslatgan. Harakat qilishdan oldin ko'proq signal kerak.
 ```
 
-### Recency Window
+### Yangilik oynasi
 
-- **Use as primary source**: Data from the last 12 months
-- **Use with caution**: 12-24 months (product and market may have shifted)
-- **Use only for baseline context**: 2+ years old
+- **Asosiy manba sifatida ishlating**: So'nggi 12 oydagi ma'lumotlar
+- **Ehtiyotkorlik bilan ishlating**: 12–24 oy (mahsulot va bozor o'zgargan bo'lishi mumkin)
+- **Faqat bazaviy kontekst uchun ishlating**: 2+ yillik
 
-When a theme appears consistently across old and new data, that's a durable signal worth acting on.
+Mavzu eski va yangi ma'lumotlarda izchil paydo bo'lganda, bu harakat qilishga arziydigan barqaror signal.
