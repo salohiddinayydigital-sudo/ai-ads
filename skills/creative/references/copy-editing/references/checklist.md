@@ -1,66 +1,66 @@
-# Copy Editing Checklist
+# Matn tahriri cheklisti
 
-Use this checklist alongside the Seven Sweeps Framework (see SKILL.md) as a final QA pass before delivering edited copy.
+Tahrirlangan matnni topshirishdan oldin yakuniy QA o'tishi sifatida bu cheklistdan Yetti Supurish freymvorki (SKILL.md ga qarang) bilan birga foydalaning.
 
-## Before You Start
+## Boshlashdan oldin
 
-- [ ] Understand the goal of this copy
-- [ ] Know the target audience
-- [ ] Identify the desired action
-- [ ] Read through once without editing
+- [ ] Bu matnning maqsadini tushuning
+- [ ] Maqsadli auditoriyani biling
+- [ ] Istalgan harakatni aniqlang
+- [ ] Tahrirlamasdan bir marta to'liq o'qib chiqing
 
-## Clarity (Sweep 1)
+## Aniqlik (1-supurish)
 
-- [ ] Every sentence is immediately understandable
-- [ ] No jargon without explanation
-- [ ] Pronouns have clear references
-- [ ] No sentences trying to do too much
+- [ ] Har bir jumla darhol tushunarli
+- [ ] Tushuntirishsiz jargon yo'q
+- [ ] Olmoshlarning havolalari aniq
+- [ ] Haddan tashqari ko'p narsani qilmoqchi bo'lgan jumlalar yo'q
 
-## Voice & Tone (Sweep 2)
+## Ovoz va ohang (2-supurish)
 
-- [ ] Consistent formality level throughout
-- [ ] Brand personality maintained
-- [ ] No jarring shifts in mood
-- [ ] Reads well aloud
+- [ ] Butun matn bo'ylab izchil rasmiylik darajasi
+- [ ] Brend shaxsiyati saqlangan
+- [ ] Kayfiyatda keskin o'zgarishlar yo'q
+- [ ] Ovoz chiqarib o'qilganda yaxshi eshitiladi
 
-## So What (Sweep 3)
+## Xo'sh nima? (3-supurish)
 
-- [ ] Every feature connects to a benefit
-- [ ] Claims answer "why should I care?"
-- [ ] Benefits connect to real desires
-- [ ] No impressive-but-empty statements
+- [ ] Har bir funksiya foydaga bog'langan
+- [ ] Da'volar "nega bu menga muhim?" savoliga javob beradi
+- [ ] Foydalar haqiqiy istaklarga bog'langan
+- [ ] Ta'sirli, lekin bo'sh bayonotlar yo'q
 
-## Prove It (Sweep 4)
+## Isbotlang (4-supurish)
 
-- [ ] Claims are substantiated
-- [ ] Social proof is specific and attributed
-- [ ] Numbers and stats have sources
-- [ ] No unearned superlatives
+- [ ] Da'volar asoslangan
+- [ ] Ijtimoiy isbot aniq va atributlangan
+- [ ] Raqamlar va statistikaning manbalari bor
+- [ ] Haqsiz superlativlar yo'q
 
-## Specificity (Sweep 5)
+## Aniqlik darajasi (5-supurish)
 
-- [ ] Vague words replaced with concrete ones
-- [ ] Numbers and timeframes included
-- [ ] Generic statements made specific
-- [ ] Filler content removed
+- [ ] Noaniq so'zlar aniq so'zlar bilan almashtirilgan
+- [ ] Raqamlar va muddatlar kiritilgan
+- [ ] Umumiy bayonotlar aniqlashtirilgan
+- [ ] To'ldiruvchi kontent olib tashlangan
 
-## Heightened Emotion (Sweep 6)
+## Kuchaytirilgan his-tuyg'u (6-supurish)
 
-- [ ] Copy evokes feeling, not just information
-- [ ] Pain points feel real
-- [ ] Aspirations feel achievable
-- [ ] Emotion serves the message authentically
+- [ ] Matn faqat ma'lumot emas, his uyg'otadi
+- [ ] Og'riq nuqtalari haqiqiy tuyuladi
+- [ ] Intilishlar erishsa bo'ladigandek tuyuladi
+- [ ] His-tuyg'u xabarga samimiy xizmat qiladi
 
-## Zero Risk (Sweep 7)
+## Nol xavf (7-supurish)
 
-- [ ] Objections addressed near CTA
-- [ ] Trust signals present
-- [ ] Next steps are crystal clear
-- [ ] Risk reversals stated (guarantee, trial, etc.)
+- [ ] E'tirozlar CTA yaqinida hal qilingan
+- [ ] Ishonch signallari mavjud
+- [ ] Keyingi qadamlar kristalldek aniq
+- [ ] Xavfni qaytarish aytilgan (kafolat, sinov va h.k.)
 
-## Final Checks
+## Yakuniy tekshiruvlar
 
-- [ ] No typos or grammatical errors
-- [ ] Consistent formatting
-- [ ] Links work (if applicable)
-- [ ] Core message preserved through all edits
+- [ ] Imlo yoki grammatik xatolar yo'q
+- [ ] Izchil formatlash
+- [ ] Havolalar ishlaydi (tegishli bo'lsa)
+- [ ] Asosiy xabar barcha tahrirlar davomida saqlangan

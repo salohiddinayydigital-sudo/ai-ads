@@ -1,38 +1,38 @@
-# Content Refresh Editing
+# Kontentni yangilash tahriri
 
-Copy editing isn't just for new content. Existing pages and posts decay over time — outdated stats, stale examples, drifted brand voice, and missed SEO opportunities. A content refresh applies the same editing rigor to content that's already published.
+Matn tahriri faqat yangi kontent uchun emas. Mavjud sahifa va postlar vaqt o'tishi bilan eskiradi — eskirgan statistika, eskirgan misollar, siljigan brend ovozi va o'tkazib yuborilgan SEO imkoniyatlari. Kontentni yangilash allaqachon nashr etilgan kontentga xuddi shu tahrir qat'iyligini qo'llaydi.
 
-## When to Refresh
+## Qachon yangilash
 
-- **Traffic declining** on a page that used to perform well
-- **Stats or data** are more than 12 months old
-- **Product has changed** — features, pricing, or positioning no longer match
-- **Competitors updated** their version of the same content
-- **AI search visibility** matters — outdated content gets cited less (see ai-seo skill)
+- Avval yaxshi ishlagan sahifada **trafik pasaymoqda**
+- **Statistika yoki ma'lumotlar** 12 oydan eski
+- **Mahsulot o'zgargan** — funksiyalar, narxlash yoki pozitsiyalash endi mos kelmaydi
+- **Raqobatchilar** xuddi shu kontentning o'z versiyasini yangiladi
+- **AI qidiruv ko'rinishi** muhim — eskirgan kontent kamroq keltiriladi (ai-seo skillga qarang)
 
-## Content Refresh Checklist
+## Kontentni yangilash cheklisti
 
-1. **Freshness pass** — Update all dates, stats, and examples. Replace "in 2024" with current data. Remove references to deprecated features or tools.
-2. **Accuracy pass** — Verify all claims are still true. Check that linked resources still exist. Confirm pricing and feature descriptions match current state.
-3. **Voice pass** — Does the tone match your current brand voice? Older content often reflects an earlier stage of the company.
-4. **SEO pass** — Has search intent shifted for this topic? Are there new keywords or questions to address? Add "Last updated: [date]" prominently.
-5. **Proof pass** — Can you add newer testimonials, case studies, or data points that didn't exist when this was first published?
-6. **Structure pass** — Add comparison tables, FAQ sections, or other scannable formats that make the content easier to consume.
+1. **Yangilik o'tishi** — Barcha sana, statistika va misollarni yangilang. "2024 yilda" ni joriy ma'lumot bilan almashtiring. Eskirgan funksiya yoki asboblarga havolalarni olib tashlang.
+2. **Aniqlik o'tishi** — Barcha da'volar hamon to'g'riligini tekshiring. Havola qilingan resurslar hamon mavjudligini tasdiqlang. Narx va funksiya tavsiflari joriy holatga mosligini tasdiqlang.
+3. **Ovoz o'tishi** — Ohang joriy brend ovozingizga mos keladimi? Eski kontent ko'pincha kompaniyaning avvalgi bosqichini aks ettiradi.
+4. **SEO o'tishi** — Bu mavzu uchun qidiruv niyati o'zgardimi? Hal qilinadigan yangi kalit so'zlar yoki savollar bormi? "Oxirgi yangilanish: [sana]" ni ko'zga tashlanadigan joyga qo'shing.
+5. **Isbot o'tishi** — Birinchi nashr qilinganda mavjud bo'lmagan yangiroq sharhlar, keyslar yoki ma'lumot nuqtalarini qo'sha olasizmi?
+6. **Tuzilma o'tishi** — Kontentni iste'mol qilishni osonlashtiradigan taqqoslash jadvallari, FAQ bo'limlari yoki boshqa skanerlanadigan formatlarni qo'shing.
 
-## Refresh vs. Rewrite
+## Yangilash va qayta yozish
 
-| Signal | Action |
+| Signal | Harakat |
 |--------|--------|
-| Core message still valid, details outdated | Refresh (update facts, stats, examples) |
-| Brand voice has evolved significantly | Refresh + voice rewrite |
-| Topic angle or audience has shifted | Full rewrite |
-| Page structure doesn't match current search intent | Full rewrite |
-| Just needs updated stats and links | Light refresh |
+| Asosiy xabar hamon yaroqli, tafsilotlar eskirgan | Yangilash (faktlar, statistika, misollarni yangilang) |
+| Brend ovozi sezilarli rivojlangan | Yangilash + ovozni qayta yozish |
+| Mavzu burchagi yoki auditoriya o'zgargan | To'liq qayta yozish |
+| Sahifa tuzilmasi joriy qidiruv niyatiga mos kelmaydi | To'liq qayta yozish |
+| Faqat yangi statistika va havolalar kerak | Yengil yangilash |
 
-## Refresh Cadence
+## Yangilash kadansi
 
-- **Pricing and product pages**: Every quarter, or when pricing/features change
-- **High-traffic blog posts**: Every 6 months
-- **Comparison and alternatives pages**: Every 3-6 months (competitors change fast)
-- **Evergreen guides**: Annually, unless traffic drops sooner
-- **Low-traffic pages**: Only when traffic data suggests an opportunity
+- **Narx va mahsulot sahifalari**: har chorakda yoki narx/funksiyalar o'zgarganda
+- **Yuqori trafikli blog postlari**: har 6 oyda
+- **Taqqoslash va muqobillar sahifalari**: har 3–6 oyda (raqobatchilar tez o'zgaradi)
+- **Evergreen qo'llanmalar**: yiliga bir marta, trafik ertaroq tushmasa
+- **Past trafikli sahifalar**: faqat trafik ma'lumotlari imkoniyat borligini ko'rsatganda

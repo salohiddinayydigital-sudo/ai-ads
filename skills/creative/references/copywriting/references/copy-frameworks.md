@@ -1,433 +1,433 @@
-# Copy Frameworks Reference
+# Matn freymvorklari referensi
 
-Headline formulas, page section types, and structural templates.
+Sarlavha formulalari, sahifa bo'lim turlari va tuzilmaviy shablonlar.
 
-## Contents
-- Headline Formulas (outcome-focused, problem-focused, audience-focused, differentiation-focused, proof-focused, additional formulas)
-- Landing Page Section Types (core sections, supporting sections)
-- Page Structure Templates (feature-heavy page, varied engaging page, compact landing page, enterprise/B2B landing page, product launch page)
-- Section Writing Tips (problem section, benefits section, how it works section, testimonial selection)
-- Clarity & Message-Market Fit (the "Now you can" test, Human Action Model, the Perception Gap, the SavvyCal case, clarity metrics)
+## Mundarija
+- Sarlavha formulalari (natijaga qaratilgan, muammoga qaratilgan, auditoriyaga qaratilgan, farqga qaratilgan, isbotga qaratilgan, qo'shimcha formulalar)
+- Landing sahifa bo'lim turlari (asosiy bo'limlar, yordamchi bo'limlar)
+- Sahifa tuzilma shablonlari (funksiyaga boy sahifa, xilma-xil jalb qiluvchi sahifa, ixcham landing, enterprise/B2B landing, mahsulot launch sahifasi)
+- Bo'lim yozish maslahatlari (muammo bo'limi, foydalar bo'limi, qanday ishlaydi bo'limi, sharhlarni tanlash)
+- Aniqlik va xabar-bozor mosligi ("Endi siz ... qila olasiz" testi, Human Action Model, Perception Gap, SavvyCal keysi, aniqlik metrikalari)
 
-## Headline Formulas
+## Sarlavha formulalari
 
-### Outcome-Focused
+### Natijaga qaratilgan
 
-**{Achieve desirable outcome} without {pain point}**
-> Understand how users are really experiencing your site without drowning in numbers
+**{Istalgan natijaga erishing} {og'riq nuqtasi}siz**
+> Raqamlar ichida cho'kib ketmasdan foydalanuvchilar saytingizdan haqiqatan qanday foydalanayotganini tushuning
 
-**{Achieve desirable outcome} by {how product makes it possible}**
-> Generate more leads by seeing which companies visit your site
+**{Istalgan natijaga erishing} {mahsulot buni qanday mumkin qilishi} orqali**
+> Saytingizga qaysi kompaniyalar kirishini ko'rib, ko'proq lid yarating
 
-**Turn {input} into {outcome}**
-> Turn your hard-earned sales into repeat customers
+**{Kirish}ni {natija}ga aylantiring**
+> Mashaqqat bilan topilgan sotuvlaringizni takroriy mijozlarga aylantiring
 
-**[Achieve outcome] in [timeframe]**
-> Get your tax refund in 10 days
-
----
-
-### Problem-Focused
-
-**Never {unpleasant event} again**
-> Never miss a sales opportunity again
-
-**{Question highlighting the main pain point}**
-> Hate returning stuff to Amazon?
-
-**Stop [pain]. Start [pleasure].**
-> Stop chasing invoices. Start getting paid on time.
+**[Natijaga erishing] [muddat]da**
+> Soliq qaytarilishini 10 kunda oling
 
 ---
 
-### Audience-Focused
+### Muammoga qaratilgan
 
-**{Key feature/product type} for {target audience}**
-> Advanced analytics for Shopify e-commerce
+**Endi hech qachon {yoqimsiz hodisa}**
+> Endi hech qachon sotuv imkoniyatini qo'ldan boy bermang
 
-**{Key feature/product type} for {target audience} to {what it's used for}**
-> An online whiteboard for teams to ideate and brainstorm together
+**{Asosiy og'riq nuqtasini ta'kidlovchi savol}**
+> Buyumlarni qaytarishdan jonga tegdimi?
 
-**You don't have to {skills or resources} to {achieve desirable outcome}**
-> With Ahrefs, you don't have to be an SEO pro to rank higher and get more traffic
-
----
-
-### Differentiation-Focused
-
-**The {opposite of usual process} way to {achieve desirable outcome}**
-> The easiest way to turn your passion into income
-
-**The [category] that [key differentiator]**
-> The CRM that updates itself
+**[Og'riq]ni to'xtating. [Zavq]ni boshlang.**
+> Hisob-fakturalarni quvishni to'xtating. O'z vaqtida to'lov olishni boshlang.
 
 ---
 
-### Proof-Focused
+### Auditoriyaga qaratilgan
 
-**[Number] [people] use [product] to [outcome]**
-> 50,000 marketers use Drip to send better emails
+**{Asosiy funksiya/mahsulot turi} {maqsadli auditoriya} uchun**
+> Shopify e-commerce uchun ilg'or analitika
 
-**{Key benefit of your product}**
-> Sound clear in online meetings
+**{Asosiy funksiya/mahsulot turi} {maqsadli auditoriya} uchun, {nima uchun ishlatilishi}**
+> Jamoalar birgalikda g'oya yaratishi va aqliy hujum o'tkazishi uchun onlayn doska
 
----
-
-### Additional Formulas
-
-**The simple way to {outcome}**
-> The simple way to track your time
-
-**Finally, {category} that {benefit}**
-> Finally, accounting software that doesn't suck
-
-**{Outcome} without {common pain}**
-> Build your website without writing code
-
-**Get {benefit} from your {thing}**
-> Get more revenue from your existing traffic
-
-**{Action verb} your {thing} like {admirable example}**
-> Market your SaaS like a Fortune 500
-
-**What if you could {desirable outcome}?**
-> What if you could close deals 30% faster?
-
-**Everything you need to {outcome}**
-> Everything you need to launch your course
-
-**The {adjective} {category} built for {audience}**
-> The lightweight CRM built for startups
+**{Istalgan natijaga erishish} uchun {ko'nikmalar yoki resurslar} shart emas**
+> Ahrefs bilan yuqoriroq reyting olish va ko'proq trafik jalb qilish uchun SEO mutaxassisi bo'lishingiz shart emas
 
 ---
 
-## Landing Page Section Types
+### Farqga qaratilgan
 
-### Core Sections
+**{Istalgan natijaga erishishning} {odatiy jarayonning teskarisi} yo'li**
+> Ishtiyoqingizni daromadga aylantirishning eng oson yo'li
 
-**Hero (Above the Fold)**
-- Headline + subheadline
-- Primary CTA
-- Supporting visual (product screenshot, hero image)
-- Optional: Social proof bar
-
-**Social Proof Bar**
-- Customer logos (recognizable > many)
-- Key metric ("10,000+ teams")
-- Star rating with review count
-- Short testimonial snippet
-
-**Problem/Pain Section**
-- Articulate their problem better than they can
-- Create recognition ("that's exactly my situation")
-- Hint at cost of not solving it
-
-**Solution/Benefits Section**
-- Bridge from problem to your solution
-- 3-5 key benefits (not 10)
-- Each: headline + explanation + proof if available
-
-**How It Works**
-- 3-4 numbered steps
-- Reduces perceived complexity
-- Each step: action + outcome
-
-**Final CTA Section**
-- Recap value proposition
-- Repeat primary CTA
-- Risk reversal (guarantee, free trial)
+**[Kategoriya], [asosiy farqlovchi]**
+> O'zi yangilanadigan CRM
 
 ---
 
-### Supporting Sections
+### Isbotga qaratilgan
 
-**Testimonials**
-- Full quotes with names, roles, companies
-- Photos when possible
-- Specific results over vague praise
-- Formats: quote cards, video, tweet embeds
+**[Raqam] [odam] [natija] uchun [mahsulot]dan foydalanadi**
+> 50 000 marketer yaxshiroq emaillar yuborish uchun Drip'dan foydalanadi
 
-**Case Studies**
-- Problem → Solution → Results
-- Specific metrics and outcomes
-- Customer name and context
-- Can be snippets with "Read more" links
-
-**Use Cases**
-- Different ways product is used
-- Helps visitors self-identify
-- "For marketers who need X" format
-
-**Personas / "Built For" Sections**
-- Explicitly call out target audience
-- "Perfect for [role]" blocks
-- Addresses "Is this for me?" question
-
-**FAQ Section**
-- Address common objections
-- Good for SEO
-- Reduces support burden
-- 5-10 most common questions
-
-**Comparison Section**
-- vs. competitors (name them or don't)
-- vs. status quo (spreadsheets, manual processes)
-- Tables or side-by-side format
-
-**Integrations / Partners**
-- Logos of tools you connect with
-- "Works with your stack" messaging
-- Builds credibility
-
-**Founder Story / Manifesto**
-- Why you built this
-- What you believe
-- Emotional connection
-- Differentiates from faceless competitors
-
-**Demo / Product Tour**
-- Interactive demos
-- Video walkthroughs
-- GIF previews
-- Shows product in action
-
-**Pricing Preview**
-- Teaser even on non-pricing pages
-- Starting price or "from $X/mo"
-- Moves decision-makers forward
-
-**Guarantee / Risk Reversal**
-- Money-back guarantee
-- Free trial terms
-- "Cancel anytime"
-- Reduces friction
-
-**Stats Section**
-- Key metrics that build credibility
-- "10,000+ customers"
-- "4.9/5 rating"
-- "$2M saved for customers"
+**{Mahsulotingizning asosiy foydasi}**
+> Onlayn uchrashuvlarda aniq eshitiling
 
 ---
 
-## Page Structure Templates
+### Qo'shimcha formulalar
 
-### Feature-Heavy Page (Weak)
+**{Natija}ga erishishning oddiy yo'li**
+> Vaqtingizni kuzatishning oddiy yo'li
+
+**Nihoyat, {foyda}ni beradigan {kategoriya}**
+> Nihoyat, yomon bo'lmagan buxgalteriya dasturi
+
+**{Natija} {keng tarqalgan og'riq}siz**
+> Kod yozmasdan saytingizni qurin
+
+**{Narsa}ngizdan {foyda} oling**
+> Mavjud trafikingizdan ko'proq daromad oling
+
+**{Narsa}ngizni {havas qilarli misol} kabi {harakat fe'li}**
+> SaaS'ingizni Fortune 500 kabi marketing qiling
+
+**{Istalgan natija}ga erisha olsangiz-chi?**
+> Bitimlarni 30% tezroq yopa olsangiz-chi?
+
+**{Natija} uchun kerak bo'lgan hamma narsa**
+> Kursingizni ishga tushirish uchun kerak bo'lgan hamma narsa
+
+**{Auditoriya} uchun yaratilgan {sifat} {kategoriya}**
+> Startaplar uchun yaratilgan yengil CRM
+
+---
+
+## Landing sahifa bo'lim turlari
+
+### Asosiy bo'limlar
+
+**Hero (fold'dan yuqorida)**
+- Sarlavha + qo'shimcha sarlavha
+- Asosiy CTA
+- Yordamchi vizual (mahsulot skrinshoti, hero rasmi)
+- Ixtiyoriy: ijtimoiy isbot paneli
+
+**Ijtimoiy isbot paneli**
+- Mijoz logotiplari (ko'p emas, tanish bo'lgani yaxshi)
+- Asosiy metrika ("10 000+ jamoa")
+- Sharhlar soni bilan yulduzli reyting
+- Qisqa sharh parchasi
+
+**Muammo/og'riq bo'limi**
+- Ularning muammosini o'zlaridan yaxshiroq ifodalang
+- Tanishlikni yarating ("aynan mening holatim")
+- Hal qilmaslik narxiga ishora qiling
+
+**Yechim/foydalar bo'limi**
+- Muammodan yechimingizga ko'prik
+- 3–5 asosiy foyda (10 emas)
+- Har biri: sarlavha + tushuntirish + mavjud bo'lsa isbot
+
+**Qanday ishlaydi**
+- 3–4 raqamlangan qadam
+- Sezilgan murakkablikni kamaytiradi
+- Har bir qadam: harakat + natija
+
+**Yakuniy CTA bo'limi**
+- Qiymat taklifini takrorlash
+- Asosiy CTA'ni takrorlash
+- Xavfni qaytarish (kafolat, bepul sinov)
+
+---
+
+### Yordamchi bo'limlar
+
+**Sharhlar**
+- Ism, rol, kompaniya bilan to'liq iqtiboslar
+- Iloji bo'lsa suratlar
+- Noaniq maqtovdan ko'ra aniq natijalar
+- Formatlar: iqtibos kartalari, video, tweet embedlar
+
+**Keyslar**
+- Muammo → Yechim → Natijalar
+- Aniq metrikalar va natijalar
+- Mijoz nomi va konteksti
+- "Batafsil" havolali parchalar bo'lishi mumkin
+
+**Foydalanish holatlari**
+- Mahsulotdan foydalanishning turli usullari
+- Tashrifchilarga o'zini aniqlashga yordam beradi
+- "X kerak bo'lgan marketerlar uchun" formati
+
+**Personalar / "Kimlar uchun" bo'limlari**
+- Maqsadli auditoriyani aniq ko'rsating
+- "[Rol] uchun ideal" bloklari
+- "Bu menga mosmi?" savoliga javob beradi
+
+**FAQ bo'limi**
+- Keng tarqalgan e'tirozlarni hal qiling
+- SEO uchun yaxshi
+- Qo'llab-quvvatlash yukini kamaytiradi
+- Eng ko'p so'raladigan 5–10 savol
+
+**Taqqoslash bo'limi**
+- Raqobatchilarga qarshi (nomlang yoki nomlamang)
+- Status-kvoga qarshi (jadvallar, qo'lda jarayonlar)
+- Jadvallar yoki yonma-yon format
+
+**Integratsiyalar / hamkorlar**
+- Ulanadigan asboblar logotiplari
+- "Steklaringiz bilan ishlaydi" xabari
+- Ishonchlilikni qurish
+
+**Asoschi hikoyasi / manifest**
+- Buni nega yaratganingiz
+- Nimaga ishonishingiz
+- Hissiy aloqa
+- Yuzsiz raqobatchilardan ajratadi
+
+**Demo / mahsulot turi**
+- Interaktiv demolar
+- Video walkthrough'lar
+- GIF previewlar
+- Mahsulotni amalda ko'rsatadi
+
+**Narx preview'i**
+- Narxsiz sahifalarda ham teaser
+- Boshlang'ich narx yoki "oyiga $X dan"
+- Qaror qabul qiluvchilarni oldinga siljitadi
+
+**Kafolat / xavfni qaytarish**
+- Pulni qaytarish kafolati
+- Bepul sinov shartlari
+- "Istalgan vaqt bekor qilish"
+- Ishqalanishni kamaytiradi
+
+**Statistika bo'limi**
+- Ishonchlilikni quradigan asosiy metrikalar
+- "10 000+ mijoz"
+- "4.9/5 reyting"
+- "Mijozlar uchun $2M tejaldi"
+
+---
+
+## Sahifa tuzilma shablonlari
+
+### Funksiyaga boy sahifa (zaif)
 
 ```
 1. Hero
-2. Feature 1
-3. Feature 2
-4. Feature 3
-5. Feature 4
+2. 1-funksiya
+3. 2-funksiya
+4. 3-funksiya
+5. 4-funksiya
 6. CTA
 ```
 
-This is a list, not a persuasive narrative.
+Bu ro'yxat, ishontiruvchi hikoya emas.
 
 ---
 
-### Varied, Engaging Page (Strong)
+### Xilma-xil, jalb qiluvchi sahifa (kuchli)
 
 ```
-1. Hero with clear value prop
-2. Social proof bar (logos or stats)
-3. Problem/pain section
-4. How it works (3 steps)
-5. Key benefits (2-3, not 10)
-6. Testimonial
-7. Use cases or personas
-8. Comparison to alternatives
-9. Case study snippet
+1. Aniq qiymat taklifli hero
+2. Ijtimoiy isbot paneli (logotiplar yoki statistika)
+3. Muammo/og'riq bo'limi
+4. Qanday ishlaydi (3 qadam)
+5. Asosiy foydalar (2–3, 10 emas)
+6. Sharh
+7. Foydalanish holatlari yoki personalar
+8. Muqobillar bilan taqqoslash
+9. Keys parchasi
 10. FAQ
-11. Final CTA with guarantee
+11. Kafolatli yakuniy CTA
 ```
 
-This tells a story and addresses objections.
+Bu hikoya aytadi va e'tirozlarni hal qiladi.
 
 ---
 
-### Compact Landing Page
+### Ixcham landing sahifa
 
 ```
-1. Hero (headline, subhead, CTA, image)
-2. Social proof bar
-3. 3 key benefits with icons
-4. Testimonial
-5. How it works (3 steps)
-6. Final CTA with guarantee
+1. Hero (sarlavha, qo'shimcha sarlavha, CTA, rasm)
+2. Ijtimoiy isbot paneli
+3. Ikonkali 3 ta asosiy foyda
+4. Sharh
+5. Qanday ishlaydi (3 qadam)
+6. Kafolatli yakuniy CTA
 ```
 
-Good for ad landing pages where brevity matters.
+Qisqalik muhim bo'lgan reklama landinglari uchun yaxshi.
 
 ---
 
-### Enterprise/B2B Landing Page
+### Enterprise/B2B landing sahifa
 
 ```
-1. Hero (outcome-focused headline)
-2. Logo bar (recognizable companies)
-3. Problem section (business pain)
-4. Solution overview
-5. Use cases by role/department
-6. Security/compliance section
-7. Integration logos
-8. Case study with metrics
-9. ROI/value section
-10. Contact/demo CTA
+1. Hero (natijaga qaratilgan sarlavha)
+2. Logotip paneli (taniqli kompaniyalar)
+3. Muammo bo'limi (biznes og'rig'i)
+4. Yechimga umumiy nazar
+5. Rol/bo'lim bo'yicha foydalanish holatlari
+6. Xavfsizlik/muvofiqlik bo'limi
+7. Integratsiya logotiplari
+8. Metrikali keys
+9. ROI/qiymat bo'limi
+10. Aloqa/demo CTA
 ```
 
-Addresses enterprise buyer concerns.
+Enterprise xaridor xavotirlarini hal qiladi.
 
 ---
 
-### Product Launch Page
+### Mahsulot launch sahifasi
 
 ```
-1. Hero with launch announcement
-2. Video demo or walkthrough
-3. Feature highlights (3-5)
-4. Before/after comparison
-5. Early testimonials
-6. Launch pricing or early access offer
-7. CTA with urgency
+1. Launch e'lonli hero
+2. Video demo yoki walkthrough
+3. Funksiya yoritmalari (3–5)
+4. Oldin/keyin taqqoslash
+5. Dastlabki sharhlar
+6. Launch narxi yoki erta kirish taklifi
+7. Shoshilinchlikli CTA
 ```
 
-Good for ProductHunt, launches, or announcements.
+ProductHunt, launch yoki e'lonlar uchun yaxshi.
 
 ---
 
-## Section Writing Tips
+## Bo'lim yozish maslahatlari
 
-### Problem Section
+### Muammo bo'limi
 
-Start with phrases like:
-- "You know the feeling..."
-- "If you're like most [role]..."
-- "Every day, [audience] struggles with..."
-- "We've all been there..."
+Quyidagi iboralardan boshlang:
+- "Siz bu tuyg'uni bilasiz..."
+- "Agar siz ko'pchilik [rol] kabi bo'lsangiz..."
+- "Har kuni [auditoriya] ... bilan kurashadi"
+- "Biz hammamiz shu yerda bo'lganmiz..."
 
-Then describe:
-- The specific frustration
-- The time/money wasted
-- The impact on their work/life
+So'ng tasvirlang:
+- Aniq asabiylashish
+- Sarflangan vaqt/pul
+- Ularning ishi/hayotiga ta'siri
 
-### Benefits Section
+### Foydalar bo'limi
 
-For each benefit, include:
-- **Headline**: The outcome they get
-- **Body**: How it works (1-2 sentences)
-- **Proof**: Number, testimonial, or example (optional)
+Har bir foyda uchun kiriting:
+- **Sarlavha**: ular oladigan natija
+- **Asosiy matn**: u qanday ishlaydi (1–2 jumla)
+- **Isbot**: raqam, sharh yoki misol (ixtiyoriy)
 
-### How It Works Section
+### Qanday ishlaydi bo'limi
 
-Each step should be:
-- **Numbered**: Creates sense of progress
-- **Simple verb**: "Connect," "Set up," "Get"
-- **Outcome-oriented**: What they get from this step
+Har bir qadam quyidagicha bo'lishi kerak:
+- **Raqamlangan**: progress hissini yaratadi
+- **Oddiy fe'l**: "Ulang," "Sozlang," "Oling"
+- **Natijaga yo'naltirilgan**: bu qadamdan nima olishadi
 
-Example:
-1. Connect your tools (takes 2 minutes)
-2. Set your preferences
-3. Get automated reports every Monday
+Misol:
+1. Asboblaringizni ulang (2 daqiqa oladi)
+2. Afzalliklaringizni belgilang
+3. Har dushanba avtomatik hisobotlarni oling
 
-### Testimonial Selection
+### Sharhlarni tanlash
 
-Best testimonials include:
-- Specific results ("increased conversions by 32%")
-- Before/after context ("We used to spend hours...")
-- Role + company for credibility
-- Something quotable and specific
+Eng yaxshi sharhlar quyidagilarni o'z ichiga oladi:
+- Aniq natijalar ("konversiyani 32% ga oshirdi")
+- Oldin/keyin konteksti ("Biz soatlab vaqt sarflar edik...")
+- Ishonchlilik uchun rol + kompaniya
+- Iqtibos qilsa bo'ladigan aniq narsa
 
-Avoid testimonials that just say:
-- "Great product!"
-- "Love it!"
-- "Easy to use!"
+Faqat quyidagilarni aytadigan sharhlardan qoching:
+- "Ajoyib mahsulot!"
+- "Yoqdi!"
+- "Foydalanish oson!"
 
 ---
 
-## Clarity & Message-Market Fit
+## Aniqlik va xabar-bozor mosligi
 
-Headline formulas give you the shape of a line. These tools tell you whether the line is actually *working* — whether it's clear, whether it maps to how the reader already thinks, and whether it lands with the right person. Positioning is the prologue to your novel: it sets up everything that follows. Get it clear and the rest of the page writes itself.
+Sarlavha formulalari sizga satr shaklini beradi. Bu vositalar satr haqiqatan *ishlayotgani* — aniqmi, o'quvchi allaqachon o'ylagan tarzga mos keladimi va to'g'ri odamga yetib boradimi — ni aytadi. Pozitsiyalash — romaningizning muqaddimasi: u keyingi hamma narsani tayyorlaydi. Uni aniq qiling va sahifaning qolgan qismi o'zi yoziladi.
 
-### The "Now you can" Test
+### "Endi siz ... qila olasiz" testi
 
-A fast gut-check for any headline or benefit line. Mentally prefix it with **"Now you can…"**. If the result is both **compelling** and **true**, the line is doing its job. If it reads as vague, obvious, or a stretch, rewrite it.
+Har qanday sarlavha yoki foyda satri uchun tezkor ichki tekshiruv. Uning oldiga ongingizda **"Endi siz…"** ni qo'shing. Natija ham **jozibali**, ham **haqiqat** bo'lsa, satr o'z vazifasini bajarmoqda. Agar u noaniq, ravshan yoki uzoqdan olinganday o'qilsa, qayta yozing.
 
-The test works because "Now you can…" forces the copy into the reader's world — it has to name a concrete new ability they didn't have before. Feature-speak and buzzwords collapse under it.
+Test shuning uchun ishlaydiki, "Endi siz…" matnni o'quvchi dunyosiga majbur qiladi — u ilgari yo'q bo'lgan aniq yangi qobiliyatni nomlashi kerak. Funksiya tili va buzzword'lar uning ostida qulaydi.
 
-| Original line | "Now you can…" version | Verdict |
+| Asl satr | "Endi siz …" varianti | Xulosa |
 |---------------|------------------------|---------|
-| "Powerful analytics platform" | Now you can… have a powerful analytics platform | Fails — not a new ability, just a description |
-| "See which companies visit your site" | Now you can… see which companies visit your site | Works — compelling + true |
-| "Streamline your workflow" | Now you can… streamline your workflow | Fails — vague, unfalsifiable |
-| "Send unlimited docs, images, and audio in one place" | Now you can… send unlimited docs, images, and audio in one place | Works — concrete + true |
+| "Kuchli analitika platformasi" | Endi siz… kuchli analitika platformasiga ega bo'ldingiz | Muvaffaqiyatsiz — yangi qobiliyat emas, shunchaki tavsif |
+| "Saytingizga qaysi kompaniyalar kirishini ko'ring" | Endi siz… saytingizga qaysi kompaniyalar kirishini ko'ra olasiz | Ishlaydi — jozibali + haqiqat |
+| "Ish jarayoningizni soddalashtiring" | Endi siz… ish jarayoningizni soddalashtira olasiz | Muvaffaqiyatsiz — noaniq, inkor qilib bo'lmaydi |
+| "Hujjat, rasm va audioni bir joyda cheksiz yuboring" | Endi siz… hujjat, rasm va audioni bir joyda cheksiz yubora olasiz | Ishlaydi — aniq + haqiqat |
 
-Use it as a filter, not a formula: draft with the headline formulas above, then run each candidate through "Now you can…" and keep the survivors.
+Undan formula emas, filtr sifatida foydalaning: yuqoridagi sarlavha formulalari bilan qoralang, so'ng har bir nomzodni "Endi siz…" dan o'tkazing va omon qolganlarini saqlang.
 
-### The Human Action Model (landing-page narrative spine)
+### Human Action Model (landing sahifa hikoya o'qi)
 
-Ludwig von Mises' Human Action Model explains *why* anyone acts: a person acts only when three things line up. Every above-the-fold that converts follows the same three-beat spine:
+Ludwig von Mises'ning Human Action Model'i har kim *nega* harakat qilishini tushuntiradi: inson faqat uch narsa mos kelgandagina harakat qiladi. Konvertatsiya qiladigan har bir fold'dan yuqori qism bir xil uch zarbali o'qqa amal qiladi:
 
-1. **Current discomfort** — the felt problem, named in the reader's own words. They have to recognize their situation ("that's exactly me").
-2. **Better vision** — a clearly imagined, more satisfying state. What life looks like once the discomfort is gone.
-3. **Path to action** — the belief that *this specific step* closes the gap between the two. The product is the bridge, and the CTA is how they cross it.
+1. **Joriy noqulaylik** — o'quvchining o'z so'zlari bilan nomlangan his qilinadigan muammo. Ular o'z vaziyatini tanishi kerak ("aynan men").
+2. **Yaxshiroq ko'rinish** — aniq tasavvur qilingan, qoniqarliroq holat. Noqulaylik yo'qolgach hayot qanday ko'rinadi.
+3. **Harakatga yo'l** — *aynan shu qadam* ikkisi o'rtasidagi bo'shliqni yopishiga ishonch. Mahsulot — ko'prik, CTA esa u orqali qanday o'tish.
 
-Miss any beat and the reader stalls. No discomfort = no reason to move. No vision = no destination. No path = no reason to believe *you're* the way there.
+Birortasini o'tkazib yuborsangiz, o'quvchi to'xtaydi. Noqulaylik yo'q = harakatlanish sababi yo'q. Ko'rinish yo'q = manzil yo'q. Yo'l yo'q = *siz* yo'l ekaningizga ishonish sababi yo'q.
 
-**Mapping it onto the hero:**
+**Uni hero'ga xaritalash:**
 
-| Beat | Where it usually lives | Example |
+| Zarba | Odatda qayerda yashaydi | Misol |
 |------|------------------------|---------|
-| Current discomfort | Eyebrow, subhead, or problem-framed headline | "You shouldn't have to feel awkward sending out your scheduling link" |
-| Better vision | Headline or subhead | "Scheduling that feels considerate, not one-sided" |
-| Path to action | CTA + supporting proof | "Start scheduling free" |
+| Joriy noqulaylik | Eyebrow, qo'shimcha sarlavha yoki muammo shaklidagi sarlavha | "Rejalashtirish havolangizni yuborayotganda o'zingizni noqulay his qilmasligingiz kerak" |
+| Yaxshiroq ko'rinish | Sarlavha yoki qo'shimcha sarlavha | "Bir tomonlama emas, hurmatli tuyuladigan rejalashtirish" |
+| Harakatga yo'l | CTA + yordamchi isbot | "Rejalashtirishni bepul boshlang" |
 
-This is the transformation spine underneath the "6 essential sections" of a landing page — hero, social proof, problem, solution, how-it-works, and final CTA. The hero states the transformation; the rest of the page substantiates each beat.
+Bu landing sahifaning "6 muhim bo'limi" — hero, ijtimoiy isbot, muammo, yechim, qanday ishlaydi va yakuniy CTA — ostidagi transformatsiya o'qi. Hero transformatsiyani bayon qiladi; sahifaning qolgani har bir zarbani asoslaydi.
 
-### The Perception Gap
+### Perception Gap
 
-The same benefit can read as a **selling point to one segment and a red flag to another**. The gap is between what *you* think you're saying and what a given reader hears through their own risk tolerance.
+Bir xil foyda bir segment uchun **sotuv nuqtasi, boshqasi uchun qizil bayroq** bo'lib o'qilishi mumkin. Bo'shliq — siz nimani aytayotganingizni o'ylashingiz va ma'lum o'quvchi o'z xavf toqati orqali nimani eshitishi o'rtasida.
 
-The fix isn't softer copy — it's **matching the value prop to the reader's risk tolerance**. Segment first, then swap the framing.
+Tuzatish — yumshoqroq matn emas, **qiymat taklifini o'quvchining xavf toqatiga moslashtirish**. Avval segmentlang, so'ng framing'ni almashtiring.
 
-| Benefit as written | Startup / early-adopter hears | Enterprise / risk-averse hears |
+| Yozilgan foyda | Startap / erta qabul qiluvchi eshitadi | Enterprise / xavfdan qochuvchi eshitadi |
 |--------------------|-------------------------------|--------------------------------|
-| "Move fast — ship in a weekend" | Speed, momentum (✅) | Immature, unstable (🚩) |
-| "Brand-new approach" | Innovative edge (✅) | Unproven, risky (🚩) |
-| "Enterprise-grade security & SLAs" | Bloated, slow, expensive (🚩) | Safe, trustworthy (✅) |
-| "Trusted by the Fortune 500" | Not built for me (🚩) | Proven, de-risked (✅) |
+| "Tez harakatlaning — hafta oxirida chiqaring" | Tezlik, momentum (✅) | Pishmagan, beqaror (🚩) |
+| "Mutlaqo yangi yondashuv" | Innovatsion ustunlik (✅) | Sinalmagan, xavfli (🚩) |
+| "Enterprise darajadagi xavfsizlik va SLA" | Shishgan, sekin, qimmat (🚩) | Xavfsiz, ishonchli (✅) |
+| "Fortune 500 ishonadi" | Men uchun qurilmagan (🚩) | Isbotlangan, xavfi kamaytirilgan (✅) |
 
-**Value-prop swap in practice** — same product, two audiences:
+**Amalda qiymat taklifini almashtirish** — bir xil mahsulot, ikki auditoriya:
 
-- *Startup landing page:* "Ship your first integration this afternoon. No sales calls, no procurement." 
-- *Enterprise landing page:* "SOC 2 Type II, 99.99% uptime SLA, and a named implementation lead. Roll out with confidence."
+- *Startap landing sahifasi:* "Birinchi integratsiyangizni bugun tushdan keyin chiqaring. Sotuv qo'ng'iroqlari yo'q, xaridlar bo'limi yo'q."
+- *Enterprise landing sahifasi:* "SOC 2 Type II, 99.99% uptime SLA va nomlangan joriy qilish rahbari. Ishonch bilan joriy qiling."
 
-When a page has to serve both, don't average them into mush — segment the traffic (separate pages, or a persona split) and let each read its own version of the truth.
+Sahifa ikkalasiga xizmat qilishi kerak bo'lsa, ularni loyqa o'rtachaga aylantirmang — trafikni segmentlang (alohida sahifalar yoki persona bo'linishi) va har biri haqiqatning o'z versiyasini o'qisin.
 
-### Worked Example — SavvyCal (message-market fit)
+### Ishlangan misol — SavvyCal (xabar-bozor mosligi)
 
-SavvyCal (a scheduling tool) originally led with feature-forward copy. They rewrote the hero around a single felt discomfort:
+SavvyCal (rejalashtirish vositasi) dastlab funksiyaga qaratilgan matn bilan boshlagan. Ular hero'ni bitta his qilinadigan noqulaylik atrofida qayta yozishdi:
 
-> **"You shouldn't have to feel awkward sending out your scheduling link."**
+> **"Rejalashtirish havolangizni yuborayotganda o'zingizni noqulay his qilmasligingiz kerak."**
 
-That one line **roughly tripled (3×) conversions**. It works because it hits all three beats of the Human Action Model at once:
+Bu bitta satr konversiyani **taxminan uch baravar (3×)** oshirdi. U Human Action Model'ning uchala zarbasiga bir vaqtda tushgani uchun ishlaydi:
 
-- **Discomfort:** the small social awkwardness of "here's my link, pick a time" — named exactly as users feel it.
-- **Vision:** scheduling that feels considerate to *both* people.
-- **Path:** SavvyCal's overlay-your-calendar mechanic is the bridge, so the CTA feels like the obvious next step.
+- **Noqulaylik:** "mana mening havolam, vaqt tanlang" ning kichik ijtimoiy noqulayligi — foydalanuvchilar his qilgandek aniq nomlangan.
+- **Ko'rinish:** *ikki* kishiga ham hurmatli tuyuladigan rejalashtirish.
+- **Yo'l:** SavvyCal'ning kalendaringizni ustiga qo'yish mexanikasi — ko'prik, shuning uchun CTA aniq keyingi qadamdek tuyuladi.
 
-The lesson: message-market fit beats feature lists. The winning line wasn't cleverer — it named a real feeling the reader hadn't heard a scheduling tool acknowledge before. Run your own hero through "Now you can…" and the Human Action Model to find that line.
+Saboq: xabar-bozor mosligi funksiyalar ro'yxatidan ustun. G'olib satr ayyorroq emas edi — u o'quvchi ilgari rejalashtirish vositasi tan olganini eshitmagan haqiqiy his-tuyg'uni nomladi. O'sha satrni topish uchun o'z hero'ingizni "Endi siz…" va Human Action Model'dan o'tkazing.
 
-### Clarity Beats Cleverness (the metrics)
+### Aniqlik ayyorlikdan ustun (metrikalar)
 
-When teams measure it, clarity — not wit — is what moves the numbers. Clearer positioning and copy is associated with:
+Jamoalar buni o'lchaganda, raqamlarni zukkolik emas, aniqlik harakatlantiradi. Aniqroq pozitsiyalash va matn quyidagilar bilan bog'liq:
 
-- **+81% conversions**
-- **−38% sales cycle** (shorter time to close)
-- **−28% CAC** (lower customer acquisition cost)
-- **+175% referrals**
+- **+81% konversiya**
+- **−38% sotuv sikli** (yopishgacha qisqaroq vaqt)
+- **−28% CAC** (mijozni jalb qilish xarajati pastroq)
+- **+175% tavsiyalar**
 
-The mechanism: clear copy lets the *right* buyer self-qualify fast and the wrong one bounce early, so every downstream metric improves. Clever copy that requires decoding does the opposite — it adds a comprehension tax at the exact moment attention is scarcest.
+Mexanizm: aniq matn *to'g'ri* xaridorga tez o'zini saralashga, noto'g'risiga esa erta ketishga imkon beradi, shuning uchun har bir keyingi metrika yaxshilanadi. Dekodlashni talab qiladigan ayyor matn teskarisini qiladi — diqqat eng kam bo'lgan lahzada tushunish solig'ini qo'shadi.
 
-**Practical rule:** if a reader has to pause to figure out what you mean, you've already lost. When forced to choose between a clever line and a clear one, ship the clear one — then use the tests above ("Now you can…", the Human Action Model, the Perception Gap) to make the clear line compelling too.
+**Amaliy qoida:** o'quvchi nima demoqchi ekaningizni tushunish uchun to'xtashi kerak bo'lsa, siz allaqachon yutqazdingiz. Ayyor va aniq satr o'rtasida tanlashga majbur bo'lsangiz, aniq satrni chiqaring — so'ng aniq satrni jozibali qilish uchun yuqoridagi testlardan ("Endi siz…", Human Action Model, Perception Gap) foydalaning.
