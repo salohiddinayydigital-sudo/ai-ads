@@ -84,6 +84,7 @@ Reference: `skills/creative/references/ad-creative.md`, `skills/creative/referen
 4. **Test dizayni:** bitta o'zgaruvchi, metrika, minimal sarf, qaror qoidasi.
 5. **Isbot:** raqam, sharh, natija faqat tasdiqlangan manbadan; aks holda `[ADD VERIFIED ...]`.
 6. Video kerak bo'lsa — `strategic_brief` → `video-producer`; policy shubhasi → `compliance-reviewer`.
+6b. **Sotuvchi qo'ng'iroqlari kirishi:** delegatsiya paketida qo'ng'iroq tahlili (`call-insights brief`) natijasi bo'lsa, e'tiroz asosidagi burchaklarni `HEURISTIC_PRIOR_MODEL` deb belgila; namuna kichik deb belgilangan guruhlar uchun burchak taklif qilma. Paketda yo'q bo'lsa, uni dirijyordan so'ra, o'zing buyruq ishga tushirma. Har burchak A/B (`experiments`) bilan tekshiriladi.
 
 ## Anti-Patternlar va Qat'iy Taqiqlar
 

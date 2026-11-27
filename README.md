@@ -1,6 +1,6 @@
 # Tyrion v8.3 — closed-loop media-buyer brain for paid ads (`ai-ads`)
 
-<!-- tyrion:catalog agents=19 skills=19 wiki=101 playbooks=9 contexts=6 commands=42 rules=9 tools=40 -->
+<!-- tyrion:catalog agents=19 skills=19 wiki=101 playbooks=9 contexts=6 commands=42 rules=9 tools=41 -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.13](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776AB.svg)](https://www.python.org/)
@@ -53,7 +53,7 @@ Account writes (`ads_create_*`, `ads_update_entity`, `ads_activate_entity`, …)
 - **19 specialist agents** — `platform-auditor` (platform passed in the delegation package), `tracking-specialist`, `audience-architect`, `creative-strategist`, `video-producer`, `budget-analyst`, `data-analyst`, `strategist`, `content-planner`, `compliance-reviewer`, `research-verifier`, `release-verifier`; plus the **Targetolog Copilot Pack** — `client-onboarder`, `ad-spy-analyst`, `campaign-launcher`, `daily-optimizer`, `funnel-cro-doctor`, `account-recovery-specialist` (white-hat only), `client-comms-lead`. Every charter follows Charter v2 (modes, anti-patterns, Self-Audit gate, typed handoff — `schemas/agent-handoff.schema.json`).
 - **19 platform & marketing skills** — `tyrion`, `strategy`, `audit`, `audience`, `creative`, `video`, `tracking`, `budget`, `analyze`, `competitors`, `funnel`, `content`, `report`, `client`, `system`, `connect`, `pulse`, `experiments`, `lead-quality` (the Uzbekistan market pack loads only when `market=uz`).
 - **42 slash commands** — 12 model-visible (`/start /audit /audience /creative /budget /export /report /client /competitors /tracking /pulse /connect`); Uzbek aliases (`/auditoriya /kreativ /voronka /eksport /hisobot /mijoz /raqobatchi /savol`) stay user-invocable but hidden from the model context. Video pre-production commands (user-invocable): `/video-ssenariy` (`/video-script`), `/video-reja` (`/video-plan`), `/motion-ssenariy` (`/motion-script`). Targetolog assistants (user-invocable): `/onboard`, `/ad-spy`, `/launch-plan`, `/morning-triage`, `/cro-dm`, `/appeal`, `/client-update`.
-- **40 deterministic 0-token Python CLI tools** (stdlib only) — `normalize`, `pulse`, `experiments`, `crm-bridge`, `creative-analytics`, `adlib-mine`, `audit_scoring`, `report-html`, `calculator`, `spend-guard`, `meta-targeting-engine`, …; Bilim: atomik qaydlar (101), 9 playbooks, market packs `global us eu uk mena latam sea in uz`.
+- **41 deterministic 0-token Python CLI tools** (stdlib only) — `normalize`, `pulse`, `experiments`, `crm-bridge`, `creative-analytics`, `adlib-mine`, `audit_scoring`, `report-html`, `calculator`, `spend-guard`, `meta-targeting-engine`, …; Bilim: atomik qaydlar (101), 9 playbooks, market packs `global us eu uk mena latam sea in uz`.
 
 ```text
 ai-ads/
@@ -61,7 +61,7 @@ ai-ads/
 ├── skills/                  # 19 skills; SKILL.md + references/
 ├── commands/                # 42 slash commands (12 model-visible)
 ├── hooks/                   # ${CLAUDE_PLUGIN_ROOT} hook launcher, guard, Spend-Guard gate
-├── tools/                   # 40 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
+├── tools/                   # 41 ta 0-Token Deterministik CLI Asbob & STDIO MCP server
 ├── schemas/                 # metrics.v1, client-state.v1
 ├── markets/                 # Market Packs (global, us, eu, uk, mena, latam, sea, in, uz)
 └── wiki/                    # atomic wikilinked knowledge notes
