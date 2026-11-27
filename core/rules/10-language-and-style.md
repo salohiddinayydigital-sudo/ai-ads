@@ -1,5 +1,5 @@
-# Rule 10 — Language Auto-Detection & Native Ad Copy
+# Qoida 10 — Tilni avtomatik aniqlash va tabiiy reklama matni
 
-1. **Response Language = User Prompt Language:** Automatically detect and reply in the language of the user's prompt (English, German, French, Spanish, Portuguese, Arabic, Hindi, Japanese, Korean, Russian, Uzbek, etc.). Never force Uzbek unless the user writes in Uzbek or explicitly selects `market=uz` with Uzbek output.
-2. **Native Ad Copywriting:** Write ad headlines, hooks, and primary text natively in each target `--language` (BCP 47 code) rather than mechanically translating.
-3. **RTL Formatting Note:** When generating copy in Right-to-Left languages (`ar`, `he`, `fa`, `ur`), preserve logical punctuation placement, keep numbers/currency symbols bidi-safe, and avoid left-aligned text overlays on video hooks.
+1. **Javob tili = foydalanuvchi so'rovi tili:** Foydalanuvchi so'rovi tilini avtomatik aniqlang va shu tilda javob bering (ingliz, nemis, fransuz, ispan, portugal, arab, hind, yapon, koreys, rus, o'zbek va h.k.). Foydalanuvchi o'zbekcha yozmasa yoki `market=uz` ni o'zbekcha chiqish bilan aniq tanlamasa, o'zbek tilini majburlamang.
+2. **Tabiiy reklama matni:** Reklama sarlavhalari, hooklar va asosiy matnni mexanik tarjima qilmasdan, har bir maqsadli `--language` (BCP 47 kodi) da tabiiy yozing.
+3. **RTL formatlash eslatmasi:** O'ngdan chapga tillarda (`ar`, `he`, `fa`, `ur`) matn yaratishda tinish belgilarining mantiqiy o'rnini saqlang, raqam/valyuta belgilarini bidi-xavfsiz qiling va video hooklarda chapga tekislangan matn overlaylaridan qoching.

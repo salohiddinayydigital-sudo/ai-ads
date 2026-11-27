@@ -1,6 +1,6 @@
 ---
 name: competitors
-description: "Competitor and customer research: ad library teardown, offer matrices, counter-angles, source verification, custdev. Use for 'raqobatchi', 'ads library', 'custdev', 'tadqiqot', конкуренты, исследование."
+description: "Raqobatchi va mijoz tadqiqoti: ad library tahlili, taklif matritsalari, qarshi-angle'lar, manbani tekshirish, custdev. Quyidagilar uchun ishlating: 'raqobatchi', 'ads library', 'custdev', 'tadqiqot', конкуренты, исследование."
 triggers:
 - "raqobatchi"
 - "raqobatchilar"
@@ -68,7 +68,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # competitors
 
-Competitor and customer research: ad library teardown, offer matrices, counter-angles, source verification, custdev. Use for 'raqobatchi', 'ads library', 'custdev', 'tadqiqot', конкуренты, исследование.
+Raqobatchi va mijoz tadqiqoti: ad library tahlili, taklif matritsalari, qarshi-angle'lar, manbani tekshirish, custdev. Quyidagilar uchun ishlating: 'raqobatchi', 'ads library', 'custdev', 'tadqiqot', конкуренты, исследование.
 
 ## Qoidalar
 Faollik muddati natija isboti emas (PROXY); har fakt manbali yoki `unverified`.
@@ -79,8 +79,8 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads-competitor` | `skills/competitors/references/ads-competitor.md` | Research competitor paid-ad presence, messaging, creative, formats, landing pages, keyword and auction signals, transparent ad libraries, and strategi… |
-| `ads-research` | `skills/competitors/references/ads-research.md` | Refresh Claude Ads platform, API, policy, regulation, benchmark, issue, pull-request, fork, and repository evidence. Use for ads research refresh, exp… |
-| `customer-research` | `skills/competitors/references/customer-research.md` | When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions "customer research," "ICP research," "talk to cus… |
+| `ads-competitor` | `skills/competitors/references/ads-competitor.md` | Raqobatchining pullik reklama mavjudligi, xabarlari, kreativi, formatlari, landinglari, kalit so'z va auksion signallari, shaffof reklama kutubxonalari va strategiyasini tadqiq qilish… |
+| `ads-research` | `skills/competitors/references/ads-research.md` | Claude Ads platforma, API, policy, qonunchilik, benchmark, issue, pull-request, fork va repozitoriy dalillarini yangilash. Ads research refresh, exp… uchun ishlating. |
+| `customer-research` | `skills/competitors/references/customer-research.md` | Foydalanuvchi mijoz tadqiqotini o'tkazish, tahlil qilish yoki umumlashtirishni xohlaganda. "customer research," "ICP research," "talk to cus… eslatilganda ishlating. |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

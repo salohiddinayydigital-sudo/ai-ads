@@ -1,6 +1,6 @@
 ---
 name: audience
-description: "Meta audience architecture: TOF/MOF/BOF layers, 6-status interest verification, overlap, saturation, lookalike, retargeting. Use for 'auditoriya', 'interest', 'detailed targeting', 'lookalike', аудитория, таргетинг."
+description: "Meta auditoriya arxitekturasi: TOF/MOF/BOF qatlamlari, 6 statusli qiziqish tekshiruvi, overlap, to'yinish, lookalike, retargeting. Quyidagilar uchun ishlating: 'auditoriya', 'interest', 'detailed targeting', 'lookalike', аудитория, таргетинг."
 triggers:
 - "detalniy targeting"
 - "detailed targeting"
@@ -37,7 +37,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # audience
 
-Meta audience architecture: TOF/MOF/BOF layers, 6-status interest verification, overlap, saturation, lookalike, retargeting. Use for 'auditoriya', 'interest', 'detailed targeting', 'lookalike', аудитория, таргетинг.
+Meta auditoriya arxitekturasi: TOF/MOF/BOF qatlamlari, 6 statusli qiziqish tekshiruvi, overlap, to'yinish, lookalike, retargeting. Quyidagilar uchun ishlating: 'auditoriya', 'interest', 'detailed targeting', 'lookalike', аудитория, таргетинг.
 
 ## Qoidalar
 Interest faqat `meta-targeting-engine.py` 6-statusli tekshiruvdan o'tgach tavsiya qilinadi; overlap < 20%.
@@ -48,6 +48,6 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads-meta-audience` | `skills/audience/references/ads-meta-audience.md` | Design, audit, and optimize Meta Ads audience architecture for Andromeda 2 and Uzbekistan/global markets — 4-layer funnel, Detailed Targeting Accuracy… |
+| `ads-meta-audience` | `skills/audience/references/ads-meta-audience.md` | Andromeda 2 va O'zbekiston/global bozorlar uchun Meta Ads auditoriya arxitekturasini loyihalash, audit qilish va optimallashtirish — 4 qatlamli voronka, Detailed Targeting aniqligi… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

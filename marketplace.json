@@ -5,14 +5,14 @@
     "url": "https://github.com/salohiddinayydigital-sudo"
   },
   "metadata": {
-    "description": "Tyrion v8.3 — The calibrated advertising & marketing operating system for AI coding agents: 19 specialist agents, 63 platform and marketing skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 42 slash commands, 40 CLI tools, Detailed Targeting Accuracy Engine, Live Meta Graph API v26.0 Insights sync, Spend-Guard, and TyrionShield.",
+    "description": "Tyrion v8.3 — AI kodlash agentlari uchun kalibrlangan reklama va marketing operatsion tizimi: 19 ta ixtisoslashgan agent, 19 ta platforma va marketing skilli, 101 ta atomik bilim qaydi, 9 ta playbook, 6 ta kontekst rejimi, 42 ta slash buyruq, 40 ta CLI asbob, Detailed Targeting aniqlik dvigateli, jonli Meta Graph API v26.0 Insights sinxronizatsiyasi, Spend-Guard va TyrionShield.",
     "version": "8.3.1"
   },
   "plugins": [
     {
       "name": "tyrion",
       "source": "./",
-      "description": "Tyrion v8.3 — Single-Root ECC-Grade Paid Media & Targetology OS (19 agents, 19 skills, 101 wiki notes, 9 playbooks, 6 context modes, 42 slash commands, 29 tools).",
+      "description": "Tyrion v8.3 — yagona ildizli ECC darajasidagi pullik media va targetologiya OS (19 ta agent, 19 ta skill, 101 ta wiki qayd, 9 ta playbook, 6 ta kontekst rejimi, 42 ta slash buyruq, 40 ta CLI asbob).",
       "version": "8.3.1",
       "category": "marketing",
       "keywords": [

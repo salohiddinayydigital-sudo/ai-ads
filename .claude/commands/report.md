@@ -1,17 +1,17 @@
 ---
 name: report
-description: "Executive client & operator performance report generator with MER, ROAS, CPA & next-sprint action plan (Alias: /hisobot)"
+description: "MER, ROAS, CPA va keyingi sprint harakat rejasi bilan mijoz va operator uchun ijroiya hisobot generatori (Alias: /hisobot)"
 alias_of: hisobot
 ---
 
 # `/report` (Alias: `/hisobot`)
 
-Executive client & operator performance report generator with MER, ROAS, CPA & next-sprint action plan (Alias: /hisobot).
+MER, ROAS, CPA va keyingi sprint harakat rejasi bilan mijoz va operator uchun ijroiya hisobot generatori (Alias: /hisobot).
 
-## Execution Workflow
-1. Detect user language and active market pack (`markets/<market>/pack.json`, default `global`).
-2. Run the deterministic CLI tool:
+## Bajarish tartibi
+1. Foydalanuvchi tilini va faol bozor paketini aniqlang (`markets/<market>/pack.json`, standart `global`).
+2. Deterministik CLI asbobini ishga tushiring:
    ```bash
    python3 tools/client-workspace.py --help
    ```
-3. Synthesize findings in the user's language with currency-accurate metrics and source citations.
+3. Natijalarni foydalanuvchi tilida, valyutaga mos metrikalar va manba havolalari bilan umumlashtiring.

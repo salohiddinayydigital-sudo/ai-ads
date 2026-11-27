@@ -1,6 +1,6 @@
 ---
 name: tracking
-description: "Measurement: Pixel, CAPI, server-side events, dedup, UTM, GA4, attribution and Telegram bot funnels. Use for 'tracking', 'pixel', 'capi', 'utm', 'atributsiya', 'event ishlamayapti', трекинг, пиксель."
+description: "O'lchash: Pixel, CAPI, server-side eventlar, dedup, UTM, GA4, atributsiya va Telegram bot voronkalari. Quyidagilar uchun ishlating: 'tracking', 'pixel', 'capi', 'utm', 'atributsiya', 'event ishlamayapti', трекинг, пиксель."
 triggers:
 - "atributsiya"
 - "attribution"
@@ -75,7 +75,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # tracking
 
-Measurement: Pixel, CAPI, server-side events, dedup, UTM, GA4, attribution and Telegram bot funnels. Use for 'tracking', 'pixel', 'capi', 'utm', 'atributsiya', 'event ishlamayapti', трекинг, пиксель.
+O'lchash: Pixel, CAPI, server-side eventlar, dedup, UTM, GA4, atributsiya va Telegram bot voronkalari. Quyidagilar uchun ishlating: 'tracking', 'pixel', 'capi', 'utm', 'atributsiya', 'event ishlamayapti', трекинг, пиксель.
 
 ## Qoidalar
 Pixel + CAPI `event_id` bilan dedup; PII faqat SHA-256 hash; consent darvozasi.
@@ -86,8 +86,8 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads-attribution` | `skills/tracking/references/ads-attribution.md` | Audit cross-platform attribution, conversion definitions, reporting windows, GA4, AdServices and AdAttributionKit, MMPs, browser and server events, of… |
-| `ads-server-side-tracking` | `skills/tracking/references/ads-server-side-tracking.md` | Audit server-side paid-media measurement including server-side tag management, platform conversion APIs, event taxonomy, browser/server deduplication,… |
-| `analytics` | `skills/tracking/references/analytics.md` | When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google… |
+| `ads-attribution` | `skills/tracking/references/ads-attribution.md` | Platformalararo atributsiya, konversiya ta'riflari, hisobot oynalari, GA4, AdServices va AdAttributionKit, MMP'lar, brauzer va server eventlarini audit qilish… |
+| `ads-server-side-tracking` | `skills/tracking/references/ads-server-side-tracking.md` | Server-side pullik media o'lchovini audit qilish: server-side tag boshqaruvi, platforma konversiya API'lari, event taksonomiyasi, brauzer/server deduplikatsiyasi… |
+| `analytics` | `skills/tracking/references/analytics.md` | Foydalanuvchi analitika trekingi va o'lchovni sozlash, yaxshilash yoki audit qilishni xohlaganda. Shuningdek "set up tracking," "GA4," "Google… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

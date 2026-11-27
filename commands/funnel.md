@@ -1,18 +1,18 @@
 ---
 disable-model-invocation: true
 name: funnel
-description: "End-to-end conversion funnel architecture & leak diagnostics across E-Commerce, B2B SaaS, WhatsApp/Telegram/LINE & CRM (Alias: /voronka)"
+description: "E-Commerce, B2B SaaS, WhatsApp/Telegram/LINE va CRM bo'ylab boshidan oxirigacha konversiya voronkasi arxitekturasi va sizib ketish diagnostikasi (Alias: /voronka)"
 alias_of: voronka
 ---
 
 # `/funnel` (Alias: `/voronka`)
 
-End-to-end conversion funnel architecture & leak diagnostics across E-Commerce, B2B SaaS, WhatsApp/Telegram/LINE & CRM (Alias: /voronka).
+E-Commerce, B2B SaaS, WhatsApp/Telegram/LINE va CRM bo'ylab boshidan oxirigacha konversiya voronkasi arxitekturasi va sizib ketish diagnostikasi (Alias: /voronka).
 
-## Execution Workflow
-1. Detect user language and active market pack (`markets/<market>/pack.json`, default `global`).
-2. Run the deterministic CLI tool:
+## Bajarish tartibi
+1. Foydalanuvchi tilini va faol bozor paketini aniqlang (`markets/<market>/pack.json`, standart `global`).
+2. Deterministik CLI asbobini ishga tushiring:
    ```bash
    python3 tools/calculator.py --help
    ```
-3. Synthesize findings in the user's language with currency-accurate metrics and source citations.
+3. Natijalarni foydalanuvchi tilida, valyutaga mos metrikalar va manba havolalari bilan umumlashtiring.

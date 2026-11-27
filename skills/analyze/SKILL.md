@@ -1,6 +1,6 @@
 ---
 name: analyze
-description: "Analyze exports and account data via code: wasted spend, Breakdown Effect, CPA diagnosis, optimization drafts, monitoring. Use for 'eksport', 'csv tahlil', 'nega qimmat', 'optimizatsiya', анализ выгрузки."
+description: "Eksport va akkaunt ma'lumotlarini kod orqali tahlil qilish: behuda sarf, Breakdown Effect, CPA diagnostikasi, optimizatsiya qoralamalari, monitoring. Quyidagilar uchun ishlating: 'eksport', 'csv tahlil', 'nega qimmat', 'optimizatsiya', анализ выгрузки."
 triggers:
 - "optimizatsiya"
 - "optimize"
@@ -50,7 +50,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # analyze
 
-Analyze exports and account data via code: wasted spend, Breakdown Effect, CPA diagnosis, optimization drafts, monitoring. Use for 'eksport', 'csv tahlil', 'nega qimmat', 'optimizatsiya', анализ выгрузки.
+Eksport va akkaunt ma'lumotlarini kod orqali tahlil qilish: behuda sarf, Breakdown Effect, CPA diagnostikasi, optimizatsiya qoralamalari, monitoring. Quyidagilar uchun ishlating: 'eksport', 'csv tahlil', 'nega qimmat', 'optimizatsiya', анализ выгрузки.
 
 ## Qoidalar
 Tahlil `ad-export-analyzer.py` / `--metrics metrics.v1` orqali; Breakdown Effect hukmdan oldin tekshiriladi.
@@ -61,7 +61,7 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads-optimize` | `skills/analyze/references/ads-optimize.md` | Diagnose and draft or explicitly apply paid-ad optimizations using evidence, financial constraints, experiments, and capability-gated adapters. Use fo… |
-| `ads-monitor` | `skills/analyze/references/ads-monitor.md` | Monitor paid-ad account pacing, delivery, performance, creative fatigue, tracking, policy, and data quality across supported platforms. Use for daily … |
+| `ads-optimize` | `skills/analyze/references/ads-optimize.md` | Dalillar, moliyaviy cheklovlar, eksperimentlar va imkoniyat bilan cheklangan adapterlar asosida pullik reklama optimizatsiyalarini diagnostika qilish hamda qoralama qilish yoki aniq qo'llash… |
+| `ads-monitor` | `skills/analyze/references/ads-monitor.md` | Qo'llab-quvvatlanadigan platformalarda pullik reklama akkaunti pacing, yetkazib berish, natija, kreativ charchoq, treking, policy va ma'lumot sifatini kuzatish. Kunlik… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

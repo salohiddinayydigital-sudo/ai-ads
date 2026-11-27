@@ -1,30 +1,30 @@
-# Security Policy & Spend-Guard Architecture (`SECURITY.md`)
+# Xavfsizlik siyosati va Spend-Guard arxitekturasi (`SECURITY.md`)
 
-## 1. Supported Versions & Inventory
+## 1. Qo'llab-quvvatlanadigan versiyalar va inventar
 
-| Version | Status | Architecture Inventory |
+| Versiya | Holat | Arxitektura inventari |
 |---|---|---|
-| **8.3.x** | Supported (Current Global Release) | **19 agents**, **19 skills**, **42 slash commands**, **40 CLI tools**, 100 wiki notes |
-| **5.0.x** | Maintenance | Single-Root ECC (Uzbekistan default) |
+| **8.3.x** | Qo'llab-quvvatlanadi (joriy global reliz) | **19 ta agent**, **19 ta skill**, **42 ta slash buyruq**, **40 ta CLI asbob**, 101 ta wiki qayd |
+| **5.0.x** | Texnik xizmat | Yagona ildizli ECC (O'zbekiston standarti) |
 
-## 2. Reporting a Vulnerability
+## 2. Zaiflik haqida xabar berish
 
-If you discover a security vulnerability, prompt injection vector, or credential leak risk:
+Agar xavfsizlik zaifligi, prompt injection yo'li yoki credential sizib chiqish xavfini topsangiz:
 - **GitHub Security Advisories:** [https://github.com/salohiddinayydigital-sudo/ai-ads/security/advisories](https://github.com/salohiddinayydigital-sudo/ai-ads/security/advisories)
-- **Repository Maintainer:** [@salohiddinayydigital-sudo](https://github.com/salohiddinayydigital-sudo)
-- Do **not** open a public issue containing live tokens, ad account IDs, or exploit payloads.
+- **Repozitoriy maintaineri:** [@salohiddinayydigital-sudo](https://github.com/salohiddinayydigital-sudo)
+- Jonli tokenlar, reklama akkaunt ID'lari yoki exploit payload'lari bor **ochiq issue ochmang**.
 
-## 3. Spend-Guard & Ad Account Mutation Safety (6 Mandatory Gates)
+## 3. Spend-Guard va reklama hisobini o'zgartirish xavfsizligi (6 majburiy darvoza)
 
-Tyrion enforces strict read-only default operation. Any action that mutates a live ad account (budget change, pausing campaigns, bid modification) is blocked by `tools/spend-guard.py` and the Universal Auto-Router until all 6 gates pass:
-1. **Preview Diff (`1_preview_diff`)**
-2. **Explicit Human Approval (`2_human_approval` / `--approved`)**
-3. **Budget Velocity Limit (`3_budget_velocity_le_20pct` — max +20% per 48–72h)**
-4. **Hard Daily Ceiling (`4_max_daily_cap`)**
-5. **Automated Stop-Loss Rule (`5_stop_loss_rule`)**
-6. **Instant Rollback Plan (`6_rollback_plan`)**
+Tyrion qat'iy "faqat o'qish" rejimida ishlaydi. Jonli reklama hisobini o'zgartiradigan har qanday amal (byudjetni o'zgartirish, kampaniyani pauza qilish, bid o'zgartirish) 6 ta darvozaning hammasi o'tmaguncha `tools/spend-guard.py` va Universal Auto-Router tomonidan bloklanadi:
+1. **Oldindan ko'rish farqi (`1_preview_diff`)**
+2. **Inson tomonidan aniq tasdiq (`2_human_approval` / `--approved`)**
+3. **Byudjet tezligi chegarasi (`3_budget_velocity_le_20pct` — 48–72 soatda ko'pi bilan +20%)**
+4. **Qat'iy kunlik shift (`4_max_daily_cap`)**
+5. **Avtomatik stop-loss qoidasi (`5_stop_loss_rule`)**
+6. **Zudlik bilan rollback rejasi (`6_rollback_plan`)**
 
-## 4. Privacy, Consent Gate & PII Protection
+## 4. Maxfiylik, rozilik darvozasi va PII himoyasi
 
-- **CAPI Consent Gate (`tools/capi-utm-builder.py`):** When `--no-consent` (`consent_granted=False`) is passed, Tyrion strips all PII (`ph`, `em`, `fn`, `ct`, `fbp`, `fbc`) before hashing or transmission (`BLOCKED_PII_NO_CONSENT`), enforces Google Consent Mode v2 (`denied`), and enables Meta Limited Data Use (`data_processing_options=['LDU']`).
-- **Secret Redaction (`tools/tyrion_core.py` & `tools/tyrion-shield.py`):** Automatically scans and masks Meta (`EAA...`), OpenAI (`sk-...`), Anthropic (`sk-ant-...`), Google (`AIza...`), Telegram, and GitHub tokens.
+- **CAPI rozilik darvozasi (`tools/capi-utm-builder.py`):** `--no-consent` (`consent_granted=False`) berilganda Tyrion hash qilish yoki uzatishdan oldin barcha PII'ni (`ph`, `em`, `fn`, `ct`, `fbp`, `fbc`) olib tashlaydi (`BLOCKED_PII_NO_CONSENT`), Google Consent Mode v2 (`denied`) ni majburiy qiladi va Meta Limited Data Use (`data_processing_options=['LDU']`) ni yoqadi.
+- **Sirlarni yashirish (`tools/tyrion_core.py` va `tools/tyrion-shield.py`):** Meta (`EAA...`), OpenAI (`sk-...`), Anthropic (`sk-ant-...`), Google (`AIza...`), Telegram va GitHub tokenlarini avtomatik skanerlaydi va maskalaydi.

@@ -1,6 +1,6 @@
 ---
 name: client
-description: "Client workspace and state: onboarding, brief, unit economics, tracking and mutation guardrails, decisions. Use for 'mijoz', 'yangi mijoz', 'onboarding', 'brief', 'client state', новый клиент."
+description: "Mijoz ish maydoni va holati: onboarding, brif, unit-iqtisodiyot, treking va o'zgartirish himoya chegaralari, qarorlar. Quyidagilar uchun ishlating: 'mijoz', 'yangi mijoz', 'onboarding', 'brief', 'client state', новый клиент."
 triggers:
 - "akkaunt sozlash"
 - "account setup"
@@ -38,7 +38,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # client
 
-Client workspace and state: onboarding, brief, unit economics, tracking and mutation guardrails, decisions. Use for 'mijoz', 'yangi mijoz', 'onboarding', 'brief', 'client state', новый клиент.
+Mijoz ish maydoni va holati: onboarding, brif, unit-iqtisodiyot, treking va o'zgartirish himoya chegaralari, qarorlar. Quyidagilar uchun ishlating: 'mijoz', 'yangi mijoz', 'onboarding', 'brief', 'client state', новый клиент.
 
 ## Qoidalar
 Mijoz holati `clients/<slug>/state.json` da; sir va PII commit qilinmaydi.
@@ -49,6 +49,6 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads-setup` | `skills/client/references/ads-setup.md` | Set up a paid-media client, brand, account, data-source, privacy, and mutation-guardrail profile for Claude Ads. Use for onboarding, initial configura… |
+| `ads-setup` | `skills/client/references/ads-setup.md` | Claude Ads uchun pullik media mijozi, brend, akkaunt, ma'lumot manbasi, maxfiylik va o'zgartirish himoya profilini sozlash. Onboarding, dastlabki konfiguratsiya… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

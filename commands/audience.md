@@ -1,18 +1,18 @@
 ---
 name: audience
-description: "Meta Ads & multi-platform audience architecture, 6-status live interest discovery, verification, 5-factor relevance ranking, overlap & saturation analysis (Alias: /auditoriya)"
+description: "Meta Ads va ko'p platformali auditoriya arxitekturasi, 6 statusli jonli qiziqish qidiruvi, tekshiruv, 5 omilli relevantlik reytingi, overlap va to'yinish tahlili (Alias: /auditoriya)"
 alias_of: auditoriya
-argument-hint: "<product/service> [--niche ecom|edu|real-estate|medical|b2b|beauty|auto|local] [--account-id act_...]"
+argument-hint: "<mahsulot/xizmat> [--niche ecom|edu|real-estate|medical|b2b|beauty|auto|local] [--account-id act_...]"
 ---
 
-# `/audience` (Alias: `/auditoriya`) — Live Meta Detailed Targeting & 4-Layer Audience Architect
+# `/audience` (Alias: `/auditoriya`) — Jonli Meta Detailed Targeting va 4 qatlamli auditoriya arxitektori
 
-Task: **$ARGUMENTS**
+Vazifa: **$ARGUMENTS**
 
-## Mandatory Live Execution Workflow (Never Stop at `--help` or Static Taxonomy!)
+## Majburiy jonli bajarish tartibi (hech qachon `--help` yoki statik taksonomiyada to'xtamang!)
 
-1. **Step 1 — Discover, Verify & Rank Detailed Targeting Interests (`tools/meta-targeting-engine.py`):**
-   Always execute the live Detailed Targeting engine first using the business context (product/service, problem solved, customer profile, purchase intent, complementary categories, market country, and campaign objective):
+1. **1-qadam — Detailed Targeting qiziqishlarini topish, tekshirish va reytinglash (`tools/meta-targeting-engine.py`):**
+   Avval doim jonli Detailed Targeting dvigatelini biznes konteksti bilan ishga tushiring (mahsulot/xizmat, hal qilinadigan muammo, mijoz profili, xarid niyati, qo'shimcha kategoriyalar, bozor mamlakati va kampaniya maqsadi):
    ```bash
    python3 tools/meta-targeting-engine.py search \
      --product "<product_or_service>" \
@@ -26,10 +26,10 @@ Task: **$ARGUMENTS**
      --account-id <act_id_if_available> \
      --max-queries 12
    ```
-   - When `META_ACCESS_TOKEN` is set, this performs read-only live queries against `GET /{api_version}/act_{id}/targetingsearch` (or global `/search?type=adinterest`) and validates candidates via `GET /{api_version}/act_{id}/targetingvalidation`.
-   - When credentials are missing or fail (`API_UNAVAILABLE`), report the exact failure category (`MISSING_TOKEN`, `AUTH_401`, `PERMISSION_403`, `RATE_LIMIT_429`, etc.) and next diagnostic step while keeping `verified_targeting_options` empty (`[]`). Never present `RELATED_UNVERIFIED` ideas as confirmed Meta interests!
+   - `META_ACCESS_TOKEN` o'rnatilgan bo'lsa, u `GET /{api_version}/act_{id}/targetingsearch` (yoki global `/search?type=adinterest`) bo'yicha faqat o'qish uchun jonli so'rovlar bajaradi va nomzodlarni `GET /{api_version}/act_{id}/targetingvalidation` orqali tekshiradi.
+   - Kirish ma'lumotlari yo'q yoki xato bo'lsa (`API_UNAVAILABLE`), aniq xato toifasini (`MISSING_TOKEN`, `AUTH_401`, `PERMISSION_403`, `RATE_LIMIT_429` va h.k.) hamda keyingi diagnostika qadamini ko'rsating, `verified_targeting_options` bo'sh qoladi (`[]`). `RELATED_UNVERIFIED` g'oyalarini hech qachon tasdiqlangan Meta qiziqishi sifatida ko'rsatmang!
 
-2. **Step 2 — Build the 4-Layer Audience Architecture & Exclusion Matrix (`tools/meta-audience.py`):**
+2. **2-qadam — 4 qatlamli auditoriya arxitekturasi va exclusion matritsasini qurish (`tools/meta-audience.py`):**
    ```bash
    python3 tools/meta-audience.py architect \
      --niche <niche> \
@@ -40,12 +40,12 @@ Task: **$ARGUMENTS**
      --has-pixel --has-crm
    ```
 
-3. **Step 3 — Present the 8-Part Targetologist Report:**
-   1. **Business & Audience Understanding** (offer, problem solved, customer intent, market, objective).
-   2. **Relevant Verified Interests, Ranked by Relevance** (`VERIFIED_AVAILABLE` first, then `FOUND_NOT_VALIDATED`, sorted by the 5-factor `relevance_score`, clearly labeled as Tyrion's estimate rather than a Meta score).
-   3. **Validation Status & Official Meta IDs** (exact Meta `name`, `id`, `type`, `path`, `source_endpoint`, and `matched_queries` preserved verbatim; if only 2 relevant verified interests exist, return 2 — never invent extra interests).
-   4. **Why Each Interest Fits the Offer** (`relevance_reason` & 5-factor breakdown).
-   5. **Closely Related Alternatives, Clearly Separated by Verification Status** (`FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED` with replacement IDs, `excluded_low_relevance_options`, and `RELATED_UNVERIFIED` offline hypotheses).
-   6. **Suggested Test Groups with Reason for Grouping** (`Group A: Core Product & Direct Intent`, `Group B: Problem & Complementary Context`, `Group C: Buyer Behavior / Solventnost Hypothesis` — 2–5 thematic options per group instead of stacking 15+ unrelated interests).
-   7. **Broad-Targeting Alternatives Where Appropriate** (when Andromeda Broad `Geo + Age + Creative Hook` beats Detailed Targeting vs when Detailed Targeting test groups are warranted).
-   8. **Missing Inputs, API Limitations & Next Steps**.
+3. **3-qadam — 8 qismli targetolog hisobotini taqdim eting:**
+   1. **Biznes va auditoriyani tushunish** (taklif, hal qilinadigan muammo, mijoz niyati, bozor, maqsad).
+   2. **Relevantlik bo'yicha reytinglangan tasdiqlangan qiziqishlar** (avval `VERIFIED_AVAILABLE`, so'ng `FOUND_NOT_VALIDATED`, 5 omilli `relevance_score` bo'yicha saralangan, Meta balli emas, Tyrion baholashi ekani aniq belgilangan).
+   3. **Tekshiruv holati va rasmiy Meta ID'lar** (Meta'ning aniq `name`, `id`, `type`, `path`, `source_endpoint` va `matched_queries` qiymatlari o'zgarishsiz saqlanadi; agar faqat 2 ta tegishli tasdiqlangan qiziqish bo'lsa, 2 tasini qaytaring — qo'shimcha qiziqishlarni hech qachon to'qimang).
+   4. **Har bir qiziqish taklifga nega mos** (`relevance_reason` va 5 omilli taqsimot).
+   5. **Yaqin muqobillar, tekshiruv holati bo'yicha aniq ajratilgan** (`FOUND_NOT_VALIDATED`, almashtiruvchi ID'lar bilan `UNAVAILABLE_OR_CONSOLIDATED`, `excluded_low_relevance_options` va oflayn gipoteza bo'lgan `RELATED_UNVERIFIED`).
+   6. **Taklif etilgan test guruhlari va guruhlash sababi** (`Group A: Core Product & Direct Intent`, `Group B: Problem & Complementary Context`, `Group C: Buyer Behavior / Solventnost Hypothesis` — 15+ bir-biriga aloqasiz qiziqishni yig'ish o'rniga har guruhda 2–5 ta mavzuviy variant).
+   7. **Mos joyda Broad-targeting muqobillari** (Andromeda Broad `Geo + Age + Creative Hook` qachon Detailed Targeting'dan ustun, qachon Detailed Targeting test guruhlari o'rinli).
+   8. **Yetishmayotgan ma'lumotlar, API cheklovlari va keyingi qadamlar**.

@@ -1,22 +1,22 @@
 ---
 disable-model-invocation: true
 name: motion-script
-description: "Motion video script, scene-by-scene storyboard and design brief (no editing) (Alias: /motion-ssenariy)"
+description: "Motion video ssenariysi, sahnama-sahna storyboard va dizayn brifi (montajsiz) (Alias: /motion-ssenariy)"
 alias_of: motion-ssenariy
-argument-hint: "<product/idea> [kinetic|ui|explainer|data|bumper] [15|30|45|60]"
+argument-hint: "<mahsulot/g'oya> [kinetic|ui|explainer|data|bumper] [15|30|45|60]"
 ---
 
 # `/motion-script` (Alias: `/motion-ssenariy`)
 
-Task: **$ARGUMENTS**
+Vazifa: **$ARGUMENTS**
 
-Same workflow as `/motion-ssenariy` (canonical, Uzbek): Motion video script, scene-by-scene storyboard and design brief (no editing). Reply in the user's language. Pre-production only: no editing/rendering pipeline changes.
+`/motion-ssenariy` bilan bir xil jarayon (kanonik, o'zbekcha): Motion video ssenariysi, sahnama-sahna storyboard va dizayn brifi (montajsiz). Foydalanuvchi tilida javob bering. Faqat pre-production: montaj/render qatlamiga tegmaydi.
 
-## Execution Workflow
-1. Detect user language (uz Latin/Cyrillic, ru, en) and market (`markets/<market>/pack.json`, default `global`). Ask only what is missing: product/offer, audience, goal, verified proof (never invent statistics, reviews, prices — use `[ADD VERIFIED ...]`).
-2. Load `skills/video/SKILL.md` Intent Router and read only the matching reference.
-3. Run the deterministic skeleton:
+## Bajarish tartibi
+1. Foydalanuvchi tilini (uz lotin/kirill, ru, en) va bozorni (`markets/<market>/pack.json`, standart `global`) aniqlang. Faqat yetishmayotganini so'rang: mahsulot/taklif, auditoriya, maqsad, tasdiqlangan dalil (statistika, sharh yoki narxni hech qachon to'qimang — `[ADD VERIFIED ...]` dan foydalaning).
+2. `skills/video/SKILL.md` dagi Intent Router'ni yuklang va faqat mos referenceni o'qing.
+3. Deterministik skeletni ishga tushiring:
    ```bash
    python3 tools/creative-matrix.py video-script --mode motion --lang <uz|ru|en> --duration 30 --niche <niche> --product "<product>" --json
    ```
-4. Fill the skeleton with the user's real data; self-audit with `skills/video/references/script-quality-rubric.md` (>= 85/100) before delivering.
+4. Skeletni foydalanuvchining haqiqiy ma'lumotlari bilan to'ldiring; topshirishdan oldin `skills/video/references/script-quality-rubric.md` bo'yicha o'zingizni baholang (>= 85/100).

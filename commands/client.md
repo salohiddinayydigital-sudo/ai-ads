@@ -1,17 +1,17 @@
 ---
 name: client
-description: "Client workspace onboarding & 5-file campaign scaffolding (brief, unit economics, audience, creative, tracking) (Alias: /mijoz)"
+description: "Mijoz ish maydonini ochish va 5 faylli kampaniya skeleti (brif, unit-iqtisodiyot, auditoriya, kreativ, treking) (Alias: /mijoz)"
 alias_of: mijoz
 ---
 
 # `/client` (Alias: `/mijoz`)
 
-Client workspace onboarding & 5-file campaign scaffolding (brief, unit economics, audience, creative, tracking) (Alias: /mijoz).
+Mijoz ish maydonini ochish va 5 faylli kampaniya skeleti (brif, unit-iqtisodiyot, auditoriya, kreativ, treking) (Alias: /mijoz).
 
-## Execution Workflow
-1. Detect user language and active market pack (`markets/<market>/pack.json`, default `global`).
-2. Run the deterministic CLI tool:
+## Bajarish tartibi
+1. Foydalanuvchi tilini va faol bozor paketini aniqlang (`markets/<market>/pack.json`, standart `global`).
+2. Deterministik CLI asbobini ishga tushiring:
    ```bash
    python3 tools/client-workspace.py --help
    ```
-3. Synthesize findings in the user's language with currency-accurate metrics and source citations.
+3. Natijalarni foydalanuvchi tilida, valyutaga mos metrikalar va manba havolalari bilan umumlashtiring.

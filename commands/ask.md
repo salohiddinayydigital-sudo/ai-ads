@@ -1,19 +1,19 @@
 ---
 disable-model-invocation: true
 name: ask
-description: "Universal natural-language paid media & targetology routing query across all agents, skills & wiki notes (Alias: /savol)"
+description: "Barcha agent, skill va wiki qaydlari bo'ylab oddiy tildagi universal pullik media va targetologiya marshrutlash so'rovi (Alias: /savol)"
 alias_of: savol
 ---
 
 # `/ask` (Alias: `/savol`)
 
-Universal natural-language paid media & targetology routing query across all agents, skills & wiki notes (Alias: /savol).
+Barcha agent, skill va wiki qaydlari bo'ylab oddiy tildagi universal pullik media va targetologiya marshrutlash so'rovi (Alias: /savol).
 
-## Execution Workflow
-1. Detect user language and active market pack (`markets/<market>/pack.json`, default `global`).
-2. Route with the single canonical system (the `tyrion` skill owns execution; do not pick agents or skills manually):
+## Bajarish tartibi
+1. Foydalanuvchi tilini va faol bozor paketini aniqlang (`markets/<market>/pack.json`, standart `global`).
+2. Yagona kanonik tizim bilan marshrutlang (bajarishni `tyrion` skilli boshqaradi; agent yoki skillni qo'lda tanlamang):
    ```bash
    python3 tools/skill-search.py route "$ARGUMENTS" --context-mode manifest --json
    ```
-   Then follow `skills/tyrion/references/conductor-v7.md` (read selected skills in full, delegate or run the labelled fallback, validate, synthesize).
-3. Synthesize findings in the user's language with currency-accurate metrics and source citations.
+   So'ng `skills/tyrion/references/conductor-v7.md` ga amal qiling (tanlangan skilllarni to'liq o'qing, delegatsiya qiling yoki belgilangan zaxira rejimini ishga tushiring, tekshiring, umumlashtiring).
+3. Xulosalarni foydalanuvchi tilida, valyutaga mos metrikalar va manba havolalari bilan umumlashtiring.

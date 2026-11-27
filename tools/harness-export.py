@@ -44,15 +44,15 @@ def strip_fm(text: str) -> tuple[str, str]:
     return desc, text[m.end():]
 
 
-ENTRY_RULE = """# TYRION ENTRY POINT (single conductor, no sub-agents in this harness)
+ENTRY_RULE = """# TYRION KIRISH NUQTASI (yagona dirijyor, bu harness'da sub-agentlar yo'q)
 
-Treat every marketing, advertising, targeting, creative, video-script, tracking, budget or client-strategy request in plain language (Uzbek, Russian or English) as a task for the Tyrion conductor. The user never picks agents, skills or tools.
+Oddiy tilda (o'zbek, rus yoki ingliz) kelgan har bir marketing, reklama, targeting, kreativ, video-ssenariy, treking, byudjet yoki mijoz strategiyasi so'rovini Tyrion dirijyori vazifasi deb qabul qiling. Foydalanuvchi hech qachon agent, skill yoki asbob tanlamaydi.
 
-1. Route once: call the MCP tool `tyrion_universal_router` with `query` = the user's request and `context_mode: "manifest"` (or run `python3 tools/skill-search.py route "<request>" --context-mode manifest --json`).
-2. Read `skills/tyrion/references/conductor-v7.md` and follow its protocol. Read in full every skill, charter and reference you will rely on (see `loaded_context.read_in_full_before_claiming` and `execution_plan`); never say a skill was applied if you only saw its name.
-3. This harness has no native sub-agents: run each stage of `execution_plan` yourself, in dependency order, by reading the stage agent's charter in `agents/<name>.md` and its skills, and label it `executed_by: conductor_as_<agent>` (single_conductor_fallback). Never claim an agent was spawned.
-4. Use deterministic tools from `tools/` (run `<tool> --help` first) for calculations, Meta targeting verification, audience architecture, creative matrices and export analysis.
-5. Validate every stage output (sources labelled, no invented stats/interests/testimonials, no guaranteed results), then deliver one synthesized document. Never change a live ad account; plans only.
+1. Bir marta marshrutlang: MCP `tyrion_universal_router` asbobini `query` = foydalanuvchi so'rovi va `context_mode: "manifest"` bilan chaqiring (yoki `python3 tools/skill-search.py route "<so'rov>" --context-mode manifest --json` ni ishga tushiring).
+2. `skills/tyrion/references/conductor-v7.md` ni o'qing va uning protokoliga amal qiling. Tayanadigan har bir skill, charter va referenceni to'liq o'qing (`loaded_context.read_in_full_before_claiming` va `execution_plan` ga qarang); faqat nomini ko'rgan bo'lsangiz, skill qo'llandi deb hech qachon aytmang.
+3. Bu harness'da native sub-agentlar yo'q: `execution_plan` ning har bir bosqichini o'zingiz, bog'liqlik tartibida bajaring — `agents/<name>.md` dagi bosqich agenti charteri va uning skilllarini o'qib, `executed_by: conductor_as_<agent>` (single_conductor_fallback) deb belgilang. Agent ishga tushirildi deb hech qachon da'vo qilmang.
+4. Hisob-kitoblar, Meta targeting tekshiruvi, auditoriya arxitekturasi, kreativ matritsalar va eksport tahlili uchun `tools/` dagi deterministik asboblardan foydalaning (avval `<tool> --help` ni ishga tushiring).
+5. Har bir bosqich natijasini tekshiring (manbalar belgilangan, to'qima statistika/qiziqish/sharh yo'q, kafolatlangan natija yo'q), so'ng bitta umumlashtirilgan hujjat topshiring. Jonli reklama hisobini hech qachon o'zgartirmang; faqat rejalar.
 """
 
 
@@ -65,7 +65,7 @@ def export_cursor(out_root: Path, dry_run: bool) -> list[str]:
     written.append(entry_dst.relative_to(out_root).as_posix())
     if not dry_run:
         entry_dst.write_text(
-            f"---\ndescription: Tyrion entry point: route marketing requests through the tyrion conductor skill\nglobs: *\nalwaysApply: true\n---\n\n{ENTRY_RULE}",
+            f"---\ndescription: Tyrion kirish nuqtasi: marketing so'rovlarini tyrion dirijyor skilli orqali marshrutlash\nglobs: *\nalwaysApply: true\n---\n\n{ENTRY_RULE}",
             encoding="utf-8",
         )
     for rule_md in sorted((VAULT / "rules").glob("[0-9]*.md")):

@@ -1,6 +1,6 @@
 ---
 name: creative
-description: "Ad creative and copy: angles, hooks, 3x3 matrix, primary text, brand DNA, image briefs, edit and style rules (UZ/RU/EN). Use for 'kreativ', 'reklama matni', 'hook', 'copy', креатив, текст объявления."
+description: "Reklama kreativi va matni: angle'lar, hooklar, 3x3 matritsa, asosiy matn, brend DNK, tasvir brifleri, tahrir va uslub qoidalari (UZ/RU/EN). Quyidagilar uchun ishlating: 'kreativ', 'reklama matni', 'hook', 'copy', креатив, текст объявления."
 triggers:
 - "ad-creative"
 - "ad creative"
@@ -171,7 +171,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # creative
 
-Ad creative and copy: angles, hooks, 3x3 matrix, primary text, brand DNA, image briefs, edit and style rules (UZ/RU/EN). Use for 'kreativ', 'reklama matni', 'hook', 'copy', креатив, текст объявления.
+Reklama kreativi va matni: angle'lar, hooklar, 3x3 matritsa, asosiy matn, brend DNK, tasvir brifleri, tahrir va uslub qoidalari (UZ/RU/EN). Quyidagilar uchun ishlating: 'kreativ', 'reklama matni', 'hook', 'copy', креатив, текст объявления.
 
 ## Qoidalar
 Raqam, benchmark yoki testimonial to'qilmaydi; matn har tilda alohida yoziladi (tarjima emas).
@@ -182,14 +182,14 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ad-creative` | `skills/creative/references/ad-creative.md` | Generate, iterate, and scale high-converting ad creative and video ad scripts across Meta, TikTok, YouTube, Google Ads (RSA), LinkedIn, and Telegram. … |
-| `ads-creative` | `skills/creative/references/ads-creative.md` | Audit paid-ad copy, images, video, hooks, concepts, format coverage, platform-native fit, message match, creative fatigue, accessibility, and policy a… |
-| `ads-create` | `skills/creative/references/ads-create.md` | Create source-grounded paid-ad campaign concepts, messaging, copy, creative briefs, and production plans from a validated brand profile, campaign obje… |
-| `ads-generate` | `skills/creative/references/ads-generate.md` | Generate paid-ad image assets from a validated creative brief and brand profile using an explicitly configured image provider. Triggers on: generate a… |
-| `ads-photoshoot` | `skills/creative/references/ads-photoshoot.md` | Generate rights-cleared paid-ad product photography variants from an authorized source image and validated brand profile. Triggers on: product photo, … |
-| `copywriting` | `skills/creative/references/copywriting.md` | When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about… |
-| `copy-editing` | `skills/creative/references/copy-editing.md` | When the user wants to edit, review, or improve existing marketing copy, or refresh outdated content. Also use when the user mentions 'edit this copy,… |
-| `writing-guidelines` | `skills/creative/references/writing-guidelines.md` | Review docs/prose for Writing Guidelines compliance. Use when asked to "review my docs", "check writing style", "audit prose", "review docs voice and … |
-| `ads-dna` | `skills/creative/references/ads-dna.md` | Extract a public-safe brand and offer profile for paid advertising from an authorized website and operator input. Triggers on: brand DNA, brand profil… |
+| `ad-creative` | `skills/creative/references/ad-creative.md` | Meta, TikTok, YouTube, Google Ads (RSA), LinkedIn va Telegram bo'yicha yuqori konversiyali reklama kreativi va video reklama ssenariylarini yaratish, iteratsiya qilish va masshtablash. … |
+| `ads-creative` | `skills/creative/references/ads-creative.md` | Pullik reklama matni, tasvirlar, video, hooklar, konseptlar, format qamrovi, platformaga xos mosligi, xabar mosligi, kreativ charchoq, qulaylik va policy'ni audit qilish… |
+| `ads-create` | `skills/creative/references/ads-create.md` | Tasdiqlangan brend profili, kampaniya maqsadi asosida manbaga tayangan pullik reklama kampaniya konseptlari, xabarlar, matn, kreativ brifler va ishlab chiqarish rejalarini yaratish… |
+| `ads-generate` | `skills/creative/references/ads-generate.md` | Tasdiqlangan kreativ brif va brend profilidan aniq sozlangan tasvir provayderi yordamida pullik reklama tasvir aktivlarini yaratish. Triggerlar: generate a… |
+| `ads-photoshoot` | `skills/creative/references/ads-photoshoot.md` | Vakolatli manba tasviri va tasdiqlangan brend profilidan huquqlari tozalangan pullik reklama mahsulot fotosuratlari variantlarini yaratish. Triggerlar: product photo, … |
+| `copywriting` | `skills/creative/references/copywriting.md` | Foydalanuvchi har qanday sahifa uchun marketing matnini yozish, qayta yozish yoki yaxshilashni xohlaganda — bosh sahifa, landing, narx sahifalari, funksiya sahifalari, about… |
+| `copy-editing` | `skills/creative/references/copy-editing.md` | Foydalanuvchi mavjud marketing matnini tahrirlash, ko'rib chiqish yoki yaxshilashni, yoki eskirgan kontentni yangilashni xohlaganda. Shuningdek 'edit this copy,… eslatilganda ishlating. |
+| `writing-guidelines` | `skills/creative/references/writing-guidelines.md` | Hujjat/matnni Writing Guidelines ga muvofiqligi bo'yicha ko'rib chiqish. "review my docs", "check writing style", "audit prose", "review docs voice and … so'ralganda ishlating. |
+| `ads-dna` | `skills/creative/references/ads-dna.md` | Vakolatli veb-sayt va operator kiritgan ma'lumotdan pullik reklama uchun ommaviy xavfsiz brend va taklif profilini ajratib olish. Triggerlar: brand DNA, brand profil… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

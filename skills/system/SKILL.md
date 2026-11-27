@@ -1,6 +1,6 @@
 ---
 name: system
-description: "Tyrion maintenance: doctor, shield, learn, SOP lookup, release validation, skill checks. Use for 'doctor', 'shield', 'learn', 'sop', 'tizim holati', 'validate', проверка системы."
+description: "Tyrion texnik xizmati: doctor, shield, learn, SOP qidiruvi, reliz validatsiyasi, skill tekshiruvlari. Quyidagilar uchun ishlating: 'doctor', 'shield', 'learn', 'sop', 'tizim holati', 'validate', проверка системы."
 triggers:
 - "policy tekshiruvi"
 - "reklama qoidalari"
@@ -35,7 +35,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # system
 
-Tyrion maintenance: doctor, shield, learn, SOP lookup, release validation, skill checks. Use for 'doctor', 'shield', 'learn', 'sop', 'tizim holati', 'validate', проверка системы.
+Tyrion texnik xizmati: doctor, shield, learn, SOP qidiruvi, reliz validatsiyasi, skill tekshiruvlari. Quyidagilar uchun ishlating: 'doctor', 'shield', 'learn', 'sop', 'tizim holati', 'validate', проверка системы.
 
 ## Qoidalar
 Testni o'chirish/kuchsizlantirish taqiqlangan; darvoza qizil bo'lsa tuzat.
@@ -46,6 +46,6 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads-validate` | `skills/system/references/ads-validate.md` | Validate Claude Ads contracts, scoring inputs, run bundles, capabilities, source freshness, safety, installation, uninstall, or release readiness. Use… |
+| `ads-validate` | `skills/system/references/ads-validate.md` | Claude Ads kontraktlari, ball kirishlari, run bundle'lar, imkoniyatlar, manba yangiligi, xavfsizlik, o'rnatish, o'chirish yoki reliz tayyorligini tekshirish… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

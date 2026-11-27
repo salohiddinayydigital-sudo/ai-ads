@@ -1,6 +1,6 @@
 ---
 name: strategy
-description: "Paid-media strategy: plan, launch, offers, positioning, product marketing, go-to-market. Use for 'strategiya', 'launch', 'offer', 'pozitsiyalash', 'reklama rejasi', стратегия, запуск, оффер, positioning."
+description: "Pullik media strategiyasi: reja, launch, takliflar, pozitsiyalash, mahsulot marketingi, go-to-market. Quyidagilar uchun ishlating: 'strategiya', 'launch', 'offer', 'pozitsiyalash', 'reklama rejasi', стратегия, запуск, оффер, positioning."
 triggers:
 - "marketing strategiya"
 - "media plan"
@@ -94,7 +94,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # strategy
 
-Paid-media strategy: plan, launch, offers, positioning, product marketing, go-to-market. Use for 'strategiya', 'launch', 'offer', 'pozitsiyalash', 'reklama rejasi', стратегия, запуск, оффер, positioning.
+Pullik media strategiyasi: reja, launch, takliflar, pozitsiyalash, mahsulot marketingi, go-to-market. Quyidagilar uchun ishlating: 'strategiya', 'launch', 'offer', 'pozitsiyalash', 'reklama rejasi', стратегия, запуск, оффер, positioning.
 
 ## Qoidalar
 Maqsad, byudjet yoki offer noaniq bo'lsa — avval so'ra (95% qonun). Har tavsiyada dalil yorlig'i va taxminlar.
@@ -105,10 +105,10 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads-plan` | `skills/strategy/references/ads-plan.md` | Create a professional paid-advertising strategy covering objectives, economics, platform selection, campaign architecture, audiences, budget, creative… |
-| `ads-launch` | `skills/strategy/references/ads-launch.md` | Draft or explicitly apply a paid-ad campaign launch through Claude Ads capability-gated adapters. Use for campaign creation, launch plans, publishing … |
-| `launch` | `skills/strategy/references/launch.md` | When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'fe… |
-| `offers` | `skills/strategy/references/offers.md` | When the user wants to design, construct, or improve an offer — the thing they actually sell — including value framing, bonus stacking, guarantee desi… |
-| `product-marketing` | `skills/strategy/references/product-marketing.md` | When the user wants to create or update their product marketing context document. Also use when the user mentions 'product context,' 'marketing contex… |
+| `ads-plan` | `skills/strategy/references/ads-plan.md` | Maqsadlar, iqtisod, platforma tanlovi, kampaniya arxitekturasi, auditoriyalar, byudjet, kreativ… qamrab oluvchi professional pullik reklama strategiyasini tuzish… |
+| `ads-launch` | `skills/strategy/references/ads-launch.md` | Claude Ads imkoniyat bilan cheklangan adapterlari orqali pullik reklama kampaniyasini ishga tushirishni qoralama qilish yoki aniq qo'llash. Kampaniya yaratish, launch rejalari, nashr qilish uchun ishlating… |
+| `launch` | `skills/strategy/references/launch.md` | Foydalanuvchi mahsulot launch'i, funksiya e'loni yoki reliz strategiyasini rejalashtirishni xohlaganda. Shuningdek 'launch,' 'Product Hunt,' 'fe… eslatilganda ishlating. |
+| `offers` | `skills/strategy/references/offers.md` | Foydalanuvchi taklifni — aynan sotadigan narsasini — loyihalash, qurish yoki yaxshilashni xohlaganda: qiymat framing, bonus stacking, kafolat dizayni… |
+| `product-marketing` | `skills/strategy/references/product-marketing.md` | Foydalanuvchi mahsulot marketing konteksti hujjatini yaratish yoki yangilashni xohlaganda. Shuningdek 'product context,' 'marketing contex… eslatilganda ishlating. |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

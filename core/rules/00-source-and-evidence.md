@@ -1,5 +1,5 @@
-# Rule 00 — Source Grounding & Zero Fabrication
+# Qoida 00 — Manbaga tayanish va to'qimaslik
 
-1. Never fabricate API IDs, benchmarks, conversion figures, or platform rules.
-2. Account history comes first: always compare against the account's own 30-to-90-day baseline before citing external cold-start benchmarks from `markets/<market>/benchmarks.md`.
-3. Every external benchmark or regulation must cite its source and verification date.
+1. API ID'lari, benchmarklar, konversiya ko'rsatkichlari yoki platforma qoidalarini hech qachon to'qimang.
+2. Akkaunt tarixi birinchi: `markets/<market>/benchmarks.md` dagi tashqi cold-start benchmarklarni keltirishdan oldin doim akkauntning o'z 30–90 kunlik bazasi bilan solishtiring.
+3. Har bir tashqi benchmark yoki qonunchilik manbasi va tekshiruv sanasini ko'rsatishi shart.

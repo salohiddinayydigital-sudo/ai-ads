@@ -2,7 +2,7 @@
   "name": "tyrion",
   "displayName": "Tyrion",
   "version": "8.3.1",
-  "description": "Tyrion v8.3 — The Calibrated Single-Root ECC Paid Media & Targetology Operating System. 19 specialist agents, 19 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 42 slash commands, 40 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
+  "description": "Tyrion v8.3 — kalibrlangan yagona ildizli ECC pullik media va targetologiya operatsion tizimi. 19 ta ixtisoslashgan agent, 19 ta skill, 101 ta atomik bilim qaydi, 9 ta playbook, 6 ta kontekst rejimi, 42 ta slash buyruq, 40 ta deterministik CLI asbob, Universal Auto-Router, mahalliy STDIO MCP server (10 ta asbob), Detailed Targeting aniqlik dvigateli (6 statusli tekshiruv), jonli Meta Ads Graph API v26.0 Insights sinxronizatsiyasi, Breakdown Effect Studio, CAPI v26.0 quruvchi, ko'p-harness eksporter va Visual Studio.",
   "author": {
     "name": "Salohiddin",
     "url": "https://github.com/salohiddinayydigital-sudo"
@@ -39,36 +39,36 @@
   "userConfig": {
     "hooks_enabled": {
       "type": "boolean",
-      "title": "Enable Tyrion hooks",
+      "title": "Tyrion hooklarini yoqish",
       "default": true,
-      "description": "Enable Tyrion deterministic lifecycle hooks (SessionStart, PreToolUse, PostToolUse, Stop)"
+      "description": "Tyrion deterministik lifecycle hooklarini yoqish (SessionStart, PreToolUse, PostToolUse, Stop)"
     },
     "hook_profile": {
       "type": "string",
-      "title": "Hook enforcement profile",
+      "title": "Hook qo'llash profili",
       "default": "standard",
-      "description": "Hook enforcement profile (minimal=SessionStart/Stop only, standard=warn on ingest/guard, strict=block on gate violations)"
+      "description": "Hook qo'llash profili (minimal=faqat SessionStart/Stop, standard=ingest/guard'da ogohlantirish, strict=darvoza buzilganda bloklash)"
     },
     "default_market": {
       "type": "string",
-      "title": "Default market pack",
+      "title": "Standart bozor paketi",
       "default": "global",
-      "description": "Default market pack (global is market-agnostic; uz/us/eu/uk/mena/latam/sea/in load regional funnels, BNPL, currency, and regulations)"
+      "description": "Standart bozor paketi (global — bozorga bog'liq emas; uz/us/eu/uk/mena/latam/sea/in mintaqaviy voronkalar, BNPL, valyuta va qonunchilikni yuklaydi)"
     }
   },
   "suggestedPrompts": [
-    "Run an evidence-backed audit across my Meta and Google ad accounts (/audit)",
-    "Verify Meta Ads Detailed Targeting interests & account validation without hallucinations (/auditoriya)",
-    "Develop an Andromeda 2 creative strategy and 3-second hook variations (/kreativ)",
-    "Draft a 3-stage campaign launch plan (Sandbox -> Validation -> Scale) with Spend-Guard (/budget)",
-    "Audit conversion tracking, CAPI v26.0 match quality, and event deduplication (/tracking)",
-    "Extract reusable campaign lessons into Tyrion instincts (/learn)",
-    "Run a TyrionShield v8.3 static security & AST audit across the workspace (/shield)"
+    "Meta va Google reklama akkauntlarimda dalilga asoslangan audit o'tkaz (/audit)",
+    "Meta Ads Detailed Targeting qiziqishlarini va akkaunt validatsiyasini gallyutsinatsiyasiz tekshir (/auditoriya)",
+    "Andromeda 2 kreativ strategiyasi va 3 soniyalik hook variantlarini tayyorla (/kreativ)",
+    "Spend-Guard bilan 3 bosqichli kampaniya ishga tushirish rejasini tuz (Sandbox -> Validation -> Scale) (/budget)",
+    "Konversiya trekingi, CAPI v26.0 match sifati va event deduplikatsiyasini audit qil (/tracking)",
+    "Qayta ishlatiladigan kampaniya saboqlarini Tyrion instinktlariga ajratib ol (/learn)",
+    "Ish maydonida TyrionShield v8.3 statik xavfsizlik va AST auditini o'tkaz (/shield)"
   ],
   "interface": {
     "displayName": "Tyrion",
-    "shortDescription": "19 marketing agents, 19 skills, 101 wiki notes, 9 playbooks, 42 commands, 40 CLI tools & Meta Graph API v26.0 Studio.",
-    "longDescription": "Tyrion v8.3 — The Calibrated Single-Root ECC Paid Media & Targetology Operating System. 19 specialist agents, 19 skills, 100 atomic knowledge notes, 9 playbooks, 6 context modes, 42 slash commands, 40 deterministic CLI tools, Universal Auto-Router, Native STDIO MCP Server (10 tools), Detailed Targeting Accuracy Engine (6-Status Verification), Live Meta Ads Graph API v26.0 Insights Sync, Breakdown Effect Studio, CAPI v26.0 Builder, Multi-Harness Exporter, and Visual Studio.",
+    "shortDescription": "19 ta marketing agenti, 19 ta skill, 101 ta wiki qayd, 9 ta playbook, 42 ta buyruq, 40 ta CLI asbob va Meta Graph API v26.0 Studio.",
+    "longDescription": "Tyrion v8.3 — kalibrlangan yagona ildizli ECC pullik media va targetologiya operatsion tizimi. 19 ta ixtisoslashgan agent, 19 ta skill, 101 ta atomik bilim qaydi, 9 ta playbook, 6 ta kontekst rejimi, 42 ta slash buyruq, 40 ta deterministik CLI asbob, Universal Auto-Router, mahalliy STDIO MCP server (10 ta asbob), Detailed Targeting aniqlik dvigateli (6 statusli tekshiruv), jonli Meta Ads Graph API v26.0 Insights sinxronizatsiyasi, Breakdown Effect Studio, CAPI v26.0 quruvchi, ko'p-harness eksporter va Visual Studio.",
     "category": "Marketing",
     "capabilities": [
       "Interactive",
@@ -77,9 +77,9 @@
     ],
     "brandColor": "#7C3AED",
     "defaultPrompt": [
-      "Follow 00-manba: never state ad metrics or benchmarks without a verified source and explicit model assumptions.",
-      "Follow 40-xavfsizlik-va-hisob: all ad account mutations require explicit user confirmation, Spend-Guard verification, and a rollback plan.",
-      "Follow 50-topshirish-dod & 70-charter-baseline: deliverables must be actionable files in outputs/ with concrete numbers, Prompt Defense Baseline, and zero hallucinated findings."
+      "00-manba ga amal qil: reklama metrikalari yoki benchmarklarni tasdiqlangan manbasiz va aniq model taxminlarisiz hech qachon aytma.",
+      "40-xavfsizlik-va-hisob ga amal qil: reklama hisobiga har qanday o'zgartirish foydalanuvchining aniq tasdig'ini, Spend-Guard tekshiruvini va rollback rejasini talab qiladi.",
+      "50-topshirish-dod va 70-charter-baseline ga amal qil: natijalar outputs/ da aniq raqamli, Prompt Defense Baseline'li va gallyutsinatsiyasiz amaliy fayllar bo'lishi shart."
     ]
   }
 }

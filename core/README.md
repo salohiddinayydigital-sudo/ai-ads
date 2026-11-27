@@ -1,3 +1,3 @@
-# Tyrion Core (`core/`) — Market-Agnostic Paid Media Architecture
+# Tyrion Core (`core/`) — bozorga bog'liq bo'lmagan pullik media arxitekturasi
 
-`core/` houses the canonical English, market-independent rules, playbooks, and knowledge index of Tyrion. Market-specific payment gateways, BNPL providers, messaging funnels, seasonality calendars, and privacy regulations live in `markets/<market>/`.
+`core/` Tyrion'ning kanonik, bozorga bog'liq bo'lmagan qoidalari, playbooklari va bilim indeksini o'z ichiga oladi. Bozorga xos to'lov shlyuzlari, BNPL provayderlari, xabar almashish voronkalari, mavsumiylik kalendarlari va maxfiylik qoidalari `markets/<market>/` da joylashgan.

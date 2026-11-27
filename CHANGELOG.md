@@ -1,6 +1,6 @@
-# Changelog
+# O'zgarishlar jurnali (Changelog)
 
-All notable changes to **Tyrion (`ai-ads`)** are documented in this file following [Semantic Versioning](https://semver.org/).
+**Tyrion (`ai-ads`)** dagi barcha muhim o'zgarishlar shu faylda [Semantic Versioning](https://semver.org/) bo'yicha hujjatlashtirilgan.
 
 
 ## [8.3.1] — 2026-11-25
@@ -102,127 +102,78 @@ Yopiq siklli media-buyer miyasi. 7.x dan o'tish: [MIGRATION.md](MIGRATION.md).
 - Rasmiy Meta/Google/OpenAI/Telegram sahifalari bu muhitdan ochilmadi: bog'liq faktlar `unverified`/`url_cited`.
 - Router (`skill-search.py`) hajmi qisqartirilmadi (docs/v8-decisions.md D5).
 
-## [Unreleased] — Plugin readiness fixes
+## [Unreleased] — Plagin tayyorligi tuzatishlari
 
-### Fixed
-- `agents: "./agents/"` in all three plugin manifests made `claude plugin validate` fail ("must end with .md"), so agents could not load on install; field removed (the `agents/` directory is auto-discovered). Verified with a real `claude --plugin-dir` session: plugin loaded, `tyrion-core` MCP connected, 36 `tyrion:*` agents and `tyrion:tyrion-universal` registered.
-- The `prompt:route` hint was advisory and the model answered without the conductor; it is now an explicit mandatory first step. Verified in a real session: the `Skill` tool invoked `tyrion-universal`, the router and `creative-matrix.py` ran, the niche playbook was read.
-- Cursor and Windsurf exports had rules only; they now carry a generated entry rule (`tyrion-00-entry.mdc`, top of `.windsurfrules`: route via `tyrion_universal_router`, read before claiming, single-conductor fallback). The generated files are committed and a test fails if they go stale.
+### Tuzatildi
+- Uchala plagin manifestidagi `agents: "./agents/"` maydoni `claude plugin validate` ni yiqitardi ("must end with .md"), shu sabab agentlar o'rnatishda yuklanmasdi; maydon olib tashlandi (`agents/` papkasi avtomatik topiladi). Haqiqiy `claude --plugin-dir` sessiyasida tekshirildi: plagin yuklandi, `tyrion-core` MCP ulandi, 36 ta `tyrion:*` agent va `tyrion:tyrion-universal` ro'yxatdan o'tdi.
+- `prompt:route` maslahati tavsiyaviy edi va model dirijyorsiz javob berardi; endi u aniq majburiy birinchi qadam. Haqiqiy sessiyada tekshirildi: `Skill` asbobi `tyrion-universal` ni chaqirdi, router va `creative-matrix.py` ishladi, nisha playbooki o'qildi.
+- Cursor va Windsurf eksportlarida faqat qoidalar bor edi; endi ularda generatsiya qilingan kirish qoidasi bor (`tyrion-00-entry.mdc`, `.windsurfrules` tepasida: `tyrion_universal_router` orqali marshrutlash, da'vodan oldin o'qish, yagona dirijyor zaxirasi). Generatsiya qilingan fayllar commit qilingan, eskirsa test yiqiladi.
 
-### Added
-- `.claude-plugin/icon.png` (plugin directory icon requirement).
+### Qo'shildi
+- `.claude-plugin/icon.png` (plagin katalogi ikonkasi talabi).
 
-## [Unreleased-2] — Universal conductor, Meta strategy and creative intelligence
+## [Unreleased-2] — Universal dirijyor, Meta strategiyasi va kreativ razvedka
+- **Nol-ishqalanishli video reklama ssenariylari (`tools/creative-matrix.py video-script`, `skills/reels-scripting/SKILL.md`):** 7 ta S/A darajali formatda (`ugc_reaction_demo`, `founder_authority`, `no_yapping_split_screen`, `imessage_reveal`, `chatgpt_reveal`, `greenscreen_proof`, `faceless_motion_explainer`) syomkaga tayyor 9:16 ssenariylar yaratadi: 3 ta ochilish hook varianti, vaqt kodli storyboard va `720x1200` xavfsiz zona overlaylari — majburiy tashqi API kalitlarsiz (`APIFY_API_TOKEN` olib tashlandi) va dasturlashsiz.
+- **Andromeda Entity-ID va Persona-Desire-Awareness (PDA) dvigateli (`tools/creative-matrix.py pda-matrix`):** Persona x Desire x Schwartzning 5 ta xabardorlik bosqichi bo'yicha 6–9 ta vizual jihatdan farqli konsept quradi, shunda Meta Andromeda'ning computer-vision klasterlashi har biriga mustaqil retrieval chiptasi beradi.
+- **Platformada tasdiqlangan reklama matni va AI-belgi linteri (`tools/creative-matrix.py ad-copy`):** Meta (`125/40/30`), Google RSA (`30/90`), TikTok (`80/100`), LinkedIn (`150/70/100`) va Telegram (`160`) uchun belgilar soni hisoblangan matn yaratadi va AI belgilarini (*"It's not X, it's Y"*, *"Stop scrolling"*, em-dash) avtomatik olib tashlaydi.
+- **Meta 2026 besh tizimli AI stek va amaliyotchi targetolog playbooki (`tools/meta-targeting-engine.py`, `tools/meta-audience.py`, `skills/ads/references/meta-ai-stack.md`):** `GEM` (Teacher Foundation Model), `Andromeda` (Retrieval + Entity ID), `Lattice` (Unified Ranking + Sequence Learning), `UTIS` (User True Interest Survey Calibrator), `Adaptive Ranking Model` (`<100ms`), `Value Rules` (`+200%` dan `-90%` gacha bid multiplikatorlari), `GUIDED_CREATION` ASC API (`v25.0+`), Meta AI Chat Signal bo'yicha mintaqaviy GDPR istisnolari va Ads Manager'ni dasturlashsiz sozlash bo'yicha 9 bo'limli amaliyotchi qo'llanma qo'shildi.
+- **Umumiy mahsulot marketing konteksti shabloni (`templates/product-marketing.md`):** `.claude/product-marketing.md` va `.agents/product-marketing.md` bilan mos.
 
-### Added
-- **`skills/tyrion-universal`**: single conductor and default entry point (route -> read -> delegate/fallback -> validate -> synthesize) with `references/orchestration-protocol.md` and `references/workflow-recipes.md`. Not routable as a specialist; specialists never load it.
-- **`manifests/workflows.json` + `tools/tyrion_workflows.py`**: single source of truth for cross-agent routing (16 workflows as validated DAGs with parallel levels, optional stages, platform-aware audit agent, anti-recursion guards). `route_task` now returns `execution_plan`, `stage_skills_deferred`, `caller_role`, `delegation_allowed`; `--as-specialist` / `caller: "specialist"` / `agent_hint` disable delegation.
-- `UserPromptSubmit` hook `prompt:route` (stdin forwarded by `run-hook.cjs`) and a SessionStart entry-point reminder.
-- `calculator.py funnel-economics` (break-even/target CPA, CPL, ROAS, test budget, labelled scenarios, +20% scaling steps; no forecast without a user-supplied CPL).
-- `creative-matrix.py iterate` / MCP `mode: "iterate"` (funnel-stage diagnostic hypotheses from real metrics vs account baselines; what to change / keep) and `claim_safety` linter on generated creative.
-- `skills/ads-plan/references/meta-strategy-deliverable.md` (evidence rules, funnel applicability, ABO/CBO/Advantage+ decisions, 15-section client deliverable, roadmap) and `skills/reels-scripting/references/performance-video-system.md` (research, concept diversity, script package, test/diagnose/iterate).
-- `tests/test_universal_orchestration.py` (46 tests).
+## [6.0.0] — 2026-10-21 (Buzuvchi o'zgarish: global arxitektura va kross-platforma relizi)
 
-### Fixed
-- Router misrouted core requests ("Meta Ads strategiya tuz" -> read-only `audit-meta`; "Kreativlarimni yaxshilash" -> no route; "reklama natijalarini tahlil qil" -> `orch-weekly-review`).
-- Progressive router slices were reported as `full_instructions_loaded: True`; now `truncated` and excluded from `applied_skills_verified` (`read_in_full_before_claiming` lists what to read).
-- `creative-matrix.py` invented statistics ("90% of people", "14 kunda natija", "Yuzlab mijozlarimiz") and silently used a default price of 100 for the installment anchor; now placeholders + `claim_safety`, unknown price stays unknown. `meta-audience.py --help` crashed on unescaped `%`.
-- MCP `tyrion_creative_matrix` invented a price (default 100) and ignored `duration`.
+### Buzuvchi o'zgarishlar
+- **Standart bozor paketi (`default_market`):** `plugin.json` dagi standart bozor `"uz"` dan `"global"` ga o'zgartirildi. `rules/30-ozbekiston-konteksti.md` va `uzbekistan-market-intel` endi **faqat** `market=uz` yoqilgan yoki aniqlangan bo'lsa yuklanadi.
+- **Kanonik inglizcha slash buyruqlar:** Kanonik inglizcha buyruqlar (`/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`) qo'shildi, barcha o'zbekcha buyruqlar (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`) alias sifatida saqlandi.
+- **Kanonik hook konfiguratsiyasi:** Hooklar `${CLAUDE_PLUGIN_ROOT}` va `hooks/run-hook.cjs` ishlatadigan `hooks/hooks.json` ga birlashtirildi; takroriy ildiz `hooks.json` va `.claude/settings.json` olib tashlandi.
 
-### Removed (merged into the conductor)
-- Skills `tyrion` (loader) and `orch-audit`, `orch-campaign-launch`, `orch-creative-sprint`, `orch-weekly-review`: their domain rules moved to `skills/tyrion-universal/references/workflow-recipes.md`, stage graphs to `manifests/workflows.json`. Inventory: 61 skills, 30 tools.
-
-## [Unreleased-prev] — Agent charters as real sub-agents (all 36)
-
-### Added
-- `.claude/agents/` generated from `agents/` by `tools/install-hooks.py` (`--agents-only`, `sync_agents`, `render_project_agent`): rewrites plugin MCP names (`mcp__plugin_tyrion_tyrion-core__*`) to project names (`mcp__tyrion-core__*`) and drops `skills:`. Mirrors all 36 (`MIRRORED_AGENTS = None`).
-- `tests/test_agent_charters.py`: charter text vs `tools:` fit, MCP names exist on the server, paths exist on disk, mirror drift. 
-
-### Changed (all 36 charters)
-- `tools:` now covers every procedure step (`tyrion-core` MCP first; `Bash` only for `meta-audience.py overlap|saturation|retargeting|lookalike`, which has no MCP equivalent); no Write/Edit on audit agents.
-- Uniform `Agent sikli` (`completed` / `needs_input` / `blocked_mutation_approval`, `execution_evidence`), "when to invoke" descriptions, root-relative paths, "Tyrion Conductor". `commands/audit.md` now dispatches workers in parallel via the `Agent` tool and reports `execution_mode: native_subagent_dispatch | single_conductor_fallback`. Dangling `control-plane/` schema references replaced by explicit field lists. Router is called with `context_mode: "manifest"` (~6 KB instead of 180 KB+).
-
-## [7.1.0] — 2026-11-12 (VK Ads skill)
-
-### Added
-- **`ads-vk` skill** (VK Ads / VK Реклама / ВКонтакте), attached to `audit-meta`; Russian VK requests now route to it. +1 eval scenario, +2 router tests. No benchmark numbers; availability and policy rules are marked unverified.
-
-## [7.0.1] — 2026-11-12 (Hardening, no new features)
-
-### Fixed
-- **`ad-export-analyzer.py`:** header normalisation (case, whitespace, currency suffix; Meta/Google/Telegram/Russian headers), delimiter/BOM/locale-number detection (`1,234.50`, `1 234,50`), explicit errors (exit 2) for missing spend column / empty file, `unmapped_columns` in the result.
-- **Numeric validation:** `tyrion_core.require_number` + argparse converters; `spend-guard`, `calculator`, MCP tools and all money CLI args reject `nan`/`inf`/negative values. Exit-code policy: `0` ok · `1` gate blocked · `2` validation/`error` field.
-- **MCP:** `.mcp.json` resolves the root via `CLAUDE_PLUGIN_ROOT` → `CLAUDE_PROJECT_DIR` → cwd; `doctor` performs a real stdio handshake of the exact `.mcp.json` command.
-- **Router:** `out_of_scope` / `needs_clarification` statuses (+ clarifying questions), stronger Uzbek-Latin detection, English live-mutation patterns, new `ads-yandex` skill for Yandex Direct, 22 extra negative/edge eval scenarios.
-- **Hooks:** `pre:guard` blocks secret-file writes in `strict`, warns in `standard`; `hooks/README.md` states honestly what is and is not enforced (Spend-Guard is policy-level only).
-- **Consistency:** single version source (`VERSION`), `catalog.py sync-claims` + `doctor` cover versions and inventory numbers; wiki `source_status` (`verified` / `url_cited` / `unverified`) enforced by `vault-audit.py`; platform notes older than 180 days warn in `doctor`.
-- **Tests/CI:** `test_tyrion_tools.py` split per tool, direct tests for `spend-guard`, `market_locale`, `install-hooks`, hooks; CI runs on all branches with a stdlib coverage gate (`tests/coverage_gate.py`, min 70%).
-
-## [7.0.0] — 2026-10-29 (Practitioner Targetology, `/ad-creative` Video Studio & Meta 2026 5-System AI Stack)
-
-### Added
-- **`/ad-creative` Skill & Slash Command (`skills/ad-creative/SKILL.md`, `commands/ad-creative.md`):** Full integration of the 4-mode Ad Creative & Video Ad Studio (`Generate from Scratch`, `Iterate from Performance Data`, `Grounded Static & Video Batches`, `Creative Strategy Roadmap & Retro`) with the 2026 S->F Meta Ad Format Tier List (`meta-creative-formats.md`), 9:16 vertical video safe-zone spec (`720x1200` inside `1080x1920`, `video-ad-scripts-and-specs.md`), Falsifiable Test Hypotheses, and strict No-AI-Tells linter (`no-ai-tells-and-hypotheses.md`).
-- **Zero-Friction Video Ad Scripting (`tools/creative-matrix.py video-script`, `skills/reels-scripting/SKILL.md`):** Generates ready-to-shoot 9:16 scripts across 7 S/A-tier formats (`ugc_reaction_demo`, `founder_authority`, `no_yapping_split_screen`, `imessage_reveal`, `chatgpt_reveal`, `greenscreen_proof`, `faceless_motion_explainer`) with 3 opening hook variants, time-coded storyboards, and `720x1200` safe-zone overlays — with zero mandatory external API keys (`APIFY_API_TOKEN` removed) and zero coding required.
-- **Andromeda Entity-ID & Persona-Desire-Awareness (PDA) Engine (`tools/creative-matrix.py pda-matrix`):** Builds 6–9 visually distinct concepts across Personas x Desires x Schwartz's 5 Awareness Stages so Meta Andromeda's computer-vision clustering assigns independent retrieval tickets.
-- **Platform-Validated Ad Copy & AI-Tell Linter (`tools/creative-matrix.py ad-copy`):** Character-counted copy generation for Meta (`125/40/30`), Google RSA (`30/90`), TikTok (`80/100`), LinkedIn (`150/70/100`), and Telegram (`160`) with automatic removal of AI tells (*"It's not X, it's Y"*, *"Stop scrolling"*, em-dashes).
-- **Meta 2026 Five-System AI Stack & Practitioner Targetologist Playbook (`tools/meta-targeting-engine.py`, `tools/meta-audience.py`, `skills/ads/references/meta-ai-stack.md`):** Added `GEM` (Teacher Foundation Model), `Andromeda` (Retrieval + Entity ID), `Lattice` (Unified Ranking + Sequence Learning), `UTIS` (User True Interest Survey Calibrator), `Adaptive Ranking Model` (`<100ms`), `Value Rules` (`+200%` to `-90%` bid multipliers), `GUIDED_CREATION` ASC API (`v25.0+`), Meta AI Chat Signal regional GDPR carve-outs, and the 9-section practitioner zero-coding Ads Manager setup guide.
-- **Shared Product Marketing Context Template (`templates/product-marketing.md`):** Compatible with `.claude/product-marketing.md` and `.agents/product-marketing.md`.
-
-## [6.0.0] — 2026-10-21 (Breaking: Global Architecture & Cross-Platform Release)
-
-### Breaking Changes
-- **Default Market Pack (`default_market`):** Changed default market in `plugin.json` from `"uz"` to `"global"`. `rules/30-ozbekiston-konteksti.md` and `uzbekistan-market-intel` are now loaded **only** when `market=uz` is active or detected.
-- **Canonical English Slash Commands:** Added canonical English commands (`/audience`, `/creative`, `/funnel`, `/export`, `/report`, `/client`, `/competitors`, `/ask`) while preserving all Uzbek commands (`/auditoriya`, `/kreativ`, `/voronka`, `/eksport`, `/hisobot`, `/mijoz`, `/raqobatchi`, `/savol`) as aliases.
-- **Canonical Hook Configuration:** Consolidated hooks into `hooks/hooks.json` using `${CLAUDE_PLUGIN_ROOT}` and `hooks/run-hook.cjs`; removed duplicate root `hooks.json` and `.claude/settings.json`.
-
-### Added
-- **Cross-Platform Node Hook & MCP Launcher (`hooks/run-hook.cjs`):** Automatically resolves `${CLAUDE_PLUGIN_ROOT}`, detects `python3` -> `python` -> `py -3` across Windows, macOS, and Linux, gates `ingest` and `dod` behind `TYRION_DEV=1` (or plugin repo root), caps `Stop` timeout at 5s, and fails open (`exit 0`) unless `TYRION_HOOK_PROFILE=strict`.
-- **9 Regional Market Packs (`markets/`):** Added `global`, `uz`, `us`, `eu`, `uk`, `mena`, `latam`, `sea`, and `in` packs with currencies, BNPL providers (`Klarna`, `Afterpay`, `Affirm`, `Tabby`, `Tamara`, `Pix`, `Atome`, `Simpl`, `Uzum Nasiya`), seasonality calendars, privacy regulations, and source-cited `benchmarks.md`.
-- **3 UI/CLI Locales (`locales/`):** Added `en`, `uz`, and `ru` message bundles and `core/` market-independent English rules and playbooks.
-- **ISO 4217 Multi-Currency & Zero-Decimal Support:** Added `--currency` across CLI tools (`EUR`, `GBP`, `BRL`, `INR`, `JPY`, `KRW`, `UZS`, `USD`) and neutral currency keys alongside legacy `_usd` fields.
-- **Global Privacy & CAPI Consent Gate (`tools/capi-utm-builder.py`):** Added `--consent-granted` / `--no-consent` PII gate, Google Consent Mode v2 signals, Meta Limited Data Use (`data_processing_options=['LDU']`), and GDPR/CCPA/LGPD/DPDP checks.
-- **6 Regional Platform Audit Skills:** Added Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat, and Taboola/Outbrain audit skills under `markets/*/skills/`.
-- **Progressive Disclosure Router (`<= 15 KB` Budget):** Default `progressive` context mode keeps single-step query context under 15 KB.
-- **Upstream MIT Attributions:** Added `AgriciDaniel/claude-ads` and `affaan-m/everything-claude-code` notices in `LICENSE`, `NOTICE`, and `THIRD_PARTY.md`.
+### Qo'shildi
+- **Kross-platforma Node hook va MCP ishga tushirgichi (`hooks/run-hook.cjs`):** `${CLAUDE_PLUGIN_ROOT}` ni avtomatik aniqlaydi, Windows, macOS va Linux'da `python3` -> `python` -> `py -3` ni topadi, `ingest` va `dod` ni `TYRION_DEV=1` (yoki plagin ildizi) ortida yopadi, `Stop` timeout'ini 5 soniya bilan cheklaydi va `TYRION_HOOK_PROFILE=strict` bo'lmasa xatoda ochiq qoladi (`exit 0`).
+- **9 ta mintaqaviy bozor paketi (`markets/`):** `global`, `uz`, `us`, `eu`, `uk`, `mena`, `latam`, `sea` va `in` paketlari valyutalar, BNPL provayderlari (`Klarna`, `Afterpay`, `Affirm`, `Tabby`, `Tamara`, `Pix`, `Atome`, `Simpl`, `Uzum Nasiya`), mavsumiylik kalendarlari, maxfiylik qoidalari va manbalari ko'rsatilgan `benchmarks.md` bilan qo'shildi.
+- **3 ta UI/CLI lokali (`locales/`):** `en`, `uz` va `ru` xabar to'plamlari hamda bozorga bog'liq bo'lmagan `core/` qoidalari va playbooklari qo'shildi.
+- **ISO 4217 ko'p valyuta va nol-o'nlik qo'llab-quvvatlash:** CLI asboblarida `--currency` (`EUR`, `GBP`, `BRL`, `INR`, `JPY`, `KRW`, `UZS`, `USD`) va eski `_usd` maydonlari yonida neytral valyuta kalitlari qo'shildi.
+- **Global maxfiylik va CAPI rozilik darvozasi (`tools/capi-utm-builder.py`):** `--consent-granted` / `--no-consent` PII darvozasi, Google Consent Mode v2 signallari, Meta Limited Data Use (`data_processing_options=['LDU']`) va GDPR/CCPA/LGPD/DPDP tekshiruvlari qo'shildi.
+- **6 ta mintaqaviy platforma audit skilli:** `markets/*/skills/` ostida Yandex Direct, VK Ads, LINE Ads, Naver/Kakao, Baidu/Douyin/WeChat va Taboola/Outbrain audit skilllari qo'shildi.
+- **Bosqichma-bosqich ochuvchi router (`<= 15 KB` byudjet):** Standart `progressive` kontekst rejimi bir qadamli so'rov kontekstini 15 KB dan past ushlaydi.
+- **Yuqori oqimdagi MIT atribusiyalari:** `LICENSE`, `NOTICE` va `THIRD_PARTY.md` ga `AgriciDaniel/claude-ads` va `affaan-m/everything-claude-code` e'lonlari qo'shildi.
 
 ---
 
-# Changelog
+# O'zgarishlar jurnali
 
-All notable changes to **Tyrion** are documented in this file.
+**Tyrion** dagi barcha muhim o'zgarishlar shu faylda hujjatlashtirilgan.
 
-## [5.0.0] - 2026-10-20 — Calibrated Recommendation Engine, Live Meta Insights Sync & Single-Source Parity
+## [5.0.0] - 2026-10-20 — Kalibrlangan tavsiya dvigateli, jonli Meta Insights sinxronizatsiyasi va yagona manba pariteti
 
-### Added
-- **Universal Auto-Router & Autonomous Agent Orchestrator (`tools/skill-search.py`, `tools/tyrion.py route`, MCP `tyrion_universal_router`)**:
-  - Automatic natural-language task routing across Uzbek Latin, Uzbek Cyrillic, Russian, and English without manual `/skill-search` or `/agent` selection.
-  - Enriched metadata across all 62 skills and 36 agents (`triggers`, `aliases`, `domains`, `platforms`, `related_skills`, `references`, `risk_level`, `output_contract`, `authority_boundary`).
-  - Session-cached disk loading (`SessionContextCache`), dynamic mid-task re-routing (`--reroute-with`), universal conductor fallback, and Spend-Guard mutation gate.
-- **Detailed Targeting Pagination, Payload & Cache Hardening (`tools/meta-targeting-engine.py`, `tools/catalog.py`)**:
-  - Per-query `pages_fetched`, `is_truncated`, and `results_count` diagnostics; explicit truncation disclosures; separation of `MALFORMED_ITEM_PAYLOAD` from genuine `NOT_FOUND`; context-isolated cache keys (`special_ad_category`, `country`, `objective`, `language`, `locale`, `ad_account_id`, `api_version`, `api_base_url`); and CRLF-resilient SHA-256 in `catalog.py`.
-- **Detailed Targeting Accuracy Engine (`tools/meta-targeting-engine.py`, `docs/DETAILED-TARGETING-ACCURACY.md` & MCP `tyrion_meta_detailed_targeting`)**:
-  - Zero-hallucination 6-status verification system (`VERIFIED_AVAILABLE`, `FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED`, `RELATED_UNVERIFIED`, `NOT_FOUND`, `API_UNAVAILABLE`).
-  - Multi-endpoint Meta Marketing API v26.0 integration (`/search?type=adinterest`, `/{ad-account-id}/targetingsearch`, `/{ad-account-id}/targetingsuggestions`, `/{ad-account-id}/targetingvalidation`) with `paging.next` pagination, `(id, type)` deduplication, multilingual query expansion (`uz_latin`, `uz_cyrillic`, `ru`, `en`), and TTL cache validation.
-- **Live Meta Ads Insights Connector (`tools/meta-insights-sync.py` & MCP `tyrion_meta_live_insights`)**: Pulls live campaign, ad set, and ad telemetry from [Meta Graph API v26.0](https://developers.facebook.com/docs/graph-api/changelog/version26.0/) (`/act_<id>/insights`) or validates raw Graph API JSON exports (`actions`, `action_values`), normalizes conversions/revenue, and pipes them into `ad-export-analyzer.py`.
-- **Confidence Intervals & Model Disclosures (`tools/meta-audience.py`)**:
-  - `saturation` now accepts `--active-reach-ratio` and `--measured-freq-7d`, outputs `estimated_fatigue_window_days` (`conservative_early_fatigue_day`, `baseline_fatigue_day`, `optimistic_late_fatigue_day`), and includes `model_disclosure` (`HEURISTIC_PRIOR_MODEL` vs `MEASURED_ACCOUNT_DATA`).
-  - `architect` now derives `target_cpa` from unit economics (`--aov`, `--margin-pct`, `--lead-to-sale-cvr`) or user targets, and labels fallback estimates as `PROVISIONAL_HEURISTIC_FALLBACK` inside `evidence_and_assumptions`.
-  - `lookalike` now exposes `heuristic_seed_readiness_score_100` with explicit disclosure (`is_meta_internal_score: False`).
-- **Python AST & Dead-Code Scanner (`tools/tyrion-shield.py`)**: Added 6th check verifying zero syntax errors and zero unreachable statements across all Python modules, removed `tests/` from `SKIP_DIRS`, and added `scope_and_limitations` disclosure.
+### Qo'shildi
+- **Universal Auto-Router va avtonom agent orkestratori (`tools/skill-search.py`, `tools/tyrion.py route`, MCP `tyrion_universal_router`)**:
+  - Qo'lda `/skill-search` yoki `/agent` tanlamasdan, o'zbek lotin, o'zbek kirill, rus va ingliz tilidagi topshiriqlarni avtomatik marshrutlash.
+  - Barcha 62 skill va 36 agent metadatasi boyitildi (`triggers`, `aliases`, `domains`, `platforms`, `related_skills`, `references`, `risk_level`, `output_contract`, `authority_boundary`).
+  - Sessiya keshli diskdan yuklash (`SessionContextCache`), vazifa o'rtasida dinamik qayta marshrutlash (`--reroute-with`), universal dirijyor zaxirasi va Spend-Guard o'zgartirish darvozasi.
+- **Detailed Targeting sahifalash, payload va kesh mustahkamlash (`tools/meta-targeting-engine.py`, `tools/catalog.py`)**:
+  - So'rov bo'yicha `pages_fetched`, `is_truncated` va `results_count` diagnostikasi; kesilganlik haqida aniq ogohlantirish; `MALFORMED_ITEM_PAYLOAD` ni haqiqiy `NOT_FOUND` dan ajratish; kontekst izolyatsiyalangan kesh kalitlari (`special_ad_category`, `country`, `objective`, `language`, `locale`, `ad_account_id`, `api_version`, `api_base_url`); `catalog.py` da CRLF'ga chidamli SHA-256.
+- **Detailed Targeting aniqlik dvigateli (`tools/meta-targeting-engine.py`, `docs/DETAILED-TARGETING-ACCURACY.md` va MCP `tyrion_meta_detailed_targeting`)**:
+  - Gallyutsinatsiyasiz 6 statusli tekshiruv tizimi (`VERIFIED_AVAILABLE`, `FOUND_NOT_VALIDATED`, `UNAVAILABLE_OR_CONSOLIDATED`, `RELATED_UNVERIFIED`, `NOT_FOUND`, `API_UNAVAILABLE`).
+  - Meta Marketing API v26.0 ning ko'p endpointli integratsiyasi (`/search?type=adinterest`, `/{ad-account-id}/targetingsearch`, `/{ad-account-id}/targetingsuggestions`, `/{ad-account-id}/targetingvalidation`): `paging.next` sahifalash, `(id, type)` bo'yicha dublikatlarni olib tashlash, ko'p tilli so'rov kengaytirish (`uz_latin`, `uz_cyrillic`, `ru`, `en`) va TTL kesh tekshiruvi.
+- **Jonli Meta Ads Insights ulagichi (`tools/meta-insights-sync.py` va MCP `tyrion_meta_live_insights`)**: [Meta Graph API v26.0](https://developers.facebook.com/docs/graph-api/changelog/version26.0/) (`/act_<id>/insights`) dan jonli kampaniya, ad set va reklama telemetriyasini oladi yoki xom Graph API JSON eksportlarini (`actions`, `action_values`) tekshiradi, konversiya/daromadni normallashtiradi va `ad-export-analyzer.py` ga uzatadi.
+- **Ishonch intervallari va model shaffofligi (`tools/meta-audience.py`)**:
+  - `saturation` endi `--active-reach-ratio` va `--measured-freq-7d` ni qabul qiladi, `estimated_fatigue_window_days` (`conservative_early_fatigue_day`, `baseline_fatigue_day`, `optimistic_late_fatigue_day`) chiqaradi va `model_disclosure` ni (`HEURISTIC_PRIOR_MODEL` va `MEASURED_ACCOUNT_DATA`) o'z ichiga oladi.
+  - `architect` endi `target_cpa` ni unit-iqtisodiyotdan (`--aov`, `--margin-pct`, `--lead-to-sale-cvr`) yoki foydalanuvchi maqsadlaridan chiqaradi va zaxira baholarni `evidence_and_assumptions` ichida `PROVISIONAL_HEURISTIC_FALLBACK` deb belgilaydi.
+  - `lookalike` endi `heuristic_seed_readiness_score_100` ni aniq ogohlantirish bilan beradi (`is_meta_internal_score: False`).
+- **Python AST va o'lik kod skaneri (`tools/tyrion-shield.py`)**: Barcha Python modullarida sintaksis xatosi va yetib bo'lmaydigan operatorlar yo'qligini tekshiradigan 6-tekshiruv qo'shildi, `tests/` `SKIP_DIRS` dan chiqarildi va `scope_and_limitations` ogohlantirishi qo'shildi.
 
-### Fixed & Changed
-- **Fixed 3 Concrete Bugs in `tools/meta-audience.py`**:
-  1. Removed 16 lines of unreachable dead code after `return` in `query_live_graph_api`.
-  2. Added `--no-telegram-bot` / `--has-telegram-bot false` CLI flags in `retargeting`.
-  3. Removed artificial `100/500/1000/200` minimum pool floors in `calc_retargeting` when source traffic is `0` (now returns `0` pool size and `INSUFFICIENT_RETARGETING_POOL`).
-- **Unified 20% Audience Overlap Threshold**: Standardized `calc_overlap` warning threshold to `20.0%` (`<20%` = `HEALTHY_ISOLATION`, `20%–29.9%` = `MODERATE_OVERLAP`, `>=30%` = `CRITICAL_COLLISION`) matching all documentation, and added explicit distinction between `STATIC_AUDIENCE_POOL_INTERSECTION` and live auction delivery overlap.
-- **Upgraded Default Meta Graph API Version to `v26.0`**: Updated `.env.example`, `tools/meta-audience.py`, `tools/capi-utm-builder.py`, and `tools/meta-insights-sync.py` to default to `v26.0` and dynamically interpolate `META_GRAPH_API_VERSION`.
-- **Single-Source Version & Inventory Parity (`v5.0.0`)**: Synchronized all version strings (`v5.0.0`) and inventory counts (`36` agents, `62` skills, `100` wiki notes, `18` commands, `9` playbooks, `6` contexts, `29` tools) across all manifests, docs, and scripts.
+### Tuzatildi va o'zgardi
+- **`tools/meta-audience.py` dagi 3 ta aniq xato tuzatildi**:
+  1. `query_live_graph_api` dagi `return` dan keyingi 16 qator yetib bo'lmaydigan kod olib tashlandi.
+  2. `retargeting` ga `--no-telegram-bot` / `--has-telegram-bot false` CLI flaglari qo'shildi.
+  3. Manba trafigi `0` bo'lganda `calc_retargeting` dagi sun'iy `100/500/1000/200` minimal pool pollari olib tashlandi (endi `0` pool o'lchami va `INSUFFICIENT_RETARGETING_POOL` qaytaradi).
+- **Auditoriya overlap chegarasi 20% ga yagonalashtirildi**: `calc_overlap` ogohlantirish chegarasi `20.0%` ga standartlashtirildi (`<20%` = `HEALTHY_ISOLATION`, `20%–29.9%` = `MODERATE_OVERLAP`, `>=30%` = `CRITICAL_COLLISION`), barcha hujjatlarga mos keltirildi va `STATIC_AUDIENCE_POOL_INTERSECTION` bilan jonli auksion yetkazib berish overlapi o'rtasidagi aniq farq qo'shildi.
+- **Standart Meta Graph API versiyasi `v26.0` ga ko'tarildi**: `.env.example`, `tools/meta-audience.py`, `tools/capi-utm-builder.py` va `tools/meta-insights-sync.py` standart `v26.0` ni ishlatadigan va `META_GRAPH_API_VERSION` ni dinamik o'rnatadigan qilib yangilandi.
+- **Versiya va inventar pariteti — yagona manba (`v5.0.0`)**: Barcha versiya satrlari (`v5.0.0`) va inventar sonlari (`36` agent, `62` skill, `100` wiki qayd, `18` buyruq, `9` playbook, `6` kontekst, `29` asbob) barcha manifest, hujjat va skriptlarda sinxronlandi.
 
-## [4.0.0] - 2026-10-18 — Single-Root ECC Architectural Overhaul
+## [4.0.0] - 2026-10-18 — Yagona ildizli ECC arxitekturasini to'liq qayta qurish
 
-### Added
-- **Unified Master CLI (`tools/tyrion.py`)**: Single entrypoint routing across `status`, `doctor`, `shield`, `audience`, `creative`, `client`, `calc`, `guard`, `search`, `skills`, `instincts`, `catalog`, `graph`, and `audit`.
-- **Meta Ads Audience Studio (`tools/meta-audience.py`)**: Added deterministic engines (`retargeting`, `lookalike`, and `diagnose`) alongside `architect`, `interests`, `overlap`, and `saturation`.
-- **Andromeda 2 Creative Matrix & Hook Studio (`tools/creative-matrix.py`)**: Deterministic 3x3 Angle x Format matrix builder (`matrix`), 3-language Hook generator (`hooks`), and creative fatigue radar (`fatigue`).
-- **Client Workspace Scaffolder (`tools/client-workspace.py` & `/mijoz`)**: Instant 1-command client workspace generator.
+### Qo'shildi
+- **Yagona Master CLI (`tools/tyrion.py`)**: `status`, `doctor`, `shield`, `audience`, `creative`, `client`, `calc`, `guard`, `search`, `skills`, `instincts`, `catalog`, `graph` va `audit` bo'yicha yagona kirish nuqtasi.
+- **Meta Ads Audience Studio (`tools/meta-audience.py`)**: `architect`, `interests`, `overlap` va `saturation` yoniga deterministik `retargeting`, `lookalike` va `diagnose` dvigatellari qo'shildi.
+- **Andromeda 2 Creative Matrix va Hook Studio (`tools/creative-matrix.py`)**: Deterministik 3x3 Angle x Format matritsa quruvchi (`matrix`), 3 tilli Hook generatori (`hooks`) va kreativ charchoq radari (`fatigue`).
+- **Mijoz ish maydoni yaratuvchisi (`tools/client-workspace.py` va `/mijoz`)**: Bir buyruqli mijoz ish maydoni generatori.

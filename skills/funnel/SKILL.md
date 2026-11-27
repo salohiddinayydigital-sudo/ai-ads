@@ -1,6 +1,6 @@
 ---
 name: funnel
-description: "Funnel and landing: CRO, landing review, web design rules, Meta/Telegram to bot to CRM flows. Use for 'voronka', 'landing', 'konversiya past', 'sayt', воронка, лендинг, CRO."
+description: "Voronka va landing: CRO, landing tekshiruvi, veb-dizayn qoidalari, Meta/Telegram → bot → CRM oqimlari. Quyidagilar uchun ishlating: 'voronka', 'landing', 'konversiya past', 'sayt', воронка, лендинг, CRO."
 triggers:
 - "cro"
 - "konversiya oshirish"
@@ -63,7 +63,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # funnel
 
-Funnel and landing: CRO, landing review, web design rules, Meta/Telegram to bot to CRM flows. Use for 'voronka', 'landing', 'konversiya past', 'sayt', воронка, лендинг, CRO.
+Voronka va landing: CRO, landing tekshiruvi, veb-dizayn qoidalari, Meta/Telegram → bot → CRM oqimlari. Quyidagilar uchun ishlating: 'voronka', 'landing', 'konversiya past', 'sayt', воронка, лендинг, CRO.
 
 ## Qoidalar
 Avval iqtisod, keyin voronka kesimi; CRO tavsiyasi o'lchanadigan gipoteza bilan.
@@ -74,8 +74,8 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `cro` | `skills/funnel/references/cro.md` | When the user wants to optimize, improve, or increase conversions on any marketing page or form — including homepage, landing pages, pricing pages, fe… |
-| `ads-landing` | `skills/funnel/references/ads-landing.md` | Audit paid-ad landing pages for message match, mobile experience, performance, accessibility, trust, forms, consent, tracking, security, and conversio… |
-| `web-design-guidelines` | `skills/funnel/references/web-design-guidelines.md` | Review UI code for Web Interface Guidelines compliance. Use when asked to "review my UI", "check accessibility", "audit design", "review UX", or "chec… |
+| `cro` | `skills/funnel/references/cro.md` | Foydalanuvchi har qanday marketing sahifasi yoki formasi konversiyasini optimallashtirish, yaxshilash yoki oshirishni xohlaganda — bosh sahifa, landing, narx sahifalari, fe… |
+| `ads-landing` | `skills/funnel/references/ads-landing.md` | Pullik reklama landinglarini xabar mosligi, mobil tajriba, tezlik, qulaylik, ishonch, formalar, rozilik, treking, xavfsizlik va konversiya bo'yicha audit qilish… |
+| `web-design-guidelines` | `skills/funnel/references/web-design-guidelines.md` | UI kodini Web Interface Guidelines ga muvofiqligi bo'yicha ko'rib chiqish. "review my UI", "check accessibility", "audit design", "review UX" yoki "chec… so'ralganda ishlating. |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

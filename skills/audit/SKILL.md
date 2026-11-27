@@ -1,6 +1,6 @@
 ---
 name: audit
-description: "Read-only platform audit (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads). Use for 'audit', 'akkaunt tekshir', 'cpa qimmat', аудит рекламы."
+description: "Faqat o'qish rejimidagi platforma auditi (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads). Quyidagilar uchun ishlating: 'audit', 'akkaunt tekshir', 'cpa qimmat', аудит рекламы."
 triggers:
 - "chatgpt ads"
 - "openai reklama"
@@ -248,7 +248,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # audit
 
-Read-only platform audit (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads). Use for 'audit', 'akkaunt tekshir', 'cpa qimmat', аудит рекламы.
+Faqat o'qish rejimidagi platforma auditi (Meta, Google, TikTok, YouTube, LinkedIn, X, Reddit, Pinterest, Snapchat, Microsoft, Amazon, Apple, Telegram, VK, Yandex, ChatGPT Ads). Quyidagilar uchun ishlating: 'audit', 'akkaunt tekshir', 'cpa qimmat', аудит рекламы.
 
 ## Qoidalar
 Faqat o'qish. Platforma `references/platforms/<p>.md` dan olinadi; har tekshiruv: id, status, evidence_label, severity. Hisobga yozish — Spend-Guard packet bilan.
@@ -259,23 +259,23 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads` | `skills/audit/references/ads-conductor.md` | Operate professional paid advertising across Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple, Amazon, Reddit, Pinterest, Snapchat, and X. Us… |
-| `ads-audit` | `skills/audit/references/audit-process.md` | Run a source-grounded paid-advertising audit for one or more of Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple, Amazon, Reddit, Pinterest, … |
-| `ads-meta` | `skills/audit/references/platforms/meta.md` | Audit Meta Ads measurement, Pixel and Conversions API, attribution, Facebook and Instagram creative, audiences, placements, automation, budgets, accou… |
-| `ads-google` | `skills/audit/references/platforms/google.md` | Audit Google Ads measurement, Search, Shopping, Performance Max, Demand Gen, YouTube-linked inventory, keywords and search terms, negative-keyword gen… |
-| `ads-tiktok` | `skills/audit/references/platforms/tiktok.md` | Audit TikTok Ads measurement, Pixel and Events API, mobile-first creative, audiences, Smart+, Shop and commerce campaigns, bidding, budgets, pacing, a… |
-| `ads-youtube` | `skills/audit/references/platforms/youtube.md` | Audit YouTube Ads campaign setup, video and Demand Gen inventory, Shorts, in-stream, CTV, creative, audiences, brand safety, bidding, and measurement.… |
-| `ads-linkedin` | `skills/audit/references/platforms/linkedin.md` | Audit LinkedIn Ads measurement, Insight Tag and conversions, professional audiences, lead generation, ABM, creative, bidding, budgets, pacing, automat… |
-| `ads-x` | `skills/audit/references/platforms/x.md` | Audit X Ads measurement, X Pixel and Conversions API, campaign objectives, keyword and conversation targeting, creative, budgets, brand safety, app me… |
-| `ads-reddit` | `skills/audit/references/platforms/reddit.md` | Audit Reddit Ads measurement, campaign structure, community and interest targeting, creative-native fit, catalog advertising, budgets, brand safety, a… |
-| `ads-pinterest` | `skills/audit/references/platforms/pinterest.md` | Audit Pinterest Ads measurement, Pinterest Tag and Conversions API, catalog and shopping readiness, visual creative, audiences, Performance+ intent, b… |
-| `ads-snapchat` | `skills/audit/references/platforms/snapchat.md` | Audit Snapchat Ads measurement, Snap Pixel and Conversions API, mobile and app campaigns, creative, AR and catalog formats, audiences, budgets, brand … |
-| `ads-microsoft` | `skills/audit/references/platforms/microsoft.md` | Audit Microsoft Advertising measurement, UET, search and audience campaigns, Google imports, syndication, keywords, creative, bidding, budgets, Copilo… |
-| `ads-amazon` | `skills/audit/references/platforms/amazon.md` | Audit Amazon Ads profiles, regions, Sponsored Products, Sponsored Brands, Sponsored Display, DSP, portfolios, targeting, search terms, retail readines… |
-| `ads-apple` | `skills/audit/references/platforms/apple.md` | Audit Apple Ads measurement, AdServices and AdAttributionKit, campaign and keyword structure, Search Match, App Store placements, custom product pages… |
-| `ads-telegram` | `skills/audit/references/platforms/telegram.md` | Audit, plan, draft, and optimize Telegram Ads campaigns across ads.telegram.org and Fragment. Covers channel targeting, 160-character copywriting form… |
-| `ads-vk` | `skills/audit/references/platforms/vk.md` | Plan and audit VK Ads (VK Реклама, ВКонтакте / VK ads.vk.com) campaigns - audience and retargeting setup, VK pixel and conversion tracking, community … |
+| `ads` | `skills/audit/references/ads-conductor.md` | Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple, Amazon, Reddit, Pinterest, Snapchat va X bo'yicha professional pullik reklamani boshqarish. … |
+| `ads-audit` | `skills/audit/references/audit-process.md` | Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple, Amazon, Reddit, Pinterest, … platformalaridan bir yoki bir nechtasi uchun manbaga tayangan pullik reklama auditini o'tkazish |
+| `ads-meta` | `skills/audit/references/platforms/meta.md` | Meta Ads o'lchovi, Pixel va Conversions API, atributsiya, Facebook va Instagram kreativi, auditoriyalar, placementlar, avtomatlashtirish, byudjetlar, akkaunt… ni audit qilish… |
+| `ads-google` | `skills/audit/references/platforms/google.md` | Google Ads o'lchovi, Search, Shopping, Performance Max, Demand Gen, YouTube bilan bog'liq inventar, kalit so'zlar va qidiruv so'rovlari, negative-keyword gen… ni audit qilish… |
+| `ads-tiktok` | `skills/audit/references/platforms/tiktok.md` | TikTok Ads o'lchovi, Pixel va Events API, mobile-first kreativ, auditoriyalar, Smart+, Shop va commerce kampaniyalari, bidding, byudjetlar, pacing… ni audit qilish… |
+| `ads-youtube` | `skills/audit/references/platforms/youtube.md` | YouTube Ads kampaniya sozlamasi, video va Demand Gen inventari, Shorts, in-stream, CTV, kreativ, auditoriyalar, brend xavfsizligi, bidding va o'lchovni audit qilish.… |
+| `ads-linkedin` | `skills/audit/references/platforms/linkedin.md` | LinkedIn Ads o'lchovi, Insight Tag va konversiyalar, professional auditoriyalar, lead generation, ABM, kreativ, bidding, byudjetlar, pacing, avtomatlashtirish… ni audit qilish… |
+| `ads-x` | `skills/audit/references/platforms/x.md` | X Ads o'lchovi, X Pixel va Conversions API, kampaniya maqsadlari, kalit so'z va suhbat targeting'i, kreativ, byudjetlar, brend xavfsizligi, app me… ni audit qilish… |
+| `ads-reddit` | `skills/audit/references/platforms/reddit.md` | Reddit Ads o'lchovi, kampaniya tuzilmasi, hamjamiyat va qiziqish targeting'i, platformaga xos kreativ mosligi, katalog reklamasi, byudjetlar, brend xavfsizligi… ni audit qilish… |
+| `ads-pinterest` | `skills/audit/references/platforms/pinterest.md` | Pinterest Ads o'lchovi, Pinterest Tag va Conversions API, katalog va shopping tayyorligi, vizual kreativ, auditoriyalar, Performance+ niyati… ni audit qilish… |
+| `ads-snapchat` | `skills/audit/references/platforms/snapchat.md` | Snapchat Ads o'lchovi, Snap Pixel va Conversions API, mobil va app kampaniyalari, kreativ, AR va katalog formatlari, auditoriyalar, byudjetlar, brend… ni audit qilish… |
+| `ads-microsoft` | `skills/audit/references/platforms/microsoft.md` | Microsoft Advertising o'lchovi, UET, qidiruv va auditoriya kampaniyalari, Google importlari, sindikatsiya, kalit so'zlar, kreativ, bidding, byudjetlar, Copilo… ni audit qilish… |
+| `ads-amazon` | `skills/audit/references/platforms/amazon.md` | Amazon Ads profillari, hududlar, Sponsored Products, Sponsored Brands, Sponsored Display, DSP, portfellar, targeting, qidiruv so'rovlari, retail tayyorligi… ni audit qilish… |
+| `ads-apple` | `skills/audit/references/platforms/apple.md` | Apple Ads o'lchovi, AdServices va AdAttributionKit, kampaniya va kalit so'z tuzilmasi, Search Match, App Store placementlari, custom product pages… ni audit qilish… |
+| `ads-telegram` | `skills/audit/references/platforms/telegram.md` | ads.telegram.org va Fragment bo'yicha Telegram Ads kampaniyalarini audit qilish, rejalash, qoralama qilish va optimallashtirish. Kanal targeting'i, 160 belgilik matn formati… ni qamrab oladi… |
+| `ads-vk` | `skills/audit/references/platforms/vk.md` | VK Ads (VK Реклама, ВКонтакте / VK ads.vk.com) kampaniyalarini rejalash va audit qilish — auditoriya va retargeting sozlamasi, VK pixel va konversiya trekingi, hamjamiyat… |
 | `chatgpt-ads` (v8, yangi) | `skills/audit/references/platforms/chatgpt-ads.md` | ChatGPT Ads (OpenAI) auditi, CG01–CG09 |
-| `ads-yandex` | `skills/audit/references/platforms/yandex.md` | Plan and audit Yandex Direct campaigns (Search network and the Yandex Advertising Network / РСЯ) with Yandex Metrica conversion tracking, Wordstat dem… |
+| `ads-yandex` | `skills/audit/references/platforms/yandex.md` | Yandex Direct kampaniyalarini (Qidiruv tarmog'i va Yandex Reklama tarmog'i / РСЯ) Yandex Metrica konversiya trekingi, Wordstat dem… bilan rejalash va audit qilish… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

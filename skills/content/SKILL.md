@@ -1,6 +1,6 @@
 ---
 name: content
-description: "Organic content and SEO: strategy, social posts, ideas, long-form direct response, psychology, prospecting, SEO audit. Use for 'kontent reja', 'post', 'seo', 'g'oya', контент-план, SEO."
+description: "Organik kontent va SEO: strategiya, ijtimoiy tarmoq postlari, g'oyalar, uzun formatdagi direct response, psixologiya, prospecting, SEO audit. Quyidagilar uchun ishlating: 'kontent reja', 'post', 'seo', 'g'oya', контент-план, SEO."
 triggers:
 - "kontent strategiya"
 - "content strategy"
@@ -125,7 +125,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # content
 
-Organic content and SEO: strategy, social posts, ideas, long-form direct response, psychology, prospecting, SEO audit. Use for 'kontent reja', 'post', 'seo', 'g'oya', контент-план, SEO.
+Organik kontent va SEO: strategiya, ijtimoiy tarmoq postlari, g'oyalar, uzun formatdagi direct response, psixologiya, prospecting, SEO audit. Quyidagilar uchun ishlating: 'kontent reja', 'post', 'seo', 'g'oya', контент-план, SEO.
 
 ## Qoidalar
 Organik kontent reklama skriptidan ajratiladi (reklama videosi → `video`).
@@ -136,12 +136,12 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `content-strategy` | `skills/content/references/content-strategy.md` | When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions "co… |
-| `social` | `skills/content/references/social.md` | When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platf… |
-| `marketing-ideas` | `skills/content/references/marketing-ideas.md` | When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,'… |
-| `longform-direct-response` | `skills/content/references/longform-direct-response.md` | Turn transcripts into longform direct response storytelling copy for Facebook, Instagram, LinkedIn, Skool, or Email. Trigger when user uploads a trans… |
-| `marketing-psychology` | `skills/content/references/marketing-psychology.md` | When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,… |
-| `prospecting` | `skills/content/references/prospecting.md` | When the user wants to find, qualify, and build a list of prospects to reach out to — across B2B SaaS, general B2B, or local small businesses. Also us… |
-| `seo-audit` | `skills/content/references/seo-audit.md` | When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I no… |
+| `content-strategy` | `skills/content/references/content-strategy.md` | Foydalanuvchi kontent strategiyasini rejalashtirish, qanday kontent yaratishni yoki qaysi mavzularni yoritishni hal qilishni xohlaganda. Shuningdek "co… eslatilganda ishlating. |
+| `social` | `skills/content/references/social.md` | Foydalanuvchi LinkedIn, Twitter/X, Instagram, TikTok, Facebook yoki boshqa platformalar uchun ijtimoiy tarmoq kontentini yaratish, rejalashtirish yoki optimallashtirishda yordam so'raganda… |
+| `marketing-ideas` | `skills/content/references/marketing-ideas.md` | Foydalanuvchiga SaaS yoki dasturiy mahsuloti uchun marketing g'oyalari, ilhom yoki strategiyalar kerak bo'lganda. Shuningdek 'marketing ideas,' so'ralganda… |
+| `longform-direct-response` | `skills/content/references/longform-direct-response.md` | Transkriptlarni Facebook, Instagram, LinkedIn, Skool yoki Email uchun uzun formatdagi direct response storytelling matniga aylantirish. Foydalanuvchi transkript yuklaganda… |
+| `marketing-psychology` | `skills/content/references/marketing-psychology.md` | Foydalanuvchi marketingda psixologik tamoyillar, mental modellar yoki xulq-atvor fanini qo'llashni xohlaganda. Shuningdek 'psychology,… eslatilganda ishlating. |
+| `prospecting` | `skills/content/references/prospecting.md` | Foydalanuvchi B2B SaaS, umumiy B2B yoki mahalliy kichik bizneslar bo'yicha murojaat qilinadigan prospektlarni topish, saralash va ro'yxat tuzishni xohlaganda… |
+| `seo-audit` | `skills/content/references/seo-audit.md` | Foydalanuvchi saytidagi SEO muammolarini audit qilish, ko'rib chiqish yoki diagnostika qilishni xohlaganda. Shuningdek "SEO audit," "technical SEO," "why am I no… eslatilganda ishlating. |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

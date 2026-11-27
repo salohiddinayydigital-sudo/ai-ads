@@ -1,6 +1,6 @@
 ---
 name: report
-description: "Client and operator performance reports from tool output: results, decisions, next steps with owner and metric. Use for 'hisobot', 'report', 'natijalar', 'haftalik hisobot', отчет клиенту."
+description: "Asbob chiqishidan mijoz va operator uchun natija hisobotlari: natijalar, qarorlar, egasi va metrikasi bor navbatdagi harakatlar. Quyidagilar uchun ishlating: 'hisobot', 'report', 'natijalar', 'haftalik hisobot', отчет клиенту."
 triggers:
 - "hisobot"
 - "haftalik hisobot"
@@ -30,7 +30,7 @@ output_contract: "Structured deliverable with evidence labels, assumptions, tool
 
 # report
 
-Client and operator performance reports from tool output: results, decisions, next steps with owner and metric. Use for 'hisobot', 'report', 'natijalar', 'haftalik hisobot', отчет клиенту.
+Asbob chiqishidan mijoz va operator uchun natija hisobotlari: natijalar, qarorlar, egasi va metrikasi bor navbatdagi harakatlar. Quyidagilar uchun ishlating: 'hisobot', 'report', 'natijalar', 'haftalik hisobot', отчет клиенту.
 
 ## Qoidalar
 Hisobot raqamlari asbob chiqishidan; keyingi qadamlarda egasi va metrikasi ko'rsatiladi.
@@ -41,6 +41,6 @@ Kerakli faylni `Read` bilan och; hammasini yoppasiga o'qima.
 
 | Eski skill | Fayl | Qachon |
 |---|---|---|
-| `ads-report` | `skills/report/references/ads-report.md` | Render Markdown, HTML, or PDF paid-advertising reports from a validated Claude Ads JSON run bundle. Use for ads report, client report, audit PDF, exec… |
+| `ads-report` | `skills/report/references/ads-report.md` | Tasdiqlangan Claude Ads JSON run bundle'dan Markdown, HTML yoki PDF formatidagi pullik reklama hisobotlarini yaratish. Ads report, mijoz hisoboti, audit PDF, ijroiya… |
 
 Eski nomlar `manifests/migration-v8.json` da; router ularni alias sifatida taniydi.

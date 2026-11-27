@@ -1,22 +1,22 @@
 ---
 disable-model-invocation: true
 name: video-plan
-description: "Video content plan (weekly/monthly matrix) and batch shooting plan (Alias: /video-reja)"
+description: "Video kontent reja (haftalik/oylik matritsa) va batch syomka rejasi (Alias: /video-reja)"
 alias_of: video-reja
-argument-hint: "<business> [1|2|4 weeks]"
+argument-hint: "<biznes> [1|2|4 hafta]"
 ---
 
 # `/video-plan` (Alias: `/video-reja`)
 
-Task: **$ARGUMENTS**
+Vazifa: **$ARGUMENTS**
 
-Same workflow as `/video-reja` (canonical, Uzbek): Video content plan (weekly/monthly matrix) and batch shooting plan. Reply in the user's language. Pre-production only: no editing/rendering pipeline changes.
+`/video-reja` bilan bir xil jarayon (kanonik, o'zbekcha): Video kontent reja (haftalik/oylik matritsa) va batch syomka rejasi. Foydalanuvchi tilida javob bering. Faqat pre-production: montaj/render qatlamiga tegmaydi.
 
-## Execution Workflow
-1. Detect user language (uz Latin/Cyrillic, ru, en) and market (`markets/<market>/pack.json`, default `global`). Ask only what is missing: product/offer, audience, goal, verified proof (never invent statistics, reviews, prices — use `[ADD VERIFIED ...]`).
-2. Load `skills/video/SKILL.md` Intent Router and read only the matching reference.
-3. Run the deterministic skeleton:
+## Bajarish tartibi
+1. Foydalanuvchi tilini (uz lotin/kirill, ru, en) va bozorni (`markets/<market>/pack.json`, standart `global`) aniqlang. Faqat yetishmayotganini so'rang: mahsulot/taklif, auditoriya, maqsad, tasdiqlangan dalil (statistika, sharh yoki narxni hech qachon to'qimang — `[ADD VERIFIED ...]` dan foydalaning).
+2. `skills/video/SKILL.md` dagi Intent Router'ni yuklang va faqat mos referenceni o'qing.
+3. Deterministik skeletni ishga tushiring:
    ```bash
    python3 tools/creative-matrix.py video-script --mode plan --lang <uz|ru|en> --weeks 2 --per-week 5 --niche <niche> --product "<business>" --json
    ```
-4. Fill the skeleton with the user's real data; self-audit with `skills/video/references/script-quality-rubric.md` (>= 85/100) before delivering.
+4. Skeletni foydalanuvchining haqiqiy ma'lumotlari bilan to'ldiring; topshirishdan oldin `skills/video/references/script-quality-rubric.md` bo'yicha o'zingizni baholang (>= 85/100).

@@ -133,11 +133,11 @@ class TyrionV5CalibratedAuditTests(unittest.TestCase):
         mp = json.loads((VAULT / "marketplace.json").read_text(encoding="utf-8"))
         self.assertEqual(mp["metadata"]["version"], catalog.read_version())
         self.assertEqual(mp["plugins"][0]["version"], catalog.read_version())
-        self.assertIn("19 specialist agents", mp["metadata"]["description"])
+        self.assertIn("19 ta ixtisoslashgan agent", mp["metadata"]["description"])
 
         sec_txt = (VAULT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn("19 agents", sec_txt)
-        self.assertIn("19 skills", sec_txt)
+        self.assertIn("19 ta agent", sec_txt)
+        self.assertIn("19 ta skill", sec_txt)
 
     def test_audit_8_graph_api_defaults_to_v26_and_interpolates_dynamically(self) -> None:
         info_default = self.ma.get_interests("ecom")

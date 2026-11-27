@@ -384,7 +384,7 @@ class HarnessExportEntryTests(unittest.TestCase):
             self.assertIn("tyrion_universal_router", txt)
             self.assertIn("skills/tyrion/references/conductor-v7.md", txt)
             self.assertIn("single_conductor_fallback", txt)
-            self.assertIn("Never claim an agent was spawned", txt)
+            self.assertIn("Agent ishga tushirildi deb hech qachon da'vo qilmang", txt)
 
     def test_committed_cursor_windsurf_exports_are_not_stale(self) -> None:
         import tempfile
