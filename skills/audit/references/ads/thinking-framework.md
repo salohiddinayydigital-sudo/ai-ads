@@ -1,299 +1,235 @@
-# The 10-Principle Thinking Framework
+# 10 tamoyilli fikrlash freymvorki
 
-The shared cognitive discipline that runs underneath every claude-ads command.
-Load this file at the start of any audit, plan, or creative-output task. It
-is not a checklist or a phase model — it is a mindset gate. The framework is
-what separates a number-crunching report from a strategic deliverable.
+Har bir claude-ads buyrug'i ostida ishlaydigan umumiy kognitiv intizom. Har qanday audit, reja yoki kreativ natija
+vazifasi boshida shu faylni yuklang. Bu cheklist yoki bosqichlar modeli emas — fikrlash darvozasi. Freymvork raqamlarni
+hisoblaydigan hisobotni strategik natijadan ajratadi.
 
-The principles cluster in five pairs: two **OBSERVE** modes (looking out and
-looking in), one **LISTEN** mode (active receptivity), one **THINK** mode
-(critical processing), two **CONNECT** modes (lateral insight and system
-orchestration), one **FEEL** mode (emotional intelligence), one **ACCEPT**
-mode (intellectual humility), one **CREATE** mode (generative output), and
-one **GROW** mode (the iterative loop that closes the cycle).
+Tamoyillar beshta juftlikka birlashadi: ikkita **OBSERVE** rejimi (tashqariga va ichkariga qarash), bitta **LISTEN**
+rejimi (faol qabul qilish), bitta **THINK** rejimi (tanqidiy qayta ishlash), ikkita **CONNECT** rejimi (lateral idrok va
+tizim orkestratsiyasi), bitta **FEEL** rejimi (hissiy intellekt), bitta **ACCEPT** rejimi (intellektual kamtarlik),
+bitta **CREATE** rejimi (generativ natija) va bitta **GROW** rejimi (siklni yopadigan iterativ halqa).
 
-When in doubt, ask: *which principle am I in right now, and which one am I
-skipping?* The skipped principle is usually where the work is weakest.
+Shubhada o'zingizdan so'rang: *hozir men qaysi tamoyildaman va qaysinisini o'tkazib yuboryapman?* O'tkazib yuborilgan
+tamoyil odatda ish eng zaif bo'lgan joy.
 
 ---
 
-## 1. OBSERVE — External Input
+## 1. OBSERVE — Tashqi kirish
 
-**Definition.** Thinking begins with data collection. Look at the environment,
-analyze the landscape, and spot patterns and inefficiencies *without rushing
-to solve them*. Read the raw inputs of the situation.
+**Ta'rif.** Fikrlash ma'lumot yig'ishdan boshlanadi. Muhitga qarang, manzarani tahlil qiling, naqshlar va samarasizliklarni
+*ularni hal qilishga shoshilmasdan* aniqlang. Vaziyatning xom kirishlarini o'qing.
 
-**In ads work.**
-- Export the actual account data — search-term reports, GAQL queries, ad
-  library screenshots, MMP dashboards — before forming any hypothesis.
-- Capture the SERP and the competitor ad surface. What does the user see
-  before they click your client's ad?
-- Pull the landing page exactly as the ad audience pulls it (mobile, paid
-  source, fresh session). Don't audit a homepage when the ad goes to a PDP.
+**Reklama ishida.**
+- Har qanday gipoteza shakllantirishdan oldin haqiqiy akkaunt ma'lumotlarini eksport qiling — qidiruv iboralari hisobotlari,
+  GAQL so'rovlari, ad library skrinshotlari, MMP dashboardlari.
+- SERP va raqobatchi reklama yuzasini yozib oling. Foydalanuvchi mijozingiz reklamasini bosishdan oldin nimani ko'radi?
+- Landing sahifani reklama auditoriyasi ochgandek oching (mobil, pullik manba, yangi sessiya). Reklama PDP'ga olib borsa,
+  bosh sahifani audit qilmang.
 
-**Anti-pattern.** Diagnosing the problem from memory or from a generic
-checklist before opening the account. Recommending Smart Bidding without
-checking conversion volume. Critiquing a creative without seeing the safe
-zone overlay.
+**Anti-pattern.** Akkauntni ochmasdan, xotiradan yoki umumiy cheklistdan muammoni diagnostika qilish. Konversiya hajmini
+tekshirmay Smart Bidding'ni tavsiya qilish. Xavfsiz zona overlayini ko'rmasdan kreativni tanqid qilish.
 
-**Example trigger.** First step of every `/ads audit`, `/ads competitor`,
-`/ads dna`. The Context Intake section in `ads/SKILL.md` enforces this gate.
+**Misol trigger.** Har bir `/ads audit`, `/ads competitor`, `/ads dna` ning birinchi qadami. `ads/SKILL.md` dagi Context
+Intake bo'limi bu darvozani majburlaydi.
 
 ---
 
-## 2. OBSERVE — Internal Metacognition
+## 2. OBSERVE — Ichki metakognitsiya
 
-**Definition.** Observe yourself. Audit how you are thinking. Are you
-operating on assumptions? Do you have a bias in this analysis?
-Clarity requires stepping back and inspecting your own mental models.
+**Ta'rif.** O'zingizni kuzating. Qanday fikrlayotganingizni audit qiling. Taxminlarga tayanyapsizmi? Bu tahlilda
+noxolisligingiz bormi? Aniqlik uchun orqaga qadam tashlab, o'z mental modellaringizni tekshirish kerak.
 
-**In ads work.**
-- Notice when you are applying B2B-SaaS heuristics to a local plumber, or
-  e-commerce ROAS targets to a brand-awareness campaign.
-- Notice when you are penalizing an account because it doesn't match *your*
-  preferred structure (SKAG vs broad-match, manual vs Smart Bidding).
-- Notice when you are anchoring on the first KPI you saw and ignoring the
-  funnel beneath it.
+**Reklama ishida.**
+- B2B-SaaS evristikalarini mahalliy santexnikka yoki e-commerce ROAS maqsadlarini brend xabardorligi kampaniyasiga qo'llayotganingizni payqang.
+- Akkauntni *siz yoqtirgan* tuzilmaga (SKAG va broad-match, manual va Smart Bidding) mos kelmagani uchun jarimalayotganingizni payqang.
+- Birinchi ko'rgan KPI'ga ankerlanib, uning ostidagi voronkani e'tiborsiz qoldirayotganingizni payqang.
 
-**Anti-pattern.** Confidence in a recommendation that has not been stress-
-tested against a counter-hypothesis. "This campaign should be paused" with
-no acknowledgment that the campaign might be load-bearing in attribution
-that isn't visible to you yet.
+**Anti-pattern.** Qarama-qarshi gipotezaga qarshi sinab ko'rilmagan tavsiyaga ishonch. Kampaniya sizga hali ko'rinmaydigan
+atributsiyada yuk ko'taruvchi bo'lishi mumkinligini tan olmasdan "bu kampaniyani to'xtatish kerak".
 
-**Example trigger.** Before finalizing the prioritized action plan in any
-audit. Before recommending a structural change (rebuild vs optimize).
+**Misol trigger.** Har qanday auditda ustuvor harakat rejasini yakunlashdan oldin. Tuzilmaviy o'zgarishni (qayta qurish va
+optimallashtirish) tavsiya qilishdan oldin.
 
 ---
 
-## 3. LISTEN — Active Receptivity
+## 3. LISTEN — Faol qabul qilish
 
-**Definition.** Shut down the ego and absorb external feedback. Pay attention
-to user intent, community discussions, and the subtle signals in the noise
-that tell you what people *actually* need rather than what you think they
-need.
+**Ta'rif.** Egoni o'chirib, tashqi fikr-mulohazani qabul qiling. Foydalanuvchi niyati, hamjamiyat muhokamalari va shovqindagi
+nozik signallarga e'tibor bering — odamlarga *aslida* nima kerakligini, siz nima kerak deb o'ylayotganingizni emas.
 
-**In ads work.**
-- Read the campaign brief verbatim. What did the client actually say their
-  goal is, in their words? Don't translate "more leads" into "lower CPL"
-  without checking that's what they meant.
-- Listen to platform-side guidance (Google blog, Meta engineering, Microsoft
-  Advertising blog, Apple WWDC sessions) before recommending a feature.
-- Listen to the community: PPC subreddits, advertiser Slack groups, agency
-  practitioners reporting real-world results that diverge from vendor claims.
+**Reklama ishida.**
+- Kampaniya brifini so'zma-so'z o'qing. Mijoz maqsadini o'z so'zlari bilan nima dedi? "Ko'proq lidlar"ni shuni
+  nazarda tutganini tekshirmasdan "past CPL" ga tarjima qilmang.
+- Funksiyani tavsiya qilishdan oldin platforma yo'riqnomasini tinglang (Google blog, Meta engineering, Microsoft Advertising blog, Apple WWDC sessiyalari).
+- Hamjamiyatni tinglang: PPC subredditlari, reklama beruvchilar Slack guruhlari, vendor da'volaridan farq qiladigan haqiqiy natijalarni
+  xabar qilayotgan agentlik amaliyotchilari.
 
-**Anti-pattern.** Telling a brand-awareness advertiser to optimize for ROAS
-because that is what most audits recommend. Citing a vendor's official
-performance lift without sanity-checking against independent advertiser data.
+**Anti-pattern.** Brend xabardorligi reklama beruvchisiga ko'p auditlar shuni tavsiya qilgani uchun ROAS uchun optimallashtirishni
+aytish. Vendor'ning rasmiy natija liftini mustaqil reklama beruvchi ma'lumotlari bilan tekshirmasdan keltirish.
 
-**Example trigger.** `/ads create` and `/ads dna` — these commands are
-fundamentally about listening (to the client and to the brand respectively).
-Also: the Context Intake step at the start of every audit.
+**Misol trigger.** `/ads create` va `/ads dna` — bu buyruqlar mohiyatan tinglash haqida (mos ravishda mijozni va brendni).
+Shuningdek: har bir audit boshidagi Context Intake qadami.
 
 ---
 
-## 4. THINK — Critical Processing
+## 4. THINK — Tanqidiy qayta ishlash
 
-**Definition.** Once you have the inputs, break the problem down to first
-principles. Structure the logic, map the workflows, evaluate the constraints,
-and synthesize the raw data into a coherent strategy.
+**Ta'rif.** Kirishlar bo'lgach, muammoni birinchi tamoyillargacha parchalang. Mantiqni tuzing, ish jarayonlarini xaritalang,
+cheklovlarni baholang va xom ma'lumotni izchil strategiyaga sintez qiling.
 
-**In ads work.**
-- Compute unit economics by hand. Don't trust platform-attributed ROAS —
-  derive CAC, LTV:CAC, payback period, and MER from raw data. See
-  `references/budget-allocation.md` for the math.
-- Build the funnel: impression → click → landing → micro-conversion →
-  primary conversion → revenue → repeat. Where does the leak live?
-- Evaluate constraints from current eligibility, account history, conversion lag,
-  data volume, economics, and official documentation. Platform examples and
-  practitioner ratios are hypotheses, not universal budget or volume floors.
+**Reklama ishida.**
+- Unit-iqtisodni qo'lda hisoblang. Platforma atributsiyalagan ROAS'ga ishonmang — CAC, LTV:CAC, qoplanish davri va MER'ni xom
+  ma'lumotdan chiqaring. Matematika uchun `references/budget-allocation.md` ga qarang.
+- Voronkani quring: ko'rsatuv → klik → landing → mikro-konversiya → asosiy konversiya → daromad → takror. Sizib ketish qayerda?
+- Cheklovlarni joriy muvofiqlik, akkaunt tarixi, konversiya kechikishi, ma'lumot hajmi, iqtisod va rasmiy hujjatlardan baholang.
+  Platforma misollari va amaliyotchi nisbatlari — gipotezalar, universal byudjet yoki hajm pollari emas.
 
-**Anti-pattern.** Copying a "best practice" without checking whether the
-account meets the prerequisites. Trusting platform attribution as ground truth
-when the MMP, server-side, and platform numbers materially disagree without first
-reconciling definitions, windows, identity, consent, deduplication, currency, and
-timezone.
+**Anti-pattern.** Akkaunt shartlarga javob berishini tekshirmasdan "best practice"ni ko'chirish. MMP, server-side va platforma
+raqamlari sezilarli farq qilganda, avval ta'riflar, oynalar, identifikatsiya, rozilik, deduplikatsiya, valyuta va vaqt
+mintaqasini moslashtirmasdan platforma atributsiyasini haqiqat deb qabul qilish.
 
-**Example trigger.** `/ads math`, `/ads budget`, `/ads test`. Also the
-scoring and prioritization step of every audit.
+**Misol trigger.** `/ads math`, `/ads budget`, `/ads test`. Shuningdek har bir auditning ballash va ustuvorlashtirish qadami.
 
 ---
 
-## 5. CONNECT — Associative / Lateral Thinking
+## 5. CONNECT — Assotsiativ / lateral fikrlash
 
-**Definition.** Great insight lives at intersections. Take two seemingly
-unrelated concepts and link them to form a novel observation. The "aha"
-moment of finding the hidden relationship between distinct variables.
+**Ta'rif.** Ajoyib idrok kesishmalarda yashaydi. Bir-biriga aloqasiz ko'ringan ikki tushunchani bog'lab, yangi kuzatuv
+hosil qiling. Ikki alohida o'zgaruvchi o'rtasidagi yashirin munosabatni topishning "aha" lahzasi.
 
-**In ads work.**
-- A creative-similarity pattern may explain delivery only after account evidence
-  separates concept, audience, placement, bid, budget, and learning effects.
-- Search automation and feed-based inventory can change the role of keywords, but
-  current query evidence and campaign controls decide whether match types remain
-  material for this account.
-- App attribution, consent signals, browser and server events, and analytics form a
-  measurement system. A recommendation in one layer must be coherent with the
-  others and with the applicable geography and consent state.
+**Reklama ishida.**
+- Kreativ-o'xshashlik naqshi yetkazib berishni faqat akkaunt dalili konsept, auditoriya, placement, bid, byudjet va o'rganish
+  ta'sirlarini ajratgandan keyingina tushuntirishi mumkin.
+- Qidiruv avtomatlashtirishi va feed asosidagi inventar kalit so'zlar rolini o'zgartirishi mumkin, lekin joriy so'rov dalili va
+  kampaniya nazoratlari match turlari bu akkaunt uchun muhim bo'lib qoladimi-yo'qmi, hal qiladi.
+- Ilova atributsiyasi, rozilik signallari, brauzer va server eventlari hamda analitika o'lchov tizimini tashkil qiladi. Bir qatlamdagi
+  tavsiya boshqalar bilan va tegishli geografiya va rozilik holati bilan izchil bo'lishi kerak.
 
-**Anti-pattern.** Siloed platform audits that miss the cross-platform
-leverage. Recommending Meta creative diversity changes without noticing the
-same principle may apply to another platform after its delivery evidence is checked.
+**Anti-pattern.** Platformalararo ta'sirni o'tkazib yuboradigan yakkalangan platforma auditlari. Meta kreativ xilma-xillik
+o'zgarishlarini tavsiya qilib, xuddi shu tamoyil yetkazib berish dalili tekshirilgandan keyin boshqa platformaga ham tegishli
+bo'lishi mumkinligini payqamaslik.
 
-**Example trigger.** `/ads plan`, `/ads competitor`, the synthesis step of
-`/ads audit` after sub-agents return.
+**Misol trigger.** `/ads plan`, `/ads competitor`, sub-agentlar qaytgandan keyin `/ads audit` sintez qadami.
 
 ---
 
-## 6. CONNECT — System Orchestration
+## 6. CONNECT — Tizim orkestratsiyasi
 
-**Definition.** Move from isolated idea to integrated system. How do
-individual thoughts, tools, and agents plug into one another to create a
-seamless, functioning whole? The principle of building the wiring.
+**Ta'rif.** Yakkalangan g'oyadan integratsiyalangan tizimga o'ting. Alohida fikrlar, asboblar va agentlar bir-biriga qanday
+ulanib, uzluksiz ishlaydigan butunlikni yaratadi? Simlarni qurish tamoyili.
 
-**In ads work.**
-- The creative pipeline IS a connected system:
-  `/ads dna` → `/ads create` → `/ads generate` → `/ads photoshoot`. Each
-  output feeds the next. Don't run them in isolation.
-- The tracking pipeline is a system: browser signals, server events, consent,
-  analytics, app attribution, and business outcomes. A recommendation in
-  `/ads tracking` must be coherent with `/ads attribution`.
-- Bounded workers in `/ads audit` are orchestrated, not parallel-only. Their
-  schema-valid findings return to one conductor and the deterministic engine;
-  failed required workers make the result partial rather than disappearing.
+**Reklama ishida.**
+- Kreativ pipeline — ulangan tizim: `/ads dna` → `/ads create` → `/ads generate` → `/ads photoshoot`. Har bir chiqish
+  keyingisini oziqlantiradi. Ularni alohida ishlatmang.
+- Treking pipeline — tizim: brauzer signallari, server eventlari, rozilik, analitika, ilova atributsiyasi va biznes natijalari.
+  `/ads tracking` dagi tavsiya `/ads attribution` bilan izchil bo'lishi kerak.
+- `/ads audit` dagi chegaralangan worker'lar faqat parallel emas, orkestratsiya qilinadi. Ularning sxemaga mos topilmalari bitta
+  dirijyor va deterministik dvigatelga qaytadi; muvaffaqiyatsiz majburiy worker'lar natijani yo'qotmasdan, qisman qiladi.
 
-**Anti-pattern.** Recommending fixes that conflict with each other.
-"Increase budget" and "pause this campaign" in the same audit
-without acknowledging the trade-off. Asking the user to run six sub-skills
-manually instead of orchestrating them.
+**Anti-pattern.** Bir-biriga zid tuzatishlarni tavsiya qilish. Bir auditda savdo-sotiqni tan olmasdan "byudjetni oshiring" va
+"bu kampaniyani to'xtating". Foydalanuvchidan oltita sub-skillni qo'lda yurgizishni so'rash, ularni orkestratsiya qilish o'rniga.
 
-**Example trigger.** Every full audit (`/ads audit`). Every multi-step
-deliverable (`/ads plan` → `/ads create` → `/ads generate`).
+**Misol trigger.** Har bir to'liq audit (`/ads audit`). Har bir ko'p qadamli natija (`/ads plan` → `/ads create` → `/ads generate`).
 
 ---
 
-## 7. FEEL — Emotional Intelligence & Intuition
+## 7. FEEL — Hissiy intellekt va intuitsiya
 
-**Definition.** Pure logic is brittle without empathy. Factor in the human
-element: user experience, emotional resonance of messaging, hard-earned
-intuition when the data is ambiguous.
+**Ta'rif.** Sof mantiq hamdardliksiz mo'rt. Inson omilini hisobga oling: foydalanuvchi tajribasi, xabarning hissiy rezonansi
+va ma'lumot noaniq bo'lganda qiyinchilik bilan orttirilgan intuitsiya.
 
-**In ads work.**
-- Read the ad copy emotionally. Does the headline make a user feel something
-  *they want to feel*? See `references/copy-frameworks.md` for the six
-  proven emotional frameworks.
-- Look at the landing page as a first-time visitor would. Where is the
-  curiosity? Where is the resolution? Is the CTA at the right moment?
-- Use informed intuition to propose creative hypotheses when data is ambiguous,
-  then label and test them. A spec-compliant ad can still be a weak hypothesis;
-  keep qualitative resonance separate from deterministic platform-health scoring.
-- Brand voice mapping: `references/voice-to-style.md` translates emotional
-  attributes into concrete visual choices.
+**Reklama ishida.**
+- Reklama matnini hissiy o'qing. Sarlavha foydalanuvchida *u his qilishni istagan* narsani uyg'otadimi? Oltita sinalgan hissiy
+  freymvork uchun `references/copy-frameworks.md` ga qarang.
+- Landing sahifaga birinchi marta kelgan tashrif buyuruvchidek qarang. Qiziqish qayerda? Yechim qayerda? CTA to'g'ri paytdami?
+- Ma'lumot noaniq bo'lganda kreativ gipotezalarni taklif qilish uchun asoslangan intuitsiyadan foydalaning, so'ng ularni
+  belgilang va sinang. Spetsifikatsiyaga mos reklama baribir zaif gipoteza bo'lishi mumkin; sifatiy rezonansni deterministik
+  platforma-sog'liq ballashidan ajrating.
+- Brend ovozi xaritasi: `references/voice-to-style.md` hissiy atributlarni aniq vizual tanlovlarga o'giradi.
 
-**Anti-pattern.** A scoring rubric that rewards "spec compliance" and
-penalizes nothing about emotional flatness. A creative review that lists
-safe-zone metrics but never asks whether the ad makes anyone feel anything.
+**Anti-pattern.** "Spetsifikatsiyaga muvofiqlik"ni mukofotlab, hissiy yassilik uchun hech narsa jarimalamaydigan ballash rubrikasi.
+Xavfsiz zona metrikalarini sanab o'tib, reklama kimgadir biror narsa his qildiradimi, deb hech so'ramaydigan kreativ ko'rib chiqish.
 
-**Example trigger.** `/ads creative`, `/ads landing`, `/ads create`,
-`/ads generate`, `/ads photoshoot`.
+**Misol trigger.** `/ads creative`, `/ads landing`, `/ads create`, `/ads generate`, `/ads photoshoot`.
 
 ---
 
-## 8. ACCEPT — Intellectual Humility
+## 8. ACCEPT — Intellektual kamtarlik
 
-**Definition.** No plan survives first contact with reality. Embrace
-constraints, acknowledge when a hypothesis failed, recognize when the
-market wants something different than what you built. Let go of sunk costs
-to pivot efficiently.
+**Ta'rif.** Hech bir reja haqiqat bilan birinchi to'qnashuvdan omon qolmaydi. Cheklovlarni qabul qiling, gipoteza muvaffaqiyatsiz
+bo'lganini tan oling, bozor siz qurganingizdan boshqa narsani xohlayotganini anglang. Samarali burilish uchun cho'kkan xarajatlardan voz keching.
 
-**In ads work.**
-- If a campaign misses its owner-approved economics after conversion lag and a
-  sufficient decision window, accept the evidence and compare pause, redesign,
-  reallocation, or continued learning. A fixed CPA multiple or attempt count is
-  not a universal stop rule and never authorizes an account mutation.
-- If an audit recommendation was implemented and didn't move the needle in
-  the measurement window, accept it and move on — don't double down.
-- If a client's stated goal doesn't match their data signal (says "leads"
-  but only revenue events are tracked), name the gap rather than
-  rationalizing it.
+**Reklama ishida.**
+- Kampaniya konversiya kechikishi va yetarli qaror oynasidan keyin egasi tasdiqlagan iqtisodga yetmasa, dalilni qabul qiling
+  va pauza, qayta dizayn, qayta taqsimlash yoki o'rganishni davom ettirishni solishtiring. Qat'iy CPA karrali qiymati yoki
+  urinishlar soni universal to'xtatish qoidasi emas va hech qachon akkauntni o'zgartirishga ruxsat bermaydi.
+- Audit tavsiyasi amalga oshirilib, o'lchov oynasida ko'rsatkichni siljitmagan bo'lsa, buni qabul qilib davom eting —
+  ustiga ikki baravar tikmang.
+- Mijozning e'lon qilingan maqsadi ma'lumot signaliga mos kelmasa ("lidlar" deydi, lekin faqat daromad eventlari kuzatiladi),
+  uni oqlamasdan, bo'shliqni nomlang.
 
-**Anti-pattern.** Defending a "best practice" recommendation when the
-account's history shows it has failed twice. Continuing to optimize a dying
-campaign because pausing feels like admitting defeat.
+**Anti-pattern.** Akkaunt tarixi ikki marta muvaffaqiyatsizlikni ko'rsatganda "best practice" tavsiyasini himoya qilish.
+O'layotgan kampaniyani optimallashtirishni davom ettirish, chunki pauza qilish mag'lubiyatni tan olishdek tuyuladi.
 
-**Example trigger.** `/ads budget` (kill rules), the prioritized action
-plan at the end of `/ads audit`, post-test review after `/ads test`.
+**Misol trigger.** `/ads budget` (kill qoidalari), `/ads audit` oxiridagi ustuvor harakat rejasi, `/ads test` dan keyingi test ko'rib chiqishi.
 
 ---
 
-## 9. CREATE — Generative Output
+## 9. CREATE — Generativ natija
 
-**Definition.** Analysis paralysis is the enemy of progress. At some point
-you stop strategizing and start producing. Move from consumption to action:
-write the code, draft the content, ship the deliverable.
+**Ta'rif.** Tahlil falajligi — taraqqiyot dushmani. Bir nuqtada strategiya tuzishni to'xtatib, ishlab chiqarishni boshlaysiz.
+Iste'moldan harakatga o'ting: kodni yozing, kontentni qoralang, natijani topshiring.
 
-**In ads work.**
-- Ship the audit report. Don't produce a 50-page analysis with no concrete
-  recommendations or owner per action item.
-- Write the actual ad copy, not a copy brief about a copy brief.
-- Generate the ad assets through `/ads generate` — don't stop at the
-  conceptual stage.
-- Render requested formats from the canonical JSON bundle. Run the current report
-  and release validation commands documented in the repository, then inspect the
-  output before delivery. Do not name a script or format that is absent.
+**Reklama ishida.**
+- Audit hisobotini topshiring. Aniq tavsiyalarsiz yoki har bir harakat bandi uchun egasisiz 50 betlik tahlil yaratmang.
+- Haqiqiy reklama matnini yozing, matn haqidagi matn brifi haqida brif emas.
+- Reklama aktivlarini `/ads generate` orqali yarating — konseptual bosqichda to'xtamang.
+- So'ralgan formatlarni kanonik JSON to'plamdan render qiling. Repozitoriyda hujjatlashtirilgan joriy hisobot va reliz tekshiruv
+  buyruqlarini ishga tushiring, so'ng topshirishdan oldin natijani ko'zdan kechiring. Mavjud bo'lmagan skript yoki formatni nomlamang.
 
-**Anti-pattern.** Endless "more analysis needed" loops. A campaign brief
-that hedges every concept and forces the next collaborator to make every
-hard decision.
+**Anti-pattern.** Cheksiz "ko'proq tahlil kerak" tsikllari. Har bir konseptni chetlab o'tib, keyingi hamkorni har bir qiyin
+qarorni qabul qilishga majbur qiladigan kampaniya brifi.
 
-**Example trigger.** `/ads create`, `/ads generate`, `/ads photoshoot`,
-`/ads report`. Also the final synthesis step of any audit.
+**Misol trigger.** `/ads create`, `/ads generate`, `/ads photoshoot`, `/ads report`. Shuningdek har qanday auditning yakuniy sintez qadami.
 
 ---
 
-## 10. GROW — The Iterative Loop
+## 10. GROW — Iterativ halqa
 
-**Definition.** Thinking is not a straight line; it is a feedback loop.
-Take what you built (CREATE), see how it performs in reality, and use
-those lessons to upgrade your skills and expand your capacity for the next
-cycle.
+**Ta'rif.** Fikrlash to'g'ri chiziq emas; u fikr-mulohaza halqasi. Qurgan narsangizni (CREATE) oling, uning haqiqatda qanday
+ishlashini ko'ring va bu saboqlarni keyingi sikl uchun ko'nikmalaringizni yangilash va imkoniyatingizni kengaytirish uchun ishlating.
 
-**In ads work.**
-- Every audit recommendation has a measurement plan attached. If you can't
-  measure whether it worked, you can't grow from it.
-- A/B test design in `/ads test`: hypothesis → significance → duration →
-  result → next hypothesis. The loop is the point.
-- Re-audit after a decision-appropriate observation window. Compare against the
-  baseline captured in the prior audit and account for conversion lag, seasonality,
-  experiment duration, and material intervening changes.
-- Carry forward what worked and what didn't into the next campaign brief.
-  `brand-profile.json` should evolve, not stay frozen.
+**Reklama ishida.**
+- Har bir audit tavsiyasiga o'lchov rejasi biriktirilgan. Ishlaganini o'lchay olmasangiz, undan o'sa olmaysiz.
+- `/ads test` dagi A/B test dizayni: gipoteza → ahamiyat → davomiylik → natija → keyingi gipoteza. Halqaning o'zi maqsad.
+- Qarorga mos kuzatuv oynasidan keyin qayta audit qiling. Oldingi auditda yozilgan baza bilan solishtiring va konversiya
+  kechikishi, mavsumiylik, eksperiment davomiyligi va oraliqdagi muhim o'zgarishlarni hisobga oling.
+- Nima ishlagani va nima ishlamaganini keyingi kampaniya brifiga olib o'ting. `brand-profile.json` qotib qolmasdan, rivojlanishi kerak.
 
-**Anti-pattern.** One-shot audits with no follow-up. Recommendations
-without measurement criteria. Treating each campaign as if the lessons from
-the last one don't apply.
+**Anti-pattern.** Kuzatuvsiz bir martalik auditlar. O'lchov mezonlarisiz tavsiyalar. Har bir kampaniyaga oxirgisidan olingan
+saboqlar tegishli emasdek munosabat qilish.
 
-**Example trigger.** Closing step of every major deliverable. Built into
-`/ads test`, and into the re-audit cycle that `/ads audit` implicitly
-invites.
+**Misol trigger.** Har bir yirik natijaning yakunlovchi qadami. `/ads test` ga va `/ads audit` bevosita taklif qiladigan
+qayta audit siklining ichiga o'rnatilgan.
 
 ---
 
-## Workflow map
+## Ish jarayoni xaritasi
 
-Which principle dominates at each step of the canonical workflow:
+Kanonik ish jarayonining har bir qadamida qaysi tamoyil ustun:
 
-| Stage | Dominant principles | Why |
+| Bosqich | Ustun tamoyillar | Nega |
 |---|---|---|
-| Context Intake (start of every command) | OBSERVE (External), LISTEN | Read the account, read the brief |
-| `/ads dna <url>` | OBSERVE, LISTEN | Brand listening made concrete |
-| `/ads audit` — data collection | OBSERVE, OBSERVE-Internal | Pull data; check your own biases |
-| `/ads audit` — analysis | THINK, CONNECT-Lateral | First-principles math; cross-platform synthesis |
-| `/ads audit` — synthesis & scoring | CONNECT-System, ACCEPT | Wire findings together; accept uncertainty and failed hypotheses |
-| `/ads plan` | THINK, CONNECT-Lateral, FEEL | Strategy = math + insight + empathy |
-| `/ads create` | LISTEN, FEEL, CREATE | Hear the brand; feel the audience; ship the brief |
-| `/ads generate` / `/ads photoshoot` | FEEL, CREATE | Produce with emotional intent |
-| `/ads report` | CREATE | Render the deliverable; close the loop |
-| Post-deliverable | GROW | Measure, learn, set up the next cycle |
+| Context Intake (har bir buyruq boshi) | OBSERVE (tashqi), LISTEN | Akkauntni o'qing, brifni o'qing |
+| `/ads dna <url>` | OBSERVE, LISTEN | Aniq ifodalangan brendni tinglash |
+| `/ads audit` — ma'lumot yig'ish | OBSERVE, OBSERVE-ichki | Ma'lumot oling; o'z noxolisligingizni tekshiring |
+| `/ads audit` — tahlil | THINK, CONNECT-lateral | Birinchi tamoyillar matematikasi; platformalararo sintez |
+| `/ads audit` — sintez va ballash | CONNECT-tizim, ACCEPT | Topilmalarni bog'lang; noaniqlik va muvaffaqiyatsiz gipotezalarni qabul qiling |
+| `/ads plan` | THINK, CONNECT-lateral, FEEL | Strategiya = matematika + idrok + hamdardlik |
+| `/ads create` | LISTEN, FEEL, CREATE | Brendni eshiting; auditoriyani his qiling; brifni topshiring |
+| `/ads generate` / `/ads photoshoot` | FEEL, CREATE | Hissiy niyat bilan yarating |
+| `/ads report` | CREATE | Natijani render qiling; halqani yoping |
+| Natijadan keyin | GROW | O'lchang, o'rganing, keyingi siklni tayyorlang |
 
-If a stage you are in does not have its dominant principle engaged, you are
-producing weaker work than you could. Slow down and find which principle is
-missing.
+Hozirgi bosqichda ustun tamoyil ishga tushmagan bo'lsa, siz qila oladigandan zaifroq ish chiqarayapsiz. Sekinlashing va qaysi
+tamoyil yetishmayotganini toping.

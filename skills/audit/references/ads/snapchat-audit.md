@@ -1,54 +1,50 @@
-# Snapchat Ads control reference
+# Snapchat Ads nazorat referensi
 
-Retrieved: 2026-07-11. Refresh official platform and policy sources before using
-this reference after its control-plane refresh date.
+Olingan: 2026-07-11. Control-plane yangilanish sanasidan keyin bu referencedan foydalanishdan oldin
+rasmiy platforma va policy manbalarini yangilang.
 
-## Category model
+## Kategoriyalar modeli
 
-This reference does not define an executable scoring profile. Bind a versioned
-profile whose categories cover the applicable controls and whose weights total 100;
-otherwise produce findings without a health score.
+Bu reference bajariladigan ballash profilini belgilamaydi. Tegishli nazoratlarni qamrab oluvchi va
+vaznlari jami 100 bo'lgan versiyalangan profilni bog'lang; aks holda sog'liq balisiz topilmalarni
+yarating.
 
-## Runtime evaluation contract
+## Runtime baholash kontrakti
 
-- Treat each row as an applicability-first evidence question. Missing evidence is
-  `unknown`; unavailable or ineligible surfaces are `not_applicable`.
-- Verify objective, placement, geography, measurement path, reporting lifecycle,
-  catalog use, policy, and account eligibility before evaluation.
-- The registered source below grounds the Marketing API surface only. Current
-  Pixel, CAPI, measurement, report-field, format, policy, and availability claims
-  require additional dated official source IDs or account evidence.
-- This reference is advisory and export-read only. It does not provide a live Snap
-  API reader or mutation adapter.
+- Har bir qatorni avval qo'llanilishni tekshiradigan dalil savoli deb qarang. Yo'q dalil — `unknown`;
+  mavjud bo'lmagan yoki yaroqsiz yuzalar — `not_applicable`.
+- Baholashdan oldin maqsad, placement, geografiya, o'lchov yo'li, hisobot hayot sikli, katalogdan foydalanish, policy va akkaunt muvofiqligini tekshiring.
+- Quyidagi ro'yxatdan o'tgan manba faqat Marketing API yuzasini asoslaydi. Joriy Pixel, CAPI, o'lchov, hisobot maydoni, format, policy va mavjudlik da'volari qo'shimcha sanalangan rasmiy manba ID yoki
+  akkaunt dalilini talab qiladi.
+- Bu reference faqat maslahat va eksportni o'qish uchun. U jonli Snap API o'quvchisi yoki o'zgartirish adapterini bermaydi.
 
-## Controls
+## Nazoratlar
 
-| ID | Category | Evidence question |
+| ID | Kategoriya | Dalil savoli |
 | --- | --- | --- |
-| SC-M01 | Measurement | Snap Pixel, Conversions API, MMP, or offline source is declared and verified. |
-| SC-M02 | Measurement | Events and values match the objective and use documented deduplication when needed. |
-| SC-M03 | Measurement | App campaigns include the required app measurement configuration. |
-| SC-M04 | Measurement | Attribution windows and report fields are explicit and comparable. |
-| SC-R01 | Reporting | Date boundaries use the ad-account timezone and the data-finalization window is disclosed. |
-| SC-R02 | Reporting | Large or product-level reports use the supported asynchronous lifecycle. |
-| SC-S01 | Structure | Campaign, ad-squad, ad, creative, and objective relationships are valid. |
-| SC-S02 | Structure | Optimization, placements, and delivery choices match the declared outcome. |
-| SC-A01 | Audience | Audience, geography, device, and first-party targeting are intentional and eligible. |
-| SC-C01 | Creative | Creative is mobile-first and native to the selected Snap placement. |
-| SC-C02 | Creative | Materially different hooks, formats, and concepts are available for testing. |
-| SC-C03 | Creative | AR, Lens, Story, collection, or lead formats use their required assets and destinations. |
-| SC-D01 | Retail | Catalog mappings, product availability, and product-level reporting validate when DPA is used. |
-| SC-B01 | Budget | Budget, bid, pacing, and campaign caps are viable and use correct currency units. |
-| SC-P01 | Policy | Brand-safety, age, privacy, regulated-category, and review-status constraints are checked. |
-| SC-E01 | Experiment | Tests isolate one decision and account for reporting latency. |
+| SC-M01 | Measurement | Snap Pixel, Conversions API, MMP yoki oflayn manba e'lon qilingan va tekshirilgan. |
+| SC-M02 | Measurement | Eventlar va qiymatlar maqsadga mos va kerak bo'lganda hujjatlashtirilgan deduplikatsiyadan foydalanadi. |
+| SC-M03 | Measurement | Ilova kampaniyalari kerakli ilova o'lchov konfiguratsiyasini o'z ichiga oladi. |
+| SC-M04 | Measurement | Atributsiya oynalari va hisobot maydonlari aniq va taqqoslanadigan. |
+| SC-R01 | Reporting | Sana chegaralari reklama akkaunti vaqt mintaqasidan foydalanadi va ma'lumotni yakunlash oynasi oshkor qilingan. |
+| SC-R02 | Reporting | Katta yoki mahsulot darajasidagi hisobotlar qo'llab-quvvatlanadigan asinxron hayot siklidan foydalanadi. |
+| SC-S01 | Structure | Kampaniya, ad-squad, reklama, kreativ va maqsad munosabatlari yaroqli. |
+| SC-S02 | Structure | Optimallashtirish, placementlar va yetkazib berish tanlovlari e'lon qilingan natijaga mos. |
+| SC-A01 | Audience | Auditoriya, geografiya, qurilma va first-party targeting ongli va yaroqli. |
+| SC-C01 | Creative | Kreativ mobile-first va tanlangan Snap placement uchun tabiiy. |
+| SC-C02 | Creative | Test uchun mazmunan farqli hooklar, formatlar va konseptlar mavjud. |
+| SC-C03 | Creative | AR, Lens, Story, collection yoki lead formatlari o'zlarining majburiy aktivlari va manzillaridan foydalanadi. |
+| SC-D01 | Retail | DPA ishlatilganda katalog xaritalari, mahsulot mavjudligi va mahsulot darajasidagi hisobotlar tekshiruvdan o'tadi. |
+| SC-B01 | Budget | Byudjet, bid, pacing va kampaniya shiftlari yaroqli va to'g'ri valyuta birliklaridan foydalanadi. |
+| SC-P01 | Policy | Brend xavfsizligi, yosh, maxfiylik, tartibga solinadigan kategoriya va ko'rib chiqish holati cheklovlari tekshirilgan. |
+| SC-E01 | Experiment | Testlar bitta qarorni ajratadi va hisobot kechikishini hisobga oladi. |
 
-Results use `pass`, `fail`, `unknown`, or `not_applicable`. Unknown controls
-reduce evidence coverage; unavailable, beta, premium, or ineligible features are
-unscored opportunities.
+`pass`, `fail`, `unknown` yoki `not_applicable` natijalaridan foydalaning. Noma'lum nazoratlar dalil
+qamrovini kamaytiradi; mavjud bo'lmagan, beta, premium yoki yaroqsiz funksiyalar ballanmagan imkoniyatlardir.
 
-## Registered official evidence
+## Ro'yxatdan o'tgan rasmiy dalil
 
 - `snap-marketing-api`: [Snap Marketing API](https://developers.snap.com/marketing-api/home)
 
-Official sources override this summary when they change. Unsupported controls stay
-`unknown`; practitioner material may supplement but not replace official evidence.
+Rasmiy manbalar o'zgarganda bu xulosadan ustun turadi. Qo'llab-quvvatlanmagan nazoratlar `unknown`
+bo'lib qoladi; amaliyotchi materiallari rasmiy dalilni to'ldirishi mumkin, lekin almashtira olmaydi.

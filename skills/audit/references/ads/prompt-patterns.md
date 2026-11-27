@@ -1,22 +1,18 @@
-# Claude Ads prompt patterns
+# Claude Ads prompt naqshlari
 
-These original examples specify routing, worker contracts, uncertainty, and
-mutation safety. Use them when behavior is subtle; do not load them for simple
-calculations or a clearly routed platform question.
+Bu original misollar marshrutlash, worker kontraktlari, noaniqlik va o'zgartirish xavfsizligini belgilaydi. Ulardan
+xatti-harakat nozik bo'lganda foydalaning; oddiy hisob-kitoblar yoki aniq marshrutlangan platforma savoli uchun yuklamang.
 
-## 1. Route by intended artifact
+## 1. Mo'ljallangan artefakt bo'yicha marshrutlash
 
-User: “Use this product photo to make four Meta ad concepts.”
+Foydalanuvchi: "Shu mahsulot fotosuratidan to'rtta Meta reklama konsepti yarat."
 
-- Route to `ads-create` when the user needs concepts, messaging, hooks, or briefs.
-- Route to `ads-generate` only when a validated brief exists and image files are
-  requested.
-- Route to `ads-photoshoot` when the primary request is product-photography
-  transformation rather than composed advertising concepts.
-- If the request includes both concept and rendering, run create, obtain approval,
-  then generate. Do not skip the intermediate manifest.
+- Foydalanuvchiga konseptlar, xabarlar, hooklar yoki brifler kerak bo'lganda `ads-create` ga yo'naltiring.
+- `ads-generate` ga faqat tasdiqlangan brif mavjud va tasvir fayllari so'ralganda yo'naltiring.
+- Asosiy so'rov kompozitsiyalangan reklama konseptlari emas, mahsulot fotosuratini o'zgartirish bo'lsa, `ads-photoshoot` ga yo'naltiring.
+- So'rov ham konsept, ham renderni o'z ichiga olsa, create ni ishga tushiring, tasdiq oling, so'ng generate. Oraliq manifestni o'tkazib yubormang.
 
-## 2. Bounded platform worker
+## 2. Chegaralangan platforma worker'i
 
 ```json
 {
@@ -33,25 +29,24 @@ User: “Use this product photo to make four Meta ad concepts.”
 }
 ```
 
-The worker returns findings and recovery hints to the conductor. It does not write
-`google-audit-results.md`, calculate a platform score, or broaden into budget work.
+Worker topilmalar va tiklash maslahatlarini dirijyorga qaytaradi. U `google-audit-results.md` ni yozmaydi, platforma
+balini hisoblamaydi va byudjet ishiga kengaymaydi.
 
-## 3. Missing evidence
+## 3. Yetishmayotgan dalil
 
-User: “My Meta CPA doubled. Pause the worst ads.”
+Foydalanuvchi: "Mening Meta CPA'm ikki baravar oshdi. Eng yomon reklamalarni pauza qil."
 
-If the supplied data lacks conversion lag, attribution definition, spend, sample
-size, recent changes, or current remote state:
+Berilgan ma'lumotlarda konversiya kechikishi, atributsiya ta'rifi, sarf, tanlama hajmi, so'nggi o'zgarishlar yoki joriy
+masofaviy holat yetishmasa:
 
-1. Record the observed CPA change only if windows are comparable.
-2. Return `needs_input` for a mutation.
-3. Offer a read-only diagnostic and an explicit data request.
-4. Do not apply a fixed CPA multiple or infer that the worst observed ad caused the
-   account-level change.
+1. Kuzatilgan CPA o'zgarishini faqat oynalar taqqoslanadigan bo'lsa yozing.
+2. O'zgartirish uchun `needs_input` qaytaring.
+3. Faqat o'qish diagnostikasi va aniq ma'lumot so'rovini taklif eting.
+4. Qat'iy CPA karrali qiymatini qo'llamang va kuzatilgan eng yomon reklama akkaunt darajasidagi o'zgarishga sabab bo'lgan deb xulosa qilmang.
 
-## 4. Approved mutation
+## 4. Tasdiqlangan o'zgartirish
 
-An approval is valid only for the exact mutation plan presented:
+Tasdiq faqat taqdim etilgan aniq o'zgartirish rejasi uchun yaroqli:
 
 ```json
 {
@@ -68,24 +63,22 @@ An approval is valid only for the exact mutation plan presented:
 }
 ```
 
-If remote state no longer matches `before`, stop and regenerate the plan. Approval
-for one campaign, budget, or date never transfers to another.
+Masofaviy holat `before` ga mos kelmasa, to'xtang va rejani qayta yarating. Bir kampaniya, byudjet yoki sana uchun tasdiq
+boshqasiga o'tmaydi.
 
-## 5. Research and independent verification
+## 5. Tadqiqot va mustaqil tekshiruv
 
-The research worker proposes source records and affected claims. A separate source
-verifier checks authority, date, scope, geography, methodology, license, and
-claim-to-source fit. Only then may the conductor update canonical references and
-tests. A community post can create a research lead; it cannot establish an official
-API or policy claim.
+Tadqiqot worker'i manba yozuvlari va ta'sirlangan da'volarni taklif qiladi. Alohida manba tekshiruvchisi vakolat, sana,
+qamrov, geografiya, metodologiya, litsenziya va da'vo-manba mosligini tekshiradi. Faqat shundan keyingina dirijyor
+kanonik referenslar va testlarni yangilashi mumkin. Hamjamiyat posti tadqiqot izini yaratishi mumkin; u rasmiy API yoki
+policy da'vosini o'rnata olmaydi.
 
-## 6. Partial full audit
+## 6. Qisman to'liq audit
 
-If Google, Meta, and tracking succeed but the requested Amazon worker fails
-authentication:
+Google, Meta va treking muvaffaqiyatli bo'lib, so'ralgan Amazon worker'i autentifikatsiyadan o'tmasa:
 
-- Preserve the successful platform results.
-- Mark the bundle `partial`.
-- Exclude Amazon from numerical portfolio health and display its missing weight.
-- Return the authentication recovery step.
-- Never title the deliverable “complete multi-platform audit.”
+- Muvaffaqiyatli platforma natijalarini saqlang.
+- To'plamni `partial` deb belgilang.
+- Amazon'ni raqamli portfel sog'lig'idan chiqarib tashlang va uning yetishmayotgan vaznini ko'rsating.
+- Autentifikatsiyani tiklash qadamini qaytaring.
+- Natijani hech qachon "to'liq ko'p platformali audit" deb nomlamang.

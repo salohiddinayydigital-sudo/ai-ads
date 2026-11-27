@@ -1,26 +1,25 @@
-# Budget Allocation and Scaling
+# Byudjet taqsimoti va masshtablash
 
-**Verified:** 2026-07-11
-**Refresh:** foundational review by 2027-01-07; platform eligibility at run time
-**Evidence status:** deterministic finance math; allocation heuristics are contextual
+**Tekshirilgan:** 2026-07-11
+**Yangilash:** asosiy ko'rib chiqish 2027-01-07 gacha; platforma muvofiqligi runtime'da
+**Dalil holati:** deterministik moliya matematikasi; taqsimot evristikalari kontekstual
 
-Allocate budget from business constraints and marginal evidence. Do not begin
-with a fixed platform mix, a minimum monthly spend, or a universal scaling step.
+Byudjetni biznes cheklovlari va marginal dalildan taqsimlang. Qat'iy platforma aralashmasi, minimal
+oylik sarf yoki universal masshtablash qadamidan boshlamang.
 
-## Required inputs
+## Majburiy kirishlar
 
-- Objective and accepted business outcome.
-- Gross margin or contribution margin and variable fulfilment costs.
-- Cash, credit, monthly, daily, platform, and campaign ceilings.
-- Target CPA, contribution per conversion, or target profit; state who approved it.
-- Conversion lag, sales-cycle lag, return/cancellation window, and data maturity.
-- Current spend, accepted conversions, value, and confidence by platform.
-- Contractual, geographic, policy, inventory, and creative-capacity constraints.
+- Maqsad va qabul qilingan biznes natijasi.
+- Yalpi marja yoki hissa marjasi va o'zgaruvchan bajarish xarajatlari.
+- Naqd pul, kredit, oylik, kunlik, platforma va kampaniya shiftlari.
+- Maqsad CPA, bir konversiyaga hissa yoki maqsad foyda; kim tasdiqlaganini ko'rsating.
+- Konversiya kechikishi, sotuv sikli kechikishi, qaytarish/bekor qilish oynasi va ma'lumot yetukligi.
+- Platforma bo'yicha joriy sarf, qabul qilingan konversiyalar, qiymat va ishonch.
+- Shartnoma, geografiya, policy, inventar va kreativ quvvat cheklovlari.
 
-Missing owner-approved ceilings blocks an account write. Missing economics makes
-the plan provisional.
+Egasi tasdiqlagan shiftlar yo'qligi akkauntga yozishni to'sadi. Iqtisod yo'qligi rejani muvaqqat qiladi.
 
-## Core math
+## Asosiy matematika
 
 ```text
 CPA = spend / accepted conversions
@@ -32,67 +31,62 @@ marginal_CPA = incremental spend / incremental accepted conversions
 marginal_ROAS = incremental accepted value / incremental spend
 ```
 
-Use net accepted value where returns, fraud, cancellations, duplicate leads, or
-sales rejection materially affect the result. Do not infer profit from platform
-ROAS alone.
+Qaytarishlar, firibgarlik, bekor qilishlar, dublikat lidlar yoki sotuv rad etilishi natijaga sezilarli
+ta'sir qilsa, sof qabul qilingan qiymatdan foydalaning. Foydani faqat platforma ROAS'idan chiqarmang.
 
-## Allocation sequence
+## Taqsimot ketma-ketligi
 
-1. Reserve non-negotiable commitments and measurement costs.
-2. Protect campaigns with causal or strong same-account evidence of positive
-   marginal contribution, subject to saturation and cash constraints.
-3. Fund bounded experiments with a declared hypothesis, minimum detectable
-   effect, decision date, and stop conditions.
-4. Hold a contingency only when the business has a defined use for it.
-5. Reallocate from the weakest marginal opportunity, not necessarily the worst
-   average CPA or ROAS.
+1. Muzokara qilinmaydigan majburiyatlar va o'lchov xarajatlarini zaxiralang.
+2. To'yinish va naqd pul cheklovlari doirasida musbat marginal hissaning sababiy yoki kuchli
+   shu-akkaunt dalili bo'lgan kampaniyalarni himoya qiling.
+3. E'lon qilingan gipoteza, minimal aniqlanadigan effekt, qaror sanasi va to'xtatish shartlari bilan
+   cheklangan eksperimentlarni moliyalashtiring.
+4. Zaxirani faqat biznesda uning aniq maqsadi bo'lgandagina ushlab turing.
+5. Qayta taqsimlashni eng yomon o'rtacha CPA yoki ROAS'dan emas, eng zaif marginal imkoniyatdan oling.
 
-Any “proven / growth / experiment” split is an operator policy, not a default.
-Record the chosen split and rationale in the run manifest.
+Har qanday "isbotlangan / o'sish / eksperiment" bo'linishi — operator siyosati, standart emas. Tanlangan
+bo'linish va asosini run manifestida yozing.
 
-## Scaling decision
+## Masshtablash qarori
 
-Draft a scale change only when all are true:
+Masshtablash o'zgarishini faqat barcha shartlar bajarilganda qoralang:
 
-- The conversion and revenue data have matured through the relevant lag.
-- Tracking, consent, policy, inventory, and landing experience are healthy enough
-  to interpret the result.
-- Marginal performance is within the owner-approved economic boundary.
-- The campaign is eligible for the proposed budget and bidding change.
-- The advertiser can absorb learning, delivery, and cash-flow volatility.
-- A before/after measure, verification window, and rollback trigger exist.
+- Konversiya va daromad ma'lumotlari tegishli kechikish davomida yetilgan.
+- Treking, rozilik, policy, inventar va landing tajribasi natijani talqin qilish uchun yetarlicha sog'lom.
+- Marginal natija egasi tasdiqlagan iqtisodiy chegarada.
+- Kampaniya taklif etilgan byudjet va bidding o'zgarishiga yaroqli.
+- Reklama beruvchi o'rganish, yetkazib berish va naqd pul oqimi tebranishini ko'tara oladi.
+- Oldin/keyin o'lchovi, tekshiruv oynasi va rollback trigeri mavjud.
 
-The size and timing of a change come from platform simulations, account history,
-conversion cycles, and blast-radius limits. No universal percentage is safe.
+O'zgarish hajmi va vaqti platforma simulyatsiyalari, akkaunt tarixi, konversiya sikllari va ta'sir doirasi
+chegaralaridan keladi. Hech bir universal foiz xavfsiz emas.
 
-## Pause or reduce decision
+## Pauza yoki qisqartirish qarori
 
-Do not pause solely because spend crosses a fixed multiple of target CPA. First
-check conversion lag, tracking outages, low sample size, downstream lead quality,
-seasonality, and whether the object is needed for an active experiment.
+Faqat sarf maqsad CPA'ning qat'iy karrali qiymatidan oshgani uchun pauza qilmang. Avval konversiya
+kechikishi, treking uzilishlari, kichik tanlama, keyingi lid sifati, mavsumiylik va obyekt faol
+eksperiment uchun kerak emasligini tekshiring.
 
-Immediate containment is appropriate for an owner-defined runaway-spend ceiling,
-policy or legal exposure, broken destination, confirmed tracking corruption, or
-unauthorized delivery. Prefer the smallest reversible action and preserve evidence.
+Zudlik bilan cheklash egasi belgilagan nazoratsiz sarf shifti, policy yoki huquqiy xavf, buzilgan manzil,
+tasdiqlangan treking buzilishi yoki ruxsatsiz yetkazib berish uchun mos. Eng kichik qaytariladigan
+harakatni afzal ko'ring va dalilni saqlang.
 
-## Portfolio view
+## Portfel ko'rinishi
 
-Compare platforms on accepted business outcomes over the same mature window.
-Include:
+Platformalarni bir xil yetuk oynada qabul qilingan biznes natijalari bo'yicha taqqoslang. Kiriting:
 
-- Spend share, accepted value share, and contribution after advertising.
-- Marginal rather than only average efficiency.
-- Confidence and evidence coverage.
-- Incrementality or holdout evidence where available.
-- Constraints that prevent movement, such as inventory, audience, policy, or
-  creative throughput.
+- Sarf ulushi, qabul qilingan qiymat ulushi va reklamadan keyingi hissa.
+- Faqat o'rtacha emas, marginal samaradorlik.
+- Ishonch va dalil qamrovi.
+- Mavjud bo'lsa inkrementallik yoki holdout dalili.
+- Harakatni to'sadigan cheklovlar: inventar, auditoriya, policy yoki kreativ o'tkazuvchanlik.
 
-When spend or accepted value is unavailable, do not fabricate proportional
-weights. Present scenarios and identify the missing decision input.
+Sarf yoki qabul qilingan qiymat mavjud bo'lmasa, mutanosib vaznlarni to'qimang. Ssenariylarni taqdim eting va
+yetishmayotgan qaror kirishini ko'rsating.
 
-## Change packet
+## O'zgarish paketi
 
-Every proposed reallocation states current and proposed amounts, affected object
-IDs, economic rationale, expected effect, uncertainty, learning impact, owner,
-approval, verification date, rollback threshold, and idempotency key. The
-recommendation remains a draft until the mutation gate passes.
+Har bir taklif etilgan qayta taqsimlash joriy va taklif etilgan summalarni, ta'sirlangan obyekt ID'larini,
+iqtisodiy asosni, kutilgan effektni, noaniqlikni, o'rganishga ta'sirni, egasini, tasdiqni, tekshiruv sanasini,
+rollback chegarasini va idempotentlik kalitini ko'rsatadi. O'zgartirish darvozasi o'tmaguncha tavsiya
+qoralama bo'lib qoladi.

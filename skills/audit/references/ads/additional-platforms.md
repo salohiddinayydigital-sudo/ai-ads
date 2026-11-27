@@ -1,61 +1,55 @@
-# Adjacent advertising channels
+# Qo'shni reklama kanallari
 
-Reddit, Pinterest, Snapchat, and X are first-class Claude Ads platforms. This
-reference covers channels outside the twelve-platform product contract. It is a
-discovery aid, not an assertion that an integration, placement, price, audience,
-or measurement feature is currently available.
+Reddit, Pinterest, Snapchat va X — Claude Ads'ning birinchi darajali platformalari. Bu reference
+o'n ikki platformali mahsulot kontraktidan tashqaridagi kanallarni qamrab oladi. U aniqlash
+yordamchisi bo'lib, integratsiya, placement, narx, auditoriya yoki o'lchov funksiyasi hozir
+mavjudligini tasdiqlamaydi.
 
-## Applicability gate
+## Qo'llanilish darvozasi
 
-Before recommending an adjacent channel, record:
+Qo'shni kanalni tavsiya qilishdan oldin quyidagilarni yozing:
 
-- the business objective, geography, audience, budget ceiling, and test horizon;
-- current inventory and account eligibility from an official dated source;
-- the buying route, fee model, minimum commitment, and cancellation terms;
-- the measurement path, attribution limitations, consent requirements, and a
-  channel-independent success measure;
-- the creative formats actually accepted by the selected publisher or exchange;
-- whether Claude Ads has an executable adapter, export contract, or only advisory
-  guidance for the channel.
+- biznes maqsadi, geografiya, auditoriya, byudjet shifti va test gorizonti;
+- rasmiy sanalangan manbadan joriy inventar va akkaunt muvofiqligi;
+- sotib olish yo'li, to'lov modeli, minimal majburiyat va bekor qilish shartlari;
+- o'lchov yo'li, atributsiya cheklovlari, rozilik talablari va kanalga bog'liq bo'lmagan muvaffaqiyat o'lchovi;
+- tanlangan publisher yoki birja haqiqatan qabul qiladigan kreativ formatlar;
+- Claude Ads'da kanal uchun bajariladigan adapter, eksport kontrakti yoki faqat maslahat ko'rsatmasi bor-yo'qligi.
 
-Without this evidence, return a research lead rather than a budget allocation.
-Do not borrow CPM, CPC, CPL, reach, demographic, or conversion assumptions from a
-different market or inventory type.
+Bu dalilsiz byudjet taqsimoti emas, tadqiqot izini (research lead) qaytaring. CPM, CPC, CPL, qamrov,
+demografik yoki konversiya taxminlarini boshqa bozor yoki inventar turidan olmang.
 
-## CTV and OTT
+## CTV va OTT
 
-Potential buying routes include publisher-direct, platform-managed, and
-programmatic inventory. Treat each as a different product. Verify publishers,
-device coverage, geography, skippability, frequency controls, brand-safety tools,
-household identity, reporting latency, and lift-study eligibility before planning.
+Mumkin bo'lgan sotib olish yo'llari: publisher-direct, platforma boshqaradigan va programmatic inventar.
+Har birini alohida mahsulot deb qarang. Rejalashdan oldin publisherlar, qurilma qamrovi, geografiya,
+o'tkazib yuborilish, chastota nazorati, brend xavfsizligi vositalari, xonadon identifikatsiyasi,
+hisobot kechikishi va lift-tadqiqot muvofiqligini tekshiring.
 
-CTV may fit an upper-funnel or incremental-reach hypothesis when the advertiser
-has appropriate video, a defensible reach or lift measure, and sufficient test
-control. It is not inherently unsuitable for response objectives, and a fixed
-monthly-spend threshold is not evidence of fit.
+Reklama beruvchida mos video, himoya qilsa bo'ladigan qamrov yoki lift o'lchovi va yetarli test nazorati
+bo'lsa, CTV yuqori voronka yoki qo'shimcha qamrov gipotezasiga mos kelishi mumkin. U javob maqsadlariga
+mohiyatan yaroqsiz emas va qat'iy oylik sarf chegarasi mosligining dalili emas.
 
-## Software directories and review platforms
+## Dasturiy ta'minot kataloglari va sharh platformalari
 
-Potential surfaces include software category directories, comparison sites, and
-review platforms. Verify whether the product is sold as media, sponsorship,
-lead-generation, or another commercial arrangement; definitions of a qualified
-lead and duplicate/refund rules often matter more than the headline price.
+Mumkin yuzalar: dasturiy ta'minot kategoriya kataloglari, taqqoslash saytlari va sharh platformalari.
+Mahsulot media, homiylik, lead-generation yoki boshqa tijoriy kelishuv sifatida sotilishini tekshiring;
+malakali lid ta'rifi va dublikat/qaytarish qoidalari ko'pincha sarlavha narxidan muhimroq.
 
-Consider a test only when category intent, review quality, deal economics, routing,
-consent, deduplication, and downstream revenue measurement are clear. Never infer
-minimum review counts, lead prices, or deal-value thresholds without current
-platform terms and the advertiser's own close-rate economics.
+Faqat kategoriya niyati, sharh sifati, bitim iqtisodi, yo'naltirish, rozilik, deduplikatsiya va keyingi
+daromad o'lchovi aniq bo'lgandagina testni ko'rib chiqing. Joriy platforma shartlari va reklama beruvchining
+o'z yopilish ko'rsatkichlari iqtisodisiz minimal sharhlar soni, lid narxi yoki bitim qiymati chegaralarini taxmin qilmang.
 
-## Other publisher or retail-media opportunities
+## Boshqa publisher yoki retail-media imkoniyatlari
 
-For any publisher, marketplace, retailer, creator network, or emerging ad surface:
+Har qanday publisher, marketplace, chakana sotuvchi, kreator tarmog'i yoki yangi reklama yuzasi uchun:
 
-1. register the official product, policy, specification, and measurement sources;
-2. classify availability by account, market, objective, placement, and buying route;
-3. map export or API fields before comparing performance with another platform;
-4. run a bounded experiment with owner-approved spend and stop conditions;
-5. keep announced, beta, premium, managed-service, and wait-listed capabilities
-   unscored until account evidence confirms access.
+1. rasmiy mahsulot, policy, spetsifikatsiya va o'lchov manbalarini ro'yxatdan o'tkazing;
+2. mavjudlikni akkaunt, bozor, maqsad, placement va sotib olish yo'li bo'yicha tasniflang;
+3. natijalarni boshqa platforma bilan solishtirishdan oldin eksport yoki API maydonlarini xaritalang;
+4. egasi tasdiqlagan sarf va to'xtatish shartlari bilan cheklangan eksperiment o'tkazing;
+5. e'lon qilingan, beta, premium, boshqariladigan xizmat va navbatdagi imkoniyatlarni akkaunt dalili
+   kirishni tasdiqlaguncha ballanmagan holda saqlang.
 
-Claude Ads remains read-only by default. An adjacent-channel recommendation never
-creates mutation authority or implies a live connector.
+Claude Ads standart bo'yicha faqat o'qish rejimida qoladi. Qo'shni kanal tavsiyasi hech qachon o'zgartirish
+vakolatini yaratmaydi va jonli konnektorni bildirmaydi.

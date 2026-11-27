@@ -1,85 +1,83 @@
-# Claude Ads scoring contract
+# Claude Ads ballash kontrakti
 
-The production scoring engine is the sole authority for health scores. Prompts,
-agents, reports, and tests must call it rather than reimplementing this document.
+Production ballash dvigateli sog'liq ballari uchun yagona vakolat hisoblanadi. Promptlar, agentlar, hisobotlar
+va testlar bu hujjatni qayta amalga oshirmasdan, uni chaqirishi kerak.
 
-## Outputs
+## Chiqishlar
 
-Keep four outputs separate:
+To'rtta chiqishni ajratib saqlang:
 
-1. `health_score`: observed performance and implementation health, 0-100.
-2. `evidence_coverage`: proportion of applicable control weight with known results.
-3. `regulatory_exposure`: independent P0/P1 risk summary, not score padding.
-4. `opportunities`: unscored optional, beta, premium, or ineligible capabilities.
+1. `health_score`: kuzatilgan natija va amalga oshirish sog'lig'i, 0–100.
+2. `evidence_coverage`: tegishli nazorat vaznining natijasi ma'lum bo'lgan ulushi.
+3. `regulatory_exposure`: ballni to'ldirmaydigan mustaqil P0/P1 xavf xulosasi.
+4. `opportunities`: ballanmaydigan ixtiyoriy, beta, premium yoki yaroqsiz imkoniyatlar.
 
-Do not publish a letter grade. Pair every score with coverage status and data window.
+Harfli baho e'lon qilmang. Har bir ballni qamrov holati va ma'lumot oynasi bilan birga bering.
 
-## Control states
+## Nazorat holatlari
 
-- `pass`: the evidence satisfies the control.
-- `fail`: the evidence does not satisfy the control.
-- `unknown`: applicable, but evidence is missing or inconclusive.
-- `not_applicable`: the control does not apply to this account or campaign.
+- `pass`: dalil nazoratni qondiradi.
+- `fail`: dalil nazoratni qondirmaydi.
+- `unknown`: qo'llaniladi, lekin dalil yo'q yoki aniq emas.
+- `not_applicable`: nazorat bu akkaunt yoki kampaniyaga tegishli emas.
 
-`not_applicable` is removed from health and coverage denominators. `unknown` is
-removed from health calculation but remains in the coverage denominator.
+`not_applicable` sog'liq va qamrov maxrajlaridan olib tashlanadi. `unknown` sog'liq hisobidan olib tashlanadi,
+lekin qamrov maxrajida qoladi.
 
-## Severity weights
+## Jiddiylik vaznlari
 
-| Severity | Weight | Meaning |
+| Jiddiylik | Vazn | Ma'nosi |
 | --- | ---: | --- |
-| critical | 5 | Immediate material revenue, data, account, privacy, or policy risk |
-| high | 3 | Material performance or operational risk |
-| medium | 1 | Meaningful improvement with lower urgency |
-| informational | 0 | Context or unscored opportunity |
+| critical | 5 | Zudlik bilan sezilarli daromad, ma'lumot, akkaunt, maxfiylik yoki policy xavfi |
+| high | 3 | Sezilarli natija yoki operatsion xavf |
+| medium | 1 | Past shoshilinchlikdagi ma'noli yaxshilanish |
+| informational | 0 | Kontekst yoki ballanmaydigan imkoniyat |
 
-Severity represents impact if the control fails. It must not be inflated because
-a feature is new or strategically interesting.
+Jiddiylik nazorat muvaffaqiyatsiz bo'lgandagi ta'sirni ifodalaydi. Funksiya yangi yoki strategik qiziqarli bo'lgani uchun
+uni oshirib yubormaslik kerak.
 
-## Category calculation
+## Kategoriya hisobi
 
-For each category, using known applicable controls only:
+Har bir kategoriya uchun faqat ma'lum tegishli nazoratlardan foydalanib:
 
 ```text
 category_health = 100 * sum(pass_weight) / sum(known_control_weight)
 ```
 
-where `control_weight` is the severity weight. A failed control earns zero. The
-category must not multiply its declared category weight into every control.
+bu yerda `control_weight` — jiddiylik vazni. Muvaffaqiyatsiz nazorat nol oladi. Kategoriya o'zining e'lon qilingan
+kategoriya vaznini har bir nazoratga ko'paytirmasligi kerak.
 
-Category coverage is:
+Kategoriya qamrovi:
 
 ```text
 category_coverage = 100 * sum(known_control_weight) / sum(applicable_control_weight)
 ```
 
-Platform health applies normalized category weights after category calculation:
+Platforma sog'lig'i kategoriya hisobidan keyin normallashtirilgan kategoriya vaznlarini qo'llaydi:
 
 ```text
 platform_health = sum(category_health * category_weight)
 ```
 
-The caller must supply a versioned scoring profile whose category weights total
-exactly 100; the production engine validates this invariant. The capability
-manifest describes executable platform surfaces and is not, by itself, a scoring
-profile. A category with no applicable controls is removed and the remaining
-category weights are renormalized for that run.
+Chaqiruvchi kategoriya vaznlari yig'indisi aniq 100 bo'lgan versiyalangan ballash profilini berishi shart; production
+dvigatel bu invariantni tekshiradi. Imkoniyatlar manifesti bajariladigan platforma yuzalarini tasvirlaydi va o'z-o'zidan
+ballash profili emas. Tegishli nazoratlari bo'lmagan kategoriya olib tashlanadi va qolgan kategoriya vaznlari shu run
+uchun qayta normallashtiriladi.
 
-## Coverage status
+## Qamrov holati
 
-| Coverage | Status | Reporting rule |
+| Qamrov | Holat | Hisobot qoidasi |
 | ---: | --- | --- |
-| 80-100% | graded | Publish health with coverage |
-| 60-79.99% | provisional | Publish health labeled provisional |
-| below 60% | insufficient_evidence | Do not present health as an account grade |
+| 80-100% | graded | Sog'liqni qamrov bilan e'lon qiling |
+| 60-79.99% | provisional | Sog'liqni provisional deb belgilab e'lon qiling |
+| 60% dan past | insufficient_evidence | Sog'liqni akkaunt bahosi sifatida taqdim etmang |
 
-Unknown critical controls must also appear in the priority output even when total
-coverage remains above 80%.
+Umumiy qamrov 80% dan yuqori bo'lib qolsa ham, noma'lum kritik nazoratlar ustuvorlik chiqishida ko'rinishi kerak.
 
-## Platform categories
+## Platforma kategoriyalari
 
-The following are initial product reference profiles. They are not inferred from
-platform behavior and do not become executable merely by appearing in this file:
+Quyidagilar — dastlabki mahsulot reference profillari. Ular platforma xatti-harakatidan xulosa qilinmagan va shu faylda
+paydo bo'lgani uchungina bajariladigan bo'lib qolmaydi:
 
 - Google: measurement 25, waste 20, structure 15, keywords 15, creative 15, settings 10.
 - Meta: measurement 25, creative 25, structure 20, audiences 15, delivery 10, policy 5.
@@ -94,41 +92,35 @@ platform behavior and do not become executable merely by appearing in this file:
 - Snapchat: measurement 25, creative 20, structure 20, audiences 15, delivery 10, policy 10.
 - X: measurement 25, structure 20, creative 20, audiences 15, delivery 10, policy 10.
 
-Before operational use, bind the selected profile to the run manifest and verify
-that its category names match the applicable controls. Change profiles only through
-a versioned product decision and regression analysis.
+Operatsion foydalanishdan oldin tanlangan profilni run manifestiga bog'lang va uning kategoriya nomlari tegishli nazoratlarga
+mos kelishini tekshiring. Profillarni faqat versiyalangan mahsulot qarori va regressiya tahlili orqali o'zgartiring.
 
-The executable state lives in
-`control-plane/manifests/control-registry.json` and
-`control-plane/manifests/scoring-profiles.json`. The current v1 profiles are
-explicitly disabled: catalog rows remain typed informational watchlists or
-source-refresh discovery items. A disabled profile yields no account health and
-zero approved evidence coverage. Do not copy the reference weights above into a
-run or assign severity in a prompt.
+Bajariladigan holat `control-plane/manifests/control-registry.json` va `control-plane/manifests/scoring-profiles.json`
+da yashaydi. Joriy v1 profillar aniq o'chirilgan: katalog qatorlari tipli axborot kuzatuv ro'yxatlari yoki
+manba-yangilash aniqlash elementlari bo'lib qoladi. O'chirilgan profil akkaunt sog'lig'ini bermaydi va tasdiqlangan
+dalil qamrovi nolga teng. Yuqoridagi reference vaznlarini runga ko'chirmang va promptda jiddiylik belgilamang.
 
-## Portfolio health
+## Portfel sog'lig'i
 
-Use platform spend from the same time window:
+Bir xil vaqt oynasidagi platforma sarfidan foydalaning:
 
 ```text
 portfolio_health = sum(platform_health * platform_spend_share)
 ```
 
-If spend is unavailable, equal-weight platforms and mark the result provisional.
-Do not include an insufficient-evidence platform in the numerical aggregate;
-surface its missing weight and the resulting portfolio coverage explicitly.
+Sarf mavjud bo'lmasa, platformalarni teng vaznli qiling va natijani provisional deb belgilang. Dalili yetarli bo'lmagan
+platformani raqamli jamlamaga qo'shmang; uning yetishmayotgan vazni va natijaviy portfel qamrovini aniq ko'rsating.
 
-## Deduplication and applicability
+## Deduplikatsiya va qo'llanilish
 
-- Model one canonical risk as one scored control with multiple observations.
-- Do not score both a root tracking failure and every symptom as separate penalties.
-- Record feature availability, account eligibility, geography, campaign type, and
-  maturity before declaring a control applicable.
-- Keep watch-list and upcoming-change items unscored until they affect the account.
-- Do not score adoption of a newly announced feature as health.
+- Bitta kanonik xavfni bir nechta kuzatuvli bitta ballanadigan nazorat sifatida modellang.
+- Asosiy treking nosozligini ham, uning har bir alomatini ham alohida jarima sifatida ballamang.
+- Nazoratni qo'llaniladigan deb e'lon qilishdan oldin funksiya mavjudligi, akkaunt muvofiqligi, geografiya, kampaniya turi va yetuklikni yozing.
+- Kuzatuv ro'yxati va kelgusi o'zgarish elementlarini akkauntga ta'sir qilmaguncha ballanmagan holda saqlang.
+- Yangi e'lon qilingan funksiyani qabul qilishni sog'liq sifatida ballamang.
 
-## Recommendations
+## Tavsiyalar
 
-Scores prioritize investigation; they do not authorize changes. Each recommendation
-must cite the relevant finding, declare confidence, consider sample size and
-conversion lag, and pass the mutation gate before any account write.
+Ballar tekshiruvni ustuvorlashtiradi; ular o'zgartirishlarga ruxsat bermaydi. Har bir tavsiya tegishli topilmani keltirishi,
+ishonchni e'lon qilishi, tanlama hajmi va konversiya kechikishini hisobga olishi hamda har qanday akkaunt yozishidan oldin
+o'zgartirish darvozasidan o'tishi kerak.

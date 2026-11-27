@@ -1,38 +1,35 @@
-# TikTok Ads creative generation contract
+# TikTok Ads kreativ yaratish kontrakti
 
-TikTok is not universally vertical-only, and upload acceptance, aspect ratios,
-audio, duration, copy fields, safe zones, and automation vary by ad format,
-placement, market, device, and account. Resolve the exact requirements from current
-official evidence and the selected account before generation.
+TikTok universal ravishda faqat vertikal emas; yuklash qabul qilinishi, nisbatlar, audio, davomiylik,
+matn maydonlari, xavfsiz zonalar va avtomatlashtirish reklama formati, placement, bozor, qurilma va
+akkauntga qarab farqlanadi. Yaratishdan oldin aniq talablarni joriy rasmiy dalil va tanlangan
+akkauntdan aniqlang.
 
-## Specification gate
+## Spetsifikatsiya darvozasi
 
-For each intended In-Feed, Spark, TopView, image, carousel, search, shopping, app,
-or other eligible surface, record the official source ID and date, objective,
-placement, identity/post ownership, ratio, dimensions, file type, codec, duration,
-audio requirements, copy fields, safe area, and account eligibility.
+Mo'ljallangan har bir In-Feed, Spark, TopView, tasvir, karusel, qidiruv, shopping, ilova yoki boshqa
+yaroqli yuza uchun rasmiy manba ID va sanasi, maqsad, placement, identifikatsiya/post egaligi, nisbat,
+o'lchamlar, fayl turi, kodek, davomiylik, audio talablari, matn maydonlari, xavfsiz zona va akkaunt
+muvofiqligini yozing.
 
-Return `needs_input` when the surface or specification cannot be verified. Do not
-reject horizontal, square, static, or silent assets by universal rule; determine
-their applicability for the selected format. Do not infer that an accepted asset
-will perform well.
+Yuza yoki spetsifikatsiya tekshirilmasa, `needs_input` qaytaring. Gorizontal, kvadrat, statik yoki
+ovozsiz aktivlarni universal qoida bilan rad etmang; tanlangan format uchun ularning qo'llanilishini
+aniqlang. Qabul qilingan aktiv yaxshi ishlaydi deb taxmin qilmang.
 
-## TikTok-specific review
+## TikTok'ka xos ko'rib chiqish
 
-- Preview UI overlays on the current placement and device. Use official templates
-  or preview tools rather than fixed pixel coordinates copied from an old guide.
-- Verify Spark authorization and post state before treating organic content as an
-  ad asset.
-- Treat sound as a creative and accessibility decision subject to format rules,
-  licensing, captions, brand context, and the user's likely sound-off behavior.
-- Keep concepts native to the audience and offer without fabricating UGC,
-  testimonials, identities, or performance proof.
-- Treat Smart+, Symphony, and other automated creative surfaces as discoverable
-  account capabilities; verify access, settings, asset use, and owner intent.
+- UI overlaylarini joriy placement va qurilmada oldindan ko'ring. Eski qo'llanmadan olingan qattiq piksel
+  koordinatalari o'rniga rasmiy shablon yoki preview vositalaridan foydalaning.
+- Organik kontentni reklama aktivi deb qarashdan oldin Spark avtorizatsiyasi va post holatini tekshiring.
+- Ovozni format qoidalari, litsenziya, subtitrlar, brend konteksti va foydalanuvchining ovozsiz ko'rish
+  odatiga bog'liq kreativ va qulaylik qarori deb qarang.
+- Konseptlarni UGC, sharhlar, shaxslar yoki natija isbotini to'qimasdan, auditoriya va taklifga tabiiy saqlang.
+- Smart+, Symphony va boshqa avtomatlashtirilgan kreativ yuzalarni akkaunt imkoniyatlari sifatida
+  aniqlang; kirish, sozlamalar, aktivdan foydalanish va egasi niyatini tekshiring.
 
-## Output contract
+## Natija kontrakti
 
-Record concept ID, placement, source IDs, ratio, dimensions, format, codec/duration/
-audio where relevant, identity authorization, copy, checksum, provenance, rights,
-safety review, and preview results. Generation remains draft-only and does not
-imply upload, post authorization, or live TikTok mutation support.
+Konsept ID, placement, manba ID'lar, nisbat, o'lchamlar, format, tegishli bo'lsa kodek/davomiylik/audio,
+identifikatsiya avtorizatsiyasi, matn, checksum, kelib chiqish, huquqlar, xavfsizlik ko'rigi va preview
+natijalarini yozing. Yaratish faqat qoralama bo'lib qoladi va yuklash, post avtorizatsiyasi yoki jonli
+TikTok o'zgartirish imkoniyatini bildirmaydi.

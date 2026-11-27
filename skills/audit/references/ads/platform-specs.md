@@ -1,73 +1,66 @@
-# Creative Specification Resolution
+# Kreativ spetsifikatsiyani aniqlash
 
-**Verified:** 2026-07-11
-**Refresh due:** 2026-08-10
-**Evidence status:** source index and validation workflow, not a universal spec sheet
+**Tekshirilgan:** 2026-07-11
+**Yangilash muddati:** 2026-08-10
+**Dalil holati:** manba indeksi va tekshiruv jarayoni, universal spetsifikatsiya jadvali emas
 
-Creative requirements vary by format, placement, objective, geography, account
-eligibility, and product release. Resolve the exact format before validating an
-asset. A single “platform spec” table is unsafe because it silently merges
-requirements that do not apply to the same placement.
+Kreativ talablar format, placement, maqsad, geografiya, akkaunt muvofiqligi va mahsulot relizlariga qarab farqlanadi.
+Aktivni tekshirishdan oldin aniq formatni aniqlang. Yagona "platforma spetsifikatsiyasi" jadvali xavfli, chunki u
+bir placementga tegishli bo'lmagan talablarni jimgina aralashtiradi.
 
-## Resolution order
+## Aniqlash tartibi
 
-1. Capture platform, objective, format, placement, destination, geography, and
-   the current account UI selection.
-2. Open the matching platform-specific creative reference.
-3. Verify volatile limits against the current official help page or API schema.
-4. Prefer the stricter requirement when an asset must serve across placements.
-5. Preview in the account UI and validate the rendered crop, overlays, text,
-   captions, audio, CTA, disclosure, and destination.
-6. Record source ID, retrieval date, observed UI/API version, and exceptions.
+1. Platforma, maqsad, format, placement, manzil, geografiya va joriy akkaunt UI tanlovini yozing.
+2. Mos platformaga xos kreativ referenceni oching.
+3. O'zgaruvchan chegaralarni joriy rasmiy yordam sahifasi yoki API sxemasi bilan tekshiring.
+4. Aktiv bir necha placementga xizmat qilishi kerak bo'lsa, qattiqroq talabni afzal ko'ring.
+5. Akkaunt UI'da oldindan ko'ring va render qilingan crop, overlaylar, matn, subtitrlar, audio, CTA, oshkor qilish va manzilni tekshiring.
+6. Manba ID, olingan sana, kuzatilgan UI/API versiyasi va istisnolarni yozing.
 
-If sources disagree, do not guess. Label the check `unknown`, preserve both
-values, and request a current preview or API validation.
+Manbalar bir-biriga zid bo'lsa, taxmin qilmang. Tekshiruvni `unknown` deb belgilang, ikkala qiymatni saqlang va joriy
+preview yoki API validatsiyasini so'rang.
 
-## Current source entry points
+## Joriy manba kirish nuqtalari
 
-| Platform | First-party source | Scope |
+| Platforma | Birlamchi manba | Qamrov |
 | --- | --- | --- |
-| Google / YouTube | `google-rsa-official` — [Responsive search ads](https://support.google.com/google-ads/answer/7684791) and [Google Ads asset requirements](https://support.google.com/adspolicy/answer/6368661) | Search text and general asset policy |
-| Meta | `meta-video-ads-official` — [Meta video ads](https://www.facebook.com/business/ads/video-ad-format) | Video placements and link to Ads Guide |
-| LinkedIn | `linkedin-ads-guide-official` — [LinkedIn Ads Guide](https://business.linkedin.com/marketing-solutions/success/ads-guide) | Current format entry points |
-| TikTok | `tiktok-ad-format-policy-official` — [Ad format and functionality](https://ads.tiktok.com/help/article/tiktok-ads-policy-ad-format-and-functionality) | Creative and editorial requirements |
-| Microsoft | `microsoft-ad-types-official` — [Ad types](https://help.ads.microsoft.com/apex/index/3/en-us/50879) | Current ad-type behavior |
-| Apple | `apple-ads-creative-official` — [Apple Ads creative help](https://ads.apple.com/app-store/help/ad-creative) | Apple Ads creative entry point |
-| Amazon | `amazon-creative-acceptance-official` — [Creative acceptance policies](https://advertising.amazon.com/resources/ad-policy/creative-acceptance) | Amazon Ads creative policy |
-| Reddit | `reddit-ads-help-official` — [Reddit Ads Help](https://business.reddithelp.com/s/) | Current Reddit help and policy discovery |
-| Pinterest | `pinterest-ad-specs-official` — [Pinterest ad specs](https://help.pinterest.com/en/business/article/pinterest-product-specs) | Pinterest formats and assets |
-| Snapchat | `snap-creative-specs-official` — [Snap creative specifications](https://forbusiness.snapchat.com/advertising/ad-formats) | Snap ad-format entry point |
-| X | `x-creative-specs-official` — [X Ads creative specs](https://business.x.com/en/help/campaign-setup/creative-ad-specifications) | X formats and assets |
+| Google / YouTube | `google-rsa-official` — [Responsive search ads](https://support.google.com/google-ads/answer/7684791) va [Google Ads asset requirements](https://support.google.com/adspolicy/answer/6368661) | Search matni va umumiy aktiv siyosati |
+| Meta | `meta-video-ads-official` — [Meta video ads](https://www.facebook.com/business/ads/video-ad-format) | Video placementlar va Ads Guide'ga havola |
+| LinkedIn | `linkedin-ads-guide-official` — [LinkedIn Ads Guide](https://business.linkedin.com/marketing-solutions/success/ads-guide) | Joriy format kirish nuqtalari |
+| TikTok | `tiktok-ad-format-policy-official` — [Ad format and functionality](https://ads.tiktok.com/help/article/tiktok-ads-policy-ad-format-and-functionality) | Kreativ va tahririy talablar |
+| Microsoft | `microsoft-ad-types-official` — [Ad types](https://help.ads.microsoft.com/apex/index/3/en-us/50879) | Joriy reklama turi xatti-harakati |
+| Apple | `apple-ads-creative-official` — [Apple Ads creative help](https://ads.apple.com/app-store/help/ad-creative) | Apple Ads kreativ kirish nuqtasi |
+| Amazon | `amazon-creative-acceptance-official` — [Creative acceptance policies](https://advertising.amazon.com/resources/ad-policy/creative-acceptance) | Amazon Ads kreativ siyosati |
+| Reddit | `reddit-ads-help-official` — [Reddit Ads Help](https://business.reddithelp.com/s/) | Joriy Reddit yordami va policy'ni aniqlash |
+| Pinterest | `pinterest-ad-specs-official` — [Pinterest ad specs](https://help.pinterest.com/en/business/article/pinterest-product-specs) | Pinterest formatlari va aktivlari |
+| Snapchat | `snap-creative-specs-official` — [Snap creative specifications](https://forbusiness.snapchat.com/advertising/ad-formats) | Snap reklama-formati kirish nuqtasi |
+| X | `x-creative-specs-official` — [X Ads creative specs](https://business.x.com/en/help/campaign-setup/creative-ad-specifications) | X formatlari va aktivlari |
 
-These pages are discovery points, not proof that every format is available in a
-given account. Re-check the active UI/API before emitting a pass or a mutation.
+Bu sahifalar — aniqlash nuqtalari, har bir format muayyan akkauntda mavjudligining isboti emas. Pass yoki o'zgartirish
+chiqarishdan oldin faol UI/API ni qayta tekshiring.
 
-## Precisely retained facts
+## Aniq saqlangan faktlar
 
-Google's current responsive-search-ad documentation says an RSA can accept up to
-15 headlines and four descriptions, and headline fields support up to 30
-characters. Microsoft's current ad-type page also says its RSA accepts up to 15
-headlines and four descriptions. These facts apply only to those named formats;
-they do not establish a cross-platform text standard.
+Google'ning joriy responsive-search-ad hujjatida RSA 15 tagacha sarlavha va to'rtta tavsifni qabul qilishi, sarlavha
+maydonlari esa 30 belgigacha qo'llab-quvvatlashi aytilgan. Microsoft'ning joriy ad-type sahifasida ham uning RSA'si
+15 tagacha sarlavha va to'rtta tavsifni qabul qilishi aytilgan. Bu faktlar faqat shu nomlangan formatlarga tegishli;
+ular platformalararo matn standartini belgilamaydi.
 
-## Validation output
+## Tekshiruv natijasi
 
-For each asset return:
+Har bir aktiv uchun qaytaring:
 
-- `platform`, `format`, `placement`, `objective`, and `geography`.
-- Observed dimensions, duration, file type, file size, text fields, audio,
-  captions, destination, CTA, and disclosure.
-- `pass`, `fail`, `unknown`, or `not_applicable` for each applicable requirement.
-- Official source ID and retrieval date for every precise limit.
-- Preview evidence and any crop or overlay risk.
-- Remediation that preserves the creative concept.
+- `platform`, `format`, `placement`, `objective` va `geography`.
+- Kuzatilgan o'lchamlar, davomiylik, fayl turi, fayl hajmi, matn maydonlari, audio, subtitrlar, manzil, CTA va oshkor qilish.
+- Har bir tegishli talab uchun `pass`, `fail`, `unknown` yoki `not_applicable`.
+- Har bir aniq chegara uchun rasmiy manba ID va olingan sana.
+- Preview dalili va har qanday crop yoki overlay xavfi.
+- Kreativ konseptni saqlaydigan tuzatish.
 
-## Non-universal rules
+## Universal bo'lmagan qoidalar
 
-- There is no universal vertical-video safe zone. Validate against the current
-  placement preview and platform overlay guidance.
-- Recommended sizes are not always minimum acceptance requirements; label them.
-- A platform upload success is not proof of policy approval or good rendering.
-- Character counts may use platform-specific normalization; validate through the
-  platform API/UI when exact acceptance matters.
-- Do not turn “best practice” asset counts or durations into compliance failures.
+- Universal vertikal-video xavfsiz zonasi yo'q. Joriy placement previewi va platforma overlay yo'riqnomasiga qarshi tekshiring.
+- Tavsiya etilgan o'lchamlar har doim minimal qabul qilish talabi emas; ularni belgilang.
+- Platformaga muvaffaqiyatli yuklash policy tasdig'i yoki yaxshi render isboti emas.
+- Belgilar soni platformaga xos normallashtirishdan foydalanishi mumkin; aniq qabul qilish muhim bo'lsa, platforma API/UI orqali tekshiring.
+- "Best practice" aktivlar soni yoki davomiyliklarini muvofiqlik nosozliklariga aylantirmang.

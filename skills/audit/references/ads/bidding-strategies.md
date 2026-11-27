@@ -1,88 +1,81 @@
-# Bidding Strategy Decisions
+# Bidding strategiyasi qarorlari
 
-**Verified:** 2026-07-11
-**Refresh due:** 2026-08-10
-**Primary source:** `google-smart-bidding-official` — [Google Ads Help: About Smart Bidding](https://support.google.com/google-ads/answer/7065882)
-**Supporting source:** `google-target-roas-official` — [Google Ads Help: About Target ROAS](https://support.google.com/google-ads/answer/6268637)
+**Tekshirilgan:** 2026-07-11
+**Yangilash muddati:** 2026-08-10
+**Asosiy manba:** `google-smart-bidding-official` — [Google Ads Help: About Smart Bidding](https://support.google.com/google-ads/answer/7065882)
+**Qo'shimcha manba:** `google-target-roas-official` — [Google Ads Help: About Target ROAS](https://support.google.com/google-ads/answer/6268637)
 
-Bidding is a control system, not a ladder unlocked by a universal conversion
-count. Select an eligible strategy from the campaign objective, value signal,
-delivery constraint, and measurement quality shown in the current account UI.
+Bidding — universal konversiyalar soni ochadigan zina emas, boshqaruv tizimi. Joriy akkaunt UI'da
+ko'rinadigan kampaniya maqsadi, qiymat signali, yetkazib berish cheklovi va o'lchov sifatidan kelib chiqib,
+yaroqli strategiyani tanlang.
 
-Google describes Target CPA, Target ROAS, Maximize conversions, and Maximize
-conversion value as Smart Bidding strategies that optimize at auction time.
-Availability and labels can change by campaign type; verify them at run time.
+Google Target CPA, Target ROAS, Maximize conversions va Maximize conversion value'ni auksion vaqtida
+optimallashtiradigan Smart Bidding strategiyalari deb ta'riflaydi. Mavjudlik va yorliqlar kampaniya
+turiga qarab o'zgarishi mumkin; ularni runtime'da tekshiring.
 
-## Decision inputs
+## Qaror kirishlari
 
-- Primary business objective: visibility, traffic, accepted conversions, value,
-  profit proxy, or another explicit outcome.
-- Conversion action, counting method, value source, attribution, and lag.
-- Historical volume and variance over complete conversion cycles.
-- Budget limitation, inventory limitation, seasonality, and auction coverage.
-- Owner-approved CPA, ROAS, contribution, cash, and policy boundaries.
-- Campaign-type eligibility and any beta, regional, or account restrictions.
+- Asosiy biznes maqsadi: ko'rinish, trafik, qabul qilingan konversiyalar, qiymat, foyda proksisi yoki boshqa aniq natija.
+- Konversiya harakati, hisoblash usuli, qiymat manbai, atributsiya va kechikish.
+- To'liq konversiya sikllari davomidagi tarixiy hajm va dispersiya.
+- Byudjet cheklovi, inventar cheklovi, mavsumiylik va auksion qamrovi.
+- Egasi tasdiqlagan CPA, ROAS, hissa, naqd pul va policy chegaralari.
+- Kampaniya turi muvofiqligi va har qanday beta, mintaqaviy yoki akkaunt cheklovlari.
 
-If optimization data are incomplete or corrupted, repair measurement before
-changing the bidder unless containment is required.
+Optimallashtirish ma'lumotlari to'liq bo'lmasa yoki buzilgan bo'lsa, cheklash zarur bo'lmasa, bidder'ni
+o'zgartirishdan oldin o'lchovni tuzating.
 
-## Strategy logic
+## Strategiya mantig'i
 
-| Goal | Candidate strategy | Evidence to verify |
+| Maqsad | Nomzod strategiya | Tekshiriladigan dalil |
 | --- | --- | --- |
-| Maximize accepted conversion volume within budget | Conversion-maximizing strategy | Primary conversion is valid; budget and lag are understood |
-| Hold an average acquisition-cost goal | Target-cost strategy | Target reflects mature account economics and is eligible |
-| Maximize accepted value within budget | Value-maximizing strategy | Values are complete, comparable, and timely |
-| Hold an average return goal | Target-return strategy | Value tracking and target economics are sound |
-| Visibility or reach | Impression/reach strategy | Outcome is truly visibility; placement and frequency constraints are explicit |
-| Exploration or measurement repair | Manual/traffic strategy where available | Time-boxed purpose, stop condition, and downstream risk are documented |
+| Byudjet doirasida qabul qilingan konversiyalar hajmini maksimallashtirish | Konversiyani maksimallashtiruvchi strategiya | Asosiy konversiya yaroqli; byudjet va kechikish tushunilgan |
+| O'rtacha jalb qilish xarajati maqsadini ushlab turish | Maqsadli-xarajat strategiyasi | Maqsad yetuk akkaunt iqtisodini aks ettiradi va yaroqli |
+| Byudjet doirasida qabul qilingan qiymatni maksimallashtirish | Qiymatni maksimallashtiruvchi strategiya | Qiymatlar to'liq, taqqoslanadigan va o'z vaqtida |
+| O'rtacha daromad maqsadini ushlab turish | Maqsadli-daromad strategiyasi | Qiymat treki va maqsad iqtisodi sog'lom |
+| Ko'rinish yoki qamrov | Ko'rsatuv/qamrov strategiyasi | Natija haqiqatan ko'rinish; placement va chastota cheklovlari aniq |
+| Izlanish yoki o'lchovni tuzatish | Mavjud bo'lsa qo'lda/trafik strategiyasi | Vaqt bilan cheklangan maqsad, to'xtatish sharti va keyingi xavf hujjatlashtirilgan |
 
-The exact platform label is an observed capability, not a cross-platform
-translation. Do not assume that similarly named strategies have identical
-auction behavior.
+Aniq platforma yorlig'i — kuzatilgan imkoniyat, platformalararo tarjima emas. O'xshash nomli
+strategiyalar bir xil auksion xatti-harakatiga ega deb o'ylamang.
 
-## Setting a target
+## Maqsadni belgilash
 
-Derive targets from accepted economics and mature account history. For Google
-Target ROAS, official guidance recommends using business goals and historical
-ROAS and evaluating over conversion cycles; the same page warns that an overly
-high target can restrict traffic. This is platform guidance, not a guaranteed
-outcome.
+Maqsadlarni qabul qilingan iqtisod va yetuk akkaunt tarixidan chiqaring. Google Target ROAS uchun rasmiy
+yo'riqnoma biznes maqsadlari va tarixiy ROAS'dan foydalanishni hamda konversiya sikllari bo'yicha
+baholashni tavsiya qiladi; o'sha sahifa haddan tashqari yuqori maqsad trafikni cheklashi mumkinligidan
+ogohlantiradi. Bu platforma yo'riqnomasi, kafolatlangan natija emas.
 
-Do not apply fixed target multipliers, fixed minimum conversion counts, or a
-fixed adjustment cadence across accounts. Record the source window, lag maturity,
-confidence interval or variance, and expected volume trade-off.
+Akkauntlar bo'ylab qat'iy maqsad ko'paytirgichlari, qat'iy minimal konversiyalar soni yoki qat'iy
+tuzatish kadansini qo'llamang. Manba oynasi, kechikish yetukligi, ishonch intervali yoki dispersiya va
+kutilgan hajm savdosini yozing.
 
-## Change discipline
+## O'zgartirish intizomi
 
-Before a bid change:
+Bid o'zgartirishdan oldin:
 
-1. Confirm no concurrent budget, conversion, targeting, creative, or policy
-   change would confound interpretation.
-2. Use the platform's current simulator or experiment feature when suitable.
-3. Define the evaluation window in conversion cycles, not arbitrary calendar days.
-4. Draft a reversible change with owner-approved boundaries.
-5. Verify delivery, spend, accepted outcomes, and remote state after application.
+1. Bir vaqtdagi byudjet, konversiya, targeting, kreativ yoki policy o'zgarishi talqinni chalkashtirmasligini tasdiqlang.
+2. Mos bo'lsa, platformaning joriy simulyatori yoki eksperiment funksiyasidan foydalaning.
+3. Baholash oynasini o'zboshimcha kalendar kunlarida emas, konversiya sikllarida belgilang.
+4. Egasi tasdiqlagan chegaralar bilan qaytariladigan o'zgarishni qoralang.
+5. Qo'llagandan keyin yetkazib berish, sarf, qabul qilingan natijalar va masofaviy holatni tekshiring.
 
-For Google target adjustments, the official guidance says the bidder reacts to
-target changes but may need one to two conversion cycles to reach the target.
-Treat that duration as Google-specific guidance and verify it against the active
-campaign, not as a universal freeze period.
+Google maqsad tuzatishlari uchun rasmiy yo'riqnoma bidder maqsad o'zgarishlariga reaksiya qilishini, ammo
+maqsadga yetish uchun bir-ikki konversiya sikli kerak bo'lishi mumkinligini aytadi. Bu muddatni Google'ga
+xos yo'riqnoma deb qarang va uni universal muzlatish davri sifatida emas, faol kampaniya bo'yicha tekshiring.
 
-## Diagnostic questions
+## Diagnostik savollar
 
-- Is under-delivery caused by target strictness, budget, eligibility, inventory,
-  creative, audience, policy, or tracking?
-- Is apparent efficiency an attribution or mix shift rather than incremental value?
-- Are values net of cancellations, low-quality leads, and repeat-customer rules?
-- Is a portfolio strategy grouping campaigns with genuinely compatible goals?
-- Would a bid change violate a learning, experiment, or contractual constraint?
+- Past yetkazib berishga maqsad qattiqligi, byudjet, muvofiqlik, inventar, kreativ, auditoriya, policy yoki treking sababchimi?
+- Ko'rinadigan samaradorlik inkremental qiymat emas, atributsiya yoki aralashma siljishimi?
+- Qiymatlar bekor qilishlar, sifatsiz lidlar va takroriy mijoz qoidalarini chiqarib tashlagan holda sof qiymatmi?
+- Portfel strategiyasi chindan mos maqsadli kampaniyalarni guruhlayaptimi?
+- Bid o'zgarishi o'rganish, eksperiment yoki shartnoma cheklovini buzadimi?
 
-## Unsafe recommendations
+## Xavfli tavsiyalar
 
-- “Use manual bidding below N conversions” without platform/account evidence.
-- “Change the target by N% every N days” as a universal rule.
-- Broad match, negative keywords, placement expansion, or automation adoption
-  prescribed solely from the bid strategy name.
-- Vendor-reported lift used as a forecast.
-- A bid mutation without exact account/object IDs, approval, verification, and rollback.
+- Platforma/akkaunt dalilisiz "N konversiyadan kam bo'lsa qo'lda bidding ishlating".
+- Universal qoida sifatida "maqsadni har N kunda N% ga o'zgartiring".
+- Faqat bid strategiyasi nomidan kelib chiqib buyurilgan broad match, negativ kalit so'zlar, placement kengaytirish yoki avtomatlashtirishni qabul qilish.
+- Prognoz sifatida ishlatilgan vendor ma'lum qilgan lift.
+- Aniq akkaunt/obyekt ID'lari, tasdiq, tekshiruv va rollbacksiz bid o'zgartirish.

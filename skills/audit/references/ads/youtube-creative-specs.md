@@ -1,38 +1,35 @@
-# YouTube Ads creative generation contract
+# YouTube Ads kreativ yaratish kontrakti
 
-Use this reference for video briefs, storyboards, thumbnails, companion assets, and
-Demand Gen assets intended for YouTube inventory. Exact duration, skippability,
-ratio, resolution, file size, safe zone, thumbnail control, and copy limits depend
-on campaign subtype and placement. Verify them from current official sources and
-the selected Google Ads account.
+YouTube inventari uchun mo'ljallangan video brifler, storyboardlar, thumbnaillar, companion aktivlar
+va Demand Gen aktivlari uchun shu referencedan foydalaning. Aniq davomiylik, o'tkazib yuborilish,
+nisbat, o'lcham, fayl hajmi, xavfsiz zona, thumbnail nazorati va matn chegaralari kampaniya
+kichik turi va placementga bog'liq. Ularni joriy rasmiy manbalar va tanlangan Google Ads akkauntidan tekshiring.
 
-## Specification gate
+## Spetsifikatsiya darvozasi
 
-For every intended in-stream, in-feed, Shorts, bumper, connected-TV, Demand Gen, or
-other surface, record objective, campaign subtype, inventory, geography, account
-eligibility, official source ID, duration, ratio, dimensions, file/codec limits,
-companion fields, safe areas, and skip or interaction behavior.
+Mo'ljallangan har bir in-stream, in-feed, Shorts, bumper, connected-TV, Demand Gen yoki boshqa yuza
+uchun maqsad, kampaniya kichik turi, inventar, geografiya, akkaunt muvofiqligi, rasmiy manba ID,
+davomiylik, nisbat, o'lchamlar, fayl/kodek chegaralari, companion maydonlari, xavfsiz zonalar va
+o'tkazib yuborish yoki o'zaro ta'sir xatti-harakatini yozing.
 
-Return `needs_input` when a current load-bearing specification is absent. Do not
-carry forward historical duration or skip rules, assume a custom thumbnail is
-available, or state that a visual treatment universally improves CTR.
+Joriy yuk ko'taruvchi spetsifikatsiya yo'q bo'lsa, `needs_input` qaytaring. Tarixiy davomiylik yoki
+o'tkazib yuborish qoidalarini ko'chirmang, maxsus thumbnail mavjud deb o'ylamang va biror vizual yondashuv
+CTR'ni universal oshiradi deb aytmang.
 
-## YouTube-specific review
+## YouTube'ga xos ko'rib chiqish
 
-- Treat the opening, narrative, brand reveal, CTA, captions, audio, and landing page
-  as one concept; a single storyboard frame is not a completed video ad.
-- Generate materially different hooks and stories. Color saturation, faces, shock,
-  and curiosity are hypotheses to test, not psychological laws.
-- Preview each horizontal, square, or vertical deliverable in its intended surface
-  using current overlays. Avoid hardcoded safe-zone pixels without a dated template.
-- Distinguish YouTube inventory from non-YouTube Demand Gen inventory in the asset
-  manifest and subsequent report.
-- Never claim the static image workflow renders a playable video. If no approved
-  video capability is installed, deliver a brief, storyboard, and asset plan only.
+- Ochilish, hikoya, brend ochilishi, CTA, subtitrlar, audio va landing sahifani bitta konsept deb
+  qarang; bitta storyboard kadri tugallangan video reklama emas.
+- Mazmunan farqli hooklar va hikoyalar yarating. Rang to'yinganligi, yuzlar, shok va qiziqish — sinaladigan
+  gipotezalar, psixologik qonunlar emas.
+- Har bir gorizontal, kvadrat yoki vertikal natijani joriy overlaylar bilan mo'ljallangan yuzada oldindan
+  ko'ring. Sanalangan shablonsiz qattiq xavfsiz zona piksellaridan qoching.
+- Aktiv manifesti va keyingi hisobotda YouTube inventarini YouTube bo'lmagan Demand Gen inventaridan ajrating.
+- Statik tasvir jarayoni ijro etiladigan video render qiladi deb hech qachon da'vo qilmang. Tasdiqlangan
+  video imkoniyati o'rnatilmagan bo'lsa, faqat brif, storyboard va aktiv rejasini bering.
 
-## Output contract
+## Natija kontrakti
 
-Record concept ID, surface, source IDs, duration, ratio, dimensions, format/codec,
-copy, captions/audio plan, checksum, provenance, rights, safety review, and preview
-results. Assets remain drafts until approved and upload-validated; no live YouTube
-write capability is implied.
+Konsept ID, yuza, manba ID'lar, davomiylik, nisbat, o'lchamlar, format/kodek, matn, subtitr/audio rejasi,
+checksum, kelib chiqish, huquqlar, xavfsizlik ko'rigi va preview natijalarini yozing. Aktivlar tasdiqlanmaguncha
+va yuklash tekshiruvidan o'tmaguncha qoralama bo'lib qoladi; jonli YouTube yozish imkoniyati nazarda tutilmaydi.

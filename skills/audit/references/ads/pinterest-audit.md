@@ -1,54 +1,50 @@
-# Pinterest Ads control reference
+# Pinterest Ads nazorat referensi
 
-Retrieved: 2026-07-11. Refresh official platform and policy sources before using
-this reference after its control-plane refresh date.
+Olingan: 2026-07-11. Control-plane yangilanish sanasidan keyin bu referencedan foydalanishdan oldin
+rasmiy platforma va policy manbalarini yangilang.
 
-## Category model
+## Kategoriyalar modeli
 
-This reference does not define an executable scoring profile. Bind a versioned
-profile whose categories cover the applicable controls and whose weights total 100;
-otherwise produce findings without a health score.
+Bu reference bajariladigan ballash profilini belgilamaydi. Tegishli nazoratlarni qamrab oluvchi va
+vaznlari jami 100 bo'lgan versiyalangan profilni bog'lang; aks holda sog'liq balisiz topilmalarni
+yarating.
 
-## Runtime evaluation contract
+## Runtime baholash kontrakti
 
-- Treat each row as an applicability-first evidence question. Missing evidence is
-  `unknown`; unavailable or ineligible surfaces are `not_applicable`.
-- Verify objective, placement, geography, measurement path, domain/catalog state,
-  privacy choices, policy, and account eligibility before evaluation.
-- The registered source below grounds the Conversions API only. Current catalog,
-  Performance+, collections, targeting, format, policy, and availability claims
-  require additional dated official source IDs or account evidence.
-- This reference is advisory and export-read only. It does not provide a live
-  Pinterest API reader or mutation adapter.
+- Har bir qatorni avval qo'llanilishni tekshiradigan dalil savoli deb qarang. Yo'q dalil — `unknown`;
+  mavjud bo'lmagan yoki yaroqsiz yuzalar — `not_applicable`.
+- Baholashdan oldin maqsad, placement, geografiya, o'lchov yo'li, domen/katalog holati, maxfiylik tanlovlari, policy va akkaunt muvofiqligini tekshiring.
+- Quyidagi ro'yxatdan o'tgan manba faqat Conversions API ni asoslaydi. Joriy katalog, Performance+, collections, targeting, format, policy va mavjudlik da'volari qo'shimcha sanalangan rasmiy manba ID yoki
+  akkaunt dalilini talab qiladi.
+- Bu reference faqat maslahat va eksportni o'qish uchun. U jonli Pinterest API o'quvchisi yoki o'zgartirish adapterini bermaydi.
 
-## Controls
+## Nazoratlar
 
-| ID | Category | Evidence question |
+| ID | Kategoriya | Dalil savoli |
 | --- | --- | --- |
-| PN-M01 | Measurement | Pinterest Tag, Conversions API, MMP, or offline source is declared and verified. |
-| PN-M02 | Measurement | Browser and server events use event IDs or the documented deduplication mechanism. |
-| PN-M03 | Measurement | Event quality, latency, diagnostics, and representative test events have been reviewed. |
-| PN-M04 | Measurement | Privacy flags and data-use choices match applicable geography and consent. |
-| PN-R01 | Retail | Catalog required fields, variants, prices, availability, links, and images validate. |
-| PN-R02 | Retail | Catalog refreshes prevent stale or unavailable products from serving. |
-| PN-R03 | Retail | Claimed-domain, destination, and tracking behavior are consistent. |
-| PN-S01 | Structure | Objective, optimization event, and campaign type match the business outcome. |
-| PN-S02 | Structure | Automation such as Performance+ is intentionally configured and eligible. |
-| PN-A01 | Audience | First-party, interest, keyword, and expansion choices reflect search and discovery intent. |
-| PN-C01 | Creative | Pins meet format requirements and communicate value without relying on unsupported assumptions. |
-| PN-C02 | Creative | Creative diversity covers materially different concepts, formats, and funnel stages. |
-| PN-C03 | Creative | Landing pages preserve the Pin promise, product, and tracking parameters. |
-| PN-B01 | Budget | Budget and bidding are viable for the optimization event and evidence volume. |
-| PN-P01 | Policy | Merchant, creative, privacy, AI-disclosure, and regulated-category obligations are reviewed. |
-| PN-E01 | Experiment | Tests isolate one decision with a declared audience, window, and success measure. |
+| PN-M01 | Measurement | Pinterest Tag, Conversions API, MMP yoki oflayn manba e'lon qilingan va tekshirilgan. |
+| PN-M02 | Measurement | Brauzer va server eventlari event ID yoki hujjatlashtirilgan deduplikatsiya mexanizmidan foydalanadi. |
+| PN-M03 | Measurement | Event sifati, kechikish, diagnostika va vakillik qiluvchi test eventlari ko'rib chiqilgan. |
+| PN-M04 | Measurement | Maxfiylik flaglari va ma'lumotdan foydalanish tanlovlari tegishli geografiya va roziliklarga mos. |
+| PN-R01 | Retail | Katalogning majburiy maydonlari, variantlar, narxlar, mavjudlik, havolalar va tasvirlar tekshiruvdan o'tadi. |
+| PN-R02 | Retail | Katalog yangilanishlari eskirgan yoki mavjud bo'lmagan mahsulotlarning ko'rsatilishini oldini oladi. |
+| PN-R03 | Retail | Tasdiqlangan domen, manzil va treking xatti-harakati izchil. |
+| PN-S01 | Structure | Maqsad, optimallashtirish eventi va kampaniya turi biznes natijasiga mos. |
+| PN-S02 | Structure | Performance+ kabi avtomatlashtirish ongli sozlangan va yaroqli. |
+| PN-A01 | Audience | First-party, qiziqish, kalit so'z va kengaytirish tanlovlari qidiruv va discovery niyatini aks ettiradi. |
+| PN-C01 | Creative | Pinlar format talablariga javob beradi va qo'llab-quvvatlanmaydigan taxminlarga tayanmasdan qiymatni yetkazadi. |
+| PN-C02 | Creative | Kreativ xilma-xillik mazmunan farqli konseptlar, formatlar va voronka bosqichlarini qamrab oladi. |
+| PN-C03 | Creative | Landing sahifalar Pin va'dasi, mahsulot va treking parametrlarini saqlaydi. |
+| PN-B01 | Budget | Byudjet va bidding optimallashtirish eventi va dalil hajmi uchun yaroqli. |
+| PN-P01 | Policy | Merchant, kreativ, maxfiylik, AI-oshkor qilish va tartibga solinadigan kategoriya majburiyatlari ko'rib chiqilgan. |
+| PN-E01 | Experiment | Testlar e'lon qilingan auditoriya, oyna va muvaffaqiyat o'lchovi bilan bitta qarorni ajratadi. |
 
-Results use `pass`, `fail`, `unknown`, or `not_applicable`. Unknown controls
-reduce evidence coverage; unavailable, beta, premium, or ineligible features are
-unscored opportunities.
+`pass`, `fail`, `unknown` yoki `not_applicable` natijalaridan foydalaning. Noma'lum nazoratlar dalil
+qamrovini kamaytiradi; mavjud bo'lmagan, beta, premium yoki yaroqsiz funksiyalar ballanmagan imkoniyatlardir.
 
-## Registered official evidence
+## Ro'yxatdan o'tgan rasmiy dalil
 
 - `pinterest-conversions-api`: [Pinterest API for Conversions](https://help.pinterest.com/en/business/article/the-pinterest-api-for-conversions)
 
-Official sources override this summary when they change. Unsupported controls stay
-`unknown`; practitioner material may supplement but not replace official evidence.
+Rasmiy manbalar o'zgarganda bu xulosadan ustun turadi. Qo'llab-quvvatlanmagan nazoratlar `unknown`
+bo'lib qoladi; amaliyotchi materiallari rasmiy dalilni to'ldirishi mumkin, lekin almashtira olmaydi.

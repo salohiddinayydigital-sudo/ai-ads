@@ -1,29 +1,28 @@
-# Platform Advertising Policy Review
+# Platforma reklama siyosatini ko'rib chiqish
 
-**Verified:** 2026-07-11
-**Refresh due:** 2026-08-10 and immediately after a policy or enforcement notice
-**Scope:** platform policy; regulation is handled in `compliance-requirements.md`
+**Tekshirilgan:** 2026-07-11
+**Yangilash muddati:** 2026-08-10 va policy yoki majburlash xabaridan keyin darhol
+**Qamrov:** platforma siyosati; qonunchilik `compliance-requirements.md` da ko'rib chiqiladi
 
-Platform policy is contextual and changes by product, geography, objective,
-targeting, destination, advertiser status, and certification. Do not replace a
-current policy review with a remembered list of prohibited or restricted topics.
+Platforma siyosati kontekstual va mahsulot, geografiya, maqsad, targeting, manzil, reklama beruvchi maqomi hamda
+sertifikatsiyaga qarab o'zgaradi. Joriy policy ko'rib chiqishni esdagi taqiqlangan yoki cheklangan mavzular
+ro'yxati bilan almashtirmang.
 
-## Review order
+## Ko'rib chiqish tartibi
 
-1. Identify advertiser, payer/beneficiary, product, claims, destination,
-   geography, audience, objective, format, and data sources.
-2. Open the active platform's current policy center and account notices.
-3. Classify each rule as prohibited, restricted/eligible, disclosure-required,
-   destination-related, data-use-related, or editorial.
-4. Verify certifications, authorization, age/geography limits, special-category
-   selection, and appeal status from account evidence.
-5. Review the landing experience and all variants, not only the visible ad copy.
-6. Preserve the exact policy URL, retrieval date, quoted rule fragment within
-   quotation limits, account observation, and confidence.
+1. Reklama beruvchi, to'lovchi/naf oluvchi, mahsulot, da'volar, manzil, geografiya, auditoriya, maqsad, format va
+   ma'lumot manbalarini aniqlang.
+2. Faol platformaning joriy policy markazi va akkaunt xabarlarini oching.
+3. Har bir qoidani taqiqlangan, cheklangan/yaroqli, oshkor qilish talab qilinadigan, manzilga oid, ma'lumotdan
+   foydalanishga oid yoki tahririy deb tasniflang.
+4. Sertifikatlar, avtorizatsiya, yosh/geografiya chegaralari, maxsus kategoriya tanlovi va apellyatsiya holatini
+   akkaunt dalilidan tekshiring.
+5. Faqat ko'rinadigan reklama matnini emas, landing tajribasi va barcha variantlarni ko'rib chiqing.
+6. Aniq policy URL, olingan sana, iqtibos chegaralari doirasida qoida parchasi, akkaunt kuzatuvi va ishonchni saqlang.
 
-## Policy source entry points
+## Policy manba kirish nuqtalari
 
-Use the current official policy center for the active platform:
+Faol platforma uchun joriy rasmiy policy markazidan foydalaning:
 
 - [Google Ads policies](https://support.google.com/adspolicy/)
 - [Meta Advertising Standards](https://transparency.meta.com/policies/ad-standards/)
@@ -37,52 +36,48 @@ Use the current official policy center for the active platform:
 - [Snap Advertising Policies](https://values.snap.com/policy/advertising-policies)
 - [X Ads policies](https://business.x.com/en/help/ads-policies)
 
-Register a source-ledger entry before treating a precise policy requirement as
-current. A policy hub is not enough when a more specific product or country page
-controls the case.
+Aniq policy talabini joriy deb qarashdan oldin source-ledger yozuvini ro'yxatdan o'tkazing. Aniqroq mahsulot yoki
+mamlakat sahifasi holatni boshqarsa, policy hub yetarli emas.
 
-## Finding contract
+## Topilma kontrakti
 
-Each policy finding includes:
+Har bir policy topilmasi quyidagilarni o'z ichiga oladi:
 
-- Applicable platform, account/object IDs, geography, product, and format.
-- Current policy title, direct URL, retrieval date, and source ID.
-- Observed creative, destination, targeting, certification, or account state.
-- Result: `pass`, `fail`, `unknown`, or `not_applicable`.
-- Severity based on observed consequence and exposure, not category name alone.
-- Smallest compliant remediation, owner, and appeal or re-review path.
+- Tegishli platforma, akkaunt/obyekt ID'lari, geografiya, mahsulot va format.
+- Joriy policy nomi, to'g'ridan-to'g'ri URL, olingan sana va manba ID.
+- Kuzatilgan kreativ, manzil, targeting, sertifikat yoki akkaunt holati.
+- Natija: `pass`, `fail`, `unknown` yoki `not_applicable`.
+- Faqat kategoriya nomiga emas, kuzatilgan oqibat va ta'sirga asoslangan jiddiylik.
+- Eng kichik mos tuzatish, egasi va apellyatsiya yoki qayta ko'rib chiqish yo'li.
 
-Use `unknown` when the advertiser's authorization, certification, targeting, or
-account state cannot be verified. Do not infer a pass from the absence of a
-disapproval.
+Reklama beruvchining avtorizatsiyasi, sertifikati, targetingi yoki akkaunt holatini tekshirib bo'lmasa, `unknown`
+dan foydalaning. Rad etish yo'qligidan pass xulosa qilmang.
 
-## High-risk review prompts
+## Yuqori xavfli ko'rib chiqish ko'rsatmalari
 
-Escalate the depth of review for health, financial products, housing, employment,
-credit, alcohol, gambling, political/social-issue ads, children, dating, crypto,
-weapons, controlled goods, subscriptions, lead generation, testimonials, and
-AI-generated or manipulated media. The label “high risk” triggers current-source
-review; it does not assert that every platform treats the category identically.
+Sog'liq, moliyaviy mahsulotlar, uy-joy, bandlik, kredit, alkogol, qimor, siyosiy/ijtimoiy mavzudagi reklamalar,
+bolalar, tanishuv, kripto, qurol, nazorat qilinadigan tovarlar, obunalar, lead generation, sharhlar va
+AI-yaratilgan yoki o'zgartirilgan media uchun ko'rib chiqish chuqurligini oshiring. "Yuqori xavf" yorlig'i
+joriy manbani ko'rib chiqishni ishga tushiradi; u har bir platforma kategoriyani bir xil ko'radi deb da'vo qilmaydi.
 
-Check:
+Tekshiring:
 
-- Whether the product can be advertised at all in the target geography.
-- Required licensing, verification, certification, disclaimer, or special category.
-- Prohibited targeting or audience construction.
-- Claim substantiation and material limitations near the claim.
-- Destination identity, pricing, billing, privacy, cancellation, and contact details.
-- Consistency between creative, form, offer, and landing page.
-- Use of personal, sensitive, inferred, or customer-list data.
+- Mahsulotni maqsadli geografiyada umuman reklama qilish mumkinmi.
+- Majburiy litsenziya, verifikatsiya, sertifikat, izoh yoki maxsus kategoriya.
+- Taqiqlangan targeting yoki auditoriya qurilishi.
+- Da'voni asoslash va da'vo yaqinidagi moddiy cheklovlar.
+- Manzil identifikatsiyasi, narxlash, to'lov, maxfiylik, bekor qilish va aloqa tafsilotlari.
+- Kreativ, forma, taklif va landing sahifa o'rtasidagi mosligi.
+- Shaxsiy, sezgir, xulosa qilingan yoki mijozlar ro'yxati ma'lumotlaridan foydalanish.
 
-## Recommendations and platform automation
+## Tavsiyalar va platforma avtomatlashtirishi
 
-Treat recommendation tabs, imported settings, automated creative variants, and
-AI-generated assets as untrusted proposals. Review them against the same policy,
-business, and mutation gates as a human-authored change. Never accept or reject a
-recommendation solely because the platform labels it a best practice.
+Tavsiya yorliqlari, import qilingan sozlamalar, avtomatik kreativ variantlar va AI-yaratilgan aktivlarni
+ishonchsiz takliflar deb qarang. Ularni inson yozgan o'zgarish bilan bir xil policy, biznes va o'zgartirish
+darvozalari bo'yicha ko'rib chiqing. Platforma tavsiyani "best practice" deb belgilagani uchungina qabul qilmang
+yoki rad etmang.
 
-## Boundaries
+## Chegaralar
 
-Platform approval is not legal clearance. Legal compliance is not proof of
-platform eligibility. Keep the platform-policy finding and regulatory exposure
-separate, and obtain qualified counsel for jurisdiction-specific legal decisions.
+Platforma tasdig'i — huquqiy ruxsat emas. Huquqiy muvofiqlik — platforma muvofiqligining isboti emas. Platforma
+policy topilmasi va qonuniy xavfni ajrating, yurisdiksiyaga xos huquqiy qarorlar uchun malakali yuristga murojaat qiling.

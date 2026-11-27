@@ -1,54 +1,50 @@
-# X Ads control reference
+# X Ads nazorat referensi
 
-Retrieved: 2026-07-11. Refresh official platform and policy sources before using
-this reference after its control-plane refresh date.
+Olingan: 2026-07-11. Control-plane yangilanish sanasidan keyin bu referencedan foydalanishdan oldin
+rasmiy platforma va policy manbalarini yangilang.
 
-## Category model
+## Kategoriyalar modeli
 
-This reference does not define an executable scoring profile. Bind a versioned
-profile whose categories cover the applicable controls and whose weights total 100;
-otherwise produce findings without a health score.
+Bu reference bajariladigan ballash profilini belgilamaydi. Tegishli nazoratlarni qamrab oluvchi va
+vaznlari jami 100 bo'lgan versiyalangan profilni bog'lang; aks holda sog'liq balisiz topilmalarni
+yarating.
 
-## Runtime evaluation contract
+## Runtime baholash kontrakti
 
-- Treat each row as an applicability-first evidence question. Missing evidence is
-  `unknown`; unavailable or ineligible surfaces are `not_applicable`.
-- Verify objective, placement, geography, measurement path, report definitions,
-  policy, brand-safety controls, and account eligibility before evaluation.
-- The registered source below grounds website conversion tracking only. Current
-  CAPI, app/offline measurement, targeting, format, policy, API, and availability
-  claims require additional dated official source IDs or account evidence.
-- This reference is advisory and export-read only. It does not provide a live X API
-  reader or mutation adapter.
+- Har bir qatorni avval qo'llanilishni tekshiradigan dalil savoli deb qarang. Yo'q dalil — `unknown`;
+  mavjud bo'lmagan yoki yaroqsiz yuzalar — `not_applicable`.
+- Baholashdan oldin maqsad, placement, geografiya, o'lchov yo'li, hisobot ta'riflari, policy, brend xavfsizligi nazoratlari va akkaunt muvofiqligini tekshiring.
+- Quyidagi ro'yxatdan o'tgan manba faqat veb-sayt konversiya trekingini asoslaydi. Joriy CAPI, ilova/oflayn o'lchov, targeting, format, policy, API va mavjudlik da'volari qo'shimcha sanalangan rasmiy manba ID yoki
+  akkaunt dalilini talab qiladi.
+- Bu reference faqat maslahat va eksportni o'qish uchun. U jonli X API o'quvchisi yoki o'zgartirish adapterini bermaydi.
 
-## Controls
+## Nazoratlar
 
-| ID | Category | Evidence question |
+| ID | Kategoriya | Dalil savoli |
 | --- | --- | --- |
-| XA-M01 | Measurement | X Pixel, Conversions API, MMP, or offline source is declared and verified. |
-| XA-M02 | Measurement | Conversion events avoid sensitive categories and comply with X data-use policy. |
-| XA-M03 | Measurement | Identifiers, event values, and browser/server deduplication are documented. |
-| XA-M04 | Measurement | App campaigns use a supported mobile measurement path. |
-| XA-S01 | Structure | Campaign objective and optimization event match the business outcome. |
-| XA-S02 | Structure | Campaign, line-item/ad-group, creative, and account eligibility are valid. |
-| XA-A01 | Audience | Keyword, conversation, interest, follower-lookalike, geography, and first-party choices are evidence-based. |
-| XA-A02 | Audience | Prospecting, retargeting, exclusions, and expansion avoid unintended overlap. |
-| XA-C01 | Creative | Copy and media fit the selected format, placement, and landing-page promise. |
-| XA-C02 | Creative | Creative diversity covers materially distinct hooks, concepts, and formats. |
-| XA-C03 | Creative | Replies and conversation context are considered where the placement exposes them. |
-| XA-B01 | Budget | Budget, bid, pacing, and optimization state are viable for available evidence. |
-| XA-R01 | Reporting | Date window, attribution, currency, and metric definitions are consistent. |
-| XA-R02 | Reporting | Organic signals remain separate from paid attribution and optimization claims. |
-| XA-P01 | Policy | Brand-safety, adjacency, regulated-category, privacy, and account-status risks are reviewed. |
-| XA-E01 | Experiment | Tests isolate one decision with a declared window and success measure. |
+| XA-M01 | Measurement | X Pixel, Conversions API, MMP yoki oflayn manba e'lon qilingan va tekshirilgan. |
+| XA-M02 | Measurement | Konversiya eventlari sezgir kategoriyalardan qochadi va X ma'lumotdan foydalanish siyosatiga rioya qiladi. |
+| XA-M03 | Measurement | Identifikatorlar, event qiymatlari va brauzer/server deduplikatsiyasi hujjatlashtirilgan. |
+| XA-M04 | Measurement | Ilova kampaniyalari qo'llab-quvvatlanadigan mobil o'lchov yo'lidan foydalanadi. |
+| XA-S01 | Structure | Kampaniya maqsadi va optimallashtirish eventi biznes natijasiga mos. |
+| XA-S02 | Structure | Kampaniya, line-item/ad-group, kreativ va akkaunt muvofiqligi yaroqli. |
+| XA-A01 | Audience | Kalit so'z, suhbat, qiziqish, follower-lookalike, geografiya va first-party tanlovlari dalilga asoslangan. |
+| XA-A02 | Audience | Prospecting, retargeting, exclusion'lar va kengaytirish kutilmagan overlapdan qochadi. |
+| XA-C01 | Creative | Matn va media tanlangan format, placement va landing sahifa va'dasiga mos. |
+| XA-C02 | Creative | Kreativ xilma-xillik mazmunan farqli hooklar, konseptlar va formatlarni qamrab oladi. |
+| XA-C03 | Creative | Placement ko'rsatadigan joyda javoblar va suhbat konteksti hisobga olingan. |
+| XA-B01 | Budget | Byudjet, bid, pacing va optimallashtirish holati mavjud dalil uchun yaroqli. |
+| XA-R01 | Reporting | Sana oynasi, atributsiya, valyuta va metrika ta'riflari izchil. |
+| XA-R02 | Reporting | Organik signallar pullik atributsiya va optimallashtirish da'volaridan alohida qoladi. |
+| XA-P01 | Policy | Brend xavfsizligi, qo'shnilik, tartibga solinadigan kategoriya, maxfiylik va akkaunt holati xavflari ko'rib chiqilgan. |
+| XA-E01 | Experiment | Testlar e'lon qilingan oyna va muvaffaqiyat o'lchovi bilan bitta qarorni ajratadi. |
 
-Results use `pass`, `fail`, `unknown`, or `not_applicable`. Unknown controls
-reduce evidence coverage; unavailable, beta, premium, or ineligible features are
-unscored opportunities.
+`pass`, `fail`, `unknown` yoki `not_applicable` natijalaridan foydalaning. Noma'lum nazoratlar dalil
+qamrovini kamaytiradi; mavjud bo'lmagan, beta, premium yoki yaroqsiz funksiyalar ballanmagan imkoniyatlardir.
 
-## Registered official evidence
+## Ro'yxatdan o'tgan rasmiy dalil
 
 - `x-conversion-tracking`: [X website conversion tracking](https://business.x.com/en/help/campaign-measurement-and-analytics/conversion-tracking-for-websites/about-conversion-tracking)
 
-Official sources override this summary when they change. Unsupported controls stay
-`unknown`; practitioner material may supplement but not replace official evidence.
+Rasmiy manbalar o'zgarganda bu xulosadan ustun turadi. Qo'llab-quvvatlanmagan nazoratlar `unknown`
+bo'lib qoladi; amaliyotchi materiallari rasmiy dalilni to'ldirishi mumkin, lekin almashtira olmaydi.

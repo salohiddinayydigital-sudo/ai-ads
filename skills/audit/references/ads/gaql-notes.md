@@ -1,57 +1,53 @@
-# GAQL compatibility and accuracy notes
+# GAQL muvofiqligi va aniqligi bo'yicha eslatmalar
 
-GAQL fields, compatibility rules, date constants, and API versions change. Treat
-this file as query-design guidance, not a current field catalog. Before executing
-a query, record the customer ID, API version, query resource, selected fields,
-date window, and the current Google Ads API field/reference source ID. A runtime
-`INVALID_ARGUMENT` or `UNRECOGNIZED_FIELD` is `needs_input` for query repair; it
-must not be silently converted into an empty dataset.
+GAQL maydonlari, muvofiqlik qoidalari, sana konstantalari va API versiyalari o'zgaradi. Bu faylni so'rov
+dizayni bo'yicha yo'riqnoma deb qarang, joriy maydonlar katalogi deb emas. So'rovni bajarishdan oldin mijoz ID,
+API versiyasi, so'rov resursi, tanlangan maydonlar, sana oynasi va joriy Google Ads API maydon/reference manba
+ID'sini yozing. Runtime `INVALID_ARGUMENT` yoki `UNRECOGNIZED_FIELD` so'rovni tuzatish uchun `needs_input`
+hisoblanadi; uni jimgina bo'sh ma'lumotlar to'plamiga aylantirmang.
 
-## Compatibility discovery
+## Muvofiqlikni aniqlash
 
-Use the current official Google Ads API documentation and field metadata for the
-selected version to validate:
+Tanlangan versiya uchun joriy rasmiy Google Ads API hujjatlari va maydon metama'lumotlaridan foydalanib tekshiring:
 
-- whether each selected and filtered field is selectable with the primary resource;
-- whether segments change row grain or conflict with metrics;
-- whether the chosen date constant exists, otherwise use explicit dates;
-- whether resource status is available in-query or must be joined or filtered
-  after retrieval;
-- pagination, partial-failure, quota, currency-unit, timezone, and manager-account
-  behavior.
+- har bir tanlangan va filtrlangan maydon asosiy resurs bilan tanlanishi mumkinmi;
+- segmentlar qator donadorligini o'zgartiradimi yoki metrikalar bilan to'qnashadimi;
+- tanlangan sana konstantasi mavjudmi, aks holda aniq sanalardan foydalaning;
+- resurs holati so'rov ichida mavjudmi yoki olingandan keyin birlashtirilishi yoxud filtrlanishi kerakmi;
+- sahifalash, qisman muvaffaqiyatsizlik, kvota, valyuta birligi, vaqt mintaqasi va manager-akkaunt xatti-harakati.
 
-Do not carry a query forward solely because it worked with a prior API version.
+So'rovni faqat avvalgi API versiyasida ishlagani uchun keyingisiga ko'chirmang.
 
-## Keyword Deduplication
+## Kalit so'zlarni deduplikatsiya qilish
 
-**Problem:** `keyword_view + segments.date DURING LAST_30_DAYS` returns one row per keyword per day. A keyword active 5 days = 5 rows. Same keyword with BROAD + PHRASE = 2 rows per day = 10 total.
+**Muammo:** `keyword_view + segments.date DURING LAST_30_DAYS` har bir kalit so'z uchun kuniga bitta qator qaytaradi.
+5 kun faol kalit so'z = 5 qator. Xuddi shu kalit so'z BROAD + PHRASE bilan = kuniga 2 qator = jami 10.
 
-**Fix:** Deduplicate by `(ad_group_id + keyword_text + match_type)` at fetch time. Aggregate metrics (impressions, clicks, cost, conversions) across duplicate rows.
+**Tuzatish:** Olish vaqtida `(ad_group_id + keyword_text + match_type)` bo'yicha deduplikatsiya qiling. Dublikat qatorlar
+bo'yicha metrikalarni (impressions, clicks, cost, conversions) jamlang.
 
-**Alternative:** Remove `segments.date` from GAQL queries entirely to eliminate date-level duplication at source.
+**Muqobil:** Sana darajasidagi dublikatni manbada yo'qotish uchun GAQL so'rovlaridan `segments.date` ni butunlay olib tashlang.
 
-Record the resulting row grain in the run manifest. Downstream checks may consume
-the normalized keyword grain only after fixture or account-level reconciliation.
+Hosil bo'lgan qator donadorligini run manifestida yozing. Keyingi tekshiruvlar normallashtirilgan kalit so'z
+donadorligini faqat fixture yoki akkaunt darajasida moslashtirishdan keyin iste'mol qilishi mumkin.
 
-## Filter Scope Best Practices
+## Filtr qamrovi bo'yicha eng yaxshi amaliyotlar
 
-Scope status to the question being answered. A current-serving health view normally
-separates enabled, paused, and removed entities. A historical change, overlap, or
-rollback investigation may require paused entities. Never describe the account as
-complete when the query intentionally excludes a status, and never assume a fixed
-lookback is suitable for every conversion lag or business cycle.
+Holatni javob beriladigan savolga moslang. Joriy xizmat ko'rsatish sog'lig'i ko'rinishi odatda yoqilgan, pauza qilingan
+va olib tashlangan obyektlarni ajratadi. Tarixiy o'zgarish, overlap yoki rollback tekshiruvi pauza qilingan obyektlarni
+talab qilishi mumkin. So'rov ataylab holatni chiqarib tashlasa, akkauntni hech qachon to'liq deb ta'riflamang va
+qat'iy lookback har bir konversiya kechikishi yoki biznes siklga mos deb o'ylamang.
 
-## Error Handling
+## Xatolarni qayta ishlash
 
-Track which data fetches failed and why. Report as a G-SYS1 diagnostic:
-- List all failed data sources with error messages
-- Provide per-check context on which checks were skipped due to missing data
-- Never silently skip checks; always explain why data is unavailable
+Qaysi ma'lumot olishlari va nega muvaffaqiyatsiz bo'lganini kuzating. G-SYS1 diagnostikasi sifatida xabar bering:
+- Barcha muvaffaqiyatsiz ma'lumot manbalarini xato xabarlari bilan sanab chiqing
+- Ma'lumot yetishmasligi sababli qaysi tekshiruvlar o'tkazib yuborilganini har bir tekshiruv uchun kontekst bilan bering
+- Tekshiruvlarni hech qachon jimgina o'tkazib yubormang; ma'lumot nega mavjud emasligini doim tushuntiring
 
-## Historical match-type interpretation
+## Tarixiy match-type talqini
 
-Do not infer legacy Broad Match Modified behavior or advertiser intent from the
-current `BROAD` enum, bidding strategy, or absence of a `+` prefix. Inspect dated
-change history, search terms, current matching behavior, campaign controls, and
-owner intent. If that evidence is unavailable, report the historical classification
-as `unknown`; do not turn it into a failure or an automated negative-keyword action.
+Eski Broad Match Modified xatti-harakatini yoki reklama beruvchi niyatini joriy `BROAD` enum, bidding strategiyasi yoki
+`+` prefiksi yo'qligidan taxmin qilmang. Sanalangan o'zgarishlar tarixi, qidiruv iboralari, joriy moslashtirish xatti-harakati,
+kampaniya nazoratlari va egasi niyatini tekshiring. Bu dalil mavjud bo'lmasa, tarixiy tasnifni `unknown` deb xabar qiling;
+uni muvaffaqiyatsizlikka yoki avtomatik negativ kalit so'z harakatiga aylantirmang.

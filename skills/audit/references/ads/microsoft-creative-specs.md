@@ -1,35 +1,34 @@
-# Microsoft Advertising creative generation contract
+# Microsoft Advertising kreativ yaratish kontrakti
 
-Use this reference for Microsoft Advertising creative planning. Microsoft formats,
-Copilot or partner inventory, import mappings, copy limits, dimensions, extensions,
-and account availability change. Verify them from dated official sources and live
-account evidence; do not assume Microsoft is a dimension-for-dimension Google copy.
+Microsoft Advertising kreativini rejalashtirishda shu referencedan foydalaning. Microsoft formatlari,
+Copilot yoki hamkor inventari, import xaritalari, matn chegaralari, o'lchamlar, extension'lar va akkaunt
+mavjudligi o'zgaradi. Ularni sanalangan rasmiy manbalar va jonli akkaunt dalili bilan tekshiring;
+Microsoft Google'ning o'lchamma-o'lcham nusxasi deb o'ylamang.
 
-## Specification gate
+## Spetsifikatsiya darvozasi
 
-For each selected Search, Audience, multimedia, video, retail, native, Copilot, or
-other placement, record objective, network, geography, eligibility, official source
-ID, asset fields, dimensions, ratio, file limits, copy limits, destination behavior,
-and preview result.
+Tanlangan har bir Search, Audience, multimedia, video, retail, native, Copilot yoki boshqa placement
+uchun maqsad, tarmoq, geografiya, muvofiqlik, rasmiy manba ID, aktiv maydonlari, o'lchamlar, nisbat,
+fayl chegaralari, matn chegaralari, manzil xatti-harakati va preview natijasini yozing.
 
-Imported Google assets are candidates, not validated Microsoft assets. Reconcile
-every mapped and omitted field, policy status, tracking parameter, extension, bid,
-budget, URL, and schedule. Missing current evidence is `needs_input`.
+Import qilingan Google aktivlari — nomzodlar, tasdiqlangan Microsoft aktivlari emas. Har bir
+xaritalangan va tushirib qoldirilgan maydon, policy holati, treking parametri, extension, bid,
+byudjet, URL va jadvalni solishtiring. Joriy dalil yo'q bo'lsa — `needs_input`.
 
-## Microsoft-specific review
+## Microsoft'ga xos ko'rib chiqish
 
-- Separate Microsoft Search, Audience Network, publisher/partner, and conversational
-  inventory in both specification and reporting.
-- Do not apply assumed CPC discounts, audience-age stereotypes, or generic
-  “professional” styling to creative decisions.
-- Treat Copilot and other announced or pilot surfaces as unscored discovery until
-  the current account confirms access and exposes auditable reporting.
-- Reuse an asset only when its rights, destination, crop, copy, format, and policy
-  state validate for Microsoft. A compatible ratio alone is insufficient.
+- Spetsifikatsiya va hisobotda Microsoft Search, Audience Network, publisher/hamkor va
+  suhbatga asoslangan inventarni ajrating.
+- Kreativ qarorlarga taxminiy CPC chegirmalari, auditoriya yoshi stereotiplari yoki umumiy
+  "professional" uslubni qo'llamang.
+- Copilot va boshqa e'lon qilingan yoki pilot yuzalarni akkaunt kirishni tasdiqlaguncha va audit
+  qilinadigan hisobotni bermaguncha ballanmaydigan aniqlash deb qarang.
+- Aktivni faqat uning huquqlari, manzili, crop'i, matni, formati va policy holati Microsoft uchun
+  tasdiqlansa qayta ishlating. Mos nisbatning o'zi yetarli emas.
 
-## Output contract
+## Natija kontrakti
 
-Record concept ID, placement/network, specification source IDs, dimensions, ratio,
-format, copy, import provenance, checksum, rights, safety review, and previews. The
-manifest must distinguish reused, transformed, and newly generated assets. Draft
-generation does not imply a live Microsoft upload or write capability.
+Konsept ID, placement/tarmoq, spetsifikatsiya manba ID'lari, o'lchamlar, nisbat, format, matn, import
+kelib chiqishi, checksum, huquqlar, xavfsizlik ko'rigi va previewlarni yozing. Manifest qayta
+ishlatilgan, o'zgartirilgan va yangidan yaratilgan aktivlarni ajratishi shart. Qoralama yaratish jonli
+Microsoft yuklash yoki yozish imkoniyatini bildirmaydi.

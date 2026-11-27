@@ -1,50 +1,48 @@
-# Contextual Benchmarks
+# Kontekstual benchmarklar
 
-**Verified:** 2026-07-11
-**Refresh:** quarterly, and whenever a cited dataset changes
-**Evidence status:** no numeric benchmark is bundled as a universal account threshold
+**Tekshirilgan:** 2026-07-11
+**Yangilash:** har chorakda va keltirilgan dataset o'zgarganda
+**Dalil holati:** hech bir raqamli benchmark universal akkaunt chegarasi sifatida kiritilmagan
 
-Benchmarks are comparison evidence, not pass/fail controls. Use them to form a
-question, then decide from the advertiser's economics, cohort, and same-window
-account data. Do not score an account down merely because it differs from a
-cross-industry median.
+Benchmarklar — taqqoslash dalili, pass/fail nazoratlari emas. Ulardan savol shakllantirish uchun
+foydalaning, so'ng qarorni reklama beruvchining iqtisodi, kogortasi va xuddi shu oynadagi akkaunt
+ma'lumotlaridan chiqaring. Akkauntni faqat sohalararo mediandan farq qilgani uchun past ballamang.
 
-## Evidence contract
+## Dalil kontrakti
 
-Before quoting any external benchmark, record:
+Har qanday tashqi benchmarkni keltirishdan oldin yozing:
 
-| Field | Required value |
+| Maydon | Majburiy qiymat |
 | --- | --- |
-| Source | Publisher, direct URL, and source-ledger ID |
-| Provenance | Platform, independent researcher, agency/vendor, or account data |
-| Publication | Publication date and retrieval date |
-| Population | Platform, objective, format, geography, industry, and sample size |
-| Statistic | Mean, median, percentile, modeled result, or case study |
-| Measurement | Numerator, denominator, attribution window, currency, and taxes/fees |
-| Time | Observation window and seasonality |
-| Fit | Why the cohort is comparable to this account |
-| Limits | Sponsorship, exclusions, survivorship bias, or missing methodology |
+| Manba | Nashriyotchi, to'g'ridan-to'g'ri URL va source-ledger ID |
+| Kelib chiqish | Platforma, mustaqil tadqiqotchi, agentlik/vendor yoki akkaunt ma'lumoti |
+| Nashr | Nashr sanasi va olingan sana |
+| Populyatsiya | Platforma, maqsad, format, geografiya, soha va tanlama hajmi |
+| Statistika | O'rtacha, mediana, persentil, modellashtirilgan natija yoki case study |
+| O'lchov | Surat, maxraj, atributsiya oynasi, valyuta va soliq/to'lovlar |
+| Vaqt | Kuzatuv oynasi va mavsumiylik |
+| Moslik | Kogorta nega bu akkauntga taqqoslanadi |
+| Cheklovlar | Homiylik, istisnolar, survivorship bias yoki metodologiya yo'qligi |
 
-If any field that could change the conclusion is unknown, label the benchmark
-`provisional`. Platform-published uplift figures are `vendor-supplied`; a case
-study is not a general baseline.
+Xulosani o'zgartirishi mumkin bo'lgan biror maydon noma'lum bo'lsa, benchmarkni `provisional` deb
+belgilang. Platforma e'lon qilgan uplift ko'rsatkichlari — `vendor-supplied`; case study umumiy baza emas.
 
-## Comparison order
+## Taqqoslash tartibi
 
-Use the narrowest defensible comparison:
+Eng tor himoya qilsa bo'ladigan taqqoslashdan foydalaning:
 
-1. Same account, same objective, same attribution definition, prior comparable period.
-2. Same account experiment or holdout with an agreed success metric.
-3. First-party CRM or revenue cohort joined to spend.
-4. Comparable peer cohort with disclosed methodology.
-5. Broad industry or platform benchmark, labeled directional only.
+1. Xuddi shu akkaunt, xuddi shu maqsad, xuddi shu atributsiya ta'rifi, avvalgi taqqoslanadigan davr.
+2. Kelishilgan muvaffaqiyat metrikali xuddi shu akkaunt eksperimenti yoki holdout.
+3. Sarfga bog'langan first-party CRM yoki daromad kogortasi.
+4. Metodologiyasi oshkor qilingan taqqoslanadigan peer kogorta.
+5. Keng soha yoki platforma benchmarki, faqat yo'nalish ko'rsatuvchi deb belgilangan.
 
-Never blend sources with different attribution windows, currencies, conversion
-definitions, or funnel stages without normalizing and disclosing the conversion.
+Turli atributsiya oynalari, valyutalar, konversiya ta'riflari yoki voronka bosqichlari bo'lgan manbalarni
+normallashtirmasdan va konversiyani oshkor qilmasdan hech qachon aralashtirmang.
 
-## Account-specific baseline
+## Akkauntga xos baza
 
-Build a baseline from complete periods only:
+Bazani faqat to'liq davrlardan quring:
 
 ```text
 baseline_window = periods before the evaluated change, excluding known outages
@@ -52,12 +50,11 @@ comparison_window = same duration and conversion-lag maturity
 delta = (comparison - baseline) / baseline
 ```
 
-Segment by platform, objective, campaign type, geography, new/returning customer,
-and device only when the segment has enough observations to be decision-useful.
-Report low-volume segments as uncertain rather than replacing them with an
-industry average.
+Platforma, maqsad, kampaniya turi, geografiya, yangi/qaytuvchi mijoz va qurilma bo'yicha segmentlarni faqat
+segmentda qaror uchun yetarli kuzatuv bo'lgandagina ajrating. Kam hajmli segmentlarni soha o'rtachasi bilan
+almashtirmay, noaniq deb xabar qiling.
 
-For cost and value metrics, reconcile:
+Xarajat va qiymat metrikalari uchun solishtiring:
 
 ```text
 CPA  = spend / accepted conversions
@@ -65,39 +62,35 @@ ROAS = accepted conversion value / spend
 MER  = business revenue / total advertising spend
 ```
 
-State whether revenue is gross or net and whether spend includes fees, credits,
-and taxes. Platform ROAS and business MER answer different questions and should
-not be treated as interchangeable.
+Daromad yalpi yoki sof ekanini va sarfga to'lovlar, kreditlar va soliqlar kiritilganini ko'rsating.
+Platforma ROAS va biznes MER turli savollarga javob beradi va o'zaro almashtirilmasligi kerak.
 
-## Evidence questions by metric
+## Metrika bo'yicha dalil savollari
 
-| Metric | Ask before interpreting |
+| Metrika | Talqin qilishdan oldin so'rang |
 | --- | --- |
-| CTR | Which impression and click definitions, placement mix, and objective? |
-| CPC/CPM | Which auction, geography, season, currency, and billing basis? |
-| CVR | Which conversion, denominator, lag, and consent population? |
-| CPA/CPL | Was lead quality or downstream acceptance included? |
-| ROAS | Which value source, returns/cancellations, attribution, and customer cohort? |
-| Frequency | Which reach window and audience overlap; is measured performance deteriorating? |
-| Creative fatigue | Is there a sustained change versus a comparable baseline after mix and spend shifts? |
+| CTR | Qaysi ko'rsatuv va klik ta'riflari, placement aralashmasi va maqsad? |
+| CPC/CPM | Qaysi auksion, geografiya, mavsum, valyuta va hisob-kitob asosi? |
+| CVR | Qaysi konversiya, maxraj, kechikish va rozilik populyatsiyasi? |
+| CPA/CPL | Lid sifati yoki keyingi qabul qilish kiritilganmi? |
+| ROAS | Qaysi qiymat manbai, qaytarishlar/bekor qilishlar, atributsiya va mijoz kogortasi? |
+| Frequency | Qaysi qamrov oynasi va auditoriya overlapi; o'lchangan natija yomonlashyaptimi? |
+| Kreativ charchoq | Aralashma va sarf siljishlaridan keyin taqqoslanadigan bazaga nisbatan barqaror o'zgarish bormi? |
 
-## Output contract
+## Natija kontrakti
 
-Every benchmark comparison must include the observed account value, benchmark
-value, cohort fit, source ID, confidence, and the decision it informs. A gap is
-an observation, not a diagnosis. Recommendation language must connect the gap to
-account evidence such as marginal efficiency, query quality, creative-level
-decay, conversion quality, or incrementality.
+Har bir benchmark taqqoslashi kuzatilgan akkaunt qiymati, benchmark qiymati, kogorta mosligi, manba ID,
+ishonch va u ma'lumot beradigan qarorni o'z ichiga olishi shart. Farq — kuzatuv, diagnoz emas. Tavsiya matni
+farqni marginal samaradorlik, so'rov sifati, kreativ darajasidagi pasayish, konversiya sifati yoki inkrementallik
+kabi akkaunt dalillariga bog'lashi kerak.
 
-## Prohibited uses
+## Taqiqlangan foydalanishlar
 
-- Fixed minimum monthly budgets presented as platform requirements.
-- Fixed conversion-count, frequency, creative-life, or budget-to-CPA thresholds
-  presented as universal truths.
-- Vendor uplift percentages presented as expected account outcomes.
-- Cross-platform cost comparisons without normalizing objective and outcome quality.
-- “Top performer” or percentile claims without a population and statistic definition.
+- Platforma talabi sifatida ko'rsatilgan qat'iy minimal oylik byudjetlar.
+- Universal haqiqat sifatida ko'rsatilgan qat'iy konversiyalar soni, frequency, kreativ umri yoki byudjet-CPA chegaralari.
+- Kutilgan akkaunt natijasi sifatida ko'rsatilgan vendor uplift foizlari.
+- Maqsad va natija sifatini normallashtirmasdan platformalararo xarajat taqqoslashlari.
+- Populyatsiya va statistika ta'rifisiz "eng yaxshi natija" yoki persentil da'volari.
 
-For platform-specific observed facts, use the relevant audit reference and its
-dated source. If no current source pack fits the account, omit the number and
-turn it into a measurement question.
+Platformaga xos kuzatilgan faktlar uchun tegishli audit referensi va uning sanalangan manbasidan foydalaning.
+Akkauntga mos joriy manba paketi bo'lmasa, raqamni tashlab, uni o'lchov savoliga aylantiring.

@@ -1,77 +1,77 @@
-# LinkedIn Ads audit control catalog
+# LinkedIn Ads audit nazoratlari katalogi
 
-<!-- Catalog IDs preserved from the legacy runtime; current platform facts require dated source or account evidence. -->
+<!-- Katalog ID'lari eski runtime'dan saqlangan; joriy platforma faktlari sanalangan manba yoki akkaunt dalilini talab qiladi. -->
 
-## Runtime evaluation contract
+## Runtime baholash kontrakti
 
-- Start with objective, geography, account type, campaign type, data window, conversion lag, sample size, and feature access.
-- Return `not_applicable` when the surface or requirement does not apply and `unknown` when the required evidence is absent.
-- A conditional control can affect health only when current account evidence, owner-defined economics, and an applicable official source establish the expectation.
-- Product adoption, availability, beta access, announcement awareness, and vendor-reported performance are not health controls. Record them only as unscored discovery.
-- Do not use fixed platform-wide thresholds, broad benchmarks, launch dates, sunset dates, or universal network, bidding, budget, audience, creative, or attribution rules from this catalog.
-- Validate mutable facts at run time. A confirmed policy, support-state, or migration requirement needs its own current claim coverage before it can create a finding.
+- Maqsad, geografiya, akkaunt turi, kampaniya turi, ma'lumot oynasi, konversiya kechikishi, tanlama hajmi va funksiyaga kirishdan boshlang.
+- Yuza yoki talab qo'llanilmasa `not_applicable`, kerakli dalil yo'q bo'lsa `unknown` qaytaring.
+- Shartli nazorat sog'liqqa faqat joriy akkaunt dalili, egasi belgilagan iqtisod va tegishli rasmiy manba kutilmani belgilagandagina ta'sir qilishi mumkin.
+- Mahsulotni qabul qilish, mavjudlik, beta kirish, e'lonlardan xabardorlik va vendor xabar qilgan natijalar sog'liq nazoratlari emas. Ularni faqat ballanmaydigan aniqlash sifatida yozing.
+- Bu katalogdan platforma bo'yicha qat'iy chegaralar, keng benchmarklar, ishga tushirish sanalari, to'xtatish sanalari yoki universal tarmoq, bidding, byudjet, auditoriya, kreativ yoki atributsiya qoidalarini ishlatmang.
+- O'zgaruvchan faktlarni runtime'da tekshiring. Tasdiqlangan policy, qo'llab-quvvatlash holati yoki migratsiya talabi topilma yaratishdan oldin o'zining joriy da'vo qamroviga muhtoj.
 
-## Source coverage boundary
+## Manba qamrovi chegarasi
 
-The registered sources below cover only the measurement, API, and import foundations stated in the claim ledger. They do not support every named product or control in this catalog. Until a narrower current claim exists, treat those names as routing labels and gather fresh official or in-account evidence.
+Quyidagi ro'yxatdan o'tgan manbalar faqat da'vo ledgerida ko'rsatilgan o'lchov, API va import asoslarini qamrab oladi. Ular bu katalogdagi har bir nomlangan mahsulot yoki nazoratni qo'llab-quvvatlamaydi. Torroq joriy da'vo paydo bo'lguncha bu nomlarni marshrutlash yorliqlari deb qarang va yangi rasmiy yoki akkaunt ichidagi dalilni to'plang.
 
-## Official evidence
+## Rasmiy dalil
 
 - `linkedin-marketing-api-official`: [LinkedIn Marketing Developer Platform](https://learn.microsoft.com/en-us/linkedin/marketing/overview)
 - `linkedin-conversion-tracking-official`: [LinkedIn conversion tracking](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/conversion-tracking)
 - `linkedin-conversions-api-official`: [LinkedIn Conversions API use cases](https://learn.microsoft.com/en-us/linkedin/marketing/conversions/conversions-usecase)
 
-## Control registry
+## Nazoratlar reyestri
 
-| ID | Audit intent | Runtime disposition |
+| ID | Audit maqsadi | Runtime holati |
 |---|---|---|
-| L01 | Insight Tag installed | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L02 | Conversions API applicability and status | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L03 | Job title targeting precision | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L04 | Company size filtering | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L05 | Seniority level targeting | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L06 | Matched Audiences | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L07 | ABM company-list applicability | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L08 | Audience expansion setting | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L09 | Predictive audiences | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L10 | Thought Leader Ads applicability | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L11 | Ad format diversity | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L12 | Video ads present | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L13 | Creative refresh cadence | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L14 | Lead Gen Form friction | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L15 | Lead Gen Form CRM integration | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L16 | Bid strategy appropriate | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L17 | Budget sufficiency | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L18 | Ad Set objective alignment | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L19 | A/B testing active | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L20 | Frequency monitoring | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L21 | CTR benchmark | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L22 | CPC benchmark | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L23 | Lead quality tracking | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L24 | Conversion tracking attribution | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L25 | Demographics report review | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L-CRM1 | CRM integration for revenue attribution | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L-EU1 | EU Sponsored Messaging compliance | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
-| L28 | Off-Platform Event Ads | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L29 | Campaign Manager terminology rename trap | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L30 | Accelerate auto-campaign creation | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L31 | AI Ad Variants | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L32 | Career Journey targeting | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L33 | Reserved Ads | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L34 | First Impression Ads | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L35 | BrandLink expansion | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L36 | Wire | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L37 | Thought Leader Event Ads | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L38 | CTV expansion | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L39 | Company Attribution in Revenue Attribution Report | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L40 | MRC accreditation for video metrics | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L41 | Company Intelligence API | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L42 | Flexible Ad Creation availability | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L43 | SMB Auto-targeting + Draft with AI | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L44 | Real-time CRM data in Campaign Manager | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L45 | Ads Agency Certification | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
-| L46 | Organic-signal relevance | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
+| L01 | Insight Tag o'rnatilgan | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L02 | Conversions API qo'llanilishi va holati | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L03 | Lavozim nomi targetingi aniqligi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L04 | Kompaniya hajmi bo'yicha filtrlash | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L05 | Staj/lavozim darajasi targetingi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L06 | Matched Audiences | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L07 | ABM kompaniya ro'yxati qo'llanilishi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L08 | Auditoriyani kengaytirish sozlamasi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L09 | Predictive auditoriyalar | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L10 | Thought Leader Ads qo'llanilishi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L11 | Reklama formatlari xilma-xilligi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L12 | Video reklamalar mavjud | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L13 | Kreativni yangilash kadansi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L14 | Lead Gen Form ishqalanishi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L15 | Lead Gen Form CRM integratsiyasi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L16 | Bid strategiyasi mosligi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L17 | Byudjet yetarliligi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L18 | Ad Set maqsadiga moslik | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L19 | A/B testlash faol | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L20 | Frequency monitoringi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L21 | CTR benchmarki | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L22 | CPC benchmarki | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L23 | Lid sifatini kuzatish | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L24 | Konversiya trekingi atributsiyasi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L25 | Demografiya hisobotini ko'rib chiqish | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L-CRM1 | Daromad atributsiyasi uchun CRM integratsiyasi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L-EU1 | EU Sponsored Messaging muvofiqligi | Shartli dalil nazorati: qo'llanilishini aniqlang va joriy akkaunt dalilidan baholang; aks holda `unknown` yoki `not_applicable` qaytaring. |
+| L28 | Off-Platform Event Ads | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L29 | Campaign Manager terminologiyasini qayta nomlash tuzog'i | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L30 | Accelerate avto-kampaniya yaratish | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L31 | AI Ad Variants | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L32 | Career Journey targetingi | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L33 | Reserved Ads | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L34 | First Impression Ads | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L35 | BrandLink kengayishi | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L36 | Wire | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L37 | Thought Leader Event Ads | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L38 | CTV kengayishi | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L39 | Revenue Attribution Report'da Company Attribution | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L40 | Video metrikalar uchun MRC akkreditatsiyasi | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L41 | Company Intelligence API | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L42 | Flexible Ad Creation mavjudligi | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L43 | SMB Auto-targeting + Draft with AI | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L44 | Campaign Manager'da real vaqt CRM ma'lumotlari | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L45 | Ads Agency Certification | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
+| L46 | Organik signal relevantligi | Ballanmaydigan manba-yangilash aniqlashi: joriy rasmiy mavjudlik, akkaunt muvofiqligi va boshqaruv ehtiyojini tekshiring; qabul qilmaslik hech qachon nosozlik emas. |
 
-## Recommendation boundary
+## Tavsiya chegarasi
 
-A recommendation must identify the observed evidence, account-specific baseline or owner threshold, expected mechanism, confidence, reversible next step, measurement window, and rollback condition. Do not infer a recommendation from the control name alone.
+Tavsiya kuzatilgan dalil, akkauntga xos baza yoki egasi chegarasi, kutilgan mexanizm, ishonch, qaytariladigan keyingi qadam, o'lchov oynasi va rollback shartini ko'rsatishi kerak. Tavsiyani faqat nazorat nomidan xulosa qilmang.

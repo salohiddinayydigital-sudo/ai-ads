@@ -1,43 +1,42 @@
-# Google Ads creative generation contract
+# Google Ads kreativ yaratish kontrakti
 
-Use this reference for generation planning across Google Ads surfaces, including
-asset-based, search, feed, video, and Demand Gen campaigns. It intentionally does
-not freeze dimensions, character limits, asset counts, feature names, or format
-availability: those are current platform claims and must come from dated official
-evidence and the target account.
+Google Ads yuzalari bo'ylab (aktivga asoslangan, search, feed, video va Demand Gen
+kampaniyalari) yaratishni rejalashtirishda shu referencedan foydalaning. U ataylab
+o'lchamlar, belgi chegaralari, aktivlar soni, funksiya nomlari yoki format mavjudligini
+qotirmaydi: bular joriy platforma da'volari bo'lib, sanalangan rasmiy dalil va
+maqsadli akkauntdan olinishi shart.
 
-## Specification gate
+## Spetsifikatsiya darvozasi
 
-Before generating, create a placement matrix with:
+Yaratishdan oldin placement matritsasini tuzing:
 
-- campaign type, objective, network, placement, geography, and account eligibility;
-- official source ID, retrieval date, and refresh date for every required asset;
-- accepted file type, ratio, pixel range, byte limit, copy limit, and asset count;
-- crop behavior, logo/text restrictions, policy constraints, and approval state;
-- whether the item is required, recommended, optional, automatically generated, or
-  unavailable for the selected campaign.
+- kampaniya turi, maqsad, tarmoq, placement, geografiya va akkaunt muvofiqligi;
+- har bir kerakli aktiv uchun rasmiy manba ID, olingan sana va yangilanish sanasi;
+- qabul qilinadigan fayl turi, nisbat, piksel oralig'i, bayt chegarasi, matn chegarasi va aktivlar soni;
+- kesish (crop) xatti-harakati, logo/matn cheklovlari, policy cheklovlari va tasdiqlash holati;
+- element tanlangan kampaniya uchun majburiy, tavsiya etilgan, ixtiyoriy, avtomatik
+  yaratiladigan yoki mavjud emasligi.
 
-If a load-bearing specification is absent or stale, return `needs_input`. A familiar
-canvas size is not proof that an upload will be accepted. Do not describe announced,
-beta, premium, or account-ineligible automation as enabled.
+Yuk ko'taruvchi spetsifikatsiya yo'q yoki eskirgan bo'lsa, `needs_input` qaytaring. Tanish
+canvas o'lchami yuklash qabul qilinishini isbotlamaydi. E'lon qilingan, beta, premium yoki
+akkaunt uchun yaroqsiz avtomatlashtirishni yoqilgan deb ta'riflamang.
 
-## Google-specific review
+## Google'ga xos ko'rib chiqish
 
-- Separate Search copy, asset-group images and logos, feed assets, Demand Gen
-  assets, and YouTube assets; requirements and cropping are not interchangeable.
-- Validate the landing page, product feed, business name, logo ownership, and policy
-  claims before generating assets around them.
-- Produce materially different concepts, not only crops or color changes, when the
-  brief calls for creative testing.
-- Keep critical subjects within the official placement safe areas and preview every
-  supported crop. Do not assume text or logos are universally forbidden or allowed.
-- Treat automatic asset creation, final-URL behavior, and generated copy as governed
-  account settings. Record their current state and owner intent.
+- Search matni, asset-group rasmlari va logolari, feed aktivlari, Demand Gen aktivlari va
+  YouTube aktivlarini ajrating; talablar va kesish o'zaro almashtirilmaydi.
+- Aktivlarni yaratishdan oldin landing sahifa, mahsulot feed'i, biznes nomi, logo egaligi va
+  policy da'volarini tekshiring.
+- Brif kreativ test talab qilsa, faqat crop yoki rang o'zgartirishni emas, mazmunan farqli konseptlarni yarating.
+- Muhim obyektlarni rasmiy placement xavfsiz zonalari ichida saqlang va har bir qo'llab-quvvatlanadigan
+  crop'ni oldindan ko'ring. Matn yoki logolar universal ravishda taqiqlangan yoki ruxsat etilgan deb o'ylamang.
+- Avtomatik aktiv yaratish, final-URL xatti-harakati va yaratilgan matnni boshqariladigan akkaunt
+  sozlamalari deb qarang. Ularning joriy holati va egasi niyatini yozib boring.
 
-## Output contract
+## Natija kontrakti
 
-Each asset-manifest entry records concept ID, source IDs, placement, ratio,
-dimensions, format, size, checksum, copy fields, rights/provenance, safety review,
-preview result, and account eligibility. A generated file is a draft until its
-manifest validates and the operator approves it. Generation does not imply upload
-or live Google Ads write support.
+Aktiv-manifestning har bir yozuvi konsept ID, manba ID'lar, placement, nisbat, o'lchamlar,
+format, hajm, checksum, matn maydonlari, huquqlar/kelib chiqish, xavfsizlik ko'rigi,
+preview natijasi va akkaunt muvofiqligini qayd etadi. Yaratilgan fayl manifest tasdiqlanmaguncha
+va operator ma'qullamaguncha qoralamadir. Yaratish yuklash yoki jonli Google Ads yozish
+imkoniyatini bildirmaydi.

@@ -1,55 +1,53 @@
-# Apple Ads control reference
+# Apple Ads nazorat referensi
 
-Retrieved: 2026-07-11. Refresh official product, API, policy, and availability
-sources before using this reference after its control-plane refresh date.
+Olingan: 2026-07-11. Control-plane yangilanish sanasidan keyin bu referencedan foydalanishdan oldin
+rasmiy mahsulot, API, policy va mavjudlik manbalarini yangilang.
 
-## Category model
+## Kategoriyalar modeli
 
-This reference does not define an executable scoring profile. Bind a versioned
-profile whose categories cover the applicable controls and whose weights total 100;
-otherwise produce findings without a health score. The deterministic engine applies
-weights only after scoring applicable controls within each category.
+Bu reference bajariladigan ballash profilini belgilamaydi. Tegishli nazoratlarni qamrab oluvchi va
+vaznlari jami 100 bo'lgan versiyalangan profilni bog'lang; aks holda sog'liq balisiz topilmalarni
+yarating. Deterministik dvigatel vaznlarni faqat har bir kategoriya ichida tegishli nazoratlarni ballagandan
+keyin qo'llaydi.
 
-## Runtime evaluation contract
+## Runtime baholash kontrakti
 
-- Treat each row as an applicability-first evidence question. Missing evidence is
-  `unknown`; unavailable or ineligible surfaces are `not_applicable`.
-- Verify app, market, placement, campaign type, reporting access, attribution path,
-  and account eligibility before evaluation.
-- The registered source below grounds the developer API surface only. Current
-  product, policy, attribution, privacy-threshold, report-field, bidding, and
-  creative claims require additional dated official source IDs or account evidence.
-- This reference is advisory and export-read only. It does not provide a live Apple
-  Ads API reader or mutation adapter.
+- Har bir qatorni avval qo'llanilishni tekshiradigan dalil savoli deb qarang. Yo'q dalil — `unknown`;
+  mavjud bo'lmagan yoki yaroqsiz yuzalar — `not_applicable`.
+- Baholashdan oldin ilova, bozor, placement, kampaniya turi, hisobotga kirish, atributsiya yo'li va
+  akkaunt muvofiqligini tekshiring.
+- Quyidagi ro'yxatdan o'tgan manba faqat developer API yuzasini asoslaydi. Joriy mahsulot, policy,
+  atributsiya, maxfiylik chegarasi, hisobot maydoni, bidding va kreativ da'volari qo'shimcha sanalangan
+  rasmiy manba ID yoki akkaunt dalilini talab qiladi.
+- Bu reference faqat maslahat va eksportni o'qish uchun. U jonli Apple Ads API o'quvchisi yoki o'zgartirish adapterini bermaydi.
 
-## Controls
+## Nazoratlar
 
-| ID | Category | Evidence question |
+| ID | Kategoriya | Dalil savoli |
 | --- | --- | --- |
-| AP-M01 | Measurement | AdServices, AdAttributionKit, MMP, or internal attribution sources and limitations are declared. |
-| AP-M02 | Measurement | Installs and post-install events reconcile across Apple Ads and the app analytics source. |
-| AP-M03 | Measurement | Attribution privacy thresholds and missing detail are treated as uncertainty, not zero performance. |
-| AP-M04 | Measurement | Campaign, placement, ad-group, keyword, search-term, and ad reports use comparable windows. |
-| AP-S01 | Structure | Campaigns separate brand, category, competitor, discovery, and placement intent where material. |
-| AP-S02 | Structure | Search Match discovery and manually targeted keywords do not create uncontrolled overlap. |
-| AP-K01 | Keywords | Match type, negatives, search terms, and keyword movement follow observed query evidence. |
-| AP-K02 | Keywords | Bid and CPT decisions consider tap-through, conversion, CPA, value, and volume together. |
-| AP-A01 | Audience | Country, device, customer type, demographics, and audience choices are eligible and intentional. |
-| AP-C01 | Creative | Default and custom product pages match keyword, placement, audience, and app-store promise. |
-| AP-C02 | Creative | Product-page tests isolate creative or message changes and have sufficient observation time. |
-| AP-B01 | Budget | Budget allocation and pacing preserve discovery while funding proven intent. |
-| AP-B02 | Budget | Goal-based bidding or automation is recommended only when eligible and supported by evidence. |
-| AP-R01 | Reporting | Currency, timezone, delayed attribution, and API pagination/report completeness are disclosed. |
-| AP-P01 | Policy | App, market, age, privacy, and product eligibility requirements are checked. |
-| AP-E01 | Experiment | Tests define hypothesis, placement, primary metric, guardrails, and readout window. |
+| AP-M01 | Measurement | AdServices, AdAttributionKit, MMP yoki ichki atributsiya manbalari va cheklovlari e'lon qilingan. |
+| AP-M02 | Measurement | O'rnatishlar va o'rnatishdan keyingi eventlar Apple Ads va ilova analitikasi manbasi o'rtasida moslashtirilgan. |
+| AP-M03 | Measurement | Atributsiya maxfiylik chegaralari va yetishmayotgan tafsilotlar noaniqlik deb qaraladi, nol natija deb emas. |
+| AP-M04 | Measurement | Kampaniya, placement, ad-group, kalit so'z, qidiruv iborasi va reklama hisobotlari taqqoslanadigan oynalardan foydalanadi. |
+| AP-S01 | Structure | Kampaniyalar muhim bo'lganda brend, kategoriya, raqobatchi, discovery va placement niyatini ajratadi. |
+| AP-S02 | Structure | Search Match discovery va qo'lda targetlangan kalit so'zlar nazoratsiz overlap yaratmaydi. |
+| AP-K01 | Keywords | Match turi, negativlar, qidiruv iboralari va kalit so'z harakati kuzatilgan so'rov dalillariga amal qiladi. |
+| AP-K02 | Keywords | Bid va CPT qarorlari tap-through, konversiya, CPA, qiymat va hajmni birga hisobga oladi. |
+| AP-A01 | Audience | Mamlakat, qurilma, mijoz turi, demografiya va auditoriya tanlovlari yaroqli va ongli. |
+| AP-C01 | Creative | Standart va maxsus mahsulot sahifalari kalit so'z, placement, auditoriya va app-store va'dasiga mos. |
+| AP-C02 | Creative | Mahsulot sahifasi testlari kreativ yoki xabar o'zgarishini ajratadi va yetarli kuzatuv vaqtiga ega. |
+| AP-B01 | Budget | Byudjet taqsimoti va pacing isbotlangan niyatni moliyalashtirib, discovery'ni saqlaydi. |
+| AP-B02 | Budget | Maqsadga asoslangan bidding yoki avtomatlashtirish faqat yaroqli va dalil bilan qo'llab-quvvatlansa tavsiya etiladi. |
+| AP-R01 | Reporting | Valyuta, vaqt mintaqasi, kechiktirilgan atributsiya va API sahifalash/hisobot to'liqligi oshkor qilingan. |
+| AP-P01 | Policy | Ilova, bozor, yosh, maxfiylik va mahsulot muvofiqligi talablari tekshirilgan. |
+| AP-E01 | Experiment | Testlar gipoteza, placement, asosiy metrika, himoya chegaralari va o'qish oynasini belgilaydi. |
 
-Use `pass`, `fail`, `unknown`, or `not_applicable`. Unknown controls reduce
-coverage. Optional, beta, premium, unavailable, immutable, or ineligible features
-are unscored opportunities.
+`pass`, `fail`, `unknown` yoki `not_applicable` dan foydalaning. Noma'lum nazoratlar qamrovni kamaytiradi.
+Ixtiyoriy, beta, premium, mavjud bo'lmagan, o'zgarmas yoki yaroqsiz funksiyalar ballanmagan imkoniyatlardir.
 
-## Registered official evidence
+## Ro'yxatdan o'tgan rasmiy dalil
 
 - `apple-ads-api-official`: [Using Apple Ads API functionality](https://developer.apple.com/documentation/apple_ads/using-apple-search-ads-api-functionality)
 
-Official sources override this summary when they change. Unsupported controls stay
-`unknown`; vendor case studies remain labeled and contextual.
+Rasmiy manbalar o'zgarganda bu xulosadan ustun turadi. Qo'llab-quvvatlanmagan nazoratlar `unknown`
+bo'lib qoladi; vendor keyslari (case study) belgilangan va kontekstual bo'lib qoladi.
