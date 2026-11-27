@@ -1,20 +1,20 @@
 ---
 name: ads-vk
-description: "VK Ads (VK Reklama) Audit & Lead/Mini-App Targetology for CIS & Central Asia"
+description: "VK Ads (VK Reklama) auditi va MDH hamda Markaziy Osiyo uchun lid/Mini-App targetologiyasi"
 verified_date: "2026-10-21"
 ---
 
-# `audit` — VK Ads (VK Reklama) Audit & Lead/Mini-App Targetology for CIS & Central Asia
+# `audit` — VK Ads (VK Reklama) auditi va MDH hamda Markaziy Osiyo uchun lid/Mini-App targetologiyasi
 
-- **Verified Date:** `2026-10-21`
-- **Core Platform Coverage Preserved:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
+- **Tekshirilgan sana:** `2026-10-21`
+- **Saqlangan asosiy platforma qamrovi:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
 
-## Audit & Execution Checklist
-1. Verify VK Pixel base code, JS event triggers, and server-to-server mobile attribution (MyTracker / AppsFlyer / Adjust).
-2. Audit Lead Form friction (<=3 fields + qualifying question) and instant webhook integration with AmoCRM / Bitrix24.
-3. Evaluate Search Context Targeting (Kontekstniy targeting by search queries over 3-14 days) separately from broad interest segments.
-4. Inspect creative asset completeness across all aspect ratios (1:1, 4:5, 16:9, 9:16 Clips/Stories) for unified VK ad placement delivery.
+## Audit va bajarish cheklisti
+1. VK Pixel bazaviy kodi, JS event triggerlari va server-to-server mobil atributsiyasini (MyTracker / AppsFlyer / Adjust) tekshiring.
+2. Lid forma ishqalanishini (<=3 maydon + saralovchi savol) va AmoCRM / Bitrix24 bilan darhol webhook integratsiyasini audit qiling.
+3. Qidiruv kontekst targetingini (3–14 kun davomidagi qidiruv so'rovlari bo'yicha kontekstli targeting) keng qiziqish segmentlaridan alohida baholang.
+4. Yagona VK reklama placement yetkazib berish uchun kreativ aktivlar barcha nisbatlarda (1:1, 4:5, 16:9, 9:16 Clips/Stories) to'liqligini tekshiring.
 
-## Official Documentation & Sources (`2026-10-21`)
-- [VK Ads Official Help & Specifications](https://ads.vk.com/help) (Verified: `2026-10-21`)
-- [VK Pixel & Event Tracking Guide](https://ads.vk.com/help/categories/sites) (Verified: `2026-10-21`)
+## Rasmiy hujjatlar va manbalar (`2026-10-21`)
+- [VK Ads rasmiy yordam va spetsifikatsiyalar](https://ads.vk.com/help) (Tekshirilgan: `2026-10-21`)
+- [VK Pixel va event treking qo'llanmasi](https://ads.vk.com/help/categories/sites) (Tekshirilgan: `2026-10-21`)

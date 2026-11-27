@@ -79,7 +79,7 @@ class TargetologCharterTests(unittest.TestCase):
         for name in sorted(TARGETOLOG_AGENTS):
             with self.subTest(agent=name):
                 fm, body = read_agent(name)
-                self.assertTrue(fm["description"].strip('"').startswith("Use this agent"))
+                self.assertTrue(fm["description"].strip('"').startswith("Ushbu agentdan"))
                 for title in REQUIRED_SECTIONS:
                     self.assertIn(title, body)
                 for rel in PATH_RE.findall(body):
@@ -118,7 +118,7 @@ class SafetyBoundaryTests(unittest.TestCase):
     def test_account_recovery_is_strictly_white_hat(self) -> None:
         fm, body = read_agent("account-recovery-specialist")
         boundary = fm["authority_boundary"].lower()
-        for needle in ("white-hat", "cloaking", "fake documents", "farmed"):
+        for needle in ("white-hat", "cloaking", "soxta hujjat", "fermadagi"):
             self.assertIn(needle, boundary)
         for needle in ("Cloaking", "Soxta hujjat", "white-hat", "rules/40-xavfsizlik-va-hisob.md", "white_hat_only: true",
                        "qat'iyan taqiqlanadi"):

@@ -1,20 +1,20 @@
 ---
 name: ads-line
-description: "LINE Ads Platform (LAP) & LINE Official Account (OA) Funnel Audit (Japan, Thailand, Taiwan)"
+description: "LINE Ads Platform (LAP) va LINE Official Account (OA) voronka auditi (Yaponiya, Tailand, Tayvan)"
 verified_date: "2026-10-21"
 ---
 
-# `ads-line` — LINE Ads Platform (LAP) & LINE Official Account (OA) Funnel Audit (Japan, Thailand, Taiwan)
+# `ads-line` — LINE Ads Platform (LAP) va LINE Official Account (OA) voronka auditi (Yaponiya, Tailand, Tayvan)
 
-- **Verified Date:** `2026-10-21`
-- **Core Platform Coverage Preserved:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
+- **Tekshirilgan sana:** `2026-10-21`
+- **Saqlangan asosiy platforma qamrovi:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
 
-## Audit & Execution Checklist
-1. Audit LINE Tag (Base Code + Conversion Code + Custom Events) and LINE Conversion API (CAPI) deduplication.
-2. Separate Cost-Per-Friend (CPF / Gain Friends for LINE Official Account) campaigns from Direct Website Conversion campaigns.
-3. Evaluate Rich Menu & automated step-message onboarding sequences inside LINE OA within the first 5 minutes of Friend addition.
-4. Check Smart Channel, VOOM, and LINE News placement performance breakdown and frequency caps.
+## Audit va bajarish cheklisti
+1. LINE Tag (Base Code + Conversion Code + Custom Events) va LINE Conversion API (CAPI) deduplikatsiyasini audit qiling.
+2. Cost-Per-Friend (CPF / LINE Official Account uchun do'st orttirish) kampaniyalarini to'g'ridan-to'g'ri veb-sayt konversiya kampaniyalaridan ajrating.
+3. Do'st qo'shilgandan keyingi dastlabki 5 daqiqada LINE OA ichidagi Rich Menu va avtomatik bosqichli onboarding xabarlar ketma-ketligini baholang.
+4. Smart Channel, VOOM va LINE News placement natijalari taqsimoti va chastota cheklovlarini tekshiring.
 
-## Official Documentation & Sources (`2026-10-21`)
-- [LINE Business ID & LINE Ads Guide (LY Corporation)](https://www.lycbiz.com/jp/service/line-ads/) (Verified: `2026-10-21`)
-- [LINE Developers & LINE Tag Documentation](https://developers.line.biz/en/docs/line-login/) (Verified: `2026-10-21`)
+## Rasmiy hujjatlar va manbalar (`2026-10-21`)
+- [LINE Business ID va LINE Ads qo'llanmasi (LY Corporation)](https://www.lycbiz.com/jp/service/line-ads/) (Tekshirilgan: `2026-10-21`)
+- [LINE Developers va LINE Tag hujjatlari](https://developers.line.biz/en/docs/line-login/) (Tekshirilgan: `2026-10-21`)

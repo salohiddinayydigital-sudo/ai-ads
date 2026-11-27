@@ -46,7 +46,7 @@ Foydalanuvchi `/skill-search`, `/agent` yoki `/brief` buyruqlarini qo'lda yozish
 
 ## 4. "Zero Findings" Qonuniyligi va Manba Haqqoniyligi
 
-> **ECC tamoyili:** *"It Is Acceptable And Expected To Return Zero Findings."*
+> **ECC tamoyili:** *"Nol topilma qaytarish maqbul va kutiladigan holat."*
 
 - Agar tekshirilgan reklama akkaunti yoki kreativ nazorat bandlari (`control_id`) bo'yicha sog'lom bo'lsa, audit agenti **`findings: []` (0 topilma)** qaytarishi shart.
 - Manbasiz fakt, to'qima benchmark, uydirma Meta interest nomi (`VERIFIED_AVAILABLE` deb ko'rsatilgan statik g'oya) yoki sun'iy muammo o'ylab topish qat'iyan taqiqlanadi ([[00-manba]]).

@@ -97,7 +97,7 @@ if (!fs.existsSync(hookScript)) {
 
 const py = findPython();
 if (!py) {
-  failOpenOrStrict("Python interpreter not found");
+  failOpenOrStrict("Python interpretatori topilmadi");
 }
 
 // Extract target file path from Claude Code PreToolUse/PostToolUse stdin payload if available

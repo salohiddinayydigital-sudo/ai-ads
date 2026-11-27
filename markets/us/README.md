@@ -1,24 +1,24 @@
-# Market Pack: United States (US) (`us`)
+# Bozor paketi: Qo'shma Shtatlar (AQSh) (`us`)
 
-- **Default Currency:** `USD` (Supported: `USD`)
-- **Payment Methods:** Visa/Mastercard/Amex/Discover, Apple Pay, Shop Pay, PayPal, Venmo
-- **BNPL Providers:** Affirm, Afterpay, Klarna, PayPal Pay in 4
-- **Price Anchor Template:** `Or 4 interest-free payments of {installment} with {bnpl}`
-- **Primary Funnels:**
-  - Ad -> Shopify / Custom DTC Landing Page -> One-Click Checkout (Shop Pay / Apple Pay)
-  - Ad -> VSL / Demo Funnel -> HubSpot / Salesforce -> AE Discovery Call
-  - Ad -> SMS / Email Capture (Klaviyo / Attentive) -> Welcome Flow -> Purchase
-- **Messaging Channels:** SMS / iMessage (Attentive, Postscript), Email (Klaviyo), Instagram DM, Messenger
-- **Privacy & Ad Regulations:**
+- **Standart valyuta:** `USD` (qo'llab-quvvatlanadi: `USD`)
+- **To'lov usullari:** Visa/Mastercard/Amex/Discover, Apple Pay, Shop Pay, PayPal, Venmo
+- **BNPL provayderlar:** Affirm, Afterpay, Klarna, PayPal Pay in 4
+- **Narx anker shabloni:** `Or 4 interest-free payments of {installment} with {bnpl}`
+- **Asosiy voronkalar:**
+  - Reklama -> Shopify / Custom DTC Landing Page -> One-Click Checkout (Shop Pay / Apple Pay)
+  - Reklama -> VSL / Demo Funnel -> HubSpot / Salesforce -> AE Discovery Call
+  - Reklama -> SMS / Email Capture (Klaviyo / Attentive) -> Welcome Flow -> Purchase
+- **Xabar kanallari:** SMS / iMessage (Attentive, Postscript), Email (Klaviyo), Instagram DM, Messenger
+- **Maxfiylik va reklama qonunchiligi:**
   - CCPA / CPRA (California)
-  - State Privacy Laws (VA, CO, CT, TX)
+  - Shtat maxfiylik qonunlari (VA, CO, CT, TX)
   - Meta Limited Data Use (LDU: data_processing_options=['LDU'])
-  - FTC Endorsement Guides (UGC/Influencer Disclosure)
-  - TCPA (SMS Opt-in Compliance)
-- **Languages (BCP 47):** `en-US, es-US` (RTL: `None`)
-- **Verified Date:** `2026-10-21`
+  - FTC Endorsement Guides (UGC/influenser oshkoralik talablari)
+  - TCPA (SMS opt-in talablariga muvofiqlik)
+- **Tillar (BCP 47):** `en-US, es-US` (RTL: `yo'q`)
+- **Tekshirilgan sana:** `2026-10-21`
 
-## Official Sources
-- [Meta Developers — Limited Data Use (LDU) for US States](https://developers.facebook.com/docs/marketing-apis/data-processing-options) (Verified: 2026-10-21)
-- [California Privacy Protection Agency — CCPA/CPRA](https://cppa.ca.gov/regulations/) (Verified: 2026-10-21)
-- [FTC Endorsement Guides (16 CFR Part 255)](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) (Verified: 2026-10-21)
+## Rasmiy manbalar
+- [Meta Developers — Limited Data Use (LDU) for US States](https://developers.facebook.com/docs/marketing-apis/data-processing-options) (Tekshirilgan: 2026-10-21)
+- [California Privacy Protection Agency — CCPA/CPRA](https://cppa.ca.gov/regulations/) (Tekshirilgan: 2026-10-21)
+- [FTC Endorsement Guides (16 CFR Part 255)](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) (Tekshirilgan: 2026-10-21)

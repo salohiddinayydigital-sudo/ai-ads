@@ -29,7 +29,7 @@ SERVER_VERSION = (VAULT / "VERSION").read_text(encoding="utf-8").strip() if (VAU
 MCP_TOOLS = [
     {
         "name": "tyrion_universal_router",
-        "description": "Universal Auto-Router & Autonomous Agent Orchestrator: analyzes any natural-language marketing task (UZ Latin, UZ Cyrillic, RU, EN), selects primary_agent, supporting_agents, required_skills, supporting_skills, references_to_load, rules_to_load, tools_to_use, and workflow, enforces Spend-Guard mutation gates, and loads the required charter/skill/reference context.",
+        "description": "Universal Auto-Router va avtonom agent orkestratori: oddiy tildagi har qanday marketing vazifasini (UZ lotin, UZ kirill, RU, EN) tahlil qiladi, primary_agent, supporting_agents, required_skills, supporting_skills, references_to_load, rules_to_load, tools_to_use va workflow'ni tanlaydi, Spend-Guard o'zgartirish darvozalarini majburlaydi va kerakli charter/skill/reference kontekstini yuklaydi.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -49,7 +49,7 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_meta_detailed_targeting",
-        "description": "Search and validate Meta Ads Detailed Targeting options (Interests, Behaviors, Demographics) via official Meta Graph API endpoints (/search, /act_<id>/targetingsearch, /targetingsuggestions, /targetingvalidation) with 6 strict verification statuses (VERIFIED_AVAILABLE, FOUND_NOT_VALIDATED, UNAVAILABLE_OR_CONSOLIDATED, RELATED_UNVERIFIED, NOT_FOUND, API_UNAVAILABLE). Never hallucinates unverified interests as valid Meta options.",
+        "description": "Meta Ads Detailed Targeting variantlarini (qiziqishlar, xatti-harakatlar, demografiya) rasmiy Meta Graph API endpointlari (/search, /act_<id>/targetingsearch, /targetingsuggestions, /targetingvalidation) orqali 6 ta qat'iy tekshiruv statusi bilan qidiradi va tekshiradi (VERIFIED_AVAILABLE, FOUND_NOT_VALIDATED, UNAVAILABLE_OR_CONSOLIDATED, RELATED_UNVERIFIED, NOT_FOUND, API_UNAVAILABLE). Tasdiqlanmagan qiziqishlarni hech qachon yaroqli Meta varianti sifatida to'qimaydi.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -69,7 +69,7 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_meta_audience",
-        "description": "Build 4-layer Meta Ads 2026 audience architecture (mode='architect'), Audience JTBD + Competitor Ad Teardown + Segment-Matched Grand Slam Offers (mode='market-intel'), or 9-section Turnkey Launch Blueprint (mode='launch-blueprint').",
+        "description": "Meta Ads 2026 uchun 4 qatlamli auditoriya arxitekturasini (mode='architect'), Audience JTBD + raqobatchi reklamalari tahlili + segmentga mos Grand Slam takliflarini (mode='market-intel') yoki 9 bo'limli tayyor Launch Blueprint'ni (mode='launch-blueprint') quradi.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -90,7 +90,7 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_meta_live_insights",
-        "description": "Pull and audit live Meta Ads account telemetry (Graph API v26.0 /act_<id>/insights with paging.next pagination, account_currency, and conversion-family separation) or parse a raw Graph API insights JSON file.",
+        "description": "Jonli Meta Ads akkaunt telemetriyasini oladi va audit qiladi (Graph API v26.0 /act_<id>/insights, paging.next sahifalash, account_currency va konversiya oilalarini ajratish bilan) yoki xom Graph API insights JSON faylini tahlil qiladi.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -108,7 +108,7 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_breakdown_effect",
-        "description": "Detect Meta Ads 'Breakdown Effect' (Marginal vs Average CPA trap) across two placements or segments.",
+        "description": "Ikkita placement yoki segment bo'yicha Meta Ads 'Breakdown Effect' (marginal va o'rtacha CPA tuzog'i) ni aniqlaydi.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -124,26 +124,26 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_creative_matrix",
-        "description": "Creative engine. mode='matrix' (default): Andromeda 3x3 Angle x Format matrix; 'video-script': shoot-ready 9:16 script with hook variants and claim_safety flags; 'pda-matrix'; 'ad-copy'; 'iterate': diagnostic hypotheses from REAL funnel metrics (hook/hold/outbound CTR/landing CVR/qualified-lead rate vs account baselines) - what to change next and what to keep. Unknown price stays unknown (no invented price anchor).",
+        "description": "Kreativ dvigatel. mode='matrix' (standart): Andromeda 3x3 Angle x Format matritsasi; 'video-script': hook variantlari va claim_safety flaglari bilan syomkaga tayyor 9:16 ssenariy; 'pda-matrix'; 'ad-copy'; 'iterate': HAQIQIY voronka metrikalaridan (hook/hold/outbound CTR/landing CVR/qualified-lead rate va akkaunt bazasi) diagnostik gipotezalar — keyin nimani o'zgartirish va nimani saqlash. Noma'lum narx noma'lumligicha qoladi (to'qilgan narx ankeri yo'q).",
         "inputSchema": {
             "type": "object",
             "properties": {
                 "mode": {"type": "string", "enum": ["matrix", "video-script", "pda-matrix", "ad-copy", "iterate"], "default": "matrix"},
                 "niche": {"type": "string", "default": "ecom"},
-                "product": {"type": "string", "description": "Required except for mode='iterate'"},
+                "product": {"type": "string", "description": "mode='iterate' dan tashqari majburiy"},
                 "problem": {"type": "string"},
-                "price": {"type": "number", "description": "Real price; omit if unknown"},
+                "price": {"type": "number", "description": "Haqiqiy narx; noma'lum bo'lsa qoldirib keting"},
                 "duration": {"type": "integer", "default": 30},
                 "format": {"type": "string"},
-                "metrics": {"type": "object", "description": "iterate: hook_rate, hold_rate, outbound_ctr, lp_cvr, qualified_lead_rate (percent)"},
-                "baselines": {"type": "object", "description": "iterate: the account's own averages for the same metrics"},
+                "metrics": {"type": "object", "description": "iterate: hook_rate, hold_rate, outbound_ctr, lp_cvr, qualified_lead_rate (foizda)"},
+                "baselines": {"type": "object", "description": "iterate: bir xil metrikalar bo'yicha akkauntning o'z o'rtacha ko'rsatkichlari"},
                 "cpa": {"type": "number"}, "breakeven_cpa": {"type": "number"}, "impressions": {"type": "integer"},
             },
         },
     },
     {
         "name": "tyrion_capi_utm",
-        "description": "Build Meta CAPI v26.0 SHA-256 hashed payload with EMQ score or Telegram Bot <=64-char UTM deep-links.",
+        "description": "EMQ bali bilan Meta CAPI v26.0 SHA-256 hashlangan payload yoki Telegram Bot uchun <=64 belgili UTM deep-linklar quradi.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -156,7 +156,7 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_media_calculator",
-        "description": "Calculate break-even CPA, break-even ROAS, and gross profit per unit.",
+        "description": "Break-even CPA, break-even ROAS va bir birlikka yalpi foydani hisoblaydi.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -169,7 +169,7 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_spend_guard",
-        "description": "Validate budget hike against the 20% learning-phase safety threshold and daily ceiling.",
+        "description": "Byudjet oshirishni 20% learning-phase xavfsizlik chegarasi va kunlik shiftga qarshi tekshiradi.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -182,7 +182,7 @@ MCP_TOOLS = [
     },
     {
         "name": "tyrion_brain_search",
-        "description": "Search Tyrion's 100 atomic knowledge notes and 9 niche playbooks in 0 tokens.",
+        "description": "Tyrion'ning 101 ta atomik bilim qaydi va 9 ta nisha playbookini 0 tokenda qidiradi.",
         "inputSchema": {
             "type": "object",
             "properties": {

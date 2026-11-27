@@ -1,21 +1,21 @@
 ---
 name: ads-china-ecosystem
-description: "Baidu Search, Ocean Engine (Douyin) & Tencent WeChat Ads (China — Informational Reference)"
+description: "Baidu Search, Ocean Engine (Douyin) va Tencent WeChat Ads (Xitoy — axborot ma'lumotnomasi)"
 verified_date: "2026-10-21"
 ---
 
-# `ads-china-ecosystem` — Baidu Search, Ocean Engine (Douyin) & Tencent WeChat Ads (China — Informational Reference)
+# `ads-china-ecosystem` — Baidu Search, Ocean Engine (Douyin) va Tencent WeChat Ads (Xitoy — axborot ma'lumotnomasi)
 
-- **Verified Date:** `2026-10-21`
-- **Core Platform Coverage Preserved:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
+- **Tekshirilgan sana:** `2026-10-21`
+- **Saqlangan asosiy platforma qamrovi:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
 
-## Audit & Execution Checklist
-1. Informational Regulatory Prerequisite: Advertising in Mainland China requires a valid business license, ICP Filing/License (`beian.miit.gov.cn`), industry-specific permits, and compliance with the PRC Advertising Law and Personal Information Protection Law (PIPL).
-2. Baidu Search & Feed: use Baidu Jimuyu (hosted landing pages) for oCPC conversion tracking and deep-conversion bidding.
-3. Ocean Engine (Douyin): align 9:16 short-video hooks (first 2 seconds) with Douyin Shop (Qianchuan) GMV ROI bidding and live-stream room retention.
-4. Tencent WeChat Ads: audit Moments / Channels ad -> WeChat Mini-Program or WeCom (Enterprise WeChat) private-domain (SiYu) lead capture.
+## Audit va bajarish cheklisti
+1. Axborot xarakteridagi tartibga oid old shart: Materik Xitoyda reklama berish uchun amaldagi biznes litsenziyasi, ICP Filing/License (`beian.miit.gov.cn`), tarmoqqa xos ruxsatnomalar hamda XXR Reklama qonuni va Shaxsiy ma'lumotlarni himoya qilish qonuniga (PIPL) muvofiqlik talab qilinadi.
+2. Baidu Search va Feed: oCPC konversiya trekingi va chuqur konversiya bidding uchun Baidu Jimuyu (hosting qilingan landinglar) dan foydalaning.
+3. Ocean Engine (Douyin): 9:16 qisqa video hooklarini (birinchi 2 soniya) Douyin Shop (Qianchuan) GMV ROI bidding va jonli efir xonasida ushlab turish bilan moslang.
+4. Tencent WeChat Ads: Moments / Channels reklamasi -> WeChat Mini-Program yoki WeCom (Enterprise WeChat) xususiy domen (SiYu) orqali lid yig'ishni audit qiling.
 
-## Official Documentation & Sources (`2026-10-21`)
-- [Baidu Marketing (Yingxiao) Official Portal](https://yingxiao.baidu.com/) (Verified: `2026-10-21`)
-- [Ocean Engine (JuLiangYinQing — Douyin / Toutiao Ads)](https://www.oceanengine.com/) (Verified: `2026-10-21`)
-- [Tencent Ads (WeChat Moments, Channels & Mini-Programs)](https://e.qq.com/) (Verified: `2026-10-21`)
+## Rasmiy hujjatlar va manbalar (`2026-10-21`)
+- [Baidu Marketing (Yingxiao) rasmiy portali](https://yingxiao.baidu.com/) (Tekshirilgan: `2026-10-21`)
+- [Ocean Engine (JuLiangYinQing — Douyin / Toutiao Ads)](https://www.oceanengine.com/) (Tekshirilgan: `2026-10-21`)
+- [Tencent Ads (WeChat Moments, Channels & Mini-Programs)](https://e.qq.com/) (Tekshirilgan: `2026-10-21`)

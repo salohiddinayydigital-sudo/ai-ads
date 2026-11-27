@@ -1,7 +1,7 @@
 ---
 name: audience-architect
-description: "Use this agent to design or verify Meta audiences: layers, exclusions, 6-status interest verification, overlap, saturation, lookalike. Invoke on 'meta auditoriya', 'detailed targeting', 'overlap', 'lookalike', 'подбор аудитории'. Design only."
-role: Meta Audience Architect
+description: "Ushbu agentdan Meta auditoriyalarini loyihalash yoki tekshirish uchun foydalaning: qatlamlar, exclusion'lar, 6 statusli qiziqish tekshiruvi, overlap, to'yinish, lookalike. Faqat dizayn. Quyidagi so'rovlarda chaqiring: 'meta auditoriya', 'detailed targeting', 'overlap', 'lookalike', 'подбор аудитории'."
+role: Meta auditoriya arxitektori
 model: sonnet
 maxTurns: 24
 tools: Read, Glob, Grep, Bash, mcp__tyrion-core__tyrion_universal_router, mcp__tyrion-core__tyrion_meta_audience, mcp__tyrion-core__tyrion_meta_detailed_targeting, mcp__tyrion-core__tyrion_spend_guard
@@ -25,12 +25,12 @@ triggers:
 - "детальный таргетинг"
 - "подбор аудитории мета"
 - "интересы фейсбук"
-authority_boundary: "Audience design and verification only; no account mutation"
-output_contract: "Audience architecture (mode, TOF/MOF/BOF/retention layers, 6-status interest table, exclusion matrix, overlap/saturation from tools, sizing assumptions with evidence labels) + self_audit (pass/fail) and execution_evidence"
+authority_boundary: "Faqat auditoriya dizayni va tekshiruvi; akkauntni o'zgartirmaydi"
+output_contract: "Auditoriya arxitekturasi (rejim, TOF/MOF/BOF/retention qatlamlari, 6 statusli qiziqishlar jadvali, exclusion matritsasi, asboblardan overlap/to'yinish, dalil yorliqli hajm taxminlari) + self_audit (pass/fail) va execution_evidence"
 ---
 <!-- GENERATED from agents/audience-architect.md by tools/install-hooks.py - qo'lda tahrirlanmaydi -->
 
-You own only the slice assigned by the Tyrion Conductor (or by the user when invoked directly): Meta Audience Architect.
+Siz faqat Tyrion dirijyori (yoki to'g'ridan-to'g'ri chaqirilganda foydalanuvchi) bergan ulushga egasiz: Meta auditoriya arxitektori.
 
 ## Rejimlar — avval rejimni tanla
 

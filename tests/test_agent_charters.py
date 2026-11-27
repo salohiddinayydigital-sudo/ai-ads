@@ -104,8 +104,8 @@ class AgentCharterTests(unittest.TestCase):
 
                 # 3. description "qachon chaqiriladi"ni aytadi
                 desc = fm["description"].strip('"')
-                self.assertTrue(desc.startswith("Use this agent"), f"{name}: description 'Use this agent ...' bilan boshlanmagan")
-                self.assertIn("Invoke on", desc)
+                self.assertTrue(desc.startswith("Ushbu agentdan"), f"{name}: description 'Ushbu agentdan ...' bilan boshlanmagan")
+                self.assertIn("Quyidagi so'rovlarda chaqiring:", desc)
 
                 # 4. Agent sikli va to'xtash holatlari
                 for needle in ("Agent sikli", "needs_input", "blocked_mutation_approval", "completed", "missing_inputs", "execution_evidence"):

@@ -1,23 +1,23 @@
-# Paid Media Reference Benchmarks — Uzbekistan & Central Asia (O'zbekiston) (`uz`)
+# Pullik media benchmark ma'lumotnomasi — O'zbekiston va Markaziy Osiyo (`uz`)
 
-> **Rule #1 (Account History First / Akkaunt tarixi birinchi):** Always prioritize the ad account's own 30-to-90-day historical baseline over external industry ranges. Use the ranges below **only** as cold-start reference intervals for new accounts with zero historical data.
+> **1-qoida (Akkaunt tarixi birinchi / Account History First):** Doim reklama akkauntining o'z 30–90 kunlik tarixiy bazasini tashqi soha oraliqlaridan ustun qo'ying. Quyidagi oraliqlardan **faqat** tarixiy ma'lumoti yo'q yangi akkauntlar uchun cold-start ma'lumotnoma sifatida foydalaning.
 
-- **Market:** `uz` (Uzbekistan & Central Asia (O'zbekiston))
-- **Currency Basis:** USD (yoki UZS ekvivalenti)
-- **Confidence Level:** Medium (Cold-Start Reference Only; +/- 35% variance by creative quality and AOV)
-- **Verified Date:** `2026-10-21`
+- **Bozor:** `uz` (O'zbekiston va Markaziy Osiyo)
+- **Valyuta asosi:** USD (yoki UZS ekvivalenti)
+- **Ishonch darajasi:** O'rta (faqat cold-start ma'lumotnoma; kreativ sifati va AOV bo'yicha +/- 35% farq)
+- **Tekshirilgan sana:** `2026-10-21`
 
-| Metric | Cold-Start Reference Range (Meta / Paid Social) | Notes |
+| Metrika | Cold-start ma'lumotnoma oralig'i (Meta / Paid Social) | Izohlar |
 |---|---|---|
-| **CPM** | `$1.80 - $5.50` | Q4 / Peak season adds +30% to +80% auction pressure |
-| **Outbound CTR** | `1.10% - 2.40%` | Below lower bound indicates hook / thumbstop bottleneck |
-| **Link CPC** | `$0.10 - $0.45` | Derived from CPM and Outbound CTR |
-| **Landing Page / Lead CVR** | `8.0% - 22.0% (Lead/Bot)` | E-Commerce checkout vs Lead Gen / Messaging funnel |
-| **Target ROAS (Cold)** | `3.0x - 6.0x` | Must always be validated against `calculator.py breakeven` |
+| **CPM** | `$1.80 - $5.50` | Q4 / yuqori mavsumda auksion bosimi +30% dan +80% gacha oshadi |
+| **Outbound CTR** | `1.10% - 2.40%` | Pastki chegaradan past bo'lsa — hook / thumbstop to'sig'i |
+| **Link CPC** | `$0.10 - $0.45` | CPM va Outbound CTR dan hisoblanadi |
+| **Landing / Lid CVR** | `8.0% - 22.0% (Lid/Bot)` | E-Commerce checkout va Lead Gen / Messaging voronkasi |
+| **Maqsad ROAS (cold)** | `3.0x - 6.0x` | Doim `calculator.py breakeven` bilan tekshirilishi shart |
 
-## Sources & Verification (`2026-10-21`)
+## Manbalar va tekshiruv (`2026-10-21`)
 - [WordStream / LocaliQ 2025–2026 Paid Media Benchmarks](https://www.wordstream.com/blog/facebook-ads-benchmarks-2024)
 - [Triple Whale / Varos E-Commerce Paid Social Index](https://www.triplewhale.com/blog)
-- [Lex.uz — O'RQ-776 Reklama to'g'risidagi Qonun](https://lex.uz/docs/-6052631) (Verified: 2026-10-21)
-- [Lex.uz — O'RQ-547 Shaxsga doir ma'lumotlar to'g'risidagi Qonun](https://lex.uz/docs/-4396419) (Verified: 2026-10-21)
-- [DataReportal — Digital Uzbekistan Report](https://datareportal.com/reports/digital-2024-uzbekistan) (Verified: 2026-10-21)
+- [Lex.uz — O'RQ-776 Reklama to'g'risidagi Qonun](https://lex.uz/docs/-6052631) (Tekshirilgan: 2026-10-21)
+- [Lex.uz — O'RQ-547 Shaxsga doir ma'lumotlar to'g'risidagi Qonun](https://lex.uz/docs/-4396419) (Tekshirilgan: 2026-10-21)
+- [DataReportal — Digital Uzbekistan Report](https://datareportal.com/reports/digital-2024-uzbekistan) (Tekshirilgan: 2026-10-21)

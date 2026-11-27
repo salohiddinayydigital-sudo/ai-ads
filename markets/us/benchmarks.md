@@ -1,23 +1,23 @@
-# Paid Media Reference Benchmarks — United States (US) (`us`)
+# Pullik media benchmark ma'lumotnomasi — Qo'shma Shtatlar (AQSh) (`us`)
 
-> **Rule #1 (Account History First / Akkaunt tarixi birinchi):** Always prioritize the ad account's own 30-to-90-day historical baseline over external industry ranges. Use the ranges below **only** as cold-start reference intervals for new accounts with zero historical data.
+> **1-qoida (Akkaunt tarixi birinchi / Account History First):** Doim reklama akkauntining o'z 30–90 kunlik tarixiy bazasini tashqi soha oraliqlaridan ustun qo'ying. Quyidagi oraliqlardan **faqat** tarixiy ma'lumoti yo'q yangi akkauntlar uchun cold-start ma'lumotnoma sifatida foydalaning.
 
-- **Market:** `us` (United States (US))
-- **Currency Basis:** USD
-- **Confidence Level:** Medium (Cold-Start Reference Only; +/- 35% variance by creative quality and AOV)
-- **Verified Date:** `2026-10-21`
+- **Bozor:** `us` (Qo'shma Shtatlar (AQSh))
+- **Valyuta asosi:** USD
+- **Ishonch darajasi:** O'rta (faqat cold-start ma'lumotnoma; kreativ sifati va AOV bo'yicha +/- 35% farq)
+- **Tekshirilgan sana:** `2026-10-21`
 
-| Metric | Cold-Start Reference Range (Meta / Paid Social) | Notes |
+| Metrika | Cold-start ma'lumotnoma oralig'i (Meta / Paid Social) | Izohlar |
 |---|---|---|
-| **CPM** | `$14.00 - $32.00` | Q4 / Peak season adds +30% to +80% auction pressure |
-| **Outbound CTR** | `0.90% - 1.90%` | Below lower bound indicates hook / thumbstop bottleneck |
-| **Link CPC** | `$0.95 - $3.50` | Derived from CPM and Outbound CTR |
-| **Landing Page / Lead CVR** | `1.8% - 4.2%` | E-Commerce checkout vs Lead Gen / Messaging funnel |
-| **Target ROAS (Cold)** | `2.0x - 3.8x` | Must always be validated against `calculator.py breakeven` |
+| **CPM** | `$14.00 - $32.00` | Q4 / yuqori mavsumda auksion bosimi +30% dan +80% gacha oshadi |
+| **Outbound CTR** | `0.90% - 1.90%` | Pastki chegaradan past bo'lsa — hook / thumbstop to'sig'i |
+| **Link CPC** | `$0.95 - $3.50` | CPM va Outbound CTR dan hisoblanadi |
+| **Landing / Lid CVR** | `1.8% - 4.2%` | E-Commerce checkout va Lead Gen / Messaging voronkasi |
+| **Maqsad ROAS (cold)** | `2.0x - 3.8x` | Doim `calculator.py breakeven` bilan tekshirilishi shart |
 
-## Sources & Verification (`2026-10-21`)
+## Manbalar va tekshiruv (`2026-10-21`)
 - [WordStream / LocaliQ 2025–2026 Paid Media Benchmarks](https://www.wordstream.com/blog/facebook-ads-benchmarks-2024)
 - [Triple Whale / Varos E-Commerce Paid Social Index](https://www.triplewhale.com/blog)
-- [Meta Developers — Limited Data Use (LDU) for US States](https://developers.facebook.com/docs/marketing-apis/data-processing-options) (Verified: 2026-10-21)
-- [California Privacy Protection Agency — CCPA/CPRA](https://cppa.ca.gov/regulations/) (Verified: 2026-10-21)
-- [FTC Endorsement Guides (16 CFR Part 255)](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) (Verified: 2026-10-21)
+- [Meta Developers — Limited Data Use (LDU) for US States](https://developers.facebook.com/docs/marketing-apis/data-processing-options) (Tekshirilgan: 2026-10-21)
+- [California Privacy Protection Agency — CCPA/CPRA](https://cppa.ca.gov/regulations/) (Tekshirilgan: 2026-10-21)
+- [FTC Endorsement Guides (16 CFR Part 255)](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) (Tekshirilgan: 2026-10-21)

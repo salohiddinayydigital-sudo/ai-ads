@@ -1,54 +1,54 @@
-name: Feature Request
-description: Suggest a new feature or improvement
+name: Funksiya taklifi
+description: Yangi funksiya yoki yaxshilanishni taklif qiling
 title: "[Feature]: "
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        Have a feature idea? You can also discuss it in [GitHub Discussions](https://github.com/salohiddinayydigital-sudo/ai-ads/discussions) for community input before opening a formal request.
+        Funksiya g'oyangiz bormi? Rasmiy so'rov ochishdan oldin uni hamjamiyat fikri uchun [GitHub Discussions](https://github.com/salohiddinayydigital-sudo/ai-ads/discussions) da ham muhokama qilishingiz mumkin.
 
   - type: textarea
     id: problem
     attributes:
-      label: What problem does this solve?
-      description: Describe the gap or limitation you've run into
-      placeholder: "e.g. The /ads google skill doesn't flag campaigns missing conversion-based bidding..."
+      label: Bu qaysi muammoni hal qiladi?
+      description: Duch kelgan kamchilik yoki cheklovni tasvirlang
+      placeholder: "masalan, /ads google skilli konversiyaga asoslangan bidding yo'q kampaniyalarni belgilamaydi..."
     validations:
       required: true
 
   - type: textarea
     id: solution
     attributes:
-      label: Proposed Solution
-      description: How would you like this to work?
+      label: Taklif etilayotgan yechim
+      description: Bu qanday ishlashini xohlaysiz?
     validations:
       required: true
 
   - type: dropdown
     id: platforms
     attributes:
-      label: Related Ad Platform (if applicable)
+      label: Bog'liq reklama platformasi (agar tegishli bo'lsa)
       multiple: true
       options:
-        - Google Ads (incl. AI Max)
-        - Meta Ads (incl. Andromeda + GEM + Lattice)
-        - YouTube Ads (incl. Demand Gen + CTV)
+        - Google Ads (AI Max bilan)
+        - Meta Ads (Andromeda + GEM + Lattice bilan)
+        - YouTube Ads (Demand Gen + CTV bilan)
         - LinkedIn Ads
-        - TikTok Ads (post-USDS)
+        - TikTok Ads (USDS dan keyin)
         - Microsoft Ads
-        - Apple Ads (formerly Apple Search Ads)
+        - Apple Ads (avvalgi Apple Search Ads)
         - Amazon Ads (Sponsored Products / Brands / Display)
-        - Attribution (AdAttributionKit, GA4, Consent Mode V2, MMP)
-        - Server-side tracking (sGTM, CAPI Gateway)
-        - Cross-platform / General
+        - Atributsiya (AdAttributionKit, GA4, Consent Mode V2, MMP)
+        - Server-side treking (sGTM, CAPI Gateway)
+        - Platformalararo / Umumiy
     validations:
       required: false
 
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives Considered
-      description: Have you tried workarounds? Are there other approaches?
+      label: Ko'rib chiqilgan muqobillar
+      description: Aylanma yo'llarni sinab ko'rdingizmi? Boshqa yondashuvlar bormi?
     validations:
       required: false

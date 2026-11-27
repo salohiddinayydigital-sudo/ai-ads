@@ -61,7 +61,7 @@ SCOPE_AND_LIMITATIONS = {
     "tests_directory_scanned": True,
     "covered_risks": [
         "Hardcoded API tokens, .env files, AWS keys, and private keys across all tracked files including tests/",
-        "Hook and MCP configuration command-injection and portability hazards",
+        "Hook va MCP konfiguratsiyasidagi command-injection va ko'chiriluvchanlik xavflari",
         "Prompt injection defense baseline and skill linkage across all 36 agent charters",
         "YAML frontmatter integrity across all skills",
         "Presence of Spend-Guard 6 financial mutation gates",

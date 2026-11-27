@@ -1,20 +1,20 @@
 ---
 name: ads-naver-kakao
-description: "Naver Search Ads (PowerLink / Shopping / GFA) & Kakao Moment Audit (South Korea)"
+description: "Naver Search Ads (PowerLink / Shopping / GFA) va Kakao Moment auditi (Janubiy Koreya)"
 verified_date: "2026-10-21"
 ---
 
-# `ads-naver-kakao` — Naver Search Ads (PowerLink / Shopping / GFA) & Kakao Moment Audit (South Korea)
+# `ads-naver-kakao` — Naver Search Ads (PowerLink / Shopping / GFA) va Kakao Moment auditi (Janubiy Koreya)
 
-- **Verified Date:** `2026-10-21`
-- **Core Platform Coverage Preserved:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
+- **Tekshirilgan sana:** `2026-10-21`
+- **Saqlangan asosiy platforma qamrovi:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
 
-## Audit & Execution Checklist
-1. Naver PowerLink & Shopping Search: audit keyword rank bid curves, Naver Pay badge enabled status, and SmartStore review count visibility.
-2. Naver GFA (Glad for Advertisers): separate performance feed placements from Smart Channel top banner placements.
-3. Kakao Moment & KakaoTalk Channel: audit Bizboard top-of-chat CTR, Kakao Sync 1-click sign-up registration, and AlimTalk/FriendTalk retention flows.
-4. Verify Korean PIPA (Personal Information Protection Act) consent compliance before firing Kakao Pixel & SDK events.
+## Audit va bajarish cheklisti
+1. Naver PowerLink va Shopping Search: kalit so'z reyting bid egri chiziqlari, Naver Pay badge yoqilganligi va SmartStore sharhlar soni ko'rinishini audit qiling.
+2. Naver GFA (Glad for Advertisers): performance feed placementlarini Smart Channel yuqori banner placementlaridan ajrating.
+3. Kakao Moment va KakaoTalk Channel: Bizboard chat tepasidagi CTR, Kakao Sync 1-klik ro'yxatdan o'tish va AlimTalk/FriendTalk ushlab turish oqimlarini audit qiling.
+4. Kakao Pixel va SDK eventlarini ishga tushirishdan oldin Koreya PIPA (Shaxsiy ma'lumotlarni himoya qilish qonuni) bo'yicha rozilikka muvofiqlikni tekshiring.
 
-## Official Documentation & Sources (`2026-10-21`)
-- [Naver Searchad Official Center](https://searchad.naver.com/) (Verified: `2026-10-21`)
-- [Kakao Moment Business Platform Guide](https://business.kakao.com/info/kakaomoment/) (Verified: `2026-10-21`)
+## Rasmiy hujjatlar va manbalar (`2026-10-21`)
+- [Naver Searchad rasmiy markazi](https://searchad.naver.com/) (Tekshirilgan: `2026-10-21`)
+- [Kakao Moment biznes platformasi qo'llanmasi](https://business.kakao.com/info/kakaomoment/) (Tekshirilgan: `2026-10-21`)

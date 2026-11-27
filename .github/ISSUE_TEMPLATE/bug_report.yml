@@ -1,17 +1,17 @@
-name: Bug Report
-description: Something isn't working as expected
+name: Xato haqida xabar
+description: Nimadir kutilganidek ishlamayapti
 title: "[Bug]: "
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report a bug! Please fill in as much detail as you can.
+        Xato haqida xabar berishga vaqt ajratganingiz uchun rahmat! Iloji boricha batafsil to'ldiring.
 
   - type: dropdown
     id: os
     attributes:
-      label: Operating System
+      label: Operatsion tizim
       options:
         - Linux
         - macOS
@@ -22,26 +22,26 @@ body:
   - type: input
     id: python_version
     attributes:
-      label: Python Version
-      description: Run `python3 --version` and paste the output
-      placeholder: "e.g. 3.12.4"
+      label: Python versiyasi
+      description: `python3 --version` ni ishga tushiring va chiqishni qo'ying
+      placeholder: "masalan, 3.12.4"
     validations:
       required: false
 
   - type: input
     id: command
     attributes:
-      label: Command That Failed
-      description: The exact Claude Code command you ran
-      placeholder: "e.g. /ads google"
+      label: Xato bergan buyruq
+      description: Siz ishga tushirgan aniq Claude Code buyrug'i
+      placeholder: "masalan, /ads google"
     validations:
       required: true
 
   - type: textarea
     id: error
     attributes:
-      label: Full Error Output
-      description: Copy and paste the complete error from your terminal
+      label: To'liq xato chiqishi
+      description: Terminaldagi to'liq xatoni nusxalab qo'ying
       render: shell
     validations:
       required: true
@@ -49,15 +49,15 @@ body:
   - type: textarea
     id: context
     attributes:
-      label: Ad Platform and Account Context
-      description: Which ad platform? Any relevant account setup details that help reproduce the issue?
+      label: Reklama platformasi va akkaunt konteksti
+      description: Qaysi reklama platformasi? Muammoni takrorlashga yordam beradigan akkaunt sozlamalari haqida ma'lumot bormi?
     validations:
       required: false
 
   - type: textarea
     id: expected
     attributes:
-      label: Expected Behavior
-      description: What did you expect to happen?
+      label: Kutilgan xatti-harakat
+      description: Nima bo'lishini kutgan edingiz?
     validations:
       required: false

@@ -1,24 +1,24 @@
-## Summary
+## Qisqacha mazmun
 
-Briefly describe what this PR does and why.
+Bu PR nima qilishini va nima uchun kerakligini qisqacha tasvirlang.
 
-## Type of Change
+## O'zgarish turi
 
-- [ ] Bug fix
-- [ ] New sub-skill or feature
-- [ ] Reference file update (benchmarks, specs, audit checks)
-- [ ] Documentation
-- [ ] Other (describe):
+- [ ] Xatoni tuzatish
+- [ ] Yangi sub-skill yoki funksiya
+- [ ] Reference faylni yangilash (benchmarklar, spetsifikatsiyalar, audit tekshiruvlari)
+- [ ] Hujjatlar
+- [ ] Boshqa (tasvirlang):
 
-## Checklist
+## Cheklist
 
-- [ ] Tested against a sample ad account (if applicable)
-- [ ] SKILL.md files are under 500 lines
-- [ ] Reference files are under 200 lines
-- [ ] Python scripts output valid JSON
-- [ ] Shell scripts use `set -euo pipefail`
-- [ ] No credentials or API keys in the diff
+- [ ] Namunaviy reklama akkauntida sinab ko'rildi (agar tegishli bo'lsa)
+- [ ] SKILL.md fayllari 500 qatordan oshmaydi
+- [ ] Reference fayllari 200 qatordan oshmaydi
+- [ ] Python skriptlari yaroqli JSON chiqaradi
+- [ ] Shell skriptlari `set -euo pipefail` ishlatadi
+- [ ] Diff'da credential yoki API kalitlari yo'q
 
-## Related Issues
+## Bog'liq issue'lar
 
-Closes #
+Yopadi: #

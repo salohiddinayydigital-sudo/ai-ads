@@ -1,21 +1,21 @@
 ---
 name: ads-yandex-direct
-description: "Yandex Direct (Search & RSYA / YAN) Audit & Optimization for CIS & Central Asia"
+description: "Yandex Direct (Search va RSYA / YAN) auditi va MDH hamda Markaziy Osiyo uchun optimizatsiya"
 verified_date: "2026-10-21"
 ---
 
-# `ads-yandex-direct` — Yandex Direct (Search & RSYA / YAN) Audit & Optimization for CIS & Central Asia
+# `ads-yandex-direct` — Yandex Direct (Search va RSYA / YAN) auditi va MDH hamda Markaziy Osiyo uchun optimizatsiya
 
-- **Verified Date:** `2026-10-21`
-- **Core Platform Coverage Preserved:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
+- **Tekshirilgan sana:** `2026-10-21`
+- **Saqlangan asosiy platforma qamrovi:** Meta, Google, YouTube, TikTok, LinkedIn, X, Microsoft, Pinterest, Reddit, Snapchat, Amazon, Apple, Telegram.
 
-## Audit & Execution Checklist
-1. Separate Search (Poisk) and Yandex Advertising Network (RSYA) into distinct campaigns — never blend search intent with display placements.
-2. Verify Yandex Metrica counter linkage, `yclid` auto-tagging, and offline CRM conversion upload (`Purchase` / `Qualified Lead`) before enabling Pay-Per-Conversion strategies.
-3. Audit negative keyword lists, cross-minusation between ad groups, and mobile app placement exclusions in RSYA (`dsp.*`, low-retention game apps).
-4. Check budget sufficiency for automated bidding (`Optimize Conversions` requires >=10-15 attributed conversions per week per goal).
+## Audit va bajarish cheklisti
+1. Qidiruv (Poisk) va Yandex Reklama tarmog'ini (RSYA) alohida kampaniyalarga ajrating — qidiruv niyatini display placementlar bilan hech qachon aralashtirmang.
+2. Pay-Per-Conversion strategiyalarini yoqishdan oldin Yandex Metrica hisoblagichi ulanishi, `yclid` avto-teglash va oflayn CRM konversiyalarini yuklashni (`Purchase` / `Qualified Lead`) tekshiring.
+3. Negativ kalit so'zlar ro'yxatlari, reklama guruhlari o'rtasidagi kross-minuslash va RSYA'da mobil ilova placement chiqarib tashlashlarini (`dsp.*`, ushlab turish past o'yin ilovalari) audit qiling.
+4. Avtomatik bidding uchun byudjet yetarliligini tekshiring (`Optimize Conversions` har bir maqsad uchun haftasiga >=10–15 atributsiyalangan konversiya talab qiladi).
 
-## Official Documentation & Sources (`2026-10-21`)
-- [Yandex Direct Official Help Center](https://yandex.com/support/direct/) (Verified: `2026-10-21`)
-- [Yandex Direct API v5 Documentation](https://yandex.com/dev/direct/doc/dg/concepts/about.html) (Verified: `2026-10-21`)
-- [Yandex Metrica Ecommerce & Offline Conversions](https://yandex.com/support/metrica/) (Verified: `2026-10-21`)
+## Rasmiy hujjatlar va manbalar (`2026-10-21`)
+- [Yandex Direct rasmiy yordam markazi](https://yandex.com/support/direct/) (Tekshirilgan: `2026-10-21`)
+- [Yandex Direct API v5 hujjatlari](https://yandex.com/dev/direct/doc/dg/concepts/about.html) (Tekshirilgan: `2026-10-21`)
+- [Yandex Metrica Ecommerce va oflayn konversiyalar](https://yandex.com/support/metrica/) (Tekshirilgan: `2026-10-21`)
