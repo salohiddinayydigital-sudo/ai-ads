@@ -1,123 +1,123 @@
-# Prospecting Compliance Reference
+# Prospecting Compliance bo'yicha reference
 
-The legal and platform-ToS constraints that apply to prospect list building. Read first, every engagement.
+Prospekt ro'yxatlarini tuzishga tegishli huquqiy va platforma-ToS cheklovlari. Har bir loyihada avval o'qing.
 
-> Operational guidance, not legal advice. For high-volume programs or programs touching EU/UK residents, run your setup past a privacy attorney.
+> Operatsion yo'riqnoma, yuridik maslahat emas. Yuqori hajmli dasturlar yoki EU/UK rezidentlariga tegadigan dasturlar uchun sozlamangizni maxfiylik bo'yicha advokatga ko'rsating.
 
 ---
 
-## United States — CAN-SPAM (downstream)
+## Qo'shma Shtatlar — CAN-SPAM (keyingi bosqich)
 
-CAN-SPAM regulates the cold email **send**, not the list build. But the list build matters because:
+CAN-SPAM ro'yxat tuzishni emas, cold email **yuborishni** tartibga soladi. Lekin ro'yxat tuzish baribir muhim, chunki:
 
-- You must be able to identify the source of every email address you contact (required if challenged)
-- The "from" line and email content rules apply at send time — but you can't lie about how you got the contact
-- Opt-out requests must be honored within 10 business days and tracked
+- Murojaat qilgan har bir email manzilining manbasini aniqlay olishingiz kerak (e'tiroz bo'lsa, majburiy)
+- "From" qatori va email mazmuni qoidalari yuborish vaqtida qo'llanadi — lekin kontaktni qanday olganingiz haqida yolg'on gapira olmaysiz
+- Opt-out so'rovlari 10 ish kuni ichida bajarilishi va kuzatilishi kerak
 
-**For prospecting specifically**: capture and retain the source URL + date for every contact you add to a list. CAN-SPAM doesn't require it explicitly, but defending your sender practices does.
+**Prospecting uchun xususan**: ro'yxatga qo'shgan har bir kontakt uchun manba URL + sanani saqlang. CAN-SPAM buni aniq talab qilmaydi, lekin yuborish amaliyotingizni himoya qilish uchun kerak.
 
 ---
 
 ## EU / UK — GDPR
 
-The strictest applicable framework. Triggers when:
+Eng qattiq amaldagi freymvork. Quyidagi hollarda ishga tushadi:
 
-- Your prospect resides in EU/UK
-- You're processing personal data (any identifiable info, including business emails tied to a named person)
+- Prospektingiz EU/UK'da yashaydi
+- Shaxsiy ma'lumotlarni qayta ishlayapsiz (har qanday identifikatsiya qilinadigan ma'lumot, jumladan nomlangan shaxsga bog'langan biznes emaillari)
 
-### Lawful bases for cold B2B outreach
+### Cold B2B murojaat uchun qonuniy asoslar
 
-You have three credible options:
+Sizda uchta ishonchli variant bor:
 
-1. **Legitimate interest** (most common for B2B). Requires:
-   - The contact is in a business role likely to be interested in your offer
-   - The data was collected from a public, business-context source
-   - You provide a clear opt-out
-   - You can articulate the legitimate interest test in writing
+1. **Legitimate interest** (qonuniy manfaat) (B2B uchun eng keng tarqalgan). Talab qiladi:
+   - Kontakt takliflaringizga qiziqishi mumkin bo'lgan biznes rolida
+   - Ma'lumot ommaviy, biznes kontekstidagi manbadan yig'ilgan
+   - Aniq opt-out beriladi
+   - Qonuniy manfaat testini yozma ravishda ifodalay olasiz
 
-2. **Consent** — typically not feasible for cold outreach (you don't have consent before first contact)
+2. **Rozilik** — cold murojaat uchun odatda mumkin emas (birinchi kontaktdan oldin rozilik yo'q)
 
-3. **Existing customer relationship** — only applies to current customers, not prospects
+3. **Mavjud mijoz munosabati** — faqat joriy mijozlarga tegishli, prospektlarga emas
 
-### What you must do
+### Nima qilishingiz kerak
 
-- Capture **source + date + lawful basis** for every contact
-- Honor data subject access requests (DSARs) — you must be able to disclose, correct, or delete on request
-- Include a privacy notice / opt-out in the first outreach
-- Don't store personal data longer than necessary for the legitimate interest
+- Har bir kontakt uchun **manba + sana + qonuniy asos**ni saqlang
+- Ma'lumot sub'ekti kirish so'rovlarini (DSAR) bajaring — so'rov bo'yicha oshkor qilish, tuzatish yoki o'chirishga qodir bo'lishingiz kerak
+- Birinchi murojaatga maxfiylik xabari / opt-out kiriting
+- Shaxsiy ma'lumotlarni qonuniy manfaat uchun zarur bo'lganidan uzoqroq saqlamang
 
-### What disqualifies a list
+### Ro'yxatni nima diskvalifikatsiya qiladi
 
-- Bulk-scraped LinkedIn data — explicit ToS violation + GDPR risk
-- Email addresses purchased from a list broker without source provenance
-- "Anyone @ this domain" guessed emails sent without verification (multiplies risk + bounces)
-
----
-
-## Canada — CASL
-
-Stricter than CAN-SPAM. Cold B2B outreach requires:
-
-- **Express consent** (explicit opt-in) — typically not present for cold prospecting
-- **OR implied consent** — existing business relationship within 24 months, OR business address publicly published on the company's own site for the purpose of receiving such communications
-
-**Practical implication for Canadian prospects**: relying on the publicly-published-address exception is the most defensible cold prospecting basis in Canada. You must include sender identification, mailing address, and an unsubscribe mechanism in every message.
+- LinkedIn'dan ommaviy scrape qilingan ma'lumotlar — aniq ToS buzilishi + GDPR xavfi
+- Manba izisiz list broker'dan sotib olingan email manzillar
+- Tekshiruvsiz yuborilgan "bu domendagi istalgan kishi" taxminiy emaillar (xavf + bounce'larni ko'paytiradi)
 
 ---
 
-## Platform Terms of Service
+## Kanada — CASL
+
+CAN-SPAM'dan qattiqroq. Cold B2B murojaat talab qiladi:
+
+- **Aniq rozilik** (explicit opt-in) — cold prospecting uchun odatda mavjud emas
+- **YOKI nazarda tutilgan rozilik** — 24 oy ichidagi mavjud biznes munosabati, YOKI biznes manzili kompaniyaning o'z saytida shunday xabarlarni olish maqsadida ommaviy e'lon qilingan
+
+**Kanadalik prospektlar uchun amaliy xulosa**: ommaviy e'lon qilingan manzil istisnosiga tayanish Kanadada cold prospecting uchun eng himoyalanuvchi asos. Har bir xabarda jo'natuvchi identifikatsiyasi, pochta manzili va obunani bekor qilish mexanizmi bo'lishi kerak.
+
+---
+
+## Platforma Terms of Service
 
 ### LinkedIn
 
-- **Sales Navigator** as a research tool: fine
-- **Scraping LinkedIn at any scale**: explicit ToS violation. Banned accounts are permanent. Don't.
-- **Apollo, Clay, and ZoomInfo** claim LinkedIn-overlap data through various legitimate channels — verify their data sources before assuming compliance
-- **InMail and Connection Requests**: governed by LinkedIn's own messaging rules, not by CAN-SPAM/GDPR (because LinkedIn-internal)
+- **Sales Navigator** tadqiqot vositasi sifatida: yaxshi
+- **LinkedIn'ni har qanday ko'lamda scrape qilish**: aniq ToS buzilishi. Bloklangan akkauntlar doimiy. Qilmang.
+- **Apollo, Clay va ZoomInfo** turli qonuniy kanallar orqali LinkedIn bilan kesishuvchi ma'lumotlarni da'vo qiladi — compliance deb taxmin qilishdan oldin ularning ma'lumot manbalarini tekshiring
+- **InMail va Connection So'rovlari**: CAN-SPAM/GDPR emas, LinkedIn'ning o'z xabar yuborish qoidalari bilan boshqariladi (chunki LinkedIn ichida)
 
 ### Google Maps
 
-- ToS prohibits bulk extraction or productizing Maps data
-- Browser-assisted research as a discovery aid: acceptable
-- Storing Place IDs or large structured Maps data in your CRM: explicit ToS prohibition
-- Use Maps to **find** local businesses, then cross-source from the business's own site for the data you retain
+- ToS Maps ma'lumotlarini ommaviy ajratib olish yoki mahsulotlashtirishni taqiqlaydi
+- Kashf yordamchisi sifatida brauzer-yordamli tadqiqot: maqbul
+- Place ID'larni yoki katta tuzilgan Maps ma'lumotlarini CRM'ingizda saqlash: aniq ToS taqiqi
+- Mahalliy bizneslarni **topish** uchun Maps'dan foydalaning, so'ng saqlaydigan ma'lumotlar uchun biznesning o'z saytidan o'zaro manba qiling
 
 ### Apollo / ZoomInfo / Clearbit
 
-- All have their own ToS limiting reselling, downstream sharing, and use cases
-- Read your contract — typically you can use the data for your own outreach but not productize it
-- Don't share extracts publicly (e.g., on a leaderboard, in a public report)
+- Hammasida qayta sotish, keyingi ulashish va foydalanish holatlarini cheklaydigan o'z ToS bor
+- Shartnomangizni o'qing — odatda ma'lumotlardan o'z murojaatingiz uchun foydalanishingiz mumkin, lekin ularni mahsulotlashtira olmaysiz
+- Ajratib olingan ma'lumotlarni ommaviy ulashmang (masalan, leaderboard'da, ommaviy hisobotda)
 
 ### Crunchbase
 
-- Free tier is read-only for personal use
-- Paid tier permits broader use within contractual scope
-- API access requires paid Pro+ tier
+- Bepul tarif shaxsiy foydalanish uchun faqat o'qish
+- Pullik tarif shartnoma doirasida kengroq foydalanishga ruxsat beradi
+- API kirish pullik Pro+ tarifni talab qiladi
 
 ---
 
-## Anti-Patterns (Don't Do These)
+## Anti-patternlar (Qilmang)
 
-1. **Bulk-scraping LinkedIn / Google Maps / Yelp**. Browser-assisted research is OK; automated scrapers pointed at these platforms are not. **Firecrawl and Browserbase are fine for an individual prospect's own website** (the URL you found through manual discovery) — not for the platforms hosting prospects.
-2. **Buying lists from random vendors** without source provenance. You inherit their legal exposure.
-3. **Guessing emails and sending unverified**. Bounce rates over 2% destroy sender reputation; legally, you can't claim a "legitimate interest" basis for an email you fabricated.
-4. **Harvesting personal email addresses** (Gmail, personal Outlook, etc.) from public profiles. Personal addresses raise GDPR risk significantly.
-5. **Storing data you don't need**. Minimize retention. Don't keep prospect lists forever — GDPR right to deletion applies.
-6. **Skipping the lawful basis documentation**. If challenged, you need to show your work. Capture source URL + collection date for every contact.
-7. **Reselling prospect lists**. You may not have the right to share them downstream. Read your data provider contracts.
-8. **CAPTCHA bypass / login wall bypass**. Even if technically possible, this signals bot behavior and violates virtually every ToS.
+1. **LinkedIn / Google Maps / Yelp'dan ommaviy scraping**. Brauzer-yordamli tadqiqot OK; shu platformalarga yo'naltirilgan avtomatik scraper'lar esa yo'q. **Firecrawl va Browserbase alohida prospektning o'z veb-sayti uchun mos** (qo'lda kashf orqali topilgan URL) — prospektlarni joylashtiruvchi platformalar uchun emas.
+2. **Manba izisiz tasodifiy vendorlardan ro'yxat sotib olish**. Ularning huquqiy xavfini meros qilib olasiz.
+3. **Emailni taxmin qilib, tekshirmasdan yuborish**. 2% dan yuqori bounce darajasi jo'natuvchi obro'sini yo'q qiladi; huquqiy jihatdan o'zingiz to'qigan email uchun "legitimate interest" asosini da'vo qila olmaysiz.
+4. Ommaviy profillardan **shaxsiy email manzillarini yig'ish** (Gmail, shaxsiy Outlook va h.k.). Shaxsiy manzillar GDPR xavfini sezilarli oshiradi.
+5. **Kerak bo'lmagan ma'lumotlarni saqlash**. Saqlashni minimallashtiring. Prospekt ro'yxatlarini abadiy saqlamang — GDPR o'chirish huquqi qo'llanadi.
+6. **Qonuniy asos hujjatlashtirishini o'tkazib yuborish**. E'tiroz bildirilsa, ishingizni ko'rsata olishingiz kerak. Har bir kontakt uchun manba URL + yig'ish sanasini saqlang.
+7. **Prospekt ro'yxatlarini qayta sotish**. Ularni keyingi tomonlarga ulashish huquqingiz bo'lmasligi mumkin. Ma'lumot provayderi shartnomalarini o'qing.
+8. **CAPTCHA / login devorini aylanib o'tish**. Texnik jihatdan mumkin bo'lsa ham, bu bot xatti-harakatini bildiradi va deyarli har bir ToS'ni buzadi.
 
 ---
 
-## Quick Audit Checklist
+## Tezkor audit cheklisti
 
-Before shipping a list to the user (or downstream to cold-email):
+Ro'yxatni foydalanuvchiga (yoki keyingi bosqichda cold-email'ga) topshirishdan oldin:
 
-- [ ] Every contact has a source URL + collection date
-- [ ] No contacts sourced from scraped LinkedIn data
-- [ ] No Google Maps Place IDs or large Maps-structured data retained
-- [ ] Lawful basis documented (legitimate interest test for B2B, or relevant alternative)
-- [ ] Email addresses validated (deliverability check before outreach)
-- [ ] Personal addresses (Gmail, etc.) flagged or excluded
-- [ ] Source provider contracts permit the intended use case
-- [ ] Retention plan documented (when to delete)
-- [ ] First outreach will include unsubscribe + privacy notice (downstream concern for cold-email skill, but mention it now)
+- [ ] Har bir kontaktda manba URL + yig'ish sanasi bor
+- [ ] Hech bir kontakt scrape qilingan LinkedIn ma'lumotlaridan olinmagan
+- [ ] Google Maps Place ID'lari yoki katta Maps-tuzilgan ma'lumotlar saqlanmagan
+- [ ] Qonuniy asos hujjatlashtirilgan (B2B uchun legitimate interest testi yoki tegishli muqobil)
+- [ ] Email manzillar tekshirilgan (murojaatdan oldin deliverability tekshiruvi)
+- [ ] Shaxsiy manzillar (Gmail va h.k.) belgilangan yoki chiqarib tashlangan
+- [ ] Manba provayder shartnomalari mo'ljallangan foydalanish holatiga ruxsat beradi
+- [ ] Saqlash rejasi hujjatlashtirilgan (qachon o'chirish)
+- [ ] Birinchi murojaat obunani bekor qilish + maxfiylik xabarini o'z ichiga oladi (cold-email skilli uchun keyingi bosqich masalasi, lekin hozir eslating)

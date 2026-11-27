@@ -1,287 +1,287 @@
-# Prospecting Data Sources
+# Prospecting ma'lumot manbalari
 
-Tool selection guide for prospecting across all three branches.
+Barcha uchta yo'nalish bo'yicha prospecting uchun asbob tanlash qo'llanmasi.
 
 ---
 
-## Tool selection by goal
+## Maqsad bo'yicha asbob tanlash
 
-| Goal | Primary tools | Notes |
+| Maqsad | Asosiy asboblar | Izohlar |
 |------|--------------|-------|
-| **Build initial firmographic list (B2B / SaaS)** | Apollo, ZoomInfo, Clay | Apollo for breadth, ZoomInfo for enterprise + intent, Clay for custom workflows |
-| **Decision-maker mapping** | LinkedIn Sales Navigator (manual), Apollo, ZoomInfo | Sales Nav is the gold standard. Never bulk scrape it. |
-| **Tech stack qualification (SaaS)** | BuiltWith, Wappalyzer | BuiltWith has wider coverage + paid plans for bulk; Wappalyzer is lighter + free for small use |
-| **Funding signals (SaaS)** | Crunchbase, Pitchbook | Crunchbase free tier sufficient for early signals; Pitchbook for deeper investor data |
-| **Email pattern discovery** | Hunter, Snov, Apollo | Pattern guessing — followed by verification |
-| **Email deliverability verification** | Truelist, Hunter, NeverBounce, ZeroBounce | Always verify before adding to outreach lists |
-| **Visitor identification (warm intent)** | RB2B, Clearbit Reveal | Anonymous traffic → company identification |
-| **Intent data** | ZoomInfo Intent, 6sense, Bombora | Pre-warmed signals; mid-market+ pricing |
-| **Trigger event monitoring** | Google Alerts, Feedly, LinkedIn Sales Nav alerts | Free options are sufficient for most |
-| **Local business discovery** | Google Maps (manual), Yelp, Facebook Pages | Browser-assisted, not bulk-extracted |
+| **Dastlabki firmografik ro'yxat tuzish (B2B / SaaS)** | Apollo, ZoomInfo, Clay | Apollo — kenglik uchun, ZoomInfo — enterprise + intent uchun, Clay — maxsus ish jarayonlari uchun |
+| **Qaror qabul qiluvchilarni xaritalash** | LinkedIn Sales Navigator (qo'lda), Apollo, ZoomInfo | Sales Nav — oltin standart. Hech qachon ommaviy scrape qilmang. |
+| **Tech stack malakalash (SaaS)** | BuiltWith, Wappalyzer | BuiltWith kengroq qamrov + ommaviy uchun pullik tariflarga ega; Wappalyzer yengilroq + kichik foydalanish uchun bepul |
+| **Investitsiya signallari (SaaS)** | Crunchbase, Pitchbook | Crunchbase bepul tarifi dastlabki signallar uchun yetarli; Pitchbook chuqurroq investor ma'lumotlari uchun |
+| **Email naqshini aniqlash** | Hunter, Snov, Apollo | Naqshni taxmin qilish — keyin tekshirish |
+| **Email deliverability tekshiruvi** | Truelist, Hunter, NeverBounce, ZeroBounce | Murojaat ro'yxatlariga qo'shishdan oldin doim tekshiring |
+| **Tashrifchi identifikatsiyasi (iliq intent)** | RB2B, Clearbit Reveal | Anonim trafik → kompaniya identifikatsiyasi |
+| **Intent ma'lumotlari** | ZoomInfo Intent, 6sense, Bombora | Oldindan isitilgan signallar; o'rta bozor+ narxlari |
+| **Trigger hodisalar monitoringi** | Google Alerts, Feedly, LinkedIn Sales Nav alertlari | Ko'pchilik uchun bepul variantlar yetarli |
+| **Mahalliy biznes kashfi** | Google Maps (qo'lda), Yelp, Facebook Pages | Brauzer-yordamli, ommaviy ajratib olinmaydi |
 
 ---
 
 ## Apollo
 
-**Use for**: General B2B / SaaS firmographic + contact data. Best starting point if you don't already have a list.
+**Nima uchun**: Umumiy B2B / SaaS firmografik + kontakt ma'lumotlari. Hali ro'yxatingiz bo'lmasa, eng yaxshi boshlang'ich nuqta.
 
-**Strengths**:
-- Large database (>200M contacts, >60M companies)
-- Strong filtering UI (industry, size, technologies, signals)
-- Integrated email + LinkedIn finder
-- Pay-as-you-go and tiered plans
+**Kuchli tomonlari**:
+- Katta ma'lumotlar bazasi (>200M kontakt, >60M kompaniya)
+- Kuchli filtr UI (soha, hajm, texnologiyalar, signallar)
+- Integratsiyalangan email + LinkedIn topuvchi
+- Pay-as-you-go va darajali tariflar
 
-**Watch out for**:
-- Data freshness varies — re-verify before scoring as "Hot"
-- Email accuracy ~60–80% — always validate
-- Bulk export limits apply
+**E'tibor bering**:
+- Ma'lumotlar yangiligi farq qiladi — "Hot" deb ballashdan oldin qayta tekshiring
+- Email aniqligi ~60–80% — doim tekshiring
+- Ommaviy eksport limitlari qo'llanadi
 
-**Integration**: see [apollo.md](../../../tools/integrations/apollo.md)
+**Integratsiya**: [apollo.md](../../../tools/integrations/apollo.md) ga qarang
 
 ---
 
 ## Clay
 
-**Use for**: Multi-source enrichment, waterfall lookups, custom scoring logic. When list quality matters more than list size.
+**Nima uchun**: Ko'p manbali boyitish, waterfall qidiruvlari, maxsus ballash mantig'i. Ro'yxat sifati ro'yxat hajmidan muhimroq bo'lganda.
 
-**Strengths**:
-- Waterfall logic: try Apollo first → fallback to ZoomInfo → fallback to Clearbit
-- 100+ data provider integrations
-- AI-powered enrichment (LLM-driven extraction from URLs)
-- Custom columns + scoring formulas
+**Kuchli tomonlari**:
+- Waterfall mantig'i: avval Apollo → ZoomInfo'ga zaxira → Clearbit'ga zaxira
+- 100+ ma'lumot provayderi integratsiyasi
+- AI-asosli boyitish (URL'lardan LLM-boshqariladigan ajratib olish)
+- Maxsus ustunlar + ballash formulalari
 - Native MCP server
 
-**Watch out for**:
-- Per-credit pricing can spike on large lists
-- Complexity overhead — easy to over-engineer workflows
+**E'tibor bering**:
+- Kredit bo'yicha narx katta ro'yxatlarda keskin oshishi mumkin
+- Murakkablik ortiqcha yuki — ish jarayonlarini haddan tashqari murakkablashtirish oson
 
-**Integration**: see [clay.md](../../../tools/integrations/clay.md)
+**Integratsiya**: [clay.md](../../../tools/integrations/clay.md) ga qarang
 
 ---
 
 ## ZoomInfo
 
-**Use for**: Enterprise B2B + intent data. Mid-market+ buyer profiles.
+**Nima uchun**: Enterprise B2B + intent ma'lumotlari. O'rta bozor+ xaridor profillari.
 
-**Strengths**:
-- Enterprise-grade firmographic depth
-- Intent signals (companies searching topics relevant to your offer)
-- Best-in-class for >$50K ACV B2B sales
+**Kuchli tomonlari**:
+- Enterprise darajadagi firmografik chuqurlik
+- Intent signallari (taklifingizga tegishli mavzularni qidirayotgan kompaniyalar)
+- >$50K ACV B2B sotuvlar uchun eng yaxshisi
 - Native MCP server
 
-**Watch out for**:
-- Expensive ($15K+/yr starter)
-- Overkill for SMB prospecting
-- Locked into multi-year contracts typically
+**E'tibor bering**:
+- Qimmat (boshlang'ich $15K+/yil)
+- SMB prospecting uchun ortiqcha
+- Odatda ko'p yillik shartnomalarga bog'langan
 
-**Integration**: see [zoominfo.md](../../../tools/integrations/zoominfo.md)
+**Integratsiya**: [zoominfo.md](../../../tools/integrations/zoominfo.md) ga qarang
 
 ---
 
 ## Clearbit
 
-**Use for**: Email → company enrichment, anonymous visitor identification (Clearbit Reveal).
+**Nima uchun**: Email → kompaniya boyitish, anonim tashrifchi identifikatsiyasi (Clearbit Reveal).
 
-**Strengths**:
-- Strong company enrichment (industry, size, funding, tech stack)
-- Email lookup by domain
-- Reveal: identify anonymous site visitors at company level
+**Kuchli tomonlari**:
+- Kuchli kompaniya boyitish (soha, hajm, investitsiya, tech stack)
+- Domen bo'yicha email qidirish
+- Reveal: anonim sayt tashrifchilarini kompaniya darajasida aniqlash
 - API-first
 
-**Watch out for**:
-- HubSpot acquisition (2023) — bundled into HubSpot Breeze Intelligence now
-- Standalone API still available but pricing/access depends on tier
+**E'tibor bering**:
+- HubSpot tomonidan sotib olingan (2023) — endi HubSpot Breeze Intelligence ga kiritilgan
+- Mustaqil API hali mavjud, lekin narx/kirish tarifga bog'liq
 
-**Integration**: see [clearbit.md](../../../tools/integrations/clearbit.md)
+**Integratsiya**: [clearbit.md](../../../tools/integrations/clearbit.md) ga qarang
 
 ---
 
 ## Hunter / Snov
 
-**Use for**: Email pattern discovery + lightweight verification on small lists.
+**Nima uchun**: Email naqshini aniqlash + kichik ro'yxatlarda yengil tekshirish.
 
-**Hunter strengths**:
-- Domain-based email discovery
-- Built-in deliverability verification
-- Free tier reasonable for occasional use
+**Hunter kuchli tomonlari**:
+- Domenga asoslangan email kashfi
+- O'rnatilgan deliverability tekshiruvi
+- Vaqti-vaqti bilan foydalanish uchun oqilona bepul tarif
 
-**Snov strengths**:
-- Email finder + drip campaigns (overlap with outreach tooling)
-- Bulk verification
-- Cheaper than Hunter at scale
+**Snov kuchli tomonlari**:
+- Email topuvchi + drip kampaniyalar (murojaat asboblari bilan kesishadi)
+- Ommaviy tekshirish
+- Katta hajmda Hunter'dan arzonroq
 
-**Watch out for**:
-- Both are pattern-guessing tools — accuracy depends on the target company's email pattern being inferable
-- Always run results through a dedicated validator (Truelist or similar) before outreach
+**E'tibor bering**:
+- Ikkalasi ham naqshni taxmin qiluvchi asboblar — aniqlik maqsadli kompaniya email naqshini xulosa qilish mumkinligiga bog'liq
+- Murojaatdan oldin natijalarni doim maxsus validator (Truelist yoki shunga o'xshash) orqali o'tkazing
 
-**Integrations**: see [hunter.md](../../../tools/integrations/hunter.md), [snov.md](../../../tools/integrations/snov.md)
+**Integratsiyalar**: [hunter.md](../../../tools/integrations/hunter.md), [snov.md](../../../tools/integrations/snov.md) ga qarang
 
 ---
 
 ## Truelist
 
-**Use for**: Email deliverability validation before adding contacts to outreach lists. Critical safety step.
+**Nima uchun**: Kontaktlarni murojaat ro'yxatlariga qo'shishdan oldin email deliverability validatsiyasi. Muhim xavfsizlik qadami.
 
-**Strengths**:
-- Single-email sync verification (`/api/v1/verify_inline`) + bulk async (`/api/v1/verify`)
-- Returns `email_state` (ok / email_invalid / risky / unknown / accept_all) + `email_sub_state` (email_ok / is_disposable / is_role / unknown_error / failed_smtp_check) + did-you-mean typo suggestions
-- Catches catch-all domains, role accounts, spam traps, disposable providers
-- Official MCP server for agent-driven workflows (Claude, Cursor, VS Code)
-- Official SDKs in 7 languages + framework integrations (Django, Laravel, Next.js, Rails, React, Svelte, Vue, WordPress)
-- Native integrations with Mailchimp, Klaviyo, HubSpot, Zapier, Make, n8n, Clay, Salesforce, more
-- Pay-per-email pricing
+**Kuchli tomonlari**:
+- Bitta email sinxron tekshiruvi (`/api/v1/verify_inline`) + ommaviy asinxron (`/api/v1/verify`)
+- `email_state` (ok / email_invalid / risky / unknown / accept_all) + `email_sub_state` (email_ok / is_disposable / is_role / unknown_error / failed_smtp_check) + did-you-mean xato takliflarini qaytaradi
+- Catch-all domenlar, rol akkauntlari, spam trap'lar, bir martalik provayderlarni ushlaydi
+- Agent boshqariladigan ish jarayonlari uchun rasmiy MCP server (Claude, Cursor, VS Code)
+- 7 tildagi rasmiy SDK'lar + freymvork integratsiyalari (Django, Laravel, Next.js, Rails, React, Svelte, Vue, WordPress)
+- Mailchimp, Klaviyo, HubSpot, Zapier, Make, n8n, Clay, Salesforce va boshqalar bilan native integratsiyalar
+- Har bir email uchun to'lov narxlash
 
-**Why this matters**: Cold email reputation craters when bounce rates exceed 2%. Validating before sending is non-negotiable. Apollo/ZoomInfo/Hunter data is often 60–80% accurate — Truelist catches the rest.
+**Nega muhim**: Bounce darajasi 2% dan oshganda cold email obro'si qulaydi. Yuborishdan oldin tekshirish muzokarasiz. Apollo/ZoomInfo/Hunter ma'lumotlari ko'pincha 60–80% aniq — Truelist qolganini ushlaydi.
 
-**Integration**: see [truelist.md](../../../tools/integrations/truelist.md)
+**Integratsiya**: [truelist.md](../../../tools/integrations/truelist.md) ga qarang
 
 ---
 
 ## LinkedIn Sales Navigator
 
-**Use for**: Manual decision-maker discovery. The gold standard for B2B / SaaS prospecting but only when used as a research tool.
+**Nima uchun**: Qaror qabul qiluvchilarni qo'lda topish. B2B / SaaS prospecting uchun oltin standart, lekin faqat tadqiqot vositasi sifatida ishlatilganda.
 
-**Strengths**:
-- Most accurate decision-maker data in the industry
-- Real-time job changes, posts, signals
-- Lead lists, alerts, saved searches
-- Inmail credits (separate channel from cold email)
+**Kuchli tomonlari**:
+- Sohadagi eng aniq qaror qabul qiluvchi ma'lumotlari
+- Real vaqtda ish o'zgarishlari, postlar, signallar
+- Lid ro'yxatlari, alertlar, saqlangan qidiruvlar
+- Inmail kreditlari (cold emaildan alohida kanal)
 
-**Hard rules**:
-- **Never bulk scrape**. LinkedIn aggressively bans scrapers. Account ban risk is real and permanent.
-- Use Sales Nav as a research interface — open profiles, read, take notes, capture key data manually.
-- Apollo and other tools claim LinkedIn data via partnerships / public mirroring — verify the source legitimacy before assuming compliance.
+**Qat'iy qoidalar**:
+- **Hech qachon ommaviy scrape qilmang**. LinkedIn scraper'larni agressiv bloklaydi. Akkaunt bloklanish xavfi haqiqiy va doimiy.
+- Sales Nav'dan tadqiqot interfeysi sifatida foydalaning — profillarni oching, o'qing, qaydlar oling, asosiy ma'lumotlarni qo'lda yig'ing.
+- Apollo va boshqa asboblar LinkedIn ma'lumotlarini hamkorlik / ommaviy aks ettirish orqali da'vo qiladi — compliance deb taxmin qilishdan oldin manba qonuniyligini tekshiring.
 
-**Integration**: no MCP or API access at consumer level. Manual research only.
+**Integratsiya**: iste'molchi darajasida MCP yoki API kirishi yo'q. Faqat qo'lda tadqiqot.
 
 ---
 
 ## BuiltWith / Wappalyzer
 
-**Use for**: Tech stack qualification (SaaS branch).
+**Nima uchun**: Tech stack malakalash (SaaS yo'nalishi).
 
 **BuiltWith**:
-- ~50K+ technologies tracked
-- API + bulk lookups (paid)
-- Historical data (when stack changed)
+- ~50K+ texnologiya kuzatiladi
+- API + ommaviy qidiruvlar (pullik)
+- Tarixiy ma'lumotlar (stack qachon o'zgargan)
 
 **Wappalyzer**:
-- Free browser extension; paid API
-- Lighter coverage than BuiltWith
-- Faster for one-off lookups
+- Bepul brauzer kengaytmasi; pullik API
+- BuiltWith'dan yengilroq qamrov
+- Bir martalik qidiruvlar uchun tezroq
 
-Cross-reference both for high-confidence tech stack signals.
+Ishonchli tech stack signallari uchun ikkalasini o'zaro solishtiring.
 
 ---
 
 ## Crunchbase
 
-**Use for**: Funding signals (SaaS branch).
+**Nima uchun**: Investitsiya signallari (SaaS yo'nalishi).
 
-**Strengths**:
-- Free tier shows recent funding events
-- Paid (Pro / Enterprise) unlocks alerts and deep history
-- API access for paid users
+**Kuchli tomonlari**:
+- Bepul tarif so'nggi investitsiya hodisalarini ko'rsatadi
+- Pullik (Pro / Enterprise) alertlar va chuqur tarixni ochadi
+- Pullik foydalanuvchilar uchun API kirish
 
-**Watch out for**:
-- Coverage is best for VC-backed companies; bootstrapped + small businesses underrepresented
-- Self-reported data — verify funding amounts independently
-
----
-
-## GitHub (stargazers / forks / watchers)
-
-**Use for**: Developer-intent prospecting. Especially powerful for dev-tool SaaS — stargazers of competitor or category-defining repos are in-market signal.
-
-**Strengths**:
-- Public API, no scraping concerns
-- High signal quality (a starred repo = explicit interest)
-- Forks are an even stronger signal (intent to modify, not just bookmark)
-- Bundled `github-prospects.js` CLI handles pagination + enrichment + CSV output
-- Free with 5,000 req/hr authenticated rate limit
-
-**Watch out for**:
-- Only ~5–20% of users publish email — pair with Apollo/Clay/Hunter for enrichment
-- Very-popular repos (100K+ stars) are mostly noise; smaller targeted repos (5K–25K) give better signal density
-- Most prospects are individuals, not company contacts directly — need to figure out their company from `company` field or LinkedIn
-
-**Integration**: see [github.md](../../../tools/integrations/github.md)
+**E'tibor bering**:
+- Qamrov VC-qo'llab-quvvatlagan kompaniyalar uchun eng yaxshi; bootstrap va kichik bizneslar kam aks etgan
+- O'zi xabar qilgan ma'lumotlar — investitsiya summalarini mustaqil tekshiring
 
 ---
 
-## Firecrawl / Browserbase (single-target site research)
+## GitHub (stargazer / fork / watcher)
 
-**Use for**: Programmatically extracting content from a **prospect's own website** that you already found via discovery on platforms like Google Maps, Yelp, or LinkedIn. Not for scraping those platforms themselves.
+**Nima uchun**: Dasturchi-intent prospecting. Ayniqsa dev-tool SaaS uchun kuchli — raqobatchi yoki kategoriyani belgilovchi repo'larning stargazer'lari bozordagi signal.
+
+**Kuchli tomonlari**:
+- Ommaviy API, scraping tashvishlari yo'q
+- Yuqori signal sifati (yulduzlangan repo = aniq qiziqish)
+- Fork'lar yanada kuchli signal (shunchaki xatcho'p emas, o'zgartirish niyati)
+- Birga keladigan `github-prospects.js` CLI sahifalash + boyitish + CSV chiqishini bajaradi
+- Autentifikatsiyalangan 5 000 req/soat limit bilan bepul
+
+**E'tibor bering**:
+- Foydalanuvchilarning faqat ~5–20% i email e'lon qiladi — boyitish uchun Apollo/Clay/Hunter bilan juftlang
+- Juda mashhur repo'lar (100K+ yulduz) asosan shovqin; kichikroq nishonli repo'lar (5K–25K) signal zichligini yaxshiroq beradi
+- Ko'p prospektlar alohida shaxslar, to'g'ridan-to'g'ri kompaniya kontaktlari emas — `company` maydoni yoki LinkedIn'dan kompaniyasini aniqlash kerak
+
+**Integratsiya**: [github.md](../../../tools/integrations/github.md) ga qarang
+
+---
+
+## Firecrawl / Browserbase (bitta nishonli sayt tadqiqoti)
+
+**Nima uchun**: Google Maps, Yelp yoki LinkedIn kabi platformalarda kashf orqali allaqachon topilgan **prospektning o'z veb-saytidan** kontentni dasturiy ajratib olish. O'sha platformalarni scrape qilish uchun emas.
 
 ### Firecrawl
 
-- **Best for**: "Just give me the page as markdown" — Local SMB website status checks, B2B company about/team page extraction, structured field extraction
-- **Strengths**: Low overhead, returns clean LLM-ready markdown, handles most JS-rendered sites, has an MCP server
-- **API + MCP + SDKs**: Node, Python, Go, Rust
+- **Eng mos**: "Sahifani markdown sifatida bering" — Local SMB veb-sayt holati tekshiruvlari, B2B kompaniya about/jamoa sahifasini ajratib olish, tuzilgan maydonlarni ajratib olish
+- **Kuchli tomonlari**: Past ortiqcha xarajat, toza LLM-tayyor markdown qaytaradi, ko'pchilik JS-render qilingan saytlarni boshqaradi, MCP serveri bor
+- **API + MCP + SDK'lar**: Node, Python, Go, Rust
 
 ### Browserbase
 
-- **Best for**: When you need real Chromium — JS-heavy pages, cookie consent dialogs, form submission to reach a contact page, session state
-- **Strengths**: Full browser control via Playwright/Puppeteer; Stagehand provides AI-friendly natural-language extraction; session recordings for debugging
-- **API + MCP (Stagehand) + SDKs**: Node, Python
+- **Eng mos**: Haqiqiy Chromium kerak bo'lganda — JS-og'ir sahifalar, cookie rozilik oynalari, kontakt sahifasiga yetish uchun forma yuborish, sessiya holati
+- **Kuchli tomonlari**: Playwright/Puppeteer orqali to'liq brauzer nazorati; Stagehand AI-qulay tabiiy-til ajratib olishni ta'minlaydi; nosozliklarni tuzatish uchun sessiya yozuvlari
+- **API + MCP (Stagehand) + SDK'lar**: Node, Python
 
-### Critical compliance line
+### Muhim compliance chegarasi
 
-Both tools can technically point at any URL. The hard rule:
+Ikkala asbob ham texnik jihatdan istalgan URL'ga yo'naltirilishi mumkin. Qat'iy qoida:
 
-- ✓ **OK**: extracting content from a single business's own website (`joescoffeeshop.com`) that you found through manual discovery
-- ✗ **NOT OK**: pointing them at `google.com/maps`, LinkedIn search results, Yelp listings, or any platform whose ToS prohibits bulk extraction
+- ✓ **OK**: qo'lda kashf orqali topilgan bitta biznesning o'z veb-saytidan (`joescoffeeshop.com`) kontentni ajratib olish
+- ✗ **OK EMAS**: ularni `google.com/maps`, LinkedIn qidiruv natijalari, Yelp ro'yxatlari yoki ToS'i ommaviy ajratib olishni taqiqlaydigan har qanday platformaga yo'naltirish
 
-Discovery happens on platforms (manual browser-assisted research). Extraction happens on individual public business sites.
+Kashf platformalarda (qo'lda brauzer-yordamli tadqiqot) amalga oshadi. Ajratib olish alohida ommaviy biznes saytlarida amalga oshadi.
 
-**Integrations**: see [firecrawl.md](../../../tools/integrations/firecrawl.md), [browserbase.md](../../../tools/integrations/browserbase.md)
+**Integratsiyalar**: [firecrawl.md](../../../tools/integrations/firecrawl.md), [browserbase.md](../../../tools/integrations/browserbase.md) ga qarang
 
 ---
 
 ## RB2B / Clearbit Reveal
 
-**Use for**: Identifying anonymous site visitors as warm intent signals.
+**Nima uchun**: Anonim sayt tashrifchilarini iliq intent signali sifatida aniqlash.
 
-**Strengths**:
-- Pixel-based visitor → company identification
-- High-intent: they came to your site, they're already in research mode
-- Slack / email alerts on key visits
+**Kuchli tomonlari**:
+- Pixel asosidagi tashrifchi → kompaniya identifikatsiyasi
+- Yuqori intent: ular saytingizga kelgan, allaqachon tadqiqot rejimida
+- Muhim tashriflar bo'yicha Slack / email alertlar
 
-**Watch out for**:
-- Privacy/GDPR considerations — verify your privacy policy disclosures
-- Person-level identification raises higher concerns than company-level
+**E'tibor bering**:
+- Maxfiylik/GDPR jihatlari — maxfiylik siyosatingiz oshkor qilishlarini tekshiring
+- Shaxs darajasidagi identifikatsiya kompaniya darajasidagidan yuqoriroq tashvish tug'diradi
 
-**Integration**: see [rb2b.md](../../../tools/integrations/rb2b.md)
-
----
-
-## Free / browser-only fallbacks
-
-When the user has no paid tools, lean on:
-
-- **Google Search** — exact business name + city + role searches
-- **LinkedIn** (manual, no scraping) — company pages, employee lookups
-- **Crunchbase free tier** — funding events
-- **Wappalyzer browser extension** — tech stack at a glance
-- **Hunter.io free tier** — 25 lookups/month
-- **Google Maps** — for Local SMB discovery
-- **Business websites + About pages** — primary source for any claim
-- **News sites + press releases** — trigger event monitoring via Google Alerts
-
-Slower than tooled-up workflows, but produces high-quality smaller lists if the user is willing to do the work.
+**Integratsiya**: [rb2b.md](../../../tools/integrations/rb2b.md) ga qarang
 
 ---
 
-## Sequencing recommendations
+## Bepul / faqat brauzer zaxiralari
 
-A typical full-stack prospecting workflow:
+Foydalanuvchida pullik asboblar bo'lmasa, quyidagilarga tayaning:
 
-1. **Define ICP** from product-marketing context (no tools needed)
-2. **Initial list** from Apollo or ZoomInfo (firmographic filter)
-3. **Enrich** with Clay (waterfall: tech stack, funding, trigger events)
-4. **Decision-maker mapping** in LinkedIn Sales Nav (manual)
-5. **Email pattern discovery** with Hunter or Apollo's built-in
-6. **Email validation** with Truelist before final list
-7. **Hand off** to cold-email skill for outreach copy
+- **Google Search** — aniq biznes nomi + shahar + rol qidiruvlari
+- **LinkedIn** (qo'lda, scraping yo'q) — kompaniya sahifalari, xodimlarni qidirish
+- **Crunchbase bepul tarifi** — investitsiya hodisalari
+- **Wappalyzer brauzer kengaytmasi** — tech stack bir qarashda
+- **Hunter.io bepul tarifi** — oyiga 25 ta qidiruv
+- **Google Maps** — Local SMB kashfi uchun
+- **Biznes veb-saytlari + About sahifalari** — har qanday da'vo uchun asosiy manba
+- **Yangilik saytlari + press-relizlar** — Google Alerts orqali trigger hodisalar monitoringi
 
-Adapt this sequence based on which tools the user actually has.
+Asboblarga ega ish jarayonlaridan sekinroq, lekin foydalanuvchi mehnat qilishga tayyor bo'lsa, yuqori sifatli kichikroq ro'yxatlar beradi.
+
+---
+
+## Ketma-ketlik bo'yicha tavsiyalar
+
+Odatiy to'liq-stek prospecting ish jarayoni:
+
+1. product-marketing kontekstidan **ICP'ni aniqlang** (asbob kerak emas)
+2. Apollo yoki ZoomInfo'dan **dastlabki ro'yxat** (firmografik filtr)
+3. Clay bilan **boyiting** (waterfall: tech stack, investitsiya, trigger hodisalar)
+4. LinkedIn Sales Nav'da **qaror qabul qiluvchilarni xaritalash** (qo'lda)
+5. Hunter yoki Apollo'ning o'rnatilgan funksiyasi bilan **email naqshini aniqlash**
+6. Yakuniy ro'yxatdan oldin Truelist bilan **email validatsiyasi**
+7. Murojaat matni uchun cold-email skilliga **topshiring**
+
+Ketma-ketlikni foydalanuvchida haqiqatan mavjud asboblarga qarab moslang.

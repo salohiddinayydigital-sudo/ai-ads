@@ -1,129 +1,129 @@
-# Demand-Signal Discovery (Find Your First Customers)
+# Demand-Signal kashfi (birinchi mijozlaringizni toping)
 
-The other three branches build a list from who *fits* (firmographics, technographics, proximity). This branch builds a list from who is *already showing the pain* — the early-stage motion where you have a product and a hunch but no customer base yet, and you need your first ten real conversations. You are not filtering a database; you are mining recent public discourse for people describing the exact problem you solve, then linking every prospect to the evidence.
+Qolgan uchta yo'nalish ro'yxatni kim *mos kelishi* bo'yicha tuzadi (firmografika, texnografika, yaqinlik). Bu yo'nalish ro'yxatni kim *allaqachon og'riqni ko'rsatayotgani* bo'yicha tuzadi — sizda mahsulot va taxmin bor, lekin hali mijozlar bazasi yo'q va dastlabki o'nta haqiqiy suhbat kerak bo'lgan erta bosqich harakati. Siz ma'lumotlar bazasini filtrlamaysiz; siz aynan siz hal qiladigan muammoni tasvirlayotgan odamlarni topish uchun so'nggi ommaviy muhokamalarni qazib olasiz va har bir prospektni dalillarga bog'laysiz.
 
-Use this branch when the user is pre-product-market-fit, launching something new, or looking for **design partners, beta users, or first customers** rather than a scaled outbound list. It reuses the shared five phases and every compliance guardrail in SKILL.md; what changes is where you look, how you score, and what you ship.
+Foydalanuvchi product-market-fit'dan oldin bo'lsa, yangi narsani ishga tushirayotgan bo'lsa yoki masshtablangan outbound ro'yxati emas, **dizayn hamkorlari, beta foydalanuvchilar yoki birinchi mijozlar** qidirayotgan bo'lsa, shu yo'nalishdan foydalaning. U SKILL.md dagi umumiy besh bosqichni va barcha compliance himoya chegaralarini qayta ishlatadi; o'zgaradigani — qayerga qarash, qanday ballash va nimani yetkazish.
 
-Pattern credit: the framework here is re-expressed from the open-source `first-customer-finder` Codex skill (Kappaemme, MIT), extended with our live-recency tooling.
+Naqsh manbasi: bu yerdagi freymvork ochiq manbali `first-customer-finder` Codex skilli (Kappaemme, MIT) dan qayta ifodalangan va bizning jonli-yangilik asboblarimiz bilan kengaytirilgan.
 
-## What makes this branch different
+## Bu yo'nalishni nima farqlaydi
 
-| | List-building branches (SaaS / B2B / SMB) | Demand-signal discovery |
+| | Ro'yxat tuzish yo'nalishlari (SaaS / B2B / SMB) | Demand-signal kashfi |
 |---|---|---|
-| Starts from | A firmographic ICP | A described problem |
-| Sources | Contact databases (Apollo, ZoomInfo, Clay) | Public discourse (forums, reviews, issues, posts) |
-| Contact step | Enrich + verify email deliverability | None — reach them where they already posted |
-| Wins on | Coverage at scale | 10 strong evidence-backed matches over a long list |
-| Output | A scored lead sheet | An evidence report + manual outreach plan |
+| Boshlanish nuqtasi | Firmografik ICP | Tasvirlangan muammo |
+| Manbalar | Kontakt ma'lumotlar bazalari (Apollo, ZoomInfo, Clay) | Ommaviy muhokamalar (forumlar, sharhlar, issue'lar, postlar) |
+| Kontakt bosqichi | Boyitish + email deliverability'ni tekshirish | Yo'q — ularga allaqachon post qo'ygan joyda yeting |
+| Yutuq asosi | Masshtabdagi qamrov | Uzun ro'yxatdan ko'ra dalilga asoslangan 10 ta kuchli moslik |
+| Natija | Ballangan lid jadvali | Dalillar hisoboti + qo'lda murojaat rejasi |
 
-A prospect here without a cited pain, need, or timing signal is a speculative fit — it does **not** belong in the primary shortlist. Evidence is the entry ticket.
+Keltirilgan og'riq, ehtiyoj yoki vaqt signalisiz prospekt bu yerda taxminiy moslikdir — u asosiy qisqa ro'yxatga **kirmaydi**. Dalil — kirish chiptasi.
 
-## Step 1 — Product brief (before any searching)
+## 1-qadam — Mahsulot brifi (har qanday qidiruvdan oldin)
 
-Define, specifically enough to *reject* weak matches:
+Zaif mosliklarni *rad etish* uchun yetarlicha aniq belgilang:
 
-- product and the promised outcome
-- primary user and the economic buyer (often different)
-- the urgent job to be done
-- the current alternative or workaround being replaced
-- the likely adoption trigger (what makes now the moment)
-- geography / language constraint
-- clear disqualifiers
+- mahsulot va va'da qilingan natija
+- asosiy foydalanuvchi va iqtisodiy xaridor (ko'pincha boshqa)
+- shoshilinch bajariladigan ish (job to be done)
+- almashtiriladigan joriy muqobil yoki vaqtinchalik yechim
+- ehtimoliy qabul qilish triggeri (nima hozirni lahzaga aylantiradi)
+- geografiya / til cheklovi
+- aniq diskvalifikatorlar
 
-Don't start broad collection until the brief is sharp. Pull from `.agents/product-marketing.md` if it exists.
+Brif aniq bo'lmaguncha keng yig'ishni boshlamang. `.agents/product-marketing.md` mavjud bo'lsa, undan oling.
 
-## Step 2 — Mine the five signal buckets
+## 2-qadam — Besh signal guruhini qazib oling
 
-Search several angles, not one query repeated. Adapt wording to how the audience actually talks (mine their vocabulary from organic content first — see the ad-creative hook-system's organic-language note for the same idea).
+Bitta so'rovni takrorlamasdan, bir nechta burchakdan qidiring. Formulirovkani auditoriya aslida qanday gaplashishiga moslang (avval ularning lug'atini organik kontentdan oling — xuddi shu g'oya uchun ad-creative hook-system'ning organik til eslatmasiga qarang).
 
-1. **Explicit demand** — "looking for," "recommend a tool for," "alternative to [X]," "does anything exist that," "how do you all handle."
-2. **Pain** — "takes hours," "so manual," "hate that," "keeps breaking," "biggest frustration with," "why is there no."
-3. **Workaround** — spreadsheets, copy-paste, a VA, a Zapier chain, a script, a template, any repeated manual step that your product would replace.
-4. **Switching** — cancellation, migration, "moving off [competitor]," a missing feature, a pricing complaint, competitor frustration.
-5. **Timing** — a public launch, a new hire for the relevant function, expansion, a new workflow or regulation, an integration announcement — a *current* event that makes the product relevant now.
+1. **Aniq talab** — "looking for," "recommend a tool for," "alternative to [X]," "does anything exist that," "how do you all handle."
+2. **Og'riq** — "takes hours," "so manual," "hate that," "keeps breaking," "biggest frustration with," "why is there no."
+3. **Vaqtinchalik yechim (workaround)** — jadvallar, copy-paste, VA, Zapier zanjiri, skript, shablon, mahsulotingiz almashtiradigan har qanday takroriy qo'lda qadam.
+4. **O'tish** — bekor qilish, migratsiya, "moving off [competitor]," yetishmayotgan funksiya, narx haqida shikoyat, raqobatchidan norozilik.
+5. **Vaqt (timing)** — ommaviy launch, tegishli funksiya uchun yangi yollash, kengayish, yangi ish jarayoni yoki tartibga solish, integratsiya e'lon qilinishi — mahsulotni hozir tegishli qiladigan *joriy* hodisa.
 
-**Use our live-recency edge.** A generic skill relies on whatever a web search surfaces; you have better:
-- **last30days** — Reddit, Hacker News, X, YouTube, and web signals from the last 30 days. This is the single highest-value tool for this branch: recency *is* the timing signal.
-- **social-fetch** — pull the full content of a specific post/thread you find, normalized.
-- **scraping** / **Firecrawl** / **Browserbase** — read the original public page (a forum thread, a GitHub issue, a review), never qualify from a search snippet alone.
-- **deep-research** — for a multi-source sweep with adversarial verification when the wedge is broad.
-- **competitor-profiling** / **customer-research** — competitor switching signals and review-mining for the pain language.
+**Jonli-yangilik ustunligimizdan foydalaning.** Umumiy skill veb-qidiruv nima ko'rsatsa, shunga tayanadi; sizda yaxshiroq vositalar bor:
+- **last30days** — so'nggi 30 kundagi Reddit, Hacker News, X, YouTube va veb signallar. Bu yo'nalish uchun eng qimmatli yagona vosita: yangilikning o'zi — vaqt signali.
+- **social-fetch** — topgan aniq post/thread'ning to'liq mazmunini normallashtirilgan holda torting.
+- **scraping** / **Firecrawl** / **Browserbase** — asl ommaviy sahifani (forum thread, GitHub issue, sharh) o'qing, hech qachon faqat qidiruv snippetidan malakalamang.
+- **deep-research** — keng wedge bo'lganda adversarial tekshiruvli ko'p manbali qamrov uchun.
+- **competitor-profiling** / **customer-research** — raqobatchiga o'tish signallari va og'riq tili uchun sharhlarni qazib olish.
 
-## Step 3 — Source mix (public only)
+## 3-qadam — Manbalar aralashmasi (faqat ommaviy)
 
-Forums and public community threads · public social posts and replies · product and app-marketplace reviews · GitHub issues and feature requests · public company pages, job posts, changelogs, launch announcements · "looking for a tool" posts and directories.
+Forumlar va ommaviy hamjamiyat thread'lari · ommaviy ijtimoiy postlar va javoblar · mahsulot va ilova marketpleys sharhlari · GitHub issue'lari va funksiya so'rovlari · ommaviy kompaniya sahifalari, ish e'lonlari, changelog'lar, launch e'lonlari · "asbob qidiryapman" postlari va kataloglar.
 
-Avoid private groups, gated communities, data brokers, leaked datasets, and any source whose terms prohibit access — the same compliance guardrails as every other branch (see SKILL.md), including the no-sensitive-traits rule.
+Yopiq guruhlar, to'siqli hamjamiyatlar, ma'lumot brokerlari, sizib chiqqan datasetlar va shartlari kirishni taqiqlaydigan har qanday manbadan qoching — boshqa barcha yo'nalishlar bilan bir xil compliance himoya chegaralari (SKILL.md ga qarang), jumladan sezgir belgilar qoidasi.
 
-**Business/professional context only.** Qualify and reach out only where someone is posting in a professional or business capacity about a work problem (a founder in an indie-hackers thread, a developer in a GitHub issue, an ops lead in a subreddit for their role). Exclude personal-distress contexts entirely — health, financial hardship, addiction, grief, or any consumer support forum where people are venting personal problems, even if your product is tangentially relevant. When the motion is genuinely consumer (B2C), a public pain post is not on its own a lawful basis for cold outreach — reach people through the channel's own norms (reply publicly where replying is expected) and never DM a stranger off a personal post.
+**Faqat biznes/professional kontekst.** Faqat kimdir professional yoki biznes sifatida ish muammosi haqida post qo'ygan joyda malakalang va murojaat qiling (indie-hackers thread'idagi asoschi, GitHub issue'dagi dasturchi, o'z roli subreddit'idagi ops rahbari). Shaxsiy qiyinchilik kontekstlarini butunlay chiqarib tashlang — salomatlik, moliyaviy qiyinchilik, giyohvandlik, qayg'u yoki odamlar shaxsiy muammolaridan shikoyat qilayotgan har qanday iste'molchi qo'llab-quvvatlash forumi, mahsulotingiz bilan ozgina bog'liq bo'lsa ham. Harakat haqiqatan iste'molchiga yo'naltirilgan (B2C) bo'lsa, ommaviy og'riq posti o'z-o'zidan sovuq murojaat uchun qonuniy asos emas — odamlarga kanalning o'z me'yorlari orqali yeting (javob kutiladigan joyda ommaviy javob bering) va shaxsiy postdan boshlab begonaga hech qachon DM yozmang.
 
-Quote minimally, paraphrase by default, and link every material pain or timing signal.
+Minimal iqtibos keltiring, odatiy ravishda parafraz qiling va har bir muhim og'riq yoki vaqt signaliga havola bering.
 
-## Step 4 — Score on demand-fit (not ICP-fit)
+## 4-qadam — Demand-fit bo'yicha ballang (ICP-fit emas)
 
-The list-building branches score Hot/Warm/Cold on ICP fit. This branch scores 0–100 on **demand fit** — how strongly the evidence says this specific prospect wants this specific thing now. Score each dimension 0–5:
+Ro'yxat tuzish yo'nalishlari Hot/Warm/Cold ni ICP moslik bo'yicha ballaydi. Bu yo'nalish **talab mosligi** bo'yicha 0–100 ball beradi — dalil aynan shu prospekt aynan shuni hozir qanchalik kuchli xohlashini qanchalik kuchli ko'rsatadi. Har bir o'lchovni 0–5 ball bilan baholang:
 
-| Dimension | Weight | What it measures |
+| O'lchov | Vazn | Nimani o'lchaydi |
 |---|---|---|
-| **Pain strength** | 25% | Directness, severity, repetition, and cost of the stated problem |
-| **Product fit** | 25% | How directly your product solves the evidenced job |
-| **Timing** | 20% | Freshness + a current trigger present |
-| **Public reachability** | 15% | A natural, relevant public/professional contact path exists |
-| **Evidence quality** | 15% | Specificity, source reliability, confidence the signal is really theirs |
+| **Og'riq kuchi** | 25% | Bayon qilingan muammoning to'g'ridan-to'g'riligi, jiddiyligi, takrorlanishi va narxi |
+| **Mahsulot mosligi** | 25% | Mahsulotingiz dalillangan vazifani qanchalik to'g'ridan-to'g'ri hal qiladi |
+| **Vaqt (timing)** | 20% | Yangilik + joriy trigger mavjudligi |
+| **Ommaviy yetib borish** | 15% | Tabiiy, tegishli ommaviy/professional kontakt yo'li mavjud |
+| **Dalil sifati** | 15% | Aniqlik, manba ishonchliligi, signal haqiqatan ularniki ekaniga ishonch |
 
 ```
 score = pain/5*25 + fit/5*25 + timing/5*20 + reachability/5*15 + evidence/5*15
 ```
 
-| Band | Meaning |
+| Diapazon | Ma'nosi |
 |---|---|
-| **80–100** | Strong first-customer candidate |
-| **65–79** | Promising — validate fast |
-| **50–64** | Plausible but missing a material signal |
-| **Below 50** | Do not include in the primary shortlist |
+| **80–100** | Kuchli birinchi mijoz nomzodi |
+| **65–79** | Istiqbolli — tez tasdiqlang |
+| **50–64** | Ishonarli, lekin muhim signal yetishmaydi |
+| **50 dan past** | Asosiy qisqa ro'yxatga kiritmang |
 
-An old explicit request can still count — but lower the timing score and label the date. A company that merely matches the industry with no evidenced trigger is *not* a qualified prospect here.
+Eski aniq so'rov hali ham hisobga olinishi mumkin — lekin vaqt ballini pasaytiring va sanani belgilang. Faqat sohaga mos keladigan, dalillangan triggeri bo'lmagan kompaniya bu yerda malakalangan prospekt *emas*.
 
-### Prospect stages
+### Prospekt bosqichlari
 
-- **High intent** — publicly requesting a solution or actively switching
-- **Problem aware** — clearly describing the pain or an expensive workaround
-- **Trigger present** — a current business event makes the product relevant
-- **Potential fit** — ICP match, incomplete evidence → keep *outside* the primary shortlist
+- **High intent** — yechimni ommaviy so'rayapti yoki faol almashtirayapti
+- **Problem aware** — og'riq yoki qimmat vaqtinchalik yechimni aniq tasvirlayapti
+- **Trigger present** — joriy biznes hodisa mahsulotni tegishli qiladi
+- **Potential fit** — ICP mosligi, to'liq bo'lmagan dalil → asosiy qisqa ro'yxatdan *tashqarida* saqlang
 
-### Evidence ledger (per qualified prospect)
+### Dalillar daftari (har bir malakalangan prospekt uchun)
 
-Displayed name (company/project/public professional) · source title + URL · visible publication date or "date unavailable" · source type · the concise pain/timing signal · observed evidence vs. inference (label which) · score breakdown · freshness warning when the signal is stale.
+Ko'rsatiladigan nom (kompaniya/loyiha/ommaviy mutaxassis) · manba sarlavhasi + URL · ko'rinadigan nashr sanasi yoki "sana mavjud emas" · manba turi · qisqa og'riq/vaqt signali · kuzatilgan dalil va xulosa (qaysi ekanini belgilang) · ball taqsimoti · signal eskirganda yangilik ogohlantirishi.
 
-## Step 5 — Draft outreach, never send it
+## 5-qadam — Murojaatni qoralang, hech qachon yubormang
 
-Recommend the most natural channel *already associated with the source*, and only where a reply is a normal part of that channel (reply in the public thread, respond via a public professional profile). Don't turn a public post into a private DM the poster didn't invite, and never contact someone off a personal-distress post. Draft one opener, under ~90 words, in this shape:
+Manba bilan *allaqachon bog'liq* eng tabiiy kanalni tavsiya qiling, va faqat javob shu kanalning odatiy qismi bo'lgan joyda (ommaviy thread'da javob bering, ommaviy professional profil orqali javob bering). Ommaviy postni muallif taklif qilmagan shaxsiy DM'ga aylantirmang va shaxsiy qiyinchilik postidan boshlab hech kimga murojaat qilmang. Quyidagi shaklda ~90 so'zdan kam bitta ochuvchi xabar qoralang:
 
-1. mention the public context naturally
-2. connect it to the exact problem
-3. explain the product in one sentence
-4. ask one low-friction question
+1. ommaviy kontekstni tabiiy tarzda eslang
+2. uni aniq muammoga bog'lang
+3. mahsulotni bir gapda tushuntiring
+4. bitta past ishqalanishli savol bering
 
-Never claim familiarity you don't have, never fabricate personal details, and never auto-send: no messages, connects, follows, comments, form submissions, or CRM records unless the user separately authorizes that action. This is the manual/gated posture from the marketing-loops guardrails.
+O'zingizda yo'q tanishlikni hech qachon da'vo qilmang, shaxsiy tafsilotlarni to'qimang va hech qachon avtomatik yubormang: foydalanuvchi alohida ruxsat bermaguncha xabarlar, connect'lar, follow'lar, izohlar, forma yuborishlar yoki CRM yozuvlari yo'q. Bu marketing-loops himoya chegaralaridagi qo'lda/darvozali yondashuv.
 
-## Step 6 — Ship the evidence report
+## 6-qadam — Dalillar hisobotini yetkazing
 
-Lead with the most actionable evidence, in this order:
+Eng amaliy dalildan boshlang, quyidagi tartibda:
 
-1. **Verdict** — does the product have reachable early-customer signal, or not yet? (An honest "not yet, here's why" is a valid answer.)
-2. **ICP** — buyer, job, trigger, disqualifiers.
-3. **Top prospect** — the single strongest evidence-backed candidate and why now.
-4. **Prospect shortlist** — per prospect: source, pain signal, demand-fit score, stage, why-now, channel, opener.
-5. **Repeated patterns** — pains and triggers recurring across prospects (these are your positioning and messaging gold).
-6. **Seven-day manual outreach plan** — a low-volume validation sequence (e.g., contact the top 3 with one source-based question; share a mockup only after they confirm the pain; target three conversations and one design-partner commitment).
-7. **Limits** — what evidence is missing and what must be confirmed through real conversations.
+1. **Xulosa** — mahsulotda yetib borsa bo'ladigan erta mijoz signali bormi yoki hali yo'qmi? (Halol "hali yo'q, mana nega" to'g'ri javob.)
+2. **ICP** — xaridor, vazifa, trigger, diskvalifikatorlar.
+3. **Top prospekt** — eng kuchli dalilga asoslangan yagona nomzod va nega hozir.
+4. **Prospektlar qisqa ro'yxati** — har bir prospekt uchun: manba, og'riq signali, demand-fit balli, bosqich, nega hozir, kanal, ochuvchi xabar.
+5. **Takrorlanuvchi naqshlar** — prospektlar bo'ylab qaytariladigan og'riqlar va triggerlar (bular sizning pozitsiyalash va xabar oltini).
+6. **Yetti kunlik qo'lda murojaat rejasi** — kam hajmli tasdiqlash ketma-ketligi (masalan, top 3 ga bitta manbaga asoslangan savol bilan murojaat qiling; mockup'ni faqat og'riq tasdiqlangandan keyin ulashing; uchta suhbat va bitta dizayn-hamkorlik majburiyatini maqsad qiling).
+7. **Cheklovlar** — qanday dalil yetishmaydi va haqiqiy suhbatlar orqali nima tasdiqlanishi kerak.
 
-For a shareable standalone HTML version of this report, the JSON→HTML generator pattern in ad-creative's [creative-review-page.md](../../ad-creative/references/creative-review-page.md) is the model (escape every value; keep it self-contained).
+Ulashsa bo'ladigan mustaqil HTML versiya uchun ad-creative'ning [creative-review-page.md](../../ad-creative/references/creative-review-page.md) dagi JSON→HTML generator naqshi namuna (har bir qiymatni escape qiling; o'zida mustaqil saqlang).
 
-## The honesty rules (non-negotiable)
+## Halollik qoidalari (muzokarasiz)
 
-- Every primary prospect links to at least one real public signal. No signal, no shortlist.
-- Label the output **"potential customer based on public signals"** — never "interested," "will buy," or "has consented."
-- Prefer ten strong matches over a long generic list. Make uncertainty and stale evidence visible.
-- Personalize from the cited source, not from invented assumptions.
-- Treat the shortlist as a research hypothesis to validate through conversations, not a customer database.
+- Har bir asosiy prospekt kamida bitta haqiqiy ommaviy signalga havola qiladi. Signal yo'q — qisqa ro'yxat yo'q.
+- Natijani **"ommaviy signallarga asoslangan potentsial mijoz"** deb belgilang — hech qachon "qiziqqan," "sotib oladi" yoki "rozilik bergan" demang.
+- Uzun umumiy ro'yxatdan ko'ra o'nta kuchli moslikni afzal ko'ring. Noaniqlik va eskirgan dalilni ko'rinadigan qiling.
+- Shaxsiylashtirishni keltirilgan manbadan qiling, to'qilgan taxminlardan emas.
+- Qisqa ro'yxatni mijozlar bazasi emas, suhbatlar orqali tasdiqlanadigan tadqiqot gipotezasi deb biling.

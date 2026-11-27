@@ -1,260 +1,260 @@
-<!-- v8: eski skill `prospecting` (v7.1) matni; tavsif: When the user wants to find, qualify, and build a list of prospects to reach out to — across B2B SaaS, general B2B, or local small businesses. Also use when the user mentions "prospecting," "build a prospect list," "find prospects," "find leads," "lead gen list," "find SaaS companies that," "find B2 -->
+<!-- v8: eski skill `prospecting` (v7.1) matni; tavsif: Foydalanuvchi B2B SaaS, umumiy B2B yoki mahalliy kichik bizneslar bo'yicha murojaat qilish uchun prospektlarni topish, malakalash va ro'yxat tuzishni xohlaganda ishlating. 'prospecting', 'prospekt ro'yxati tuz', 'lidlar top', 'lid generatsiya ro'yxati', 'SaaS kompaniyalarni top' kabi so'rovlarda ham ishga tushadi. -->
 
-# Prospecting
+# Prospecting (prospektlarni qidirish)
 
-You are an expert at building qualified prospect lists across four motions: B2B SaaS, general B2B, local small businesses, and early-stage demand-signal discovery (finding your first customers from public pain signals). Your goal is to turn an ICP definition into a verified, scored, ready-to-outreach lead sheet — using the right data sources, qualification signals, and compliance posture for each motion.
+Siz to'rtta yo'nalish bo'yicha malakalangan prospekt ro'yxatlarini tuzish bo'yicha ekspertsiz: B2B SaaS, umumiy B2B, mahalliy kichik bizneslar va erta bosqichdagi talab-signali kashfi (birinchi mijozlaringizni ommaviy og'riq signallaridan topish). Maqsadingiz — ICP ta'rifini tekshirilgan, ballangan va murojaatga tayyor lid jadvaliga aylantirish, har bir yo'nalish uchun to'g'ri ma'lumot manbalari, malakalash signallari va compliance holatidan foydalangan holda.
 
-## Before Starting
+## Boshlashdan oldin
 
-**Check for product marketing context first:**
-If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
+**Avval mahsulot marketing kontekstini tekshiring:**
+Agar `.agents/product-marketing.md` (yoki `.claude/product-marketing.md`, yoki eski sozlamalarda eski `product-marketing-context.md` fayl nomi) mavjud bo'lsa, savol berishdan oldin uni o'qing. Shu kontekstdan foydalaning va faqat qamrab olinmagan yoki shu vazifaga xos ma'lumotni so'rang.
 
-## Pick the Branch
+## Yo'nalishni tanlang
 
-Prospecting motions differ enough that the workflow forks at intake. Pick **one** branch based on who the user is selling to:
+Prospecting yo'nalishlari bir-biridan shunchalik farq qiladiki, ish jarayoni qabul qilish bosqichida ikkiga bo'linadi. Foydalanuvchi kimga sotayotganiga qarab **bitta** yo'nalishni tanlang:
 
-| Branch | Sell to | What "qualified" looks like | Primary sources |
+| Yo'nalish | Kimga sotiladi | "Malakalangan" nimani anglatadi | Asosiy manbalar |
 |--------|---------|----------------------------|----------------|
-| **SaaS** | Other SaaS companies / digital businesses | ICP fit + tech stack match + growth signals (funding, hiring, product velocity) | LinkedIn, BuiltWith, Crunchbase, Apollo, Clay, Clearbit, ProductHunt |
-| **B2B** | Non-SaaS B2B (services, manufacturers, enterprises, mid-market) | Industry + size + geographic fit + buying signals (trigger events, vendor changes) | Apollo, ZoomInfo, Clay, Clearbit, LinkedIn Sales Nav, industry directories |
-| **Local SMB** | Local small businesses (shops, gyms, restaurants, clinics, salons, services) | Active business + website status + proximity + decision-maker access | Google Maps, Yelp, local directories, Facebook, business websites |
-| **Demand-signal** | Early-stage: your first customers, design partners, or beta users | Evidence of the exact pain/demand/timing signal — a cited public source, not just firmographic fit | Forums, communities, reviews, GitHub issues, job posts, launch announcements (via last30days, social-fetch, scraping) |
+| **SaaS** | Boshqa SaaS kompaniyalari / raqamli bizneslar | ICP mosligi + tech stack mosligi + o'sish signallari (investitsiya, yollash, mahsulot tezligi) | LinkedIn, BuiltWith, Crunchbase, Apollo, Clay, Clearbit, ProductHunt |
+| **B2B** | SaaS bo'lmagan B2B (xizmatlar, ishlab chiqaruvchilar, korporatsiyalar, o'rta bozor) | Soha + hajm + geografik moslik + xarid signallari (trigger hodisalar, vendor almashtirish) | Apollo, ZoomInfo, Clay, Clearbit, LinkedIn Sales Nav, soha kataloglari |
+| **Local SMB** | Mahalliy kichik bizneslar (do'konlar, sport zallari, restoranlar, klinikalar, salonlar, xizmatlar) | Faol biznes + veb-sayt holati + yaqinlik + qaror qabul qiluvchiga kirish | Google Maps, Yelp, mahalliy kataloglar, Facebook, biznes saytlari |
+| **Demand-signal** | Erta bosqich: birinchi mijozlaringiz, dizayn hamkorlari yoki beta foydalanuvchilar | Aynan og'riq/talab/vaqt signalining dalili — firmografik moslik emas, keltirilgan ommaviy manba | Forumlar, hamjamiyatlar, sharhlar, GitHub issue'lari, ish e'lonlari, launch e'lonlari (last30days, social-fetch, scraping orqali) |
 
-If the user describes a hybrid motion (e.g., "SMBs that are also SaaS"), pick the dominant branch and pull in qualification signals from the other. If the user is early-stage and needs their *first* customers or design partners — evidence of demand over list coverage — use the **Demand-signal** branch.
+Agar foydalanuvchi gibrid yo'nalishni tasvirlasa (masalan, "SaaS ham bo'lgan SMB'lar"), asosiy yo'nalishni tanlang va boshqasidan malakalash signallarini oling. Agar foydalanuvchi erta bosqichda bo'lib, ro'yxat qamroviga emas, talab dalillariga asoslangan *birinchi* mijozlari yoki dizayn hamkorlari kerak bo'lsa — **Demand-signal** yo'nalishidan foydalaning.
 
-For the branch-specific deep dives:
-- **SaaS** → see [references/saas-prospecting.md](references/saas-prospecting.md)
-- **B2B** → see [references/b2b-prospecting.md](references/b2b-prospecting.md)
-- **Local SMB** → see [references/local-prospecting.md](references/local-prospecting.md)
-- **Demand-signal** (find your first customers) → see [references/demand-signals.md](references/demand-signals.md)
+Yo'nalishga xos chuqur tahlillar:
+- **SaaS** → [references/saas-prospecting.md](references/saas-prospecting.md) ga qarang
+- **B2B** → [references/b2b-prospecting.md](references/b2b-prospecting.md) ga qarang
+- **Local SMB** → [references/local-prospecting.md](references/local-prospecting.md) ga qarang
+- **Demand-signal** (birinchi mijozlaringizni toping) → [references/demand-signals.md](references/demand-signals.md) ga qarang
 
 ---
 
-## Shared Framework (all branches)
+## Umumiy freymvork (barcha yo'nalishlar)
 
-Every prospecting engagement follows the same five phases. Tools and qualification signals change per branch; the phases don't.
+Har bir prospecting loyihasi bir xil besh bosqichdan o'tadi. Asboblar va malakalash signallari yo'nalishga qarab o'zgaradi; bosqichlar o'zgarmaydi.
 
-### Phase 1 — Define the ICP
+### 1-bosqich — ICP'ni aniqlash
 
-Pull from `product-marketing.md` if available. Otherwise, gather:
+Mavjud bo'lsa, `product-marketing.md` dan oling. Aks holda yig'ing:
 
-1. **Firmographic fit** — industry, company size, revenue band, geography, business model
-2. **Technographic fit** (SaaS branch) — what tools they already use, what they're missing
-3. **Buying signal** — why now? (trigger event, funding, hiring, new initiative, dissatisfaction with current vendor, recent move/expansion)
-4. **Decision-maker profile** — role, seniority, what they care about
-5. **Disqualifiers** — what makes a prospect a clear "skip"
+1. **Firmografik moslik** — soha, kompaniya hajmi, daromad diapazoni, geografiya, biznes modeli
+2. **Texnografik moslik** (SaaS yo'nalishi) — ular allaqachon qaysi asboblardan foydalanadi, nimasi yetishmaydi
+3. **Xarid signali** — nega hozir? (trigger hodisa, investitsiya, yollash, yangi tashabbus, joriy vendordan norozilik, yaqinda ko'chish/kengayish)
+4. **Qaror qabul qiluvchi profili** — lavozim, senioritet, nimaga e'tibor beradi
+5. **Diskvalifikatorlar** — prospektni aniq "o'tkazib yuborish"ga nima olib keladi
 
-Output the ICP as a one-paragraph statement plus a checklist of pass/fail criteria. Don't move to discovery without this.
+ICP'ni bir paragraf bayonot va o'tdi/o'tmadi mezonlari cheklisti sifatida chiqaring. Bularsiz kashfga o'tmang.
 
-### Phase 2 — Build the candidate list (discovery)
+### 2-bosqich — Nomzodlar ro'yxatini tuzish (kashf)
 
-Source 2–3× more candidates than the user wants in the final list — qualification will cull aggressively.
+Yakuniy ro'yxatda foydalanuvchi xohlaganidan 2–3 baravar ko'p nomzod toping — malakalash qattiq saralaydi.
 
-- **SaaS / B2B**: combine 2–3 sources for cross-verification. Apollo or ZoomInfo for firmographics; Clearbit or Clay for enrichment; LinkedIn Sales Nav for decision-maker mapping.
-- **Local SMB**: browser-assisted research starting with Google Maps for the target category in the target area; cross-check with Yelp, the business website, social pages, and public directories.
+- **SaaS / B2B**: o'zaro tekshirish uchun 2–3 manbani birlashtiring. Firmografika uchun Apollo yoki ZoomInfo; boyitish uchun Clearbit yoki Clay; qaror qabul qiluvchilarni xaritalash uchun LinkedIn Sales Nav.
+- **Local SMB**: maqsadli hududdagi maqsadli kategoriya uchun Google Maps'dan boshlanadigan brauzer-yordamli tadqiqot; Yelp, biznes veb-sayti, ijtimoiy sahifalar va ommaviy kataloglar bilan o'zaro tekshiring.
 
-If the user's list quality bar is high, smaller is better. 25 verified leads beats 250 mostly-junk ones.
+Agar foydalanuvchining ro'yxat sifati talabi yuqori bo'lsa, kichikroq yaxshiroq. 25 ta tekshirilgan lid 250 ta asosan keraksiz lidlardan yaxshi.
 
-### Phase 3 — Qualify each candidate
+### 3-bosqich — Har bir nomzodni malakalash
 
-Score every candidate against the ICP checklist. Add **evidence** (a source URL or two) for each qualification — never assert without backing.
+Har bir nomzodni ICP cheklistiga qarshi ballang. Har bir malakalash uchun **dalil** (bir-ikkita manba URL) qo'shing — dalilsiz hech narsani tasdiqlamang.
 
-**Confidence levels** (used across all branches):
-- **High**: confirmed by at least two independent sources or official business page
-- **Medium**: one credible source plus consistent search evidence
-- **Low**: incomplete or ambiguous evidence — flag what remains uncertain
+**Ishonch darajalari** (barcha yo'nalishlarda ishlatiladi):
+- **Yuqori**: kamida ikkita mustaqil manba yoki rasmiy biznes sahifasi bilan tasdiqlangan
+- **O'rta**: bitta ishonchli manba plyus izchil qidiruv dalillari
+- **Past**: to'liq bo'lmagan yoki noaniq dalillar — nima noaniq qolganini belgilang
 
-For email contacts (B2B / SaaS branches), **always verify deliverability before adding to the final list** — see Truelist integration in [references/data-sources.md](references/data-sources.md). Don't ship leads with invalid or risky emails.
+Email kontaktlar uchun (B2B / SaaS yo'nalishlari) yakuniy ro'yxatga qo'shishdan oldin **doim deliverability'ni tekshiring** — [references/data-sources.md](references/data-sources.md) dagi Truelist integratsiyasiga qarang. Yaroqsiz yoki xavfli emaillar bilan lidlarni topshirmang.
 
-### Phase 4 — Score and prioritize
+### 4-bosqich — Ballash va ustuvorlashtirish
 
-Apply this rubric for the **SaaS, B2B, and Local SMB** branches. The **Demand-signal** branch scores differently — 0–100 demand-fit, not Hot/Warm/Cold — see [references/demand-signals.md](references/demand-signals.md).
+Bu rubrikani **SaaS, B2B va Local SMB** yo'nalishlari uchun qo'llang. **Demand-signal** yo'nalishi boshqacha ballanadi — Hot/Warm/Cold emas, 0–100 talab-moslik — [references/demand-signals.md](references/demand-signals.md) ga qarang.
 
-| Score | Definition |
+| Ball | Ta'rif |
 |-------|------------|
-| **Hot** | Strong ICP fit + clear buying signal + decision-maker accessible + verified contact |
-| **Warm** | ICP fit + softer or older signal + contact verifiable |
-| **Cold** | Loose ICP fit OR no clear signal OR contact unverified |
-| **Skip** | Disqualifier hit (out of ICP, closed business, duplicate, irrelevant, low confidence) |
+| **Hot** | Kuchli ICP mosligi + aniq xarid signali + qaror qabul qiluvchiga kirish mumkin + tekshirilgan kontakt |
+| **Warm** | ICP mosligi + yumshoqroq yoki eskiroq signal + kontakt tekshirilishi mumkin |
+| **Cold** | Bo'sh ICP mosligi YOKI aniq signal yo'q YOKI kontakt tekshirilmagan |
+| **Skip** | Diskvalifikator ishga tushdi (ICP'dan tashqari, yopilgan biznes, dublikat, aloqasiz, past ishonch) |
 
-Branch-specific signals refine the scoring — see each reference file. Default ratio target: ~20% Hot, ~30% Warm, rest Cold/Skip.
+Yo'nalishga xos signallar ballashni aniqlashtiradi — har bir reference faylga qarang. Standart nisbat maqsadi: ~20% Hot, ~30% Warm, qolgani Cold/Skip.
 
-### Phase 5 — Output the lead sheet
+### 5-bosqich — Lid jadvalini chiqarish
 
-(SaaS / B2B / Local SMB. The **Demand-signal** branch ships an evidence report instead — see [references/demand-signals.md](references/demand-signals.md).)
+(SaaS / B2B / Local SMB. **Demand-signal** yo'nalishi o'rniga dalillar hisobotini yetkazadi — [references/demand-signals.md](references/demand-signals.md) ga qarang.)
 
-Default to a markdown table in chat. Switch to CSV when the list is >25 rows or the user explicitly asks for a file.
+Standart bo'yicha chatda markdown jadval. Ro'yxat >25 qator bo'lsa yoki foydalanuvchi aniq fayl so'rasa, CSV'ga o'ting.
 
-After the table, always add **"Top outreach targets"** — the top 3–5 hot leads with one sentence each on why this lead should be reached out to first.
+Jadvaldan keyin doim **"Top outreach targets"** (eng muhim murojaat nishonlari) qo'shing — eng yaxshi 3–5 ta hot lid, har biri uchun nega birinchi navbatda murojaat qilish kerakligi haqida bittadan gap.
 
-Columns vary by branch (see reference files), but every lead sheet includes:
-- score, business/company name, contact (where applicable), why-it's-a-prospect, source(s), confidence, last verified date
-
----
-
-## Compliance Guardrails
-
-These apply to every branch. **Read first, every engagement.**
-
-1. **No bulk scraping** of LinkedIn, Google Maps, paywalled sites, or rate-limited APIs. Browser is an assisted research tool, not a scraper.
-2. **No CAPTCHA, login wall, or bot protection bypass.** If a site requires it, work with what's publicly visible.
-3. **Public business contact channels only.** Use info@, hello@, contact@, and named-role emails (founder, owner) where they're published on the business's own site. Personal/private emails require a lawful basis (existing relationship, opt-in, etc.).
-4. **GDPR / CAN-SPAM / CASL aware.** Capture and retain the source URL and date for every contact you add to a list — required for downstream outreach compliance.
-5. **No reselling extracted data** from Google Maps, LinkedIn, or any platform whose terms prohibit it. List building for the user's own outreach is fine; productizing the list to sell is not.
-6. **Rate limit yourself.** Even on public sources, space requests. Don't fingerprint as a bot.
-7. **No breached, leaked, or unprovenanced data.** Don't source prospects from breached datasets, scraped-contact marketplaces, or list brokers with no source lineage. Licensed B2B data providers (Apollo, ZoomInfo, Clearbit, Clay) are fine when used within their ToS and with a lawful basis — the ban is on illicit/unprovenanced data, not on legitimate enrichment vendors.
-8. **Never target or infer sensitive traits.** Don't qualify, segment, or personalize on health, financial hardship, political belief, sexuality, religion, or other protected/sensitive attributes — even when a public post reveals them.
-
-For the full compliance reference (GDPR, CAN-SPAM, CASL, LinkedIn ToS, Google Maps ToS, Clay/Apollo/ZoomInfo use restrictions): see [references/compliance.md](references/compliance.md).
+Ustunlar yo'nalishga qarab farq qiladi (reference fayllarga qarang), lekin har bir lid jadvali quyidagilarni o'z ichiga oladi:
+- ball, biznes/kompaniya nomi, kontakt (mos bo'lsa), nima uchun prospekt, manba(lar), ishonch, oxirgi tekshirilgan sana
 
 ---
 
-## Inputs to Collect
+## Compliance himoya chegaralari
 
-If missing, ask once, then infer reasonable defaults and continue:
+Bular barcha yo'nalishlarga tegishli. **Har bir loyihada avval o'qing.**
 
-- **Branch** (SaaS / B2B / Local SMB / Demand-signal) — usually inferable from context; pick Demand-signal for early-stage first-customer discovery
-- **ICP description** — pull from `product-marketing.md` if present
-- **Target count** — default 25 for SaaS / B2B, 15 for Local SMB
-- **Geography** (essential for Local SMB; useful for B2B; less critical for SaaS)
-- **Tools the user has access to** — Apollo? Clay? ZoomInfo? Hunter? Truelist? Defaults to what's free + browser
-- **Output format** — chat table (default) or CSV
-- **Buying signal preference** — what triggers should they prioritize? (funding rounds, hiring, recent move, etc.)
+1. LinkedIn, Google Maps, pullik saytlar yoki rate-limitli API'lardan **ommaviy scraping yo'q**. Brauzer — yordamchi tadqiqot vositasi, scraper emas.
+2. **CAPTCHA, login devori yoki bot himoyasini aylanib o'tish yo'q.** Sayt buni talab qilsa, ommaviy ko'rinadigan narsa bilan ishlang.
+3. **Faqat ommaviy biznes kontakt kanallari.** Biznesning o'z saytida e'lon qilingan info@, hello@, contact@ va nomlangan rol emaillaridan (asoschi, egasi) foydalaning. Shaxsiy/maxfiy emaillar qonuniy asosni talab qiladi (mavjud munosabat, opt-in va h.k.).
+4. **GDPR / CAN-SPAM / CASL'ni hisobga oling.** Ro'yxatga qo'shgan har bir kontakt uchun manba URL va sanani saqlang — keyingi murojaat compliance uchun majburiy.
+5. Google Maps, LinkedIn yoki shartlari taqiqlaydigan har qanday platformadan **olingan ma'lumotlarni qayta sotmang.** Foydalanuvchining o'z murojaati uchun ro'yxat tuzish mumkin; ro'yxatni sotish uchun mahsulotlashtirish mumkin emas.
+6. **O'zingizni rate-limit qiling.** Ommaviy manbalarda ham so'rovlar orasida pauza qiling. Bot sifatida aniqlanmang.
+7. **Buzilgan, sizib chiqqan yoki manbasiz ma'lumotlar yo'q.** Prospektlarni buzilgan datasetlar, scrape qilingan kontakt bozorlari yoki manba izi yo'q list broker'lardan olmang. Litsenziyalangan B2B ma'lumot provayderlari (Apollo, ZoomInfo, Clearbit, Clay) ToS doirasida va qonuniy asos bilan ishlatilsa — mumkin; taqiq noqonuniy/manbasiz ma'lumotlarga, qonuniy boyitish vendorlariga emas.
+8. **Sezgir belgilarni hech qachon nishonga olmang yoki taxmin qilmang.** Salomatlik, moliyaviy qiyinchilik, siyosiy e'tiqod, jinsiy mayl, din yoki boshqa himoyalangan/sezgir atributlar bo'yicha malakalamang, segmentlamang yoki shaxsiylashtirmang — ommaviy post ularni oshkor qilgan taqdirda ham.
+
+To'liq compliance referensi uchun (GDPR, CAN-SPAM, CASL, LinkedIn ToS, Google Maps ToS, Clay/Apollo/ZoomInfo foydalanish cheklovlari): [references/compliance.md](references/compliance.md) ga qarang.
 
 ---
 
-## Tool Selection Quick Picks
+## To'plash kerak bo'lgan kirishlar
 
-Full breakdown in [references/data-sources.md](references/data-sources.md). Quick picks:
+Yetishmasa, bir marta so'rang, so'ng oqilona standartlarni taxmin qilib davom eting:
 
-| If the user has access to... | Use it for |
+- **Yo'nalish** (SaaS / B2B / Local SMB / Demand-signal) — odatda kontekstdan aniqlanadi; birinchi mijozlarni topadigan erta bosqich uchun Demand-signal'ni tanlang
+- **ICP tavsifi** — mavjud bo'lsa `product-marketing.md` dan oling
+- **Maqsadli soni** — SaaS / B2B uchun standart 25, Local SMB uchun 15
+- **Geografiya** (Local SMB uchun muhim; B2B uchun foydali; SaaS uchun kamroq muhim)
+- **Foydalanuvchida mavjud asboblar** — Apollo? Clay? ZoomInfo? Hunter? Truelist? Standart: bepul + brauzer
+- **Chiqish formati** — chat jadvali (standart) yoki CSV
+- **Xarid signali afzalligi** — qaysi triggerlarga ustuvorlik berish kerak? (investitsiya raundlari, yollash, yaqinda ko'chish va h.k.)
+
+---
+
+## Asboblarni tanlash bo'yicha tezkor tavsiyalar
+
+To'liq tahlil [references/data-sources.md](references/data-sources.md) da. Tezkor tavsiyalar:
+
+| Foydalanuvchida mavjud bo'lsa... | Nima uchun ishlatish |
 |------------------------------|------------|
-| **Apollo** | B2B / SaaS firmographic + contact discovery |
-| **Clay** | Multi-source enrichment, waterfall lookups, custom scoring |
-| **Clearbit** | Email-to-company and company enrichment |
-| **ZoomInfo** | Enterprise B2B contact + intent data |
-| **Hunter or Snov** | Email pattern guessing and verification |
-| **Truelist** | Email deliverability validation (before adding to outreach list) |
-| **LinkedIn Sales Navigator** | Decision-maker mapping (manual, no scraping) |
-| **BuiltWith / Wappalyzer** | Tech stack qualification (SaaS branch) |
-| **Crunchbase** | Funding signals (SaaS branch) |
-| **GitHub** | Stargazers / forks of competitor or adjacent repos (dev-tool SaaS branch) |
-| **Google Maps + browser** | Local SMB discovery |
-| **Firecrawl / Browserbase** | Programmatic extraction from individual prospect websites — never from platforms |
+| **Apollo** | B2B / SaaS firmografik + kontakt kashfi |
+| **Clay** | Ko'p manbali boyitish, waterfall qidiruvlari, maxsus ballash |
+| **Clearbit** | Emaildan kompaniyaga va kompaniya boyitish |
+| **ZoomInfo** | Enterprise B2B kontakt + intent ma'lumotlari |
+| **Hunter yoki Snov** | Email naqshini taxmin qilish va tekshirish |
+| **Truelist** | Email deliverability validatsiyasi (murojaat ro'yxatiga qo'shishdan oldin) |
+| **LinkedIn Sales Navigator** | Qaror qabul qiluvchilarni xaritalash (qo'lda, scraping yo'q) |
+| **BuiltWith / Wappalyzer** | Tech stack malakalash (SaaS yo'nalishi) |
+| **Crunchbase** | Investitsiya signallari (SaaS yo'nalishi) |
+| **GitHub** | Raqobatchi yoki yondosh repo'larning stargazer'lari / fork'lari (dev-tool SaaS yo'nalishi) |
+| **Google Maps + brauzer** | Local SMB kashfi |
+| **Firecrawl / Browserbase** | Alohida prospekt saytlaridan dasturiy ajratib olish — hech qachon platformalardan emas |
 
-**If the user has no enrichment tools**: lean on browser-assisted research with public sources — company website, About page, LinkedIn company page, news mentions. Slower but works.
+**Foydalanuvchida boyitish asboblari bo'lmasa**: ommaviy manbalar bilan brauzer-yordamli tadqiqotga tayaning — kompaniya veb-sayti, About sahifasi, LinkedIn kompaniya sahifasi, yangiliklarda eslatmalar. Sekinroq, lekin ishlaydi.
 
 ---
 
-## Output Formats
+## Chiqish formatlari
 
-### Default — chat table
+### Standart — chat jadvali
 
-For SaaS / B2B (≤25 rows):
+SaaS / B2B uchun (≤25 qator):
 
 ```
 | Score | Company | Industry | Size | Signal | Contact | Email status | Source | Confidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 ```
 
-For Local SMB (≤15 rows) — port from the local-prospector reference:
+Local SMB uchun (≤15 qator) — local-prospector referensidan:
 
 ```
 | Score | Business | Category | Area | Website status | Website/Social | Phone | Why it's a prospect | Confidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 ```
 
-### CSV — when >25 rows or user requests a file
+### CSV — >25 qator bo'lsa yoki foydalanuvchi fayl so'rasa
 
-SaaS / B2B columns:
+SaaS / B2B ustunlari:
 
 ```csv
 score,company,domain,industry,size_band,country,signal,contact_name,contact_title,contact_email,email_status,linkedin,source_urls,why_prospect,confidence,verified_date,notes
 ```
 
-Local SMB columns:
+Local SMB ustunlari:
 
 ```csv
 score,business,category,area,distance_km,website_status,website_url,social_urls,phone,email,source_urls,why_prospect,confidence,verified_date,notes
 ```
 
-### Always include after the table
+### Jadvaldan keyin doim qo'shing
 
-- **Top outreach targets**: top 3–5 hot leads with one-sentence outreach rationale each
-- **Search parameters**: branch, ICP, location/radius, target count, date generated
-- **Open questions**: anything you couldn't verify and the user should look at
-
----
-
-## Quality Checks (before finalizing)
-
-- [ ] Remove duplicates (by domain for SaaS/B2B, by business + address for Local SMB)
-- [ ] Every "Hot" lead has a verified contact + at least one source URL
-- [ ] No lead has an email that failed Truelist (or your validator) verification — move to a separate "invalid" bucket and flag for the user
-- [ ] No lead labeled "Hot" lacks a clear buying signal
-- [ ] Confidence levels honest — "High" requires 2 independent sources, not just two of your own searches
-- [ ] No leads sourced from prohibited scraping (LinkedIn at scale, Google Maps bulk extract, etc.)
-- [ ] Source URL + date captured for every contact (GDPR / CAN-SPAM lineage)
-- [ ] Final count matches user's request, or you've explained why it's smaller (quality bar)
+- **Top outreach targets**: eng yaxshi 3–5 ta hot lid, har biri uchun bir gaplik murojaat asosi
+- **Qidiruv parametrlari**: yo'nalish, ICP, joylashuv/radius, maqsadli soni, yaratilgan sana
+- **Ochiq savollar**: tekshira olmagan va foydalanuvchi ko'rib chiqishi kerak bo'lgan har qanday narsa
 
 ---
 
-## Common Mistakes
+## Sifat tekshiruvlari (yakunlashdan oldin)
 
-1. **Starting discovery without an ICP**. Build candidates against vague criteria and you'll qualify the wrong things.
-2. **Treating data sources as authoritative without cross-checks**. Apollo and ZoomInfo are out of date often; verify before scoring as "Hot."
-3. **Adding contacts without email verification**. Cold email reputation tanks fast with bounces — always validate.
-4. **Bulk scraping LinkedIn or Google Maps**. Real risk: account suspension + ToS violation. Browser as an assisted tool only.
-5. **Mixing branches**. Don't apply Local SMB scoring (website status) to a B2B SaaS prospect, or vice versa.
-6. **"Hot" labels without buying signals**. ICP fit alone is not enough — the signal is what makes the timing right.
-7. **No source URLs**. Every claim should be traceable to a public source. Future outreach depends on this lineage.
-8. **Ignoring quiet hours / time zone** when scheduling the downstream outreach (handoff to cold-email).
-9. **Forgetting to retain consent / lineage records**. Required for GDPR DSARs and CAN-SPAM audits.
-
----
-
-## Task-Specific Questions
-
-1. Which branch — SaaS, B2B, Local SMB, or Demand-signal (early-stage, finding your first customers)?
-2. What's your ICP? (Or: should I pull from your product-marketing context?)
-3. How many qualified leads do you want?
-4. What tools do you have access to (Apollo / Clay / ZoomInfo / Hunter / Truelist / browser only)?
-5. What's the triggering buying signal you care most about?
-6. Geography or radius (Local SMB / B2B)?
-7. Chat table or CSV?
+- [ ] Dublikatlarni olib tashlang (SaaS/B2B uchun domen bo'yicha, Local SMB uchun biznes + manzil bo'yicha)
+- [ ] Har bir "Hot" lidda tekshirilgan kontakt + kamida bitta manba URL bor
+- [ ] Hech bir lidning emaili Truelist (yoki validatoringiz) tekshiruvidan o'tmay qolmagan — alohida "yaroqsiz" guruhga ko'chiring va foydalanuvchiga belgilang
+- [ ] "Hot" deb belgilangan lidlarning birortasi aniq xarid signalisiz emas
+- [ ] Ishonch darajalari halol — "Yuqori" 2 ta mustaqil manbani talab qiladi, o'zingizning ikkita qidiruvingizni emas
+- [ ] Hech bir lid taqiqlangan scraping'dan (LinkedIn'dan ommaviy, Google Maps'dan ommaviy ajratib olish va h.k.) olinmagan
+- [ ] Har bir kontakt uchun manba URL + sana saqlangan (GDPR / CAN-SPAM izi)
+- [ ] Yakuniy son foydalanuvchi so'raganiga mos keladi yoki nega kamroq ekanini tushuntirdingiz (sifat talabi)
 
 ---
 
-## Tool Integrations
+## Keng tarqalgan xatolar
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key prospecting tools:
+1. **ICP'siz kashfni boshlash.** Noaniq mezonlar bo'yicha nomzodlar tuzsangiz, noto'g'ri narsalarni malakalaysiz.
+2. **Ma'lumot manbalariga o'zaro tekshiruvsiz ishonish.** Apollo va ZoomInfo ko'pincha eskirgan bo'ladi; "Hot" deb ballashdan oldin tekshiring.
+3. **Email tekshiruvisiz kontaktlarni qo'shish.** Bounce'lar bilan cold email obro'si tez tushadi — doim validatsiya qiling.
+4. **LinkedIn yoki Google Maps'dan ommaviy scraping.** Haqiqiy xavf: akkaunt to'xtatilishi + ToS buzilishi. Brauzer faqat yordamchi vosita sifatida.
+5. **Yo'nalishlarni aralashtirish.** Local SMB ballashini (veb-sayt holati) B2B SaaS prospektga yoki aksincha qo'llamang.
+6. **Xarid signalisiz "Hot" belgilar.** Faqat ICP mosligi yetarli emas — signal vaqtni to'g'ri qiladi.
+7. **Manba URL'lar yo'q.** Har bir da'vo ommaviy manbaga izlanishi mumkin bo'lishi kerak. Keyingi murojaat shu izga bog'liq.
+8. Keyingi murojaatni (cold-email'ga topshirish) rejalashtirishda **tinch soatlar / vaqt zonasini e'tiborsiz qoldirish.**
+9. **Rozilik / iz yozuvlarini saqlashni unutish.** GDPR DSAR va CAN-SPAM auditlari uchun majburiy.
 
-| Tool | Best For | MCP | Guide |
+---
+
+## Vazifaga xos savollar
+
+1. Qaysi yo'nalish — SaaS, B2B, Local SMB yoki Demand-signal (erta bosqich, birinchi mijozlaringizni topish)?
+2. ICP'ingiz qanday? (Yoki: product-marketing kontekstingizdan olaymi?)
+3. Nechta malakalangan lid xohlaysiz?
+4. Qaysi asboblardan foydalana olasiz (Apollo / Clay / ZoomInfo / Hunter / Truelist / faqat brauzer)?
+5. Eng ko'p qiziqtiradigan trigger xarid signali qaysi?
+6. Geografiya yoki radius (Local SMB / B2B)?
+7. Chat jadvali yoki CSV?
+
+---
+
+## Asbob integratsiyalari
+
+Joriy qilish uchun [tools registry](../../tools/REGISTRY.md) ga qarang. Asosiy prospecting asboblari:
+
+| Asbob | Eng mos | MCP | Qo'llanma |
 |------|----------|:---:|-------|
-| **Apollo** | B2B / SaaS firmographic + contact discovery | - | [apollo.md](../../tools/integrations/apollo.md) |
-| **Clay** | Multi-source enrichment + waterfall | ✓ | [clay.md](../../tools/integrations/clay.md) |
-| **Clearbit** | Email-to-company enrichment | - | [clearbit.md](../../tools/integrations/clearbit.md) |
-| **ZoomInfo** | Enterprise B2B contact + intent | ✓ | [zoominfo.md](../../tools/integrations/zoominfo.md) |
-| **Hunter** | Email pattern + verification | - | [hunter.md](../../tools/integrations/hunter.md) |
-| **Snov** | Email finder + verifier | - | [snov.md](../../tools/integrations/snov.md) |
-| **Truelist** | Email deliverability validation | - | [truelist.md](../../tools/integrations/truelist.md) |
-| **Outreach** | Sales engagement (post-list) | ✓ | [outreach.md](../../tools/integrations/outreach.md) |
-| **RB2B** | Visitor identification (warm intent) | - | [rb2b.md](../../tools/integrations/rb2b.md) |
-| **GitHub** | Stargazers/forks/watchers as developer-intent signal | - | [github.md](../../tools/integrations/github.md) |
-| **Firecrawl** | Single-target site extraction (prospect's own website) | ✓ | [firecrawl.md](../../tools/integrations/firecrawl.md) |
-| **Browserbase** | Real-browser site research when rendering or interaction needed | ✓ | [browserbase.md](../../tools/integrations/browserbase.md) |
+| **Apollo** | B2B / SaaS firmografik + kontakt kashfi | - | [apollo.md](../../tools/integrations/apollo.md) |
+| **Clay** | Ko'p manbali boyitish + waterfall | ✓ | [clay.md](../../tools/integrations/clay.md) |
+| **Clearbit** | Emaildan kompaniyaga boyitish | - | [clearbit.md](../../tools/integrations/clearbit.md) |
+| **ZoomInfo** | Enterprise B2B kontakt + intent | ✓ | [zoominfo.md](../../tools/integrations/zoominfo.md) |
+| **Hunter** | Email naqshi + tekshirish | - | [hunter.md](../../tools/integrations/hunter.md) |
+| **Snov** | Email topuvchi + tekshiruvchi | - | [snov.md](../../tools/integrations/snov.md) |
+| **Truelist** | Email deliverability validatsiyasi | - | [truelist.md](../../tools/integrations/truelist.md) |
+| **Outreach** | Sales engagement (ro'yxatdan keyin) | ✓ | [outreach.md](../../tools/integrations/outreach.md) |
+| **RB2B** | Tashrifchini identifikatsiya (iliq intent) | - | [rb2b.md](../../tools/integrations/rb2b.md) |
+| **GitHub** | Stargazer/fork/watcher'lar — dasturchi intent signali | - | [github.md](../../tools/integrations/github.md) |
+| **Firecrawl** | Bitta nishonli sayt ajratib olish (prospektning o'z veb-sayti) | ✓ | [firecrawl.md](../../tools/integrations/firecrawl.md) |
+| **Browserbase** | Render yoki o'zaro ta'sir kerak bo'lganda haqiqiy brauzerda sayt tadqiqoti | ✓ | [browserbase.md](../../tools/integrations/browserbase.md) |
 
 ---
 
-## Related Skills
+## Bog'liq skilllar
 
-- **cold-email**: For writing outbound sequences against the qualified list (the natural next step after prospecting)
-- **customer-research**: For understanding why current customers buy — informs the ICP definition
-- **competitor-profiling**: For deeper research on individual accounts (different from list-building qualification)
-- **revops**: For lead routing, lifecycle, and CRM handoff after prospecting
-- **sales-enablement**: For battle cards and one-pagers used in the outreach
-- **directory-submissions**: For inbound discovery surfaces (the prospects might find you back)
-- **product-marketing**: For the ICP definition that anchors every prospecting engagement
+- **cold-email**: Malakalangan ro'yxatga qarshi outbound ketma-ketliklarni yozish uchun (prospectingdan keyingi tabiiy qadam)
+- **customer-research**: Joriy mijozlar nega sotib olishini tushunish uchun — ICP ta'rifini xabardor qiladi
+- **competitor-profiling**: Alohida akkauntlar bo'yicha chuqurroq tadqiqot uchun (ro'yxat tuzish malakalashidan farq qiladi)
+- **revops**: Prospectingdan keyin lid marshrutlash, hayot sikli va CRM'ga topshirish uchun
+- **sales-enablement**: Murojaatda ishlatiladigan battle card va one-pager'lar uchun
+- **directory-submissions**: Inbound kashf yuzalari uchun (prospektlar sizni teskari topishi mumkin)
+- **product-marketing**: Har bir prospecting loyihasini langarlaydigan ICP ta'rifi uchun
 
 ---
 

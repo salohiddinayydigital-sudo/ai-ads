@@ -1,116 +1,116 @@
-# Local SMB Prospecting Reference
+# Local SMB Prospecting bo'yicha reference
 
-For when the user sells to local small businesses — shops, gyms, restaurants, salons, clinics, professional services, contractors, real estate, fitness studios, dental practices.
+Foydalanuvchi mahalliy kichik bizneslarga sotganda — do'konlar, sport zallari, restoranlar, salonlar, klinikalar, professional xizmatlar, pudratchilar, ko'chmas mulk, fitnes studiyalari, stomatologiya klinikalari.
 
-Adapted from and generalized beyond the local-client-prospector pattern (browser-assisted discovery + website status classification + proximity scoring).
+local-client-prospector naqshidan (brauzer-yordamli kashf + veb-sayt holati tasnifi + yaqinlik ballashi) moslashtirilgan va undan kengaytirilgan.
 
 ---
 
-## ICP Signals That Matter (Local SMB branch)
+## Muhim ICP signallari (Local SMB yo'nalishi)
 
-### Operational signals
+### Operatsion signallar
 
-- **Active business** — Google Business Profile updated, recent reviews, recent hours updates
-- **Recent activity** — open right now, regular hours posted, recent photos uploaded by owner
-- **Customer engagement** — owner responding to reviews, posts on social, active calendar (for service businesses)
+- **Faol biznes** — Google Business Profile yangilangan, yaqinda sharhlar, ish vaqti yaqinda yangilangan
+- **So'nggi faollik** — hozir ochiq, muntazam ish vaqti ko'rsatilgan, egasi yaqinda rasm yuklagan
+- **Mijozlar bilan aloqa** — egasi sharhlarga javob beradi, ijtimoiy tarmoqda post qo'yadi, faol kalendar (xizmat bizneslari uchun)
 
-### Online presence signals (the core SMB qualification axis)
+### Onlayn mavjudlik signallari (SMB malakalashning asosiy o'qi)
 
-The reference local-client-prospector skill uses **website status** as the primary qualification — port this directly. Four classifications:
+local-client-prospector skilli **veb-sayt holatini** asosiy malakalash sifatida ishlatadi — buni to'g'ridan-to'g'ri o'tkazing. To'rtta tasnif:
 
-| Status | Definition | Typical outcome |
+| Holat | Ta'rif | Odatiy natija |
 |--------|-----------|-----------------|
-| **No site found** | No credible standalone website after cross-checked search | **Hot prospect** for web/marketing service |
-| **Social only** | Facebook, Instagram, WhatsApp, Linktree, booking portal, marketplace page only — no standalone site | **Hot prospect** for web/marketing service |
-| **Weak site** | Standalone site exists but outdated, broken, very thin, non-mobile-friendly, or missing clear contact/conversion flow | **Warm prospect** for refresh / rebuild service |
-| **Has site** | Credible, modern standalone site exists | **Low prospect** unless other signals apply (e.g., poor SEO, weak conversion design) |
+| **Sayt topilmadi** | O'zaro tekshirilgan qidiruvdan keyin ishonchli mustaqil veb-sayt yo'q | Veb/marketing xizmati uchun **Hot prospekt** |
+| **Faqat ijtimoiy tarmoq** | Faqat Facebook, Instagram, WhatsApp, Linktree, bron portali, marketpleys sahifasi — mustaqil sayt yo'q | Veb/marketing xizmati uchun **Hot prospekt** |
+| **Zaif sayt** | Mustaqil sayt bor, lekin eskirgan, buzilgan, juda yupqa, mobil uchun qulay emas yoki aniq kontakt/konversiya oqimi yo'q | Yangilash / qayta qurish xizmati uchun **Warm prospekt** |
+| **Sayt bor** | Ishonchli, zamonaviy mustaqil sayt mavjud | Boshqa signallar bo'lmasa (masalan, yomon SEO, zaif konversiya dizayni) **past prospekt** |
 
-### Proximity signals
+### Yaqinlik signallari
 
-- **Distance** from the user's location or service area
-- **Density** — clusters of similar businesses in one area = neighborhood targeting opportunity
-- **Travel time** — useful when in-person discovery, install, or service delivery is required
+- Foydalanuvchining joylashuvi yoki xizmat hududidan **masofa**
+- **Zichlik** — bir hududda o'xshash bizneslar klasterlari = mahalla bo'yicha nishonga olish imkoniyati
+- **Sayohat vaqti** — shaxsan kashf, o'rnatish yoki xizmat ko'rsatish talab qilinganda foydali
 
-### Decay signals
+### Pasayish signallari
 
-- Closed permanently (Google Maps banner)
-- Reviews paused or business listing reported as closed
-- Last activity (review, post) >12 months ago
-
----
-
-## Discovery Sources (Local SMB branch)
-
-### Primary
-
-- **Google Maps** (browser, manual) — search "category near [location]" and walk the visible results. Cross-check details. Don't bulk-extract.
-- **Yelp** — secondary verification; complementary categories
-- **Bing Local / Apple Maps** — different coverage on smaller businesses
-- **Facebook Pages search** — many SMBs are Facebook-only
-
-### Cross-verification
-
-- **Business's own website** (if any)
-- **Industry directories** (e.g., Healthgrades for medical, OpenTable for restaurants, Avvo for legal)
-- **Local Chamber of Commerce listings**
-- **State business registries** for incorporation status
-- **Search results for "[business name] [city]"** to discover non-Maps presence
+- Butunlay yopilgan (Google Maps bannerida)
+- Sharhlar to'xtagan yoki biznes ro'yxati yopilgan deb xabar qilingan
+- Oxirgi faollik (sharh, post) >12 oy oldin
 
 ---
 
-## Browser Research Workflow
+## Kashf manbalari (Local SMB yo'nalishi)
 
-1. Open a browser and search Google Maps for the category near `base_location`
-2. Build a candidate list from visible local results, search results, and public directories
-3. For each candidate, inspect public sources to fill required fields
-4. Search the exact business name plus city/town to check whether a standalone website exists
-5. Classify website status per the table above
-6. Mark confidence: High (2+ sources), Medium (1 source + consistent evidence), Low (incomplete/ambiguous)
+### Asosiy
 
-When the user explicitly asks for subagents AND subagents are available, split candidates into non-overlapping batches and ask each subagent to verify only website/social/contact status. Don't use subagents for the primary search if it slows progress.
+- **Google Maps** (brauzer, qo'lda) — "[joylashuv] yaqinidagi kategoriya" deb qidiring va ko'rinadigan natijalarni ko'rib chiqing. Tafsilotlarni o'zaro tekshiring. Ommaviy ajratib olmang.
+- **Yelp** — ikkilamchi tekshiruv; to'ldiruvchi kategoriyalar
+- **Bing Local / Apple Maps** — kichikroq bizneslar bo'yicha boshqacha qamrov
+- **Facebook Pages qidiruvi** — ko'pgina SMB'lar faqat Facebook'da
 
-### Optional: programmatic verification with Firecrawl or Browserbase
+### O'zaro tekshirish
 
-Once you have a candidate's website URL (found via manual Maps/Yelp discovery), you can speed up website-status classification by hitting the URL programmatically:
-
-- **Firecrawl** for simple "is this site live, modern, mobile-friendly, conversion-flow-equipped" reads — returns clean markdown you can inspect
-- **Browserbase** when the candidate site requires JS rendering, has a cookie consent dialog, or you need session state
-
-**Strict line**: use these on the individual business's URL. **Don't** point them at Google Maps, Yelp, or any platform whose ToS prohibits bulk extraction — discovery stays manual.
-
-See [data-sources.md](data-sources.md) for setup details.
+- **Biznesning o'z veb-sayti** (bo'lsa)
+- **Soha kataloglari** (masalan, tibbiyot uchun Healthgrades, restoranlar uchun OpenTable, huquq uchun Avvo)
+- **Mahalliy Savdo palatasi ro'yxatlari**
+- Yuridik shaxs holati uchun **davlat biznes reestrlari**
+- Maps'dan tashqari mavjudlikni aniqlash uchun **"[biznes nomi] [shahar]" qidiruv natijalari**
 
 ---
 
-## Qualification Checklist (Local SMB branch)
+## Brauzer tadqiqoti ish jarayoni
 
-- [ ] Business is active (recent reviews or activity in last 6 months)
-- [ ] Category matches user's service offering
-- [ ] Distance / proximity within target radius
-- [ ] Website status classified
-- [ ] Phone or contact channel verified
-- [ ] At least one cross-source confirms business operates at the listed address
-- [ ] Not a duplicate / chain location / out-of-scope category
-- [ ] Not closed permanently
+1. Brauzerni oching va `base_location` yaqinidagi kategoriya uchun Google Maps'da qidiring
+2. Ko'rinadigan mahalliy natijalar, qidiruv natijalari va ommaviy kataloglardan nomzodlar ro'yxatini tuzing
+3. Har bir nomzod uchun kerakli maydonlarni to'ldirish uchun ommaviy manbalarni ko'rib chiqing
+4. Mustaqil veb-sayt mavjudligini tekshirish uchun aniq biznes nomi plyus shahar/qishloqni qidiring
+5. Veb-sayt holatini yuqoridagi jadvalga muvofiq tasniflang
+6. Ishonchni belgilang: Yuqori (2+ manba), O'rta (1 manba + izchil dalil), Past (to'liq bo'lmagan/noaniq)
+
+Foydalanuvchi subagentlarni aniq so'rasa VA subagentlar mavjud bo'lsa, nomzodlarni kesishmaydigan partiyalarga bo'ling va har bir subagentdan faqat veb-sayt/ijtimoiy tarmoq/kontakt holatini tekshirishni so'rang. Asosiy qidiruv uchun, agar bu jarayonni sekinlashtirsa, subagentlardan foydalanmang.
+
+### Ixtiyoriy: Firecrawl yoki Browserbase bilan dasturiy tekshiruv
+
+Nomzodning veb-sayt URL'ini olgach (qo'lda Maps/Yelp kashfi orqali topilgan), URL'ga dasturiy murojaat qilib veb-sayt holati tasnifini tezlashtirishingiz mumkin:
+
+- **Firecrawl** — oddiy "bu sayt jonlimi, zamonaviymi, mobil uchun qulaymi, konversiya oqimi bormi" o'qishlari uchun — ko'rib chiqsa bo'ladigan toza markdown qaytaradi
+- **Browserbase** — nomzod sayti JS rendering talab qilganda, cookie rozilik oynasi bo'lganda yoki sessiya holati kerak bo'lganda
+
+**Qat'iy chegara**: bularni alohida biznesning URL'ida ishlating. Google Maps, Yelp yoki shartlari ommaviy ajratib olishni taqiqlaydigan har qanday platformaga **yo'naltirmang** — kashf qo'lda qoladi.
+
+Sozlash tafsilotlari uchun [data-sources.md](data-sources.md) ga qarang.
 
 ---
 
-## Lead Scoring (Local SMB)
+## Malakalash cheklisti (Local SMB yo'nalishi)
 
-Use this simple rubric (matches local-client-prospector pattern):
+- [ ] Biznes faol (so'nggi 6 oyda yangi sharhlar yoki faollik)
+- [ ] Kategoriya foydalanuvchining xizmat taklifiga mos
+- [ ] Masofa / yaqinlik maqsadli radius ichida
+- [ ] Veb-sayt holati tasniflangan
+- [ ] Telefon yoki kontakt kanali tekshirilgan
+- [ ] Kamida bitta o'zaro manba biznes ko'rsatilgan manzilda ishlashini tasdiqlaydi
+- [ ] Dublikat / tarmoq filiali / mavzudan tashqari kategoriya emas
+- [ ] Butunlay yopilmagan
 
-| Score | Criteria |
+---
+
+## Lid ballash (Local SMB)
+
+Ushbu oddiy rubrikadan foydalaning (local-client-prospector naqshiga mos):
+
+| Ball | Mezonlar |
 |-------|----------|
-| **Hot** | No site found OR social-only + phone present + active business + within target radius |
-| **Warm** | Weak site, poor online presentation, or marketplace/booking-page only |
-| **Cold** | Good website already present OR low confidence |
-| **Skip** | Closed, duplicate, outside radius, irrelevant category, or not a business prospect |
+| **Hot** | Sayt topilmadi YOKI faqat ijtimoiy tarmoq + telefon mavjud + faol biznes + maqsadli radius ichida |
+| **Warm** | Zaif sayt, yomon onlayn taqdimot yoki faqat marketpleys/bron sahifasi |
+| **Cold** | Yaxshi veb-sayt allaqachon mavjud YOKI past ishonch |
+| **Skip** | Yopilgan, dublikat, radiusdan tashqari, aloqasiz kategoriya yoki biznes prospekti emas |
 
 ---
 
-## Output Columns (Local SMB branch)
+## Chiqish ustunlari (Local SMB yo'nalishi)
 
-Chat table (≤15 rows):
+Chat jadvali (≤15 qator):
 
 ```
 | Score | Business | Category | Area | Distance | Website status | Website/Social | Phone | Why it's a prospect | Confidence |
@@ -122,44 +122,44 @@ CSV:
 score,business,category,area,distance_km,website_status,website_url,social_urls,phone,email,source_urls,why_prospect,confidence,verified_date,notes
 ```
 
-Rules:
-- Keep "Why it's a prospect" short and actionable
-- Use `Not found` instead of leaving blank fields
-- Include source links sparingly, not all of them
-- After the table, add **Best first outreach targets** with the top 3 leads and one practical reason each
-- If confidence is low, state exactly what remains uncertain
+Qoidalar:
+- "Why it's a prospect" ni qisqa va amaliy saqlang
+- Maydonlarni bo'sh qoldirish o'rniga `Not found` ishlating
+- Manba havolalarini tejamkorlik bilan qo'shing, hammasini emas
+- Jadvaldan keyin eng yaxshi 3 ta lid va har biri uchun bitta amaliy sabab bilan **Best first outreach targets** qo'shing
+- Ishonch past bo'lsa, nima noaniq qolganini aniq ayting
 
 ---
 
-## Top Outreach Targets Selection (Local SMB)
+## Top outreach nishonlarini tanlash (Local SMB)
 
-Prioritize for the top 3 hot leads:
+Eng yaxshi 3 ta hot lid uchun ustuvorlik:
 
-1. **No site / social only + phone present** = clearest service opportunity
-2. **High review count** = active, established business with real customers
-3. **Owner-responded reviews** = engaged owner = more likely to evaluate a vendor
-4. **Industry alignment with your service specialty** beats generic category match
+1. **Sayt yo'q / faqat ijtimoiy tarmoq + telefon mavjud** = eng aniq xizmat imkoniyati
+2. **Ko'p sharhlar soni** = haqiqiy mijozlari bor faol, mustahkam biznes
+3. **Egasi javob bergan sharhlar** = jalb qilingan ega = vendorni baholashga ko'proq moyil
+4. **Sizning xizmat ixtisosligingizga soha mosligi** umumiy kategoriya mosligidan yaxshi
 
-Each top target rationale should be one sentence naming the gap and the signal: "No standalone website (cross-checked); 80+ Google reviews with owner replies; 2 km from target area."
-
----
-
-## Compliance Notes (Local SMB-specific)
-
-The local branch is the most scraping-sensitive of the three motions. Specifically:
-
-- **Google Maps Terms of Service** prohibit bulk extraction. Treat browser visits as research, not as data acquisition.
-- **Don't store full Google Maps Place IDs in your CRM** — the ToS limits storage of Maps data.
-- **Public business contact channels only**: published phone, contact form, info@ email. Don't reach individual employees through their personal channels.
-- **Owner/operator name when published on the business's own site** is OK to use. If you only got it from LinkedIn, mark the source.
+Har bir top nishon asoslamasi bo'shliq va signalni nomlaydigan bir gap bo'lishi kerak: "Mustaqil veb-sayt yo'q (o'zaro tekshirilgan); egasi javob bergan 80+ Google sharhi; maqsadli hududdan 2 km."
 
 ---
 
-## Common Mistakes (Local SMB)
+## Compliance eslatmalari (Local SMB'ga xos)
 
-1. **Bulk-scraping Google Maps** — fastest way to violate ToS and lose the research channel.
-2. **Treating Google Maps data as truth** — listings go stale. Cross-check hours, status, and reviews.
-3. **Skipping the website status cross-check** — finding "no site" on Maps doesn't mean no site exists; do an exact-name web search before classifying.
-4. **Targeting only the largest businesses** — they're already covered by other providers. The 2–5 employee SMBs are the under-served opportunity.
-5. **Generic outreach to all hot leads** — local SMBs respond better to outreach that names their specific gap ("I noticed your menu isn't visible on mobile") than generic pitches.
-6. **Ignoring chains and franchises** as Skip — sometimes the franchisee is the buyer and they have local marketing authority. Verify before skipping.
+Mahalliy yo'nalish uchta yo'nalish ichida scrapingga eng sezgir. Xususan:
+
+- **Google Maps Terms of Service** ommaviy ajratib olishni taqiqlaydi. Brauzer tashriflarini ma'lumot olish emas, tadqiqot deb hisoblang.
+- **To'liq Google Maps Place ID'larini CRM'ingizda saqlamang** — ToS Maps ma'lumotlarini saqlashni cheklaydi.
+- **Faqat ommaviy biznes kontakt kanallari**: e'lon qilingan telefon, kontakt formasi, info@ email. Alohida xodimlarga ularning shaxsiy kanallari orqali murojaat qilmang.
+- **Biznesning o'z saytida e'lon qilingan ega/operator ismidan** foydalanish mumkin. Agar uni faqat LinkedIn'dan olgan bo'lsangiz, manbani belgilang.
+
+---
+
+## Keng tarqalgan xatolar (Local SMB)
+
+1. **Google Maps'dan ommaviy scraping** — ToS'ni buzish va tadqiqot kanalini yo'qotishning eng tez yo'li.
+2. **Google Maps ma'lumotlarini haqiqat deb hisoblash** — ro'yxatlar eskiradi. Ish vaqti, holat va sharhlarni o'zaro tekshiring.
+3. **Veb-sayt holatini o'zaro tekshirishni o'tkazib yuborish** — Maps'da "sayt yo'q" topilishi sayt mavjud emasligini anglatmaydi; tasniflashdan oldin aniq nom bo'yicha veb-qidiruv qiling.
+4. **Faqat eng yirik bizneslarni nishonga olish** — ular allaqachon boshqa provayderlar bilan qoplangan. 2–5 xodimli SMB'lar — xizmat ko'rsatilmayotgan imkoniyat.
+5. **Barcha hot lidlarga umumiy murojaat** — mahalliy SMB'lar umumiy pitchlarga qaraganda aniq bo'shliqlarini nomlaydigan murojaatga ("menyuingiz mobilda ko'rinmayotganini payqadim") yaxshiroq javob beradi.
+6. **Tarmoqlar va franshizalarni Skip deb e'tiborsiz qoldirish** — ba'zan franshiza egasi xaridor bo'ladi va mahalliy marketing vakolatiga ega. O'tkazib yuborishdan oldin tekshiring.

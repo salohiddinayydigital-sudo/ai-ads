@@ -1,106 +1,106 @@
-# B2B Prospecting Reference
+# B2B Prospecting bo'yicha reference
 
-For when the user sells to non-SaaS B2B — services, agencies, manufacturers, mid-market and enterprise companies, professional services firms.
-
----
-
-## ICP Signals That Matter (B2B branch)
-
-### Firmographic signals
-
-- **Industry / vertical** — NAICS or SIC codes if precision matters
-- **Company size** — headcount band, revenue band, location count
-- **Geography** — relevant for time zones, regulations, on-site requirements
-- **Business model** — service vs product vs distribution; B2B vs B2B2C
-- **Ownership** — independent, PE-backed, public, family-owned — affects buying motion
-
-### Buying signals
-
-- **Trigger events**: new C-level hire, recent acquisition or divestiture, IPO/funding, opening a new location, recent rebrand, expansion announcement
-- **Vendor signals**: posting RFPs publicly, switching costs in last quarterly report, contract renewal windows
-- **Operational signals**: recent layoffs (cost pressure) or rapid hiring (capacity pressure)
-- **News mentions**: launching new initiative, entering new market, regulatory change forcing action
-- **PR / press**: anything that signals "this company is changing right now"
-
-### Decay signals
-
-- Multiple bankruptcies or PE-stripped operations
-- Negative growth + cost-cutting headlines
-- Ownership stagnation (small family-owned, no growth incentive)
-- Buyer turnover (3+ Marketing Directors in 2 years)
+Foydalanuvchi SaaS bo'lmagan B2B segmentiga sotganda — xizmatlar, agentliklar, ishlab chiqaruvchilar, o'rta bozor va enterprise kompaniyalar, professional xizmat firmalari.
 
 ---
 
-## Discovery Sources (B2B branch)
+## Muhim ICP signallari (B2B yo'nalishi)
 
-### Tier 1 — primary discovery
+### Firmografik signallar
 
-- **Apollo**: best general B2B firmographic + contact discovery
-- **ZoomInfo**: enterprise B2B + intent signals (mid-market+)
-- **LinkedIn Sales Navigator**: industry + role + signal search; the gold standard for decision-maker mapping (manual)
-- **Clay**: when you need custom waterfall lookups (e.g., enrich Apollo records with Hunter + Clearbit)
+- **Soha / vertikal** — aniqlik muhim bo'lsa NAICS yoki SIC kodlari
+- **Kompaniya hajmi** — xodimlar soni diapazoni, daromad diapazoni, filiallar soni
+- **Geografiya** — vaqt zonalari, tartibga solish, joyida ishlash talablari uchun muhim
+- **Biznes modeli** — xizmat va mahsulot va distributsiya; B2B va B2B2C
+- **Egalik** — mustaqil, PE-qo'llab-quvvatlagan, ommaviy, oilaviy — xarid harakatiga ta'sir qiladi
 
-### Tier 2 — industry-specific directories
+### Xarid signallari
 
-- **Crunchbase / Pitchbook**: funded businesses
-- **D&B Hoovers**: large traditional B2B firmographics
-- **State / national business registries**: for verified incorporation data
-- **Industry association membership rosters**: trade groups often publish member lists
-- **Trade show exhibitor lists**: signals active participation in a vertical
-- **Procurement databases** (Procore for construction, e.g.): vertical-specific signals
+- **Trigger hodisalar**: yangi C-level yollash, yaqinda sotib olish yoki ajratib yuborish, IPO/investitsiya, yangi filial ochish, yaqinda rebrending, kengayish e'loni
+- **Vendor signallari**: ommaviy RFP e'lon qilish, so'nggi choraklik hisobotda o'tish xarajatlari, shartnoma yangilanish oynalari
+- **Operatsion signallar**: yaqinda ishdan bo'shatish (xarajat bosimi) yoki tez yollash (quvvat bosimi)
+- **Yangiliklarda eslatmalar**: yangi tashabbusni ishga tushirish, yangi bozorga kirish, harakatga majbur qiluvchi tartibga solish o'zgarishi
+- **PR / matbuot**: "bu kompaniya hozir o'zgarmoqda" degan signal beradigan har qanday narsa
 
-### Tier 3 — trigger event monitoring
+### Pasayish signallari
 
-- **Google Alerts / Feedly**: trigger keywords ("acquired," "hires," "expansion," "raises," "announces")
-- **PR Newswire / Business Wire**: company-controlled announcements
-- **SEC filings** (public companies): material change disclosures
-- **State filings**: new entity formation, dissolution
-
----
-
-## Qualification Checklist (B2B branch)
-
-- [ ] Industry / vertical matches ICP (use a recognized classification if possible)
-- [ ] Company size within range (employees or revenue)
-- [ ] Geography fits
-- [ ] At least one trigger event in last 90–180 days
-- [ ] Decision-maker role exists (CEO, COO, VP Operations, Director of X — match buyer profile)
-- [ ] Email contact verifiable (named role > info@ catchall)
-- [ ] Source URLs captured for firmographic claims
-- [ ] No disqualifiers (closed, acquired-paused, multi-bankrupt, off-ICP)
+- Bir nechta bankrotlik yoki PE tomonidan bo'shatilgan operatsiyalar
+- Salbiy o'sish + xarajatlarni qisqartirish sarlavhalari
+- Egalik turg'unligi (kichik oilaviy, o'sish rag'bati yo'q)
+- Xaridorlar almashinuvi (2 yilda 3+ Marketing direktori)
 
 ---
 
-## Output Columns (B2B branch)
+## Kashf manbalari (B2B yo'nalishi)
 
-Recommended CSV columns:
+### 1-daraja — asosiy kashf
+
+- **Apollo**: eng yaxshi umumiy B2B firmografik + kontakt kashfi
+- **ZoomInfo**: enterprise B2B + intent signallari (o'rta bozor+)
+- **LinkedIn Sales Navigator**: soha + rol + signal bo'yicha qidiruv; qaror qabul qiluvchilarni xaritalashning oltin standarti (qo'lda)
+- **Clay**: maxsus waterfall qidiruvlar kerak bo'lganda (masalan, Apollo yozuvlarini Hunter + Clearbit bilan boyitish)
+
+### 2-daraja — sohaga xos kataloglar
+
+- **Crunchbase / Pitchbook**: investitsiya olgan bizneslar
+- **D&B Hoovers**: yirik an'anaviy B2B firmografikasi
+- **Davlat / milliy biznes reestrlari**: tasdiqlangan ro'yxatdan o'tish ma'lumotlari uchun
+- **Soha assotsiatsiyalarining a'zolar ro'yxatlari**: savdo guruhlari ko'pincha a'zolar ro'yxatini e'lon qiladi
+- **Ko'rgazma ishtirokchilari ro'yxatlari**: vertikalda faol ishtirokni bildiradi
+- **Xaridlar ma'lumotlar bazalari** (masalan, qurilish uchun Procore): vertikalga xos signallar
+
+### 3-daraja — trigger hodisalar monitoringi
+
+- **Google Alerts / Feedly**: trigger kalit so'zlar ("acquired," "hires," "expansion," "raises," "announces")
+- **PR Newswire / Business Wire**: kompaniya tomonidan nazorat qilinadigan e'lonlar
+- **SEC hujjatlari** (ommaviy kompaniyalar): muhim o'zgarishlar oshkor qilinishi
+- **Davlat hujjatlari**: yangi yuridik shaxs tashkil etish, tugatish
+
+---
+
+## Malakalash cheklisti (B2B yo'nalishi)
+
+- [ ] Soha / vertikal ICP'ga mos (iloji bo'lsa tan olingan tasnifdan foydalaning)
+- [ ] Kompaniya hajmi diapazon ichida (xodimlar yoki daromad)
+- [ ] Geografiya mos
+- [ ] So'nggi 90–180 kunda kamida bitta trigger hodisa
+- [ ] Qaror qabul qiluvchi rol mavjud (CEO, COO, VP Operations, X direktori — xaridor profiliga moslang)
+- [ ] Email kontakt tekshirilishi mumkin (nomlangan rol > info@ catchall)
+- [ ] Firmografik da'volar uchun manba URL'lar saqlangan
+- [ ] Diskvalifikatorlar yo'q (yopilgan, sotib olingan-to'xtatilgan, ko'p marta bankrot, ICP'dan tashqari)
+
+---
+
+## Chiqish ustunlari (B2B yo'nalishi)
+
+Tavsiya etilgan CSV ustunlari:
 
 ```csv
 score,company,domain,industry,naics_code,size_band,revenue_band,country,city,trigger_event,trigger_date,contact_name,contact_title,contact_email,email_status,linkedin_url,source_urls,why_prospect,confidence,verified_date,notes
 ```
 
-For chat table, condense to: Score | Company | Industry | Size | Trigger | Contact | Email status | Confidence.
+Chat jadvali uchun qisqartiring: Score | Company | Industry | Size | Trigger | Contact | Email status | Confidence.
 
 ---
 
-## Top Outreach Targets Selection (B2B)
+## Top outreach nishonlarini tanlash (B2B)
 
-Prioritize for the top 3–5 hot leads:
+Eng yaxshi 3–5 ta hot lid uchun ustuvorlik:
 
-1. **Trigger event recency** — 30 days beats 6 months
-2. **Trigger event specificity** — new CMO hire in your buyer's role beats "company in the news"
-3. **Decision-maker access** — named contact with verified email + LinkedIn beats role-only
-4. **Vertical fit precision** — exact NAICS match beats "adjacent industry"
+1. **Trigger hodisaning yangiligi** — 30 kun 6 oydan yaxshi
+2. **Trigger hodisaning aniqligi** — xaridoringiz rolida yangi CMO yollash "kompaniya yangiliklarda" dan yaxshi
+3. **Qaror qabul qiluvchiga kirish** — tekshirilgan email + LinkedIn bilan nomlangan kontakt faqat rol dan yaxshi
+4. **Vertikal moslik aniqligi** — aniq NAICS mosligi "yondosh soha" dan yaxshi
 
-Each top target rationale names the trigger and decision-maker: "Hired new VP of Marketing 14 days ago; verified email; mid-market manufacturer matching ICP."
+Har bir top nishon asoslamasi trigger va qaror qabul qiluvchini nomlaydi: "14 kun oldin yangi VP of Marketing yollagan; tekshirilgan email; ICP'ga mos o'rta bozor ishlab chiqaruvchisi."
 
 ---
 
-## Common Mistakes (B2B)
+## Keng tarqalgan xatolar (B2B)
 
-1. **Treating B2B like SaaS** — funding rounds matter less; PE ownership and acquisition activity matter more.
-2. **Trying to verify private company revenue precisely** — most public databases approximate. Use size bands, not point estimates.
-3. **Ignoring procurement complexity** at enterprise scale — your prospect contact list may not include the actual approver.
-4. **Cold-emailing executive assistants** — they're not the buyer and they will flag your outreach as spam.
-5. **Source URL hygiene** — without source lineage, you can't defend a contact under GDPR DSAR or CAN-SPAM challenge.
-6. **Stopping at one source** — Apollo can be 60% accurate on small businesses. Cross-verify with LinkedIn or the business website.
+1. **B2B'ga SaaS kabi qarash** — investitsiya raundlari kamroq ahamiyatli; PE egaligi va sotib olish faolligi ko'proq muhim.
+2. **Xususiy kompaniya daromadini aniq tekshirishga urinish** — ko'pchilik ommaviy ma'lumotlar bazalari taxminiy. Nuqtaviy baholar emas, hajm diapazonlaridan foydalaning.
+3. **Enterprise miqyosida xarid murakkabligini e'tiborsiz qoldirish** — kontaktlar ro'yxatingizda haqiqiy tasdiqlovchi bo'lmasligi mumkin.
+4. **Ijrochi yordamchilarga cold email yuborish** — ular xaridor emas va murojaatingizni spam deb belgilaydi.
+5. **Manba URL gigiyenasi** — manba izisiz GDPR DSAR yoki CAN-SPAM e'tirozi ostida kontaktni himoya qila olmaysiz.
+6. **Bitta manbada to'xtash** — Apollo kichik bizneslarda 60% aniq bo'lishi mumkin. LinkedIn yoki biznes veb-sayti bilan o'zaro tekshiring.
